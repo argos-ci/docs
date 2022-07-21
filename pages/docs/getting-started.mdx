@@ -1,0 +1,53 @@
+---
+title: Getting Started
+slug: /docs/getting-started/
+order: 2
+---
+
+import { GithubMergeStatus } from '../../components/Github'
+import { ArgosInBrowser } from '../../components/ArgosInBrowser'
+
+# Getting started
+
+Learn how to install Argos CI and start visual testing.
+
+Welcome to the Argos CI documentation !
+
+Go to [about Argos CI](/docs/about-argos-ci) to read about visual testing, Argos CI philosophy or who we are.
+
+### System Requirements
+
+- Code repository on [GitHub](https://github.com/)
+- Having [end-to-end tests](https://kentcdodds.com/blog/static-vs-unit-vs-integration-vs-e2e-tests) and a [CI environment](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration)
+
+## Install Argos CI
+
+### Add Argos to your stack
+
+Use the integration that matches your testing stack :
+
+- [Cypress](/docs/integrations/cypress)
+- [Puppeteer](/docs/integrations/puppeteer)
+- Or use [custom integration](/docs/integrations/custom-integration)
+
+### Update your CI workflow
+
+- [CircleCI](/docs/ci-config/circle-ci)
+- [GitHub Actions](/docs/ci-config/github-actions)
+- Or use [Others CI](/docs/ci-config/others-ci) doc
+
+### Add screenshots review to your coding routine
+
+Argos CI detects visual changes on every commits and notify you via Github check status.
+
+Click on `Details` button to review all visual changes into Argos CI app.
+
+<GithubMergeStatus status="error" mb="40px" maxWidth="500px" />
+
+Your new commit's screenshots are compared side-by-side with their `main` branch counterparts to easily spot and prevent visual regressions.
+
+<ArgosInBrowser approved={false} mb="40px" maxWidth="600px" />
+
+Click on `Mark as approved` button to approve the changes and clear the Github check status.
+
+If the screenshots is not satisfactory fix your code and push a new commit.

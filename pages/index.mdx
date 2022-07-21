@@ -1,0 +1,35 @@
+import {
+  ScreenContainer,
+  Button,
+  HeroSection,
+  Hero,
+  HeroBody,
+  HeroTitle,
+  HeroTeaser,
+  HeroActionList,
+  HeroAction,
+} from 'smooth-doc/components'
+import heroBackgroundImageURL from '../images/hero-background.png'
+
+<HeroSection>
+  <Hero backgroundImageURL={heroBackgroundImageURL}>
+    <HeroBody>
+      <HeroTitle>Argos Documentation</HeroTitle>
+      <HeroTeaser>
+        Adds screenshot review to your developer team’s routine. Compare
+        pull-requests screenshots and be notified when something changes.
+      </HeroTeaser>
+      <HeroActionList>
+        <HeroAction>
+          <Button
+            variant="neutral"
+            forwardedAs="a"
+            href="/docs/getting-started/"
+          >
+            Getting started
+          </Button>
+        </HeroAction>
+      </HeroActionList>
+    </HeroBody>
+  </Hero>
+</HeroSection>
