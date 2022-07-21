@@ -1,0 +1,30 @@
+---
+title: About flaky tests
+section: Flaky tests
+slug: /docs/flaky-tests/about-flaky
+order: 1
+---
+
+# About flaky tests
+
+Definition and stabilization strategies.
+
+### What are flaky tests
+
+Visual flaky tests are screenshots that display randomly variations. They are pretty annoying because they invalid Argos status check and neutralize visual testing first purpose : easily spot visuals changes.
+
+Some flaky use-cases are well known and easy to fix like date stabilization. On the other hand, some of them need real engineering skills to be fixed.
+
+In this sections, we will provide some tools to fix the most common ones.
+
+### Mark test as flaky
+
+We decide to not provide the "mark test as flaky" button whom ignore visual diff. We think that ignore a test result is more damaging than removing the test.
+
+## Usual flaky causes and defuse strategies
+
+In this sections we will list most commons flaky test cases and fixing methods.
+
+- Stabilize generated data seeds : [data stabilization](/docs/flaky-tests/data-stabilization)
+- Refreshed date : [how to freeze date on screenshots](/docs/flaky-tests/data-stabilization#stabilize-date-and-time)
+- Box shadow and border radius variations : [how to inject style before screenshots](/docs/flaky-tests/style-injection)

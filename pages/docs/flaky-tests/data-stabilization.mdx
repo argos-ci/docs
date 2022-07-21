@@ -1,0 +1,41 @@
+---
+title: Data stabilization
+section: Flaky tests
+slug: /docs/flaky-tests/data-stabilization
+order: 3
+---
+
+# Data Stabilization
+
+Stabilize refreshed date and generated seeds to avoid flaky tests.
+
+## Stabilize data seeds
+
+Generated data seeds from tools like [Chance](https://chancejs.com/) or [Faker](https://fakerjs.dev/) can cause flaky tests. Happily each of this tools provide the ability to use your own data.
+
+We advice to continue using your favorite data seed generator and set fixed variables only when flaky are created.
+
+## Stabilize date and time
+
+Multiple strategies can be used to avoid flaky tests causes by dates.
+
+### Use a fixed date
+
+When a date value is not a main purpose of a the test, it can be convenient to set it to a fixed date. For example, a date filter with default today value fix with this strategy.
+
+### Use a library to mock the current date
+
+[MockDate](https://github.com/boblauer/MockDate) is a javascript lib that change the "now" date.
+
+### Use your test framework feature
+
+In Cypress, you can freezing date with the following command :
+
+```js
+const now = new Date(2030, 5, 5)
+cy.clock(now) // set current date to 5 Mai 2030
+```
+
+## Hide rebellious data
+
+If none of this methods work, you have the ability to hide a DOM node from screenshot via [style injection](/docs/flaky-tests/style-injection) feature and custom class feature.
