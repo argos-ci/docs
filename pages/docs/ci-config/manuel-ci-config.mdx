@@ -1,0 +1,59 @@
+---
+title: Manual CI config
+section: CI config
+slug: /docs/ci-config/manual-ci-config
+order: 100
+---
+
+# Manual CI config
+
+Configure your CI manually with argos-cli
+
+### Install the CLI with NPM
+
+Argos is available as an NPM package : [argos-cli](https://github.com/argos-ci/argos-cli)
+
+```sh
+$ npm install --save argos-cli
+```
+
+### Environment variables
+
+Use your `ARGOS_TOKEN` to push screenshots to your Argos repository :
+
+```sh
+$ export ARGOS_TOKEN=__ARGOS_TOKEN__
+```
+
+Provide this variables to improve the experience :
+
+- `ARGOS_COMMIT`: the commit the screenshots have been taken on
+- `ARGOS_BRANCH`: the branch the screenshots have been taken on
+
+Consult [argos-cli doc](/docs/argos-cli) to know which other param can be used.
+
+## Config examples
+
+### General config
+
+```sh
+$ export ARGOS_TOKEN=__ARGOS_TOKEN__
+$ ARGOS_COMMIT=$COMMIT_SHA1 ARGOS_BRANCH=$BRANCH_NAME \
+  argos upload tmp/screenshots --token $ARGOS_TOKEN
+```
+
+### Circle-CI config
+
+```sh
+$ export ARGOS_TOKEN=__ARGOS_TOKEN__
+$ ARGOS_COMMIT=$CIRCLE_SHA1 ARGOS_BRANCH=$CIRCLE_BRANCH \
+  argos upload cypress/screenshots --token $ARGOS_TOKEN
+```
+
+### Travis config
+
+```sh
+$ export ARGOS_TOKEN=__ARGOS_TOKEN__
+$ ARGOS_COMMIT=$TRAVIS_COMMIT ARGOS_BRANCH=$TRAVIS_BRANCH \
+  argos upload sandbox/argos-bootstrap/screenshots --token $ARGOS_TOKEN
+```

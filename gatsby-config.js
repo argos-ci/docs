@@ -10,7 +10,7 @@ module.exports = {
         githubRepositoryURL: 'https://github.com/argos-ci',
         sections: [
           'Overview',
-          'Flaky tests',
+          'Screenshots stabilization',
           'Integrations',
           'Static stacks',
           'CI config',

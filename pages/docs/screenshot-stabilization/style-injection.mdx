@@ -1,0 +1,55 @@
+---
+title: Style injection (feature needed)
+section: Screenshots stabilization
+slug: /docs/screenshots-stabilization/style-injection
+order: 3
+---
+
+# Style injection
+
+Inject css to fix unstable rendering.
+
+Browsers have unstable rendering for some items like scroll and border-radius.
+
+Use the code bellow to override the style and fix unstable rendering :
+
+- The first rule hide all scrollbars.
+- The `data-test-hidden` class allow you to hide flagged DOM node from the screenshots.
+- The `data-test-no-radius` class allow you to remove border-radius from flagged DOM node.
+
+```js
+function injectStyles(document) {
+  const cssText = `
+  /* Hide scrollbars */
+  ::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* Generic hide */
+  [data-test-hidden] {
+    opacity: 0 !important;
+  }
+
+  /* Generic hide */
+  [data-test-no-radius] {
+    border-radius: 0 !important;
+  }
+  `
+  const css = document.createElement('style')
+  css.type = 'text/css'
+  css.textContent = cssText
+  document.body.appendChild(css)
+}
+
+/* Cypress command example */
+Cypress.Commands.add('argosScreenshot', (name, options = {}) => {
+  // Inject style
+  cy.document().then((doc) => injectStyles(doc))
+
+  // Wait for font loading
+  cy.document().its('fonts.status').should('equal', 'loaded')
+
+  // Take a screenshot with Cypress
+  cy.screenshot(name, options)
+})
+```

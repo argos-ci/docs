@@ -1,0 +1,28 @@
+---
+title: Visual testing routine
+slug: /docs/visual-testing-routine/
+order: 3
+---
+
+import { GithubMergeStatus } from '../../components/Github'
+import { ArgosInBrowser } from '../../components/ArgosInBrowser'
+
+# Visual testing routine
+
+Add visual testing routine to developers code's routine.
+
+Visit [about Argos](/docs/about-argos) to get insights about visual testing advantages.
+
+Argos CI detects visual changes on every commits and notify you via Github check status.
+
+Click on `Details` button to review all visual changes into Argos CI app.
+
+<GithubMergeStatus status="error" maxWidth="500px" mb="40px" />
+
+Your new commit's screenshots are compared side-by-side with their `main` branch's counterparts to easily spot visual updates and prevent regressions.
+
+<ArgosInBrowser approved={false} maxWidth="600px" />
+
+Click on `Mark as approved` button to approve the changes and valid the Github status.
+
+If new commits screenshots doesn't match expected results rework on your code and push a new commit.
