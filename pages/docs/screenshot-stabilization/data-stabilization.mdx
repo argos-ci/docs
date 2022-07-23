@@ -7,19 +7,19 @@ order: 2
 
 # Data Stabilization
 
-Stabilize refreshed date and generated seeds to avoid flaky tests.
+Stabilize refreshed dates and generated seeds to avoid flaky tests.
 
 ## Stabilize data seeds
 
-Generated data seeds from tools like [Chance](https://chancejs.com/) or [Faker](https://fakerjs.dev/) can cause flaky tests. Happily each of this tools provide the ability to use your own data.
+Data seed generators like [Chance](https://chancejs.com/) or [Faker](https://fakerjs.dev/) can cause flaky tests. But, happily, each tool provides the ability to use your data.
 
-We advice to continue using your favorite data seed generator and set fixed variables only when flaky are created.
+We advise you to continue using your favorite library and resolve flaky tests with fixed variables only when needed.
 
 ## Stabilize date and time
 
-When a displayed date is not a main purpose of a the test, it can be convenient to freeze it to a fixed value.
+When a displayed date is not a primary purpose of a test, it can be convenient to freeze it to a fixed value.
 
-The easier way is to use you test framework feature like bellow :
+The easier way is to use your test framework feature like this :
 
 ```js
 /* Cypress command to freeze date to 20 May 2030 */
@@ -27,8 +27,8 @@ const now = new Date(2030, 4, 20)
 cy.clock(now)
 ```
 
-In an other way, you can use [MockDate](https://github.com/boblauer/MockDate) library to mock the current date.
+Another way is to use an external library like [MockDate](https://github.com/boblauer/MockDate) to mock the current date.
 
 ## Hide rebellious components
 
-If none of this methods work, you can hide node DOM from screenshot with [style injection](/docs/screenshots-stabilization/style-injection).
+If none of these methods work, you can hide node DOM from the screenshots with [style injection](/docs/screenshots-stabilization/style-injection).

@@ -7,15 +7,15 @@ order: 3
 
 # Style injection
 
-Inject css to fix unstable rendering.
+Inject CSS to fix unstable rendering.
 
-Browsers have unstable rendering for some items like scroll and border-radius.
+Browsers have unstable rendering for some use-cases like scrollbar display and border-radius consistency.
 
-Use the code bellow to override the style and fix unstable rendering :
+Use the code below to override the style and fix unstable rendering :
 
-- The first rule hide all scrollbars.
-- The `data-test-hidden` class allow you to hide flagged DOM node from the screenshots.
-- The `data-test-no-radius` class allow you to remove border-radius from flagged DOM node.
+- The first rule hides all scrollbars.
+- The `data-test-hidden` class allows you to hide flagged DOM nodes from the screenshots.
+- The `data-test-no-radius` class enables you to remove border-radius from the flagged DOM node.
 
 ```js
 function injectStyles(document) {

@@ -9,20 +9,38 @@ import { ArgosInBrowser } from '../../components/ArgosInBrowser'
 
 # Visual testing routine
 
-Add visual testing routine to developers code's routine.
+Add visual testing to the developer's code routine.
 
-Visit [about Argos](/docs/about-argos) to get insights about visual testing advantages.
+## Objectives
 
-Argos CI detects visual changes on every commits and notify you via Github check status.
+With a one-line code, you can take a picture of an end-to-end test step, review the screenshot, and keep it safe from future visual regression.
 
-Click on `Details` button to review all visual changes into Argos CI app.
+Argos CI has two main purposes prevent visual regression across website codebase and ensure UI stability for every browser and resolution.
+
+More than that, Argos CI give developers the confidence to ship feature safely with automatic detection and manual review.
+
+## The safe visual routine
+
+### Visual changes, automatic detection
+
+**Argos CI** receives screenshots from the Continuous Integration environment when a commit is pushed to GitHub. The Github check status turns red when visual diffs are detected by Argos CI, and a link is displayed to review the visual changes on Argos app.
+
+Click on `Details` button to review all visual changes in Argos CI app.
 
 <GithubMergeStatus status="error" maxWidth="500px" mb="40px" />
 
-Your new commit's screenshots are compared side-by-side with their `main` branch's counterparts to easily spot visual updates and prevent regressions.
+### Screenshot comparison
+
+**Argos app** is a web platform designed to review screenshots and verify that they match expected results.
+
+The side-by-side UI allows developers to compare new commit's screenshots with their `main` branch's counterparts, easily spot visual changes and prevent visual regressions.
+
+#### Review approval
+
+Click on `Mark as approved` button to approve the changes and validate the Github status.
 
 <ArgosInBrowser approved={false} maxWidth="600px" />
 
-Click on `Mark as approved` button to approve the changes and valid the Github status.
+#### Review rejection
 
-If new commits screenshots doesn't match expected results rework on your code and push a new commit.
+If new commits screenshots don't satisfy your expectations, rework your code and push a new commit.
