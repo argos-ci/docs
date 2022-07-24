@@ -11,7 +11,6 @@ module.exports = {
         sections: [
           'Overview',
           'Screenshots stabilization',
-          'Integrations',
           'Static stacks',
           'CI config',
           'FAQ',

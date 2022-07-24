@@ -9,20 +9,34 @@ import { ArgosInBrowser } from '../../components/ArgosInBrowser'
 
 # Getting started
 
-Welcome to the Argos CI documentation !
+Welcome to the Argos CI documentation!
 
 To learn about Argos' philosophy, visit [about Argos CI](/docs/about-argos-ci).
 
-### Prerequisites
+**Prerequisites**: to use Argos CI, you need a GitHub-hosted project with [end-to-end tests](https://kentcdodds.com/blog/static-vs-unit-vs-integration-vs-e2e-tests) and a [CI environment](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration).
 
-To use Argos, you need a GitHub-hosted project with [end-to-end tests](https://kentcdodds.com/blog/static-vs-unit-vs-integration-vs-e2e-tests) and a [CI environment](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration).
+### Get Argos app on GitHub marketplace.
 
-## Install Argos CI
+Go to GitHub marketplace, install the [Argos-ci App](https://github.com/apps/argos-ci), and select organization and repository.
 
-1. Use the integration guide that matches your stack, or use the [custom integration](/docs/integrations/custom-integration) doc.
+### Setup `ARGOS_TOKEN` as a GitHub Secret
 
-2. [Select a plan](https://github.com/marketplace/argos-ci) on Github Marketplace to get your `ARGOS_TOKEN`.
+- Login to https://www.argos-ci.com
+- Click on your username to display your repositories
+- Click on the one you want to activate
+- Click on `Activate repository` and copy your `ARGOS_TOKEN` value.
+- Create a [GitHub Secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) named `ARGOS_TOKEN` with the copied value.
 
-3. Use the CI config guide that matches your stack.
+### Configure your CI to send screenshots to Argos
 
-You are now ready to [add visual testing to your routine](/docs/visual-testing-routine/).
+Use the CI configuration doc that matches your stack.
+
+### Enjoy!
+
+You are ready to use your favorite end-to-end framework
+( ex. [Cypress](https://docs.cypress.io/api/commands/screenshot),
+[Playwright](https://playwright.dev/docs/screenshots),
+[Puppeteer](https://pptr.dev/api/puppeteer.page.screenshot),
+[TestCafe](https://testcafe.io/documentation/402675/reference/test-api/testcontroller/takescreenshot) )
+to take screenshots
+and [add visual testing to your routine](/docs/visual-testing-routine/).
