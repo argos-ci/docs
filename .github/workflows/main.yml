@@ -1,9 +1,9 @@
-name: Cypress Tests
+name: Main CI
 
 on: [push]
 
 jobs:
-  cypress-run:
+  main-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

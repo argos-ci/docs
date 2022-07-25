@@ -24,7 +24,6 @@ module.exports = {
             options: {
               branch: process.env.GITHUB_REF_NAME,
               commit: process.env.GITHUB_SHA,
-              dir: './screenshots',
               token: process.env.ARGOS_TOKEN,
             },
           },
