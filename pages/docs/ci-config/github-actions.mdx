@@ -19,11 +19,11 @@ Configure Actions CI to send screenshots to Argos CI.
 steps:
   ...
   - name: 'Argos screenshots upload'
-    run: yarn argos upload cypress/screenshots
+    run: yarn argos upload screenshots_folder
       --branch ${GITHUB_REF##*/}
       --commit $GITHUB_SHA
       --token ${{ secrets.ARGOS_TOKEN }}
     if: ${{ always() }}
 ```
 
-Watch example project : https://github.com/jsfez/argos-nextjs-example
+Example project : https://github.com/jsfez/argos-nextjs-example

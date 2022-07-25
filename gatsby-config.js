@@ -17,18 +17,5 @@ module.exports = {
         ],
       },
     },
-    ...(process.env.CI
-      ? [
-          {
-            resolve: 'gatsby-plugin-argos',
-            options: {
-              branch: process.env.GITHUB_REF_NAME,
-              commit: process.env.GITHUB_SHA,
-              dir: './screenshots',
-              token: process.env.ARGOS_TOKEN,
-            },
-          },
-        ]
-      : []),
   ],
 }

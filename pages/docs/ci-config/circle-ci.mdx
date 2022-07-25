@@ -22,10 +22,10 @@ steps:
   ...
   - run:
       name: Argos screenshots upload
-      command: yarn argos upload cypress/screenshots
+      command: yarn argos upload screenshots_folder
         --branch $CIRCLE_BRANCH
         --commit $CIRCLE_SHA1
         --token $ARGOS_TOKEN
 ```
 
-Watch example project : https://github.com/jsfez/argos-cra-circle-ci
+Example project : https://github.com/jsfez/argos-cra-circle-ci

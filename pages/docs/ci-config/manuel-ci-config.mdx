@@ -19,7 +19,7 @@ Configure your CI to send screenshots to Argos CI.
 steps:
   ...
   - name: 'Argos screenshots upload'
-    run: yarn argos upload cypress/screenshots
+    run: yarn argos upload screenshots_folder
       --branch ${BRANCH_NAME}
       --commit ${COMMIT_HASH}
       --token ${ARGOS_TOKEN}
