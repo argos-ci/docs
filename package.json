@@ -15,7 +15,11 @@
     "smooth-doc": "^5.0.4"
   },
   "devDependencies": {
+    "argos-cli": "^0.3.3",
     "eslint": "^8.20.0",
-    "eslint-plugin-react": "^7.30.1"
+    "eslint-plugin-react": "^7.30.1",
+    "gatsby-plugin-argos": "^1.0.0",
+    "gatsby-plugin-screenshot": "^1.0.0",
+    "puppeteer": "^15.5.0"
   }
 }
