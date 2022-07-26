@@ -8,7 +8,7 @@ module.exports = {
         description: 'The fancy screenshot testing app.',
         siteUrl: 'https://argos-ci.com',
         githubRepositoryURL: 'https://github.com/argos-ci',
-        navItems: [{ title: 'Docs', url: '/docs/' }],
+        navItems: [{ title: 'Docs', url: '/' }],
         sections: [
           'Overview',
           'Screenshots stabilization',
