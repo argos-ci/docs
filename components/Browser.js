@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box } from '@xstyled/styled-components'
-import { IoReload } from 'react-icons/io5'
+import { IoReload } from '@react-icons/all-files/io5/IoReload'
 import { ControlButtons } from './ControlButtons'
 
 const Header = (props) => (

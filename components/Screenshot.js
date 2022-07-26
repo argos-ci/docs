@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box } from '@xstyled/styled-components'
-import { IoCar } from 'react-icons/io5'
+import { IoCar } from '@react-icons/all-files/io5/IoCar'
 
 const IconContainer = ({ size = '60px', ...props }) => (
   <Box

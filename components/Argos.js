@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import { Box } from '@xstyled/styled-components'
-import { IoCheckmark } from 'react-icons/io5'
+import { IoCheckmark } from '@react-icons/all-files/io5/IoCheckmark'
 
 export const ArgosCard = forwardRef((props, ref) => (
   <Box

@@ -1,6 +1,8 @@
 import React, { forwardRef } from 'react'
 import styled, { Box } from '@xstyled/styled-components'
-import { FaCheck, FaTimes } from 'react-icons/fa'
+import { FaCheck } from '@react-icons/all-files/fa/FaCheck'
+import { FaTimes } from '@react-icons/all-files/fa/FaTimes'
+
 import logo from '../images/logo.png'
 
 export const GITHUB_COLORS = {

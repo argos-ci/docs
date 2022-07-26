@@ -15,7 +15,7 @@ import {
   ScreenshotLegend,
 } from './Screenshot'
 import { TextIcon } from './TextIcon'
-import { IoGitBranch } from 'react-icons/io5'
+import { IoGitBranch } from '@react-icons/all-files/io5/IoGitBranch'
 
 export const ArgosInBrowser = ({ approved = true, ...props }) => (
   <Browser {...props}>
