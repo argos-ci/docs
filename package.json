@@ -10,7 +10,6 @@
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
     "gatsby": "^2.15.18",
-    "gatsby-plugin-google-analytics": "^4.19.0",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "smooth-doc": "^5.0.4"

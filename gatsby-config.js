@@ -16,16 +16,6 @@ module.exports = {
           'CI config',
           'FAQ',
         ],
-        // docSearch: {
-        //   apiKey: 'XX',
-        //   indexName: 'XXX',
-        // },
-      },
-    },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: '324671858',
       },
     },
   ],
