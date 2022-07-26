@@ -1,22 +1,26 @@
+/* eslint-env node */
+
 module.exports = {
   plugins: [
     {
-      resolve: 'smooth-doc',
+      resolve: "smooth-doc",
       options: {
-        name: 'Argos CI DOC',
-        author: 'Jeremy Sfez',
-        description: 'The fancy screenshot testing app.',
-        siteUrl: 'https://argos-ci.com',
-        githubRepositoryURL: 'https://github.com/argos-ci',
-        navItems: [{ title: 'Docs', url: '/' }],
+        name: "Argos",
+        author: "Smooth Code",
+        description: "Argos documentation.",
+        siteUrl: "https://docs.argos-ci.com",
+        githubRepositoryURL: "https://github.com/argos-ci/docs.argos-ci.com",
+        baseDirectory: __dirname,
+        githubDefaultBranch: "main",
+        navItems: [{ title: "Docs", url: "/" }],
         sections: [
-          'Overview',
-          'Screenshots stabilization',
-          'Static stacks',
-          'CI config',
-          'FAQ',
+          "Overview",
+          "Screenshots stabilization",
+          "Static stacks",
+          "CI config",
+          "FAQ",
         ],
       },
     },
   ],
-}
+};

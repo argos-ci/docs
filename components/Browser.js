@@ -1,11 +1,11 @@
-import React from 'react'
-import { Box } from '@xstyled/styled-components'
-import { IoReload } from '@react-icons/all-files/io5/IoReload'
-import { ControlButtons } from './ControlButtons'
+import React from "react";
+import { x } from "@xstyled/styled-components";
+import { IoReload } from "@react-icons/all-files/io5/IoReload";
+import { ControlButtons } from "./ControlButtons";
 
 const Header = (props) => (
-  <Box
-    height="40px"
+  <x.div
+    h="40px"
     display="flex"
     alignItems="center"
     borderBottom={1}
@@ -13,39 +13,39 @@ const Header = (props) => (
     position="relative"
     {...props}
   />
-)
+);
 
 const SearchBar = ({ children, ...props }) => (
-  <Box
+  <x.div
     textAlign="center"
     backgroundColor="body-background"
-    height="28px"
+    h="28px"
     pt="7px"
     borderRadius="3px"
-    width={1 / 3}
+    w={1 / 3}
     fontSize="12px"
     position="relative"
     mx="auto"
-    minWidth="130px"
+    minW="130px"
     display="flex"
     justifyContent="space-between"
     {...props}
   >
-    <Box width="14px" ml="12px" />
+    <x.div w="14px" ml="12px" />
     {children}
-    <Box as={IoReload} width="14px" height="14px" mr="12px" />
-  </Box>
-)
+    <x.div as={IoReload} w="14px" h="14px" mr="12px" />
+  </x.div>
+);
 
-const Body = (props) => <Box p={2} {...props} />
+const Body = (props) => <x.div p={2} {...props} />;
 
 export const Browser = ({ children, ...props }) => {
   return (
-    <Box
+    <x.div
       borderRadius="3px"
       border={1}
       borderColor="border"
-      backgroundColor="background-secondary"
+      bg="background-secondary"
       overflow="hidden"
       zIndex={400}
       {...props}
@@ -55,6 +55,6 @@ export const Browser = ({ children, ...props }) => {
         <SearchBar>argos.com</SearchBar>
       </Header>
       <Body>{children}</Body>
-    </Box>
-  )
-}
+    </x.div>
+  );
+};
