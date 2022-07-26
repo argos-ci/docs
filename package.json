@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "gatsby": "^2.15.18",
+    "gatsby-plugin-google-analytics": "^4.19.0",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-icons": "^4.4.0",

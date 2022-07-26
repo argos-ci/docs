@@ -4,10 +4,11 @@ module.exports = {
       resolve: 'smooth-doc',
       options: {
         name: 'Argos CI DOC',
-        description: 'How to install and use Argos CI.',
         author: 'Jeremy Sfez',
+        description: 'The fancy screenshot testing app.',
         siteUrl: 'https://argos-ci.com',
         githubRepositoryURL: 'https://github.com/argos-ci',
+        navItems: [{ title: 'Docs', url: '/docs/' }],
         sections: [
           'Overview',
           'Screenshots stabilization',
@@ -15,6 +16,16 @@ module.exports = {
           'CI config',
           'FAQ',
         ],
+        // docSearch: {
+        //   apiKey: 'XX',
+        //   indexName: 'XXX',
+        // },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: '324671858',
       },
     },
   ],
