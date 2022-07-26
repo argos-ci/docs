@@ -1,22 +1,22 @@
-import React, { forwardRef } from 'react'
-import { Box } from '@xstyled/styled-components'
-import { IoCheckmark } from '@react-icons/all-files/io5/IoCheckmark'
+import React, { forwardRef } from "react";
+import { x } from "@xstyled/styled-components";
+import { IoCheckmark } from "@react-icons/all-files/io5/IoCheckmark";
 
 export const ArgosCard = forwardRef((props, ref) => (
-  <Box
+  <x.div
     ref={ref}
     borderLeft="solid 2px"
     color="white"
     borderRadius="4px"
-    backgroundColor="rgba(51, 65, 85, 0.7)"
+    bg="rgba(51, 65, 85, 0.7)"
     transition="opacity 1200ms 700ms"
     position="relative"
     {...props}
   />
-))
+));
 
 export const ArgosCardHeader = forwardRef((props, ref) => (
-  <Box
+  <x.div
     ref={ref}
     display="flex"
     justifyContent="space-between"
@@ -26,14 +26,14 @@ export const ArgosCardHeader = forwardRef((props, ref) => (
     p={2}
     {...props}
   />
-))
+));
 
 export const ArgosCardTitle = (props) => (
-  <Box fontSize="15px" color="secondary" fontWeight="semibold" {...props} />
-)
+  <x.div fontSize="15px" color="secondary" fontWeight="semibold" {...props} />
+);
 
 export const ArgosCardBody = forwardRef((props, ref) => (
-  <Box
+  <x.div
     position="relative"
     display="flex"
     py={2}
@@ -42,13 +42,13 @@ export const ArgosCardBody = forwardRef((props, ref) => (
     justifyContent="flex-between"
     {...props}
   />
-))
+));
 
 export const ArgosApproveButton = forwardRef(
-  ({ variant = 'success', ...props }, ref) => (
-    <Box
-      bg={variant === 'success' ? 'success' : 'warning'}
+  ({ variant = "success", ...props }, ref) => (
+    <x.div
       ref={ref}
+      bg={variant === "success" ? "success" : "warning"}
       fontSize="14px"
       px="12px"
       py="4px"
@@ -59,14 +59,14 @@ export const ArgosApproveButton = forwardRef(
       color="white"
       {...props}
     >
-      {variant === 'success' ? (
+      {variant === "success" ? (
         <>
-          <Box as={IoCheckmark} />
+          <x.div as={IoCheckmark} />
           Approved
         </>
       ) : (
-        'Mark as approved'
+        "Mark as approved"
       )}
-    </Box>
-  ),
-)
+    </x.div>
+  )
+);

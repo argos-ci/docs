@@ -4,8 +4,8 @@ slug: /visual-testing-routine/
 order: 3
 ---
 
-import { GithubMergeStatus } from '../../components/Github'
-import { ArgosInBrowser } from '../../components/ArgosInBrowser'
+import { GitHubMergeStatus } from "../../components/GitHub";
+import { ArgosInBrowser } from "../../components/ArgosInBrowser";
 
 # Visual testing routine
 
@@ -23,11 +23,11 @@ More than that, Argos CI give developers the confidence to ship feature safely w
 
 ### Visual changes, automatic detection
 
-**Argos CI** receives screenshots from the Continuous Integration environment when a commit is pushed to GitHub. The Github check status turns red when visual diffs are detected by Argos CI, and a link is displayed to review the visual changes on Argos app.
+**Argos CI** receives screenshots from the Continuous Integration environment when a commit is pushed to GitHub. The GitHub check status turns red when visual diffs are detected by Argos CI, and a link is displayed to review the visual changes on Argos app.
 
 Click on `Details` button to review all visual changes in Argos CI app.
 
-<GithubMergeStatus status="error" maxWidth="500px" mb="40px" />
+<GitHubMergeStatus status="error" maxWidth="500px" mb="40px" />
 
 ### Screenshot comparison
 
@@ -37,7 +37,7 @@ The side-by-side UI allows developers to compare new commit's screenshots with t
 
 #### Review approval
 
-Click on `Mark as approved` button to approve the changes and validate the Github status.
+Click on `Mark as approved` button to approve the changes and validate the GitHub status.
 
 <ArgosInBrowser approved={false} maxWidth="600px" />
 

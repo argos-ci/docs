@@ -1,5 +1,5 @@
-import React from 'react'
-import { Box } from '@xstyled/styled-components'
+import React from "react";
+import { x } from "@xstyled/styled-components";
 
 export const TextIcon = ({
   icon: Icon,
@@ -7,16 +7,16 @@ export const TextIcon = ({
   children,
   ...props
 }) => (
-  <Box display="flex" whiteSpace="nowrap" {...props}>
-    <Box
+  <x.div display="flex" whiteSpace="nowrap" {...props}>
+    <x.div
       as={Icon}
-      width="16px"
-      height="16px"
-      minWidth="16px"
+      w="16px"
+      h="16px"
+      minW="16px"
       mr="4px"
       mt="4px"
       {...iconStyle}
     />
     {children}
-  </Box>
-)
+  </x.div>
+);

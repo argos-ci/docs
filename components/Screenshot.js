@@ -1,12 +1,12 @@
-import React from 'react'
-import { Box } from '@xstyled/styled-components'
-import { IoCar } from '@react-icons/all-files/io5/IoCar'
+import React from "react";
+import { x } from "@xstyled/styled-components";
+import { IoCar } from "@react-icons/all-files/io5/IoCar";
 
-const IconContainer = ({ size = '60px', ...props }) => (
-  <Box
-    height={size}
-    width={size}
-    maxWidth={size}
+const IconContainer = ({ size = "60px", ...props }) => (
+  <x.div
+    h={size}
+    w={size}
+    maxW={size}
     backgroundColor="white"
     boxShadow="md"
     border={1}
@@ -18,100 +18,93 @@ const IconContainer = ({ size = '60px', ...props }) => (
     color="black"
     {...props}
   />
-)
+);
 
 const Icon = ({ size = 24, ...props }) => (
-  <Box
-    mx="auto"
-    width={size}
-    minWidth={size}
-    height={size}
-    minHeight={size}
-    {...props}
-  />
-)
+  <x.div mx="auto" w={size} minW={size} h={size} minH={size} {...props} />
+);
 
 const Placeholder = ({ active, ...props }) => (
-  <Box
-    height="8px"
-    bg={active ? 'white' : 'secondary'}
+  <x.div
+    w={1}
+    h="8px"
+    bg={active ? "white" : "secondary"}
     borderRadius="20px"
-    width={1}
     {...props}
   />
-)
+);
 
 const ParagraphPlaceholder = (props) => (
   <Placeholder borderRadius="4px" height="24px" bg="secondary" {...props} />
-)
+);
 
 const InnerScreenshot = ({ children, ...props }) => {
   return (
-    <Box
+    <x.div
       flex={1}
-      backgroundColor="#0f172aff"
+      bg="#0f172aff"
       pt={2}
       px={{ xs: 1, sm: 3 }}
       pb={4}
       transition="800ms"
       {...props}
     >
-      <Box maxWidth="200px" mx="auto">
+      <x.div maxW="200px" mx="auto">
         {children}
-      </Box>
-    </Box>
-  )
-}
+      </x.div>
+    </x.div>
+  );
+};
 
 const Header = (props) => (
-  <Box display="flex" mx="auto" alignItems="center" height="50px" {...props} />
-)
+  <x.div display="flex" mx="auto" alignItems="center" h="50px" {...props} />
+);
 const ScreenshotLayoutHeader = (props) => (
   <Header {...props}>
     <IconContainer size="40px" flex={1}>
       <Icon as={IoCar} />
     </IconContainer>
-    <Box flex={1} ml="10px">
+    <x.div flex={1} ml="10px">
       <Placeholder active width={1 / 2} />
       <Placeholder mt={1} />
-    </Box>
+    </x.div>
   </Header>
-)
+);
 
-const Body = (props) => <Box mx="auto" height="62px" {...props} />
+const Body = (props) => <x.div mx="auto" h="62px" {...props} />;
 const ScreenshotLayoutBody = (props) => (
   <Body border={1} borderColor="transparent" {...props}>
-    <ParagraphPlaceholder mt={2} height="20px" />
-    <ParagraphPlaceholder mt={1} height="30px" />
+    <ParagraphPlaceholder mt={2} h="20px" />
+    <ParagraphPlaceholder mt={1} h="30px" />
   </Body>
-)
+);
 
 const Price = (props) => (
-  <Box
+  <x.div
     display="flex"
     justifyContent="flex-end"
-    height="40px"
+    h="40px"
     pt="8px"
     {...props}
   />
-)
-const PriceTag = ({ backgroundColor = 'blue-500', ...props }) => (
-  <Box
+);
+const PriceTag = ({ backgroundColor = "blue-500", ...props }) => (
+  <x.div
     fontSize="21px"
     fontWeight="200"
     px="10px"
     pt="-10px"
     borderRadius="22px"
-    height="13px"
+    h="13px"
+    w="58px"
     backgroundColor={backgroundColor}
-    width="58px"
     lineHeight="normal"
     {...props}
   />
-)
+);
 
 export const ScreenshotLegend = (props) => (
-  <Box
+  <x.div
     borderLeft={1}
     borderColor="secondary"
     color="secondary"
@@ -119,13 +112,13 @@ export const ScreenshotLegend = (props) => (
     pl={2}
     ml={2}
     flex={1}
-    maxHeight={26}
+    maxH={26}
     {...props}
   />
-)
+);
 
 export const ScreenshotContainer = (props) => (
-  <Box
+  <x.div
     flex={1}
     display="flex"
     flexDirection="column"
@@ -133,11 +126,11 @@ export const ScreenshotContainer = (props) => (
     position="relative"
     {...props}
   />
-)
+);
 
 export const Screenshot = ({
-  tagColor = 'blue-500',
-  tagSize = 'md',
+  tagColor = "blue-500",
+  tagSize = "md",
   ...props
 }) => (
   <InnerScreenshot {...props}>
@@ -145,26 +138,26 @@ export const Screenshot = ({
     <Price>
       <PriceTag
         backgroundColor={tagColor}
-        height={tagSize === 'md' ? '24px' : '13px'}
+        height={tagSize === "md" ? "24px" : "13px"}
       >
         $$$
       </PriceTag>
     </Price>
     <ScreenshotLayoutBody />
   </InnerScreenshot>
-)
+);
 
 export const ScreenshotDiff = ({ variant, ...props }) => {
   return (
     <InnerScreenshot {...props}>
       <Header />
       <Price>
-        {variant === 'bugged' ? (
+        {variant === "bugged" ? (
           <PriceTag position="absolute" height="13px" bg="danger" />
         ) : null}
         <PriceTag height="24px" backgroundColor="danger" />
       </Price>
       <Body />
     </InnerScreenshot>
-  )
-}
+  );
+};

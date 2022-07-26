@@ -1,22 +1,22 @@
-import React, { forwardRef } from 'react'
-import { Box } from '@xstyled/styled-components'
+import React, { forwardRef } from "react";
+import { x } from "@xstyled/styled-components";
 
 export const ControlButton = forwardRef(
-  ({ variant = 'success', ...props }, ref) => (
-    <Box
-      width="12px"
-      height="12px"
+  ({ variant = "success", ...props }, ref) => (
+    <x.div
+      ref={ref}
+      w="12px"
+      h="12px"
       borderRadius="50%"
       mr="8px"
-      backgroundColor={variant}
-      ref={ref}
+      bg={variant}
       {...props}
     />
-  ),
-)
+  )
+);
 
 export const ControlButtons = ({ ...props }) => (
-  <Box
+  <x.div
     display="flex"
     alignItems="center"
     pl="12px"
@@ -27,5 +27,5 @@ export const ControlButtons = ({ ...props }) => (
     <ControlButton variant="danger" />
     <ControlButton variant="warning" />
     <ControlButton variant="success" />
-  </Box>
-)
+  </x.div>
+);
