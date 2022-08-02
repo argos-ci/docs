@@ -4,6 +4,8 @@ slug: /static-sites/
 order: 4
 ---
 
+import { Snippet } from '../../components/Snippet'
+
 # Static sites
 
 Fast install guide to static sites.
@@ -16,9 +18,10 @@ Use the [`gatsby-plugin-argos`](https://github.com/argos-ci/argos-javascript/tre
 
 ### Fast install
 
-```sh
-$ npm install --save-dev gatsby-plugin-argos argos-cli gatsby-plugin-screenshot puppeteer
-```
+<Snippet lang="sh">
+  $ npm install --save-dev gatsby-plugin-argos argos-cli
+  gatsby-plugin-screenshot puppeteer
+</Snippet>
 
 ```js
 // in your gatsby-config.js
