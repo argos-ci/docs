@@ -13,7 +13,7 @@ Configure Actions CI to send screenshots to Argos CI.
 
 - Create a [GitHub Secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) named `ARGOS_TOKEN` with the copied value.
 
-### 2. Update your CI configuration file
+### 2. Update your CI configuration file `.github/workflows/main.yml`
 
 ```yml
 name: CI
@@ -38,7 +38,7 @@ jobs:
 
       - name: "Argos screenshots upload"
         run: yarn argos upload screenshots_folder
-          --branch ${GITHUB_REF##*/}
+          --branch $GITHUB_REF_NAME
           --commit $GITHUB_SHA
           --token ${{ secrets.ARGOS_TOKEN }}
         if: ${{ always() }}
