@@ -4,9 +4,8 @@ slug: /getting-started/
 order: 2
 ---
 
-import { GitHubMergeStatus } from '../../components/GitHub'
-import { ArgosInBrowser } from '../../components/ArgosInBrowser'
-import { Snippet } from '../../components/Snippet'
+import { GitHubMergeStatus } from "../../components/GitHub";
+import { ArgosInBrowser } from "../../components/ArgosInBrowser";
 
 # Getting started
 
@@ -18,35 +17,29 @@ To learn about Argos' philosophy, visit [about Argos CI](/about-argos-ci).
 
 ### 1. Install the CLI
 
-<Snippet lang="sh">$ npm install --save-dev argos-cli</Snippet>
+```sh
+$ npm install --save-dev argos-cli
+```
 
-### 2. Get Argos app on GitHub marketplace.
+### 2. Install the Argos app on GitHub marketplace
 
-Go to GitHub marketplace, install the [Argos-ci App](https://github.com/apps/argos-ci), and select your repository.
+Install the [Argos-ci App](https://github.com/apps/argos-ci) and select the chosen repository.
 
-### 3. Get a private `ARGOS_TOKEN`
+### 3. Get the Argos repository's token
+
+Argos assigns a unique token to the connected repositories. This token should be added as a CI environment variable and sent when the screenshots are uploaded.
 
 - Login to https://www.argos-ci.com
-- Click on your username to display your repositories
-- Select the one you want to activate and click on `Activate repository` button
-- Copy and set aside the `ARGOS_TOKEN` value. It will be used during the CI configuration.
+- Click on your organization's name (or username) to display the repositories
+- Select the repository you want to activate and click on `Activate repository` button
+- Copy and save the `ARGOS_TOKEN` value. It will be used as a environment variable during the CI configuration.
 
-### 4. Configure your CI to send screenshots to Argos.
+### 4. Configure your CI to send screenshots to Argos
 
 Use the CI configuration doc that matches your stack.
 
-#### Fast install for static sites
-
-Argos makes it very simple to integrate visual testing for static websites. Visit [Static sites doc](/static-sites/) to check if we have an integration for your stack.
+> Argos has a fast install for some static sites stacks. Visit [static sites doc](/static-sites/) to check if we have an integration for your stack.
 
 ### Enjoy!
 
-You are ready to use your favorite end-to-end framework
-( ex. [Cypress](https://docs.cypress.io/api/commands/screenshot),
-[Playwright](https://playwright.dev/screenshots),
-[Puppeteer](https://pptr.dev/api/puppeteer.page.screenshot),
-[TestCafe](https://testcafe.io/documentation/402675/reference/test-api/testcontroller/takescreenshot) )
-to take screenshots
-and [add visual testing to your routine](/visual-testing-routine/).
-
-NB. we recommend adding the screenshots folder to your `.gitignore`.
+You are ready to [add visual testing to your routine](/visual-testing-routine/)!

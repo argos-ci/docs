@@ -4,7 +4,7 @@ slug: /static-sites/
 order: 4
 ---
 
-import { Snippet } from '../../components/Snippet'
+import { Snippet } from "../../components/Snippet";
 
 # Static sites
 
@@ -23,6 +23,17 @@ Use the [`gatsby-plugin-argos`](https://github.com/argos-ci/argos-javascript/tre
   gatsby-plugin-screenshot puppeteer
 </Snippet>
 
+### Expose your `ARGOS_TOKEN` as environment variable
+
+```yml
+// Github Actions example: add this command to your .github/workflows/*.yml
+
+env:
+  ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
+```
+
+### Add the Argos plugin to Gatsby config
+
 ```js
 // in your gatsby-config.js
 module.exports = {
@@ -30,7 +41,7 @@ module.exports = {
     ...(process.env.CI
       ? [
           {
-            resolve: 'gatsby-plugin-argos',
+            resolve: "gatsby-plugin-argos",
             options: {
               branch: process.env.GITHUB_REF_NAME,
               commit: process.env.GITHUB_SHA,
@@ -40,9 +51,9 @@ module.exports = {
         ]
       : []),
   ],
-}
+};
 ```
 
-After each build, every pages will be screenshot and sent to Argos.
+After the build, your CI will take screenshots of every pages and sent them to Argos.
 
 Example project : https://github.com/argos-ci/argos-example-gatsby-github-actions

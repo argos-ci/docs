@@ -22,5 +22,18 @@ module.exports = {
         ],
       },
     },
+
+    ...(process.env.CI
+      ? [
+          {
+            resolve: "gatsby-plugin-argos",
+            options: {
+              branch: process.env.BRANCH,
+              commit: process.env.COMMIT_REF,
+              token: process.env.ARGOS_TOKEN,
+            },
+          },
+        ]
+      : []),
   ],
 };

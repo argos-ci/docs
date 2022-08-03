@@ -16,14 +16,32 @@ Configure Actions CI to send screenshots to Argos CI.
 ### 2. Update your CI configuration file
 
 ```yml
-steps:
-  ...
-  - name: 'Argos screenshots upload'
-    run: yarn argos upload screenshots_folder
-      --branch ${GITHUB_REF##*/}
-      --commit $GITHUB_SHA
-      --token ${{ secrets.ARGOS_TOKEN }}
-    if: ${{ always() }}
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - Install node
+      uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: "Argos screenshots upload"
+        run: yarn argos upload screenshots_folder
+          --branch $GITHUB_REF_NAME
+          --commit $GITHUB_SHA
+          --token ${{ secrets.ARGOS_TOKEN }}
+        if: ${{ always() }}
 ```
 
 Example project : https://github.com/argos-ci/argos-example-github-actions
