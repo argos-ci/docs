@@ -20,6 +20,10 @@ module.exports = {
           "CI config",
           "FAQ",
         ],
+        docSearch: {
+          apiKey: "51e0917fff78fade813b4cfeeaa27721",
+          indexName: "argos-ci",
+        },
       },
     },
 
