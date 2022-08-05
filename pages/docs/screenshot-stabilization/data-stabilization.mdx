@@ -5,8 +5,6 @@ slug: /screenshots-stabilization/data-stabilization
 order: 2
 ---
 
-import { Snippet } from '../../components/Snippet'
-
 # Data Stabilization
 
 Stabilize refreshed dates and generated seeds to avoid flaky tests.
@@ -23,9 +21,11 @@ When a displayed date is not a primary purpose of a test, it can be convenient t
 
 The easier way is to use your test framework feature like this :
 
-<Snippet lang="js">{`/* Cypress command to freeze date to 20 May 2030 */
-const now = new Date(2030, 4, 20)
-cy.clock(now)`}</Snippet>
+```js
+/* Cypress command to freeze date to 20 May 2030 */
+const now = new Date(2030, 4, 20);
+cy.clock(now);
+```
 
 Another way is to use an external library like [MockDate](https://github.com/boblauer/MockDate) to mock the current date.
 
