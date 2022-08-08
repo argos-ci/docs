@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "scripts": {
+    "develop": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve"
+  },
+  "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
+    "@xstyled/styled-components": "^3.6.0",
+    "gatsby": "^4.19.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "smooth-doc": "^9.0.0"
+  },
+  "devDependencies": {
+    "argos-cli": "^0.1.3",
+    "eslint": "^8.20.0",
+    "eslint-plugin-react": "^7.30.1",
+    "gatsby-plugin-argos": "^2.0.0",
+    "gatsby-plugin-screenshot": "^2.0.0",
+    "puppeteer": "^2.1.1"
+  },
+  "overrides": {
+    "babel-plugin-styled-components": "2.0.2"
+  }
+}

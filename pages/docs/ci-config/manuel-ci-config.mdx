@@ -1,0 +1,26 @@
+---
+title: Manual CI config
+section: CI config
+slug: /ci-config/manual-ci-config
+order: 100
+---
+
+# Manual CI config
+
+Configure your CI to send screenshots to Argos CI.
+
+### 1. Set `ARGOS_TOKEN` as environment variable
+
+- Create an environment variable named `ARGOS_TOKEN` with the copied value.
+
+### 2. Update your CI configuration file
+
+```yml
+steps:
+  ...
+  - name: 'Argos screenshots upload'
+    run: yarn argos upload screenshots_folder
+      --branch ${BRANCH_NAME}
+      --commit ${COMMIT_HASH}
+      --token ${ARGOS_TOKEN}
+```

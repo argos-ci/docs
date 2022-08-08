@@ -1,0 +1,31 @@
+---
+title: Circle CI
+section: CI config
+slug: /ci-config/circle-ci
+order: 1
+---
+
+# Circle CI
+
+Configure Circle CI to send screenshots to Argos CI.
+
+### 1. Set `ARGOS_TOKEN` as environment variable
+
+- [Create an environment variable](https://circleci.com/env-vars#setting-an-environment-variable-in-a-project) named `ARGOS_TOKEN` with the copied value.
+
+### 2. Update your CI configuration file
+
+```yml
+# .circleci/config.yml
+
+steps:
+  ...
+  - run:
+      name: Argos screenshots upload
+      command: yarn argos upload screenshots_folder
+        --branch $CIRCLE_BRANCH
+        --commit $CIRCLE_SHA1
+        --token $ARGOS_TOKEN
+```
+
+Example project : https://github.com/argos-ci/argos-example-circleci

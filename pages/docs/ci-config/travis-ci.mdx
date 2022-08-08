@@ -1,0 +1,26 @@
+---
+title: Travis CI
+section: CI config
+slug: /ci-config/travis-ci
+order: 4
+---
+
+# Travis CI
+
+Configure Travis CI to send screenshots to Argos CI.
+
+### 1. Set `ARGOS_TOKEN` as environment variable
+
+- [Create an environment variable](https://docs.travis-ci.com/user/environment-variables/#defining-variables-in-repository-settings) named `ARGOS_TOKEN` with the copied value.
+
+### Update your CI configuration file
+
+```yml
+# .travis.yml
+
+script:
+  #...
+  - yarn argos upload screenshots_folder --branch $TRAVIS_BRANCH --commit $TRAVIS_COMMIT --token $ARGOS_TOKEN
+```
+
+Example project : https://github.com/argos-ci/argos-example-travis

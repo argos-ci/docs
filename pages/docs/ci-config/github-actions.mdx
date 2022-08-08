@@ -1,0 +1,47 @@
+---
+title: GitHub Actions
+section: CI config
+slug: /ci-config/github-actions
+order: 2
+---
+
+# GitHub Actions
+
+Configure Actions CI to send screenshots to Argos CI.
+
+### 1. Set `ARGOS_TOKEN` as environment variable
+
+- Create a [GitHub Secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) named `ARGOS_TOKEN` with the copied value.
+
+### 2. Update your CI configuration file
+
+```yml
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - Install node
+      uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: "Argos screenshots upload"
+        run: yarn argos upload screenshots_folder
+          --branch $GITHUB_REF_NAME
+          --commit $GITHUB_SHA
+          --token ${{ secrets.ARGOS_TOKEN }}
+        if: ${{ always() }}
+```
+
+Example project : https://github.com/argos-ci/argos-example-github-actions
