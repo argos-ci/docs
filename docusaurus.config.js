@@ -28,7 +28,7 @@ const config = {
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           sidebarCollapsible: false,
-          editUrl: "https://github.com/argos-ci/docs.argos-ci.com",
+          editUrl: "https://github.com/argos-ci/docs.argos-ci.com/blob/main",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -53,30 +53,13 @@ const config = {
         },
         items: [
           {
-            type: "doc",
+            to: "https://app.argos-ci.com/",
             position: "left",
-            docId: "introduction",
-            label: "Docs",
+            label: "Go to app",
           },
-          {
-            to: "https://www.argos-ci.com/",
-            position: "left",
-            label: "Argos app",
-          },
-
           {
             type: "search",
             position: "right",
-          },
-          {
-            to: "https://github.com/marketplace/argos-ci",
-            position: "right",
-            label: "Pricing",
-          },
-          {
-            to: "https://www.argos-ci.com/",
-            position: "right",
-            label: "Login",
           },
           {
             href: "https://github.com/argos-ci",
@@ -92,7 +75,7 @@ const config = {
       },
       algolia: {
         appId: "S8JDA82FPQ",
-        apiKey: "17ceeb06c9f5d61d707a7515faee91dd",
+        apiKey: "51e0917fff78fade813b4cfeeaa27721",
         indexName: "argos-ci",
         searchPagePath: "false",
       },
