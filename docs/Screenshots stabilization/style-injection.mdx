@@ -1,8 +1,7 @@
 ---
-title: Style injection (feature needed)
-section: Screenshots stabilization
+id: style-injection
 slug: /screenshots-stabilization/style-injection
-order: 3
+sidebar_position: 3
 ---
 
 # Style injection
@@ -34,22 +33,22 @@ function injectStyles(document) {
   [data-test-no-radius] {
     border-radius: 0 !important;
   }
-  `
-  const css = document.createElement('style')
-  css.type = 'text/css'
-  css.textContent = cssText
-  document.body.appendChild(css)
+  `;
+  const css = document.createElement("style");
+  css.type = "text/css";
+  css.textContent = cssText;
+  document.body.appendChild(css);
 }
 
 /* Cypress command example */
-Cypress.Commands.add('argosScreenshot', (name, options = {}) => {
+Cypress.Commands.add("argosScreenshot", (name, options = {}) => {
   // Inject style
-  cy.document().then((doc) => injectStyles(doc))
+  cy.document().then((doc) => injectStyles(doc));
 
   // Wait for font loading
-  cy.document().its('fonts.status').should('equal', 'loaded')
+  cy.document().its("fonts.status").should("equal", "loaded");
 
   // Take a screenshot with Cypress
-  cy.screenshot(name, options)
-})
+  cy.screenshot(name, options);
+});
 ```
