@@ -91,8 +91,8 @@ const config = {
         darkTheme: darkCodeTheme,
       },
       algolia: {
-        appId: "YOUR_APP_ID",
-        apiKey: "51e0917fff78fade813b4cfeeaa27721",
+        appId: "S8JDA82FPQ",
+        apiKey: "17ceeb06c9f5d61d707a7515faee91dd",
         indexName: "argos-ci",
         searchPagePath: "false",
       },
