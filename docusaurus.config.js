@@ -53,13 +53,13 @@ const config = {
         },
         items: [
           {
-            to: "https://app.argos-ci.com/",
-            position: "left",
-            label: "Go to app",
-          },
-          {
             type: "search",
             position: "right",
+          },
+          {
+            to: "https://app.argos-ci.com/",
+            position: "left",
+            label: "Sign in or start for free",
           },
           {
             href: "https://github.com/argos-ci",
