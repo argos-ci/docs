@@ -75,9 +75,8 @@ const config = {
       },
       algolia: {
         appId: "S8JDA82FPQ",
-        apiKey: "51e0917fff78fade813b4cfeeaa27721",
+        apiKey: "a772ca710e0e36d90ad9b9eccce92f8f",
         indexName: "argos-ci",
-        searchPagePath: "false",
       },
     }),
 };
