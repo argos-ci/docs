@@ -14,7 +14,7 @@ const config = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.png",
-  organizationName: "argos-ci",
+  organizationName: "Argos",
   projectName: "docs.argos-ci.com",
   deploymentBranch: "main",
   trailingSlash: false,
@@ -53,13 +53,13 @@ const config = {
         },
         items: [
           {
-            to: "https://app.argos-ci.com/",
-            position: "left",
-            label: "Go to app",
-          },
-          {
             type: "search",
             position: "right",
+          },
+          {
+            to: "https://app.argos-ci.com/",
+            position: "left",
+            label: "Sign in or start for free",
           },
           {
             href: "https://github.com/argos-ci",
@@ -75,9 +75,8 @@ const config = {
       },
       algolia: {
         appId: "S8JDA82FPQ",
-        apiKey: "51e0917fff78fade813b4cfeeaa27721",
+        apiKey: "a772ca710e0e36d90ad9b9eccce92f8f",
         indexName: "argos-ci",
-        searchPagePath: "false",
       },
     }),
 };
