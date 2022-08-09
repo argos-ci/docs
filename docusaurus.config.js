@@ -14,7 +14,7 @@ const config = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.png",
-  organizationName: "argos-ci",
+  organizationName: "Argos",
   projectName: "docs.argos-ci.com",
   deploymentBranch: "main",
   trailingSlash: false,
