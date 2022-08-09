@@ -4,7 +4,7 @@ sidebar_position: 2
 
 import { CliInstall } from "@site/src/components/packageManagerTabs";
 
-# Installation
+# Getting Started
 
 Argos is a visual testing app that adds screenshots review to a developer's routine and ships features with confidence.
 
@@ -12,11 +12,7 @@ To learn more about Argos' philosophy, read the [introduction section](/).
 
 **Prerequisites :** to use Argos CI, you need a GitHub-hosted project with [end-to-end tests](https://kentcdodds.com/blog/static-vs-unit-vs-integration-vs-e2e-tests) and a [CI environment](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration).
 
-### Install the CLI
-
-<CliInstall />
-
-### Subscribe to Argos Free plan on GitHub Marketplace
+### 1. Subscribe to Argos Free plan on GitHub Marketplace
 
 [Subscribe Argos Free plan](https://github.com/marketplace/argos-ci/) from GitHub Marketplace.
 
@@ -24,7 +20,7 @@ A prompt will asks which repository you want to connect to Argos. We only use co
 
 At the end of the installation you will be redirected to Argos homepage.
 
-### Get the Argos repository's token
+### 2. Get the Argos repository's token
 
 Argos assigns a unique token to the connected repositories. It ensures nobody except you can upload screenshots on your repository.
 
@@ -32,10 +28,10 @@ Argos assigns a unique token to the connected repositories. It ensures nobody ex
 - Select the repository you want to activate and click on `Activate repository` button
 - Copy and save the `ARGOS_TOKEN` value. It will be used as a environment variable during the CI configuration.
 
-### Configure your CI to send screenshots to Argos
+### 4. Configure your CI to send screenshots to Argos
 
 - Setup `ARGOS_TOKEN` environment variable on your CI
-- Run `argos upload screenshots-folder`
+- Run `npx argos-cli upload screenshots-folder`
 
 ### Enjoy!
 
