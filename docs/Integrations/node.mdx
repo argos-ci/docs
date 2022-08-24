@@ -1,0 +1,30 @@
+---
+title: Node.js
+slug: /integrations/node
+---
+
+# Argos Node.js SDK
+
+Upload screenshots to [argos-ci.com](https://app.argos-ci.com) from a Node.js script or create a Argos SDK using `@argos-ci/core`.
+
+The SDK is available as a [npm package](https://www.npmjs.com/package/@argos-ci/core) and open sourced on [GitHub](https://github.com/argos-ci/argos-javascript/tree/main/packages/core).
+
+## Installation
+
+```sh
+npm install --save-dev @argos-ci/core
+```
+
+## Usage
+
+To upload screenshots stored in a `screenshots` folder, use `argos upload` command:
+
+```js
+import { upload } from "@argos-ci/core";
+
+await upload({ root: "./screenshots" });
+```
+
+## API Reference
+
+API Reference is available on [SDK reference documentation](https://js-sdk-reference.argos-ci.com).
