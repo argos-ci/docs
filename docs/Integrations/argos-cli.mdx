@@ -1,0 +1,64 @@
+---
+title: CLI
+slug: /integrations/argos-cli
+---
+
+# Argos Command Line Interface
+
+`@argos-ci/cli` allows you to manually upload screenshots to [argos-ci.com](https://app.argos-ci.com). It can be used to set up a custom CI.
+
+The CLI is available as a [npm package](https://www.npmjs.com/package/@argos-ci/cli) and open sourced on [GitHub](https://github.com/argos-ci/argos-javascript/tree/main/packages/cli).
+
+## Installation
+
+```sh
+npm install --save-dev @argos-ci/cli
+```
+
+## Configuration
+
+To use `@argos-ci/cli` you have to configure your repository token in an environment variable:
+
+```sh
+ARGOS_TOKEN=<your-repository-token>
+```
+
+It is also possible to use `--token` argument in the CLI but it is not recommended.
+
+## Usage
+
+To upload screenshots stored in a `screenshots` folder, use `argos upload` command:
+
+```sh
+argos upload screenshots
+```
+
+## Advanced usage
+
+### Run multiple Argos builds on the same commit
+
+Assign a name to the Argos build with `--build-name` argument to run multiple builds for the same commit.
+
+In this example we create one build for components and another for E2E:
+
+```sh
+argos upload --build-name components screenshots/components
+argos upload --build-name e2e screenshots/e2e
+```
+
+### Parallel test suites
+
+Parallelism is a common way to speed up test suites by running multiple tests concurrently and then combining results at the end.
+
+To configure parallel test suites using `@argos-ci/cli`, you have to setup two environment variables:
+
+- `ARGOS_PARALLEL_NONCE`: a unique build ID for this parallel build. Argos groups uploaded screenshots using this ID.
+- `ARGOS_PARALLEL_TOTAL`: the number of parallel nodes being ran. `argos upload` command must be called exactly up to this number.
+
+It is also possible to configure parallel mode using arguments: `--parallel-nonce` and `--parallel-total`.
+
+Once configured, upload commands can be ran multiple times and will aggregate screenshots in the same build.
+
+```sh
+argos upload --parallel screenshots
+```

@@ -1,10 +1,7 @@
 ---
 title: Gatsby
-slug: /guides/gatsby
-sidebar_position: 1
+slug: /integrations/gatsby
 ---
-
-import { PackageManagerTabs } from "@site/src/components/packageManagerTabs";
 
 # Install Argos with Gatsby
 
@@ -16,22 +13,9 @@ On CI post-build, the plugin will take screenshots of every page and upload them
 
 ### 1. Install
 
-<PackageManagerTabs>
-  <TabItem value="npm">
-
-```bash
+```sh
 npm install --save-dev gatsby-plugin-argos argos-cli gatsby-plugin-screenshot puppeteer
 ```
-
-  </TabItem>
-  <TabItem value="yarn">
-
-```bash
-yarn add -D gatsby-plugin-argos argos-cli gatsby-plugin-screenshot puppeteer
-```
-
-  </TabItem>
-</PackageManagerTabs>
 
 ### 2. Use your Argos token
 
