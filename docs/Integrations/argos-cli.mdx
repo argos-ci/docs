@@ -37,9 +37,9 @@ argos upload screenshots
 
 ### Run multiple Argos builds on the same commit
 
-Argos allows you to give a name to identify a build. It allows to create multiple builds for a same commit.
+Assign a name to the Argos build with `--build-name` argument to run multiple builds for the same commit.
 
-Give a name to your build using `--build-name` argument. In this example we create one build for components and another for E2E.
+In this example we create one build for components and another for E2E:
 
 ```sh
 argos upload --build-name components screenshots/components
