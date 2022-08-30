@@ -29,7 +29,9 @@ Argos assigns a unique token to the connected repositories. It ensures nobody ex
 ### 4. Configure your CI to send screenshots to Argos
 
 - Setup `ARGOS_TOKEN` environment variable on your CI
-- Run `npx @argos-ci/cli upload screenshots-folder`
+- Add `npx @argos-ci/cli upload screenshots-folder` command to your CI workflow
+
+> `npx` automatically installs `@argos-ci/cli`, but you can also add `@argos-ci/cli` to your dev dependencies if you prefer.
 
 ### Enjoy!
 
