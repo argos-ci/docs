@@ -1,0 +1,60 @@
+---
+title: Cypress
+slug: /integrations/cypress
+---
+
+# Cypress
+
+Install the [@argos-ci/cypress](https://github.com/argos-ci/argos-cypress) library to use Cypress commands and utilities for Argos visual testing.
+
+[![npm version](https://img.shields.io/npm/v/@argos-ci/cypress.svg)](https://www.npmjs.com/package/@argos-ci/cypress)
+[![npm dm](https://img.shields.io/npm/dm/@argos-ci/cypress.svg)](https://www.npmjs.com/package/@argos-ci/cypress)
+[![npm dt](https://img.shields.io/npm/dt/@argos-ci/cypress.svg)](https://www.npmjs.com/package/@argos-ci/cypress)
+
+## Install
+
+```sh
+npm install --save-dev @argos-ci/cypress
+```
+
+Make sure that you have [setup Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress) and add this line to your `cypress/support/index.js` file.
+
+```js
+import "@argos-ci/cypress/support";
+```
+
+## Usage
+
+The `argosScreenshot` command to stabilizes the UI before taking a screenshot.
+
+cy.argosScreenshot([name][, options])
+
+- `name` - The screenshot name; must be unique; default value to test title
+- `options` - Send to [cy.screenshot command options](https://docs.cypress.io/api/commands/screenshot)
+
+```js
+describe("Homepage", () => {
+  it("should be stable", () => {
+    // Screenshot a page
+    cy.argosScreenshot("home");
+
+    // Screenshot a component
+    cy.get("main div.breadcrumb").argosScreenshot("home-breadcrumb");
+  });
+});
+```
+
+## Helper attributes
+
+The `data-visual-test` attributes allow you to control how elements behave in the Argos screenshot.
+
+It is often used to hide changing element like dates.
+
+- `[data-visual-test="transparent"]` - Make the element transparent (`opacity: 0`)
+- `[data-visual-test="removed"]` - Remove the element (`display: none`)
+- `[data-visual-test="blackout"]` - Blacked out the element
+
+```html
+<!-- Hide a div from a screenshot -->
+<div id="clock" data-visual-test="transparent">...</div>
+```
