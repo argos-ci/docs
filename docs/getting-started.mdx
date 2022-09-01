@@ -10,25 +10,17 @@ To learn more about Argos' philosophy, read the [introduction section](/).
 
 **Prerequisites :** to use Argos CI, you need a GitHub-hosted project with [end-to-end tests](https://kentcdodds.com/blog/static-vs-unit-vs-integration-vs-e2e-tests) and a [CI environment](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration).
 
-### 1. Subscribe to Argos Free plan on GitHub Marketplace
-
-[Subscribe Argos Free plan](https://github.com/marketplace/argos-ci/) from GitHub Marketplace.
-
-A prompt will asks which repository you want to connect to Argos. We only use commits to match the correct "base screenshot".
-
-At the end of the installation you will be redirected to Argos homepage.
-
-### 2. Get the Argos repository's token
+### Get the Argos repository's token
 
 Argos assigns a unique token to the connected repositories. It ensures nobody except you can upload screenshots on your repository.
 
 - Login to [Argos](http://www.argos-ci.com)
-- Select the repository you want to activate and click on `Activate repository` button
-- Copy and save the `ARGOS_TOKEN` value. It will be used as a environment variable during the CI configuration.
+- Click on the repository to activate and click on `Activate repository` button
+- Copy and save the `ARGOS_TOKEN` value
 
-### 4. Configure your CI to send screenshots to Argos
+### Configure your CI to send screenshots to Argos
 
-- Setup `ARGOS_TOKEN` environment variable on your CI
+- Set the `ARGOS_TOKEN` as an environment variable on your CI
 - Add `npx @argos-ci/cli upload screenshots-folder` command to your CI workflow
 
 > `npx` automatically installs `@argos-ci/cli`, but you can also add `@argos-ci/cli` and use `npx argos upload screenshots-folder` command instead. It gives you more control on your dependencies.
