@@ -1,26 +1,36 @@
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #8b5cf6;
-  --ifm-color-primary-dark: #743cf4;
-  --ifm-color-primary-darker: #692cf3;
-  --ifm-color-primary-darkest: #4d0ce0;
-  --ifm-color-primary-light: #a78bfa;
-  --ifm-color-primary-lighter: #c4b5fd;
-  --ifm-color-primary-lightest: #ede9fe;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-navbar-height: 72px;
-  --ifm-code-background: #f6f7f8;
+
+  --ifm-color-primary: #8b5cf6; /* violet-500*/
+  --ifm-color-primary-dark: #7c3aedff; /* violet-600*/
+  --ifm-color-primary-darker: #6d28d9ff; /* violet-700*/
+  --ifm-color-primary-darkest: #5b21b6ff; /* violet-800*/
+  --ifm-color-primary-light: #a78bfaff; /* violet-400*/
+  --ifm-color-primary-lighter: #c4b5fdff; /* violet-300*/
+  --ifm-color-primary-lightest: #ddd6feff; /* violet-200*/
+  --ifm-background-surface-color: #fafafaff; /* gray-50 */
+
+  --ifm-background-active: #f4f4f5ff; /* gray-100 */
+  --ifm-code-background: var(--ifm-background-active);
 }
 
 html[data-theme="dark"] {
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  --ifm-background-color: rgb(0, 0, 0);
-  --ifm-code-background: #1e293bff;
+  --ifm-background-color: black;
+  --ifm-background-surface-color: #18181bff; /* gray-900 */
+  --ifm-color-primary: #c4b5fdff; /* violet-300*/
+  --ifm-color-primary-dark: #a78bfaff; /* violet-400*/
+  --ifm-color-primary-darker: #8b5cf6ff; /* violet-500*/
+  --ifm-color-primary-darkest: #7c3aedff; /* violet-600*/
+  --ifm-color-primary-light: #ddd6feff; /* violet-200*/
+  --ifm-color-primary-lighter: #ede9feff; /* violet-100*/
+  --ifm-color-primary-lightest: #f5f3ffff; /* violet-50*/
+
+  --ifm-background-active: rgba(39, 39, 42, 0.9); /* gray-800-a90 */
+  --ifm-code-background: var(--ifm-background-active);
 }
 
 code {
-  color: var(--ifm-color-primary);
   padding: 2px 6px;
   border: 0;
 }
@@ -39,16 +49,11 @@ code {
   border: 0;
 }
 .theme-doc-sidebar-item-category .menu__list {
-  /* border-left: 1px solid rgb(63, 63, 70); */
   margin-left: 13px;
 }
 .theme-doc-sidebar-menu .menu__link.menu__link--active {
-  color: var(--ifm-color-white);
-  background-color: var(--ifm-color-primary-darkest);
-
-  /* border-left: 2px solid var(--ifm-color-primary);
-  border-radius: 0 0.25em 0.25em 0;
-  margin-left: -1.5px; */
+  color: var(--ifm-font-color-base);
+  background-color: var(--ifm-background-active);
 }
 
 /* Breadcrumbs */
