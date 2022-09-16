@@ -12,19 +12,20 @@ To learn more about Argos' philosophy, read the [introduction section](/).
 
 ### Get the Argos repository's token
 
-Argos assigns a unique token to the connected repositories. It ensures nobody except you can upload screenshots on your repository.
+Argos assigns a unique token to each repository to ensure that only allowed users can upload screenshots.
 
-- Login to [Argos](http://www.argos-ci.com)
-- Click on the repository to activate and click on `Activate repository` button
+- Subscribe to [Argos Free plan](https://github.com/marketplace/argos-ci) on GitHub Marketplace
+- Follow the Github installation tunnel until you land on [Argos App](https://app.argos-ci.com/)
+- Click on the repository you want to activate and click on `Activate repository` button
 - Copy and save the `ARGOS_TOKEN` value
 
 ### Configure your CI to send screenshots to Argos
 
-- Set the `ARGOS_TOKEN` as an environment variable on your CI
-- Add `npx @argos-ci/cli upload screenshots-folder` command to your CI workflow
+- Set the `ARGOS_TOKEN` as an environment variable in your CI application
+- Add this command to you CI workflow : `npx @argos-ci/cli upload ./screenshots`
 
-> `npx` automatically installs `@argos-ci/cli`, but you can also add `@argos-ci/cli` and use `npx argos upload screenshots-folder` command instead. It gives you more control on your dependencies.
+> `npx` automatically installs `@argos-ci/cli`, but you can also add `@argos-ci/cli` and use `npx argos upload ./screenshots` command instead. It gives you more control on your dependencies.
 
 ### Enjoy!
 
-You are ready to start using Argos! Learn more about the [developer routine using Argos](/usage).
+You are now ready to start using Argos! Learn more about the [developer routine using Argos](/usage).
