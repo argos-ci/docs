@@ -4,10 +4,12 @@
   </a>
 </p>
 
-# docs.argos-ci.com
+# Argos documentation
 
 Argos documentation available on [docs.argos-ci.com](https://docs.argos-ci.com).
 
-## Links
+## Highlights
 
-- [Discord](https://discord.gg/pK79sv85Vg)
+- [Getting Started](https://docs.argos-ci.com/getting-started)
+- [Introduction](https://docs.argos-ci.com/introduction)
+- [Join us on Discord](https://discord.gg/pK79sv85Vg)
