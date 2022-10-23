@@ -10,7 +10,6 @@ const config = {
   repositories: [
     {
       name: "argos-ci/argos-puppeteer",
-      branch: "docs",
       target: "docs/Integrations/puppeteer",
     },
   ],
@@ -41,7 +40,7 @@ const exists = async (path) => {
 
 await Promise.all(
   config.repositories.map(async (repository) => {
-    const { name, branch, target } = repository;
+    const { name, branch = "main", target } = repository;
     const [, repo] = name.split("/");
     const path = join(config.root, repo);
 
