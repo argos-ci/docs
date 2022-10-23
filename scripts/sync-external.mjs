@@ -12,6 +12,10 @@ const config = {
       name: "argos-ci/argos-puppeteer",
       target: "docs/Integrations/puppeteer",
     },
+    {
+      name: "argos-ci/argos-cypress",
+      target: "docs/Integrations/cypress",
+    },
   ],
 };
 
