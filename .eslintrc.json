@@ -1,4 +1,4 @@
 {
-  "extends": ["plugin:@docusaurus/recommended"],
+  "extends": ["eslint:recommend", "plugin:@docusaurus/recommended"],
   "plugins": ["@docusaurus"]
 }

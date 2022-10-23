@@ -1,0 +1,3 @@
+[build]
+  publish = "build"
+  command = "rm -rf external && npm run sync-external && npm run build"
