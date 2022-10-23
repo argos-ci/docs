@@ -1,0 +1,3 @@
+[build]
+  publish = "build"
+  command = "npm run sync-external && npm run build"

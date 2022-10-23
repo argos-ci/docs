@@ -4,6 +4,10 @@
 # Production
 /build
 
+# External repositories
+/external/
+/docs/Integrations/puppeteer/
+
 # Generated files
 .docusaurus
 .cache-loader
