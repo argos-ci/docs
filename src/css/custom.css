@@ -1,33 +1,71 @@
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-navbar-height: 72px;
+  /*
+    Use Tailwind v3 purple-600 as base
+    in https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
+  */
+  --ifm-color-primary: #9333ea;
+  --ifm-color-primary-dark: #8519e7;
+  --ifm-color-primary-darker: #7e17dc;
+  --ifm-color-primary-darkest: #6813b5;
+  --ifm-color-primary-light: #a14ded;
+  --ifm-color-primary-lighter: #a85aee;
+  --ifm-color-primary-lightest: #bc81f2;
 
-  --ifm-color-primary: #8b5cf6; /* violet-500*/
-  --ifm-color-primary-dark: #7c3aedff; /* violet-600*/
-  --ifm-color-primary-darker: #6d28d9ff; /* violet-700*/
-  --ifm-color-primary-darkest: #5b21b6ff; /* violet-800*/
-  --ifm-color-primary-light: #a78bfaff; /* violet-400*/
-  --ifm-color-primary-lighter: #c4b5fdff; /* violet-300*/
-  --ifm-color-primary-lightest: #ddd6feff; /* violet-200*/
-  --ifm-background-surface-color: #fafafaff; /* gray-50 */
+  /* slate-x from Tailwind v3 */
+  --ifm-color-gray-50: #f8fafc;
+  --ifm-color-gray-100: #f1f5f9;
+  --ifm-color-gray-200: #e2e8f0;
+  --ifm-color-gray-300: #cbd5e1;
+  --ifm-color-gray-400: #94a3b8;
+  --ifm-color-gray-500: #64748b;
+  --ifm-color-gray-600: #475569;
+  --ifm-color-gray-700: #334155;
+  --ifm-color-gray-800: #1e293b;
+  --ifm-color-gray-900: #0f172a;
 
-  --ifm-background-active: #f4f4f5ff; /* gray-100 */
-  --ifm-code-background: var(--ifm-background-active);
+  --ifm-background-color: var(--ifm-color-gray-0); 
+  --ifm-font-color-base: var(--ifm-color-gray-900); 
+  --ifm-hover-overlay: var(--ifm-color-gray-100); 
+  --ifm-table-border-color: var(--ifm-color-gray-200);
+  --ifm-blockquote-border-color: var(--ifm-color-gray-200);
+  --ifm-toc-border-color: var(--ifm-color-gray-200);
+  --ifm-background-active: var(--ifm-color-gray-100);
+
+  --docsearch-primary-color: var(--ifm-color-primary) !important;
+  --docsearch-text-color: var(--ifm-font-color-base) !important;
+  --docsearch-searchbox-background: var(--ifm-hover-overlay) !important;
+  --docsearch-muted-color: var(--ifm-color-gray-500) !important;
 }
 
 html[data-theme="dark"] {
-  --ifm-background-color: black;
-  --ifm-background-surface-color: #18181bff; /* gray-900 */
-  --ifm-color-primary: #c4b5fdff; /* violet-300*/
-  --ifm-color-primary-dark: #a78bfaff; /* violet-400*/
-  --ifm-color-primary-darker: #8b5cf6ff; /* violet-500*/
-  --ifm-color-primary-darkest: #7c3aedff; /* violet-600*/
-  --ifm-color-primary-light: #ddd6feff; /* violet-200*/
-  --ifm-color-primary-lighter: #ede9feff; /* violet-100*/
-  --ifm-color-primary-lightest: #f5f3ffff; /* violet-50*/
+  /*
+    Use Tailwind v3 purple-400 as base
+    in https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
+  */
+  --ifm-color-primary: #c084fc;
+  --ifm-color-primary-dark: #ad5ffb;
+  --ifm-color-primary-darker: #a34cfb;
+  --ifm-color-primary-darkest: #8614f9;
+  --ifm-color-primary-light: #d3a9fd;
+  --ifm-color-primary-lighter: #ddbcfd;
+  --ifm-color-primary-lightest: #faf4ff;
 
-  --ifm-background-active: rgba(39, 39, 42, 0.9); /* gray-800-a90 */
-  --ifm-code-background: var(--ifm-background-active);
+  --ifm-background-color: var(--ifm-color-gray-1000);
+  --ifm-background-surface-color: var(--ifm-color-gray-1000);
+  --ifm-font-color-base: var(--ifm-color-gray-100);
+  --ifm-hover-overlay: var(--ifm-color-gray-900);
+  --ifm-table-border-color: var(--ifm-color-gray-800);
+  --ifm-blockquote-border-color: var(--ifm-color-gray-800);
+  --ifm-toc-border-color: var(--ifm-color-gray-800);
+  --ifm-background-active: var(--ifm-color-gray-900);
+
+  --docsearch-muted-color: var(--ifm-color-gray-400) !important;
+}
+
+.navbar {
+  border-bottom: 1px solid var(--ifm-toc-border-color);
+  box-shadow: none;
 }
 
 code {
