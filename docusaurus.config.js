@@ -40,13 +40,14 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      image: "img/social.png",
       colorMode: {
-        defaultMode: "dark",
+        respectPrefersColorScheme: true,
       },
       navbar: {
         title: "",
         logo: {
-          alt: "Argos Logo",
+          alt: "Argos CI",
           src: "img/logo-nav-light.svg",
           srcDark: "img/logo-nav-dark.svg",
           href: "/getting-started",
