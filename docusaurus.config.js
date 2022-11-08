@@ -50,7 +50,7 @@ const config = {
           alt: "Argos CI",
           src: "img/logo-nav-light.svg",
           srcDark: "img/logo-nav-dark.svg",
-          href: "/getting-started",
+          href: "/installation",
         },
         items: [
           {
