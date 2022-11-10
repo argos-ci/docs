@@ -36,6 +36,19 @@ const config = {
       }),
     ],
   ],
+  plugins: [
+    [
+      "@docusaurus/plugin-client-redirects",
+      {
+        redirects: [
+          {
+            from: "/getting-started",
+            to: "/installation",
+          },
+        ],
+      },
+    ],
+  ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -50,7 +63,7 @@ const config = {
           alt: "Argos CI",
           src: "img/logo-nav-light.svg",
           srcDark: "img/logo-nav-dark.svg",
-          href: "/getting-started",
+          href: "/installation",
         },
         items: [
           {
