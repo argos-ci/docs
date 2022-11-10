@@ -1,5 +1,11 @@
+@import url("https://fonts.googleapis.com/css?family=Inter:400,500,600,700&display=swap");
+
 /* You can override the default Infima variables here. */
 :root {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+
   /*
     Use Tailwind v3 purple-600 as base
     in https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
@@ -70,6 +76,38 @@ html[data-theme="dark"] {
   --ifm-background-active: var(--ifm-color-gray-900);
 
   --docsearch-muted-color: var(--ifm-color-gray-400) !important;
+}
+
+div.markdown > h1 {
+  font-size: 2.25rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  margin-bottom: 8px !important;
+}
+div.markdown > h2 {
+  font-size: 1.5em;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  margin: 28px 0 16px;
+  padding-top: 20px;
+}
+div.markdown > h3 {
+  font-size: 1.25em;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  margin: 28px 0 12px;
+  padding-top: 20px;
+}
+div.markdown > h4,
+div.markdown > h5,
+div.markdown > h6 {
+  font-size: 1em;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
 }
 
 .navbar__inner {
