@@ -1,0 +1,116 @@
+---
+title: Installation
+id: installation
+slug: /installation
+sidebar_position: 2
+---
+
+import {
+  CiCardImage,
+  CiCardTitle,
+  CiCard,
+  CICardLink,
+  CiCards,
+  CiArrow,
+  CiBody,
+} from "@site/src/components/CiCard";
+import GithubLogo from "@site/src/components/GithubLogo";
+import TravisCiLogo from "@site/src/components/TravisCiLogo";
+import CircleCiLogo from "@site/src/components/CircleCiLogo";
+import githubStatus from "/img/github-status-2.png";
+import argosPlugin from "/img/argos-plugin.png";
+import githubRepoAccesses from "/img/github-repo-accesses.png";
+
+# Get started with Argos
+
+The Argos CLI is the safe way to send your screenshots to Argos. It should be run by your CI after the end-to-end tests.
+
+To learn more about Argos philosophy read the [Introduction](/#introduction).
+
+## Install Argos plugin on Github
+
+The Argos GitHub plugin will allows Argos to authenticate repositories, mirror user accesses and update the pull request summary when visual changes need review.
+
+To install Argos plugin you have to login to [GitHub](https://github.com/login) and activate the [Argos plugin](https://github.com/apps/argos-ci).
+
+<div style={{ margin: "-10px 0 20px" }}>
+  <a href="https://github.com/apps/argos-ci">
+    <img
+      src={argosPlugin}
+      alt="Argos plugin"
+      style={{ borderRadius: "6px", maxWidth: "150px" }}
+    />
+  </a>
+</div>
+
+You can install Argos to all repositories or select specific repositories.
+
+<img
+  src={githubRepoAccesses}
+  alt="Github repository accesses"
+  style={{ margin: "-50px 0 -20px" }}
+/>
+
+Argos will be installed with the following access:
+
+- **Contents** — to find a common ancestor commit between branches
+- **Statuses** — to add status on commit
+- **Pull requests** — to add comment in pull requests
+- **Actions** — to allow tokenless authentication
+
+## Taking the screenshots
+
+Argos relay on screenshots to monitor your application's UI. Use your favorite testing library ([Cypress](https://www.cypress.io/),
+[Puppeteer](https://pptr.dev/),
+[Playwright](https://playwright.dev/),
+etc...) to take screenshots during your end-to-end tests.
+
+You can also use the Argos integrations to improve screenshots stability and benefit useful commands. Look at the Integrations section of this documentation to check if your stack matches one of them.
+
+## Upload the screenshots
+
+The simplest and fastest way to send screenshots to Argos is with the [Argos CLI](/argos-cli) tool.
+
+If the screenshots are taken during end-to-end tests running on your CI, you have to configure your CI to send screenshot to Argos.
+
+Specific guides that cover our recommended approach to use Argos CLI on your CI :
+
+<CiCards>
+  <CICardLink href="/github-actions">
+    <CiCard>
+      <CiBody>
+        <CiCardImage>
+          <GithubLogo />
+        </CiCardImage>
+        <CiCardTitle>Github Actions</CiCardTitle>
+      </CiBody>
+      <CiArrow />
+    </CiCard>
+  </CICardLink>
+  <CICardLink href="/circle-ci">
+    <CiCard>
+      <CiBody>
+        <CiCardImage>
+          <TravisCiLogo />
+        </CiCardImage>
+        <CiCardTitle>Circle CI</CiCardTitle>
+      </CiBody>
+      <CiArrow />
+    </CiCard>
+  </CICardLink>
+  <CICardLink href="/travis-ci">
+    <CiCard>
+      <CiBody>
+        <CiCardImage>
+          <CircleCiLogo />
+        </CiCardImage>
+        <CiCardTitle>Travis CI</CiCardTitle>
+      </CiBody>
+      <CiArrow />
+    </CiCard>
+  </CICardLink>
+</CiCards>
+
+## Enjoy !
+
+Congratulation, Argos is installed on your repository. You are now ready to start [visual testing](/visual-testing).
