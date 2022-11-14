@@ -7,7 +7,7 @@ sidebar_position: 1
 
 # Github Actions
 
-The simplest and fastest way to send screenshot with your CI is to use the Argos tokenless feature created to **GitHub Actions**.
+Argos automatically authenticates your repository in GitHub Actions, you don't need to specify a token.
 
 Add this command to your CI to safely send your screenshots to Argos.
 
@@ -15,4 +15,4 @@ Add this command to your CI to safely send your screenshots to Argos.
 npx @argos-ci/cli upload ./screenshots
 ```
 
-> Replace `.\screenshots` with the folder path that contains the screenshots.
+> Replace `.\screenshots` with the folder path that containing the screenshots.

@@ -5,44 +5,146 @@ slug: /visual-testing
 sidebar_position: 3
 ---
 
-import githubStatus from "/img/github-status-2.png";
-import argosScreenshots from "/img/argos-screenshots-2.png";
+import {
+  CiCardImage,
+  CiCardTitle,
+  CiCard,
+  CICardLink,
+  CiCards,
+  CiArrow,
+  CiBody,
+} from "@site/src/components/CiCard";
+import githubCommitStatus from "/img/github-commit-status.png";
+import CypressLogo from "/img/cypress-logo.png";
+import PuppeteerLogo from "/img/puppeteer-logo.png";
+import PlaywrightLogo from "/img/playwright-logo.png";
+import siriusBuild from "/img/sirius-build.png";
 
 # Visual testing
 
-Argos is a devX tool that adds visual testing to developer's routine.
+Visual testing is the process of comparing application UI with the results expected by design or with the previous state of the application. Automated visual testing tools, like Argos, allow monitoring of the application's UI across multiple browsers and screen sizes.
 
-Upload your app pages' screenshots to protect them from future visual regression. Cover every browser and resolution with automatic changes detection and manual review.
+Argos visual testing is based on screenshots comparison, changes detection, and manual review. With this process, developers can check the visual impacts of their pull requests in a few seconds, even on a big application.
 
-Argos give developers the confidence to ship feature safely.
+## Screenshot a website
 
-## The visual testing routine
+The first step to visual testing is to screenshot your website or application. Up to you to test the components, the whole pages, or specific steps of your checkout tunnel.
 
-Every modern end-to-end framework allow to take screenshots :
-[Puppeteer](https://pptr.dev/),
-[Cypress](https://www.cypress.io/),
-[Playwright](https://playwright.dev/), ...
+> Tip: It is easier to visually check page content than asserting each element's text. Moreover, there is no code maintenance to update visual tests.
 
-Take a screenshot of every step you want to cover from future regression.
+We recommend leaning on end-to-end testing frameworks to take screenshots. They facilitate the navigation through the websites and provide commands to take screenshots in various browsers and screen resolutions. In addition, we offer integrations to some of them:
 
-** Static sites ** : we provide plugins to automatically take screenshots of all pages and upload them on Argos. Visit our integration guides to check if your stack match our integrations.
+<CiCards>
+  <CICardLink href="/cypress">
+    <CiCard>
+      <CiBody>
+        <CiCardImage>
+          <img src={CypressLogo} />
+        </CiCardImage>
+        <CiCardTitle>Cypress</CiCardTitle>
+      </CiBody>
+      <CiArrow />
+    </CiCard>
+  </CICardLink>
+  <CICardLink href="/puppeteer">
+    <CiCard>
+      <CiBody>
+        <CiCardImage>
+          <img src={PuppeteerLogo} style={{ maxHeight: 25, margin: "auto" }} />
+        </CiCardImage>
+        <CiCardTitle>Puppeteer</CiCardTitle>
+      </CiBody>
+      <CiArrow />
+    </CiCard>
+  </CICardLink>
+  <CICardLink href="/playwright">
+    <CiCard>
+      <CiBody>
+        <CiCardImage>
+          <img src={PlaywrightLogo} />
+        </CiCardImage>
+        <CiCardTitle>Playwright</CiCardTitle>
+      </CiBody>
+      <CiArrow />
+    </CiCard>
+  </CICardLink>
+</CiCards>
 
-### Notify change detection
+These integrations provide helpful utilities to hide unstable elements from screenshots. Read [screenshot stability](/screenshot-stability) to learn more about this topic.
 
-Once [installed](/installation), Argos receives screenshots from the Continuous Integration (CI) workflow.
+## Visual changes detection
 
-On Github, a new check will appear on your commits status. It will turns red when visual changes are detected. Click on `Details` to review the diffs on Argos.
+Once the [installation](/installation) is done, Argos will receive your application's screenshots when you create a pull request or merge a commit to the repository reference branch.
 
-<img src={githubStatus} alt="Github status" />
+Argos compares the screenshots with their baseline counterpart. If a visual change is detected, a red check status is added to the GitHub pull request, and a green check is if they are stable.
 
-### Screenshot comparison
+<img src={githubCommitStatus} alt="GitHub commit status" className="rounded" />
 
-Argos is designed to review screenshots and verify they match expected results. The side-by-side UI allows developers to compare new commit's screenshots with their `main` branch's counterparts, easily spot visual changes and prevent visual regression.
+Click on the **"Details"** link to review the visual changes.
 
-<img src={argosScreenshots} alt="Argos screenshots" />
+## Reviewing visual changes
 
-#### Review approval / rejection
+The visual changes review takes place on the Argos application.
 
-Click on `Mark as approved` to validate the GitHub status.
+<img src={siriusBuild} alt="Example build" style={{ borderRadius: 8 }} />
 
-If new commits screenshots don't satisfy your expectations, rework your code and push a new commit.
+Navigate through the screenshot diffs by clicking on the sidebar, the navigation buttons, or using your keyboard.
+
+> Tip: Press `?` to show all available keyboard shortcuts.
+
+The side-by-side UI is designed to quickly spots visual changes and verify that screenshots match their expected results.
+
+#### Reject a build
+
+If you spot a visual bug or if a screenshot doesn't satisfy your expectations, click on the "Review changes" button and select "Reject changes." It will update the build status to "Changes rejected" and notify GitHub of the rejection.
+
+After rejecting the change, commit a new version to fix it.
+
+#### Approve a build
+
+When screenshots match the expected results, click on the "Review changes" button, then select "Approve changes." It will update the build status to "Changes approved" and notify GitHub of the approval.
+
+Now that the changes are accepted, you can confidently merge your pull request.
+
+## FAQ
+
+<details>
+  <summary>How to update the screenshot baseline compare?</summary>
+  <p>
+    Argos updates the comparison baseline screenshots when a commit is merged to
+    the repository's reference branch.
+  </p>
+</details>
+
+<details>
+  <summary>What is a reference branch?</summary>
+  <p>
+    The reference branch is used as the baseline for the screenshots
+    comparisons. Argos automatically uses the GitHub default branch as the
+    reference branch. You can choose another reference branch in Argos
+    repository settings.
+  </p>
+</details>
+
+<details>
+  <summary>How to update the reference branch?</summary>
+  You can choose another reference branch in Argos repository settings.
+</details>
+
+<details>
+  <summary>What is an orphan build?</summary>
+  <p>
+    An orphan build is the first one performed on a reference branch. It won't
+    show any comparison. The screenshots of this build will be considered as the
+    baseline for the following comparisons.
+  </p>
+</details>
+
+<details>
+  <summary>What is a reference build?</summary>
+  <p>
+    A reference build is created when a commit is merged on the reference
+    branch. Its screenshots will be used as the baseline for following
+    comparisons performed on other branches.
+  </p>
+</details>

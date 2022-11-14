@@ -2,7 +2,16 @@ import React from "react";
 import ChevronRight from "@site/src/components/ChevronRight";
 
 export const CiCardImage = (props) => (
-  <div className="ciCardImage" style={{ width: 25, height: 25 }} {...props} />
+  <div
+    className="ciCardImage"
+    style={{
+      width: 25,
+      height: 25,
+      display: "flex",
+      alignItems: "center",
+    }}
+    {...props}
+  />
 );
 
 export const CiCardTitle = (props) => (
@@ -20,7 +29,7 @@ export const CiCardTitle = (props) => (
 export const CICardLink = (props) => (
   <a
     className="ciCardLink"
-    style={{ textDecoration: "none", borderRadius: 8, cursor: "default" }}
+    style={{ textDecoration: "none", borderRadius: 8 }}
     {...props}
   />
 );

@@ -10,11 +10,11 @@ const config = {
   repositories: [
     {
       name: "argos-ci/argos-puppeteer",
-      target: "docs/Integrations/puppeteer",
+      target: "docs/04-Integrations/puppeteer",
     },
     {
       name: "argos-ci/argos-cypress",
-      target: "docs/Integrations/cypress",
+      target: "docs/04-Integrations/cypress",
     },
   ],
 };
