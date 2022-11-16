@@ -44,10 +44,11 @@ export const CiBody = (props) => (
 
 export const CiCard = (props) => (
   <div
+    className="bordered rounded"
     style={{
       display: "flex",
-      gap: 16,
       justifyContent: "space-between",
+      gap: 16,
       padding: "10px 15px",
     }}
     {...props}
