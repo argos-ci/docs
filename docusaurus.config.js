@@ -73,7 +73,7 @@ const config = {
           {
             to: "https://app.argos-ci.com/",
             position: "left",
-            label: "Sign in or start for free",
+            label: "Go to Argos app",
           },
           {
             href: "https://github.com/argos-ci",
