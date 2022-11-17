@@ -6,49 +6,35 @@ sidebar_position: 3
 
 # Style injection
 
-Inject CSS to fix unstable rendering.
+Browsers have unstable rendering for well-known use cases like scrollbar display, border-radius consistency, etc. Therefore, it can be convenient to hide these components to ensure the screenshots' consistency.
 
-Browsers have unstable rendering for some use-cases like scrollbar display and border-radius consistency.
+In our integrations, we inject the following styles before taking a screenshot.
 
-Use the code below to override the style and fix unstable rendering :
-
-- The first rule hides all scrollbars.
-- The `data-test-hidden` class allows you to hide flagged DOM nodes from the screenshots.
-- The `data-test-no-radius` class enables you to remove border-radius from the flagged DOM node.
-
-```js
-function injectStyles(document) {
-  const cssText = `
-  /* Hide scrollbars */
-  ::-webkit-scrollbar {
-    display: none !important;
-  }
-
-  /* Generic hide */
-  [data-test-hidden] {
-    opacity: 0 !important;
-  }
-
-  /* Generic hide */
-  [data-test-no-radius] {
-    border-radius: 0 !important;
-  }
-  `;
-  const css = document.createElement("style");
-  css.type = "text/css";
-  css.textContent = cssText;
-  document.body.appendChild(css);
+```css
+/* Hide carets */
+* {
+  caret-color: transparent !important;
 }
 
-/* Cypress command example */
-Cypress.Commands.add("argosScreenshot", (name, options = {}) => {
-  // Inject style
-  cy.document().then((doc) => injectStyles(doc));
+/* Hide scrollbars */
+::-webkit-scrollbar {
+  display: none !important;
+}
 
-  // Wait for font loading
-  cy.document().its("fonts.status").should("equal", "loaded");
+/* Hide a DOM node */
+[data-test-hidden] {
+  opacity: 0 !important;
+}
 
-  // Take a screenshot with Cypress
-  cy.screenshot(name, options);
-});
+/* Remove border radius */
+[data-test-no-radius] {
+  border-radius: 0 !important;
+}
 ```
+
+Then, you can :
+
+- Add `data-test-hidden` attribute to a DOM nodes to hide it from screenshots
+- Add `data-test-no-radius` attribute to remove the border-radius from screenshots
+
+Read the [code injection doc](/code-injection) to know how to inject CSS in a page.

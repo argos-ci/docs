@@ -21,20 +21,20 @@ import gearButton from "/img/gear-button.png";
 
 # Configure CI
 
-The official [Argos CLI](/argos-cli) is the simplest and fastest way to send screenshots to Argos. Your CI should use it after taking the screenshot during the end-to-end tests.
+The official [Argos CLI](/argos-cli) is the simplest and fastest way to send screenshots to Argos. Therefore, your CI should use it after taking the screenshot during the end-to-end tests.
 
 ## Set up the Argos token
 
-> Note: Github Actions CI users can skip this step as the repository authentication is automatic.
+> Note: GitHub Actions CI users can skip this step as the repository authentication is automatic.
 
-[Login to Argos](https://app.argos-ci.com), and click on <img
+[Login to Argos](https://app.argos-ci.com), and click on the <img
 src={gearButton}
 alt="Gear button"
 className="rounded"
 width={40}
 style={{ display: "inline-block", marginBottom: -8 }}
 />
-button in front of a repository to get the `ARGOS_TOKEN`. There is an token for each repository.
+button in front of a repository to get the `ARGOS_TOKEN`. There is unique a token for each repository.
 
 Set the `ARGOS_TOKEN` as an environment variable (sometimes called “secrets”) in your CI configuration.
 
@@ -48,7 +48,7 @@ npx @argos-ci/cli upload ./screenshots
 
 Sometimes an additional option is required to access the CI environment variable.
 
-**Optional:** You can also add @argos-ci/cli to your package.json to control the dependency version.
+**Optional:** You can add @argos-ci/cli to your package.json to control the dependency version.
 
 #### CI configuration examples
 

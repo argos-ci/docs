@@ -1,0 +1,26 @@
+---
+slug: /date-stabilization
+sidebar_position: 2
+---
+
+# Date stabilization
+
+Strategies to stabilize date on screenshots
+
+## Freeze the date
+
+When a displayed date is not the primary purpose of a test, it can be convenient to freeze it to a fixed value.
+
+You can use your end-to-end testing framework native command :
+
+```js
+/* Cypress command to freeze date to 20 May 2030 */
+const now = new Date(2030, 4, 20);
+cy.clock(now);
+```
+
+Or you can use an external library, like [MockDate](https://github.com/boblauer/MockDate), to mock the current date.
+
+## Hide data
+
+If none of these methods work, you can hide the node DOM from the screenshots with [style injection](/style-injection).
