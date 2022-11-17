@@ -60,10 +60,10 @@ export const CiCards = (props) => (
     style={{
       paddingLeft: 0,
       display: "grid",
-      gridTemplateColumns: "repeat(3, 1fr)",
+      gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
       marginBottom: 32,
-      gridColumnGap: 24,
-      gridRowGap: 30,
+      gridColumnGap: 16,
+      gridRowGap: 16,
     }}
     {...props}
   />
