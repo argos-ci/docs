@@ -2,7 +2,7 @@
 title: Visual testing
 id: visual-testing
 slug: /visual-testing
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 import {
@@ -18,75 +18,35 @@ import githubCommitStatus from "/img/github-commit-status.png";
 import CypressLogo from "/img/cypress-logo.png";
 import PuppeteerLogo from "/img/puppeteer-logo.png";
 import PlaywrightLogo from "/img/playwright-logo.png";
-import siriusBuild from "/img/sirius-build.png";
+import buildExample from "/img/build-example.png";
 
 # Visual testing
 
-Visual testing is the process of comparing application UI with the results expected by design or with the previous state of the application. Automated visual testing tools, like Argos, allow monitoring of the application's UI across multiple browsers and screen sizes.
+Visual testing is the process of comparing application UI with the results expected by design or with the previous state of the application. Automated visual testing tools, like Argos, allow monitoring the application's UI on multiple browsers and screen sizes.
 
-Argos visual testing is based on screenshots comparison, changes detection, and manual review. With this process, developers can check the visual impacts of their pull requests in a few seconds, even on a big application.
-
-## Screenshot a website
-
-The first step to visual testing is to screenshot your website or application. Up to you to test the components, the whole pages, or specific steps of your checkout tunnel.
-
-> Tip: It is easier to visually check page content than asserting each element's text. Moreover, there is no code maintenance to update visual tests.
-
-We recommend leaning on end-to-end testing frameworks to take screenshots. They facilitate the navigation through the websites and provide commands to take screenshots in various browsers and screen resolutions. In addition, we offer integrations to some of them:
-
-<CiCards>
-  <CICardLink href="/cypress">
-    <CiCard>
-      <CiBody>
-        <CiCardImage>
-          <img src={CypressLogo} />
-        </CiCardImage>
-        <CiCardTitle>Cypress</CiCardTitle>
-      </CiBody>
-      <CiArrow />
-    </CiCard>
-  </CICardLink>
-  <CICardLink href="/puppeteer">
-    <CiCard>
-      <CiBody>
-        <CiCardImage>
-          <img src={PuppeteerLogo} style={{ maxHeight: 25, margin: "auto" }} />
-        </CiCardImage>
-        <CiCardTitle>Puppeteer</CiCardTitle>
-      </CiBody>
-      <CiArrow />
-    </CiCard>
-  </CICardLink>
-  <CICardLink href="/playwright">
-    <CiCard>
-      <CiBody>
-        <CiCardImage>
-          <img src={PlaywrightLogo} />
-        </CiCardImage>
-        <CiCardTitle>Playwright</CiCardTitle>
-      </CiBody>
-      <CiArrow />
-    </CiCard>
-  </CICardLink>
-</CiCards>
-
-These integrations provide helpful utilities to hide unstable elements from screenshots. Read [screenshot stability](category/screenshot-stability) to learn more about this topic.
+Argos visual testing is based on screenshots comparison changes detection, and manual review. With this process, developers can check the visual impacts of their pull requests in a few seconds, even on a big application.
 
 ## Visual changes detection
 
-Once the [installation](/installation) is done, Argos will receive your application's screenshots when you create a pull request or merge a commit to the repository reference branch.
+Once the [installation](/installation) is done, Argos will receive your application's screenshots when you create a pull request or merge a commit to the repository [reference branch](#reference-branch-definition).
 
 Argos compares the screenshots with their baseline counterpart. If a visual change is detected, a red check status is added to the GitHub pull request, and a green check is if they are stable.
 
 <img src={githubCommitStatus} alt="GitHub commit status" className="rounded" />
 
-Click on the **"Details"** link to review the visual changes.
+> Click on the **"Details"** link to review the visual changes.
 
 ## Reviewing visual changes
 
 The visual changes review takes place on the Argos application.
 
-<img src={siriusBuild} alt="Example build" style={{ borderRadius: 8 }} />
+#### Argos build example
+
+<img
+  src={buildExample}
+  alt="Example build"
+  style={{ borderRadius: 8, marginBottom: 10 }}
+/>
 
 Navigate through the screenshot diffs by clicking on the sidebar, the navigation buttons, or using your keyboard.
 
@@ -94,17 +54,17 @@ Navigate through the screenshot diffs by clicking on the sidebar, the navigation
 
 The side-by-side UI is designed to quickly spots visual changes and verify that screenshots match their expected results.
 
-#### Reject a build
+#### Reject a build workflow
 
-If you spot a visual bug or if a screenshot doesn't satisfy your expectations, click on the "Review changes" button and select "Reject changes." It will update the build status to "Changes rejected" and notify GitHub of the rejection.
+If you spot a visual bug or if a screenshot doesn't satisfy your expectations, click on the "Review changes" button and select "Reject changes." The build status becomes "Changes rejected", and GitHub is notified of the rejection.
 
 After rejecting the change, commit a new version to fix it.
 
-#### Approve a build
+#### Approve a build workflow
 
-When screenshots match the expected results, click on the "Review changes" button, then select "Approve changes." It will update the build status to "Changes approved" and notify GitHub of the approval.
+When screenshots match the expected results, click on the "Review changes" button, then select "Approve changes". The build status becomes "Changes approved", and GitHub is notified of the approval.
 
-Now that the changes are accepted, you can confidently merge your pull request.
+Once the changes are accepted, you can confidently merge your pull request.
 
 ## FAQ
 
@@ -116,7 +76,7 @@ Now that the changes are accepted, you can confidently merge your pull request.
   </p>
 </details>
 
-<details>
+<details id="reference-branch-definition">
   <summary>What is a reference branch?</summary>
   <p>
     The reference branch is used as the baseline for the screenshots

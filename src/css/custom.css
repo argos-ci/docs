@@ -72,13 +72,13 @@ html[data-theme="dark"] {
   --ifm-color-primary-lighter: #ddbcfd;
   --ifm-color-primary-lightest: #faf4ff;
 
-  --ifm-code-background: var(--ifm-color-gray-900);
+  --ifm-code-background: var(--ifm-color-gray-800);
   --ifm-background-color: #070c15;
   --ifm-background-surface-color: var(--ifm-color-gray-1000);
   --ifm-font-color-base: var(--ifm-color-gray-50);
   --ifm-color-emphasis-800: var(--ifm-color-gray-300);
   --ifm-heading-color: #fff;
-  --ifm-hover-overlay: var(--ifm-color-gray-800);
+  --ifm-hover-overlay: var(--ifm-color-gray-700);
   --ifm-table-border-color: var(--ifm-color-gray-800);
   --ifm-blockquote-border-color: var(--ifm-color-gray-800);
   --ifm-toc-border-color: var(--ifm-color-gray-700);

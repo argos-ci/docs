@@ -1,0 +1,95 @@
+---
+title: Configure CI
+id: configure-ci
+slug: /configure-ci
+sidebar_position: 3
+---
+
+import {
+  CiCardImage,
+  CiCardTitle,
+  CiCard,
+  CICardLink,
+  CiCards,
+  CiArrow,
+  CiBody,
+} from "@site/src/components/CiCard";
+import GithubLogo from "@site/src/components/GithubLogo";
+import TravisCiLogo from "@site/src/components/TravisCiLogo";
+import CircleCiLogo from "@site/src/components/CircleCiLogo";
+import gearButton from "/img/gear-button.png";
+
+# Configure CI
+
+The official [Argos CLI](/argos-cli) is the simplest and fastest way to send screenshots to Argos. Your CI should use it after taking the screenshot during the end-to-end tests.
+
+## Set up the Argos token
+
+> Note: Github Actions CI users can skip this step as the repository authentication is automatic.
+
+[Login to Argos](https://app.argos-ci.com), and click on <img
+src={gearButton}
+alt="Gear button"
+className="rounded"
+width={40}
+style={{ display: "inline-block", marginBottom: -8 }}
+/>
+button in front of a repository to get the `ARGOS_TOKEN`. There is an token for each repository.
+
+Set the `ARGOS_TOKEN` as an environment variable (sometimes called “secrets”) in your CI configuration.
+
+## Upload the screenshots
+
+Add this command to your CI workflow to upload the screenshot to Argos:
+
+```
+npx @argos-ci/cli upload ./screenshots
+```
+
+Sometimes an additional option is required to access the CI environment variable.
+
+**Optional:** You can also add @argos-ci/cli to your package.json to control the dependency version.
+
+#### CI configuration examples
+
+<CiCards>
+  <CICardLink href="https://github.com/argos-ci/argos/tree/main/examples/github-actions">
+    <CiCard>
+      <CiBody>
+        <CiCardImage>
+          <GithubLogo />
+        </CiCardImage>
+        <CiCardTitle>Github Actions</CiCardTitle>
+      </CiBody>
+      <CiArrow />
+    </CiCard>
+  </CICardLink>
+  <CICardLink href="https://github.com/argos-ci/argos/tree/main/examples/circleci">
+    <CiCard>
+      <CiBody>
+        <CiCardImage>
+          <CircleCiLogo />
+        </CiCardImage>
+        <CiCardTitle>Circle CI</CiCardTitle>
+      </CiBody>
+      <CiArrow />
+    </CiCard>
+  </CICardLink>
+  <CICardLink href="https://github.com/argos-ci/argos/tree/main/examples/travis">
+    <CiCard>
+      <CiBody>
+        <CiCardImage>
+          <TravisCiLogo />
+        </CiCardImage>
+        <CiCardTitle>Travis CI</CiCardTitle>
+      </CiBody>
+      <CiArrow />
+    </CiCard>
+  </CICardLink>
+</CiCards>
+
+Don't see an example for your CI? check our [examples folder](https://github.com/argos-ci/argos/tree/main/examples). As an open-source project, [contributions](https://github.com/argos-ci/argos/blob/main/CONTRIBUTING.md) are appreciated.
+
+## Enjoy!
+
+Congratulation, Argos is installed on your repository, and you are ready to start the [visual testing](/visual-testing).
