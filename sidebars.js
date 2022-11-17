@@ -27,7 +27,6 @@ const sidebars = {
       label: "Account & External links",
       items: [
         "account/account",
-        "account/pricing-plans",
         {
           type: "link",
           label: "Security",
