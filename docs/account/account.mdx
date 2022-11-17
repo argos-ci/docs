@@ -3,6 +3,8 @@ slug: /account
 sidebar_position: 1
 ---
 
+import monthlyConsumption from "/img/monthly-consumption.png";
+
 # Account
 
 Argos relies on GitHub Marketplace to handle the subscriptions and billing. Therefore, we mirror the GitHub system and distinguish personal accounts from organizational ones.
@@ -15,31 +17,44 @@ Argos' usage for open-source repositories is free and unlimited. It's our way to
 
 #### Private repositories
 
-For the moment, Argos is free and unlimited. However, very soon, the **Free plan** will be limited to 5.000 screenshots diffs per month for private repositories.
-
-<!---
-By default, an account that uses less than 5.000 screenshots diffs/month uses the **Free plan**. If you exceed this threshold, you must subscribe to a [paid plan on GitHub Marketplace](https://github.com/marketplace/argos-ci). Otherwise, you won't be able to upload more screenshots to Argos until next month's renewal.
--->
+For the moment, the Argos **Free plan** is unlimited for private repositories. However, very soon, it will be limited to 5.000 screenshots diffs per month.
 
 ## Subscription
 
-Subscribe to Argos' plan on [GitHub Marketplace](https://github.com/marketplace/argos-ci).
+Subscribe to Argos' plan on [GitHub Marketplace](https://github.com/marketplace/argos-ci). However, a subscription is not required until you reach the **Free plan** threshold.
 
-> Note: no need to subscribe to a plan until you reach the free plan threshold. A banner will notify you in Argos when you approach the limit.
+> Note: You may have multiple Argos subscriptions related to different accounts.
 
-## Consumption monitoring
+### Current month's usage
 
-You can check the monthly consumption for each of your accounts on Argos' settings :
+Find the current month's usage for each of your accounts on Argos' settings :
 
 - https://app.argos-ci.com/[personal-login]/settings
 - https://app.argos-ci.com/[organization-login]/settings
 
-## Billing
+<img
+  src={monthlyConsumption}
+  alt="Monthly consumption"
+  className="rounded"
+  style={{ marginBottom: 20 }}
+/>
+
+### Exceed plan capacity
+
+A banner will notify you in Argos when you approach the limit of your current plan.
+
+If you exceed your plan threshold, you must [upgrade your plan](https://github.com/marketplace/argos-ci). Otherwise, you won't be able to upload more screenshots to Argos until next month's renewal.
+
+### Change plan
+
+You can change your Argos plan on [GitHub Marketplace](https://github.com/marketplace/argos-ci).
+
+Don't hesitate to [contact us](/contact-us) if none of the offered plans satisfy your consumption.
+
+## Invoices
 
 Argos' subscription will be charged on your GitHub invoices. Thanks to this, we don't require your credit card or financial information.
 
 ## Cancel a subscription
 
-You can cancel an Argos subscription on [GitHub Marketplace](https://github.com/marketplace/argos-ci) or on GitHub [billing and plan settings](https://github.com/settings/billing).
-
-Be careful; you may possess multiple subscriptions on different accounts.
+You can cancel your Argos subscription on [GitHub Marketplace](https://github.com/marketplace/argos-ci) or on GitHub [billing and plan settings](https://github.com/settings/billing).
