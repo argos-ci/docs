@@ -3,28 +3,26 @@ title: Gatsby
 slug: /gatsby
 ---
 
-# Install Argos with Gatsby
+# Integrate Argos with Gatsby
 
-Setting up Argos in a Gatsby v4+ project.
+Use [gatsby-plugin-argos](https://www.npmjs.com/package/gatsby-plugin-argos) plugin to automatically take screenshots of every page of a [Gatsby](https://www.gatsbyjs.com/) project and upload them on Argos.
 
-The quickest way to use Argos with [Gatsby](https://www.gatsbyjs.com/) is to use the dedicated plugin [gatsby-plugin-argos](https://www.npmjs.com/package/gatsby-plugin-argos).
+Click here to see the [Gatsby integration repository example](https://github.com/argos-ci/argos-example-gatsby-github-actions).
 
-On CI post-build, the plugin will take screenshots of every page and upload them on Argos. The Argos check will available on Github commit status.
-
-### 1. Install
+## Install
 
 ```sh
 npm install --save-dev gatsby-plugin-argos argos-cli gatsby-plugin-screenshot puppeteer
 ```
 
-### 2. Use your Argos token
+## Set the repository token
 
-Expose your `ARGOS_TOKEN` as environment variable.
+Follow this guide to [set up the Argos token](/configure-ci#set-up-the-argos-token) as an environment variable.
 
-### 3. Add the Argos plugin to Gatsby config
+## Update the Gatsby config
 
 ```js
-// in your gatsby-config.js
+// Example for Github Actions
 module.exports = {
   plugins: [
     ...(process.env.CI
@@ -46,5 +44,3 @@ module.exports = {
   ],
 };
 ```
-
-> Read the [example repository](https://github.com/argos-ci/argos-example-gatsby-github-actions).
