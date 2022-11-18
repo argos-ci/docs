@@ -14,9 +14,9 @@ import {
   CiArrow,
   CiBody,
 } from "@site/src/components/CiCard";
-import CypressLogo from "/img/cypress-logo.png";
-import PuppeteerLogo from "/img/puppeteer-logo.png";
-import PlaywrightLogo from "/img/playwright-logo.png";
+import cypressLogo from "/img/cypress-logo-2.png";
+import puppeteerLogo from "/img/puppeteer-logo.png";
+import playwrightLogo from "/img/playwright-logo.png";
 import githubRepoAccess from "/img/github-repo-access.png";
 
 # Get started with Argos
@@ -27,7 +27,7 @@ Argos is a visual testing app that compares screenshots and notifies developers 
 
 Argos GitHub app will allow Argos to read commits, mirror user accesses, and add pull-request statuses to notify about changes.
 
-Subscribe to Argos on plan on [Github Marketplace](https://github.com/marketplace/argos-ci).
+Subscribe to an Argos plan on [Github Marketplace](https://github.com/marketplace/argos-ci).
 
 You can give Argos access to all of your repositories or choose specific ones. However, we recommend selecting only the repositories on which you want to use Argos.
 
@@ -45,10 +45,10 @@ You can give Argos access to all of your repositories or choose specific ones. H
       <b>Contents</b> — to find a common commit ancestor between branches
     </li>
     <li>
-      <b>Statuses</b> — to add status on commit
+      <b>Statuses</b> — to add statuses on commit
     </li>
     <li>
-      <b>Pull requests</b> — to add a comment in pull requests
+      <b>Pull requests</b> — to add a comments in pull requests
     </li>
     <li>
       <b>Actions</b> — to allow tokenless authentication
@@ -58,22 +58,22 @@ You can give Argos access to all of your repositories or choose specific ones. H
 
 ## Capture the screenshots
 
-The first step to visual testing is to capture screenshots. Up to you to test isolated components, whole pages, or each stage of a checkout tunnel.
+The first step to visual testing is to capture screenshots. It's up to you to test isolated components, whole pages, or each stage of a checkout tunnel.
 
-> Tip: It is easier to visually check page content than asserting each text. Moreover, there is no code maintenance when the content is updated.
+> Tip: It is easier to check page content visually than asserting each text. Moreover, there is no code maintenance when the content is updated.
 
 We recommend leaning on end-to-end testing frameworks to take screenshots. They facilitate navigation through the application and have native commands to take screenshots in various browsers and screen resolutions.
 
 #### Testing framework guide
 
-Guides that cover our recommended approach to installing Argos in a number of popular testing frameworks.
+The following guides that cover our recommended approach to installing Argos in a number of popular testing frameworks.
 
 <CiCards>
   <CICardLink href="/cypress">
     <CiCard>
       <CiBody>
         <CiCardImage>
-          <img src={CypressLogo} />
+          <img src={cypressLogo} />
         </CiCardImage>
         <CiCardTitle>Cypress</CiCardTitle>
       </CiBody>
@@ -84,7 +84,7 @@ Guides that cover our recommended approach to installing Argos in a number of po
     <CiCard>
       <CiBody>
         <CiCardImage>
-          <img src={PuppeteerLogo} style={{ maxHeight: 25, margin: "auto" }} />
+          <img src={puppeteerLogo} style={{ maxHeight: 25, margin: "auto" }} />
         </CiCardImage>
         <CiCardTitle>Puppeteer</CiCardTitle>
       </CiBody>
@@ -95,7 +95,7 @@ Guides that cover our recommended approach to installing Argos in a number of po
     <CiCard>
       <CiBody>
         <CiCardImage>
-          <img src={PlaywrightLogo} />
+          <img src={playwrightLogo} />
         </CiCardImage>
         <CiCardTitle>Playwright</CiCardTitle>
       </CiBody>

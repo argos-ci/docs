@@ -14,27 +14,27 @@ import {
   CiArrow,
   CiBody,
 } from "@site/src/components/CiCard";
-import GithubLogo from "@site/src/components/GithubLogo";
-import TravisCiLogo from "@site/src/components/TravisCiLogo";
-import CircleCiLogo from "@site/src/components/CircleCiLogo";
 import gearButton from "/img/gear-button.png";
+import githubLogo from "/img/github-logo.png";
+import travisLogo from "/img/travis-logo.png";
+import circleCiLogo from "/img/circle-ci-logo.png";
 
 # Configure CI
 
-The official [Argos CLI](/argos-cli) is the simplest and fastest way to send screenshots to Argos. Therefore, your CI should use it after taking the screenshot during the end-to-end tests.
+The official [Argos CLI](/argos-cli) is the simplest and fastest way to send screenshots to Argos. Therefore, your CI should use it after taking screenshots during the end-to-end tests.
 
-## Set up the Argos token
+## Set up the repository token
 
 > Note: GitHub Actions CI users can skip this step as the repository authentication is automatic.
 
-[Login to Argos](https://app.argos-ci.com), and click on the <img
+[Sign in to Argos](https://app.argos-ci.com), and click on the <img
 src={gearButton}
 alt="Gear button"
 className="rounded"
 width={40}
 style={{ display: "inline-block", marginBottom: -8 }}
 />
-button in front of a repository to get the `ARGOS_TOKEN`. There is unique a token for each repository.
+button in front of a repository to get the `ARGOS_TOKEN`.
 
 Set the `ARGOS_TOKEN` as an environment variable (sometimes called “secrets”) in your CI configuration.
 
@@ -57,7 +57,7 @@ Sometimes an additional option is required to access the CI environment variable
     <CiCard>
       <CiBody>
         <CiCardImage>
-          <GithubLogo />
+          <img src={githubLogo} />
         </CiCardImage>
         <CiCardTitle>Github Actions</CiCardTitle>
       </CiBody>
@@ -68,7 +68,7 @@ Sometimes an additional option is required to access the CI environment variable
     <CiCard>
       <CiBody>
         <CiCardImage>
-          <CircleCiLogo />
+          <img src={circleCiLogo} />
         </CiCardImage>
         <CiCardTitle>Circle CI</CiCardTitle>
       </CiBody>
@@ -79,7 +79,7 @@ Sometimes an additional option is required to access the CI environment variable
     <CiCard>
       <CiBody>
         <CiCardImage>
-          <TravisCiLogo />
+          <img src={travisLogo} />
         </CiCardImage>
         <CiCardTitle>Travis CI</CiCardTitle>
       </CiBody>
@@ -88,7 +88,7 @@ Sometimes an additional option is required to access the CI environment variable
   </CICardLink>
 </CiCards>
 
-Don't see an example for your CI? check our [examples folder](https://github.com/argos-ci/argos/tree/main/examples). Don't hesitate to contribute by adding an example!
+Your CI is missing? Check our [examples folder](https://github.com/argos-ci/argos/tree/main/examples). Don't hesitate to contribute by adding an example!
 
 ## Enjoy!
 

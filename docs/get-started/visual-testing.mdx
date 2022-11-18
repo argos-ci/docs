@@ -15,22 +15,19 @@ import {
   CiBody,
 } from "@site/src/components/CiCard";
 import githubCommitStatus from "/img/github-commit-status.png";
-import CypressLogo from "/img/cypress-logo.png";
-import PuppeteerLogo from "/img/puppeteer-logo.png";
-import PlaywrightLogo from "/img/playwright-logo.png";
 import buildExample from "/img/build-example.png";
 
 # Visual testing
 
 Visual testing is the process of comparing application UI with the results expected by design or with the previous state of the application. Automated visual testing tools, like Argos, allow monitoring of the application's UI on multiple browsers and screen sizes.
 
-Argos visual testing is based on screenshots comparison changes detection and manual review. With this process, developers can check the visual impacts of their pull requests in a few seconds, even on a big application.
+Argos visual testing is based on screenshots comparison changes detection and manual review. With this process, developers can check the visual impacts of their pull requests in a few seconds, even on a large application.
 
 ## Visual changes detection
 
 Once the [installation](/installation) is done, Argos will receive your application's screenshots when you create a pull request or merge a commit to the repository [reference branch](#reference-branch-definition).
 
-Argos notifies you directly on your GitHub pull-request by adding a status check. If a no change are detected, the status is ✅ Pass, everything's good, you can merge your pull-request with confidence.
+Argos notifies you directly on your GitHub pull-request by adding a status check. If there is no change detected detected, the status is ✅ Pass, you can confidently merge your pull-request.
 
 If some changes are detected, the status is ❌ Fail. In this case, you have to review your visual changes.
 
@@ -40,7 +37,7 @@ If some changes are detected, the status is ❌ Fail. In this case, you have to 
 
 ## Review visual changes
 
-The visual changes review takes place on the Argos application.
+The visual changes review takes place in the Argos application.
 
 #### Argos build example
 
@@ -54,7 +51,7 @@ Navigate through the screenshot diffs by clicking on the sidebar, the navigation
 
 > Tip: Press `?` to show all available keyboard shortcuts.
 
-The side-by-side UI is designed to quickly spots visual changes and verify that screenshots match their expected results.
+The side-by-side UI is designed to quickly spot visual changes and verify that screenshots match their expected results.
 
 #### 👎 Reject a build workflow
 
@@ -71,10 +68,10 @@ Once the changes are accepted, you can confidently merge your pull request.
 ## FAQ
 
 <details>
-  <summary>How to update the screenshot baseline compare?</summary>
+  <summary>How to update the screenshot comparison baseline?</summary>
   <p>
-    Argos updates the comparison baseline screenshots when a commit is merged to
-    the repository's reference branch.
+    Argos updates the comparison baseline screenshots when a commit is merged
+    into the repository's reference branch.
   </p>
 </details>
 

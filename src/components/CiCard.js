@@ -9,6 +9,7 @@ export const CiCardImage = (props) => (
       height: 25,
       display: "flex",
       alignItems: "center",
+      filter: "saturate(0%)",
     }}
     {...props}
   />
