@@ -1,0 +1,73 @@
+---
+title: CLI
+id: argos-cli
+slug: /argos-cli
+---
+
+# Argos Command Line Interface (CLI)
+
+Argos CLI is the simplest and fastest way to send screenshots to the Argos app. You can use it locally, but it is designed to be executed by CI.
+
+`@argos-ci/cli` is available as [npm package](https://www.npmjs.com/package/@argos-ci/cli) and open-sourced on [GitHub](https://github.com/argos-ci/argos-javascript/tree/main/packages/cli).
+
+## Installation
+
+```sh
+npm install --save-dev @argos-ci/cli
+```
+
+## Configuration
+
+To use `@argos-ci/cli` you have to configure your repository token in an environment variable.
+
+Read [set up the argos token](/configure-ci#set-up-the-repository-token) to know how to get the `ARGOS_TOKEN` value for your repository.
+
+```sh
+ARGOS_TOKEN=<your-repository-token>
+```
+
+> Note: It is also possible specify the token with the `--token=<your-repository-token> ` argument instead of using an environment variable but it is not recommended.
+
+## Usage
+
+Use `argos upload` command to upload the screenshots stored in `./screenshots` folder.
+
+```sh
+npx argos upload ./screenshots
+```
+
+Use the `argos help` command to get available options:
+
+```sh
+npx argos help upload
+```
+
+## Advanced usage
+
+### Run multiple Argos builds on the same commit
+
+Assign a name to the Argos build with `--build-name` argument to run multiple builds for the same commit.
+
+In this example we create one build for components and another for E2E:
+
+```sh
+argos upload --build-name components ./screenshots/components
+argos upload --build-name e2e ./screenshots/e2e
+```
+
+### Parallel test suites
+
+Parallelism is a common way to speed up test suites by running multiple tests concurrently and then combining results at the end.
+
+To configure parallel test suites using `@argos-ci/cli`, you have to setup two environment variables:
+
+- `ARGOS_PARALLEL_NONCE`: a unique build ID for this parallel build. Argos groups uploaded screenshots using this ID.
+- `ARGOS_PARALLEL_TOTAL`: the number of parallel nodes being ran. `argos upload` command must be called exactly up to this number.
+
+> Note: It is also possible to configure parallel mode using the arguments `--parallel-nonce` and `--parallel-total`.
+
+Once configured, upload commands can be ran multiple times and will aggregate screenshots in the same build.
+
+```sh
+ARGOS_PARALLEL_NONCE=<unique-build-id> ARGOS_PARALLEL_TOTAL=<total-batch-count> argos upload --parallel ./screenshots
+```

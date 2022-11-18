@@ -1,0 +1,41 @@
+---
+id: style-injection
+slug: /style-injection
+sidebar_position: 3
+---
+
+# Style injection
+
+Browsers have unstable rendering for well-known use cases like scrollbar display, border-radius consistency, etc. Therefore, it can be convenient to hide these components to ensure the screenshots' consistency.
+
+In our integrations, we inject the following styles before taking a screenshot.
+
+```css
+/* Hide carets */
+* {
+  caret-color: transparent !important;
+}
+
+/* Hide scrollbars */
+::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Generic hide */
+[data-visual-test="transparent"] {
+  color: transparent !important;
+  font-family: monospace !important;
+  opacity: 0 !important;
+}
+
+[data-visual-test="removed"] {
+  display: none !important;
+}
+```
+
+Then, you can :
+
+- Add `data-test-hidden` attribute to a DOM nodes to hide it from screenshots
+- Add `data-test-no-radius` attribute to remove the border-radius from screenshots
+
+Read the [code injection doc](/code-injection) to know how to inject CSS in a page.

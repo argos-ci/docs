@@ -1,0 +1,109 @@
+---
+title: Visual testing
+id: visual-testing
+slug: /visual-testing
+sidebar_position: 4
+---
+
+import {
+  CiCardImage,
+  CiCardTitle,
+  CiCard,
+  CICardLink,
+  CiCards,
+  CiArrow,
+  CiBody,
+} from "@site/src/components/CiCard";
+import githubCommitStatus from "/img/github-commit-status.png";
+import buildExample from "/img/build-example.png";
+
+# Visual testing
+
+Visual testing is the process of comparing application UI with the results expected by design or with the previous state of the application. Automated visual testing tools, like Argos, allow monitoring of the application's UI on multiple browsers and screen sizes.
+
+Argos visual testing is based on screenshots comparison changes detection and manual review. With this process, developers can check the visual impacts of their pull requests in a few seconds, even on a large application.
+
+## Visual changes detection
+
+Once the [installation](/installation) is done, Argos will receive your application's screenshots when you create a pull request or merge a commit to the repository [reference branch](#reference-branch-definition).
+
+Argos notifies you directly on your GitHub pull-request by adding a status check. If there is no change detected detected, the status is ✅ Pass, you can confidently merge your pull-request.
+
+If some changes are detected, the status is ❌ Fail. In this case, you have to review your visual changes.
+
+<img src={githubCommitStatus} alt="GitHub commit status" className="rounded" />
+
+> Click on the **"Details"** link to review the visual changes.
+
+## Review visual changes
+
+The visual changes review takes place in the Argos application.
+
+#### Argos build example
+
+<img
+  src={buildExample}
+  alt="Example build"
+  style={{ borderRadius: 8, marginBottom: 10 }}
+/>
+
+Navigate through the screenshot diffs by clicking on the sidebar, the navigation buttons, or using your keyboard.
+
+> Tip: Press `?` to show all available keyboard shortcuts.
+
+The side-by-side UI is designed to quickly spot visual changes and verify that screenshots match their expected results.
+
+#### 👎 Reject a build workflow
+
+If you spot a visual bug or if a screenshot doesn't satisfy your expectations, click on the "Review changes" button and select "Reject changes". The build status becomes "Changes rejected", and GitHub is notified of the rejection.
+
+After rejecting the change, you should commit a new version to fix it.
+
+#### 👍 Approve a build workflow
+
+When screenshots match the expected results, click on the "Review changes" button, then select 🟢&nbsp;"Approve changes". The build status becomes 🔴&nbsp;"Changes approved", and GitHub is notified of the approval.
+
+Once the changes are accepted, you can confidently merge your pull request.
+
+## FAQ
+
+<details>
+  <summary>How to update the screenshot comparison baseline?</summary>
+  <p>
+    Argos updates the comparison baseline screenshots when a commit is merged
+    into the repository's reference branch.
+  </p>
+</details>
+
+<details id="reference-branch-definition">
+  <summary>What is a reference branch?</summary>
+  <p>
+    The reference branch is used as the baseline for the screenshots
+    comparisons. Argos automatically uses the GitHub default branch as the
+    reference branch. You can choose another reference branch in Argos
+    repository settings.
+  </p>
+</details>
+
+<details>
+  <summary>How to update the reference branch?</summary>
+  You can choose another reference branch in Argos repository settings.
+</details>
+
+<details>
+  <summary>What is an orphan build?</summary>
+  <p>
+    An orphan build is the first one performed on a reference branch. It won't
+    show any comparison. The screenshots of this build will be considered as the
+    baseline for the following comparisons.
+  </p>
+</details>
+
+<details>
+  <summary>What is a reference build?</summary>
+  <p>
+    A reference build is created when a commit is merged on the reference
+    branch. Its screenshots will be used as the baseline for following
+    comparisons performed on other branches.
+  </p>
+</details>

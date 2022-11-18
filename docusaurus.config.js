@@ -55,7 +55,9 @@ const config = {
     ({
       image: "img/social.png",
       colorMode: {
-        respectPrefersColorScheme: true,
+        defaultMode: "dark",
+        disableSwitch: false,
+        respectPrefersColorScheme: false,
       },
       navbar: {
         title: "",
@@ -73,7 +75,7 @@ const config = {
           {
             to: "https://app.argos-ci.com/",
             position: "left",
-            label: "Sign in or start for free",
+            label: "Go to Argos app",
           },
           {
             href: "https://github.com/argos-ci",
