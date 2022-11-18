@@ -30,13 +30,15 @@ Argos visual testing is based on screenshots comparison changes detection and ma
 
 Once the [installation](/installation) is done, Argos will receive your application's screenshots when you create a pull request or merge a commit to the repository [reference branch](#reference-branch-definition).
 
-Argos compares the screenshots with their baseline counterpart. If a visual change is detected, a red check status is added to the GitHub pull request, and a green check is if they are stable.
+Argos notifies you directly on your GitHub pull-request by adding a status check. If a no change are detected, the status is ✅ Pass, everything's good, you can merge your pull-request with confidence.
+
+If some changes are detected, the status is ❌ Fail. In this case, you have to review your visual changes.
 
 <img src={githubCommitStatus} alt="GitHub commit status" className="rounded" />
 
 > Click on the **"Details"** link to review the visual changes.
 
-## Reviewing visual changes
+## Review visual changes
 
 The visual changes review takes place on the Argos application.
 
@@ -54,15 +56,15 @@ Navigate through the screenshot diffs by clicking on the sidebar, the navigation
 
 The side-by-side UI is designed to quickly spots visual changes and verify that screenshots match their expected results.
 
-#### Reject a build workflow
+#### 👎 Reject a build workflow
 
-If you spot a visual bug or if a screenshot doesn't satisfy your expectations, click on the "Review changes" button and select "Reject changes." The build status becomes "Changes rejected", and GitHub is notified of the rejection.
+If you spot a visual bug or if a screenshot doesn't satisfy your expectations, click on the "Review changes" button and select "Reject changes". The build status becomes "Changes rejected", and GitHub is notified of the rejection.
 
-After rejecting the change, commit a new version to fix it.
+After rejecting the change, you should commit a new version to fix it.
 
-#### Approve a build workflow
+#### 👍 Approve a build workflow
 
-When screenshots match the expected results, click on the "Review changes" button, then select "Approve changes". The build status becomes "Changes approved", and GitHub is notified of the approval.
+When screenshots match the expected results, click on the "Review changes" button, then select 🟢&nbsp;"Approve changes". The build status becomes 🔴&nbsp;"Changes approved", and GitHub is notified of the approval.
 
 Once the changes are accepted, you can confidently merge your pull request.
 

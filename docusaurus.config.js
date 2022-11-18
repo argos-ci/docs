@@ -55,7 +55,9 @@ const config = {
     ({
       image: "img/social.png",
       colorMode: {
-        respectPrefersColorScheme: true,
+        defaultMode: "dark",
+        disableSwitch: false,
+        respectPrefersColorScheme: false,
       },
       navbar: {
         title: "",

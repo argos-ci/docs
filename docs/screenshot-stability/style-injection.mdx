@@ -21,14 +21,15 @@ In our integrations, we inject the following styles before taking a screenshot.
   display: none !important;
 }
 
-/* Hide a DOM node */
-[data-test-hidden] {
+/* Generic hide */
+[data-visual-test="transparent"] {
+  color: transparent !important;
+  font-family: monospace !important;
   opacity: 0 !important;
 }
 
-/* Remove border radius */
-[data-test-no-radius] {
-  border-radius: 0 !important;
+[data-visual-test="removed"] {
+  display: none !important;
 }
 ```
 
