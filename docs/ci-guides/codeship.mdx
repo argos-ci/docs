@@ -1,0 +1,35 @@
+---
+title: Codeship
+id: codeship
+slug: /codeship
+---
+
+import {
+  GetArgosToken,
+  WhyArgosToken,
+  SetArgosToken,
+} from "@site/src/components/ArgosToken";
+
+# Use Argos with Codeship
+
+Configure [Codeship](https://www.cloudbees.com/products/codeship) to send screenshots to Argos.
+
+## Set up repository token
+
+<WhyArgosToken />
+<GetArgosToken />
+<SetArgosToken />
+
+Read the codeship doc to know how to [access the environment](https://docs.cloudbees.com/docs/cloudbees-codeship/latest/pro-builds-and-configuration/environment-variables) variable during workflow.
+
+## Configure Codeship step file
+
+```yml
+- name: ci
+  type: parallel
+  steps:
+    - service: project_name
+      command: npx @argos-ci/cli upload ./screenshots
+```
+
+Read the [Codeship repository](https://github.com/argos-ci/argos/tree/main/examples/Codeship) for a complete configuration example.

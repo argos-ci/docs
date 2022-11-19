@@ -1,0 +1,44 @@
+---
+title: CircleCi
+id: circle-ci
+slug: /circle-ci
+---
+
+import {
+  GetArgosToken,
+  WhyArgosToken,
+  SetArgosToken,
+} from "@site/src/components/ArgosToken";
+
+# Use Argos with CircleCI
+
+Configure [CircleCI](https://circleci.com/) to send screenshots to Argos.
+
+## Set up repository token
+
+<WhyArgosToken />
+<GetArgosToken />
+<SetArgosToken />
+
+## Configure CircleCI
+
+```yml
+jobs:
+  build:
+    executor: node/default
+    steps:
+      - checkout
+
+      # 👉 Insert the steps required to take screenshots
+
+      - run:
+          name: Upload screenshots to argos-ci.com
+          command: npx @argos-ci/cli upload ./screenshots
+
+workflows:
+  ci:
+    jobs:
+      - build
+```
+
+Read the [CircleCI repository](https://github.com/argos-ci/argos/tree/main/examples/circleci) for a complete configuration example.

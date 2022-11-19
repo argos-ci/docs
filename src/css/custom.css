@@ -38,15 +38,18 @@
   --ifm-color-emphasis-800: var(--ifm-color-gray-600);
   --ifm-heading-color: var(--ifm-color-gray-900);
   --ifm-hover-overlay: var(--ifm-color-gray-100);
-  --ifm-table-border-color: var(--ifm-color-gray-200);
-  --ifm-blockquote-border-color: var(--ifm-color-gray-200);
-  --ifm-toc-border-color: var(--ifm-color-gray-200);
+  --ifm-table-border-color: var(--ifm-color-gray-300);
+  --ifm-blockquote-border-color: var(--ifm-color-gray-300);
+  --ifm-toc-border-color: var(--ifm-color-gray-300);
   --ifm-background-active: var(--ifm-color-gray-100);
 
   --docsearch-primary-color: var(--ifm-color-primary) !important;
   --docsearch-text-color: var(--ifm-font-color-base) !important;
   --docsearch-searchbox-background: var(--ifm-hover-overlay) !important;
   --docsearch-muted-color: var(--ifm-color-gray-500) !important;
+
+  --ifm-color-info-contrast-background: var(--ifm-color-gray-100);
+  --ifm-color-info-dark: var(--ifm-color-gray-400);
 
   --ifm-spacing-horizontal: 2em;
   --ifm-navbar-padding-horizontal: 10px;
@@ -79,8 +82,8 @@ html[data-theme="dark"] {
   --ifm-color-emphasis-800: var(--ifm-color-gray-300);
   --ifm-heading-color: #fff;
   --ifm-hover-overlay: var(--ifm-color-gray-700);
-  --ifm-table-border-color: var(--ifm-color-gray-800);
-  --ifm-blockquote-border-color: var(--ifm-color-gray-800);
+  --ifm-table-border-color: var(--ifm-color-gray-700);
+  --ifm-blockquote-border-color: var(--ifm-color-gray-700);
   --ifm-toc-border-color: var(--ifm-color-gray-700);
   --ifm-background-active: var(--ifm-color-gray-900);
 
@@ -205,22 +208,16 @@ code {
 }
 /* Sidebar: end */
 
-/* CI Card */
-.ciCardLink {
-  background-color: var(--ifm-code-background);
+/* Card */
+.cardLink {
+  background-color: transparent;
 }
-.ciCardLink:hover {
-  background-color: var(--ifm-hover-overlay);
-}
-.ciCardLink .arrow {
+.cardLink .arrow {
   opacity: 0;
   color: var(--ifm-font-color-base);
 }
-.ciCardLink:hover .arrow {
+.cardLink:hover .arrow {
   opacity: 1;
-}
-.ciCardImage svg {
-  fill: var(--ifm-font-color-base);
 }
 /* CI Card: end *
 
@@ -261,12 +258,10 @@ nav.menu {
 }
 
 .bordered {
-  border: solid 1px var(--ifm-hover-overlay);
+  border: solid 1px var(--ifm-table-border-color);
 }
-
-.card:hover {
-  border-color: transparent !important;
-  background-color: var(--ifm-hover-overlay);
+.bordered:hover {
+  border: solid 1px var(--ifm-color-primary);
 }
 
 /* Mobile view */

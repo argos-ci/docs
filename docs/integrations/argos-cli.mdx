@@ -4,6 +4,8 @@ id: argos-cli
 slug: /argos-cli
 ---
 
+import { GetArgosToken } from "@site/src/components/ArgosToken";
+
 # Argos Command Line Interface (CLI)
 
 Argos CLI is the simplest and fastest way to send screenshots to the Argos app. You can use it locally, but it is designed to be executed by CI.
@@ -20,21 +22,21 @@ npm install --save-dev @argos-ci/cli
 
 To use `@argos-ci/cli` you have to configure your repository token in an environment variable.
 
-Read [set up the argos token](/configure-ci#set-up-the-repository-token) to know how to get the `ARGOS_TOKEN` value for your repository.
+<GetArgosToken />
 
-```sh
-ARGOS_TOKEN=<your-repository-token>
-```
-
-> Note: It is also possible specify the token with the `--token=<your-repository-token> ` argument instead of using an environment variable but it is not recommended.
+> Note: You can specify the token with the `--token=<your-repository-token>` argument instead of using an environment variable but it is not recommended.
 
 ## Usage
+
+### Upload command
 
 Use `argos upload` command to upload the screenshots stored in `./screenshots` folder.
 
 ```sh
 npx argos upload ./screenshots
 ```
+
+### Help command
 
 Use the `argos help` command to get available options:
 
