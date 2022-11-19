@@ -1,0 +1,33 @@
+---
+title: Travis CI
+id: travis-ci
+slug: /travis-ci
+---
+
+import {
+  WhyArgosToken,
+  GetArgosToken,
+  SetArgosToken,
+} from "@site/src/components/ArgosToken";
+
+# Use Argos with Travis CI
+
+Configure [Travis CI](https://www.travis-ci.com/) to send screenshots to Argos.
+
+## Set up repository token
+
+<WhyArgosToken />
+<GetArgosToken />
+<SetArgosToken />
+
+## Configure Travis CI
+
+```yml
+script:
+  # 👉 Insert the steps required to take screenshots
+
+  # Upload screenshots to argos-ci.com
+  - npx @argos-ci/cli upload ./screenshots
+```
+
+Read the [Travis CI repository](https://github.com/argos-ci/argos/tree/main/examples/travis) for a complete configuration example.

@@ -1,0 +1,33 @@
+---
+title: GitLab CI
+id: gitlab-ci
+slug: /gitlab-ci
+---
+
+import {
+  WhyArgosToken,
+  GetArgosToken,
+  SetArgosToken,
+} from "@site/src/components/ArgosToken";
+
+# Use Argos with GitLab CI
+
+Configure [GitLab CI](https://docs.gitlab.com/ee/ci/) to send screenshots to Argos.
+
+## Set up repository token
+
+<WhyArgosToken />
+<GetArgosToken />
+<SetArgosToken />
+
+## Configure GitLab CI
+
+```yml
+script:
+  # 👉 Insert the steps required to take screenshots
+
+  # Upload screenshots to argos-ci.com
+  - npx @argos-ci/cli upload ./screenshots
+```
+
+We don't have GitLab CI example repository to yet. Don't hesitate to contribute by [adding an example](https://github.com/argos-ci/argos/tree/main/examples)!

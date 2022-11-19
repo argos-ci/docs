@@ -1,0 +1,35 @@
+---
+title: Semaphore CI
+id: semaphore-ci
+slug: /semaphore-ci
+---
+
+import {
+  GetArgosToken,
+  WhyArgosToken,
+  SetArgosToken,
+} from "@site/src/components/ArgosToken";
+
+# Use Argos with Semaphore CI
+
+Configure [Semaphore CI](https://semaphoreci.com/) to send screenshots to Argos. CI
+
+## Set up repository token
+
+<WhyArgosToken />
+<GetArgosToken />
+<SetArgosToken />
+
+## Configure Semaphore CI
+
+```yml
+blocks:
+  jobs:
+    # 👉 Insert the steps required to take screenshots
+
+    - name: Upload screenshots to argos-ci.com
+      commands:
+        - npx @argos-ci/cli upload ./screenshots
+```
+
+We don't have Buildkite example repository to yet. Don't hesitate to contribute by [adding an example](https://github.com/argos-ci/argos/tree/main/examples)!

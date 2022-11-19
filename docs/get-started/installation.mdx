@@ -5,19 +5,17 @@ slug: /installation
 sidebar_position: 2
 ---
 
-import {
-  CiCardImage,
-  CiCardTitle,
-  CiCard,
-  CICardLink,
-  CiCards,
-  CiArrow,
-  CiBody,
-} from "@site/src/components/CiCard";
-import cypressLogo from "/img/cypress-logo-2.png";
-import puppeteerLogo from "/img/puppeteer-logo.png";
-import playwrightLogo from "/img/playwright-logo.png";
-import githubRepoAccess from "/img/github-repo-access.png";
+import { LinkCard, Cards } from "@site/src/components/Card";
+import githubRepoAccess from "@site/static/img/github-repo-access.png";
+
+import cypressLogo from "@site/static/img/cypress-logo-2.png";
+import puppeteerLogo from "@site/static/img/puppeteer-logo.png";
+import playwrightLogo from "@site/static/img/playwright-logo.png";
+import testCafeLogo from "@site/static/img/test-cafe-logo.png";
+import capybaraLogo from "@site/static/img/capybara-logo.png";
+import nightwatchLogo from "@site/static/img/nightwatch-logo.png";
+import webdriverLogo from "@site/static/img/webdriver-logo.png";
+import seleniumLogo from "@site/static/img/selenium-logo.png";
 
 # Get started with Argos
 
@@ -64,42 +62,34 @@ The first step to visual testing is to capture screenshots. It's up to you to te
 
 We recommend leaning on end-to-end testing frameworks to take screenshots. They facilitate navigation through the application and have native commands to take screenshots in various browsers and screen resolutions.
 
-#### Testing framework guide
+### Testing framework guides
 
 The following guides that cover our recommended approach to installing Argos in a number of popular testing frameworks.
 
-<CiCards>
-  <CICardLink href="/cypress">
-    <CiCard>
-      <CiBody>
-        <CiCardImage>
-          <img src={cypressLogo} />
-        </CiCardImage>
-        <CiCardTitle>Cypress</CiCardTitle>
-      </CiBody>
-      <CiArrow />
-    </CiCard>
-  </CICardLink>
-  <CICardLink href="/puppeteer">
-    <CiCard>
-      <CiBody>
-        <CiCardImage>
-          <img src={puppeteerLogo} style={{ maxHeight: 25, margin: "auto" }} />
-        </CiCardImage>
-        <CiCardTitle>Puppeteer</CiCardTitle>
-      </CiBody>
-      <CiArrow />
-    </CiCard>
-  </CICardLink>
-  <CICardLink href="/playwright">
-    <CiCard>
-      <CiBody>
-        <CiCardImage>
-          <img src={playwrightLogo} />
-        </CiCardImage>
-        <CiCardTitle>Playwright</CiCardTitle>
-      </CiBody>
-      <CiArrow />
-    </CiCard>
-  </CICardLink>
-</CiCards>
+<Cards>
+  <LinkCard link="/cypress" image={cypressLogo}>
+    Cypress
+  </LinkCard>
+  <LinkCard link="/puppeteer" image={puppeteerLogo}>
+    Puppeteer
+  </LinkCard>
+  <LinkCard link="/playwright" image={playwrightLogo}>
+    Playwright
+  </LinkCard>
+  <LinkCard link="/test-cafe" image={testCafeLogo}>
+    TestCafe
+  </LinkCard>
+  <LinkCard link="/capybara" image={capybaraLogo}>
+    Capybara
+  </LinkCard>
+  <LinkCard link="/nightwatch" image={nightwatchLogo}>
+    Nightwatch
+  </LinkCard>
+  <LinkCard link="/webdriver-io" image={webdriverLogo}>
+    WebdriverIO
+  </LinkCard>
+  <LinkCard link="/selenium" image={seleniumLogo}>
+    Selenium
+  </LinkCard>
+  <LinkCard link="/other-framework">Other framework</LinkCard>
+</Cards>

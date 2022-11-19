@@ -7,13 +7,13 @@ sidebar_position: 4
 
 # Code injection
 
-It can be convenient to inject Javascript into a page to ensure the screenshots' consistency.
+It can be convenient to inject Javascript into a page to ensure screenshots' consistency.
 
 For example, the screenshot could be taken when the assets are not fully loaded and induce a flaky test.
 
-In our integrations, we inject the following code before taking each screenshot.
+In our integrations, we execute the following functions in the tested pages and wait for their resolution before taking a screenshot.
 
-## Inject CSS
+## Inject styles in a page
 
 Injected style to hide elements and fix unstable rendering.
 
@@ -28,7 +28,7 @@ function injectStyles(document) {
 
 ## Ensure no busy
 
-Check if there is `[aria-busy="true"]` element on the page.
+Check if there is `[aria-busy="true"]` element on the page. It prevent in progress loaders to be displayed.
 
 ```js
 async function ensureNoBusy() {
