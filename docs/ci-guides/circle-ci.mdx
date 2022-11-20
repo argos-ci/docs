@@ -7,22 +7,35 @@ slug: /circle-ci
 import {
   GetArgosToken,
   WhyArgosToken,
-  SetArgosToken,
+  TokenPrivacyWarningMessage,
 } from "@site/src/components/ArgosToken";
+import circleCiEnvVariable from "@site/static/img/circle-ci-env-variable.png";
 
 # Use Argos with CircleCI
 
 Configure [CircleCI](https://circleci.com/) to send screenshots to Argos.
 
-## Set up repository token
+## Configuring environment variable
 
 <WhyArgosToken />
 <GetArgosToken />
-<SetArgosToken />
+
+In CircleCI project, go to Project settings > Environment Variables > Add Environment Variable. Then, set the `ARGOS_TOKEN` as an environment variable.
+
+<img
+  src={circleCiEnvVariable}
+  alt="CircleCI setup environment variable"
+  className="rounded"
+  style={{ marginBottom: 20 }}
+/>
+
+<TokenPrivacyWarningMessage />
+
+If you are not comfortable with storing secret, read [CircleCI documentation about environment variables](https://circleci.com/docs/env-vars/).
 
 ## Configure CircleCI
 
-```yml
+```yml title=".circleci/config.yml"
 jobs:
   build:
     executor: node/default

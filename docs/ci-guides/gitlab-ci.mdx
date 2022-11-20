@@ -7,22 +7,27 @@ slug: /gitlab-ci
 import {
   WhyArgosToken,
   GetArgosToken,
-  SetArgosToken,
+  TokenPrivacyWarningMessage,
 } from "@site/src/components/ArgosToken";
 
 # Use Argos with GitLab CI
 
 Configure [GitLab CI](https://docs.gitlab.com/ee/ci/) to send screenshots to Argos.
 
-## Set up repository token
+## Configuring environment variable
 
 <WhyArgosToken />
 <GetArgosToken />
-<SetArgosToken />
+
+In your GitLab repository, go to Settings > CI/CD > and then expand the Variables section. Then, set the `ARGOS_TOKEN` as an environment variable.
+
+<TokenPrivacyWarningMessage />
+
+If you are not comfortable with storing secret, read Gitlab CI documentation about [adding a CI/CD variable to a project](https://docs.gitlab.com/ee/ci/variables/#add-a-cicd-variable-to-a-project).
 
 ## Configure GitLab CI
 
-```yml
+```yml title=".gitlab-ci.yml"
 script:
   # 👉 Insert the steps required to take screenshots
 

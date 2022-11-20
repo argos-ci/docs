@@ -8,21 +8,29 @@ import {
   WhyArgosToken,
   GetArgosToken,
   SetArgosToken,
+  TokenPrivacyWarningMessage,
 } from "@site/src/components/ArgosToken";
 
 # Use Argos with Buildkite
 
 Configure [Buildkite](https://buildkite.com/) to send screenshots to Argos.
 
-## Set up repository token
+## Configuring environment variable
 
 <WhyArgosToken />
 <GetArgosToken />
+
+In your Buildkite pipeline, go to Settings > Steps > Environment Variables. Then, set the `ARGOS_TOKEN` as an environment variable.
+
 <SetArgosToken />
+<TokenPrivacyWarningMessage />
+
+If you are not comfortable with storing secret, read [Buildkite documentation about
+environment variables](https://buildkite.com/docs/pipelines/environment-variables).
 
 ## Configure Buildkite
 
-```yml
+```yml title="pipeline.yml"
 steps:
   # 👉 Insert the steps required to take screenshots
 
