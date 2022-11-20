@@ -8,21 +8,25 @@ import {
   GetArgosToken,
   WhyArgosToken,
   SetArgosToken,
+  TokenPrivacyWarningMessage,
 } from "@site/src/components/ArgosToken";
 
 # Use Argos with Drone CI
 
 Configure [Drone CI](https://www.drone.io/) to send screenshots to Argos.
 
-## Set up repository token
+## Configuring environment variable
 
 <WhyArgosToken />
 <GetArgosToken />
 <SetArgosToken />
+<TokenPrivacyWarningMessage />
+
+If you are not comfortable with storing secret, read [Drone CI documentation about repository secret](https://docs.drone.io/secret/repository/).
 
 ## Configure Drone CI
 
-```yml
+```yml title=".drone.yml"
 kind: pipeline
 type: docker
 name: default

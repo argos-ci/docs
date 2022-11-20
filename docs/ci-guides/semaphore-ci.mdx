@@ -4,25 +4,26 @@ id: semaphore-ci
 slug: /semaphore-ci
 ---
 
-import {
-  GetArgosToken,
-  WhyArgosToken,
-  SetArgosToken,
-} from "@site/src/components/ArgosToken";
+import { GetArgosToken, WhyArgosToken } from "@site/src/components/ArgosToken";
 
 # Use Argos with Semaphore CI
 
 Configure [Semaphore CI](https://semaphoreci.com/) to send screenshots to Argos. CI
 
-## Set up repository token
+## Configuring environment variable
 
 <WhyArgosToken />
 <GetArgosToken />
-<SetArgosToken />
+
+In your Semaphore project, go to Settings > Environment Variables. Then, set the `ARGOS_TOKEN` as an environment variable.
+
+<TokenPrivacyWarningMessage />
+
+If you are not comfortable with storing secret, read Semaphore CI documentation about [environment variables](https://docs.semaphoreci.com/ci-cd-environment/environment-variables/).
 
 ## Configure Semaphore CI
 
-```yml
+```yml title=".semaphore/semaphore.yml"
 blocks:
   jobs:
     # 👉 Insert the steps required to take screenshots

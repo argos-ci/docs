@@ -37,3 +37,11 @@ export const WhyArgosToken = () => (
     screenshots you send are related.
   </p>
 );
+
+export const TokenPrivacyWarningMessage = () => (
+  <blockquote>
+    <b>Warning:</b> Be careful to store your Argos token safely.{" "}
+    <Code>ARGOS_TOKEN</Code> environment variable should be accessible by your
+    CI but not visible publicly.
+  </blockquote>
+);

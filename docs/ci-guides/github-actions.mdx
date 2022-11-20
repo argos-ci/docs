@@ -8,13 +8,9 @@ slug: /github-actions
 
 Configure [GitHub Actions](https://github.com/features/actions) to send screenshots to Argos.
 
-## Set up repository token
-
-The repository is automatically detected when you use Github Actions as CI. Therefore, you don't need to add `ARGOS_TOKEN` as environment variable.
-
 ## Configure GitHub Actions
 
-```yml
+```yml title=".github/workflows/ci.yml"
 name: CI
   build:
     runs-on: ubuntu-latest

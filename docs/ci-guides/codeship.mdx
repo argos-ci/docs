@@ -1,5 +1,5 @@
 ---
-title: Codeship
+title: CodeShip
 id: codeship
 slug: /codeship
 ---
@@ -7,24 +7,27 @@ slug: /codeship
 import {
   GetArgosToken,
   WhyArgosToken,
-  SetArgosToken,
+  TokenPrivacyWarningMessage,
 } from "@site/src/components/ArgosToken";
 
-# Use Argos with Codeship
+# Use Argos with CodeShip
 
-Configure [Codeship](https://www.cloudbees.com/products/codeship) to send screenshots to Argos.
+Configure [CodeShip](https://www.cloudbees.com/products/CodeShip) to send screenshots to Argos.
 
-## Set up repository token
+## Configuring environment variable
 
 <WhyArgosToken />
 <GetArgosToken />
-<SetArgosToken />
 
-Read the codeship doc to know how to [access the environment](https://docs.cloudbees.com/docs/cloudbees-codeship/latest/pro-builds-and-configuration/environment-variables) variable during workflow.
+In your CodeShip project go to Settings > Environment Variables. Then, set the `ARGOS_TOKEN` as an environment variable.
 
-## Configure Codeship step file
+<TokenPrivacyWarningMessage />
 
-```yml
+If you are not comfortable with storing secret, read [CodeShip documentation about environment variables](https://docs.cloudbees.com/docs/cloudbees-codeship/latest/pro-builds-and-configuration/environment-variables).
+
+## Configure CodeShip step file
+
+```yml title="codeship-steps.yml"
 - name: ci
   type: parallel
   steps:
@@ -32,4 +35,4 @@ Read the codeship doc to know how to [access the environment](https://docs.cloud
       command: npx @argos-ci/cli upload ./screenshots
 ```
 
-Read the [Codeship repository](https://github.com/argos-ci/argos/tree/main/examples/Codeship) for a complete configuration example.
+Read the [CodeShip repository](https://github.com/argos-ci/argos/tree/main/examples/CodeShip) for a complete configuration example.

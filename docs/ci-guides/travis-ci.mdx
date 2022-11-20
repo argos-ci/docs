@@ -4,25 +4,26 @@ id: travis-ci
 slug: /travis-ci
 ---
 
-import {
-  WhyArgosToken,
-  GetArgosToken,
-  SetArgosToken,
-} from "@site/src/components/ArgosToken";
+import { WhyArgosToken, GetArgosToken } from "@site/src/components/ArgosToken";
 
 # Use Argos with Travis CI
 
 Configure [Travis CI](https://www.travis-ci.com/) to send screenshots to Argos.
 
-## Set up repository token
+## Configuring environment variable
 
 <WhyArgosToken />
 <GetArgosToken />
-<SetArgosToken />
+
+In your Travis repository, go to Settings > Environment Variables. Then, set the `ARGOS_TOKEN` as an environment variable.
+
+<TokenPrivacyWarningMessage />
+
+If you are not comfortable with storing secret, read Gitlab CI documentation about [environment variables](https://docs.travis-ci.com/user/environment-variables/#defining-variables-in-repository-settings).
 
 ## Configure Travis CI
 
-```yml
+```yml title=".travis.yml"
 script:
   # 👉 Insert the steps required to take screenshots
 
