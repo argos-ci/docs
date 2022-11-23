@@ -25,26 +25,31 @@ import travisLogo from "@site/static/img/travis-logo.png";
 
 The official [Argos CLI](/argos-cli) is the simplest and fastest way to send screenshots to Argos. Therefore, your CI should use it after taking screenshots during the end-to-end tests.
 
+## Install
+
+Install [@argos-cli](https://www.npmjs.com/package/@argos-ci/cli) package from npm.
+
+```sh
+npm i --save-dev @argos-cli
+```
+
 ## Configuring environment variable
 
+> **Note:** GitHub Actions CI users can skip this step.
+
 <WhyArgosToken />
-
-> Note: GitHub Actions CI users can skip this step as the repository authentication is automatic.
-
 <GetArgosToken />
 <SetArgosTokenSecret />
 
 ## Upload the screenshots
 
-Add this command to your CI workflow to upload the screenshot to Argos:
+Add the following command to your CI workflow to upload screenshots to Argos:
 
 ```sh
 npx @argos-ci/cli upload ./screenshots
 ```
 
 Sometimes an additional option is required to access the CI environment variable.
-
-> **Optional:** You can add [@argos-ci/cli](https://www.npmjs.com/package/@argos-ci/cli) to your package.json to control the dependency version.
 
 ### CI configuration examples
 
