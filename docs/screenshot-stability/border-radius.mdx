@@ -1,0 +1,20 @@
+---
+title: Borders radius
+id: borders-radius
+slug: /borders-radius
+sidebar_position: 3
+---
+
+# Border radius
+
+A usual use case of flaky screenshots comes from the unstable `border-radius` rendered by browsers.
+
+We recommend adding the `data-test-no-radius` attribute to instable components and injecting the following CSS before taking a screenshot.
+
+```css
+[data-test-no-radius] {
+  border-radius: 0 !important;
+}
+```
+
+Read the [code injection doc](/code-injection#inject-styles-in-a-page) to know how to inject style into the tested page.

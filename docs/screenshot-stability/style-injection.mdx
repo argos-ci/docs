@@ -1,7 +1,7 @@
 ---
 id: style-injection
 slug: /style-injection
-sidebar_position: 3
+sidebar_position: 9
 ---
 
 # Style injection
@@ -33,9 +33,17 @@ In our integrations, we inject the following styles before taking a screenshot.
 }
 ```
 
-This snippets hide unstable elements and provide the following attributes you can added to HTML nodes:
+This snippet provides the following attributes to hide unstable HTML nodes:
 
-- `data-test-hidden` — hide this node from screenshots
-- `data-test-no-radius` — remove the border-radius from screenshots
+- `data-visual-test="transparent"` — hide this HTML node from screenshots
+- `data-visual-test="removed` — remove this HTML node from screenshots
 
-Read the [code injection doc](/code-injection) to know how to inject CSS in a page.
+### Usage
+
+Add the custom attribute to your unstable component:
+
+```html
+<button data-visual-test="transparent">Click here</button>
+```
+
+Then, [inject the style](/code-injection#inject-styles-in-a-page) into the tested page before taking the screenshot.
