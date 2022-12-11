@@ -94,6 +94,13 @@ const config = {
         apiKey: "a772ca710e0e36d90ad9b9eccce92f8f",
         indexName: "argos-ci",
       },
+      scripts: [
+        {
+          src: "https://plausible.io/js/script.js",
+          defer: true,
+          "data-domain": "argos-ci.com",
+        },
+      ],
     }),
 };
 
