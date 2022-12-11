@@ -86,11 +86,11 @@ export const IllustratedCardBody = (props) => (
   />
 );
 
-export const LinkCard = ({ link, image, children }) => {
+export const LinkCard = ({ to, image, children }) => {
   const PickedCardBody = image ? IllustratedCardBody : CardBody;
 
   return (
-    <CardLink to={link}>
+    <CardLink to={to}>
       <Card>
         <PickedCardBody>
           {image ? <CardImage src={image} /> : null}
