@@ -6,10 +6,10 @@
 
 # Argos documentation
 
-Argos documentation available on [docs.argos-ci.com](https://docs.argos-ci.com).
+Argos documentation available on [argos-ci.com/docs](https://argos-ci.com/docs).
 
 ## Highlights
 
-- [Getting Started](https://docs.argos-ci.com/installation)
-- [Introduction](https://docs.argos-ci.com/introduction)
+- [Getting Started](https://argos-ci.com/docs/installation)
+- [Introduction](https://argos-ci.com/docs/introduction)
 - [Join us on Discord](https://discord.gg/WjzGrQGS4A)

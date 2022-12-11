@@ -9,13 +9,13 @@ const config = {
   title: "Argos",
   tagline:
     "Argos is a visual testing solution that fits in your workflow to avoid visual regression. Takes screenshots on each commit and be notified if something changes.",
-  url: "https://docs.argos-ci.com",
-  baseUrl: "/",
+  url: "https://argos-ci.com",
+  baseUrl: process.env.CONTEXT === "production" ? "/docs" : "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.png",
   organizationName: "Argos",
-  projectName: "docs.argos-ci.com",
+  projectName: "docs",
   deploymentBranch: "main",
   trailingSlash: false,
   i18n: { defaultLocale: "en", locales: ["en"] },
@@ -23,7 +23,7 @@ const config = {
     {
       src: "https://plausible.io/js/script.js",
       defer: true,
-      "data-domain": "docs.argos-ci.com",
+      "data-domain": "argos-ci.com",
     },
   ],
   presets: [
