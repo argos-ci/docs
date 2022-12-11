@@ -1,5 +1,6 @@
 import React from "react";
 import ChevronRight from "@site/src/components/ChevronRight";
+import Link from "@docusaurus/Link";
 
 export const CardImage = (props) => (
   <img
@@ -26,7 +27,7 @@ export const CardTitle = (props) => (
 );
 
 export const CardLink = (props) => (
-  <a
+  <Link
     className="cardLink"
     style={{ textDecoration: "none", borderRadius: 8 }}
     {...props}
@@ -89,7 +90,7 @@ export const LinkCard = ({ link, image, children }) => {
   const PickedCardBody = image ? IllustratedCardBody : CardBody;
 
   return (
-    <CardLink href={link}>
+    <CardLink to={link}>
       <Card>
         <PickedCardBody>
           {image ? <CardImage src={image} /> : null}
