@@ -33,6 +33,7 @@ const sidebars = {
       label: "Account & External links",
       items: [
         "account/account",
+        "account/invoiced-customers",
         {
           type: "link",
           label: "Security",

@@ -1,0 +1,79 @@
+---
+title: Invoiced Customers
+slug: /invoiced-customers
+---
+
+import organizationSettings from "@site/static/img/organization-settings.png";
+import stripePricesTable from "@site/static/img/stripe-prices-table.png";
+import manageStripeLink from "@site/static/img/manage-stripe-link.png";
+
+# Invoiced Customers
+
+Purchase Argos plan for GitHub invoiced account.
+
+> "Unfortunately, invoiced customers cannot purchase paid plans on the GitHub Marketplace."<br/> **— GitHub error message**
+
+This message is displayed when an invoiced Github account tries to subscribe to Argos' plan on GitHub Marketplace.
+
+For these customers, we offer an alternative payment method via Stripe.
+
+## Subscribe via Stripe
+
+Go to the organization to upgrade and click on the "Settings" tab.
+
+<details>
+  <summary>
+    Possible causes explain why you can't find the settings tab...
+  </summary>
+  <ul>
+    <li>
+      You are in "Repository Settings" instead of "Organization Settings".
+    </li>
+    <li>
+      You don't have the required authorizations to access this organization's
+      settings. Update your access on GitHub or ask for help from an
+      organization's admin.
+    </li>
+  </ul>
+</details>
+
+Click on the link "Subscribe to plan using Stripe" to display the pricing list.
+
+<img
+  src={organizationSettings}
+  alt="Organization settings"
+  className="rounded"
+  style={{ marginBottom: 20 }}
+/>
+
+Pick a plan to be redirected to the Stripe payment platform. Note that there is a discount applied to yearly plans.
+
+<img
+  src={stripePricesTable}
+  alt="Stripe prices table"
+  className="rounded"
+  style={{ marginBottom: 20 }}
+/>
+
+After payment, you will receive a confirmation e-mail containing the invoice.
+
+## Manage your subscription on Stripe
+
+You can manage your Argos subscription purchased via Stripe on the "Stripe customer portal". You will be able to:
+
+- Upgrade (or downgrade) your plan
+- Update your payment method and billing address
+- Cancel your subscription
+
+To access the platform, go to the organization's settings and click "Manage your subscription on Stripe".
+
+<img
+  src={manageStripeLink}
+  alt="Manage Stripe link"
+  className="rounded"
+  style={{ marginBottom: 20 }}
+/>
+
+---
+
+Please, contact us if you meet any issues on the Stripe subscription tunnel.
