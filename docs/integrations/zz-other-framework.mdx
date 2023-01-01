@@ -4,12 +4,10 @@ id: other-framework
 slug: /other-framework
 ---
 
-# Use Argos with another testing framework
+# Use Argos with Another Testing Framework
 
-Integrating Argos with another testing framework to enable visual testing on your application.
+To integrate Argos with other testing frameworks to enable visual testing for your application, you can use the built-in screenshot command. However, we recommend modifying this command to improve the stability of the rendering.
 
-Most testing frameworks have a command to take screenshots. However, we recommend overloading the native command to improve the screenshots' stability.
+For guidance on which code snippets to inject into tested pages before taking screenshots, refer to the [style injection](/style-injection) and [code injection](/code-injection) documentation.
 
-Read the [style injection](/style-injection) and [code injection](/code-injection) docs to know which snippets you should inject in tested pages before taking screenshots. Your testing framework should provide a command to execute JavaScript functions in the tested pages and wait for their resolution.
-
-Check our [example repositories](https://github.com/argos-ci/argos/tree/main/examples) to see if there is an example for your testing framework. If not, don't hesitate to contribute!
+If you can't find an example for your specific testing framework in our [example repositories](https://github.com/argos-ci/argos/tree/main/examples), don't hesitate to contribute!

@@ -11,20 +11,16 @@ import manageStripeLink from "@site/static/img/manage-stripe-link.png";
 
 Purchase Argos plan for GitHub invoiced account.
 
+If an invoiced GitHub account tries to subscribe to Argos' plan on GitHub Marketplace, the following message will be displayed. However, we offer an alternative payment method through Stripe for these customers.
+
 > "Unfortunately, invoiced customers cannot purchase paid plans on the GitHub Marketplace."<br/> **— GitHub error message**
-
-This message is displayed when an invoiced Github account tries to subscribe to Argos' plan on GitHub Marketplace.
-
-For these customers, we offer an alternative payment method via Stripe.
 
 ## Subscribe via Stripe
 
-Go to the organization to upgrade and click on the "Settings" tab.
+Go to the organization to upgrade and click on the "Settings" tab. Then, click on the "Subscribe to plan using Stripe" link to display pricing list.
 
 <details>
-  <summary>
-    Possible causes explain why you can't find the settings tab...
-  </summary>
+  <summary>Why you can't find the "Settings" tab?</summary>
   <ul>
     <li>
       You are in "Repository Settings" instead of "Organization Settings".
@@ -37,8 +33,6 @@ Go to the organization to upgrade and click on the "Settings" tab.
   </ul>
 </details>
 
-Click on the link "Subscribe to plan using Stripe" to display the pricing list.
-
 <img
   src={organizationSettings}
   alt="Organization settings"
@@ -46,7 +40,7 @@ Click on the link "Subscribe to plan using Stripe" to display the pricing list.
   style={{ marginBottom: 20 }}
 />
 
-Pick a plan to be redirected to the Stripe payment platform. Note that there is a discount applied to yearly plans.
+Choose a plan and you will be redirected to the Stripe payment platform. Please note that there is a discount available for yearly plans.
 
 <img
   src={stripePricesTable}
@@ -55,17 +49,17 @@ Pick a plan to be redirected to the Stripe payment platform. Note that there is 
   style={{ marginBottom: 20 }}
 />
 
-After payment, you will receive a confirmation e-mail containing the invoice.
+Upon completion of payment, you will receive a confirmation email that includes the invoice.
 
 ## Manage your subscription on Stripe
 
-You can manage your Argos subscription purchased via Stripe on the "Stripe customer portal". You will be able to:
+If you purchased your Argos subscription via Stripe, you can manage it on the "Stripe Customer Portal." From there, you will have the ability to:
 
-- Upgrade (or downgrade) your plan
-- Update your payment method and billing address
+- Upgrade or downgrade your plan
+- Change your payment method and billing address
 - Cancel your subscription
 
-To access the platform, go to the organization's settings and click "Manage your subscription on Stripe".
+To access the portal, go to your organization's settings and click "Manage your subscription on Stripe."
 
 <img
   src={manageStripeLink}
@@ -76,4 +70,4 @@ To access the platform, go to the organization's settings and click "Manage your
 
 ---
 
-Please, contact us if you meet any issues on the Stripe subscription tunnel.
+If you encounter any issues with the Stripe subscription tunnel, please do not hesitate to contact us.

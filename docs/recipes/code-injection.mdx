@@ -7,15 +7,13 @@ sidebar_position: 10
 
 # Code injection
 
-It can be convenient to inject Javascript into a page to ensure screenshots' consistency.
+Injecting code into a page can help ensure the consistency of screenshots. For example, if a screenshot is taken while assets are not fully loaded, it can result in a flaky test.
 
-For example, the screenshot could be taken when the assets are not fully loaded and induce a flaky test.
+Here are some functions that we recommend running in the tested pages and waiting for them to resolve before taking a screenshot:
 
-In our integrations, we execute the following functions in the tested pages and wait for their resolution before taking a screenshot.
+## Inject Styles
 
-## Inject styles in a page
-
-Injected style to hide elements and fix unstable rendering.
+Inject styles to hide elements and fix unstable rendering:
 
 ```js
 function injectStyles(document) {
@@ -26,9 +24,9 @@ function injectStyles(document) {
 }
 ```
 
-## Ensure no busy
+## Ensure No Busy State
 
-Check if there is `[aria-busy="true"]` element on the page. It prevent in progress loaders to be displayed.
+Check for the presence of `[aria-busy="true"]` elements on the page, which can indicate that a page is still loading:
 
 ```js
 async function ensureNoBusy() {
@@ -45,9 +43,9 @@ async function ensureNoBusy() {
 }
 ```
 
-## Wait for fonts
+## Wait for Fonts
 
-Wait for all fonts to be loaded.
+Wait for all fonts to be loaded:
 
 ```js
 function waitForFonts() {
@@ -55,9 +53,9 @@ function waitForFonts() {
 }
 ```
 
-## Wait for images
+## Wait for Images
 
-Wait for all images to be loaded.
+Wait for all images to be loaded:
 
 ```js
 async function waitForImages() {

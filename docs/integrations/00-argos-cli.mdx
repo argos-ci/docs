@@ -9,11 +9,13 @@ import { GetArgosToken } from "@site/src/components/ArgosToken";
 
 # Argos Command Line Interface (CLI)
 
-Argos CLI is the simplest and fastest way to send screenshots to the Argos app. You can use it locally, but it is designed to be executed by CI.
+The Argos Command Line Interface (CLI) is a tool that allows you to easily send screenshots to the Argos app. It can be used locally, but it is primarily intended to be run by a continuous integration (CI) system.
 
-`@argos-ci/cli` is available as [npm package](https://www.npmjs.com/package/@argos-ci/cli) and open-sourced on [GitHub](https://github.com/argos-ci/argos-javascript/tree/main/packages/cli).
+`@argos-ci/cli` is available as an [npm package](https://www.npmjs.com/package/@argos-ci/cli) and its source code can be found on [GitHub](https://github.com/argos-ci/argos-javascript/tree/main/packages/cli).
 
 ## Installation
+
+To install `@argos-ci/cli`, run the following command:
 
 ```sh
 npm install --save-dev @argos-ci/cli
@@ -21,55 +23,55 @@ npm install --save-dev @argos-ci/cli
 
 ## Configuration
 
-To use `@argos-ci/cli` you have to configure your repository token in an environment variable.
+In order to use `@argos-ci/cli`, you need to configure your repository token as an environment variable.
 
 <GetArgosToken />
 
-> Note: You can specify the token with the `--token=<your-repository-token>` argument instead of using an environment variable but it is not recommended.
+> Note: Instead of using an environment variable, you can also specify the token with the `--token=<your-repository-token>` argument, but this is not recommended.
 
 ## Usage
 
-### Upload command
+### Upload Command
 
-Use `argos upload` command to upload the screenshots stored in `./screenshots` folder.
+Use the `upload` command to upload screenshots stored in the ./screenshots folder:
 
 ```sh
 npx argos upload ./screenshots
 ```
 
-### Help command
+### Help Command
 
-Use the `argos help` command to get available options:
+To see a list of available options, use the argos help command:
 
 ```sh
 npx argos help upload
 ```
 
-## Advanced usage
+## Advanced Usage
 
-### Run multiple Argos builds on the same commit
+### Running Multiple Argos Builds on the Same Commit
 
-Assign a name to the Argos build with `--build-name` argument to run multiple builds for the same commit.
+To run multiple builds for the same commit, assign a name to the Argos build using the `--build-name` argument.
 
-In this example we create one build for components and another for E2E:
+In this example, we create one build for components and another for E2E:
 
 ```sh
 argos upload --build-name components ./screenshots/components
 argos upload --build-name e2e ./screenshots/e2e
 ```
 
-### Parallel test suites
+### Parallel Test Suites
 
-Parallelism is a common way to speed up test suites by running multiple tests concurrently and then combining results at the end.
+Parallelism is a technique for speeding up test suites by running multiple tests concurrently and then combining the results at the end.
 
-To configure parallel test suites using `@argos-ci/cli`, you have to setup two environment variables:
+To configure parallel test suites using `@argos-ci/cli`, you need to set two environment variables:
 
 - `ARGOS_PARALLEL_NONCE`: a unique build ID for this parallel build. Argos groups uploaded screenshots using this ID.
-- `ARGOS_PARALLEL_TOTAL`: the number of parallel nodes being ran. `argos upload` command must be called exactly up to this number.
+- `ARGOS_PARALLEL_TOTAL`: the total number of parallel nodes being run. argos upload must be called exactly this number of times.
 
-> Note: It is also possible to configure parallel mode using the arguments `--parallel-nonce` and `--parallel-total`.
+> Note: It is also possible to configure parallel mode using the `--parallel-nonce` and `--parallel-total` arguments.
 
-Once configured, upload commands can be ran multiple times and will aggregate screenshots in the same build.
+Once configured, the `argos upload` command can be run multiple times to aggregate screenshots in the same build
 
 ```sh
 ARGOS_PARALLEL_NONCE=<unique-build-id> ARGOS_PARALLEL_TOTAL=<total-batch-count> argos upload --parallel ./screenshots

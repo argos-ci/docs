@@ -10,25 +10,25 @@ import buildExample from "@site/static/img/build-example.png";
 
 # Visual testing
 
-Visual testing is the process of comparing application UI with the results expected by design or with the previous state of the application. Automated visual testing tools, like Argos, allow monitoring of the application's UI on multiple browsers and screen sizes.
+Visual testing is the process of comparing the UI of an application with the results expected by design or with the previous state of the application. Automated visual testing tools like Argos allow for the monitoring of the UI of an application on multiple browsers and screen sizes.
 
-Argos visual testing is based on screenshots comparison changes detection and manual review. With this process, developers can check the visual impacts of their pull requests in a few seconds, even on a large application.
+Argos visual testing is based on screenshot comparison change detection and manual review. With this process, developers can quickly check the visual impacts of their pull requests, even on a large application.
 
-## Visual changes detection
+## Change Detection
 
-Once the [installation](/installation) is done, Argos will receive your application's screenshots when you create a pull request or merge a commit to the repository [reference branch](#reference-branch-definition).
+Once [installation](/installation) is complete, Argos will receive screenshots of your application when you create a pull request or merge a commit to the repository's [reference branch](#reference-branch-definition).
 
-Argos notifies you directly on your GitHub pull-request by adding a status check. If there is no change detected detected, the status is ✅ Pass, you can confidently merge your pull-request.
+Argos will notify you directly on your GitHub pull request by adding a status check. If no changes are detected, the status is ✅ Pass, and you can confidently merge your pull request.
 
-If some changes are detected, the status is ❌ Fail. In this case, you have to review your visual changes.
+If changes are detected, the status is ❌ Fail. In this case, you must review your visual changes.
 
 <img src={githubCommitStatus} alt="GitHub commit status" className="rounded" />
 
 > Click on the **"Details"** link to review the visual changes.
 
-## Review visual changes
+## Reviewing Visual Changes
 
-The visual changes review takes place in the Argos application.
+The visual change review takes place in the Argos application.
 
 #### Argos build example
 
@@ -46,20 +46,20 @@ The side-by-side UI is designed to quickly spot visual changes and verify that s
 
 #### 👎 Reject a build workflow
 
-If you spot a visual bug or if a screenshot doesn't satisfy your expectations, click on the "Review changes" button and select "Reject changes". The build status becomes "Changes rejected", and GitHub is notified of the rejection.
+If you spot a visual bug or if a screenshot doesn't meet your expectations, click on the "Review Changes" button and select "Reject Changes". The build status will become "Changes Rejected" and GitHub will be notified of the rejection.
 
 After rejecting the change, you should commit a new version to fix it.
 
-#### 👍 Approve a build workflow
+#### 👍 Approving a Build
 
-When screenshots match the expected results, click on the "Review changes" button, then select 🟢&nbsp;"Approve changes". The build status becomes 🔴&nbsp;"Changes approved", and GitHub is notified of the approval.
+When screenshots match the expected results, click on the "Review Changes" button and select 🟢&nbsp;"Approve Changes". The build status will become 🔴&nbsp;"Changes Approved" and GitHub will be notified of the approval.
 
 Once the changes are accepted, you can confidently merge your pull request.
 
 ## FAQ
 
 <details>
-  <summary>How to update the screenshot comparison baseline?</summary>
+  <summary>How do I update the screenshot comparison baseline?</summary>
   <p>
     Argos updates the comparison baseline screenshots when a commit is merged
     into the repository's reference branch.
@@ -78,7 +78,7 @@ Once the changes are accepted, you can confidently merge your pull request.
 
 <details>
   <summary>How to update the reference branch?</summary>
-  You can choose another reference branch in Argos repository settings.
+  <p>You can choose another reference branch in Argos repository settings.</p>
 </details>
 
 <details>

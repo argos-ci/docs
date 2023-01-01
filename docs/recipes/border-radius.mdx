@@ -5,11 +5,11 @@ slug: /borders-radius
 sidebar_position: 3
 ---
 
-# Border radius
+# Stabilizing border radius
 
-A usual use case of flaky screenshots comes from the unstable `border-radius` rendered by browsers.
+Sometimes, the `border-radius` property can cause screenshots to appear differently across different browsers or devices.
 
-We recommend adding the `data-test-no-radius` attribute to instable components and injecting the following CSS before taking a screenshot.
+To address this, you can add the `data-test-no-radius` attribute to unstable components and inject the following CSS snippet before taking a screenshot:
 
 ```css
 [data-test-no-radius] {
@@ -17,4 +17,4 @@ We recommend adding the `data-test-no-radius` attribute to instable components a
 }
 ```
 
-Read the [code injection doc](/code-injection#inject-styles-in-a-page) to know how to inject style into the tested page.
+For more information on how to inject styles into a page, see the [Code Injection](/code-injection#inject-styles-in-a-page) documentation.
