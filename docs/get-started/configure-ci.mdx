@@ -23,11 +23,11 @@ import travisLogo from "@site/static/img/travis-logo.png";
 
 # Configure CI
 
-The official [Argos CLI](/argos-cli) is the simplest and fastest way to send screenshots to Argos visual testing platform. Therefore, your CI should use it after taking screenshots during the end-to-end tests.
+The official [Argos CLI](/argos-cli) is the easiest and fastest way to send screenshots to the Argos visual testing platform. Therefore, your CI should use it after taking screenshots during end-to-end tests.
 
 ## Install
 
-Install [@argos-cli](https://www.npmjs.com/package/@argos-ci/cli) package from npm.
+Install the [@argos-cli](https://www.npmjs.com/package/@argos-ci/cli) package from npm:
 
 ```sh
 npm i --save-dev @argos-cli
@@ -49,7 +49,7 @@ Add the following command to your CI workflow to upload screenshots to Argos:
 npx @argos-ci/cli upload ./screenshots
 ```
 
-Sometimes an additional option is required to access the CI environment variable.
+Sometimes, an additional option is required to access the CI environment variable.
 
 ### CI configuration examples
 
@@ -80,7 +80,7 @@ Sometimes an additional option is required to access the CI environment variable
   </LinkCard>
 </Cards>
 
-Your CI is missing? Check our [examples folder](https://github.com/argos-ci/argos/tree/main/examples). Don't hesitate to [contribute](https://github.com/argos-ci/argos/blob/main/CONTRIBUTING.md) by adding an example!
+If your CI is missing, check our [examples folder](https://github.com/argos-ci/argos/tree/main/examples). Don't hesitate to [contribute](https://github.com/argos-ci/argos/blob/main/CONTRIBUTING.md) by adding an example!
 
 ## Enjoy!
 

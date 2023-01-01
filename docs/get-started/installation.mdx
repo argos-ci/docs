@@ -21,13 +21,12 @@ import seleniumLogo from "@site/static/img/selenium-logo.png";
 
 Argos is a visual testing app that compares screenshots and notifies developers in GitHub. Follow these steps to install Argos on your repository.
 
-## Set up the GitHub application​
+## Set up the GitHub Application
 
 Argos GitHub app will allow Argos to read commits, mirror user accesses, and add pull-request statuses to notify about changes.
 
-Subscribe to an Argos plan on [GitHub Marketplace](https://github.com/marketplace/argos-ci).
-
-You can give Argos access to all of your repositories or choose specific ones. However, we recommend selecting only the repositories on which you want to use Argos.
+1. Subscribe to an Argos plan on [GitHub Marketplace](https://github.com/marketplace/argos-ci).
+2. Give Argos access to your desired repositories. It is recommended to only select the repositories that you want to use Argos for.
 
 <img
   src={githubRepoAccess}
@@ -37,34 +36,34 @@ You can give Argos access to all of your repositories or choose specific ones. H
 />
 
 <details>
-  <summary>GitHub permissions details</summary>
+  <summary>GitHub Permissions Details</summary>
   <ul>
     <li>
-      <b>Contents</b> — to find a common commit ancestor between branches
+      <b>Contents</b> — used to find a common commit ancestor between branches
     </li>
     <li>
-      <b>Statuses</b> — to add statuses on commit
+      <b>Statuses</b> — used to add statuses to commits
     </li>
     <li>
-      <b>Pull requests</b> — to add a comments in pull requests
+      <b>Pull requests</b> — used to add comments in pull requests
     </li>
     <li>
-      <b>Actions</b> — to allow tokenless authentication
+      <b>Actions</b> — used to allow tokenless authentication
     </li>
   </ul>
 </details>
 
 ## Capture the screenshots
 
-The first step to visual testing is to capture screenshots. It's up to you to test isolated components, whole pages, or each stage of a checkout tunnel.
+The first step in visual testing is to capture screenshots. You can test isolated components, whole pages, or each stage of a checkout tunnel.
 
 > Tip: It is easier to check page content visually than asserting each text. Moreover, there is no code maintenance when the content is updated.
 
-We recommend leaning on end-to-end testing frameworks to take screenshots. They facilitate navigation through the application and have native commands to take screenshots in various browsers and screen resolutions.
+We recommend using end-to-end testing frameworks to take screenshots. These frameworks facilitate navigation through the application and have native commands to take screenshots in various browsers and screen resolutions.
 
-### Testing framework guides
+### Testing Framework Guides
 
-The following guides that cover our recommended approach to installing Argos in a number of popular testing frameworks.
+Use the following guides to learn about our recommended approach for installing Argos in popular testing frameworks:
 
 <Cards>
   <LinkCard link="/cypress" image={cypressLogo}>

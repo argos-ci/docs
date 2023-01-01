@@ -1,14 +1,15 @@
 ---
+title: Style injection
 id: style-injection
 slug: /style-injection
 sidebar_position: 9
 ---
 
-# Style injection
+# Injecting Styles
 
-Browsers have unstable rendering for well-known use cases like scrollbar display, border-radius, etc. Therefore, it can be convenient to hide these components to ensure the screenshots' consistency.
+Browsers may have unstable rendering for certain elements, such as scrollbars and border-radii. To ensure consistency in screenshots, it can be helpful to hide or remove these elements.
 
-In our integrations, we inject the following styles before taking a screenshot.
+In our integrations, we inject the following styles before taking a screenshot:
 
 ```css
 /* Hide carets */
@@ -33,14 +34,14 @@ In our integrations, we inject the following styles before taking a screenshot.
 }
 ```
 
-This snippet provides the following attributes to hide unstable HTML nodes:
+This snippet provides the following attributes to hide or remove unstable HTML nodes:
 
 - `data-visual-test="transparent"` — hide this HTML node from screenshots
 - `data-visual-test="removed` — remove this HTML node from screenshots
 
-### Usage
+### Using these Styles
 
-Add the custom attribute to your unstable component:
+To use these styles, add the appropriate attribute to your unstable element:
 
 ```html
 <button data-visual-test="transparent">Click here</button>
