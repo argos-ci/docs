@@ -34,6 +34,7 @@ const sidebars = {
       items: [
         "account/account",
         "account/invoiced-customers",
+        "account/self-hosting",
         {
           type: "link",
           label: "Security",
