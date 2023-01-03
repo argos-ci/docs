@@ -11,7 +11,7 @@ import manageStripeLink from "@site/static/img/manage-stripe-link.png";
 
 Purchase Argos plan for GitHub invoiced account.
 
-If an invoiced GitHub account tries to subscribe to Argos' plan on GitHub Marketplace, the following message will be displayed. However, we offer an alternative payment method through Stripe for these customers.
+If an invoiced GitHub account tries to subscribe to Argos' paid plan on GitHub Marketplace, the following message will be displayed. However, we offer an alternative payment method through Stripe for these customers.
 
 > "Unfortunately, invoiced customers cannot purchase paid plans on the GitHub Marketplace."<br/> **— GitHub error message**
 
@@ -31,6 +31,21 @@ Go to the organization to upgrade and click on the "Settings" tab. Then, click o
       organization's admin.
     </li>
   </ul>
+</details>
+<details>
+  <summary>
+    Why you can't find the "Subscribe to plan using Stripe" link?
+  </summary>
+  <p>
+    The "Subscribe to plan using Stripe" link will not be visible if you have
+    already subscribed to a plan on GitHub Marketplace. In order to subscribe
+    via Stripe, you must first{" "}
+    <a href="https://github.com/marketplace/argos-ci">
+      cancel your current plan on GitHub
+    </a>
+    . Please note that canceling your plan will not affect your Argos organization,
+    repositories, or builds.
+  </p>
 </details>
 
 <img
