@@ -16,6 +16,10 @@ const config = {
       name: "argos-ci/argos-cypress",
       target: "docs/integrations/cypress",
     },
+    {
+      name: "argos-ci/argos-playwright",
+      target: "docs/integrations/playwright",
+    },
   ],
 };
 

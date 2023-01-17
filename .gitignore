@@ -8,6 +8,7 @@
 /external/
 /docs/Integrations/puppeteer/
 /docs/Integrations/cypress/
+/docs/Integrations/playwright/
 
 # Generated files
 .docusaurus
