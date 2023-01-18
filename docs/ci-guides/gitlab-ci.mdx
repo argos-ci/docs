@@ -2,30 +2,44 @@
 title: GitLab CI
 id: gitlab-ci
 slug: /gitlab-ci
+sidebar_position: 50
 ---
 
 import {
+  InstallCliCommand,
   WhyArgosToken,
-  GetArgosToken,
-  TokenPrivacyWarningMessage,
+  Enjoy,
 } from "@site/src/components/ArgosToken";
 
 # Use Argos with GitLab CI
 
 Configure [GitLab CI](https://docs.gitlab.com/ee/ci/) to send screenshots to Argos visual testing platform.
 
-## Configuring environment variable
+## 1. Install
+
+<InstallCliCommand />
+
+## 2. Set `ARGOS_TOKEN` as CI secret
 
 <WhyArgosToken />
-<GetArgosToken />
 
-In your GitLab repository, go to Settings > CI/CD > and then expand the Variables section. Then, set the `ARGOS_TOKEN` as an environment variable.
+- **Step 1: Get the token value**<br/>
+  On Argos, go to the repository you want to set and click on the "settings" tab. Store the ARGOS_TOKEN value.
 
-<TokenPrivacyWarningMessage />
+- **Step 2: Create a secret in your CI**<br/>
+  In your GitLab repository, go to **Settings > CI/CD** and then expand the Variables section. Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
 
-If you are not comfortable with storing secret, read Gitlab CI documentation about [adding a CI/CD variable to a project](https://docs.gitlab.com/ee/ci/variables/#add-a-cicd-variable-to-a-project).
+> If you are not comfortable with storing secret, read Gitlab CI documentation about [adding a CI/CD variable to a project](https://docs.gitlab.com/ee/ci/variables/#add-a-cicd-variable-to-a-project).
 
-## Configure GitLab CI
+## 3. Upload the screenshots
+
+Add the following command to your CI workflow to upload screenshots to Argos:
+
+```sh
+npx @argos-ci/cli upload ./screenshots
+```
+
+#### Example
 
 ```yml title=".gitlab-ci.yml"
 script:
@@ -35,4 +49,8 @@ script:
   - npx @argos-ci/cli upload ./screenshots
 ```
 
-We don't have GitLab CI example repository to yet. Don't hesitate to contribute by [adding an example](https://github.com/argos-ci/argos/tree/main/examples)!
+<RepositoryExampleLink />
+
+## Enjoy!
+
+<Enjoy />

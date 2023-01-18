@@ -1,0 +1,55 @@
+---
+title: Capture screenshots
+id: capture-screenshots
+slug: /capture-screenshots
+sidebar_position: 3
+---
+
+import { LinkCard, Cards } from "@site/src/components/Card";
+
+import cypressLogo from "@site/static/img/cypress-logo-2.png";
+import puppeteerLogo from "@site/static/img/puppeteer-logo.png";
+import playwrightLogo from "@site/static/img/playwright-logo.png";
+import testCafeLogo from "@site/static/img/test-cafe-logo.png";
+import capybaraLogo from "@site/static/img/capybara-logo.png";
+import nightwatchLogo from "@site/static/img/nightwatch-logo.png";
+import webdriverLogo from "@site/static/img/webdriver-logo.png";
+import seleniumLogo from "@site/static/img/selenium-logo.png";
+
+# Capture Screenshots for Visual Testing
+
+Capturing screenshots is the first step in visual testing. With Argos, you can test isolated components, entire pages, or specific stages of a checkout process. We recommend using a testing framework to make it easy to navigate your application and capture screenshots.
+
+Here are some guides to help you get started with popular testing frameworks:
+
+<Cards>
+  <LinkCard to="/cypress" image={cypressLogo}>
+    Cypress
+  </LinkCard>
+  <LinkCard to="/playwright" image={playwrightLogo}>
+    Playwright
+  </LinkCard>
+  <LinkCard to="/puppeteer" image={puppeteerLogo}>
+    Puppeteer
+  </LinkCard>
+  <LinkCard to="/capybara" image={capybaraLogo}>
+    Capybara
+  </LinkCard>
+  <LinkCard to="/nightwatch" image={nightwatchLogo}>
+    Nightwatch
+  </LinkCard>
+  <LinkCard to="/selenium" image={seleniumLogo}>
+    Selenium
+  </LinkCard>
+  <LinkCard to="/test-cafe" image={testCafeLogo}>
+    TestCafe
+  </LinkCard>
+  <LinkCard to="/webdriver-io" image={webdriverLogo}>
+    WebdriverIO
+  </LinkCard>
+  <LinkCard to="/other-framework">Other framework...</LinkCard>
+</Cards>
+
+---
+
+Once you have captured your screenshots, it's time to [configure your CI](/configure-ci) to upload them to the Argos visual testing platform.

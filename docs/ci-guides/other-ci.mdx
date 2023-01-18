@@ -1,0 +1,44 @@
+---
+title: Other CI
+id: other-ci
+slug: /other-ci
+sidebar_position: 1000
+---
+
+import {
+  InstallCliCommand,
+  WhyArgosToken,
+  Enjoy,
+} from "@site/src/components/ArgosToken";
+
+# Use Argos with Other CI
+
+Configure your CI to send screenshots to Argos visual testing platform.
+
+## 1. Install
+
+<InstallCliCommand />
+
+## 2. Set `ARGOS_TOKEN` as CI secret
+
+<WhyArgosToken />
+
+- **Step 1: Get the token value**<br/>
+  On Argos, go to the repository you want to set and click on the "settings" tab. Store the ARGOS_TOKEN value.
+
+- **Step 2: Create a secret in your CI**<br/>
+  Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
+
+## 3. Upload the screenshots
+
+Add the following command to your CI workflow to upload screenshots to Argos:
+
+```sh
+npx @argos-ci/cli upload ./screenshots
+```
+
+<RepositoryExampleLink />
+
+## Enjoy!
+
+<Enjoy />

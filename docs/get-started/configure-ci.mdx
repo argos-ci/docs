@@ -2,15 +2,11 @@
 title: Configure CI
 id: configure-ci
 slug: /configure-ci
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 import { LinkCard, Cards } from "@site/src/components/Card";
-import {
-  GetArgosToken,
-  SetArgosTokenSecret,
-  WhyArgosToken,
-} from "@site/src/components/ArgosToken";
+import { WhyArgosToken } from "@site/src/components/ArgosToken";
 import buildkiteLogo from "@site/static/img/buildkite-logo.png";
 import circleCiLogo from "@site/static/img/circle-ci-logo.png";
 import codeshipLogo from "@site/static/img/codeship-logo.png";
@@ -21,37 +17,11 @@ import jenkinsLogo from "@site/static/img/jenkins-logo.png";
 import semaphoreLogo from "@site/static/img/semaphore-logo.png";
 import travisLogo from "@site/static/img/travis-logo.png";
 
-# Configure CI
+# Configure Continuous Integration
 
-The official [Argos CLI](/argos-cli) is the easiest and fastest way to send screenshots to the Argos visual testing platform. Therefore, your CI should use it after taking screenshots during end-to-end tests.
+To get started with Argos, you'll need to configure your Continuous Integration (CI) environment to use the Argos CLI. This is the easiest and fastest way to upload screenshots to the Argos visual testing platform.
 
-## Install
-
-Install the [@argos-cli](https://www.npmjs.com/package/@argos-ci/cli) package from npm:
-
-```sh
-npm i --save-dev @argos-cli
-```
-
-## Configuring environment variable
-
-> **Note:** GitHub Actions CI users can skip this step.
-
-<WhyArgosToken />
-<GetArgosToken />
-<SetArgosTokenSecret />
-
-## Upload the screenshots
-
-Add the following command to your CI workflow to upload screenshots to Argos:
-
-```sh
-npx @argos-ci/cli upload ./screenshots
-```
-
-Sometimes, an additional option is required to access the CI environment variable.
-
-### CI configuration examples
+Guides to use Argos CLI on your CI:
 
 <Cards>
   <LinkCard to="/github-actions" image={githubLogo}>
@@ -78,10 +48,13 @@ Sometimes, an additional option is required to access the CI environment variabl
   <LinkCard to="/semaphore-ci" image={semaphoreLogo}>
     Semaphore
   </LinkCard>
+  <LinkCard to="/semaphore-ci">Other CI...</LinkCard>
 </Cards>
 
-If your CI is missing, check our [examples folder](https://github.com/argos-ci/argos/tree/main/examples). Don't hesitate to [contribute](https://github.com/argos-ci/argos/blob/main/CONTRIBUTING.md) by adding an example!
+Need help setting up Argos in your CI environment? Check out our [examples repository on GitHub](https://github.com/argos-ci/argos/tree/main/examples) sample configurations.
 
-## Enjoy!
+Don't see your preferred CI listed in our examples? We welcome contributions from the community. Head over to our [contributing guide](https://github.com/argos-ci/argos/blob/main/CONTRIBUTING.md) to learn how you can add an example for your CI.
 
-Congratulations, Argos is now installed on your repository. You are ready to start the [visual testing routine](/visual-testing).
+## Get Started with Visual Testing
+
+Congratulations, you have successfully set up Argos in your CI environment. You are now ready to begin your visual testing routine. Head over to our [visual testing](/visual-testing) section to learn more about how to use Argos to detect and fix visual regressions in your web applications.

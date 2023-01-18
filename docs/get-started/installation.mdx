@@ -5,22 +5,12 @@ slug: /installation
 sidebar_position: 2
 ---
 
-import { LinkCard, Cards } from "@site/src/components/Card";
 import githubRepoAccess from "@site/static/img/github-repo-access.png";
-
-import cypressLogo from "@site/static/img/cypress-logo-2.png";
-import puppeteerLogo from "@site/static/img/puppeteer-logo.png";
-import playwrightLogo from "@site/static/img/playwright-logo.png";
-import testCafeLogo from "@site/static/img/test-cafe-logo.png";
-import capybaraLogo from "@site/static/img/capybara-logo.png";
-import nightwatchLogo from "@site/static/img/nightwatch-logo.png";
-import webdriverLogo from "@site/static/img/webdriver-logo.png";
-import seleniumLogo from "@site/static/img/selenium-logo.png";
 import buildExample from "@site/static/img/build-example.png";
 
-# Get started with Argos
+# Getting Started with Argos
 
-Argos is a visual testing app that compares screenshots and notifies developers in GitHub. Follow these steps to install Argos on your repository.
+Argos is a powerful visual testing tool that allows developers to easily compare screenshots and detect visual changes in their web applications. With Argos, developers can be notified of visual changes in real-time, directly within GitHub. Follow these simple steps to install and set up Argos on your repository.
 
 <img
   src={buildExample}
@@ -28,11 +18,11 @@ Argos is a visual testing app that compares screenshots and notifies developers 
   style={{ borderRadius: 8, marginBottom: 10 }}
 />
 
-## Set up the GitHub Application
+## Install the Argos GitHub App
 
-Argos GitHub app will allow Argos to read commits, mirror user accesses, and add pull-request statuses to notify about changes.
+To get started with Argos, you'll first need to install the Argos GitHub App. This will allow Argos to read commits, mirror user access, and add pull-request statuses to notify you of any changes.
 
-1. Subscribe to an Argos plan on [GitHub Marketplace](https://github.com/marketplace/argos-ci).
+1. Go to the [GitHub Marketplace](https://github.com/marketplace/argos-ci) and subscribe to an Argos plan.
 2. Give Argos access to your desired repositories. It is recommended to only select the repositories that you want to use Argos for.
 
 <img
@@ -60,42 +50,6 @@ Argos GitHub app will allow Argos to read commits, mirror user accesses, and add
   </ul>
 </details>
 
-## Capture the screenshots
+---
 
-The first step in visual testing is to capture screenshots. You can test isolated components, whole pages, or each stage of a checkout tunnel.
-
-> Tip: It is easier to check page content visually than asserting each text. Moreover, there is no code maintenance when the content is updated.
-
-We recommend using end-to-end testing frameworks to take screenshots. These frameworks facilitate navigation through the application and have native commands to take screenshots in various browsers and screen resolutions.
-
-### Testing Framework Guides
-
-Use the following guides to learn about our recommended approach for installing Argos in popular testing frameworks:
-
-<Cards>
-  <LinkCard to="/cypress" image={cypressLogo}>
-    Cypress
-  </LinkCard>
-  <LinkCard to="/puppeteer" image={puppeteerLogo}>
-    Puppeteer
-  </LinkCard>
-  <LinkCard to="/playwright" image={playwrightLogo}>
-    Playwright
-  </LinkCard>
-  <LinkCard to="/test-cafe" image={testCafeLogo}>
-    TestCafe
-  </LinkCard>
-  <LinkCard to="/capybara" image={capybaraLogo}>
-    Capybara
-  </LinkCard>
-  <LinkCard to="/nightwatch" image={nightwatchLogo}>
-    Nightwatch
-  </LinkCard>
-  <LinkCard to="/webdriver-io" image={webdriverLogo}>
-    WebdriverIO
-  </LinkCard>
-  <LinkCard to="/selenium" image={seleniumLogo}>
-    Selenium
-  </LinkCard>
-  <LinkCard to="/other-framework">Other framework</LinkCard>
-</Cards>
+Once the Argos GitHub app is successfully installed, the next step is to capture the screenshots for visual comparison. Follow the instructions provided in [capture-screenshots](/capture-screenshots) to set up your screenshots.

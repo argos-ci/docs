@@ -2,30 +2,42 @@
 title: CodeShip
 id: codeship
 slug: /codeship
+sidebar_position: 30
 ---
 
 import {
-  GetArgosToken,
+  InstallCliCommand,
   WhyArgosToken,
-  TokenPrivacyWarningMessage,
+  Enjoy,
 } from "@site/src/components/ArgosToken";
 
 # Use Argos with CodeShip
 
 Configure [CodeShip](https://www.cloudbees.com/products/CodeShip) to send screenshots to Argos visual testing platform.
 
-## Configuring environment variable
+## 1. Install
 
-<WhyArgosToken />
-<GetArgosToken />
+<InstallCliCommand />
 
-In your CodeShip project go to Settings > Environment Variables. Then, set the `ARGOS_TOKEN` as an environment variable.
+## 2. Set `ARGOS_TOKEN` as CI secret
 
-<TokenPrivacyWarningMessage />
+- **Step 1: Get the token value**<br/>
+  On Argos, go to the repository you want to set and click on the "settings" tab. Store the ARGOS_TOKEN value.
 
-If you are not comfortable with storing secret, read [CodeShip documentation about environment variables](https://docs.cloudbees.com/docs/cloudbees-codeship/latest/pro-builds-and-configuration/environment-variables).
+- **Step 2: Create a secret in your CI**<br/>
+  In your CodeShip project go to Settings > Environment Variables. Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
 
-## Configure CodeShip step file
+> If you are not comfortable with storing secret, read [CodeShip documentation about environment variables](https://docs.cloudbees.com/docs/cloudbees-codeship/latest/pro-builds-and-configuration/environment-variables).
+
+## 3. Upload the screenshots
+
+Add the following command to your CI workflow to upload screenshots to Argos:
+
+```sh
+npx @argos-ci/cli upload ./screenshots
+```
+
+#### Example
 
 ```yml title="codeship-steps.yml"
 - name: ci
@@ -35,4 +47,8 @@ If you are not comfortable with storing secret, read [CodeShip documentation abo
       command: npx @argos-ci/cli upload ./screenshots
 ```
 
-Read the [CodeShip repository](https://github.com/argos-ci/argos/tree/main/examples/CodeShip) for a complete configuration example.
+<RepositoryExampleLink />
+
+## Enjoy!
+
+<Enjoy />

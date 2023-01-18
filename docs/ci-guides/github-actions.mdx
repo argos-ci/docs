@@ -2,13 +2,32 @@
 title: GitHub Actions
 id: github-actions
 slug: /github-actions
+sidebar_position: 40
 ---
+
+import {
+  InstallCliCommand,
+  RepositoryExampleLink,
+  Enjoy,
+} from "@site/src/components/ArgosToken";
 
 # Use Argos with GitHub Actions
 
 Configure [GitHub Actions](https://github.com/features/actions) to send screenshots to Argos visual testing platform.
 
-## Configure GitHub Actions
+## 1. Install
+
+<InstallCliCommand />
+
+## 2. Upload the screenshots
+
+Add the following command to your CI workflow to upload screenshots to Argos:
+
+```sh
+npx @argos-ci/cli upload ./screenshots
+```
+
+#### Example
 
 ```yml title=".github/workflows/ci.yml"
 name: CI
@@ -22,6 +41,8 @@ name: CI
         run: npx @argos-ci/cli upload ./screenshots
 ```
 
-Read the [GitHub Actions repository](https://github.com/argos-ci/argos/tree/main/examples/github-actions) for a complete configuration example.
+<RepositoryExampleLink />
 
-> Note: You can also force the usage of `ARGOS_TOKEN` on GitHub Actions CI. Read the [deprecated configuration](https://github.com/argos-ci/argos/blob/e60495b33194697d6e634f1f743b4c32e6441e9e/examples/github-actions/.github/workflows/ci.yml) for a complete example.
+## Enjoy!
+
+<Enjoy />

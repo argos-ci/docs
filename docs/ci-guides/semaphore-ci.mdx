@@ -2,26 +2,44 @@
 title: Semaphore CI
 id: semaphore-ci
 slug: /semaphore-ci
+sidebar_position: 60
 ---
 
-import { GetArgosToken, WhyArgosToken } from "@site/src/components/ArgosToken";
+import {
+  InstallCliCommand,
+  WhyArgosToken,
+  Enjoy,
+} from "@site/src/components/ArgosToken";
 
 # Use Argos with Semaphore CI
 
 Configure [Semaphore CI](https://semaphoreci.com/) to send screenshots to Argos visual testing platform. CI
 
-## Configuring environment variable
+## 1. Install
+
+<InstallCliCommand />
+
+## 2. Set `ARGOS_TOKEN` as CI secret
 
 <WhyArgosToken />
-<GetArgosToken />
 
-In your Semaphore project, go to Settings > Environment Variables. Then, set the `ARGOS_TOKEN` as an environment variable.
+- **Step 1: Get the token value**<br/>
+  On Argos, go to the repository you want to set and click on the "settings" tab. Store the ARGOS_TOKEN value.
 
-<TokenPrivacyWarningMessage />
+- **Step 2: Create a secret in your CI**<br/>
+  In your Semaphore project, go to **Settings > Environment Variables**. Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
 
-If you are not comfortable with storing secret, read Semaphore CI documentation about [environment variables](https://docs.semaphoreci.com/ci-cd-environment/environment-variables/).
+> If you are not comfortable with storing secret, read Semaphore CI documentation about [environment variables](https://docs.semaphoreci.com/ci-cd-environment/environment-variables/).
 
-## Configure Semaphore CI
+## 3. Upload the screenshots
+
+Add the following command to your CI workflow to upload screenshots to Argos:
+
+```sh
+npx @argos-ci/cli upload ./screenshots
+```
+
+#### Example
 
 ```yml title=".semaphore/semaphore.yml"
 blocks:
@@ -33,4 +51,8 @@ blocks:
         - npx @argos-ci/cli upload ./screenshots
 ```
 
-We don't have Buildkite example repository to yet. Don't hesitate to contribute by [adding an example](https://github.com/argos-ci/argos/tree/main/examples)!
+<RepositoryExampleLink />
+
+## Enjoy!
+
+<Enjoy />
