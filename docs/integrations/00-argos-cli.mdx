@@ -5,27 +5,32 @@ slug: /argos-cli
 sidebar_position: 1
 ---
 
-import { GetArgosToken } from "@site/src/components/ArgosToken";
+import {
+  GetArgosToken,
+  InstallCliCommand,
+  WhyArgosToken,
+} from "@site/src/components/ArgosToken";
 
 # Argos Command Line Interface (CLI)
 
-The Argos Command Line Interface (CLI) is a tool that allows you to easily send screenshots to the Argos app. It can be used locally, but it is primarily intended to be run by a continuous integration (CI) system.
+The Argos Command Line Interface (CLI) easiest and fastest way to upload screenshots to the Argos visual testing platform.
+It should be exectuted by your CI.
 
 `@argos-ci/cli` is available as an [npm package](https://www.npmjs.com/package/@argos-ci/cli) and its source code can be found on [GitHub](https://github.com/argos-ci/argos-javascript/tree/main/packages/cli).
 
 ## Installation
 
-To install `@argos-ci/cli`, run the following command:
-
-```sh
-npm install --save-dev @argos-ci/cli
-```
+<InstallCliCommand />
 
 ## Configuration
 
-In order to use `@argos-ci/cli`, you need to configure your repository token as an environment variable.
+<WhyArgosToken />
 
-<GetArgosToken />
+- **Step 1: Get the token value**<br/>
+  On Argos, go to the repository you want to set and click on the "settings" tab. Store the ARGOS_TOKEN value.
+
+- **Step 2: Create a secret in your CI**<br/>
+  Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
 
 > Note: Instead of using an environment variable, you can also specify the token with the `--token=<your-repository-token>` argument, but this is not recommended.
 
@@ -36,7 +41,7 @@ In order to use `@argos-ci/cli`, you need to configure your repository token as 
 Use the `upload` command to upload screenshots stored in the ./screenshots folder:
 
 ```sh
-npx argos upload ./screenshots
+npx @argos-ci/cli upload ./screenshots
 ```
 
 ### Help Command
@@ -44,7 +49,7 @@ npx argos upload ./screenshots
 To see a list of available options, use the argos help command:
 
 ```sh
-npx argos help upload
+npx @argos-ci/cli help upload
 ```
 
 ## Advanced Usage
@@ -56,8 +61,8 @@ To run multiple builds for the same commit, assign a name to the Argos build usi
 In this example, we create one build for components and another for E2E:
 
 ```sh
-argos upload --build-name components ./screenshots/components
-argos upload --build-name e2e ./screenshots/e2e
+npx @argos-ci/cli upload --build-name components ./screenshots/components
+npx @argos-ci/cli upload --build-name e2e ./screenshots/e2e
 ```
 
 ### Parallel Test Suites
@@ -71,7 +76,7 @@ To configure parallel test suites using `@argos-ci/cli`, you need to set two env
 
 > Note: It is also possible to configure parallel mode using the `--parallel-nonce` and `--parallel-total` arguments.
 
-Once configured, the `argos upload` command can be run multiple times to aggregate screenshots in the same build
+Once configured, the `@argos-ci/cli upload` command can be run multiple times to aggregate screenshots in the same build
 
 ```sh
 ARGOS_PARALLEL_NONCE=<unique-build-id> ARGOS_PARALLEL_TOTAL=<total-batch-count> argos upload --parallel ./screenshots

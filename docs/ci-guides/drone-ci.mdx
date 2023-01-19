@@ -2,29 +2,40 @@
 title: Drone CI
 id: drone-ci
 slug: /drone-ci
+sidebar_position: 40
 ---
 
-import {
-  GetArgosToken,
-  WhyArgosToken,
-  SetArgosToken,
-  TokenPrivacyWarningMessage,
-} from "@site/src/components/ArgosToken";
+import { WhyArgosToken } from "@site/src/components/ArgosToken";
 
 # Use Argos with Drone CI
 
 Configure [Drone CI](https://www.drone.io/) to send screenshots to Argos visual testing platform.
 
-## Configuring environment variable
+## 1. Install
+
+<InstallCliCommand />
+
+## 2. Set `ARGOS_TOKEN` as CI secret
 
 <WhyArgosToken />
-<GetArgosToken />
-<SetArgosToken />
-<TokenPrivacyWarningMessage />
+
+- **Step 1: Get the token value**<br/>
+  On Argos, go to the repository you want to set and click on the "settings" tab. Store the ARGOS_TOKEN value.
+
+- **Step 2: Create a secret in your CI**<br/>
+  Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
 
 If you are not comfortable with storing secret, read [Drone CI documentation about repository secret](https://docs.drone.io/secret/repository/).
 
-## Configure Drone CI
+## 3. Upload the screenshots
+
+Add the following command to your CI workflow to upload screenshots to Argos:
+
+```sh
+npx @argos-ci/cli upload ./screenshots
+```
+
+#### Example
 
 ```yml title=".drone.yml"
 kind: pipeline
@@ -40,4 +51,8 @@ steps:
     secrets: [ARGOS_TOKEN]
 ```
 
-We don't have Drone CI example repository to yet. Don't hesitate to contribute by [adding an example](https://github.com/argos-ci/argos/tree/main/examples)!
+<RepositoryExampleLink />
+
+## Enjoy!
+
+<Enjoy />
