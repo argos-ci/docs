@@ -1,7 +1,7 @@
 ---
-title: Capture screenshots
-id: capture-screenshots
-slug: /capture-screenshots
+title: Take screenshots
+id: take-screenshots
+slug: /take-screenshots
 sidebar_position: 3
 ---
 
@@ -16,9 +16,11 @@ import nightwatchLogo from "@site/static/img/nightwatch-logo.png";
 import webdriverLogo from "@site/static/img/webdriver-logo.png";
 import seleniumLogo from "@site/static/img/selenium-logo.png";
 
-# Capture Screenshots for Visual Testing
+# Take screenshots
 
-Capturing screenshots is the first step in visual testing. With Argos, you can test isolated components, entire pages, or specific stages of a checkout process. We recommend using a testing framework to make it easy to navigate your application and capture screenshots.
+Taking screenshots is the first step in visual testing. With Argos, you can test isolated components, entire pages, or specific stages of a checkout process.
+
+Argos compares screenshot, nothing more. It does not snapshot the DOM, compare HTML or take screenshots. Taking screenshots of your application must be done on your CI. We recommend using a testing framework to make it easy to navigate in your application and take screenshots.
 
 Here are some guides to help you get started with popular testing frameworks:
 
@@ -52,4 +54,4 @@ Here are some guides to help you get started with popular testing frameworks:
 
 ---
 
-Once you have captured your screenshots, it's time to [configure your CI](/configure-ci) to upload them to the Argos visual testing platform.
+Once you got screenshots, it's time to [upload screenshots in CI](/upload-screenshots) to upload them to the Argos visual testing platform.

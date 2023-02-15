@@ -1,7 +1,7 @@
 ---
-title: Configure CI
-id: configure-ci
-slug: /configure-ci
+title: Upload screenshots
+id: upload-screenshots
+slug: /upload-screenshots
 sidebar_position: 4
 ---
 
@@ -17,11 +17,13 @@ import jenkinsLogo from "@site/static/img/jenkins-logo.png";
 import semaphoreLogo from "@site/static/img/semaphore-logo.png";
 import travisLogo from "@site/static/img/travis-logo.png";
 
-# Configure Continuous Integration
+# Upload screenshots
 
-To get started with Argos, you'll need to configure your Continuous Integration (CI) environment to use the Argos CLI. This is the easiest and fastest way to upload screenshots to the Argos visual testing platform.
+Once you got screenshots of your applications, you have to upload them on Argos to create a build and compares them.
 
-Guides to use Argos CLI on your CI:
+Uploading screenshots can be done locally by yourself but to work efficiently it has to be done in continuous integration. The [Argos CLI](/argos-cli) is the easiest and fastest way to upload screenshots to the Argos visual testing platform.
+
+Here are some guides to help you upload screenshots with popular CI tools:
 
 <Cards>
   <LinkCard to="/github-actions" image={githubLogo}>
@@ -53,8 +55,8 @@ Guides to use Argos CLI on your CI:
 
 Need help setting up Argos in your CI environment? Check out our [examples repository on GitHub](https://github.com/argos-ci/argos/tree/main/examples) sample configurations.
 
-Don't see your preferred CI listed in our examples? We welcome contributions from the community. Head over to our [contributing guide](https://github.com/argos-ci/argos/blob/main/CONTRIBUTING.md) to learn how you can add an example for your CI.
+Don't see your preferred CI listed in our examples? Feel free to contribute! Head over to our [contributing guide](https://github.com/argos-ci/argos/blob/main/CONTRIBUTING.md) to learn how you can add an example for your CI.
 
-## Get Started with Visual Testing
+---
 
-Congratulations, you have successfully set up Argos in your CI environment. You are now ready to begin your visual testing routine. Head over to our [visual testing](/visual-testing) section to learn more about how to use Argos to detect and fix visual regressions in your web applications.
+Congratulations, you have successfully set up Argos in your CI environment. You are now ready to begin your visual review workflow. Head over to our [review changes](/review-changes) section to learn more about how to use Argos to detect and fix visual regressions in your web applications.

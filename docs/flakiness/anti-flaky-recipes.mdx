@@ -1,30 +1,19 @@
 ---
-title: Code injection
-id: code-injection
-slug: /code-injection
+title: Anti-flaky recipes
+id: anti-flaky-recipes
+slug: /anti-flaky-recipes
 sidebar_position: 10
 ---
 
-# Code injection
+# Anti-flaky recipes
 
-Injecting code into a page can help ensure the consistency of screenshots. For example, if a screenshot is taken while assets are not fully loaded, it can result in a flaky test.
+Here are some recipes that we recommend running in the tested pages and waiting for them to resolve before taking a screenshot.
 
-Here are some functions that we recommend running in the tested pages and waiting for them to resolve before taking a screenshot:
+At Argos we believe that end-to-end testing should rely on accessibility. A bot can be compared to a blind person navigating in the application. That's why in these recipes we rely a lot of accessiblity of your application.
 
-## Inject Styles
+Making your application more accessible will reduce its flakiness.
 
-Inject styles to hide elements and fix unstable rendering:
-
-```js
-function injectStyles(document) {
-  const css = document.createElement("style");
-  css.type = "text/css";
-  css.textContent = cssText;
-  document.body.appendChild(css);
-}
-```
-
-## Ensure No Busy State
+## Wait for all "aria-busy"
 
 Check for the presence of `[aria-busy="true"]` elements on the page, which can indicate that a page is still loading:
 
@@ -43,7 +32,7 @@ async function ensureNoBusy() {
 }
 ```
 
-## Wait for Fonts
+## Wait for fonts
 
 Wait for all fonts to be loaded:
 
@@ -53,7 +42,7 @@ function waitForFonts() {
 }
 ```
 
-## Wait for Images
+## Wait for images
 
 Wait for all images to be loaded:
 

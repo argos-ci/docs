@@ -1,12 +1,12 @@
 ---
-title: Date stabilization
+title: Dates
 slug: /date-stabilization
 sidebar_position: 2
 ---
 
-# Stabilizing Dates
+# Stabilize dates
 
-There are several strategies that can be used to stabilize the display of dates in screenshots:
+Dates are changing by nature, displaying them in UI is often a source of flakiness. Here are some solutions to solve it properly.
 
 ## Freezing the Date
 
@@ -24,7 +24,7 @@ Alternatively, you can use an external library like [MockDate](https://github.co
 
 ## Hiding the Date
 
-If neither of these methods are effective, you can try hiding the node that displays the date from the screenshot using [style injection](/style-injection). This can be done by adding the following CSS to your style injection:
+If neither of these methods are effective, you can try hiding the node that displays the date from the screenshot using [CSS Preflight](/css-preflight). This can be done by adding the following CSS to your style injection:
 
 ```css
 [data-test-date] {
