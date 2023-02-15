@@ -1,24 +1,14 @@
 ---
-title: Visual testing
-id: visual-testing
-slug: /visual-testing
+title: Review changes
+id: review-changes
+slug: /review-changes
 sidebar_position: 5
 ---
 
 import githubCommitStatus from "@site/static/img/github-commit-status.png";
 import buildExample from "@site/static/img/build-example.png";
 
-# Visual testing
-
-Visual testing is the process of comparing the UI of an application with the results expected by design or with the previous state of the application. Automated visual testing tools like Argos allow for the monitoring of the UI of an application on multiple browsers and screen sizes.
-
-With Argos, you can easily detect and fix visual regressions in your web applications. The process is simple:
-
-1. **Capture screenshots**: Use the [Argos CLI](/argos-cli) to capture screenshots of your application in various browsers and screen sizes.
-2. **Compare screenshots**: Argos will automatically compare the captured screenshots with a reference set, and notify you of any visual changes.
-3. **Review changes**: Review the visual changes in the Argos application, and either approve or reject the changes.
-
-## Change Detection
+# Review changes
 
 Once [installation](/installation) is complete, Argos will receive screenshots of your application when you create a pull request or merge a commit to the repository's [reference branch](#reference-branch-definition).
 
@@ -30,9 +20,9 @@ If changes are detected, the status is ❌ Fail. In this case, you must review y
 
 > Click on the **"Details"** link to review the visual changes.
 
-## Reviewing Visual Changes
+## Reviewing visual changes
 
-The visual change review takes place in the Argos application.
+The visual review takes place in the Argos application.
 
 <img
   src={buildExample}
@@ -44,15 +34,15 @@ Navigate through the screenshot diffs by clicking on the sidebar, the navigation
 
 > Tip: Press `?` to show all available keyboard shortcuts.
 
-The side-by-side UI is designed to quickly spot visual changes and verify that screenshots match their expected results.
+The side-by-side UI is designed to quickly spot visual changes and verifies that screenshots match their expected results.
 
-#### 👎 Reject a build workflow
+#### 👎 Reject a build
 
 If you spot a visual bug or if a screenshot doesn't meet your expectations, click on the "Review Changes" button and select "Reject Changes". The build status will become "Changes Rejected" and GitHub will be notified of the rejection.
 
 After rejecting the change, you should commit a new version to fix it.
 
-#### 👍 Approving a Build
+#### 👍 Approve a build
 
 When screenshots match the expected results, click on the "Review Changes" button and select 🟢&nbsp;"Approve Changes". The build status will become 🔴&nbsp;"Changes Approved" and GitHub will be notified of the approval.
 
@@ -64,23 +54,24 @@ Once the changes are accepted, you can confidently merge your pull request.
   <summary>How do I update the screenshot comparison baseline?</summary>
   <p>
     Argos updates the comparison baseline screenshots when a commit is merged
-    into the repository's reference branch.
+    into the repository's reference branch. You have to run Argos on your
+    reference branch.
   </p>
 </details>
 
 <details id="reference-branch-definition">
   <summary>What is a reference branch?</summary>
   <p>
-    The reference branch is used as the baseline for the screenshots
-    comparisons. Argos automatically uses the GitHub default branch as the
-    reference branch. You can choose another reference branch in Argos
+    Each build from a reference branch is used as the baseline for the
+    screenshots comparisons. Argos automatically uses the GitHub default branch
+    as the reference branch. You can set another reference branch in Argos
     repository settings.
   </p>
 </details>
 
 <details>
-  <summary>How to update the reference branch?</summary>
-  <p>You can choose another reference branch in Argos repository settings.</p>
+  <summary>How to change the reference branch?</summary>
+  <p>You can set another reference branch in Argos repository settings.</p>
 </details>
 
 <details>
@@ -95,8 +86,9 @@ Once the changes are accepted, you can confidently merge your pull request.
 <details>
   <summary>What is a reference build?</summary>
   <p>
-    A reference build is created when a commit is merged on the reference
-    branch. Its screenshots will be used as the baseline for following
-    comparisons performed on other branches.
+    A reference build is a build created from a CI running on a commit pushed on
+    your reference branch. Reference build are used as baseline for branches
+    created from this commit. Argos automatically choose the best reference
+    build by analyzing commits history.
   </p>
 </details>

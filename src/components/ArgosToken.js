@@ -33,7 +33,7 @@ export const RepositoryExampleLink = () => (
 export const Enjoy = () => (
   <p>
     Congratulations, now that Argos is installed, your app screenshots will be
-    uploaded to Argos by your CI. You are ready to start the{" "}
-    <a href="/visual-testing">visual testing</a> routine!
+    uploaded to Argos by your CI. You are ready to{" "}
+    <a href="/review-changes">review changes</a>!
   </p>
 );

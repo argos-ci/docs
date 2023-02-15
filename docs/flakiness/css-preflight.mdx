@@ -1,15 +1,15 @@
 ---
-title: Style injection
-id: style-injection
-slug: /style-injection
+title: CSS Preflight
+id: css-preflight
+slug: /css-preflight
 sidebar_position: 9
 ---
 
-# Injecting Styles
+# CSS Preflight
 
-Browsers may have unstable rendering for certain elements, such as scrollbars and border-radii. To ensure consistency in screenshots, it can be helpful to hide or remove these elements.
+Browsers may have unstable rendering for certain elements, such as scrollbars and border-radii. To ensure consistency in screenshots, Argos provides a set of rule to stabilize it.
 
-In our integrations, we inject the following styles before taking a screenshot:
+This is the CSS preflight injected by our integrations before taking a screenshot:
 
 ```css
 /* Hide carets */
@@ -39,7 +39,7 @@ This snippet provides the following attributes to hide or remove unstable HTML n
 - `data-visual-test="transparent"` — hide this HTML node from screenshots
 - `data-visual-test="removed` — remove this HTML node from screenshots
 
-### Using these Styles
+### Using these styles
 
 To use these styles, add the appropriate attribute to your unstable element:
 
@@ -47,4 +47,13 @@ To use these styles, add the appropriate attribute to your unstable element:
 <button data-visual-test="transparent">Click here</button>
 ```
 
-Then, [inject the style](/code-injection#inject-styles-in-a-page) into the tested page before taking the screenshot.
+Here is an example of function to inject styles in the page:
+
+```js
+function injectStyles(document) {
+  const css = document.createElement("style");
+  css.type = "text/css";
+  css.textContent = cssText;
+  document.body.appendChild(css);
+}
+```
