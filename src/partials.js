@@ -24,6 +24,17 @@ export const WhyArgosToken = () => (
   </p>
 );
 
+export const ArgosTokenStep1 = () => {
+  return (
+    <>
+      <strong>Step 1: Get the token value</strong>
+      <br />
+      On Argos, go to the repository you want to set and click on the "settings"
+      tab. Store the ARGOS_TOKEN value.
+    </>
+  );
+};
+
 export const RepositoryExampleLink = () => (
   <p>
     For a repository examples, check out our{" "}

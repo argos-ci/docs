@@ -5,8 +5,9 @@ slug: /circle-ci
 sidebar_position: 20
 ---
 
-import { InstallCliCommand, WhyArgosToken, Enjoy } from "@site/src/partials";
+import { InstallCliCommand, Enjoy } from "@site/src/partials";
 import circleCiEnvVariable from "@site/static/img/circle-ci-env-variable.png";
+import TokenStep from "./_token-step.mdx";
 
 # Use Argos with CircleCI
 
@@ -18,13 +19,11 @@ Configure [CircleCI](https://circleci.com/) to send screenshots to Argos visual 
 
 ## 2. Set `ARGOS_TOKEN` as CI secret
 
-<WhyArgosToken />
+<TokenStep />
 
-- **Step 1: Get the token value**<br/>
-  On Argos, go to the repository you want to set and click on the "settings" tab. Store the ARGOS_TOKEN value.
+### Expose `ARGOS_TOKEN` as environment variable
 
-- **Step 2: Create a secret in your CI**<br/>
-  In CircleCI go to **Project settings -> Environment Variables -> Add Environment Variable**. Set the `ARGOS_TOKEN` as an environment variable and past the value you stored in the previous step.
+In CircleCI go to **Project settings -> Environment Variables -> Add Environment Variable**. Set `ARGOS_TOKEN` as name, and your token as value.
 
 <img
   src={circleCiEnvVariable}

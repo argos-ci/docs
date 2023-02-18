@@ -5,7 +5,8 @@ slug: /travis-ci
 sidebar_position: 70
 ---
 
-import { InstallCliCommand, WhyArgosToken, Enjoy } from "@site/src/partials";
+import { InstallCliCommand, Enjoy } from "@site/src/partials";
+import TokenStep from "./_token-step.mdx";
 
 # Use Argos with Travis CI
 
@@ -17,13 +18,11 @@ Configure [Travis CI](https://www.travis-ci.com/) to send screenshots to Argos v
 
 ## 2. Set `ARGOS_TOKEN` as CI secret
 
-<WhyArgosToken />
+<TokenStep />
 
-- **Step 1: Get the token value**<br/>
-  On Argos, go to the repository you want to set and click on the "settings" tab. Store the ARGOS_TOKEN value.
+### Expose `ARGOS_TOKEN` as environment variable
 
-- **Step 2: Create a secret in your CI**<br/>
-  In your Travis repository, go to **Settings > Environment Variables**. Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
+In your Travis repository, go to **Settings -> Environment Variables**. Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
 
 > If you are not comfortable with storing secret, read Gitlab CI documentation about [environment variables](https://docs.travis-ci.com/user/environment-variables/#defining-variables-in-repository-settings).
 

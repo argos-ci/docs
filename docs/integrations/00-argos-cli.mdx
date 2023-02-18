@@ -5,11 +5,8 @@ slug: /argos-cli
 sidebar_position: 1
 ---
 
-import {
-  GetArgosToken,
-  InstallCliCommand,
-  WhyArgosToken,
-} from "@site/src/partials";
+import { InstallCliCommand } from "@site/src/partials";
+import TokenStep from "../ci-guides/_token-step.mdx";
 
 # Argos Command Line Interface (CLI)
 
@@ -24,13 +21,11 @@ It should be exectuted by your CI.
 
 ## Configuration
 
-<WhyArgosToken />
+<TokenStep />
 
-- **Step 1: Get the token value**<br/>
-  On Argos, go to the repository you want to set and click on the "settings" tab. Store the ARGOS_TOKEN value.
+### Expose `ARGOS_TOKEN` as environment variable
 
-- **Step 2: Create a secret in your CI**<br/>
-  Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
+Argos CLI automatically detects `ARGOS_TOKEN` environment variable. In order to work you have to expose it as environment variable.
 
 > Note: Instead of using an environment variable, you can also specify the token with the `--token=<your-repository-token>` argument, but this is not recommended.
 

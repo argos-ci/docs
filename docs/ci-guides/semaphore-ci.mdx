@@ -5,7 +5,8 @@ slug: /semaphore-ci
 sidebar_position: 60
 ---
 
-import { InstallCliCommand, WhyArgosToken, Enjoy } from "@site/src/partials";
+import { InstallCliCommand, Enjoy } from "@site/src/partials";
+import TokenStep from "./_token-step.mdx";
 
 # Use Argos with Semaphore CI
 
@@ -17,13 +18,11 @@ Configure [Semaphore CI](https://semaphoreci.com/) to send screenshots to Argos 
 
 ## 2. Set `ARGOS_TOKEN` as CI secret
 
-<WhyArgosToken />
+<TokenStep />
 
-- **Step 1: Get the token value**<br/>
-  On Argos, go to the repository you want to set and click on the "settings" tab. Store the ARGOS_TOKEN value.
+### Expose `ARGOS_TOKEN` as environment variable
 
-- **Step 2: Create a secret in your CI**<br/>
-  In your Semaphore project, go to **Settings > Environment Variables**. Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
+In your Semaphore project, go to **Settings -> Environment Variables**. Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
 
 > If you are not comfortable with storing secret, read Semaphore CI documentation about [environment variables](https://docs.semaphoreci.com/ci-cd-environment/environment-variables/).
 

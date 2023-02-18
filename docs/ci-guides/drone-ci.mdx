@@ -5,7 +5,7 @@ slug: /drone-ci
 sidebar_position: 40
 ---
 
-import { WhyArgosToken } from "@site/src/partials";
+import TokenStep from "./_token-step.mdx";
 
 # Use Argos with Drone CI
 
@@ -17,15 +17,13 @@ Configure [Drone CI](https://www.drone.io/) to send screenshots to Argos visual 
 
 ## 2. Set `ARGOS_TOKEN` as CI secret
 
-<WhyArgosToken />
+<TokenStep />
 
-- **Step 1: Get the token value**<br/>
-  On Argos, go to the repository you want to set and click on the "settings" tab. Store the ARGOS_TOKEN value.
+### Expose `ARGOS_TOKEN` as environment variable
 
-- **Step 2: Create a secret in your CI**<br/>
-  Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
+Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
 
-If you are not comfortable with storing secret, read [Drone CI documentation about repository secret](https://docs.drone.io/secret/repository/).
+> If you are not comfortable with storing secret, read [Drone CI documentation about repository secret](https://docs.drone.io/secret/repository/).
 
 ## 3. Upload the screenshots
 
