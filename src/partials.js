@@ -1,16 +1,20 @@
 import * as React from "react";
-import Code from "@theme/MDXComponents/Code";
 import BlocCode from "@theme/CodeBlock";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 export const InstallCliCommand = () => (
-  <>
-    <p>
-      Install the{" "}
-      <a href="https://www.npmjs.com/package/@argos-ci/cli">@argos-cli</a>{" "}
-      package from npm:
-    </p>{" "}
-    <BlocCode>npm i --save-dev @argos-cli</BlocCode>
-  </>
+  <Tabs>
+    <TabItem value="npm" label="npm" default>
+      <BlocCode>npm i --save-dev @argos-ci/cli</BlocCode>
+    </TabItem>
+    <TabItem value="yarn" label="yarn">
+      <BlocCode>yarn add --dev @argos-ci/cli</BlocCode>
+    </TabItem>
+    <TabItem value="pnpm" label="pnpm">
+      <BlocCode>pnpm add --save-dev @argos-ci/cli</BlocCode>
+    </TabItem>
+  </Tabs>
 );
 
 export const WhyArgosToken = () => (
