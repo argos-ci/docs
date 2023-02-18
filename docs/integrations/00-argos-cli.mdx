@@ -5,8 +5,7 @@ slug: /argos-cli
 sidebar_position: 1
 ---
 
-import { InstallCliCommand } from "@site/src/partials";
-import TokenStep from "../ci-guides/_token-step.mdx";
+import { InstallDevDep, RunPkgCommand } from "@site/src/partials";
 
 # Argos Command Line Interface (CLI)
 
@@ -17,15 +16,14 @@ It should be exectuted by your CI.
 
 ## Installation
 
-<InstallCliCommand />
+<InstallDevDep dependency="@argos-ci/cli" />
 
 ## Configuration
 
-<TokenStep />
+1. Log in to [Argos](https://app.argos-ci.com), navigate to your repository settings and copy your `ARGOS_TOKEN`.
+2. Expose an environment variable called `ARGOS_TOKEN` with the value you copied in the previous step.
 
-### Expose `ARGOS_TOKEN` as environment variable
-
-Argos CLI automatically detects `ARGOS_TOKEN` environment variable. In order to work you have to expose it as environment variable.
+Depending the CI you use, you may have to set `ARGOS_TOKEN` as a secret in the settings.
 
 > Note: Instead of using an environment variable, you can also specify the token with the `--token=<your-repository-token>` argument, but this is not recommended.
 
@@ -35,17 +33,13 @@ Argos CLI automatically detects `ARGOS_TOKEN` environment variable. In order to 
 
 Use the `upload` command to upload screenshots stored in the ./screenshots folder:
 
-```sh
-npx @argos-ci/cli upload ./screenshots
-```
+<RunPkgCommand command="@argos-ci/cli upload ./screenshots" />
 
 ### Help Command
 
 To see a list of available options, use the argos help command:
 
-```sh
-npx @argos-ci/cli help upload
-```
+<RunPkgCommand command="@argos-ci/cli help upload" />
 
 ## Advanced Usage
 
@@ -55,10 +49,12 @@ To run multiple builds for the same commit, assign a name to the Argos build usi
 
 In this example, we create one build for components and another for E2E:
 
-```sh
-npx @argos-ci/cli upload --build-name components ./screenshots/components
-npx @argos-ci/cli upload --build-name e2e ./screenshots/e2e
-```
+<RunPkgCommand
+  command={[
+    "@argos-ci/cli upload --build-name components ./screenshots/components",
+    "@argos-ci/cli upload --build-name e2e ./screenshots/e2e",
+  ]}
+/>
 
 ### Parallel Test Suites
 
@@ -74,5 +70,8 @@ To configure parallel test suites using `@argos-ci/cli`, you need to set two env
 Once configured, the `@argos-ci/cli upload` command can be run multiple times to aggregate screenshots in the same build
 
 ```sh
-ARGOS_PARALLEL_NONCE=<unique-build-id> ARGOS_PARALLEL_TOTAL=<total-batch-count> argos upload --parallel ./screenshots
+export ARGOS_PARALLEL_NONCE=<unique-build-id>
+export ARGOS_PARALLEL_TOTAL=<total-batch-count>
 ```
+
+<RunPkgCommand command="npx @argos-ci/cli upload --parallel ./screenshots" />

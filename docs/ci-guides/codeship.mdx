@@ -5,34 +5,29 @@ slug: /codeship
 sidebar_position: 30
 ---
 
-import { InstallCliCommand, Enjoy } from "@site/src/partials";
-import TokenStep from "./_token-step.mdx";
+import { InstallDevDep, RunPkgCommand, Enjoy } from "@site/src/partials";
 
 # Use Argos with CodeShip
 
 Configure [CodeShip](https://www.cloudbees.com/products/CodeShip) to send screenshots to Argos visual testing platform.
 
-## 1. Install `@argos-ci/cli`
+## 1. Install Argos CLI
 
-<InstallCliCommand />
+<InstallDevDep dependency="@argos-ci/cli" />
 
-## 2. Set `ARGOS_TOKEN` as CI secret
+## 2. Expose `ARGOS_TOKEN` as environment variable
 
-<TokenStep />
+1. Log in to [Argos](https://app.argos-ci.com), navigate to your repository settings and copy your `ARGOS_TOKEN`.
+2. In your CodeShip project go to **Settings -> Environment Variables**.
+3. Add a new environment variable called `ARGOS_TOKEN` and paste the value you copied in the previous step.
 
-### Expose `ARGOS_TOKEN` as environment variable
-
-In your CodeShip project go to **Settings -> Environment Variables**. Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
-
-> If you are not comfortable with storing secret, read [CodeShip documentation about environment variables](https://docs.cloudbees.com/docs/cloudbees-codeship/latest/pro-builds-and-configuration/environment-variables).
+If you are not comfortable with exposing environment variables, read [CodeShip documentation](https://docs.cloudbees.com/docs/cloudbees-codeship/latest/pro-builds-and-configuration/environment-variables).
 
 ## 3. Upload the screenshots
 
 Add the following command to your CI workflow to upload screenshots to Argos:
 
-```sh
-npx @argos-ci/cli upload ./screenshots
-```
+<RunPkgCommand command="@argos-ci/cli upload ./screenshots" />
 
 #### Example
 

@@ -5,32 +5,28 @@ slug: /other-ci
 sidebar_position: 1000
 ---
 
-import { InstallCliCommand, Enjoy } from "@site/src/partials";
-import TokenStep from "./_token-step.mdx";
+import { InstallDevDep, Enjoy, RunPkgCommand } from "@site/src/partials";
 
 # Use Argos with Other CI
 
 Configure your CI to send screenshots to Argos visual testing platform.
 
-## 1. Install `@argos-ci/cli`
+## 1. Install Argos CLI
 
-<InstallCliCommand />
+<InstallDevDep dependency="@argos-ci/cli" />
 
-## 2. Set `ARGOS_TOKEN` as CI secret
+## 2. Expose `ARGOS_TOKEN` as environment variable
 
-<TokenStep />
+1. Log in to [Argos](https://app.argos-ci.com), navigate to your repository settings and copy your `ARGOS_TOKEN`.
+2. Expose an environment variable called `ARGOS_TOKEN` with the value you copied in the previous step.
 
-### Expose `ARGOS_TOKEN` as environment variable
-
-Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
+Depending the CI you use, you may have to set `ARGOS_TOKEN` as a secret in the settings.
 
 ## 3. Upload the screenshots
 
 Add the following command to your CI workflow to upload screenshots to Argos:
 
-```sh
-npx @argos-ci/cli upload ./screenshots
-```
+<RunPkgCommand command="@argos-ci/cli upload ./screenshots" />
 
 <RepositoryExampleLink />
 

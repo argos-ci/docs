@@ -3,35 +3,42 @@ import BlocCode from "@theme/CodeBlock";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-export const InstallCliCommand = () => (
-  <Tabs>
-    <TabItem value="npm" label="npm" default>
-      <BlocCode>npm i --save-dev @argos-ci/cli</BlocCode>
-    </TabItem>
-    <TabItem value="yarn" label="yarn">
-      <BlocCode>yarn add --dev @argos-ci/cli</BlocCode>
-    </TabItem>
-    <TabItem value="pnpm" label="pnpm">
-      <BlocCode>pnpm add --save-dev @argos-ci/cli</BlocCode>
-    </TabItem>
-  </Tabs>
-);
-
-export const WhyArgosToken = () => (
-  <p>
-    Argos uses a token called <code>ARGOS_TOKEN</code> to identify to which
-    repository the screenshots you send are related to.
-  </p>
-);
-
-export const ArgosTokenStep1 = () => {
+export const InstallDevDep = ({ dependency }) => {
   return (
-    <>
-      <strong>Step 1: Get the token value</strong>
-      <br />
-      On Argos, go to the repository you want to set and click on the "settings"
-      tab. Store the ARGOS_TOKEN value.
-    </>
+    <Tabs groupId="package-managers">
+      <TabItem value="npm" label="npm" default>
+        <BlocCode>npm i --save-dev {dependency}</BlocCode>
+      </TabItem>
+      <TabItem value="yarn" label="yarn">
+        <BlocCode>yarn add --dev {dependency}</BlocCode>
+      </TabItem>
+      <TabItem value="pnpm" label="pnpm">
+        <BlocCode>pnpm add --save-dev {dependency}</BlocCode>
+      </TabItem>
+    </Tabs>
+  );
+};
+
+export const RunPkgCommand = ({ command }) => {
+  const commands = Array.isArray(command) ? command : [command];
+  return (
+    <Tabs groupId="package-managers">
+      <TabItem value="npm" label="npm" default>
+        <BlocCode>
+          {commands.map((command) => `npx ${command}`).join("\n")}
+        </BlocCode>
+      </TabItem>
+      <TabItem value="yarn" label="yarn">
+        <BlocCode>
+          {commands.map((command) => `yarn run ${command}`).join("\n")}
+        </BlocCode>
+      </TabItem>
+      <TabItem value="pnpm" label="pnpm">
+        <BlocCode>
+          {commands.map((command) => `pnpm exec ${command}`).join("\n")}
+        </BlocCode>
+      </TabItem>
+    </Tabs>
   );
 };
 
@@ -47,8 +54,9 @@ export const RepositoryExampleLink = () => (
 
 export const Enjoy = () => (
   <p>
-    Congratulations, now that Argos is installed, your app screenshots will be
-    uploaded to Argos by your CI. You are ready to{" "}
-    <a href="/review-changes">review changes</a>!
+    Congratulations, Argos is now installed! 🎉
+    <br />
+    Learn how to <a href="/review-changes">review changes</a> in your
+    pull-requests.
   </p>
 );

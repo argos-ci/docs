@@ -6,7 +6,8 @@ sidebar_position: 40
 ---
 
 import {
-  InstallCliCommand,
+  InstallDevDep,
+  RunPkgCommand,
   RepositoryExampleLink,
   Enjoy,
 } from "@site/src/partials";
@@ -15,17 +16,15 @@ import {
 
 Configure [GitHub Actions](https://github.com/features/actions) to send screenshots to Argos visual testing platform.
 
-## 1. Install `@argos-ci/cli`
+## 1. Install Argos CLI
 
-<InstallCliCommand />
+<InstallDevDep dependency="@argos-ci/cli" />
 
 ## 2. Upload the screenshots
 
 Add the following command to your CI workflow to upload screenshots to Argos:
 
-```sh
-npx @argos-ci/cli upload ./screenshots
-```
+<RunPkgCommand command="@argos-ci/cli upload ./screenshots" />
 
 #### Example
 
