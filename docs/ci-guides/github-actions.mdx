@@ -30,14 +30,37 @@ npx @argos-ci/cli upload ./screenshots
 #### Example
 
 ```yml title=".github/workflows/ci.yml"
-name: CI
-  build:
-    runs-on: ubuntu-latest
-      - uses: actions/checkout@v3
+name: Argos
 
+on:
+  push:
+    # Argos has to run on your reference branch to creates reference builds
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  argos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: current
+
+      - name: Install dependencies
+        run: npm ci
+
+      # -----
       # 👉 Insert the steps required to take screenshots
+      # -----
 
       - name: Upload screenshots to argos-ci.com
+        continue-on-error: true
         run: npx @argos-ci/cli upload ./screenshots
 ```
 
