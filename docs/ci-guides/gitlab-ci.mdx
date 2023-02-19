@@ -5,39 +5,30 @@ slug: /gitlab-ci
 sidebar_position: 50
 ---
 
-import {
-  InstallCliCommand,
-  WhyArgosToken,
-  Enjoy,
-} from "@site/src/components/ArgosToken";
+import { InstallDevDep, RunPkgCommand, Enjoy } from "@site/src/partials";
 
 # Use Argos with GitLab CI
 
 Configure [GitLab CI](https://docs.gitlab.com/ee/ci/) to send screenshots to Argos visual testing platform.
 
-## 1. Install
+## 1. Install Argos CLI
 
-<InstallCliCommand />
+<InstallDevDep dependency="@argos-ci/cli" />
 
-## 2. Set `ARGOS_TOKEN` as CI secret
+## 2. Expose `ARGOS_TOKEN` as environment variable
 
-<WhyArgosToken />
+1. Log in to [Argos](https://app.argos-ci.com), navigate to your repository settings and copy your `ARGOS_TOKEN`.
+2. In your GitLab repository, go to **Settings -> CI/CD**.
+3. Expand the **Variables** section.
+4. Add a new environment variable called `ARGOS_TOKEN` and paste the value you copied in the previous step.
 
-- **Step 1: Get the token value**<br/>
-  On Argos, go to the repository you want to set and click on the "settings" tab. Store the ARGOS_TOKEN value.
-
-- **Step 2: Create a secret in your CI**<br/>
-  In your GitLab repository, go to **Settings > CI/CD** and then expand the Variables section. Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
-
-> If you are not comfortable with storing secret, read Gitlab CI documentation about [adding a CI/CD variable to a project](https://docs.gitlab.com/ee/ci/variables/#add-a-cicd-variable-to-a-project).
+If you are not comfortable with exposing environment variables, read [Gitlab CI documentation](https://docs.gitlab.com/ee/ci/variables/#add-a-cicd-variable-to-a-project).
 
 ## 3. Upload the screenshots
 
 Add the following command to your CI workflow to upload screenshots to Argos:
 
-```sh
-npx @argos-ci/cli upload ./screenshots
-```
+<RunPkgCommand command="@argos-ci/cli upload ./screenshots" />
 
 #### Example
 

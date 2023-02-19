@@ -6,39 +6,33 @@ sidebar_position: 10
 ---
 
 import {
-  InstallCliCommand,
-  WhyArgosToken,
+  InstallDevDep,
+  RunPkgCommand,
   RepositoryExampleLink,
   Enjoy,
-} from "@site/src/components/ArgosToken";
+} from "@site/src/partials";
 
 # Use Argos with Buildkite
 
 Configure [Buildkite](https://buildkite.com/) to send screenshots to Argos visual testing platform.
 
-## 1. Install
+## 1. Install Argos CLI
 
-<InstallCliCommand />
+<InstallDevDep dependency="@argos-ci/cli" />
 
-## 2. Set `ARGOS_TOKEN` as CI secret
+## 2. Expose `ARGOS_TOKEN` as environment variable
 
-<WhyArgosToken />
+1. Log in to [Argos](https://app.argos-ci.com), navigate to your repository settings and copy your `ARGOS_TOKEN`.
+2. In your Buildkite pipeline, go to **Settings -> Steps -> Environment Variables**.
+3. Add a new environment variable called `ARGOS_TOKEN` and paste the value you copied in the previous step.
 
-- **Step 1: Get the token value**<br/>
-  On Argos, go to the repository you want to set and click on the "settings" tab. Store the ARGOS_TOKEN value.
-
-- **Step 2: Create a secret in your CI**<br/>
-  In your Buildkite pipeline, go to **Settings -> Steps -> Environment Variables**. Set the `ARGOS_TOKEN` as an environment variable and paste the value you stored in the previous step.
-
-> If you are not comfortable with storing secrets, read the [Buildkite documentation](https://buildkite.com/docs/pipelines/secrets#using-a-secrets-storage-service).
+If you are not comfortable with exposing environment variables, read the [Buildkite documentation](https://buildkite.com/docs/pipelines/secrets#using-a-secrets-storage-service).
 
 ## 3. Upload the screenshots
 
 Add the following command to your CI workflow to upload screenshots to Argos:
 
-```sh
-npx @argos-ci/cli upload ./screenshots
-```
+<RunPkgCommand command="@argos-ci/cli upload ./screenshots" />
 
 #### Example
 
