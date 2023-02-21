@@ -5,90 +5,67 @@ slug: /review-changes
 sidebar_position: 5
 ---
 
-import githubCommitStatus from "@site/static/img/github-commit-status.png";
+import { Tag } from "@site/src/components/Tag";
+
 import buildExample from "@site/static/img/build-example.png";
+import githubWaitingCheckStatus from "@site/static/img/github-waiting-check-status.png";
+import githubPassingCheckStatus from "@site/static/img/github-passing-check-status.png";
 
 # Review changes
 
-Once [installation](/installation) is complete, Argos will receive screenshots of your application when you create a pull request or merge a commit to the repository's [reference branch](#reference-branch-definition).
+Once the installation is complete, Argos will receive screenshots when you create a pull request or update the [reference branch](/faq#what-is-a-reference-branch). On GitHub, pull requests will now have a new check status indicating if visual changes are detected.
 
-Argos will notify you directly on your GitHub pull request by adding a status check. If no changes are detected, the status is ✅ Pass, and you can confidently merge your pull request.
+## No changes detected
 
-If changes are detected, the status is ❌ Fail. In this case, you must review your visual changes.
+If no changes are detected, the status is <Tag>✅ Pass</Tag>, and you can confidently merge your pull request.
 
-<img src={githubCommitStatus} alt="GitHub commit status" className="rounded" />
+<img
+  src={githubPassingCheckStatus}
+  alt="GitHub passing check status"
+  className="rounded"
+  style={{ marginBottom: 10 }}
+/>
 
-> Click on the **"Details"** link to review the visual changes.
+## Changes detected
+
+If changes are detected, the GitHub check status is <Tag>🟠 Pending</Tag> and is waiting for your review. Click on <Tag>Details</Tag> link to [review the changes](#reviewing-visual-changes).
+
+<img
+  src={githubWaitingCheckStatus}
+  alt="GitHub waiting check status"
+  className="rounded"
+  style={{ marginBottom: 10 }}
+/>
 
 ## Reviewing visual changes
 
-The visual review takes place in the Argos application.
+Click on <Tag>Details</Tag> link will redirect you to an Argos' build page.
 
 <img
   src={buildExample}
-  alt="Example build"
-  style={{ borderRadius: 8, marginBottom: 10 }}
+  alt="Argos build example"
+  className="rounded"
+  style={{ marginBottom: 10 }}
 />
 
-Navigate through the screenshot diffs by clicking on the sidebar, the navigation buttons, or using your keyboard.
+Here, you will find all the screenshots introduced by your pull request (right) compared to their previous version from the [reference branch](/faq#what-is-a-reference-branch) (left). The side-by-side UI is designed to quickly spot visual changes (red) and quickly verify if frontend match the expected results.
 
-> Tip: Press `?` to show all available keyboard shortcuts.
+You can navigate through the screenshot diffs by clicking on the sidebar, the navigation buttons, or by using your keyboard.
 
-The side-by-side UI is designed to quickly spot visual changes and verifies that screenshots match their expected results.
+Tip: You can press <Tag>?</Tag> to show all available keyboard shortcut list.
 
-#### 👎 Reject a build
+### Reject a build
 
-If you spot a visual bug or if a screenshot doesn't meet your expectations, click on the "Review Changes" button and select "Reject Changes". The build status will become "Changes Rejected" and GitHub will be notified of the rejection.
+If you spot a visual bug or if a screenshot doesn't meet your expectations, click on <Tag>Review changes</Tag> button and select <Tag>👎 Reject changes</Tag>. The build status will become <Tag>🔴 Changes rejected</Tag> and GitHub will be notified of the rejection.
 
-After rejecting the change, you should commit a new version to fix it.
+After rejecting the changes, you should commit a fix to your pull request.
 
-#### 👍 Approve a build
+### Approve a build
 
-When screenshots match the expected results, click on the "Review Changes" button and select 🟢&nbsp;"Approve Changes". The build status will become 🔴&nbsp;"Changes Approved" and GitHub will be notified of the approval.
+When screenshots match the expected results, click on <Tag>Review changes</Tag> button and select <Tag>👍 Approve changes</Tag>. The build status will become <Tag>🟢 Changes approved</Tag> and GitHub will be notified of the approval.
 
 Once the changes are accepted, you can confidently merge your pull request.
 
-## FAQ
+## Join the Argos Community
 
-<details>
-  <summary>How do I update the screenshot comparison baseline?</summary>
-  <p>
-    Argos updates the comparison baseline screenshots when a commit is merged
-    into the repository's reference branch. You have to run Argos on your
-    reference branch.
-  </p>
-</details>
-
-<details id="reference-branch-definition">
-  <summary>What is a reference branch?</summary>
-  <p>
-    Each build from a reference branch is used as the baseline for the
-    screenshots comparisons. Argos automatically uses the GitHub default branch
-    as the reference branch. You can set another reference branch in Argos
-    repository settings.
-  </p>
-</details>
-
-<details>
-  <summary>How to change the reference branch?</summary>
-  <p>You can set another reference branch in Argos repository settings.</p>
-</details>
-
-<details>
-  <summary>What is an orphan build?</summary>
-  <p>
-    An orphan build is the first one performed on a reference branch. It won't
-    show any comparison. The screenshots of this build will be considered as the
-    baseline for the following comparisons.
-  </p>
-</details>
-
-<details>
-  <summary>What is a reference build?</summary>
-  <p>
-    A reference build is a build created from a CI running on a commit pushed on
-    your reference branch. Reference build are used as baseline for branches
-    created from this commit. Argos automatically choose the best reference
-    build by analyzing commits history.
-  </p>
-</details>
+Congratulations on mastering the art of monitoring visual changes in your development workflow! To continue expanding your knowledge, suggest new features, or stay updated on Argos news, we encourage you to join the [Argos Discord channel](https://discord.gg/WjzGrQGS4A).

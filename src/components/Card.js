@@ -14,17 +14,7 @@ export const CardImage = (props) => (
   />
 );
 
-export const CardTitle = (props) => (
-  <h4
-    style={{
-      lineHeight: "1.5em",
-      fontWeight: 600,
-      whiteSpace: "nowrap",
-      marginBottom: 0,
-    }}
-    {...props}
-  />
-);
+export const CardTitle = (props) => <h4 className="title4" {...props} />;
 
 export const CardLink = (props) => (
   <Link

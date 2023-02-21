@@ -5,6 +5,7 @@ slug: /upload-screenshots
 sidebar_position: 4
 ---
 
+import { Enjoy } from "@site/src/partials";
 import { LinkCard, Cards } from "@site/src/components/Card";
 import { WhyArgosToken } from "@site/src/partials";
 import buildkiteLogo from "@site/static/img/buildkite-logo.png";
@@ -19,9 +20,9 @@ import travisLogo from "@site/static/img/travis-logo.png";
 
 # Upload screenshots
 
-Once you got screenshots of your applications, you have to upload them on Argos to create a build and compares them.
+The next step is to upload screenshots by using the Argos CLI in your Continuous Integration (CI) process. By doing so, you will be able to review the visual changes introduced by each pull request and systematically prevent unexpected visual bugs.
 
-Uploading screenshots can be done locally by yourself but to work efficiently it has to be done in continuous integration. The [Argos CLI](/argos-cli) is the easiest and fastest way to upload screenshots to the Argos visual testing platform.
+## Configure your CI
 
 Here are some guides to help you upload screenshots with popular CI tools:
 
@@ -53,10 +54,12 @@ Here are some guides to help you upload screenshots with popular CI tools:
   <LinkCard to="/semaphore-ci">Other CI...</LinkCard>
 </Cards>
 
-Need help setting up Argos in your CI environment? Check out our [examples repository on GitHub](https://github.com/argos-ci/argos/tree/main/examples) sample configurations.
+### Need help with CI Setup?
 
-Don't see your preferred CI listed in our examples? Feel free to contribute! Head over to our [contributing guide](https://github.com/argos-ci/argos/blob/main/CONTRIBUTING.md) to learn how you can add an example for your CI.
+If you need any assistance setting up Argos in your CI environment, feel free to reach out to us on the [Argos Discord channel](https://discord.gg/WjzGrQGS4A). We'll be happy to help you get started!
 
----
+### Examples and contributions
 
-Congratulations, you have successfully set up Argos in your CI environment. You are now ready to begin your visual review workflow. Head over to our [review changes](/review-changes) section to learn more about how to use Argos to detect and fix visual regressions in your web applications.
+Check out our [examples folder](https://github.com/argos-ci/argos/tree/main/examples) on GitHub for CI configuration examples. If you don't see your CI listed, we welcome [contributions](https://github.com/argos-ci/argos/blob/main/CONTRIBUTING.md) to expand our collection of examples.
+
+<Enjoy />

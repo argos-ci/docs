@@ -5,12 +5,7 @@ slug: /buildkite
 sidebar_position: 10
 ---
 
-import {
-  InstallDevDep,
-  RunPkgCommand,
-  RepositoryExampleLink,
-  Enjoy,
-} from "@site/src/partials";
+import { InstallDevDep, RunPkgCommand, Enjoy } from "@site/src/partials";
 
 # Use Argos with Buildkite
 
@@ -43,9 +38,5 @@ steps:
   - label: "Upload screenshots to argos-ci.com"
     command: npx @argos-ci/cli upload ./screenshots
 ```
-
-<RepositoryExampleLink />
-
-## Enjoy!
 
 <Enjoy />

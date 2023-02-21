@@ -5,44 +5,27 @@ slug: /installation
 sidebar_position: 2
 ---
 
-import githubRepoAccess from "@site/static/img/github-repo-access.png";
+import githubAppInstallation from "@site/static/img/github-app-installation.png";
 
 # Getting started with Argos
 
-Argos takes less than 10 minutes to install. Follow these steps to set it up into your project.
+Argos is a visual testing tool that allows you to catch and prevent visual regressions in your application.
+Here's how to get started with Argos in less than 10 minutes:
 
-## Install GitHub App
+## Install the GitHub app
 
-To get started with Argos, you'll first need to install the Argos GitHub App. This will allow Argos to read commits, mirror user access, and add pull-request statuses to notify you of any changes.
+To get started with Argos, you'll first need to install the Argos GitHub app. Follow this steps to do so:
 
-1. Go to the [GitHub Marketplace](https://github.com/marketplace/argos-ci) and subscribe to a plan
-2. Give Argos access to your desired repositories. It is recommended to only select the repositories that you want to use Argos for.
+1. Go to the [Argos GitHub Marketplace page](https://github.com/marketplace/argos-ci) and subscribe to a plan.
 
-<img
-  src={githubRepoAccess}
-  alt="GitHub repository access"
-  className="rounded"
-  style={{ marginBottom: 20 }}
-/>
+2. After subscribing, GitHub should guide you through the installation process. If not, you can [follow this link](https://github.com/apps/argos-ci/installations/new) to install the Argos app on your account.
 
-<details>
-  <summary>Why do we required permissions?</summary>
-  <ul>
-    <li>
-      <b>Contents</b> — used to find a common commit ancestor between branches
-    </li>
-    <li>
-      <b>Statuses</b> — used to add statuses to commits
-    </li>
-    <li>
-      <b>Pull requests</b> — used to add comments in pull requests
-    </li>
-    <li>
-      <b>Actions</b> — used to allow tokenless authentication
-    </li>
-  </ul>
-</details>
+3. The last step is to give Argos access to the repositories you want to use it with. We recommend only sharing the repositories that you want to use Argos for.
+   <img
+     src={githubAppInstallation}
+     alt="Manage Stripe link"
+     className="rounded"
+     style={{ marginBottom: 20, width: 400 }}
+   />
 
----
-
-Once the Argos GitHub app is successfully installed, the next step is to take screenshots for visual comparison. Follow the instructions provided in [take screenshots](/take-screenshots) to set up your screenshots.
+Once you've installed the GitHub app, the next step is to [take screenshots](/take-screenshots).

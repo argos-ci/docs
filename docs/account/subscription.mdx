@@ -1,0 +1,91 @@
+---
+title: Subscription
+slug: /subscription
+sidebar_position: 1
+---
+
+import stripeLink from "@site/static/img/stripe-link.png";
+import manageStripeLink from "@site/static/img/manage-stripe-link.png";
+
+# Subscription
+
+Argos offers a free and unlimited plan for open-source repositories as a way of thanking the community. For private repositories, the Free plan allows you to upload up to 5,000 screenshots per month. If your account requires more, you can subscribe to a paid plan.
+
+You can subscribe to Argos' paid plan via [GitHub Marketplace](#subscribe-via-github-marketplace) or [Stripe](#subscribe-via-stripe).
+
+## Subscribe via GitHub Marketplace
+
+To subscribe to Argos' plan, visit the [GitHub Marketplace](https://github.com/marketplace/argos-ci). Your Argos subscription will be charged on your GitHub invoices, so we do not require your credit card or financial information.
+
+#### Manage a plan subscribed via GitHub Marketplace
+
+You can update (or cancel) your plan on the [GitHub Marketplace](https://github.com/marketplace/argos-ci).<br/>
+
+> Note: You may have multiple Argos subscriptions associated with different accounts.
+
+## Subscribe via Stripe
+
+If you need to subscribe with Stripe, you must cancel any previous subscription taken via GitHub Marketplace.
+
+The Stripe subscription process takes place in the Argos app:
+
+1. [Log in into Argos](https://app.argos-ci.com), navigate to your account and click on the "Settings" tab.<br/>
+   **Be careful to be on the intended account (personal or organization).**
+2. Click on the link "Subscribe to plan using Stripe" to display the pricing list.
+
+   <img
+     src={stripeLink}
+     alt="Organization settings"
+     className="rounded"
+     style={{ marginBottom: 20, width: 600 }}
+   />
+
+3. Choose a plan to be redirected to the Stripe payment platform.
+
+Upon completion of payment, you will receive a confirmation email that includes the invoice.
+
+#### Stripe subscription FAQ
+
+<details>
+  <summary>Why you can't find the account's "Settings" tab?</summary>
+  <ul>
+    <li>
+      You are in "Repository Settings" instead of "Organization Settings".
+    </li>
+    <li>
+      You don't have the required authorizations to access this organization's
+      settings. Update your access on GitHub or ask for help from an
+      organization's admin.
+    </li>
+  </ul>
+</details>
+<details>
+  <summary>
+    Why you can't find the "Subscribe to plan using Stripe" link?
+  </summary>
+  <p>
+    The "Subscribe to plan using Stripe" link will not be visible if you have
+    already subscribed to a plan on GitHub Marketplace. In order to subscribe
+    via Stripe, you must first{" "}
+    <a href="https://github.com/marketplace/argos-ci">
+      cancel your current plan on GitHub
+    </a>
+    . Please note that canceling your plan will not affect your Argos organization,
+    repositories, or builds.
+  </p>
+</details>
+
+#### Manage a plan subscribed via Stripe
+
+To upgrade your plan, change your payment method, or cancel your subscription, go to the **Stripe Customer Portal**. To access the portal, go to your account's settings and click on "Manage your subscription on Stripe."
+
+<img
+  src={manageStripeLink}
+  alt="Manage Stripe link"
+  className="rounded"
+  style={{ marginBottom: 20, width: 600 }}
+/>
+
+## What if you need a custom plan?
+
+If none of the offered plans meet your needs, please do not hesitate to [contact us](/contact-us) to discuss a custom plan tailored to your specific requirements.

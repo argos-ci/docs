@@ -6,6 +6,7 @@ sidebar_position: 3
 ---
 
 import { LinkCard, Cards } from "@site/src/components/Card";
+import { AfterScreenshotSetup } from "@site/src/partials";
 
 import cypressLogo from "@site/static/img/cypress-logo-2.png";
 import puppeteerLogo from "@site/static/img/puppeteer-logo.png";
@@ -16,13 +17,13 @@ import nightwatchLogo from "@site/static/img/nightwatch-logo.png";
 import webdriverLogo from "@site/static/img/webdriver-logo.png";
 import seleniumLogo from "@site/static/img/selenium-logo.png";
 
-# Take screenshots
+# Taking screenshots with Argos
 
-Taking screenshots is the first step in visual testing. With Argos, you can test isolated components, entire pages, or specific stages of a checkout process.
+Argos allows you to compare screenshots taken during your E2E tests to prevent visual regressions on your application. We recommend using a testing framework to make it easy to navigate in your application and take screenshots.
 
-Argos compares screenshot, nothing more. It does not snapshot the DOM, compare HTML or take screenshots. Taking screenshots of your application must be done on your CI. We recommend using a testing framework to make it easy to navigate in your application and take screenshots.
+## Integrate with your testing framework
 
-Here are some guides to help you get started with popular testing frameworks:
+Argos supports a variety of testing frameworks to help you take and compare screenshots easily. Here are some guides to get started with popular testing frameworks:
 
 <Cards>
   <LinkCard to="/cypress" image={cypressLogo}>
@@ -52,6 +53,6 @@ Here are some guides to help you get started with popular testing frameworks:
   <LinkCard to="/other-framework">Other framework...</LinkCard>
 </Cards>
 
----
+If you don't see your testing framework in the list, feel free to reach out to us in our [Discord channel](https://discord.gg/WjzGrQGS4A) for assistance.
 
-Once you got screenshots, it's time to [upload screenshots in CI](/upload-screenshots) to upload them to the Argos visual testing platform.
+<AfterScreenshotSetup />
