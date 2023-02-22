@@ -1,88 +1,15 @@
 ---
 title: Invoiced Customers
 slug: /invoiced-customers
+sidebar_position: 3
 ---
-
-import organizationSettings from "@site/static/img/organization-settings.png";
-import stripePricesTable from "@site/static/img/stripe-prices-table.png";
-import manageStripeLink from "@site/static/img/manage-stripe-link.png";
 
 # Invoiced Customers
 
-Purchase Argos plan for GitHub invoiced account.
-
-If an invoiced GitHub account tries to subscribe to Argos' paid plan on GitHub Marketplace, the following message will be displayed. However, we offer an alternative payment method through Stripe for these customers.
+If you have a GitHub invoiced account and are looking to subscribe to Argos' paid plan through the GitHub Marketplace, you may have encountered the following error message:
 
 > "Unfortunately, invoiced customers cannot purchase paid plans on the GitHub Marketplace."<br/> **— GitHub error message**
 
-## Subscribe via Stripe
+This error message can be confusing, but it simply means that if your GitHub account is set up to receive an invoice for your subscription rather than charging your credit card directly, you won't be able to use the GitHub Marketplace to subscribe to Argos.
 
-Go to the organization to upgrade and click on the "Settings" tab. Then, click on the "Subscribe to plan using Stripe" link to display pricing list.
-
-<details>
-  <summary>Why you can't find the "Settings" tab?</summary>
-  <ul>
-    <li>
-      You are in "Repository Settings" instead of "Organization Settings".
-    </li>
-    <li>
-      You don't have the required authorizations to access this organization's
-      settings. Update your access on GitHub or ask for help from an
-      organization's admin.
-    </li>
-  </ul>
-</details>
-<details>
-  <summary>
-    Why you can't find the "Subscribe to plan using Stripe" link?
-  </summary>
-  <p>
-    The "Subscribe to plan using Stripe" link will not be visible if you have
-    already subscribed to a plan on GitHub Marketplace. In order to subscribe
-    via Stripe, you must first{" "}
-    <a href="https://github.com/marketplace/argos-ci">
-      cancel your current plan on GitHub
-    </a>
-    . Please note that canceling your plan will not affect your Argos organization,
-    repositories, or builds.
-  </p>
-</details>
-
-<img
-  src={organizationSettings}
-  alt="Organization settings"
-  className="rounded"
-  style={{ marginBottom: 20 }}
-/>
-
-Choose a plan and you will be redirected to the Stripe payment platform. Please note that there is a discount available for yearly plans.
-
-<img
-  src={stripePricesTable}
-  alt="Stripe prices table"
-  className="rounded"
-  style={{ marginBottom: 20 }}
-/>
-
-Upon completion of payment, you will receive a confirmation email that includes the invoice.
-
-## Manage your subscription on Stripe
-
-If you purchased your Argos subscription via Stripe, you can manage it on the "Stripe Customer Portal." From there, you will have the ability to:
-
-- Upgrade or downgrade your plan
-- Change your payment method and billing address
-- Cancel your subscription
-
-To access the portal, go to your organization's settings and click "Manage your subscription on Stripe."
-
-<img
-  src={manageStripeLink}
-  alt="Manage Stripe link"
-  className="rounded"
-  style={{ marginBottom: 20 }}
-/>
-
----
-
-If you encounter any issues with the Stripe subscription tunnel, please do not hesitate to contact us.
+Not to worry! You can still purchase an Argos' paid plan by [subscribing via Stripe](/subscription#subscribe-via-stripe).

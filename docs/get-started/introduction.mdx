@@ -2,32 +2,67 @@
 id: introduction
 slug: /introduction
 sidebar_position: 1
+title: Introduction
 ---
 
-import buildExample from "@site/static/img/build-example.png";
+import {
+  Feature,
+  FeatureImage,
+  FeatureParagraph,
+  Features,
+  FeatureTitle,
+} from "@site/src/components/Feature";
 
-# Introduction
+import cameraIcon from "@site/static/img/camera-icon.png";
+import uploadIcon from "@site/static/img/upload-icon.png";
+import checkIcon from "@site/static/img/check-icon.png";
 
-Argos is a powerful visual testing tool that allows developers to easily compare screenshots and detect visual changes in their web applications.
+# Introduction to Argos
 
-## What is Argos?
+Argos is a powerful developer tool designed to improve the development experience and provide comfort and peace of mind to our users. With Argos, you can ensure that your code produces the expected results and prevent visual regressions on each browser and screen resolution.
 
-With Argos, you can be notified of visual changes in real-time, directly within GitHub. The process is simple:
+Here's how Argos works:
 
-1. **Take screenshots** — Take screenshots of your application in various browsers and screen sizes.
-2. **Compare screenshots** — Argos will automatically compare the screenshots with a reference set, and notify you of any visual changes.
-3. **Review changes** — Review the visual changes in the Argos application, and either approve or reject the changes.
+<Features>
+  <Feature>
+    <FeatureImage src={cameraIcon} />
+    <FeatureTitle>1. Take screenshots</FeatureTitle>
+    <FeatureParagraph>
+      Use a testing framework to take screenshots during E2E tests.
+    </FeatureParagraph>
+  </Feature>
+  <Feature>
+    <FeatureImage src={uploadIcon} />
+    <FeatureTitle>2. Upload screenshots</FeatureTitle>
+    <FeatureParagraph>
+      Add one command in your CI to upload screenshots to Argos.
+    </FeatureParagraph>
+  </Feature>
+  <Feature>
+    <FeatureImage src={checkIcon} />
+    <FeatureTitle>3. Review changes</FeatureTitle>
+    <FeatureParagraph>
+      Be notified into GitHub when visual changes are detected.
+    </FeatureParagraph>
+  </Feature>
+</Features>
 
-<a href="https://app.argos-ci.com/argos-ci/argos-ci.com/builds/20">
-  <img
-    src={buildExample}
-    alt="Example build"
-    style={{ borderRadius: 8, marginBottom: 10 }}
-  />
-</a>
+## Avoid visual bugs
 
-You can see Argos in action on the [demo build](https://app.argos-ci.com/argos-ci/argos-ci.com/builds/20).
+Argos is a visual testing tool that allows developers to review visual changes introduced by each pull request. With Argos, you can avoid visual bugs and ensure that your application maintains a high level of visual quality.
 
----
+## Easy to install
 
-The first step is to [install Argos](/installation) on your repository.
+Argos provides integrations for popular CI and testing frameworks, making it easy to get started with visual testing in your existing projects. Simply follow the provided installation instructions, and you'll be up and running in no time. In addition, we have a [Discord channel](https://discord.gg/WjzGrQGS4A) where you can get help if needed.
+
+## Enjoyable to use
+
+Once installed, Argos is straightforward to use. You can add the screenshot taking command anywhere in your E2E tests to cover a page against regression. Then, you can easily review the visual changes in [Argos' beautiful UI](https://app.argos-ci.com/argos-ci/argos-ci.com/builds/20). It allows developers to get a summary of all visual changes introduced by their PR and avoid visual bugs.
+
+## Fit in developer workflow
+
+Thanks to the GitHub integration, the visual review fits perfectly into developer workflows. A GitHub check status is displayed in each PR and notifies you when visual changes are detected. Follow the direct link to either approve or reject the changes. This process ensures that visual changes are intentional and do not cause any extra time burden on users.
+
+## Getting started
+
+Getting started with Argos is easy. The first step is to [install Argos](/installation) on your repository. Then, read our [review changes guide](/review-changes) to learn how to use Argos in your development workflow.

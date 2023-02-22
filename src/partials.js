@@ -53,10 +53,25 @@ export const RepositoryExampleLink = () => (
 );
 
 export const Enjoy = () => (
-  <p>
-    Congratulations, Argos is now installed! 🎉
-    <br />
-    Learn how to <a href="/review-changes">review changes</a> in your
-    pull-requests.
-  </p>
+  <>
+    <h2>What's next?</h2>
+    <p>
+      Congratulations on installing Argos! 🎉
+      <br />
+      The next step is to integrate visual review into your development
+      workflow. Visit our <a href="/review-changes">review changes</a> section
+      to learn how to.
+    </p>
+  </>
+);
+
+export const AfterScreenshotSetup = () => (
+  <>
+    <h2>After taking screenshots</h2>
+    <p>
+      After taking screenshots, the next step is to upload them to Argos. Check
+      out the <a href="/upload-screenshots">uploading screenshots</a>{" "}
+      documentation to learn how to do this.
+    </p>
+  </>
 );

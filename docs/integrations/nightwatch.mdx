@@ -4,6 +4,8 @@ id: nightwatch
 slug: /nightwatch
 ---
 
+import { AfterScreenshotSetup } from "@site/src/partials";
+
 # Use Argos with Nightwatch
 
 Integrating Argos with [Nightwatch](https://nightwatchjs.org/) enables visual testing on your application.
@@ -11,3 +13,5 @@ Integrating Argos with [Nightwatch](https://nightwatchjs.org/) enables visual te
 We recommend overloading the screenshot command to improve rendering stability when using Nightwatch to take screenshots of your application. For more information, see the [CSS Preflight](/css-preflight) and [anti-flaky recipes](/anti-flaky-recipes) docs.
 
 To see examples of using Argos with different testing frameworks, check out our [example repositories](https://github.com/argos-ci/argos/tree/main/examples). If you don't see an example for your testing framework, consider contributing one!
+
+<AfterScreenshotSetup />
