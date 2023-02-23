@@ -87,8 +87,14 @@ const config = {
           {
             href: "https://github.com/argos-ci",
             position: "right",
-            className: "header-github-link",
+            className: "header-link github-header-link",
             "aria-label": "GitHub repository",
+          },
+          {
+            href: "https://discord.gg/WjzGrQGS4A",
+            position: "right",
+            className: "header-link discord-header-link",
+            "aria-label": "Argos Discord channel",
           },
         ],
       },
