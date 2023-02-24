@@ -5,6 +5,10 @@ slug: /faq
 sidebar_position: 100
 ---
 
+import { Tag } from "@site/src/components/Tag";
+import githubSwitchAccountSettings from "@site/src/img/github-switch-account-settings.png";
+import githubRepoAccess from "@site/src/img/github-repo-access.png";
+
 # FAQ
 
 In this section, we will provide answers to frequently asked questions about Argos.
@@ -31,11 +35,36 @@ An orphan build is the first build performed on a reference branch. It won't sho
 
 A reference build is a build created from a CI running on a commit pushed to your reference branch. Reference builds are used as the baseline for branches created from this commit. Argos automatically chooses the best reference build by analyzing the commit history.
 
+## Why share repositories with Argos?
+
+When you install the Argos app on GitHub, you'll be asked to share your repositories. This allows Argos to create a list of your repositories and find reference builds to compare against each pull request. It also helps keep the authorized user list synchronized automatically.
+
+## How do I update the repositories list shared with Argos?
+
+Once you have installed the Argos app on GitHub, you can adjust the list of repositories that are shared with Argos. Here's how to do it:
+
+1. Go to [GitHub's installations settings](https://github.com/settings/installations)
+2. Select the account you want to configure<br/>
+   <img
+     src={githubSwitchAccountSettings}
+     alt="Argos build example"
+     className="rounded"
+     style={{ marginBottom: 4, marginTop: 8, width: 450 }}
+   />
+3. Click the <Tag>Configure</Tag> button next to Argos installation.
+4. Under "Repository access," select "Only select repositories" and choose the repositories you want to share with Argos.<br/>
+   <img
+     src={githubRepoAccess}
+     alt="Argos build example"
+     className="rounded"
+     style={{ marginBottom: 4, marginTop: 8, width: 450 }}
+   />
+
 ## What app permissions does Argos require?
 
 Argos requires the following GitHub app permissions to function:
 
-- **Contents** - used to find a common commit ancestor between branches
+- **Contents** — used to find a common commit ancestor between branches
 - **Statuses** — used to add statuses to commits
 - **Pull requests** — used to add comments in pull requests
 - **Actions** — used to allow tokenless authentication
