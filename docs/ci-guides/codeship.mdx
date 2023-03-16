@@ -36,6 +36,7 @@ Add the following command to your CI workflow to upload screenshots to Argos:
   type: parallel
   steps:
     - service: project_name
+      # 👇 change "./screenshots" by your screenshots folder path
       command: npx @argos-ci/cli upload ./screenshots
 ```
 
