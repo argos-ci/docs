@@ -67,7 +67,7 @@ html[data-theme="dark"] {
     Use Tailwind v3 purple-400 as base
     in https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   */
-  --ifm-color-primary: #c084fc;
+  --ifm-color-primary: #e29eff;
   --ifm-color-primary-dark: #ad5ffb;
   --ifm-color-primary-darker: #a34cfb;
   --ifm-color-primary-darkest: #8614f9;
