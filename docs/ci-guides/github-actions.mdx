@@ -11,6 +11,7 @@ import {
   RepositoryExampleLink,
   Enjoy,
 } from "@site/src/partials";
+import { Tag } from "@site/src/components/Tag";
 
 # Use Argos with GitHub Actions
 
@@ -60,9 +61,36 @@ jobs:
 
       - name: Upload screenshots to argos-ci.com
         continue-on-error: true
+        # 👇 change "./screenshots" by your screenshots folder path
         run: npx @argos-ci/cli upload ./screenshots
 ```
 
 <RepositoryExampleLink />
 
 <Enjoy />
+
+---
+
+## Troubleshooting
+
+### Force repository detection with `ARGOS_TOKEN`
+
+<small>
+  To ensure seamless integration with GitHub Actions, the <Tag>ARGOS_TOKEN</Tag> is
+  usually not required. However, if the automatic repository detection doesn't
+  work, you may need to specify the token. If that's the case, follow these
+  steps:
+
+1. Log in to [Argos](https://app.argos-ci.com), navigate to your repository settings and copy your `ARGOS_TOKEN`.
+2. Navigate to your repository settings on GitHub and set a new repository secret called `ARGOS_TOKEN` with the value you have copied.
+3. Expose the `ARGOS_TOKEN` when you call the argos' upload command.
+
+```yml title=".github/workflows/ci.yml"
+- name: Upload screenshots to argos-ci.com
+  continue-on-error: true
+  env:
+    ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
+  run: npx @argos-ci/cli upload ./screenshots
+```
+
+</small>
