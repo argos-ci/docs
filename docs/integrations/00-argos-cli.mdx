@@ -63,7 +63,7 @@ Parallelism is a technique for speeding up test suites by running multiple tests
 To configure parallel test suites using `@argos-ci/cli`, you need to set two environment variables:
 
 - `ARGOS_PARALLEL_NONCE`: a unique build ID for this parallel build. Argos groups uploaded screenshots using this ID.
-- `ARGOS_PARALLEL_TOTAL`: the total number of parallel nodes being run. argos upload must be called exactly this number of times.
+- `ARGOS_PARALLEL_TOTAL`: the total number of parallel nodes being run. Argos upload must be called exactly this number of times.
 
 > Note: It is also possible to configure parallel mode using the `--parallel-nonce` and `--parallel-total` arguments.
 
@@ -75,3 +75,14 @@ export ARGOS_PARALLEL_TOTAL=<total-batch-count>
 ```
 
 <RunPkgCommand command="npx @argos-ci/cli upload --parallel ./screenshots" />
+
+**Example of parallel setup on GitHub Actions**
+
+```yml title=".github/workflows/ci.yml"
+- name: Upload screenshots to argos-ci.com
+  continue-on-error: true
+  env:
+    ARGOS_PARALLEL_NONCE: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+    ARGOS_PARALLEL_TOTAL: ${{ strategy['job-total'] }}
+  run: yarn run @argos-ci/cli upload --parallel ./screenshots
+```
