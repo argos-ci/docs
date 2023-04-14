@@ -10,7 +10,7 @@ const config = {
   tagline:
     "Argos is a visual testing solution that fits in your workflow to avoid visual regression. Takes screenshots on each commit and be notified if something changes.",
   url: "https://argos-ci.com",
-  baseUrl: process.env.CONTEXT === "production" ? "/docs" : "/",
+  baseUrl: process.env.VERCEL_ENV === "production" ? "/docs" : "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.png",
