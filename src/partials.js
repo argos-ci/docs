@@ -67,11 +67,20 @@ export const Enjoy = () => (
 
 export const AfterScreenshotSetup = () => (
   <>
-    <h2>After taking screenshots</h2>
+    <h2>Next step</h2>
     <p>
-      After taking screenshots, the next step is to upload them to Argos. Check
-      out the <a href="/upload-screenshots">uploading screenshots</a>{" "}
-      documentation to learn how to do this.
+      The next step is to{" "}
+      <a href="/upload-screenshots">integrate the Argos CLI command</a> within
+      your Continuous Integration (CI) workflow. This command will automatically
+      upload your captured screenshots to Argos for further review and analysis.
     </p>
+  </>
+);
+
+export const HelpSection = () => (
+  <>
+    Have questions or need further assistance? Feel free to{" "}
+    <a href="https://discord.gg/WjzGrQGS4A">join our Discord</a> for support.
+    We're here to help!
   </>
 );

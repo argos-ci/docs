@@ -5,7 +5,7 @@ slug: /upload-screenshots
 sidebar_position: 4
 ---
 
-import { Enjoy } from "@site/src/partials";
+import { Enjoy, HelpSection } from "@site/src/partials";
 import { LinkCard, Cards } from "@site/src/components/Card";
 import { WhyArgosToken } from "@site/src/partials";
 import buildkiteLogo from "@site/src/img/buildkite-logo.png";
@@ -20,7 +20,8 @@ import travisLogo from "@site/src/img/travis-logo.png";
 
 # Upload screenshots
 
-The next step is to upload screenshots by using the Argos CLI in your Continuous Integration (CI) process. By doing so, you will be able to review the visual changes introduced by each pull request and systematically prevent unexpected visual bugs.
+Integrate the Argos CLI command within your Continuous Integration (CI) workflow to automate screenshot upload.
+By doing so, you will be able to review the visual changes introduced by a pull request and avoid visual bugs.
 
 ## Configure your CI
 
@@ -54,13 +55,11 @@ Here are some guides to help you upload screenshots with popular CI tools:
   <LinkCard to="/semaphore-ci">Other CI...</LinkCard>
 </Cards>
 
+<HelpSection />
+
 ### Advanced options
 
-Read the CLI documentation if you need information about [advanced usage options](/argos-cli#advanced-usage) like parallelism of build splitting.
-
-### Need help with CI Setup?
-
-If you need any assistance setting up Argos in your CI environment, feel free to reach out to us on the [Argos Discord channel](https://discord.gg/WjzGrQGS4A). We'll be happy to help you get started!
+Read the [CLI documentation](/argos-cli#advanced-usage) if you need information about advanced usage options like parallelism of build splitting.
 
 ### Examples and contributions
 

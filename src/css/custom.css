@@ -269,11 +269,13 @@ nav.menu {
 .rounded {
   border-radius: 8px;
 }
-
+.border {
+  border: solid 1px var(--ifm-table-border-color);
+}
 .bordered {
   border: solid 1px var(--ifm-table-border-color);
 }
-.bordered:hover {
+.border-active:hover {
   border: solid 1px var(--ifm-color-primary);
 }
 
@@ -312,7 +314,7 @@ nav.menu {
 
 .features {
   display: flex;
-  background-color: var(--ifm-color-gray-900);
+  background-color: var(--ifm-menu-color-background-active);
   padding: 24px 16px;
   column-gap: 16px;
   row-gap: 32px;
@@ -338,4 +340,12 @@ nav.menu {
   font-weight: 600;
   white-space: nowrap;
   margin-bottom: 0;
+}
+
+.separator {
+  background-color: var(--ifm-font-color-base);
+}
+
+.paragraph {
+  color: var(--ifm-color-emphasis-800);
 }

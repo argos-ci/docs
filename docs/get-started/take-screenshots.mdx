@@ -17,13 +17,21 @@ import nightwatchLogo from "@site/src/img/nightwatch-logo.png";
 import webdriverLogo from "@site/src/img/webdriver-logo.png";
 import seleniumLogo from "@site/src/img/selenium-logo.png";
 
-# Taking screenshots with Argos
+# Taking Screenshots
 
-Argos allows you to compare screenshots taken during your E2E tests to prevent visual regressions on your application. We recommend using a testing framework to make it easy to navigate in your application and take screenshots.
+Capture screenshots of your app during your end-to-end (E2E) tests, before invoking the Argos CLI command.
 
-## Integrate with your testing framework
+## Utilizing your testing framework
 
-Argos supports a variety of testing frameworks to help you take and compare screenshots easily. Here are some guides to get started with popular testing frameworks:
+Argos integrates seamlessly with your preferred testing frameworks like Playwright, Puppeteer, Selenium, and others. Each of these frameworks provides a native screenshot command, which you can use within your E2E tests.
+
+## Enhancing screenshot stability with integrations
+
+Native screenshot commands can sometimes face stability issues. This is particularly true when dealing with loaded resources like images or fonts.
+
+Argos offers integrations to enhance stability. These wait for all page items to load before capturing screenshots. In addition, the integrations provide the ability to selectively hide elements. This results in cleaner test results.
+
+We highly recommend exploring these integrations into your testing framework of choice.
 
 <Cards>
   <LinkCard to="/cypress" image={cypressLogo}>
