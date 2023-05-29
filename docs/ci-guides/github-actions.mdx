@@ -84,8 +84,8 @@ jobs:
   work, you may need to specify the token. If that's the case, follow these
   steps:
 
-1. Log in to [Argos](https://app.argos-ci.com), navigate to your repository settings and copy your `ARGOS_TOKEN`.
-2. Navigate to your repository settings on GitHub and set a new repository secret called `ARGOS_TOKEN` with the value you have copied.
+1. Log in to [Argos](https://app.argos-ci.com), navigate to your project settings and copy your `ARGOS_TOKEN`.
+2. On GitHub, navigate to your repository settings and set a new repository secret called `ARGOS_TOKEN` with the value you have copied.
 3. Expose the `ARGOS_TOKEN` when you call the argos' upload command.
 
 ```yml title=".github/workflows/ci.yml"
