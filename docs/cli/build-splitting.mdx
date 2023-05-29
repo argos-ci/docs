@@ -1,0 +1,24 @@
+---
+title: Advanced - Build splitting
+slug: /build-splitting
+sidebar_position: 2
+---
+
+import { RunPkgCommand } from "@site/src/partials";
+
+# Build splitting
+
+In certain scenarios, you may want to run multiple Argos builds for the same commit. This can be particularly useful if you have different sets of screenshots, such as component screenshots and end-to-end (E2E) testing screenshots.
+
+To achieve this, you can assign a distinct name to each Argos build using the `--build-name` argument.
+
+## Example
+
+Consider an example where you have one set of screenshots for components and another for E2E tests. You can create separate builds for these by using the following commands:
+
+<RunPkgCommand
+  command={[
+    "@argos-ci/cli upload --build-name components ./screenshots/components",
+    "@argos-ci/cli upload --build-name e2e ./screenshots/e2e",
+  ]}
+/>
