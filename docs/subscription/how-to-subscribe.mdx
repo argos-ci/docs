@@ -1,0 +1,56 @@
+---
+title: How to subscribe
+slug: /how-to-subscribe
+sidebar_position: 2
+---
+
+import subscriptionDialog from "@site/src/img/subscription-dialog.png";
+import upgradeButton from "@site/src/img/upgrade-button.png";
+
+# How to subscribe
+
+Accessing Argos' team features requires a subscription to a paid plan. Follow the steps outlined below to subscribe.
+
+1. [Create a new team](https://app.argos-ci.com/teams/new) if you have not already done so.
+
+2. Navigate to your team settings, scroll down to the Plan section, and click the "Upgrade" button to display the subscription dialog.
+
+   <img
+     src={upgradeButton}
+     alt="upgrade button"
+     className="rounded"
+     style={{ marginBottom: 20, width: 600 }}
+   />
+
+3. CIn the subscription dialog, select your preferred payment provider and the team to upgrade, then click "Continue". You'll be redirected to the payment provider of your choice.
+
+   <img
+     src={subscriptionDialog}
+     alt="Subscription Dialog"
+     className="rounded"
+     style={{ marginBottom: 20, width: 600 }}
+   />
+
+4. **Payment providers**
+
+- **Subscription via Stripe**<br/>
+  Upon redirection to Stripe Checkout, fill out the payment form. The payment will be processed at the end of the first month according to your usage.
+
+- **Subscription via GitHub Marketplace**<br/>
+  Once redirected to the GitHub Marketplace, select the account to upgrade, choose the plan that best fits your needs, and complete the payment form.
+
+After the payment process is complete, you will receive a confirmation email.
+
+## FAQ
+
+<details>
+  <summary>Why can't I find the account's "Settings" tab?</summary>
+  <ul>
+    <li>You might be in "Project Settings" instead of "Team Settings".</li>
+    <li>
+      You may not have the required authorizations to access the team's
+      settings. You'll need to update your access permissions or ask for help
+      from a team owner.
+    </li>
+  </ul>
+</details>
