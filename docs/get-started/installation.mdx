@@ -6,20 +6,52 @@ sidebar_position: 2
 ---
 
 import githubAppInstallation from "@site/src/img/github-app-installation.png";
+import { Card } from "@site/src/components/Card";
+import {
+  StepList,
+  Step,
+  StepTitle,
+  StepContent,
+} from "@site/src/components/StepList";
+import { HelpSection } from "@site/src/partials";
 
-# Getting started with Argos
+# Getting started
 
-Argos is a powerful visual testing tool designed to detect and prevent visual regressions in your application before they're deployed to production.
+Get Argos up and running in your project in just a few minutes by following these steps.
 
-Follow these simple steps to integrate Argos into your development workflow within minutes. If you have any questions or need assistance, feel free to [join our Discord](https://discord.gg/WjzGrQGS4A) for support.
+<StepList>
+  <Step>
+    <StepTitle>Sign up to Argos</StepTitle>
+    <StepContent>
+      <a href="http://app.argos-ci.com/signup">Sign up</a> and select an{" "}
+      <a href="/pricing-plans">Argos plans</a> that suits your needs.
+    </StepContent>
+  </Step>
+  <Step>
+    <StepTitle>Capture screenshot within your E2E tests</StepTitle>
+    <StepContent>
+      Utilize the screenshot command of your preferred testing tool, or{" "}
+      <a href="/capture-screenshots">browse our integrations</a> to improve
+      screenshot consistency.
+    </StepContent>
+  </Step>
+  <Step>
+    <StepTitle>Upload Screenshots to Argos</StepTitle>
+    <StepContent>
+      <a href="/upload-screenshots">Integrate the Argos CLI command</a> within
+      your Continuous Integration (CI) workflow to automate screenshot upload.
+    </StepContent>
+  </Step>
+  <Step>
+    <StepTitle>Review visual changes</StepTitle>
+    <StepContent>
+      Congratulation! You are now ready to{" "}
+      <a href="/review-changes">
+        add visual review in your development process
+      </a>
+      .
+    </StepContent>
+  </Step>
+</StepList>
 
-1. [Install Argos GitHub App](https://github.com/apps/argos-ci/installations/new)<br/>
-   During installation, grant Argos access to your repositories. We recommend selecting only the repositories where you intend to use Argos.
-
-2. [Take Screenshots](/take-screenshots)<br/>
-   Utilize a testing framework to take screenshots during E2E tests.
-
-3. [Upload Screenshots](/upload-screenshots)<br/>
-   Set up your CI workflow to upload screenshots to Argos using the CLI.
-
-After successfully installing Argos, you can proceed to learn how to [review visual changes](/review-changes) seamlessly within your development process.
+<HelpSection />

@@ -55,7 +55,7 @@
   --ifm-navbar-padding-horizontal: 10px;
   --ifm-menu-link-padding-vertical: 0px;
   --ifm-menu-link-padding-horizontal: 0;
-  --ifm-menu-color-background-active: transparent;
+  --ifm-menu-color-background-active: var(--ifm-color-gray-100);
   --ifm-menu-color-background-hover: transparent;
 
   --ifm-alert-padding-horizontal: 25px;
@@ -93,6 +93,7 @@ html[data-theme="dark"] {
   --ifm-alert-border-width: 0;
 
   --ifm-background-surface-color: var(--ifm-color-gray-900);
+  --ifm-menu-color-background-active: var(--ifm-color-gray-800);
 }
 
 /* Main layout */
@@ -268,11 +269,13 @@ nav.menu {
 .rounded {
   border-radius: 8px;
 }
-
+.border {
+  border: solid 1px var(--ifm-table-border-color);
+}
 .bordered {
   border: solid 1px var(--ifm-table-border-color);
 }
-.bordered:hover {
+.border-active:hover {
   border: solid 1px var(--ifm-color-primary);
 }
 
@@ -311,7 +314,7 @@ nav.menu {
 
 .features {
   display: flex;
-  background-color: var(--ifm-color-gray-900);
+  background-color: var(--ifm-menu-color-background-active);
   padding: 24px 16px;
   column-gap: 16px;
   row-gap: 32px;
@@ -337,4 +340,12 @@ nav.menu {
   font-weight: 600;
   white-space: nowrap;
   margin-bottom: 0;
+}
+
+.separator {
+  background-color: var(--ifm-font-color-base);
+}
+
+.paragraph {
+  color: var(--ifm-color-emphasis-800);
 }

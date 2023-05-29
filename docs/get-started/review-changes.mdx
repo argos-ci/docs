@@ -9,50 +9,46 @@ import { Tag } from "@site/src/components/Tag";
 
 import buildExample from "@site/src/img/build-example.png";
 import githubWaitingCheckStatus from "@site/src/img/github-waiting-check-status.png";
-import githubPassingCheckStatus from "@site/src/img/github-passing-check-status.png";
 
-# Review changes
+# Integrate visual review into development routine
 
-Once the installation is complete, Argos will receive screenshots when you create a pull request or update the [reference branch](/faq#what-is-a-reference-branch). On GitHub, pull requests will now have a new check status indicating if visual changes are detected.
+Once installed, Argos receive a screenshots batch when you create a pull request or update your reference branch.
 
-## No changes detected
+## GitHub check status
 
-If no changes are detected, the status is <Tag>✅ Pass</Tag>, and you can confidently merge your pull request.
-
-<img
-  src={githubPassingCheckStatus}
-  alt="GitHub passing check status"
-  className="rounded"
-  style={{ marginBottom: 10 }}
-/>
-
-## Changes detected
-
-If changes are detected, the GitHub check status is <Tag>🟠 Pending</Tag> and is waiting for your review. Click on <Tag>Details</Tag> link to [review the changes](#reviewing-visual-changes).
+Your pull requests will have a new status check indicating if visual changes are detected.
 
 <img
   src={githubWaitingCheckStatus}
   alt="GitHub waiting check status"
   className="rounded"
-  style={{ marginBottom: 10 }}
+  style={{ marginBottom: 20 }}
 />
+
+**Check status is <Tag>🟠 Pending</Tag>**
+
+Some changes had been detected, and GitHub is waiting for your approval. Click on the <Tag>Details</Tag> link to [review changes](#reviewing-visual-changes) into Argos app.
+
+**Check status is <Tag>✅ Pass</Tag>**
+
+No changes detected. You can confidently merge your pull request.
 
 ## Reviewing visual changes
 
-Click on <Tag>Details</Tag> link will redirect you to an Argos' build page.
+The <Tag>Details</Tag> link of Github check status will redirect you to Argos build page.
 
 <img
   src={buildExample}
   alt="Argos build example"
   className="rounded"
-  style={{ marginBottom: 10 }}
+  style={{ marginBottom: 20 }}
 />
 
-Here, you will find all the screenshots introduced by your pull request (right) compared to their previous version from the [reference branch](/faq#what-is-a-reference-branch) (left). The side-by-side UI is designed to quickly spot visual changes (red) and quickly verify if frontend match the expected results.
+Here, you will find all the screenshots introduced by your pull request (right) compared to their previous version from the [reference branch](/faq#what-is-a-reference-branch) (left). The side-by-side UI is designed to quickly spot visual changes (red) and swiftly verify if frontend match the expected results.
 
 You can navigate through the screenshot diffs by clicking on the sidebar, the navigation buttons, or by using your keyboard.
 
-Tip: You can press <Tag>?</Tag> to show all available keyboard shortcut list.
+Tip: You can press <Tag>?</Tag> to show available keyboard shortcut list.
 
 ### Reject a build
 

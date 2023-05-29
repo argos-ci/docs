@@ -30,7 +30,7 @@ export const CardArrow = (props) => (
 
 export const Card = (props) => (
   <div
-    className="bordered rounded"
+    className="bordered rounded border-active"
     style={{ padding: "10px 15px" }}
     {...props}
   />

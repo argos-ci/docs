@@ -21,13 +21,16 @@ Configure [GitHub Actions](https://github.com/features/actions) to send screensh
 
 <InstallDevDep dependency="@argos-ci/cli" />
 
+Read the [CLI documentation](/argos-cli#advanced-usage) if you need information about
+advanced usages.
+
 ## 2. Upload the screenshots
 
 Add the following command to your CI workflow to upload screenshots to Argos:
 
 <RunPkgCommand command="@argos-ci/cli upload ./screenshots" />
 
-#### Example
+#### Complete example
 
 ```yml title=".github/workflows/ci.yml"
 name: Argos
