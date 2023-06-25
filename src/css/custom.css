@@ -302,16 +302,6 @@ nav.menu {
   /* Sidebar: end */
 }
 
-.tag {
-  background-color: var(--ifm-code-background);
-  border-radius: var(--ifm-code-border-radius);
-  font-family: var(--ifm-font-family-monospace);
-  font-size: var(--ifm-code-font-size);
-  padding: 2px 6px;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-
 .features {
   display: flex;
   background-color: var(--ifm-menu-color-background-active);
