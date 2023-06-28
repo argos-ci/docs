@@ -31,7 +31,7 @@ If you are not comfortable with exposing environment variables, read [Gitlab CI 
 
 Add the following command to your CI workflow to upload screenshots to Argos:
 
-<RunPkgCommand command="@argos-ci/cli upload ./screenshots" />
+<RunPkgCommand command="argos upload ./screenshots" />
 
 #### Complete example
 
@@ -41,7 +41,7 @@ script:
 
   # Upload screenshots to argos-ci.com
   # 👇 change "./screenshots" by your screenshots folder path
-  - npx @argos-ci/cli upload ./screenshots
+  - npm exec argos upload ./screenshots
 ```
 
 <Enjoy />

@@ -25,7 +25,7 @@ export const RunPkgCommand = ({ command }) => {
     <Tabs groupId="package-managers">
       <TabItem value="npm" label="npm" default>
         <BlocCode>
-          {commands.map((command) => `npx ${command}`).join("\n")}
+          {commands.map((command) => `npm exec ${command}`).join("\n")}
         </BlocCode>
       </TabItem>
       <TabItem value="yarn" label="yarn">

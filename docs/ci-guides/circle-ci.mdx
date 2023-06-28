@@ -30,7 +30,7 @@ If you are not comfortable with exposing environment variables, read [CircleCI d
 
 Add the following command to your CI workflow to upload screenshots to Argos:
 
-<RunPkgCommand command="@argos-ci/cli upload ./screenshots" />
+<RunPkgCommand command="argos upload ./screenshots" />
 
 #### Complete example
 
@@ -46,7 +46,7 @@ jobs:
       - run:
           name: Upload screenshots to argos-ci.com
           # 👇 change "./screenshots" by your screenshots folder path
-          command: npx @argos-ci/cli upload ./screenshots
+          command: npm exec argos upload ./screenshots
 
 workflows:
   ci:

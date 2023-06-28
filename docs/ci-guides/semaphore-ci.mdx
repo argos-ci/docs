@@ -30,7 +30,7 @@ If you are not comfortable with exposing environment variables, read [Semaphore 
 
 Add the following command to your CI workflow to upload screenshots to Argos:
 
-<RunPkgCommand command="@argos-ci/cli upload ./screenshots" />
+<RunPkgCommand command="argos upload ./screenshots" />
 
 #### Complete example
 
@@ -42,7 +42,7 @@ blocks:
     - name: Upload screenshots to argos-ci.com
       commands:
         # 👇 change "./screenshots" by your screenshots folder path
-        - npx @argos-ci/cli upload ./screenshots
+        - npm exec argos upload ./screenshots
 ```
 
 <Enjoy />
