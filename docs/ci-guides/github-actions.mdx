@@ -28,7 +28,7 @@ advanced usages.
 
 Add the following command to your CI workflow to upload screenshots to Argos:
 
-<RunPkgCommand command="@argos-ci/cli upload ./screenshots" />
+<RunPkgCommand command="argos upload ./screenshots" />
 
 #### Complete example
 
@@ -65,7 +65,7 @@ jobs:
       - name: Upload screenshots to argos-ci.com
         continue-on-error: true
         # 👇 change "./screenshots" by your screenshots folder path
-        run: npx @argos-ci/cli upload ./screenshots
+        run: npm exec argos upload ./screenshots
 ```
 
 <RepositoryExampleLink />
@@ -93,7 +93,7 @@ jobs:
   continue-on-error: true
   env:
     ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
-  run: npx @argos-ci/cli upload ./screenshots
+  run: npm exec argos upload ./screenshots
 ```
 
 </small>

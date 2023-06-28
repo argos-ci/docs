@@ -22,7 +22,7 @@ export ARGOS_PARALLEL_NONCE=<unique-build-id>
 export ARGOS_PARALLEL_TOTAL=<total-batch-count>
 ```
 
-<RunPkgCommand command="npx @argos-ci/cli upload --parallel ./screenshots" />
+<RunPkgCommand command="argos upload --parallel ./screenshots" />
 
 ## Example: Setting up parallel tests with github actions
 
@@ -32,5 +32,5 @@ export ARGOS_PARALLEL_TOTAL=<total-batch-count>
   env:
     ARGOS_PARALLEL_NONCE: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
     ARGOS_PARALLEL_TOTAL: ${{ strategy['job-total'] }}
-  run: yarn run @argos-ci/cli upload --parallel ./screenshots
+  run: npm exec argos upload --parallel ./screenshots
 ```
