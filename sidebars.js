@@ -52,7 +52,7 @@ const sidebars = {
         {
           type: "link",
           label: "Discord",
-          href: "https://discord.gg/pK79sv85Vg",
+          href: "https://discord.gg/WjzGrQGS4A",
         },
         {
           type: "link",
