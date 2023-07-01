@@ -12,4 +12,4 @@ Argos documentation available on [argos-ci.com/docs](https://argos-ci.com/docs).
 
 - [Getting Started](https://argos-ci.com/docs/installation)
 - [Introduction](https://argos-ci.com/docs/introduction)
-- [Join us on Discord](https://discord.gg/WjzGrQGS4A)
+- [Join us on Discord](https://argos-ci.com/discord)

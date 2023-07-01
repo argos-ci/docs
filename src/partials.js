@@ -80,7 +80,7 @@ export const AfterScreenshotSetup = () => (
 export const HelpSection = () => (
   <>
     Have questions or need further assistance? Feel free to{" "}
-    <a href="https://discord.gg/WjzGrQGS4A">join our Discord</a> for support.
+    <a href="https://argos-ci.com/discord">join our Discord</a> for support.
     We're here to help!
   </>
 );
