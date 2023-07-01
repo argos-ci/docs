@@ -91,7 +91,7 @@ const config = {
             "aria-label": "GitHub repository",
           },
           {
-            href: "https://discord.gg/WjzGrQGS4A",
+            href: "https://argos-ci.com/discord",
             position: "right",
             className: "header-link discord-header-link",
             "aria-label": "Argos Discord channel",

@@ -52,7 +52,7 @@ const sidebars = {
         {
           type: "link",
           label: "Discord",
-          href: "https://discord.gg/WjzGrQGS4A",
+          href: "https://argos-ci.com/discord",
         },
         {
           type: "link",
