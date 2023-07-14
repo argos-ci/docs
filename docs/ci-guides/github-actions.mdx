@@ -97,3 +97,21 @@ jobs:
 ```
 
 </small>
+
+### Why do my screenshots show elements not present in my local code?
+
+When running tests on GitHub, it defaults to performing tests on the merge commit. This means that it behaves as if a rebase had been done before running the tests. As a result, some elements may appear in your screenshots that are not visible in your local code.
+
+It is not a problem with Argos because it is handled automatically by our system but it can be suprising.
+
+If you wish to disable this behavior and have GitHub check out the pull request's HEAD commit instead of the merge commit, you can use the following configuration in your workflow file:
+
+```yml
+- uses: actions/checkout@v3
+  with:
+    ref: ${{ github.event.pull_request.head.sha }}
+```
+
+By specifying the `ref` parameter with the value `${{ github.event.pull_request.head.sha }}`, you ensure that GitHub checks out the specific commit associated with the pull request, allowing your screenshots to accurately reflect the code changes made in that commit.
+
+Make sure to update your workflow file with this configuration if you want to avoid including extraneous elements in your screenshots.
