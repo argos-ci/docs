@@ -339,3 +339,13 @@ nav.menu {
 .paragraph {
   color: var(--ifm-color-emphasis-800);
 }
+
+.tag {
+  background-color: var(--ifm-code-background);
+  border-radius: var(--ifm-code-border-radius);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: var(--ifm-code-font-size);
+  padding: 2px 6px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
