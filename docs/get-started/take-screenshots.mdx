@@ -17,19 +17,17 @@ import nightwatchLogo from "@site/src/img/nightwatch-logo.png";
 import webdriverLogo from "@site/src/img/webdriver-logo.png";
 import seleniumLogo from "@site/src/img/selenium-logo.png";
 
-# Taking Screenshots
+# Capture Screenshots
 
-Capture screenshots of your app during your end-to-end (E2E) tests, before invoking the Argos CLI command.
+The first step in visual testing involves capturing screenshots during End-To-End (E2E) tests of your application.
 
-## Utilizing your testing framework
+All modern testing tools provide a native command to capture screenshots. Use these commands to capture screenshots of your pages and protect them from visual regressions.
 
-Argos integrates seamlessly with your preferred testing frameworks like Playwright, Puppeteer, Selenium, and others. Each of these frameworks provides a native screenshot command, which you can use within your E2E tests.
+## Enhancing Screenshot Stability
 
-## Enhancing screenshot stability with integrations
+Native screenshot commands can sometimes struggle with stability issues, especially when dealing with resources like images or fonts that need to be loaded.
 
-Native screenshot commands can sometimes face stability issues. This is particularly true when dealing with loaded resources like images or fonts.
-
-Argos offers integrations to enhance stability. These wait for all page items to load before capturing screenshots. In addition, the integrations provide the ability to selectively hide elements. This results in cleaner test results.
+Argos integrations offer commands to improve screenshot stability. The `argosScreenshot` command will wait for all resources to load before capturing screenshots. Additionally, these integrations allow selective hiding of elements, leading to cleaner and more accurate test results.
 
 We highly recommend exploring these integrations into your testing framework of choice.
 
@@ -61,6 +59,6 @@ We highly recommend exploring these integrations into your testing framework of 
   <LinkCard to="/other-framework">Other framework...</LinkCard>
 </Cards>
 
-If you don't see your testing framework in the list, feel free to reach out to us in our [Discord channel](https://argos-ci.com/discord) for assistance.
+If you can't find your testing framework in the list above, feel free to reach out to us in our [Discord channel](https://argos-ci.com/discord) for assistance.
 
 <AfterScreenshotSetup />
