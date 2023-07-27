@@ -59,8 +59,8 @@ export const Enjoy = () => (
       Congratulations on installing Argos! 🎉
       <br />
       The next step is to integrate visual review into your development
-      workflow. Visit our <a href="/review-changes">review changes</a> section
-      to learn how to.
+      workflow. Visit our <a href="review-changes">review changes</a> section to
+      learn how to.
     </p>
   </>
 );
@@ -70,7 +70,7 @@ export const AfterScreenshotSetup = () => (
     <h2>Next step</h2>
     <p>
       The next step is to{" "}
-      <a href="/upload-screenshots">integrate the Argos CLI command</a> within
+      <a href="upload-screenshots">integrate the Argos CLI command</a> within
       your Continuous Integration (CI) workflow. This command will automatically
       upload your captured screenshots to Argos for further review and analysis.
     </p>
