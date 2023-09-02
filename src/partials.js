@@ -15,6 +15,9 @@ export const InstallDevDep = ({ dependency }) => {
       <TabItem value="pnpm" label="pnpm">
         <BlocCode>pnpm add --save-dev {dependency}</BlocCode>
       </TabItem>
+      <TabItem value="bun" label="bun">
+        <BlocCode>bun add --dev {dependency}</BlocCode>
+      </TabItem>
     </Tabs>
   );
 };
