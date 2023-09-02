@@ -5,7 +5,6 @@ slug: /installation
 sidebar_position: 2
 ---
 
-import githubAppInstallation from "@site/src/img/github-app-installation.png";
 import { Card } from "@site/src/components/Card";
 import {
   StepList,
@@ -17,30 +16,40 @@ import { HelpSection } from "@site/src/partials";
 
 # Getting started
 
-Get Argos up and running in your project in just a few minutes by following these steps.
+Set up Argos for your project in few minutes by following these steps.
 
 <StepList>
   <Step>
-    <StepTitle>Create an Argos Account</StepTitle>
+    <StepTitle>Create your Argos Account</StepTitle>
     <StepContent>
-      <a href="http://app.argos-ci.com">Log in</a> with Github to create an
-      account.
+      <a href="http://app.argos-ci.com/signup">Sign up</a> to Argos and opt for
+      a plan.
+      <br />
+      <span style={{ fontWeight: 600 }}>Hobby Plan</span> for personal project
+      or <span style={{ fontWeight: 600 }}>Pro Plan</span> to enable team
+      collaboration.
+    </StepContent>
+  </Step>
+  <Step>
+    <StepTitle>Import a repository from Git provider</StepTitle>
+    <StepContent>
+      Either <a href="/github">Github</a> or <a href="/gitlab">GitLab</a>.
     </StepContent>
   </Step>
   <Step>
     <StepTitle>Generate Screenshots</StepTitle>
     <StepContent>
-      Use your preferred testing tool to{" "}
-      <a href="/capture-screenshots">capture reliable screenshots</a> during
-      your E2E tests.
+      Use your testing tool to{" "}
+      <a href="/capture-screenshots">capture screenshots</a> during your E2E
+      tests.
     </StepContent>
   </Step>
   <Step>
     <StepTitle>Upload Screenshots</StepTitle>
     <StepContent>
-      Integrate{" "}
-      <a href="/upload-screenshots">a command into your CI pipeline</a> to
-      upload the screenshots to Argos.
+      Add{" "}
+      <a href="/upload-screenshots">the Argos command into your CI pipeline</a>{" "}
+      to upload the screenshots.
     </StepContent>
   </Step>
   <Step>
