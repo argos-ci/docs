@@ -10,26 +10,35 @@ import { Tag } from "@site/src/components/Tag";
 
 # Integrating Argos with GitLab
 
-Enhance your development workflow by integrating Argos with [GitLab](https://gitlab.com). This integration provides visual testing feedback directly within your GitLab pull requests. This guide walks you through the setup process.
+Leverage the power of Argos by seamlessly integrating it with [GitLab](https://gitlab.com).
+
+## Advantages of GitLab Integration
+
+- Log in effortlessly via GitLab
+- Access to GitLab repositories
+- Get Argos feedback on your pull requests.
 
 ## Connecting a GitLab Repository
 
+By leveraging GitLab's Personal Access Token, Argos communicates via a dedicated GitLab Bot User. This setup ensures direct feedback on your pull requests.
+
 #### 1. Generate a Personal Access Token in GitLab
 
-Follow [GitLab's documentation](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#create-a-personal-access-token) to generate a token. Ensure the permissions <Tag>api</Tag> and <Tag>read_user</Tag> are assigned to this token.
+- Go to [GitLab tokens settings](https://gitlab.com/-/profile/personal_access_tokens?name=argos2&scopes=api,read_user).
+- Click "Add new token".
+- Set an expiration date 12 months ahead (maximum allowed).
+- Click "Create personal access token" and then copy the generated token.
 
 #### 2. Configure the Generated Token in Argos
 
 On Argos, navigate to <Tag>Team Settings</Tag> > <Tag>GitLab</Tag>, enter the generated token and save the changes.
 
-#### 3. Import GitLab Project to Argos
+#### 3. Link GitLab Project to Argos
 
-In Argos, navigate to the <Tag>Team projects</Tag> page and select <Tag>Create a new Project</Tag>. Continue by clicking <Tag>Continue with GitLab</Tag> and choose the GitLab repository you intend to integrate.
+In Argos, go to <Tag>Team projects</Tag>, then click on <Tag>Create a new Project</Tag>. Select <Tag>Continue with GitLab</Tag>, pick your GitLab organization and the desired repository. The new project will appear in your projects list.
 
-#### Repository Connection Validation
+## Connecting a Argos project to a GitLab Repository
 
-To verify the successful linkage of your GitLab repository, head to <Tag>Project Settings</Tag> > <Tag>Connect Git Repository</Tag> in Argos. The connected GitLab repository should be displayed.
+First, ensure the [GitLab Personal Access Token has been configured correctly](#connecting-a-gitlab-repository)
 
-## Associating an Existing Argos Project with a GitLab Repository
-
-Ensure the [GitLab Personal Access Token has been configured correctly](#connecting-a-gitlab-repository). Then, in Argos, navigate to <Tag>Project Settings</Tag> > <Tag>Connect Git Repository</Tag> and select the desired GitLab repository for association.
+In Argos, navigate to <Tag>Project Settings</Tag> > <Tag>Connect Git Repository</Tag> and select the desired GitHub repository for association.

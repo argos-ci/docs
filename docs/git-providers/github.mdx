@@ -1,0 +1,49 @@
+---
+title: GitHub
+id: github
+slug: /github
+sidebar_position: 40
+---
+
+import { InstallDevDep, RunPkgCommand, Enjoy } from "@site/src/partials";
+import { Tag } from "@site/src/components/Tag";
+import githubSwitchAccountSettings from "@site/src/img/github-switch-account-settings.png";
+import githubRepoAccess from "@site/src/img/github-repo-access.png";
+
+# Integrating Argos with GitHub
+
+Leverage the power of Argos by seamlessly integrating it with [GitHub](https://github.com).
+
+## Advantages of GitHub Integration
+
+- Log in effortlessly via GitHub.
+- Access to GitHub repositories
+- Get Argos feedback on your pull requests.
+
+## Connecting a GitHub Repository to Argos
+
+Argos has a dedicated GitHub App to connect to your repositories and provide real-time feedback on pull requests.
+
+#### 1. Install Argos' GitHub App
+
+Visit the [Argos app page on GitHub](https://github.com/apps/argos-ci) and click "Configure". Choose the organization for Argos installation.
+
+#### 2. Link GitHub Repository to Argos
+
+In Argos, go to <Tag>Team projects</Tag>, then click on <Tag>Create a new Project</Tag>. Select <Tag>Continue with GitHub</Tag>, pick your GitHub organization and the desired repository. The new project will appear in your projects list.
+
+## Connecting a Argos project to a GitHub Repository
+
+In Argos, navigate to <Tag>Project Settings</Tag> > <Tag>Connect Git Repository</Tag> and select the desired GitHub repository for association.
+
+## Update the repositories list shared with Argos
+
+1. Head to the [Argos app page on GitHub](https://github.com/apps/argos-ci) and select "Configure".
+2. Select the organization you aim to adjust.
+3. Under "Repository access" select "Only select repositories" and choose the repositories you want to share with Argos.<br/>
+   <img
+     src={githubRepoAccess}
+     alt="Argos build example"
+     className="rounded"
+     style={{ marginBottom: 4, marginTop: 8, width: 450 }}
+   />
