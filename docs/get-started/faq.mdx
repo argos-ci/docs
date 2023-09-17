@@ -6,7 +6,6 @@ sidebar_position: 100
 ---
 
 import { Tag } from "@site/src/components/Tag";
-import referenceBranchSettings from "@site/src/img/reference-branch-settings.png";
 
 # FAQ
 
@@ -22,28 +21,9 @@ Navigate to your team settings, scroll down to members section, and click on "In
 
 Argos updates the comparison baseline screenshots when a commit is merged into the project's reference branch.
 
-## What is a reference branch?
-
-A reference branch is the branch used as the baseline for the screenshot comparisons. Argos automatically uses the default branch of your Git project as the reference branch, but you can set another branch in your Argos project's settings.
-
-## How do I change the reference branch?
-
-To change the reference branch of a project, navigate to the Argos project settings, deselect the checkbox, enter the desired branch name, and then save your changes.
-
-<img
-  src={referenceBranchSettings}
-  alt="Reference branch settings"
-  className="rounded"
-  style={{ marginBottom: 4, marginTop: 8, width: 450, marginLeft: 32 }}
-/>
-
 ## What is an orphan build?
 
 An orphan build is the first build performed on a reference branch. It won't show any comparison. The screenshots of this build will be considered as the baseline for the following comparisons.
-
-## What is a reference build?
-
-A reference build is a build created from a CI running on a commit pushed to your reference branch. Reference builds are used as the baseline for branches created from this commit. Argos automatically chooses the best reference build by analyzing the commit history.
 
 ## Why share repositories with Argos?
 
