@@ -41,6 +41,11 @@ export const RunPkgCommand = ({ command }) => {
           {commands.map((command) => `pnpm exec ${command}`).join("\n")}
         </BlocCode>
       </TabItem>
+      <TabItem value="bun" label="bun">
+        <BlocCode>
+          {commands.map((command) => `bun x ${command}`).join("\n")}
+        </BlocCode>
+      </TabItem>
     </Tabs>
   );
 };
