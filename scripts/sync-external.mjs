@@ -7,17 +7,19 @@ const exec = promisify(execCb);
 
 const config = {
   root: "external",
-  repositories: [
+  branch: "main",
+  repo: "argos-ci/argos-javascript",
+  packages: [
     {
-      name: "argos-ci/argos-puppeteer",
+      src: "packages/puppeteer/docs",
       target: "docs/integrations/puppeteer",
     },
     {
-      name: "argos-ci/argos-cypress",
+      src: "packages/cypress/docs",
       target: "docs/integrations/cypress",
     },
     {
-      name: "argos-ci/argos-playwright",
+      src: "packages/playwright/docs",
       target: "docs/integrations/playwright",
     },
   ],
@@ -39,33 +41,33 @@ const exists = async (path) => {
   }
 };
 
-// Creating root folders
-[config.root].map(async (path) => {
-  if (!(await exists(path))) {
-    await mkdir(path);
+async function syncDocs() {
+  // Creating root folders
+  if (!(await exists(config.root))) {
+    await mkdir(config.root);
   }
-});
 
-await Promise.all(
-  config.repositories.map(async (repository) => {
-    const { name, branch = "main", target } = repository;
-    const [, repo] = name.split("/");
-    const path = join(config.root, repo);
+  const [, repoName] = config.repo.split("/");
+  const root = join(config.root, repoName);
 
-    // Syncing repository
-    if (!(await exists(path))) {
-      await exec(
-        `git clone --depth 1 --single-branch --branch ${branch} https://github.com/${name}.git ${path}`
-      );
-    } else {
-      await exec(`git fetch --depth 1 origin ${branch}`, { cwd: path });
-      await exec(`git reset --hard origin/${branch}`, { cwd: path });
-    }
+  // Syncing repository
+  if (!(await exists(root))) {
+    await exec(
+      `git clone --depth 1 --single-branch --branch ${config.branch} https://github.com/${config.repo}.git ${root}`,
+    );
+  } else {
+    await exec(`git fetch --depth 1 origin ${config.branch}`, { cwd: root });
+    await exec(`git reset --hard origin/${config.branch}`, { cwd: root });
+  }
 
-    // Removing existing docs
-    await exec(`rm -rf ${target}`);
+  await Promise.all(
+    config.packages.map(async ({ src, target }) => {
+      // Removing existing docs
+      await exec(`rm -rf ${target}`);
+      // Copying docs
+      await exec(`cp -r ${join(root, src)} ${target}`);
+    }),
+  );
+}
 
-    // Copying docs
-    await exec(`cp -r ${path}/docs ${target}`);
-  })
-);
+await syncDocs();

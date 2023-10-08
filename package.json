@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "rm -rf external && npm run sync-external && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
