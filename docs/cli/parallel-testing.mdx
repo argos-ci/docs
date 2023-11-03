@@ -6,31 +6,21 @@ sidebar_position: 2
 
 # Parallel Testing
 
-Parallelism is a technique for speeding up test suites by running multiple tests concurrently and then combining the results at the end.
+Parallelism, also known as Sharding, enhances test suite efficiency by concurrently executing tests. Argos optimizes this process, automating the configuration.
 
-With `@argos-ci/cli`, you can set up parallel test suites by defining two environment variables:
+For `@argos-ci/cli`, parallelism is controlled via:
 
-- `ARGOS_PARALLEL_NONCE`: a unique build ID for this parallel build. Argos groups uploaded screenshots using this ID.
-- `ARGOS_PARALLEL_TOTAL`: the total number of parallel nodes being run. Argos upload must be called exactly this number of times.
+- `ARGOS_PARALLEL_TOTAL`: Number of parallel nodes. Equal calls to Argos upload are required.
+- `ARGOS_PARALLEL_NONCE`: Unique identifier for the build. Argos automatically generates this for most CI environments.
 
-> Note: Parallel mode can also be set using the `--parallel-nonce` and `--parallel-total` command line arguments.
+> **Note:** Alternatively, use `--parallel-nonce` and `--parallel-total` flags with the CLI.
 
-Once configured, the `@argos-ci/cli upload` command can be run multiple times to aggregate screenshots in the same build
-
-```sh
-export ARGOS_PARALLEL_NONCE=<unique-build-id>
-export ARGOS_PARALLEL_TOTAL=<total-batch-count>
-```
-
-<RunPkgCommand command="argos upload --parallel ./screenshots" />
-
-## Example: Setting up parallel tests with github actions
+## GitHub Actions Example
 
 ```yml title=".github/workflows/ci.yml"
 - name: Upload screenshots to argos-ci.com
   continue-on-error: true
   env:
-    ARGOS_PARALLEL_NONCE: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
     ARGOS_PARALLEL_TOTAL: ${{ strategy['job-total'] }}
   run: npm exec argos upload --parallel ./screenshots
 ```
