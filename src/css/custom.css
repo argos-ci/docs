@@ -173,6 +173,7 @@ code {
   color: var(--ifm-heading-color);
   font-size: 14px;
   padding-left: 12px;
+  padding-top: 20px;
 }
 /* Section content */
 .theme-doc-sidebar-item-category ul.menu__list {
@@ -180,7 +181,7 @@ code {
   margin-left: 12px;
   border-left: solid 1px var(--ifm-toc-border-color);
   font-weight: 400;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
 }
 .theme-doc-sidebar-item-category .menu__list li.menu__list-item {
   margin: 0;

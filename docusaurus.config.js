@@ -34,7 +34,7 @@ const config = {
         docs: {
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
-          sidebarCollapsible: false,
+          sidebarCollapsible: true,
           editUrl: "https://github.com/argos-ci/docs.argos-ci.com/blob/main",
         },
         theme: {
@@ -50,7 +50,11 @@ const config = {
         redirects: [
           {
             from: "/getting-started",
-            to: "/installation",
+            to: "/introduction",
+          },
+          {
+            from: "/installation",
+            to: "/introduction",
           },
         ],
       },

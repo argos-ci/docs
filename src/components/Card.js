@@ -3,15 +3,7 @@ import ChevronRight from "@site/src/components/ChevronRight";
 import Link from "@docusaurus/Link";
 
 export const CardImage = (props) => (
-  <img
-    style={{
-      maxHeight: 25,
-      maxWidth: 25,
-      margin: "auto",
-      filter: "saturate(0%)",
-    }}
-    {...props}
-  />
+  <img style={{ maxHeight: 30, maxWidth: 30 }} {...props} />
 );
 
 export const CardTitle = (props) => <h4 className="title4" {...props} />;
@@ -31,7 +23,7 @@ export const CardArrow = (props) => (
 export const Card = (props) => (
   <div
     className="bordered rounded border-active"
-    style={{ padding: "10px 15px" }}
+    style={{ padding: "20px 24px", height: 115 }}
     {...props}
   />
 );
@@ -41,7 +33,7 @@ export const Cards = (props) => (
     style={{
       paddingLeft: 0,
       display: "grid",
-      gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+      gridTemplateColumns: "repeat(2, minmax(200px, 1fr))",
       marginBottom: 32,
       gridColumnGap: 16,
       gridRowGap: 16,
@@ -53,11 +45,11 @@ export const Cards = (props) => (
 export const CardBody = (props) => (
   <div
     style={{
-      width: "100%",
-      display: "grid",
-      gridTemplateColumns: "auto 16px",
-      alignItems: "center",
-      gap: 16,
+      display: "flex",
+      flexDirection: "column",
+      gap: 24,
+      justifyContent: "center",
+      height: "100%",
     }}
     {...props}
   />
@@ -66,11 +58,9 @@ export const CardBody = (props) => (
 export const IllustratedCardBody = (props) => (
   <div
     style={{
-      width: "100%",
-      display: "grid",
-      gridTemplateColumns: "25px auto 16px",
-      alignItems: "center",
-      gap: 16,
+      display: "flex",
+      flexDirection: "column",
+      gap: 24,
     }}
     {...props}
   />
@@ -83,9 +73,12 @@ export const LinkCard = ({ to, image, children }) => {
     <CardLink to={to}>
       <Card>
         <PickedCardBody>
-          {image ? <CardImage src={image} /> : null}
+          {image ? (
+            <div style={{ height: 25 }}>
+              <CardImage src={image} />
+            </div>
+          ) : null}
           <CardTitle>{children}</CardTitle>
-          <CardArrow />
         </PickedCardBody>
       </Card>
     </CardLink>

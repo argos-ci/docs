@@ -1,0 +1,89 @@
+---
+title: Playwright
+id: playwright
+slug: /playwright
+sidebar_position: 2
+---
+
+import { InstallDevDep, HelpSection, Enjoy } from "@site/src/partials";
+
+# Playwright Quickstart
+
+Integrate Argos with Playwright for enhanced in your CI/CD pipeline.
+
+## Prerequisites
+
+Before starting, ensure that:
+
+- Your project has Playwright installed. [Installation Guide](https://playwright.dev/docs/intro#installing-playwright)
+- You have a CI/CD setup running your E2E tests.
+- You know how to add secrets to your CI environment.
+
+## 1. Install packages
+
+<InstallDevDep dependency="@argos-ci/playwright" />
+
+## 2. Update Playwright config file
+
+Enhance your Playwright configuration to capture screenshots on test failure and utilize the Argos reporter in CI environments.
+
+```js title="playwright.config.ts"
+export default defineConfig({
+  // ...
+
+  use: {
+    // Capture a screenshot when a test fails
+    screenshot: "only-on-failure",
+
+    // Retain traces when a test fails
+    trace: "retain-on-failure",
+  },
+
+  // Add Argos reporter when the tests run on CI
+  reporter: process.env.CI
+    ? [["list"], ["@argos-ci/playwright/reporter"]]
+    : "list",
+});
+```
+
+## 3. Capture screenshots
+
+Capture stabilized screenshot in your tests using the `argosScreenshot` command.
+
+Here's an example test:
+
+```js title="tests/homepage.spec.ts"
+import { test } from "@playwright/test";
+import { argosScreenshot } from "@argos-ci/playwright";
+
+test.describe("Homepage", () => {
+  test("take screenshot", async ({ page }) => {
+    await page.goto("https://localhost:3000");
+    await argosScreenshot(page, "homepage");
+  });
+});
+```
+
+## 4. Create a new Project on Argos
+
+Set up your project in Argos to start receiving screenshots:
+
+1. [Sign in to Argos](http://app.argos-ci.com/signup)
+2. Click on "Create a new project"
+3. Choose your Git provider and click on "Import repository".
+
+## 5. Setup your CI
+
+Screenshots are automatically uploaded in most CI environments.
+
+#### GitHub Actions
+
+Your repository is already
+
+For other platforms other, you need to add the `ARGOS_TOKEN` is an environment variable.
+
+<Enjoy />
+
+---
+
+<HelpSection />

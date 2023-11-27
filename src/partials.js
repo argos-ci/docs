@@ -64,11 +64,11 @@ export const Enjoy = () => (
   <>
     <h2>What's next?</h2>
     <p>
-      Congratulations on installing Argos! 🎉
+      Congratulations on installing Argos! 👏
       <br />
-      The next step is to integrate visual review into your development
-      workflow. Visit our <a href="review-changes">review changes</a> section to
-      learn how to.
+      You can now review the visual changes of your app for each pull request,
+      avoid UI bugs and merge with confidence! Visit our{" "}
+      <a href="review-changes">review changes</a> section to learn how to.
     </p>
   </>
 );

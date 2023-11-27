@@ -20,10 +20,7 @@ You can access `@argos-ci/cli` through our [npm package](https://www.npmjs.com/p
 
 ## Configuration
 
-Your configuration requirements may vary [depending on the CI you use](/upload-screenshots#configure-your-ci). Typically, you'll need to set ARGOS_TOKEN as a secret in the settings.
-
-1. Log into [Argos](https://app.argos-ci.com), navigate to your project settings, and copy your `ARGOS_TOKEN`.
-2. Declare an environment variable called `ARGOS_TOKEN` with the copied value.
+Your configuration requirements may vary depending on the CI you use. Typically, you'll need to set ARGOS_TOKEN as a environment variable (ie. secret).
 
 Note: You can also specify the token with the `--token=<your-repository-token>` argument. However, for security reasons, we recommend using an environment variable instead.
 
