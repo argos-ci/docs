@@ -1,43 +1,39 @@
 ---
-title: Screenshot Viewports
+title: Responsive Viewports
 id: viewports
 slug: /viewports
 sidebar_position: 2
 ---
 
-# Screenshot Viewports
+# Responsive Viewports
 
-Specify viewport options to capture screenshots on this screen sizes.
+Specify various viewports to capture screenshots across multiple screen sizes.
 
-## Supported integrations
+## Supported Integrations
 
-Viewport options is supported by the following integrations: [Playwright](/playwright), [Cypress](/cypress) and [Puppeteer](/puppeteer)
+This feature is available in the following integrations. Refer to the respective integration guide for specific setup instructions.
 
-## Configuration
+- [Playwright](/api/playwright)
+- [Cypress](/api/cypress)
+- [Puppeteer](/puppeteer)
 
-You can set the viewport in several formats:
+## Configuring Viewports
+
+To tailor viewport settings, modify the `argosScreenshot()` command within your tests. This allows for capturing responsive views using either specific dimensions or predefined device presets:
 
 ```js
-{
+await argosScreenshot(..., {
   viewports: [
-    // using dimensions
-    { width: 800, height: 600 },
-    { width: 1400, height: 800 },
-
-    // using presets
-    "iphone-4",
-    "macbook-15",
-
-    // using presets + options
-    { preset: "ipad-2", orientation: "landscape" },
-    { preset: "samsung-s10" },
-  ];
-}
+    "iphone-4", // Device preset
+    { width: 800, height: 600 }, // Direct dimensions
+    { preset: "ipad-2", orientation: "landscape" }, // Preset with options
+  ],
+});
 ```
 
 ## Supported Presets
 
-List of available device presets and their dimensions:
+List of available device presets with their respective dimensions:
 
 | Preset        | Width (px) | Height (px) |
 | ------------- | ---------- | ----------- |
@@ -60,7 +56,7 @@ List of available device presets and their dimensions:
 | samsung-s10   | 360        | 760         |
 | samsung-note9 | 414        | 846         |
 
-## Resizing troubleshoot
+## Troubleshooting and Best Practices
 
 Setting the viewport using `page.setViewportSize()` will resize the page. However, many websites are not designed to adapt dynamically to different viewport sizes. Thus, it's recommended to set the viewport size **before** navigating to the page.
 

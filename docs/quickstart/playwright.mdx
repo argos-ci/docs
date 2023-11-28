@@ -1,45 +1,48 @@
 ---
 title: Playwright
 id: playwright
-slug: /playwright
-sidebar_position: 2
+slug: /quickstart/playwright
+sidebar_position: 1
 ---
 
 import { InstallDevDep, HelpSection, Enjoy } from "@site/src/partials";
 
 # Playwright Quickstart
 
-Integrate Argos with Playwright for enhanced in your CI/CD pipeline.
+Learn how to connect your Playwright project to Argos.
 
 ## Prerequisites
 
 Before starting, ensure that:
 
-- Your project has Playwright installed. [Installation Guide](https://playwright.dev/docs/intro#installing-playwright)
-- You have a CI/CD setup running your E2E tests.
-- You know how to add secrets to your CI environment.
+- Playwright [is installed](https://playwright.dev/docs/intro#installing-playwright) in your project.
+- A CI/CD setup is in place to run your E2E tests.
+- You know how to add a environment variables (ie. secret) to your CI.
 
 ## 1. Install packages
 
 <InstallDevDep dependency="@argos-ci/playwright" />
 
+Read the `@argos-ci/playwright` [package doc](/playwright).
+
 ## 2. Update Playwright config file
 
-Enhance your Playwright configuration to capture screenshots on test failure and utilize the Argos reporter in CI environments.
+Configure Playwright to capture screenshots on test failures and to use the Argos reporter in CI environments.
+
+In your `playwright.config.ts`, add:
 
 ```js title="playwright.config.ts"
 export default defineConfig({
   // ...
-
   use: {
     // Capture a screenshot when a test fails
     screenshot: "only-on-failure",
 
-    // Retain traces when a test fails
+    // Keeps traces for failed tests
     trace: "retain-on-failure",
   },
 
-  // Add Argos reporter when the tests run on CI
+  // Adds Argos reporter in CI environments
   reporter: process.env.CI
     ? [["list"], ["@argos-ci/playwright/reporter"]]
     : "list",
@@ -48,39 +51,32 @@ export default defineConfig({
 
 ## 3. Capture screenshots
 
-Capture stabilized screenshot in your tests using the `argosScreenshot` command.
+In your tests, use `argosScreenshot` to capture stable screenshots and send them to Argos.
 
-Here's an example test:
+For example:
 
 ```js title="tests/homepage.spec.ts"
-import { test } from "@playwright/test";
-import { argosScreenshot } from "@argos-ci/playwright";
-
-test.describe("Homepage", () => {
-  test("take screenshot", async ({ page }) => {
-    await page.goto("https://localhost:3000");
-    await argosScreenshot(page, "homepage");
-  });
+test("screenshot homepage", async ({ page }) => {
+  await page.goto("https://localhost:3000");
+  await argosScreenshot(page, "homepage");
 });
 ```
 
-## 4. Create a new Project on Argos
+## 4. Set up your Project in Argos
 
-Set up your project in Argos to start receiving screenshots:
+Follow these steps to set up your project in Argos:
 
-1. [Sign in to Argos](http://app.argos-ci.com/signup)
-2. Click on "Create a new project"
-3. Choose your Git provider and click on "Import repository".
+1. [Sign up](http://app.argos-ci.com/signup) on Argos.
+2. Click on "Create a new project".
+3. Select your Git provider and import your repository.
 
 ## 5. Setup your CI
 
-Screenshots are automatically uploaded in most CI environments.
+Quickly integrate Argos with your CI setup:
 
-#### GitHub Actions
+- **GitHub Actions** — No extra setup required! Argos works out-of-the-box with Playwright and GitHub Actions, using a tokenless strategy for pull requests.
 
-Your repository is already
-
-For other platforms other, you need to add the `ARGOS_TOKEN` is an environment variable.
+- **Other CI Platforms** — Simply add `ARGOS_TOKEN` to your CI environment variables.
 
 <Enjoy />
 

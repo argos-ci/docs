@@ -1,0 +1,87 @@
+---
+title: Cypress
+id: cypress
+slug: /quickstart/cypress
+sidebar_position: 2
+---
+
+import { InstallDevDep, HelpSection, Enjoy } from "@site/src/partials";
+
+# Cypress Quickstart
+
+Learn how to connect your Cypress project to Argos.
+
+## Prerequisites
+
+Before starting, ensure that:
+
+- Cypress [is installed](https://docs.cypress.io/guides/getting-started/installing-cypress) in your project.
+- A CI/CD setup is in place to run your E2E tests.
+- You know how to add a environment variables (ie. secret) to your CI.
+
+## 1. Install packages
+
+<InstallDevDep dependency="@argos-ci/cli @argos-ci/cypress" />
+
+Read the `@argos-ci/cypress` [package doc](/cypress).
+
+## 2. Update Cypress config file
+
+Copy/past this code at the end of your `cypress/support/index.js` file.
+
+```js cypress/support/index.js
+import "@argos-ci/cypress/support";
+```
+
+## 3. Capture screenshots
+
+In your tests, use `argosScreenshot` to capture stable screenshots and send them to Argos.
+
+For example:
+
+```js title="cypress/e2e/homepage.cy.js"
+it("screenshot homepage", async ({ page }) => {
+  cy.visit("https://localhost:3000");
+  cy.argosScreenshot("homepage");
+});
+```
+
+#### TypeScript support
+
+To add typings for TypeScript, update your `tsconfig.json`:
+
+```js title="tsconfig.json"
+{
+  "compilerOptions": {
+    "types": ["cypress", "@argos-ci/cypress"]
+  }
+}
+```
+
+## 4. Set up your Project in Argos
+
+Follow these steps to set up your project in Argos:
+
+1. [Sign up](http://app.argos-ci.com/signup) on Argos.
+2. Click on "Create a new project".
+3. Select your Git provider and import your repository.
+
+## 5. Setup your CI
+
+Add this command to your CI pipeline to upload the screenshots to Argos.
+
+```sh
+npx @argos-ci/cli upload cypress/screenshots
+```
+
+Then,
+
+- **GitHub Actions** — No extra setup required! Argos works out-of-the-box with GitHub Actions, using a tokenless strategy for pull requests.
+
+- **Other CI Platforms** — Add `ARGOS_TOKEN` to your CI environment variables.
+
+<Enjoy />
+
+---
+
+<HelpSection />
