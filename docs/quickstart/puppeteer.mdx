@@ -1,0 +1,61 @@
+---
+title: Puppeteer
+id: puppeteer
+slug: /quickstart/puppeteer
+sidebar_position: 2
+---
+
+import {
+  InstallDevDep,
+  HelpSection,
+  Enjoy,
+  AddSecret,
+  SetUpProjectInArgos,
+} from "@site/src/partials";
+
+# Puppeteer Quickstart
+
+Learn how to connect your Puppeteer project to Argos.
+
+## Prerequisites
+
+- Puppeteer [is installed](https://pptr.dev/#installation) in your project.
+- A CI/CD setup is in place to run your E2E tests.
+- You know how to add environment variables (i.e., secrets) to your CI.
+
+## 1. Install packages
+
+<InstallDevDep dependency="@argos-ci/cli @argos-ci/puppeteer" />
+
+Learn more about [Argos CLI](/argos-cli) and [@argos-ci/puppeteer](/puppeteer).
+
+## 2. Capture screenshots
+
+In your tests, use `argosScreenshot` to capture stable screenshots and send them to Argos.
+
+```js title="homepage.test.js"
+import puppeteer from "puppeteer";
+import { argosScreenshot } from "@argos-ci/puppeteer";
+
+describe("Integration test with visual testing", () => {
+  it("loads the homepage", async () => {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto(TEST_URL);
+    await argosScreenshot(page, this.test.fullTitle());
+  });
+});
+```
+
+## 3. Set up a Project in Argos
+
+<SetUpProjectInArgos />
+
+## 4. Setup your CI
+
+<AddSecret />
+<Enjoy />
+
+---
+
+<HelpSection />

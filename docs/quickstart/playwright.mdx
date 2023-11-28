@@ -5,7 +5,12 @@ slug: /quickstart/playwright
 sidebar_position: 1
 ---
 
-import { InstallDevDep, HelpSection, Enjoy } from "@site/src/partials";
+import {
+  InstallDevDep,
+  HelpSection,
+  SetUpProjectInArgos,
+  Enjoy,
+} from "@site/src/partials";
 
 # Playwright Quickstart
 
@@ -23,7 +28,7 @@ Before starting, ensure that:
 
 <InstallDevDep dependency="@argos-ci/playwright" />
 
-Read the `@argos-ci/playwright` [package doc](/playwright).
+Learn more about [Argos CLI](/argos-cli) and [@argos-ci/playwright](/playwright).
 
 ## 2. Update Playwright config file
 
@@ -62,13 +67,9 @@ test("screenshot homepage", async ({ page }) => {
 });
 ```
 
-## 4. Set up your Project in Argos
+## 4. Set up a Project in Argos
 
-Follow these steps to set up your project in Argos:
-
-1. [Sign up](http://app.argos-ci.com/signup) on Argos.
-2. Click on "Create a new project".
-3. Select your Git provider and import your repository.
+<SetUpProjectInArgos />
 
 ## 5. Setup your CI
 

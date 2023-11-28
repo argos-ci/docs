@@ -1,5 +1,5 @@
 import * as React from "react";
-import BlocCode from "@theme/CodeBlock";
+import CodeBlock from "@theme/CodeBlock";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
@@ -7,16 +7,16 @@ export const InstallDevDep = ({ dependency }) => {
   return (
     <Tabs groupId="package-managers">
       <TabItem value="npm" label="npm" default>
-        <BlocCode>npm i --save-dev {dependency}</BlocCode>
+        <CodeBlock>npm i --save-dev {dependency}</CodeBlock>
       </TabItem>
       <TabItem value="yarn" label="yarn">
-        <BlocCode>yarn add --dev {dependency}</BlocCode>
+        <CodeBlock>yarn add --dev {dependency}</CodeBlock>
       </TabItem>
       <TabItem value="pnpm" label="pnpm">
-        <BlocCode>pnpm add --save-dev {dependency}</BlocCode>
+        <CodeBlock>pnpm add --save-dev {dependency}</CodeBlock>
       </TabItem>
       <TabItem value="bun" label="bun">
-        <BlocCode>bun add --dev {dependency}</BlocCode>
+        <CodeBlock>bun add --dev {dependency}</CodeBlock>
       </TabItem>
     </Tabs>
   );
@@ -27,24 +27,24 @@ export const RunPkgCommand = ({ command }) => {
   return (
     <Tabs groupId="package-managers">
       <TabItem value="npm" label="npm" default>
-        <BlocCode>
+        <CodeBlock>
           {commands.map((command) => `npm exec ${command}`).join("\n")}
-        </BlocCode>
+        </CodeBlock>
       </TabItem>
       <TabItem value="yarn" label="yarn">
-        <BlocCode>
+        <CodeBlock>
           {commands.map((command) => `yarn run ${command}`).join("\n")}
-        </BlocCode>
+        </CodeBlock>
       </TabItem>
       <TabItem value="pnpm" label="pnpm">
-        <BlocCode>
+        <CodeBlock>
           {commands.map((command) => `pnpm exec ${command}`).join("\n")}
-        </BlocCode>
+        </CodeBlock>
       </TabItem>
       <TabItem value="bun" label="bun">
-        <BlocCode>
+        <CodeBlock>
           {commands.map((command) => `bun x ${command}`).join("\n")}
-        </BlocCode>
+        </CodeBlock>
       </TabItem>
     </Tabs>
   );
@@ -91,4 +91,38 @@ export const HelpSection = () => (
     <a href="https://argos-ci.com/discord">join our Discord</a> for support.
     We're here to help!
   </>
+);
+
+export const SetUpProjectInArgos = () => (
+  <div>
+    <p>Follow these steps to set up your project in Argos:</p>
+    <ol>
+      <li>
+        <a href="https://app.argos-ci.com/signup">Sign up</a> on Argos.
+      </li>
+      <li>Click on "Create a new project".</li>
+      <li>Select your Git provider and import your repository.</li>
+    </ol>
+  </div>
+);
+
+export const AddSecret = () => (
+  <div>
+    <p>
+      Add this command to your CI pipeline to upload the screenshots to Argos.
+    </p>
+    <CodeBlock>npx @argos-ci/cli upload cypress/screenshots</CodeBlock>
+    <p>Then,</p>
+    <ul>
+      <li>
+        <span style={{ fontWeight: 600 }}>Github Actions</span> — No extra setup
+        required! Argos works out-of-the-box with GitHub Actions, using a
+        tokenless strategy for pull requests.
+      </li>
+      <li>
+        <span style={{ fontWeight: 600 }}>Other CI Platforms</span> — Add{" "}
+        <code>ARGOS_TOKEN</code> to your CI environment variables.
+      </li>
+    </ul>
+  </div>
 );

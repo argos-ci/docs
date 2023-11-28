@@ -12,15 +12,15 @@ const config = {
   packages: [
     {
       src: "packages/puppeteer/docs",
-      target: "docs/api/puppeteer",
+      target: "docs/puppeteer",
     },
     {
       src: "packages/cypress/docs",
-      target: "docs/api/cypress",
+      target: "docs/cypress",
     },
     {
       src: "packages/playwright/docs",
-      target: "docs/api/playwright",
+      target: "docs/playwright",
     },
   ],
 };
