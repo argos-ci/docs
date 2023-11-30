@@ -50,11 +50,7 @@ const config = {
         redirects: [
           {
             from: "/getting-started",
-            to: "/introduction",
-          },
-          {
-            from: "/installation",
-            to: "/introduction",
+            to: "/installation",
           },
         ],
       },

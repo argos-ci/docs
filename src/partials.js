@@ -62,10 +62,8 @@ export const RepositoryExampleLink = () => (
 
 export const Enjoy = () => (
   <>
-    <h2>What's next?</h2>
+    <h2>Congratulations on installing Argos! 👏</h2>
     <p>
-      Congratulations on installing Argos! 👏
-      <br />
       You can now review the visual changes of your app for each pull request,
       avoid UI bugs and merge with confidence! Visit our{" "}
       <a href="review-changes">review changes</a> section to learn how to.

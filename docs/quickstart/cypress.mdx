@@ -15,21 +15,18 @@ import {
 
 # Cypress Quickstart
 
-Learn how to connect your Cypress project to Argos.
+How to connect your Cypress project to Argos.
 
 ## Prerequisites
 
 Before starting, ensure that:
 
 - Cypress [is installed](https://docs.cypress.io/guides/getting-started/installing-cypress) in your project.
-- A CI/CD setup is in place to run your E2E tests.
-- You know how to add a environment variables (ie. secret) to your CI.
+- A CI/CD setup running your E2E tests
 
 ## 1. Install packages
 
 <InstallDevDep dependency="@argos-ci/cli @argos-ci/cypress" />
-
-Learn more about [Argos CLI](/argos-cli) and [@argos-ci/cypress](/cypress).
 
 ## 2. Update Cypress config file
 
@@ -41,7 +38,7 @@ import "@argos-ci/cypress/support";
 
 ## 3. Capture screenshots
 
-In your tests, use `argosScreenshot` to capture stable screenshots and send them to Argos.
+In your E2E tests, use `argosScreenshot` to capture stable screenshots.
 
 For example:
 
@@ -73,6 +70,12 @@ To add typings for TypeScript, update your `tsconfig.json`:
 <AddSecret />
 
 <Enjoy />
+
+### Additional Resources
+
+- [Example of Argos + Cypress](https://github.com/argos-ci/argos/tree/main/examples/cypress)
+- [@argos-ci/cypress package doc](/cypress)
+- [Argos CLI doc](/argos-cli)
 
 ---
 

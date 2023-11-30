@@ -14,21 +14,18 @@ import {
 
 # Playwright Quickstart
 
-Learn how to connect your Playwright project to Argos.
+How to connect your Playwright project to Argos.
 
 ## Prerequisites
 
 Before starting, ensure that:
 
 - Playwright [is installed](https://playwright.dev/docs/intro#installing-playwright) in your project.
-- A CI/CD setup is in place to run your E2E tests.
-- You know how to add a environment variables (ie. secret) to your CI.
+- A CI/CD setup running your E2E tests
 
 ## 1. Install packages
 
 <InstallDevDep dependency="@argos-ci/playwright" />
-
-Learn more about [Argos CLI](/argos-cli) and [@argos-ci/playwright](/playwright).
 
 ## 2. Update Playwright config file
 
@@ -56,7 +53,7 @@ export default defineConfig({
 
 ## 3. Capture screenshots
 
-In your tests, use `argosScreenshot` to capture stable screenshots and send them to Argos.
+In your E2E tests, use `argosScreenshot` to capture stable screenshots.
 
 For example:
 
@@ -80,6 +77,12 @@ Quickly integrate Argos with your CI setup:
 - **Other CI Platforms** — Simply add `ARGOS_TOKEN` to your CI environment variables.
 
 <Enjoy />
+
+### Additional Resources
+
+- [Example of Argos + Playwright](https://github.com/argos-ci/argos/tree/main/examples/playwright)
+- [@argos-ci/playwright package doc](/playwright)
+- [Argos CLI doc](/argos-cli)
 
 ---
 
