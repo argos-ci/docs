@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const ChevronRight = (props) => (
+export const ChevronRight = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -14,5 +14,3 @@ const ChevronRight = (props) => (
     />
   </svg>
 );
-
-export default ChevronRight;

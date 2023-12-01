@@ -1,8 +1,8 @@
 ---
-title: Next
-id: next
-slug: /quickstart/next
-sidebar_position: 3
+title: Next.js
+id: next-js
+slug: /quickstart/next-js
+sidebar_position: 4
 ---
 
 import {
@@ -13,24 +13,17 @@ import {
   SetUpProjectInArgos,
 } from "@site/src/partials";
 
-# Next Quickstart
+# Next.js Quickstart
 
-Learn how to connect your Next project to Argos.
-
-## Prerequisites
-
-Ensure that:
-
-- You have a [Next project installed](https://nextjs.org/docs/getting-started/installation)
-- Playwright [is installed](https://playwright.dev/docs/intro#installing-playwright) in your project.
-- A CI/CD setup running your E2E tests
+Learn how to connect your Next.js project to Argos.
 
 ## Prerequisites
 
 Ensure that:
 
-- Playwright [is installed](https://playwright.dev/docs/intro#installing-playwright) in your project.
-- A CI/CD setup running your E2E tests
+- You work on a [Next.js](https://nextjs.org/) project
+- Playwright [is installed](https://playwright.dev/docs/intro#installing-playwright)
+- A [CI/CD run your E2E tests](https://playwright.dev/docs/ci-intro#on-pushpull_request)
 
 ## 1. Install packages
 
@@ -40,23 +33,22 @@ Ensure that:
 
 Configure Playwright to capture screenshots on test failures and to use the Argos reporter in CI environments.
 
-In your `playwright.config.ts`, add:
+Update playwright's config file:
 
 ```js title="playwright.config.ts"
 export default defineConfig({
   // ...
-  use: {
-    // Capture a screenshot when a test fails
-    screenshot: "only-on-failure",
-
-    // Keeps traces for failed tests
-    trace: "retain-on-failure",
-  },
-
   // Adds Argos reporter in CI environments
   reporter: process.env.CI
     ? [["list"], ["@argos-ci/playwright/reporter"]]
     : "list",
+
+  use: {
+    // Capture a screenshot when a test fails
+    screenshot: "only-on-failure",
+    // Keeps traces for failed tests
+    trace: "retain-on-failure",
+  },
 });
 ```
 
@@ -68,7 +60,7 @@ For example:
 
 ```js title="tests/homepage.spec.ts"
 test("screenshot homepage", async ({ page }) => {
-  await page.goto("https://localhost:3000");
+  await page.goto("http://localhost:3000");
   await argosScreenshot(page, "homepage");
 });
 ```

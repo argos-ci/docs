@@ -5,7 +5,7 @@ sidebar_position: 1
 title: Installation
 ---
 
-import { Card } from "@site/src/components/Card";
+import { Card, CardLink, CardBody, CardTitle } from "@site/src/components/Card";
 import {
   StepList,
   Step,
@@ -21,6 +21,8 @@ import {
 } from "@site/src/components/Feature";
 
 import { LinkCard, Cards } from "@site/src/components/Card";
+import { RemixLogo } from "@site/src/components/icons/Remix";
+import { NextLogo } from "@site/src/components/icons/Next";
 import { AfterScreenshotSetup } from "@site/src/partials";
 
 import cameraIcon from "@site/src/img/camera-icon.png";
@@ -45,5 +47,21 @@ Argos enable UI changes verification within your pull request reviews.
   <LinkCard to="/puppeteer" image={puppeteerLogo}>
     Puppeteer
   </LinkCard>
-  <LinkCard to="/with-any-e2e-tool">Other</LinkCard>
+  <CardLink to="/quickstart/next-js">
+    <Card>
+      <CardBody>
+        <NextLogo style={{ color: "white", maxWidth: 30, maxHeight: 30 }} />
+        <CardTitle>Next</CardTitle>
+      </CardBody>
+    </Card>
+  </CardLink>
+  <CardLink to="/quickstart/remix">
+    <Card>
+      <CardBody>
+        <RemixLogo style={{ color: "white", maxWidth: 30, maxHeight: 30 }} />
+        <CardTitle>Remix</CardTitle>
+      </CardBody>
+    </Card>
+  </CardLink>
+  <LinkCard to="/with-any-e2e-tool">With any E2E tool</LinkCard>
 </Cards>

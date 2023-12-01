@@ -1,5 +1,5 @@
 import React from "react";
-import ChevronRight from "@site/src/components/ChevronRight";
+import { ChevronRight } from "@site/src/components/icons/ChevronRight";
 import Link from "@docusaurus/Link";
 
 export const CardImage = (props) => (

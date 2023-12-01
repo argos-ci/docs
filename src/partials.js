@@ -96,7 +96,8 @@ export const SetUpProjectInArgos = () => (
     <p>Follow these steps to set up your project in Argos:</p>
     <ol>
       <li>
-        <a href="https://app.argos-ci.com/signup">Sign up</a> on Argos.
+        <a href="https://app.argos-ci.com/signup">Sign up</a> or{" "}
+        <a href="https://app.argos-ci.com/login">Login to</a> to Argos.
       </li>
       <li>Click on "Create a new project".</li>
       <li>Select your Git provider and import your repository.</li>

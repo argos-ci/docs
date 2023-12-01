@@ -20,8 +20,8 @@ How to connect your Playwright project to Argos.
 
 Ensure that:
 
-- Playwright [is installed](https://playwright.dev/docs/intro#installing-playwright) in your project.
-- A CI/CD setup running your E2E tests
+- Playwright [is installed](https://playwright.dev/docs/intro#installing-playwright) on your project
+- A [CI/CD run your E2E tests](https://playwright.dev/docs/ci-intro#on-pushpull_request)
 
 ## 1. Install packages
 
@@ -31,11 +31,16 @@ Ensure that:
 
 Configure Playwright to capture screenshots on test failures and to use the Argos reporter in CI environments.
 
-In your `playwright.config.ts`, add:
+Update playwright's config file:
 
 ```js title="playwright.config.ts"
 export default defineConfig({
   // ...
+  // Adds Argos reporter in CI environments
+  reporter: process.env.CI
+    ? [["list"], ["@argos-ci/playwright/reporter"]]
+    : "list",
+
   use: {
     // Capture a screenshot when a test fails
     screenshot: "only-on-failure",
@@ -43,11 +48,6 @@ export default defineConfig({
     // Keeps traces for failed tests
     trace: "retain-on-failure",
   },
-
-  // Adds Argos reporter in CI environments
-  reporter: process.env.CI
-    ? [["list"], ["@argos-ci/playwright/reporter"]]
-    : "list",
 });
 ```
 
