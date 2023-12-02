@@ -1,16 +1,19 @@
 ---
-title: Next.js
-id: next-js
 slug: /quickstart/next-js
+title: Next.js
 sidebar_position: 4
 ---
 
 import {
-  InstallDevDep,
-  HelpSection,
-  Enjoy,
   AddSecret,
+  Congratulation,
+  AdditionalResources,
+  HelpSection,
+  InstallDevDep,
   SetUpProjectInArgos,
+  PlaywrightConfig,
+  PlaywrightCaptureScreenshot,
+  PlaywrightSetupCI,
 } from "@site/src/partials";
 
 # Next.js Quickstart
@@ -19,7 +22,9 @@ Learn how to connect your Next.js project to Argos.
 
 ## Prerequisites
 
-Ensure that:
+To integrate Argos with Next.js, ensure Playwright is set up for E2E testing. If using a different E2E tool, see [our specific guides](/getting-started).
+
+Before starting, ensure that:
 
 - You work on a [Next.js](https://nextjs.org/) project
 - Playwright [is installed](https://playwright.dev/docs/intro#installing-playwright)
@@ -29,41 +34,13 @@ Ensure that:
 
 <InstallDevDep dependency="@argos-ci/playwright" />
 
-## 2. Update Playwright config file
+## 2. Update Playwright config
 
-Configure Playwright to capture screenshots on test failures and to use the Argos reporter in CI environments.
-
-Update playwright's config file:
-
-```js title="playwright.config.ts"
-export default defineConfig({
-  // ...
-  // Adds Argos reporter in CI environments
-  reporter: process.env.CI
-    ? [["list"], ["@argos-ci/playwright/reporter"]]
-    : "list",
-
-  use: {
-    // Capture a screenshot when a test fails
-    screenshot: "only-on-failure",
-    // Keeps traces for failed tests
-    trace: "retain-on-failure",
-  },
-});
-```
+<PlaywrightConfig />
 
 ## 3. Capture screenshots
 
-In your E2E tests, use `argosScreenshot` to capture stable screenshots.
-
-For example:
-
-```js title="tests/homepage.spec.ts"
-test("screenshot homepage", async ({ page }) => {
-  await page.goto("http://localhost:3000");
-  await argosScreenshot(page, "homepage");
-});
-```
+<PlaywrightCaptureScreenshot />
 
 ## 4. Set up a Project in Argos
 
@@ -71,19 +48,15 @@ test("screenshot homepage", async ({ page }) => {
 
 ## 5. Setup your CI
 
-Quickly integrate Argos with your CI setup:
+<PlaywrightSetupCI />
 
-- **GitHub Actions** — No extra setup required! Argos works out-of-the-box with Playwright and GitHub Actions, using a tokenless strategy for pull requests.
+<Congratulation />
 
-- **Other CI Platforms** — Simply add `ARGOS_TOKEN` to your CI environment variables.
-
-<Enjoy />
-
-### Additional Resources
-
-- [Example of Argos + Playwright](https://github.com/argos-ci/argos/tree/main/examples/playwright)
-- [@argos-ci/playwright package doc](/playwright)
-- [Argos CLI doc](/argos-cli)
+<AdditionalResources>
+  <li>
+    <a href="/playwright">@argos-ci/playwright package doc</a>
+  </li>
+</AdditionalResources>
 
 ---
 

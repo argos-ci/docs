@@ -49,8 +49,8 @@ const config = {
       {
         redirects: [
           {
-            from: "/getting-started",
-            to: "/installation",
+            from: "/installation",
+            to: "/getting-started",
           },
         ],
       },
@@ -72,7 +72,7 @@ const config = {
           alt: "Argos CI",
           src: "img/logo-nav-light.svg",
           srcDark: "img/logo-nav-dark.svg",
-          href: "/installation",
+          href: "/getting-started",
         },
         items: [
           {

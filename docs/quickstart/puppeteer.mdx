@@ -1,15 +1,15 @@
 ---
-title: Puppeteer
-id: puppeteer
 slug: /quickstart/puppeteer
+title: Puppeteer
 sidebar_position: 3
 ---
 
 import {
-  InstallDevDep,
-  HelpSection,
-  Enjoy,
   AddSecret,
+  Congratulation,
+  AdditionalResources,
+  HelpSection,
+  InstallDevDep,
   SetUpProjectInArgos,
 } from "@site/src/partials";
 
@@ -19,7 +19,7 @@ Learn how to connect your Puppeteer project to Argos.
 
 ## Prerequisites
 
-Ensure that:
+Before starting, ensure that:
 
 - Puppeteer [is installed](https://pptr.dev/#getting-started)
 - A CI/CD run your E2E tests
@@ -52,12 +52,13 @@ const puppeteer = require("puppeteer");
 ## 4. Setup your CI
 
 <AddSecret />
-<Enjoy />
+<Congratulation />
 
-### Additional Resources
-
-- [@argos-ci/puppeteer package doc](/puppeteer)
-- [Argos CLI doc](/argos-cli)
+<AdditionalResources>
+  <li>
+    <a href="/puppeteer">@argos-ci/puppeteer package doc</a>
+  </li>
+</AdditionalResources>
 
 ---
 

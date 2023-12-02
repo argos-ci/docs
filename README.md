@@ -10,5 +10,5 @@ Argos documentation available on [argos-ci.com/docs](https://argos-ci.com/docs).
 
 ## Highlights
 
-- [Installation](https://argos-ci.com/docs/installation)
+- [Installation](https://argos-ci.com/docs/getting-started)
 - [Join us on Discord](https://argos-ci.com/discord)

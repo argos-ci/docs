@@ -350,3 +350,7 @@ nav.menu {
   vertical-align: middle;
   white-space: nowrap;
 }
+
+.tabs__item {
+  padding: 8px 16px;
+}

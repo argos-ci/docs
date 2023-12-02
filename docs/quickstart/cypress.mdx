@@ -1,16 +1,16 @@
 ---
-title: Cypress
-id: cypress
 slug: /quickstart/cypress
+title: Cypress
 sidebar_position: 2
 ---
 
 import {
-  InstallDevDep,
-  HelpSection,
-  Enjoy,
-  SetUpProjectInArgos,
   AddSecret,
+  Congratulation,
+  AdditionalResources,
+  HelpSection,
+  InstallDevDep,
+  SetUpProjectInArgos,
 } from "@site/src/partials";
 
 # Cypress Quickstart
@@ -19,7 +19,7 @@ How to connect your Cypress project to Argos.
 
 ## Prerequisites
 
-Ensure that:
+Before starting, ensure that:
 
 - Cypress [is installed](https://docs.cypress.io/guides/getting-started/installing-cypress) on your project
 - A [CI/CD run your E2E tests](https://playwright.dev/docs/ci-intro#on-pushpull_request)
@@ -49,7 +49,9 @@ it("screenshot homepage", async ({ page }) => {
 });
 ```
 
-#### TypeScript support
+**Note:** Consider adding `/cypress/screenshots` directory in your `.gitignore` file, to avoid uploading screenshots to your Git repository.
+
+### TypeScript support
 
 To add typings for TypeScript, update your `tsconfig.json`:
 
@@ -69,13 +71,13 @@ To add typings for TypeScript, update your `tsconfig.json`:
 
 <AddSecret />
 
-<Enjoy />
+<Congratulation />
 
-### Additional Resources
-
-- [Example of Argos + Cypress](https://github.com/argos-ci/argos/tree/main/examples/cypress)
-- [@argos-ci/cypress package doc](/cypress)
-- [Argos CLI doc](/argos-cli)
+<AdditionalResources>
+  <li>
+    <a href="/cypress">@argos-ci/cypress package doc</a>
+  </li>
+</AdditionalResources>
 
 ---
 
