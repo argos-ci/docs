@@ -190,6 +190,11 @@ test("screenshot homepage", async ({ page }) => {
   await argosScreenshot(page, "homepage");
 });`}
     </CodeBlock>
+    <p>
+      <span style={{ fontWeight: 600 }}>Tip</span>: Check out our guide to{" "}
+      <a href="/screenshot-pages-script">streamline page screenshot captures</a>
+      .
+    </p>
   </div>
 );
 

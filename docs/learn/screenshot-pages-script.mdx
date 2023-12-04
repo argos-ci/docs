@@ -1,0 +1,86 @@
+---
+slug: /screenshot-pages-script
+title: Streamline Pages Screenshot
+sidebar_position: 1
+---
+
+# Streamline Pages Screenshot Capture
+
+A practical script to efficiently capture screenshots of various web pages.
+
+## Playwright
+
+```js
+import { test } from "@playwright/test";
+import { argosScreenshot } from "@argos-ci/playwright";
+
+const baseUrl = "http:localhost:3000";
+const pages = [
+  { name: "homepage", path: "/" },
+  { name: "faq", path: "/faq" },
+  { name: "contact", path: "/contact-us" },
+  { name: "pricing", path: "/pricing" },
+];
+
+test("screenshot pages", async ({ page, browserName }) => {
+  for (const { name, path } of pages) {
+    await page.goto(`${baseUrl}${path}`);
+    await argosScreenshot(page, `${name}-${browserName}`);
+  }
+});
+```
+
+See [responsive screenshots](/viewports) option to capture screenshot on various screen sizes.
+
+## Cypress
+
+```js
+describe("Screenshot pages", () => {
+  const baseUrl = "http://localhost:3000";
+
+  const pages = [
+    { name: "homepage", path: "/" },
+    { name: "faq", path: "/faq" },
+    { name: "contact", path: "/contact-us" },
+    { name: "pricing", path: "/pricing" },
+  ];
+
+  for (const { name, path } of pages) {
+    it(`Screenshots for ${name}`, () => {
+      cy.visit(`${baseUrl}${path}`);
+      cy.argosScreenshot(name);
+    });
+  }
+});
+```
+
+See [responsive screenshots](/viewports) option to capture screenshot on various screen sizes.
+
+## Puppeteer
+
+```javascript
+import puppeteer from "puppeteer";
+import { argosScreenshot } from "@argos-ci/puppeteer";
+
+(async () => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+
+  const baseUrl = "http://localhost:3000";
+  const pages = [
+    { name: "homepage", path: "/" },
+    { name: "faq", path: "/faq" },
+    { name: "contact", path: "/contact-us" },
+    { name: "pricing", path: "/pricing" },
+  ];
+
+  for (const { name, path } of pages) {
+    await page.goto(`${baseUrl}${path}`);
+    await page.screenshot({ path: `${name}.png` });
+  }
+
+  await browser.close();
+})();
+```
+
+See [responsive screenshots](/viewports) option to capture screenshot on various screen sizes.
