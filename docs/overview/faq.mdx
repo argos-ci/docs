@@ -1,0 +1,46 @@
+---
+slug: /faq
+title: FAQ
+sidebar_position: 10
+---
+
+import { Tag } from "@site/src/components/Tag";
+
+# FAQ
+
+Frequently asked questions (FAQ) and how to resolve common issues in Argos.
+
+## How to invite someone to my Argos team?
+
+Navigate to your team settings, scroll down to members section, and click on "Invite Link". You can now share the team's link with the individuals you want to invite.
+
+::::info
+Everyone has access to Argos public repositories.
+::::
+
+## How do I update the screenshot comparison baseline?
+
+Argos updates the comparison baseline screenshots when a commit is merged into the project's reference branch.
+
+## What is an orphan build?
+
+An orphan build is the first build performed on a reference branch. It won't show any comparison. The screenshots of this build will be considered as the baseline for the following comparisons.
+
+## Why share repositories with Argos?
+
+Sharing repositories with Argos during installation on GitHub or GitLab allows Argos to access your projects. This is essential for comparing pull requests with reference builds and automatically synchronizing your user list.
+
+## How do I update the repositories list shared with Argos?
+
+After you've set up the Argos app, you can modify the repositories you've allowed Argos to access. Please refer to the relevant section in our detailed [GitHub doc](/github) or [GitLab doc](/gitlab).
+
+## What app permissions does Argos require on Github?
+
+Argos requires the following GitHub app permissions to function:
+
+- **Contents** — used to find a common commit ancestor between branches
+- **Statuses** — used to add statuses to commits
+- **Pull requests** — used to add comments in pull requests
+- **Actions** — used to allow tokenless authentication
+
+We take your security and privacy seriously. If you have any concerns or questions, please don't hesitate to [contact us](/contact-us).

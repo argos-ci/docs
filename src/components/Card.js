@@ -1,14 +1,25 @@
 import React from "react";
-import ChevronRight from "@site/src/components/ChevronRight";
+import { ChevronRight } from "@site/src/components/icons/ChevronRight";
 import Link from "@docusaurus/Link";
+
+export const CardImageContainer = (props) => (
+  <div
+    style={{
+      width: 40,
+      height: 35,
+      display: "flex",
+      justifyItems: "center",
+    }}
+    {...props}
+  />
+);
 
 export const CardImage = (props) => (
   <img
     style={{
-      maxHeight: 25,
-      maxWidth: 25,
+      maxHeight: 35,
+      maxWidth: 30,
       margin: "auto",
-      filter: "saturate(0%)",
     }}
     {...props}
   />
@@ -31,7 +42,12 @@ export const CardArrow = (props) => (
 export const Card = (props) => (
   <div
     className="bordered rounded border-active"
-    style={{ padding: "10px 15px" }}
+    style={{
+      padding: "10px 15px",
+      minHeight: 80,
+      display: "flex",
+      alignItems: "center",
+    }}
     {...props}
   />
 );
@@ -41,7 +57,7 @@ export const Cards = (props) => (
     style={{
       paddingLeft: 0,
       display: "grid",
-      gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+      gridTemplateColumns: "repeat(2, minmax(200px, 300px))",
       marginBottom: 32,
       gridColumnGap: 16,
       gridRowGap: 16,
@@ -83,7 +99,11 @@ export const LinkCard = ({ to, image, children }) => {
     <CardLink to={to}>
       <Card>
         <PickedCardBody>
-          {image ? <CardImage src={image} /> : null}
+          {image ? (
+            <CardImageContainer>
+              <CardImage src={image} />
+            </CardImageContainer>
+          ) : null}
           <CardTitle>{children}</CardTitle>
           <CardArrow />
         </PickedCardBody>

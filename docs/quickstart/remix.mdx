@@ -1,0 +1,63 @@
+---
+slug: /quickstart/Remix
+title: Remix
+sidebar_position: 6
+---
+
+import {
+  AddSecret,
+  Congratulation,
+  AdditionalResources,
+  HelpSection,
+  InstallDevDep,
+  PlaywrightCaptureScreenshot,
+  PlaywrightConfig,
+  PlaywrightSetupCI,
+  SetUpProjectInArgos,
+} from "@site/src/partials";
+
+# Remix Quickstart
+
+Learn how to connect your Remix project to Argos.
+
+## Prerequisites
+
+To integrate Argos with Remix, ensure Playwright is set up for E2E testing. If using a different E2E tool, see [our specific guides](/getting-started).
+
+Before starting, ensure that:
+
+- You have a [Remix project installed](https://remix.run/docs/en/main/start/tutorial#setup)
+- Playwright [is installed](https://playwright.dev/docs/intro#installing-playwright) on your project
+- A [CI/CD run your E2E tests](https://playwright.dev/docs/ci-intro#on-pushpull_request)
+
+## 1. Install packages
+
+<InstallDevDep dependency="@argos-ci/playwright" />
+
+## 2. Update Playwright config
+
+<PlaywrightConfig />
+
+## 3. Capture screenshots
+
+<PlaywrightCaptureScreenshot />
+
+## 4. Set up a Project in Argos
+
+<SetUpProjectInArgos />
+
+## 5. Setup your CI
+
+<PlaywrightSetupCI />
+
+<Congratulation />
+
+<AdditionalResources>
+  <li>
+    <a href="/playwright">@argos-ci/playwright package doc</a>
+  </li>
+</AdditionalResources>
+
+---
+
+<HelpSection />

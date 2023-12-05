@@ -1,0 +1,36 @@
+---
+slug: /argos-cli
+title: CLI
+sidebar_position: 1
+---
+
+import { InstallDevDep, RunPkgCommand } from "@site/src/partials";
+import { Tag } from "@site/src/components/Tag";
+
+# Argos Command Line Interface (CLI)
+
+The Argos Command Line Interface (CLI) offers a swift and straightforward method for uploading screenshots to the Argos visual testing platform. Ideally, this should be executed by your Continuous Integration (CI) process.
+
+You can access `@argos-ci/cli` through our [npm package](https://www.npmjs.com/package/@argos-ci/cli). The source code is available on our [GitHub repository](https://github.com/argos-ci/argos-javascript/tree/main/packages/cli).
+
+## Installation
+
+<InstallDevDep dependency="@argos-ci/cli" showCliLink={false} />
+
+## Configuration
+
+Your configuration requirements may vary depending on the CI you use. Typically, you'll need to set ARGOS_TOKEN as a environment variable (ie. secret).
+
+Note: You can also specify the token with the `--token=<your-repository-token>` argument. However, for security reasons, we recommend using an environment variable instead.
+
+## Upload Command
+
+Use the `upload` command to upload screenshots stored in your <Tag>./screenshots</Tag> directory.
+
+<RunPkgCommand command="argos upload ./screenshots" />
+
+## Help Command
+
+To view a list of available options, use the argos help command.
+
+<RunPkgCommand command="argos help upload" />

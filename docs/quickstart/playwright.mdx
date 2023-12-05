@@ -1,0 +1,59 @@
+---
+slug: /quickstart/playwright
+title: Playwright
+sidebar_position: 1
+---
+
+import {
+  Congratulation,
+  AdditionalResources,
+  HelpSection,
+  InstallDevDep,
+  PlaywrightCaptureScreenshot,
+  PlaywrightConfig,
+  PlaywrightSetupCI,
+  SetUpProjectInArgos,
+} from "@site/src/partials";
+
+# Playwright Quickstart
+
+How to connect your Playwright project to Argos.
+
+## Prerequisites
+
+Before starting, ensure that:
+
+- Playwright [is installed](https://playwright.dev/docs/intro#installing-playwright) on your project
+- A [CI/CD run your E2E tests](https://playwright.dev/docs/ci-intro#on-pushpull_request)
+
+## 1. Install packages
+
+<InstallDevDep dependency="@argos-ci/playwright" />
+
+## 2. Update Playwright config
+
+<PlaywrightConfig />
+
+## 3. Capture screenshots
+
+<PlaywrightCaptureScreenshot />
+
+## 4. Set up a Project in Argos
+
+<SetUpProjectInArgos />
+
+## 5. Setup your CI
+
+<PlaywrightSetupCI />
+
+<Congratulation />
+
+<AdditionalResources>
+  <li>
+    <a href="/playwright">@argos-ci/playwright package doc</a>
+  </li>
+</AdditionalResources>
+
+---
+
+<HelpSection />

@@ -1,0 +1,37 @@
+---
+slug: /reference-build
+title: Reference build
+sidebar_position: 4
+---
+
+import { RunPkgCommand } from "@site/src/partials";
+import referenceBranchSettings from "@site/src/img/reference-branch-settings.png";
+
+# Reference build
+
+Argos compares screenshots to a baseline. To be accurate it selects a reference build as baseline.
+
+## What is a reference build?
+
+A reference build is a build created from a CI running on a commit pushed to your reference branch. Reference builds are used as the baseline for branches created from this commit. Argos automatically chooses the best reference build by analyzing the commit history.
+
+## What is a reference branch?
+
+A reference branch is the branch used as the baseline for the screenshot comparisons. Argos automatically uses the default branch of your linked Git project as the reference branch, but you can set another branch in your Argos project's settings.
+
+## Change the reference branch in settings
+
+To change the reference branch of a project, navigate to the Argos project settings, deselect the checkbox, enter the desired branch name, and then save your changes.
+
+<img
+  src={referenceBranchSettings}
+  alt="Reference branch settings"
+  className="rounded"
+  style={{ marginBottom: 4, marginTop: 8, width: 450, marginLeft: 32 }}
+/>
+
+## Select a custom reference using CLI
+
+The Argos CLI offers two options to specify a custom reference branch and a custom reference commit:
+
+<RunPkgCommand command="argos upload --reference-branch <branch> --reference-commit <commit> ./screenshots" />

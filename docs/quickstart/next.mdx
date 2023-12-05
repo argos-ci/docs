@@ -1,0 +1,63 @@
+---
+slug: /quickstart/next-js
+title: Next.js
+sidebar_position: 4
+---
+
+import {
+  AddSecret,
+  Congratulation,
+  AdditionalResources,
+  HelpSection,
+  InstallDevDep,
+  SetUpProjectInArgos,
+  PlaywrightConfig,
+  PlaywrightCaptureScreenshot,
+  PlaywrightSetupCI,
+} from "@site/src/partials";
+
+# Next.js Quickstart
+
+Learn how to connect your Next.js project to Argos.
+
+## Prerequisites
+
+To integrate Argos with Next.js, ensure Playwright is set up for E2E testing. If using a different E2E tool, see [our specific guides](/getting-started).
+
+Before starting, ensure that:
+
+- You work on a [Next.js](https://nextjs.org/) project
+- Playwright [is installed](https://playwright.dev/docs/intro#installing-playwright)
+- A [CI/CD run your E2E tests](https://playwright.dev/docs/ci-intro#on-pushpull_request)
+
+## 1. Install packages
+
+<InstallDevDep dependency="@argos-ci/playwright" />
+
+## 2. Update Playwright config
+
+<PlaywrightConfig />
+
+## 3. Capture screenshots
+
+<PlaywrightCaptureScreenshot />
+
+## 4. Set up a Project in Argos
+
+<SetUpProjectInArgos />
+
+## 5. Setup your CI
+
+<PlaywrightSetupCI />
+
+<Congratulation />
+
+<AdditionalResources>
+  <li>
+    <a href="/playwright">@argos-ci/playwright package doc</a>
+  </li>
+</AdditionalResources>
+
+---
+
+<HelpSection />
