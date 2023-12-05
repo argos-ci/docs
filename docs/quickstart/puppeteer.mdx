@@ -5,12 +5,14 @@ sidebar_position: 3
 ---
 
 import {
+  AdditionalResources,
   AddSecret,
   Congratulation,
-  AdditionalResources,
   HelpSection,
   InstallDevDep,
+  ScreenshotGuidesLink,
   SetUpProjectInArgos,
+  TestingInstallation,
 } from "@site/src/partials";
 
 # Puppeteer Quickstart
@@ -24,13 +26,15 @@ Before starting, ensure that:
 - Puppeteer [is installed](https://pptr.dev/#getting-started)
 - A CI/CD run your E2E tests
 
-## 1. Install packages
+## 1. Set up a Project in Argos
 
-<InstallDevDep dependency="@argos-ci/cli @argos-ci/puppeteer" />
+<SetUpProjectInArgos />
 
 ## 2. Capture screenshots
 
-In your E2E tests, use `argosScreenshot` to capture stable screenshots.
+<InstallDevDep dependency="@argos-ci/cli @argos-ci/puppeteer" />
+
+**II. In your E2E tests, use `argosScreenshot` to capture stable screenshots:**
 
 ```js
 import { argosScreenshot } from "@argos-ci/puppeteer";
@@ -45,15 +49,16 @@ const puppeteer = require("puppeteer");
 })();
 ```
 
-**Tip:** Check out our guide to [streamline page screenshot captures](/screenshot-pages-script).
-
-## 3. Set up a Project in Argos
-
-<SetUpProjectInArgos />
+<ScreenshotGuidesLink />
 
 ## 4. Setup your CI
 
 <AddSecret />
+
+## 5.Testing Installation
+
+<TestingInstallation />
+
 <Congratulation />
 
 <AdditionalResources>

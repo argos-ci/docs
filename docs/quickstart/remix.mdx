@@ -5,15 +5,17 @@ sidebar_position: 6
 ---
 
 import {
+  AdditionalResources,
   AddSecret,
   Congratulation,
-  AdditionalResources,
   HelpSection,
   InstallDevDep,
   PlaywrightCaptureScreenshot,
   PlaywrightConfig,
   PlaywrightSetupCI,
+  ScreenshotGuidesLink,
   SetUpProjectInArgos,
+  TestingInstallation,
 } from "@site/src/partials";
 
 # Remix Quickstart
@@ -30,25 +32,27 @@ Before starting, ensure that:
 - Playwright [is installed](https://playwright.dev/docs/intro#installing-playwright) on your project
 - A [CI/CD run your E2E tests](https://playwright.dev/docs/ci-intro#on-pushpull_request)
 
-## 1. Install packages
-
-<InstallDevDep dependency="@argos-ci/playwright" />
-
-## 2. Update Playwright config
-
-<PlaywrightConfig />
-
-## 3. Capture screenshots
-
-<PlaywrightCaptureScreenshot />
-
-## 4. Set up a Project in Argos
+## 1. Set up a Project in Argos
 
 <SetUpProjectInArgos />
 
-## 5. Setup your CI
+## 2. Capture screenshots
+
+<InstallDevDep dependency="@argos-ci/playwright" />
+<PlaywrightCaptureScreenshot />
+<ScreenshotGuidesLink />
+
+## 3. Update Playwright config
+
+<PlaywrightConfig />
+
+## 4. Setup your CI
 
 <PlaywrightSetupCI />
+
+## 5.Testing Installation
+
+<TestingInstallation />
 
 <Congratulation />
 
