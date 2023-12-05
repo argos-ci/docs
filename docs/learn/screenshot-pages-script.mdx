@@ -10,7 +10,7 @@ A practical script to efficiently capture screenshots of various web pages.
 
 ## Playwright
 
-```js
+```js title="screenshot-pages.js"
 import { test } from "@playwright/test";
 import { argosScreenshot } from "@argos-ci/playwright";
 
@@ -22,8 +22,9 @@ const pages = [
   { name: "pricing", path: "/pricing" },
 ];
 
-test("screenshot pages", async ({ page, browserName }) => {
+test("screenshot pages", async ({ page }, workerInfo) => {
   for (const { name, path } of pages) {
+    const browserName = workerInfo.project.name;
     await page.goto(`${baseUrl}${path}`);
     await argosScreenshot(page, `${name}-${browserName}`);
   }
@@ -34,7 +35,7 @@ See [responsive screenshots](/viewports) option to capture screenshot on various
 
 ## Cypress
 
-```js
+```js title="screenshot-pages.js"
 describe("Screenshot pages", () => {
   const baseUrl = "http://localhost:3000";
 
@@ -58,7 +59,7 @@ See [responsive screenshots](/viewports) option to capture screenshot on various
 
 ## Puppeteer
 
-```javascript
+```js title="screenshot-pages.js"
 import puppeteer from "puppeteer";
 import { argosScreenshot } from "@argos-ci/puppeteer";
 

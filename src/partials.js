@@ -65,7 +65,7 @@ export const Congratulation = () => (
     <p>
       You can now review the visual changes of your app for each pull request,
       avoid UI bugs and merge with confidence! Visit our guide on{" "}
-      <a href="/how-to-use-argos">how to use Argos</a>.
+      <a href="/why-argos">how to use Argos</a>.
     </p>
   </>
 );
@@ -150,20 +150,20 @@ export const PlaywrightConfig = () => (
     </p>
     <CodeBlock language="js" title="playwright.config.ts">
       {`export default defineConfig({
-      // ...
-      // Adds Argos reporter in CI environments
-      reporter: process.env.CI
-        ? [["list"], ["@argos-ci/playwright/reporter"]]
-        : "list",
+  // ...
+  // Adds Argos reporter in CI environments
+  reporter: process.env.CI
+    ? [["list"], ["@argos-ci/playwright/reporter"]]
+    : "list",
 
-      use: {
-        // Capture a screenshot when a test fails
-        screenshot: "only-on-failure",
+  use: {
+    // Capture a screenshot when a test fails
+    screenshot: "only-on-failure",
 
-        // Keeps traces for failed tests
-        trace: "retain-on-failure",
-      },
-    });`}
+    // Keeps traces for failed tests
+    trace: "retain-on-failure",
+  },
+});`}
     </CodeBlock>
     <p>
       Screenshots will be stored in <code>/screenshots</code> directory.
