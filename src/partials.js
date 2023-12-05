@@ -64,8 +64,7 @@ export const Congratulation = () => (
     <h2>Congratulations on installing Argos! 👏</h2>
     <p>
       You can now review the visual changes of your app for each pull request,
-      avoid UI bugs and merge with confidence! Visit our guide on{" "}
-      <a href="/why-argos">how to use Argos</a>.
+      avoid UI bugs and merge with confidence!
     </p>
   </>
 );
