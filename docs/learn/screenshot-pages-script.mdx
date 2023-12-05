@@ -35,7 +35,7 @@ See [responsive screenshots](/viewports) option to capture screenshot on various
 
 ## Cypress
 
-```js title="screenshot-pages.js"
+```js title="screenshot-pages.cy.js"
 describe("Screenshot pages", () => {
   const baseUrl = "http://localhost:3000";
 
@@ -48,8 +48,8 @@ describe("Screenshot pages", () => {
 
   for (const { name, path } of pages) {
     it(`Screenshots for ${name}`, () => {
-      cy.visit(`${baseUrl}${path}`);
-      cy.argosScreenshot(name);
+      cy.visit(path);
+      cy.argosScreenshot(name, { viewports });
     });
   }
 });
