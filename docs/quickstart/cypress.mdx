@@ -10,7 +10,9 @@ import {
   AdditionalResources,
   HelpSection,
   InstallDevDep,
+  ScreenshotGuidesLink,
   SetUpProjectInArgos,
+  TestingInstallation,
 } from "@site/src/partials";
 
 # Cypress Quickstart
@@ -24,38 +26,21 @@ Before starting, ensure that:
 - Cypress [is installed](https://docs.cypress.io/guides/getting-started/installing-cypress) on your project
 - A [CI/CD run your E2E tests](https://playwright.dev/docs/ci-intro#on-pushpull_request)
 
-## 1. Install packages
+## 1. Set up a Project in Argos
+
+<SetUpProjectInArgos />
+
+## 2. Capture screenshots
 
 <InstallDevDep dependency="@argos-ci/cli @argos-ci/cypress" />
 
-## 2. Update Cypress config file
-
-Copy/past this code at the end of your `cypress/support/index.js` file.
+**II. Copy/past this code at the end of your `cypress/support/index.js` file.**
 
 ```js cypress/support/index.js
 import "@argos-ci/cypress/support";
 ```
 
-## 3. Capture screenshots
-
-In your E2E tests, use `argosScreenshot` to capture stable screenshots.
-
-For example:
-
-```js title="cypress/e2e/homepage.cy.js"
-it("screenshot homepage", async ({ page }) => {
-  cy.visit("https://localhost:3000");
-  cy.argosScreenshot("homepage");
-});
-```
-
-**Tip:** Check out our guide to [streamline page screenshot captures](/screenshot-pages-script).
-
-**Note:** Consider adding `/cypress/screenshots` directory in your `.gitignore` file, to avoid uploading screenshots to your Git repository.
-
-### TypeScript support
-
-To add typings for TypeScript, update your `tsconfig.json`:
+**III. [optional] Update your `tsconfig.json` to add typings for TypeScript.**
 
 ```js
 {
@@ -65,13 +50,26 @@ To add typings for TypeScript, update your `tsconfig.json`:
 }
 ```
 
-## 4. Set up a Project in Argos
+**IV. In your E2E tests, use `argosScreenshot` to capture stable screenshots.**
 
-<SetUpProjectInArgos />
+```js title="cypress/e2e/homepage.cy.js"
+it("screenshot homepage", async ({ page }) => {
+  cy.visit("https://localhost:3000");
+  cy.argosScreenshot("homepage");
+});
+```
 
-## 5. Setup your CI
+<ScreenshotGuidesLink />
+
+**Note:** Consider adding `/cypress/screenshots` to `.gitignore` file, to avoid uploading screenshots to your Git repository.
+
+## 3. Setup your CI
 
 <AddSecret />
+
+## 4.Testing Installation
+
+<TestingInstallation />
 
 <Congratulation />
 

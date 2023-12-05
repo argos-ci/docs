@@ -6,7 +6,9 @@ import TabItem from "@theme/TabItem";
 export const InstallDevDep = ({ dependency, showCliLink = true }) => {
   return (
     <div>
-      <p>Install Argos dependency using your favorite package manager.</p>
+      <p style={{ marginBottom: 8, fontWeight: 600 }}>
+        I. Install Argos dependency using your favorite package manager.
+      </p>
       <Tabs groupId="package-managers">
         <TabItem value="npm" label="npm" default>
           <CodeBlock>npm i --save-dev {dependency}</CodeBlock>
@@ -22,7 +24,7 @@ export const InstallDevDep = ({ dependency, showCliLink = true }) => {
         </TabItem>
       </Tabs>
       {showCliLink && (
-        <p>
+        <p style={{ marginTop: -6, marginBottom: 30 }}>
           Read the <a href="/argos-cli">CLI documentation</a> if you need
           information about advanced usages.
         </p>
@@ -59,12 +61,28 @@ export const RunPkgCommand = ({ command }) => {
   );
 };
 
+export const TestingInstallation = () => (
+  <div>
+    <p>
+      After committing and pushing your changes to your repository, the Argos
+      check status will appear on your pull request in GitHub (or GitLab). To
+      view the initial build on Argos, click the "Details" link.
+    </p>
+    <p>
+      <span style={{ fontWeight: 600 }}>Note</span>: The initial build is
+      considered an 'orphan' build. It serves as a baseline for future
+      comparisons and will become the reference point once merged into the main
+      branch.
+    </p>
+  </div>
+);
+
 export const Congratulation = () => (
   <>
     <h2>Congratulations on installing Argos! 👏</h2>
     <p>
-      You can now review the visual changes of your app for each pull request,
-      avoid UI bugs and merge with confidence!
+      You can now review changes of your app for each pull request, avoid visual
+      bugs and merge with confidence. Welcome on board!
     </p>
   </>
 );
@@ -91,11 +109,10 @@ export const HelpSection = () => (
 
 export const SetUpProjectInArgos = () => (
   <div>
-    <p>Follow these steps to set up your project in Argos:</p>
-    <ol>
+    <ol type="I">
       <li>
         <a href="https://app.argos-ci.com/signup">Sign up</a> or{" "}
-        <a href="https://app.argos-ci.com/login">Login to</a> to Argos.
+        <a href="https://app.argos-ci.com/login">Login</a> to Argos.
       </li>
       <li>Click on "Create a new project".</li>
       <li>Select your Git provider and import your repository.</li>
@@ -112,11 +129,13 @@ export const AddSecret = () => (
     <p>Then,</p>
     <ul>
       <li>
-        <span style={{ fontWeight: 600 }}>Github Actions</span> — No extra setup
-        required! Argos works out-of-the-box with GitHub Actions, using a
-        tokenless strategy for pull requests.
+        <div style={{ fontWeight: 600 }}>
+          GitHub Actions — No extra setup required!
+        </div>
+        Argos works out-of-the-box with GitHub Actions, using a tokenless
+        strategy for pull requests.
       </li>
-      <li>
+      <li style={{ marginTop: 10 }}>
         <span style={{ fontWeight: 600 }}>Other CI Platforms</span> — Add{" "}
         <code>ARGOS_TOKEN</code> to your CI environment variables.
       </li>
@@ -145,7 +164,7 @@ export const PlaywrightConfig = () => (
   <div>
     <p>
       Configure Playwright to capture screenshots on test failures and to use
-      the Argos reporter in CI environments.
+      the Argos reporter.
     </p>
     <CodeBlock language="js" title="playwright.config.ts">
       {`export default defineConfig({
@@ -165,21 +184,18 @@ export const PlaywrightConfig = () => (
 });`}
     </CodeBlock>
     <p>
-      Screenshots will be stored in <code>/screenshots</code> directory.
-      Consider adding this folder to <code>.gitignore</code> file, to avoid
-      uploading screenshots to your Git repository.
+      Consider adding <code>/screenshots</code> to <code>.gitignore</code> file,
+      to avoid uploading screenshots to your Git repository.
     </p>
   </div>
 );
 
 export const PlaywrightCaptureScreenshot = () => (
   <div>
-    <p>
-      In your E2E tests, use <code>argosScreenshot</code> to capture stable
-      screenshots.
+    <p style={{ fontWeight: 600 }}>
+      II. In your E2E tests, use <code>argosScreenshot</code> to capture stable
+      screenshots:
     </p>
-    <p>For example:</p>
-
     <CodeBlock language="js" title="tests/example.spec.ts">
       {`import { test } from "@playwright/test";
 import { argosScreenshot } from "@argos-ci/playwright";
@@ -189,12 +205,15 @@ test("screenshot homepage", async ({ page }) => {
   await argosScreenshot(page, "homepage");
 });`}
     </CodeBlock>
-    <p>
-      <span style={{ fontWeight: 600 }}>Tip</span>: Check out our guide to{" "}
-      <a href="/screenshot-pages-script">streamline page screenshot captures</a>
-      .
-    </p>
   </div>
+);
+
+export const ScreenshotGuidesLink = () => (
+  <p>
+    <span style={{ fontWeight: 600 }}>Tip</span>: Check out our guides to
+    captures <a href="/screenshot-pages-script">streamline pages screenshot</a>{" "}
+    or <a href="/viewports">capture multiple viewports</a>.
+  </p>
 );
 
 export const PlaywrightSetupCI = () => (
@@ -202,13 +221,13 @@ export const PlaywrightSetupCI = () => (
     <p>Quickly integrate Argos with your CI setup:</p>
     <ul>
       <li>
-        <span style={{ fontWeight: 600 }}>GitHub Actions</span> — No extra setup
-        required!
-        <br />
+        <div style={{ fontWeight: 600 }}>
+          GitHub Actions — No extra setup required!
+        </div>
         Argos works out-of-the-box with Playwright and GitHub Actions, using a
         tokenless strategy for pull requests.
       </li>
-      <li>
+      <li style={{ marginTop: 10 }}>
         <span style={{ fontWeight: 600 }}>Other CI Platforms</span> — Simply add{" "}
         <code>ARGOS_TOKEN</code> to your CI environment variables.
       </li>
