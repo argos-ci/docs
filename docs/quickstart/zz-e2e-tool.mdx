@@ -11,7 +11,6 @@ import {
   HelpSection,
   InstallDevDep,
   SetUpProjectInArgos,
-  TestingInstallation,
 } from "@site/src/partials";
 
 # Quickstart with any E2E Tool
@@ -32,15 +31,13 @@ Learn how to connect your project to Argos.
 
 <InstallDevDep dependency="@argos-ci/cli" />
 
-**II. In your E2E tests, capture screenshots using your tool's native command.**
+#### Update your E2E tests
+
+Use <code>argosScreenshot</code> helper to capture stable screenshots in your E2E tests.
 
 ## 4. Setup your CI
 
 <AddSecret />
-
-## 5.Testing Installation
-
-<TestingInstallation />
 
 <Congratulation />
 
