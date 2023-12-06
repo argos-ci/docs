@@ -6,13 +6,13 @@ sidebar_position: 2
 
 import {
   AddSecret,
+  AddToGitIgnore,
   Congratulation,
   AdditionalResources,
   HelpSection,
   InstallDevDep,
   ScreenshotGuidesLink,
   SetUpProjectInArgos,
-  TestingInstallation,
 } from "@site/src/partials";
 
 # Cypress Quickstart
@@ -34,13 +34,17 @@ Before starting, ensure that:
 
 <InstallDevDep dependency="@argos-ci/cli @argos-ci/cypress" />
 
-**II. Copy/past this code at the end of your `cypress/support/index.js` file.**
+#### II. Update Cypress config
+
+Copy/past this code at the end of your `cypress/support/index.js` file.
 
 ```js cypress/support/index.js
 import "@argos-ci/cypress/support";
 ```
 
-**III. [optional] Update your `tsconfig.json` to add typings for TypeScript.**
+#### III. Add TypeScript support
+
+Update your `tsconfig.json` to add typings for TypeScript.
 
 ```js
 {
@@ -50,7 +54,11 @@ import "@argos-ci/cypress/support";
 }
 ```
 
-**IV. In your E2E tests, use `argosScreenshot` to capture stable screenshots.**
+#### IV. Update your E2E tests
+
+Use <code>argosScreenshot</code> helper to capture stable screenshots in your E2E tests.
+
+For example:
 
 ```js title="cypress/e2e/homepage.cy.js"
 it("screenshot homepage", async ({ page }) => {
@@ -60,16 +68,11 @@ it("screenshot homepage", async ({ page }) => {
 ```
 
 <ScreenshotGuidesLink />
-
-**Note:** Consider adding `/cypress/screenshots` to `.gitignore` file, to avoid uploading screenshots to your Git repository.
+<AddToGitIgnore path="/cypress/screenshots" />
 
 ## 3. Setup your CI
 
 <AddSecret />
-
-## 4.Testing Installation
-
-<TestingInstallation />
 
 <Congratulation />
 

@@ -30,7 +30,11 @@ export const CardTitle = (props) => <h4 className="title4" {...props} />;
 export const CardLink = (props) => (
   <Link
     className="cardLink"
-    style={{ textDecoration: "none", borderRadius: 8 }}
+    style={{
+      textDecoration: "none",
+      borderRadius: 8,
+      flex: 1,
+    }}
     {...props}
   />
 );
@@ -41,12 +45,14 @@ export const CardArrow = (props) => (
 
 export const Card = (props) => (
   <div
-    className="bordered rounded border-active"
+    className="bordered rounded border-active card"
     style={{
       padding: "10px 15px",
       minHeight: 80,
       display: "flex",
       alignItems: "center",
+      minWidth: 250,
+      justifyContent: "center",
     }}
     {...props}
   />
@@ -56,8 +62,8 @@ export const Cards = (props) => (
   <ul
     style={{
       paddingLeft: 0,
-      display: "grid",
-      gridTemplateColumns: "repeat(2, minmax(200px, 300px))",
+      display: "flex",
+      flexWrap: "wrap",
       marginBottom: 32,
       gridColumnGap: 16,
       gridRowGap: 16,

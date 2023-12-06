@@ -12,7 +12,6 @@ import {
   InstallDevDep,
   ScreenshotGuidesLink,
   SetUpProjectInArgos,
-  TestingInstallation,
 } from "@site/src/partials";
 
 # Puppeteer Quickstart
@@ -34,7 +33,11 @@ Before starting, ensure that:
 
 <InstallDevDep dependency="@argos-ci/cli @argos-ci/puppeteer" />
 
-**II. In your E2E tests, use `argosScreenshot` to capture stable screenshots:**
+#### II. Update your E2E tests
+
+Use <code>argosScreenshot</code> helper to capture stable screenshots in your E2E tests.
+
+For example:
 
 ```js
 import { argosScreenshot } from "@argos-ci/puppeteer";
@@ -54,10 +57,6 @@ const puppeteer = require("puppeteer");
 ## 4. Setup your CI
 
 <AddSecret />
-
-## 5.Testing Installation
-
-<TestingInstallation />
 
 <Congratulation />
 
