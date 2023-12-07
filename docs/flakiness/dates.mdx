@@ -1,0 +1,21 @@
+---
+title: Date & Time
+slug: /date-stabilization
+sidebar_position: 2
+---
+
+# Stabilize Date & Time
+
+Date and time are changing by nature, displaying them in UI is often a source of flakiness. Here are some solutions to solve it properly.
+
+## Hiding the Date
+
+Using Argos helpers, you can choose to hide a date or a time by adding `data-visual-test="transparent"`.
+
+```html
+<time data-visual-test="transparent">10 oct, 2012</time>
+```
+
+## Freezing the Date
+
+If you are using dates (not precise time), you can stabilize them in your seeds by running a script that updates dates just before running your E2E tests.

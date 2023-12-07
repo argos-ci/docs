@@ -6,9 +6,9 @@
 
 # External repositories
 /external/
-/docs/puppeteer/
-/docs/cypress/
-/docs/playwright/
+/docs/sdks/puppeteer/
+/docs/sdks/cypress/
+/docs/sdks/playwright/
 
 # Generated files
 .docusaurus

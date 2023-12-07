@@ -2,118 +2,16 @@ import React from "react";
 import { ChevronRight } from "@site/src/components/icons/ChevronRight";
 import Link from "@docusaurus/Link";
 
-export const CardImageContainer = (props) => (
-  <div
-    style={{
-      width: 40,
-      height: 35,
-      display: "flex",
-      justifyItems: "center",
-    }}
-    {...props}
-  />
-);
-
-export const CardImage = (props) => (
-  <img
-    style={{
-      maxHeight: 35,
-      maxWidth: 30,
-      margin: "auto",
-    }}
-    {...props}
-  />
-);
-
-export const CardTitle = (props) => <h4 className="title4" {...props} />;
-
-export const CardLink = (props) => (
-  <Link
-    className="cardLink"
-    style={{
-      textDecoration: "none",
-      borderRadius: 8,
-      flex: 1,
-    }}
-    {...props}
-  />
-);
-
-export const CardArrow = (props) => (
-  <ChevronRight className="arrow" width="16" {...props} />
-);
-
-export const Card = (props) => (
-  <div
-    className="bordered rounded border-active card"
-    style={{
-      padding: "10px 15px",
-      minHeight: 80,
-      display: "flex",
-      alignItems: "center",
-      minWidth: 250,
-      justifyContent: "center",
-    }}
-    {...props}
-  />
-);
-
-export const Cards = (props) => (
-  <ul
-    style={{
-      paddingLeft: 0,
-      display: "flex",
-      flexWrap: "wrap",
-      marginBottom: 32,
-      gridColumnGap: 16,
-      gridRowGap: 16,
-    }}
-    {...props}
-  />
-);
-
-export const CardBody = (props) => (
-  <div
-    style={{
-      width: "100%",
-      display: "grid",
-      gridTemplateColumns: "auto 16px",
-      alignItems: "center",
-      gap: 16,
-    }}
-    {...props}
-  />
-);
-
-export const IllustratedCardBody = (props) => (
-  <div
-    style={{
-      width: "100%",
-      display: "grid",
-      gridTemplateColumns: "25px auto 16px",
-      alignItems: "center",
-      gap: 16,
-    }}
-    {...props}
-  />
-);
-
-export const LinkCard = ({ to, image, children }) => {
-  const PickedCardBody = image ? IllustratedCardBody : CardBody;
-
+export function XCard({ logo, text, to, className }) {
   return (
-    <CardLink to={to}>
-      <Card>
-        <PickedCardBody>
-          {image ? (
-            <CardImageContainer>
-              <CardImage src={image} />
-            </CardImageContainer>
-          ) : null}
-          <CardTitle>{children}</CardTitle>
-          <CardArrow />
-        </PickedCardBody>
-      </Card>
-    </CardLink>
+    <Link to={to} className="!no-underline text hover:text group transition">
+      <div className="border rounded-lg transition group-hover:border-violet-8 flex items-center gap-4 font-medium p-4">
+        <div className="bg-white rounded-full p-1">
+          <img src={logo} width={48} height={48} className="!m-0" />
+        </div>
+        <div>{text}</div>
+        <ChevronRight className="w-5 h-5 transition group-hover:translate-x-1" />
+      </div>
+    </Link>
   );
-};
+}

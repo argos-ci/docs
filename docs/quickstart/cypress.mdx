@@ -8,43 +8,38 @@ import {
   AddSecret,
   AddToGitIgnore,
   Congratulation,
-  AdditionalResources,
   HelpSection,
   InstallDevDep,
   ScreenshotGuidesLink,
-  SetUpProjectInArgos,
 } from "@site/src/partials";
 
 # Cypress Quickstart
 
-How to connect your Cypress project to Argos.
+Learn how to setup visual testing using the Argos Cypress SDK.
 
 ## Prerequisites
 
-Before starting, ensure that:
+To get the most out of this guide, you’ll need to:
 
-- Cypress [is installed](https://docs.cypress.io/guides/getting-started/installing-cypress) on your project
-- A [CI/CD run your E2E tests](https://playwright.dev/docs/ci-intro#on-pushpull_request)
+- [Use Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress)
+- [Run Cypress on your CI/CD](https://playwright.dev/docs/ci-intro#on-pushpull_request)
+- [Create your project in Argos](https://app.argos-ci.com/new)
 
-## 1. Set up a Project in Argos
+## 1. Install
 
-<SetUpProjectInArgos />
+Get the Argos Cypress SDK.
 
-## 2. Capture screenshots
+<InstallDevDep dependency="@argos-ci/cli @argos-ci/cypress" showCliLink />
 
-<InstallDevDep dependency="@argos-ci/cli @argos-ci/cypress" />
+## 2. Add `cy.argosScreenshot` command
 
-#### II. Update Cypress config
-
-Copy/past this code at the end of your `cypress/support/index.js` file.
+And add this line to your `cypress/support/index.js` file:
 
 ```js cypress/support/index.js
 import "@argos-ci/cypress/support";
 ```
 
-#### III. Add TypeScript support
-
-Update your `tsconfig.json` to add typings for TypeScript.
+If you use TypeScript, update your `tsconfig.json`:
 
 ```js
 {
@@ -54,11 +49,9 @@ Update your `tsconfig.json` to add typings for TypeScript.
 }
 ```
 
-#### IV. Update your E2E tests
+## 3. Take screesnhots
 
 Use <code>argosScreenshot</code> helper to capture stable screenshots in your E2E tests.
-
-For example:
 
 ```js title="cypress/e2e/homepage.cy.js"
 it("screenshot homepage", async ({ page }) => {
@@ -72,15 +65,14 @@ it("screenshot homepage", async ({ page }) => {
 
 ## 3. Setup your CI
 
-<AddSecret />
+<AddSecret folder="cypress/screenshots" />
 
 <Congratulation />
 
-<AdditionalResources>
-  <li>
-    <a href="/cypress">@argos-ci/cypress package doc</a>
-  </li>
-</AdditionalResources>
+## Additional ressources
+
+- [Cypress example](https://github.com/argos-ci/argos/tree/main/examples/cypress)
+- [Cypress SDK reference](/cypress)
 
 ---
 

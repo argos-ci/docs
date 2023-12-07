@@ -4,84 +4,48 @@ title: Getting Started
 sidebar_position: 1
 ---
 
-import {
-  Card,
-  CardArrow,
-  CardBody,
-  CardImageContainer,
-  CardLink,
-  CardTitle,
-  IllustratedCardBody,
-} from "@site/src/components/Card";
-import {
-  StepList,
-  Step,
-  StepTitle,
-  StepContent,
-} from "@site/src/components/StepList";
-import {
-  Feature,
-  FeatureImage,
-  FeatureParagraph,
-  Features,
-  FeatureTitle,
-} from "@site/src/components/Feature";
+import { XCard } from "@site/src/components/Card";
+import { HelpSection } from "@site/src/partials";
 
-import { LinkCard, Cards } from "@site/src/components/Card";
-import { RemixLogo } from "@site/src/components/icons/Remix";
-import { NextLogo } from "@site/src/components/icons/Next";
-import { AfterScreenshotSetup, HelpSection } from "@site/src/partials";
-
-import cameraIcon from "@site/src/img/camera-icon.png";
-import uploadIcon from "@site/src/img/upload-icon.png";
-import checkIcon from "@site/src/img/check-icon.png";
-
-import cypressLogo from "@site/src/img/cypress-logo.png";
-import puppeteerLogo from "@site/src/img/puppeteer-logo.png";
-import playwrightLogo from "@site/src/img/playwright-logo.png";
+import CypressLogo from "@site/src/img/frameworks/cypress.png";
+import PlaywrightLogo from "@site/src/img/frameworks/playwright.png";
+import PuppeteerLogo from "@site/src/img/frameworks/puppeteer.png";
+import NextjsLogo from "@site/src/img/frameworks/next-js.png";
+import RemixLogo from "@site/src/img/frameworks/remix.png";
+import OthersLogo from "@site/src/img/frameworks/others.png";
 
 # Get started with Argos
 
-Argos enable UI changes verification within your pull request reviews.
+Argos provides the developer tools to debug tests and detect visual regressions.
 
-## Framework Guides
+## Quick start
 
-Start using Argos in your framework using our framework-specific guides that cover our recommended approach.
+Learn how to setup Argos in your project:
 
-<Cards>
-  <LinkCard to="/quickstart/playwright" image={playwrightLogo}>
-    Playwright
-  </LinkCard>
-  <LinkCard to="/quickstart/cypress" image={cypressLogo}>
-    Cypress
-  </LinkCard>
-  <LinkCard to="/quickstart/puppeteer" image={puppeteerLogo}>
-    Puppeteer
-  </LinkCard>
-  <CardLink to="/quickstart/next-js">
-    <Card>
-      <IllustratedCardBody>
-        <CardImageContainer>
-          <NextLogo style={{ maxWidth: 25, maxHeight: 25, margin: "auto" }} />
-        </CardImageContainer>
-        <CardTitle>Next</CardTitle>
-        <CardArrow />
-      </IllustratedCardBody>
-    </Card>
-  </CardLink>
-  <CardLink to="/quickstart/remix">
-    <Card>
-      <IllustratedCardBody>
-        <CardImageContainer>
-          <RemixLogo style={{ maxWidth: 25, maxHeight: 25, margin: "auto" }} />
-        </CardImageContainer>
-        <CardTitle>Remix</CardTitle>
-        <CardArrow />
-      </IllustratedCardBody>
-    </Card>
-  </CardLink>
-  <LinkCard to="/quickstart/with-any-e2e-tool">Other E2E tool</LinkCard>
-</Cards>
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap">
+  <XCard
+    logo={PlaywrightLogo}
+    text="Playwright Quickstart"
+    to="/quickstart/playwright"
+  />
+  <XCard
+    logo={CypressLogo}
+    text="Cypress Quickstart"
+    to="/quickstart/cypress"
+  />
+  <XCard
+    logo={PuppeteerLogo}
+    text="Puppeteer Quickstart"
+    to="/quickstart/puppeteer"
+  />
+  <XCard logo={NextjsLogo} text="Next.js Quickstart" to="/quickstart/next-js" />
+  <XCard logo={RemixLogo} text="Remix Quickstart" to="/quickstart/remix" />
+  <XCard
+    logo={OthersLogo}
+    text="Any E2E Quickstart"
+    to="/quickstart/with-any-e2e-tool"
+  />
+</div>
 
 ## Need help?
 

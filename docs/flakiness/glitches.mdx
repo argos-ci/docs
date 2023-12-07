@@ -1,0 +1,24 @@
+---
+title: Glitches
+id: glitches
+slug: /glitches
+sidebar_position: 3
+---
+
+# Stabilize glitches
+
+Some graphic glitches can be experienced because of unstable rendering engine of browsers. Here are some solutions to stabilize rendering.
+
+## Border radius
+
+Sometimes, the `border-radius` property can cause screenshots to appear differently across different browsers or devices.
+
+To address this, you can add the `data-visual-test-no-radius` Argos helper to remove the border radius while taking screenshots.
+
+```html
+<button className="rounded" data-visual-test-no-radius>My button</button>
+```
+
+## Other glitches
+
+Glitches can occur when your tests are not running in the same environment. Be sure to run your E2E tests in the exact same environment (OS and Browser).

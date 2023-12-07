@@ -5,8 +5,6 @@ sidebar_position: 4
 ---
 
 import {
-  AdditionalResources,
-  AddSecret,
   Congratulation,
   HelpSection,
   InstallDevDep,
@@ -14,36 +12,38 @@ import {
   PlaywrightConfig,
   PlaywrightSetupCI,
   ScreenshotGuidesLink,
-  SetUpProjectInArgos,
 } from "@site/src/partials";
 
 # Next.js Quickstart
 
-Learn how to connect your Next.js project to Argos.
+Learn how to setup visual testing in a Next.js project using Argos.
+
+The best way to integrate Argos with Next.js is to setup Playwright in your project.
 
 ## Prerequisites
 
-To integrate Argos with Next.js, ensure Playwright is set up for E2E testing. If using a different E2E tool, see [our specific guides](/getting-started).
+To get the most out of this guide, you’ll need to:
 
-Before starting, ensure that:
+- [Use Next.js](https://nextjs.org/)
+- [Install Playwright](https://nextjs.org/docs/pages/building-your-application/optimizing/testing#playwright)
+- [Run Playwright on your CI/CD](https://playwright.dev/docs/ci-intro#on-pushpull_request)
+- [Create your project in Argos](https://app.argos-ci.com/new)
 
-- You work on a [Next.js](https://nextjs.org/) project
-- Playwright [is installed](https://playwright.dev/docs/intro#installing-playwright)
-- A [CI/CD run your E2E tests](https://playwright.dev/docs/ci-intro#on-pushpull_request)
+## 1. Install
 
-## 1. Set up a Project in Argos
-
-<SetUpProjectInArgos />
-
-## 2. Capture screenshots
+Get the Argos Playwright SDK.
 
 <InstallDevDep dependency="@argos-ci/playwright" />
-<PlaywrightCaptureScreenshot />
-<ScreenshotGuidesLink />
 
-## 3. Update Playwright config
+## 2. Setup Argos in your Playwright config
 
 <PlaywrightConfig />
+
+## 3. Take screenshots
+
+<PlaywrightCaptureScreenshot />
+<ScreenshotGuidesLink />
+<AddToGitIgnore path="/screenshots" />
 
 ## 4. Setup your CI
 
@@ -51,11 +51,10 @@ Before starting, ensure that:
 
 <Congratulation />
 
-<AdditionalResources>
-  <li>
-    <a href="/playwright">@argos-ci/playwright package doc</a>
-  </li>
-</AdditionalResources>
+## Additional ressources
+
+- [Next.js example](https://github.com/argos-ci/argos/tree/main/examples/nextjs)
+- [Playwright SDK reference](/playwright)
 
 ---
 
