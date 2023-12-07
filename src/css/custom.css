@@ -58,7 +58,7 @@ html[data-theme="dark"] {
 }
 
 svg {
-  display: inline-block;
+  @apply !inline-block;
 }
 
 /* Main layout */
