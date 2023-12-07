@@ -1,0 +1,26 @@
+---
+slug: /about-flaky
+sidebar_position: 1
+---
+
+# About flaky tests
+
+Flaky tests are tests that exhibit unpredictable behavior, sometimes passing and sometimes failing for no apparent reason.
+
+## Introduction
+
+This can be frustrating for developers, as it can be difficult to determine the root cause of the issue and fix it. Flaky tests can also negate the primary purpose of visual testing, which is to easily identify visual changes, as they invalidate GitHub status checks.
+
+## Cause of flakiness
+
+There are several potential causes of flaky tests in visual testing, including:
+
+- **Timing issues**: Tests that rely on timing may be flaky if the timing is not consistent. For example, if a test waits for a specific element to load on a page and that element takes a variable amount of time to appear, the test may sometimes pass and sometimes fail.
+
+- **Dependence on external factors**: Tests that rely on external factors such as network connectivity or the availability of certain resources may be prone to flakiness.
+
+- **Inconsistent test setup**: Flaky tests may also be caused by an inconsistent test setup process. This can happen if variables are not properly reset between runs or if tests rely on the state of the system being tested.
+
+To fix flaky tests, it is important to identify the root cause of the issue and take steps to address it. In the following pages, we will provide recipes for handling common causes of flaky tests.
+
+**Note**: We do not provide a button to ignore flaky tests because we believe that ignoring an error is more damaging than removing a test.

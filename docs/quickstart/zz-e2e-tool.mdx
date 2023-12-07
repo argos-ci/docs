@@ -1,6 +1,6 @@
 ---
 slug: /quickstart/with-any-e2e-tool
-title: With any E2E tool
+title: Any test framework
 sidebar_position: 100
 ---
 
@@ -13,39 +13,27 @@ import {
   SetUpProjectInArgos,
 } from "@site/src/partials";
 
-# Quickstart with any E2E Tool
+# Quickstart with any test framework
 
 Learn how to connect your project to Argos.
 
 ## Prerequisites
 
-- A E2E testing tool installed on your project
-- Your E2E tool is able to take screenshots
-- A CI/CD run your E2E tests
+To get the most out of this guide, you’ll need to:
 
-## 1. Set up a Project in Argos
+- Take screenshots while your E2E tests are running
+- Run your E2E tests on CI
+- [Create your project in Argos](https://app.argos-ci.com/new)
 
-<SetUpProjectInArgos />
+## 1. Install
 
-## 2. Capture screenshots
+<InstallDevDep dependency="@argos-ci/cli" showCliLink />
 
-<InstallDevDep dependency="@argos-ci/cli" />
+## 2. Upload screenshots on CI
 
-#### Update your E2E tests
-
-Use <code>argosScreenshot</code> helper to capture stable screenshots in your E2E tests.
-
-## 4. Setup your CI
-
-<AddSecret />
+<AddSecret folder="screenshots" />
 
 <Congratulation />
-
-<AdditionalResources>
-  <li>
-    <a href="/cypress">@argos-ci/cypress package doc</a>
-  </li>
-</AdditionalResources>
 
 ---
 
