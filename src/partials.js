@@ -2,8 +2,15 @@ import * as React from "react";
 import CodeBlock from "@theme/CodeBlock";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+
+const relativeUrl = (baseUrl = "", path = "") =>
+  `${baseUrl}${path.replace(/^\//, "")}`;
 
 export const InstallDevDep = ({ dependency, showCliLink = false }) => {
+  const { siteConfig } = useDocusaurusContext();
+  const { baseUrl } = siteConfig;
+
   return (
     <>
       <Tabs groupId="package-managers">
@@ -22,8 +29,9 @@ export const InstallDevDep = ({ dependency, showCliLink = false }) => {
       </Tabs>
       {showCliLink && (
         <p className="text-sm !-mt-2">
-          Read the <a href="/argos-cli">CLI documentation</a> if you need
-          information about advanced usages.
+          Read the{" "}
+          <a href={relativeUrl(baseUrl, "argos-cli")}>CLI documentation</a> if
+          you need information about advanced usages.
         </p>
       )}
     </>
@@ -77,17 +85,25 @@ export const Congratulation = () => (
   </>
 );
 
-export const AfterScreenshotSetup = () => (
-  <>
-    <h2>Next step</h2>
-    <p>
-      The next step is to{" "}
-      <a href="upload-screenshots">integrate the Argos CLI command</a> within
-      your Continuous Integration (CI) workflow. This command will automatically
-      upload your captured screenshots to Argos for further review and analysis.
-    </p>
-  </>
-);
+export const AfterScreenshotSetup = () => {
+  const { siteConfig } = useDocusaurusContext();
+  const { baseUrl } = siteConfig;
+
+  return (
+    <>
+      <h2>Next step</h2>
+      <p>
+        The next step is to{" "}
+        <a href={relativeUrl(baseUrl, "upload-screenshots")}>
+          integrate the Argos CLI command
+        </a>{" "}
+        within your Continuous Integration (CI) workflow. This command will
+        automatically upload your captured screenshots to Argos for further
+        review and analysis.
+      </p>
+    </>
+  );
+};
 
 export const HelpSection = () => (
   <>
@@ -201,13 +217,22 @@ test("screenshot homepage", async ({ page }) => {
   </div>
 );
 
-export const ScreenshotGuidesLink = () => (
-  <p className="small">
-    <span style={{ fontWeight: 600 }}>Tip</span>: Check out our guides to{" "}
-    <a href="/screenshot-pages-script">streamline page screenshot captures</a>{" "}
-    or <a href="/viewports">capture multiple viewports</a>.
-  </p>
-);
+export const ScreenshotGuidesLink = () => {
+  const { siteConfig } = useDocusaurusContext();
+  const { baseUrl } = siteConfig;
+
+  return (
+    <p className="small">
+      <span style={{ fontWeight: 600 }}>Tip</span>: Check out our guides to{" "}
+      <a href={relativeUrl(baseUrl, "screenshot-pages-script")}>
+        streamline page screenshot captures
+      </a>{" "}
+      or
+      <a href={relativeUrl(baseUrl, "viewports")}>capture multiple viewports</a>
+      .
+    </p>
+  );
+};
 
 export const PlaywrightSetupCI = () => (
   <p>
