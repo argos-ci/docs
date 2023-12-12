@@ -227,7 +227,7 @@ export const ScreenshotGuidesLink = () => {
       <a href={relativeUrl(baseUrl, "screenshot-pages-script")}>
         streamline page screenshot captures
       </a>{" "}
-      or
+      or{" "}
       <a href={relativeUrl(baseUrl, "viewports")}>capture multiple viewports</a>
       .
     </p>
