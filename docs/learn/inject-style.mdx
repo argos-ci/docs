@@ -1,0 +1,140 @@
+---
+slug: /inject-style
+title: Inject Style
+sidebar_position: 3
+---
+
+# Inject Style into Screenshots
+
+A practical script to inject custom styles into your page before capturing screenshots with Argos.
+
+## Playwright
+
+```ts
+import { Page } from "@playwright/test";
+import { ArgosScreenshotOptions, argosScreenshot } from "@argos-ci/playwright";
+
+const STYLE_ID = "argos-style";
+const STYLE = `
+  body { background: red; }
+  #my-element { color: blue; };
+`;
+
+async function addStyle(page: Page) {
+  await page.evaluate(
+    ({ STYLE, STYLE_ID }) => {
+      const style = document.createElement("style");
+      style.textContent = STYLE;
+      style.id = STYLE_ID;
+      document.head.appendChild(style);
+    },
+    { STYLE, STYLE_ID },
+  );
+}
+
+async function removeStyle(page: Page) {
+  await page.evaluate(
+    ({ STYLE_ID }) => {
+      const style = document.getElementById(STYLE_ID);
+      style?.remove();
+    },
+    { STYLE_ID },
+  );
+}
+
+export async function screenshotWithStyleInjection(
+  page: Page,
+  name: string,
+  options?: ArgosScreenshotOptions,
+) {
+  await addStyle(page);
+  await argosScreenshot(page, name, options);
+  await removeStyle(page);
+}
+```
+
+## Cypress
+
+This script is tailored for Cypress, allowing you to inject and remove styles seamlessly.
+
+```ts
+import { ArgosScreenshotOptions, argosScreenshot } from "@argos-ci/cypress";
+
+const STYLE_ID = "argos-style";
+const STYLE = `
+  body { background: red; }
+  #my-element { color: blue; };
+`;
+
+function addStyle() {
+  cy.document().then((document) => {
+    const style = document.createElement("style");
+    style.textContent = STYLE;
+    style.id = STYLE_ID;
+    document.head.appendChild(style);
+  });
+}
+
+function removeStyle() {
+  cy.document().then((document) => {
+    const style = document.getElementById(STYLE_ID);
+    style?.remove();
+  });
+}
+
+export function screenshotWithStyleInjection(
+  name: string,
+  options?: ArgosScreenshotOptions,
+) {
+  addStyle();
+  argosScreenshot(name, options);
+  removeStyle();
+}
+```
+
+## Puppeteer
+
+Implement this script for Puppeteer to dynamically inject and remove styles before capturing screenshots.
+
+```ts
+import { Page } from "puppeteer";
+import { ArgosScreenshotOptions, argosScreenshot } from "@argos-ci/puppeteer";
+
+const STYLE_ID = "argos-style";
+const STYLE = `
+  body { background: red; }
+  #my-element { color: blue; };
+`;
+
+async function addStyle(page: Page) {
+  await page.evaluate(
+    ({ STYLE, STYLE_ID }) => {
+      const style = document.createElement("style");
+      style.textContent = STYLE;
+      style.id = STYLE_ID;
+      document.head.appendChild(style);
+    },
+    { STYLE, STYLE_ID },
+  );
+}
+
+async function removeStyle(page: Page) {
+  await page.evaluate(
+    ({ STYLE_ID }) => {
+      const style = document.getElementById(STYLE_ID);
+      style?.remove();
+    },
+    { STYLE_ID },
+  );
+}
+
+export async function screenshotWithStyleInjection(
+  page: Page,
+  name: string,
+  options?: ArgosScreenshotOptions,
+) {
+  await addStyle(page);
+  await argosScreenshot(page, name, options);
+  await removeStyle(page);
+}
+```
