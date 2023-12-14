@@ -5,23 +5,23 @@ sidebar_position: 3
 
 # Injecting CSS
 
-Argos allows custom CSS injection in screenshots for more control over visual output.
+Learn how to inject CSS before taking a screenshot.
 
-In addition to [Argos built-in helpers](https://argos-ci.com/docs/argos-helpers#helpers), Argos integrations provide the capability to inject custom CSS into your screenshots. This feature is particularly useful in complex scenarios for excluding certain elements or addressing flaky visual differences.
+In addition to [Argos built-in helpers](https://argos-ci.com/docs/argos-helpers#helpers), Argos offer the possibility to inject custom CSS applied during the screenshot process. It can be helpful for complex use cases that produce flaky visual diffs.
 
 ## Custom CSS Injection
 
-Use the `customCSS` option in `argosScreenshot()` to apply temporary CSS before a screenshot. This CSS is removed post-capture.
+All our SDKs supports an `argosCSS` options that allows you to specify custom CSS evaluated during the screenshot phase. The style will be removed from the page after the screenshot is taken.
 
 ```ts
 // Define CSS
 const CUSTOM_STYLE = `iframe { display: none; }`;
 
 // Usage in Playwright and Puppeteer
-await argosScreenshot(page, "my-screenshot", { customCSS: CUSTOM_STYLE });
+await argosScreenshot(page, "my-screenshot", { argosCSS: CUSTOM_STYLE });
 
 // Usage in Cypress
-cy.argosScreenshot("my-screenshot", { customCSS: CUSTOM_STYLE });
+cy.argosScreenshot("my-screenshot", { argosCSS: CUSTOM_STYLE });
 ```
 
 ## Argos-Specific Styles
