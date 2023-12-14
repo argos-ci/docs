@@ -1,26 +1,29 @@
 ---
 slug: /about-flaky
-sidebar_position: 1
+sidebar_position: 10
 ---
 
 # About flaky tests
 
-Flaky tests are tests that exhibit unpredictable behavior, sometimes passing and sometimes failing for no apparent reason.
+Flaky tests, unpredictable in nature, can pass or fail without clear reason. This section offers strategies to stabilize screenshots and eliminate such inconsistencies.
 
-## Introduction
+## Emphasis on Accessibility
 
-This can be frustrating for developers, as it can be difficult to determine the root cause of the issue and fix it. Flaky tests can also negate the primary purpose of visual testing, which is to easily identify visual changes, as they invalidate GitHub status checks.
+At Argos, we advocate for accessibility-focused end-to-end testing. Enhancing accessibility not only supports users with disabilities but also strengthens test consistency.
 
-## Cause of flakiness
+## Common Causes
 
-There are several potential causes of flaky tests in visual testing, including:
+Flakiness often stems from:
 
-- **Timing issues**: Tests that rely on timing may be flaky if the timing is not consistent. For example, if a test waits for a specific element to load on a page and that element takes a variable amount of time to appear, the test may sometimes pass and sometimes fail.
+- **Dynamic Content**: Flakiness due to content changes, like ads or user-generated content.
+- **Asynchronous Loading**: Inconsistent element or style loading affecting visuals.
+- **Rendering Differences**: Browser or device variations altering visual output.
+- **External Dependencies**: Reliance on external systems causing variability.
+- **Animations and Transitions**: Unhandled animations leading to different visual states.
+- **Resolution and Scaling**: Screen resolution or scaling differences impacting visuals.
 
-- **Dependence on external factors**: Tests that rely on external factors such as network connectivity or the availability of certain resources may be prone to flakiness.
+Solutions involve identifying and addressing these root causes.
 
-- **Inconsistent test setup**: Flaky tests may also be caused by an inconsistent test setup process. This can happen if variables are not properly reset between runs or if tests rely on the state of the system being tested.
+## Policy
 
-To fix flaky tests, it is important to identify the root cause of the issue and take steps to address it. In the following pages, we will provide recipes for handling common causes of flaky tests.
-
-**Note**: We do not provide a button to ignore flaky tests because we believe that ignoring an error is more damaging than removing a test.
+We don't offer a "flaky test ignore" option, aligning with our ethos that addressing issues is preferable to bypassing them.
