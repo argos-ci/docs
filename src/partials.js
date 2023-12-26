@@ -170,18 +170,27 @@ import { defineConfig } from "@playwright/test";
 export default defineConfig({
   // ... other configuration
 
-  // Setup recording option to enable test debugging features
+  // Add Argos reporter.
+  reporter: [
+    ["list"],
+    [
+      "@argos-ci/playwright/reporter",
+      {
+        // Enable upload to Argos only when it runs on CI.
+        uploadToArgos: !!process.env.CI,
+        // Set your Argos token.
+        token: "<YOUR-ARGOS-TOKEN>",
+      },
+    ],
+  ],
+
+  // Setup recording option to enable test debugging features.
   use: {
-    // Setting to capture screenshot only when a test fails
+    // Setting to capture screenshot only when a test fails.
     screenshot: "only-on-failure",
-    // Setting to retain traces only when a test fails
+    // Setting to retain traces only when a test fails.
     trace: "retain-on-failure",
   },
-
-  // Add Argos reporter only when it runs on CI
-  reporter: process.env.CI
-    ? [["list"], ["@argos-ci/playwright/reporter"]]
-    : "list",
 });
       `.trim()}
     </CodeBlock>
@@ -233,11 +242,3 @@ export const ScreenshotGuidesLink = () => {
     </p>
   );
 };
-
-export const PlaywrightSetupCI = () => (
-  <p>
-    If you use GitHub Actions, your project will be automatically detected, no
-    extra step is required. For other CI environments, expose{" "}
-    <code>{`ARGOS_TOKEN=<YOUR-TOKEN>`}</code> environment variable.
-  </p>
-);
