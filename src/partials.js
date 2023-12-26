@@ -234,7 +234,7 @@ export const ScreenshotGuidesLink = () => {
     <p className="small">
       <span style={{ fontWeight: 600 }}>Tip</span>: Check out our guides to{" "}
       <a href={relativeUrl(baseUrl, "screenshot-pages-script")}>
-        streamline page screenshot captures
+        screenshot multiple pages
       </a>{" "}
       or{" "}
       <a href={relativeUrl(baseUrl, "viewports")}>capture multiple viewports</a>
