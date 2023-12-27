@@ -29,7 +29,7 @@ To get the most out of this guide, you’ll need to:
 
 Get the Argos Cypress SDK.
 
-<InstallDevDep dependency="@argos-ci/cli @argos-ci/cypress" showCliLink />
+<InstallDevDep dependency="@argos-ci/cypress" showCliLink />
 
 ## 2. Add `cy.argosScreenshot` command
 
@@ -44,29 +44,46 @@ If you use TypeScript, update your `tsconfig.json`:
 ```js
 {
   "compilerOptions": {
-    "types": ["cypress", "@argos-ci/cypress"]
+    "types": ["cypress", "@argos-ci/cypress/support"]
   }
 }
 ```
 
-## 3. Take screesnhots
+## 3. Register Argos in Cypress config
+
+```js cypress.config.js
+const { defineConfig } = require("cypress");
+
+module.exports = defineConfig({
+  // setupNodeEvents can also be defined in "component"
+  e2e: {
+    async setupNodeEvents(on, config) {
+      require("@argos-ci/cypress/task")(on, config, {
+        // Enable upload to Argos only when it runs on CI.
+        uploadToArgos: !!process.env.CI,
+        // Set your Argos token (required only if you don't use GitHub Actions).
+        token: "<YOUR-ARGOS-TOKEN>",
+      });
+
+      // include any other plugin code...
+    },
+  },
+});
+```
+
+## 4. Take screesnhots
 
 Use <code>argosScreenshot</code> helper to capture stable screenshots in your E2E tests.
 
 ```js title="cypress/e2e/homepage.cy.js"
 it("screenshot homepage", async ({ page }) => {
-  cy.visit("https://localhost:3000");
+  cy.visit("https://localhost:3000/");
   cy.argosScreenshot("homepage");
 });
 ```
 
-<ScreenshotGuidesLink />
 <AddToGitIgnore path="/cypress/screenshots" />
-
-## 3. Setup your CI
-
-<AddSecret folder="cypress/screenshots" />
-
+<ScreenshotGuidesLink />
 <Congratulation />
 
 ## Additional ressources
