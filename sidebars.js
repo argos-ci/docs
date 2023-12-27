@@ -78,17 +78,17 @@ const sidebars = {
         {
           type: "link",
           label: "Security",
-          href: "https://www.argos-ci.com/security",
+          href: "https://argos-ci.com/security",
         },
         {
           type: "link",
           label: "Privacy",
-          href: "https://www.argos-ci.com/privacy",
+          href: "https://argos-ci.com/privacy",
         },
         {
           type: "link",
           label: "Terms",
-          href: "https://www.argos-ci.com/terms",
+          href: "https://argos-ci.com/terms",
         },
       ],
     },
