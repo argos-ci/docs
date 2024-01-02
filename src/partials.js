@@ -170,15 +170,16 @@ import { defineConfig } from "@playwright/test";
 export default defineConfig({
   // ... other configuration
 
-  // Add Argos reporter.
+  // Reporter to use
   reporter: [
-    ["list"],
+    ["html"],
     [
       "@argos-ci/playwright/reporter",
       {
-        // Enable upload to Argos only when it runs on CI.
+        // Upload to Argos on CI only.
         uploadToArgos: !!process.env.CI,
-        // Set your Argos token (required only if you don't use GitHub Actions).
+
+        // Set your Argos token (needed if not using GitHub Actions).
         token: "<YOUR-ARGOS-TOKEN>",
       },
     ],
@@ -186,10 +187,11 @@ export default defineConfig({
 
   // Setup recording option to enable test debugging features.
   use: {
-    // Setting to capture screenshot only when a test fails.
+    // Collect trace when retrying the failed test.
+    trace: 'on-first-retry',
+
+    // Capture screenshot after each test failure.
     screenshot: "only-on-failure",
-    // Setting to retain traces only when a test fails.
-    trace: "retain-on-failure",
   },
 });
       `.trim()}
