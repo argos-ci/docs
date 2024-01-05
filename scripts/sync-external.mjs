@@ -22,6 +22,10 @@ const config = {
       src: "packages/playwright/docs",
       target: "docs/sdks/playwright",
     },
+    {
+      src: "packages/webdriverio/docs",
+      target: "docs/sdks/webdriverio",
+    },
   ],
 };
 
