@@ -63,6 +63,10 @@ const config = {
             from: "/installation",
             to: "/getting-started",
           },
+          {
+            from: "/quickstart",
+            to: "/getting-started",
+          },
         ],
       },
     ],
