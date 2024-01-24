@@ -1,0 +1,41 @@
+---
+slug: /run-on-preview-deployment
+title: Run on Preview Deployments
+sidebar_position: 20
+---
+
+# Run on Preview Deployments
+
+You can run Argos on a Preview Deployment. Vercel, Cloudflare or Netlify are supported.
+
+## Vercel + GitHub Action
+
+First be sure that your repository is correctly connected to Vercel. Read the [Vercel guide](https://vercel.com/guides/how-can-i-run-end-to-end-tests-after-my-vercel-preview-deployment) for more information.
+
+This setup runs Playwright tests after a successful Vercel deployment. If you didn't setup Argos + Playwright, read our [quickstart guide](/quickstart/playwright).
+
+Create a GitHub workflow in `.github/workflows` with the following:
+
+```yml
+name: Playwright + Argos Tests
+
+on:
+  deployment_status:
+jobs:
+  run-e2es:
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm ci && npx playwright install --with-deps
+      - name: Run tests
+        run: npx playwright test
+        env:
+          # Use this environment variable as `baseUrl` in your plawright.config.ts
+          BASE_URL: ${{ github.event.deployment_status.environment_url }}
+          # Argos uses GITHUB_TOKEN to collect branch and pull request informations
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Set the branch when your deployment runs on "Production" environment.
+          ARGOS_BRANCH: ${{ github.event.deployment_status.environment == 'Production' && 'main' || '' }}
+```
