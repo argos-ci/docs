@@ -4,17 +4,17 @@ title: Run on Preview Deployments
 sidebar_position: 20
 ---
 
-# Run on Preview Deployments
+# Setting Up Argos for Preview Deployments
 
-You can run Argos on a Preview Deployment. Vercel, Cloudflare or Netlify are supported.
+Argos can be integrated with Preview Deployments from various providers like Vercel, Cloudflare, Netlify, etc.
 
-## Vercel + GitHub Action
+## Configure a GitHub Action
 
-First be sure that your repository is correctly connected to Vercel. Read the [Vercel guide](https://vercel.com/guides/how-can-i-run-end-to-end-tests-after-my-vercel-preview-deployment) for more information.
+Ensure your deployment provider is linked to GitHub, as Argos requires the provider to create a GitHub deployment for triggering tests on Deployment Previews.
 
-This setup runs Playwright tests after a successful Vercel deployment. If you didn't setup Argos + Playwright, read our [quickstart guide](/quickstart/playwright).
+In this guide, we setup a GitHub workflow that listens to the ["deployment_status"](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#deployment_status) event. Specifically, focus on the "success" state of this event to initiate tests.
 
-Create a GitHub workflow in `.github/workflows` with the following:
+Create the workflow file under `.github/workflows` with this structure:
 
 ```yml
 name: Playwright + Argos Tests
@@ -23,6 +23,7 @@ on:
   deployment_status:
 jobs:
   run-e2es:
+    # Run tests only if the deployment is successful
     if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     steps:
@@ -34,8 +35,50 @@ jobs:
         env:
           # Use this environment variable as `baseUrl` in your plawright.config.ts
           BASE_URL: ${{ github.event.deployment_status.environment_url }}
-          # Argos uses GITHUB_TOKEN to collect branch and pull request informations
+          # Argos uses GITHUB_TOKEN to collect branch and pull request information
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Set the branch when your deployment runs on "Production" environment.
           ARGOS_BRANCH: ${{ github.event.deployment_status.environment == 'Production' && 'main' || '' }}
+```
+
+**Environment Variables Explained:**
+
+- `BASE_URL`: This is automatically set to the URL of your deployment from the provider. It's used for running End-to-End (E2E) tests.
+- `GITHUB_TOKEN`: Argos utilizes the `GITHUB_TOKEN` secret, which is [provided by GitHub by default](https://docs.github.com/en/actions/security-guides/automatic-token-authentication), for accessing branch and pull request information. If you prefer not to use `GITHUB_TOKEN`, see the following section for alternatives.
+- `ARGOS_BRANCH`: This variable is crucial when your deployment is on the "Production" environment, typically corresponding to your "main" or "master" branch. Argos cannot automatically identify the branch, so you need to specify it explicitly.
+
+### Usage without `GITHUB_TOKEN`
+
+For security reasons, you might choose not to use a `GITHUB_TOKEN` with Argos. In this scenario, your Argos build will have the following limitations:
+
+- The branch name of the deployment environment will be used instead of specific pull request information.
+- There will be no direct link to the corresponding pull request.
+
+To mitigate these limitations, it's important to designate your main production environment (e.g., "Production" in Vercel) as the "reference branch" in your project's Argos settings.
+
+![Screenshot showing how to configure "Production" as the reference branch in Argos project settings](./run-on-preview-deployment/configure-reference-branch.png)
+
+Additionally, Argos SDKs typically show a warning when a `GITHUB_TOKEN` is not set. You can suppress this warning by setting the `DISABLE_GITHUB_TOKEN_WARNING` environment variable to true.
+
+Here is an example configuration without `GITHUB_TOKEN`:
+
+```yml
+name: Playwright + Argos Tests
+
+on:
+  deployment_status:
+jobs:
+  run-e2es:
+    # Run tests only if the deployment is successful
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm ci && npx playwright install --with-deps
+      - name: Run tests
+        run: npx playwright test
+        env:
+          # Use this environment variable as `baseUrl` in your plawright.config.ts
+          BASE_URL: ${{ github.event.deployment_status.environment_url }}
 ```
