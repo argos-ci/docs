@@ -28,6 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
       - name: Install dependencies
         run: npm ci && npx playwright install --with-deps
       - name: Run tests
@@ -46,6 +47,36 @@ jobs:
 - `BASE_URL`: This is automatically set to the URL of your deployment from the provider. It's used for running End-to-End (E2E) tests.
 - `GITHUB_TOKEN`: Argos utilizes the `GITHUB_TOKEN` secret, which is [provided by GitHub by default](https://docs.github.com/en/actions/security-guides/automatic-token-authentication), for accessing branch and pull request information. If you prefer not to use `GITHUB_TOKEN`, see the following section for alternatives.
 - `ARGOS_BRANCH`: This variable is crucial when your deployment is on the "Production" environment, typically corresponding to your "main" or "master" branch. Argos cannot automatically identify the branch, so you need to specify it explicitly.
+
+### Disable Vercel Toolbar
+
+If you use Vercel, the Vercel Toolbar may show up in your screenshots.
+
+To disable it, you must [set `x-vercel-skip-toolbar`](https://vercel.com/docs/workflow-collaboration/vercel-toolbar#disable-toolbar-for-session).
+
+**Using Playwright:**
+
+```ts title="playwright.config.ts"
+import { defineConfig } from "@playwright/test";
+
+export default defineConfig({
+  use: {
+    extraHTTPHeaders: {
+      "x-vercel-skip-toolbar": "1",
+    },
+  },
+});
+```
+
+**Using Cypress:**
+
+```ts title="support/index.js"
+beforeEach(() => {
+  cy.intercept(`${Cypress.config("baseUrl")}**`, (req) => {
+    req.headers["x-vercel-skip-toolbar"] = "1";
+  });
+});
+```
 
 ### Usage without `GITHUB_TOKEN`
 
