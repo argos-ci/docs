@@ -172,7 +172,9 @@ export default defineConfig({
 
   // Reporter to use
   reporter: [
-    ["html"],
+    // Use "dot" reporter on CI, "list" otherwise (Playwright default).
+    process.env.CI ? ["dot"] : ["list"],
+    // Add Argos reporter.
     [
       "@argos-ci/playwright/reporter",
       {
