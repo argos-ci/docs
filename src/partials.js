@@ -135,10 +135,10 @@ export const AddSecret = ({ folder }) => (
       Add this command to your CI pipeline to upload the screenshots to Argos.
     </p>
     <CodeBlock>{`npm exec -- argos upload --token <ARGOS_TOKEN> ${folder}`}</CodeBlock>
-    <div>
-      <span style={{ fontWeight: 600 }}>Tip</span>: On GitHub Actions, you don't
-      need to set your Argos token, it is automatically detected. On other CI,
-      we recommended to use a variable to store your Argos token.
+    <div className="-mt-2">
+      <span className="font-medium">Note:</span> The value of{" "}
+      <span className="font-medium text-sm">ARGOS_TOKEN</span> is available your
+      project settings on Argos.
     </div>
   </div>
 );
