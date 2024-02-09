@@ -32,9 +32,9 @@ Get the Argos Cypress SDK.
 
 ## 2. Add `cy.argosScreenshot` command
 
-And add this line to your `cypress/support/index.js` file:
+And add this line to your `cypress/support/e2e.js` file:
 
-```js cypress/support/index.js
+```js cypress/support/e2e.js
 import "@argos-ci/cypress/support";
 ```
 
@@ -71,7 +71,7 @@ module.exports = defineConfig({
 });
 ```
 
-## 4. Take screesnhots
+## 4. Take screenshots
 
 Use <code>argosScreenshot</code> helper to capture stable screenshots in your E2E tests.
 
