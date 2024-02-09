@@ -157,11 +157,19 @@ export const AddToGitIgnore = ({ path = "/screenshots" }) => (
   </p>
 );
 
+export const NoNeedUpdateCI = () => (
+  <p>
+    <span className="font-medium">Note:</span> No need to add{" "}
+    <code>@argos-ci/cli</code> in your CI/CD pipeline. Screenshots and traces
+    are automatically uploaded to Argos when your tests run on CI.
+  </p>
+);
+
 export const PlaywrightConfig = () => (
   <>
     <p>
-      The Argos reporter seamlessly uploads screenshots and traces to Argos in
-      real-time.
+      Update `playwright.config.ts` file to upload screenshots and traces to
+      Argos when your tests run on CI.
     </p>
     <CodeBlock language="js" title="playwright.config.ts">
       {`
@@ -181,7 +189,7 @@ export default defineConfig({
         // Upload to Argos on CI only.
         uploadToArgos: !!process.env.CI,
 
-        // Set your Argos token (required if not using GitHub Actions).
+        // Set your Argos token (available in project settings on Argos).
         token: "<YOUR-ARGOS-TOKEN>",
       },
     ],
@@ -198,17 +206,18 @@ export default defineConfig({
 });
       `.trim()}
     </CodeBlock>
-    Playwright's{" "}
-    <a
-      href="https://playwright.dev/docs/test-use-options#recording-options"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      recording options
-    </a>{" "}
-    facilitate the automated capture of screenshots upon test failures. Notably,
-    these captured screenshots and traces are then automatically uploaded to
-    Argos.
+    <p>
+      Playwright's{" "}
+      <a
+        href="https://playwright.dev/docs/test-use-options#recording-options"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        recording options
+      </a>{" "}
+      facilitate the automated capture of screenshots upon test failures.
+    </p>
+    <NoNeedUpdateCI />
   </>
 );
 

@@ -10,6 +10,7 @@ import {
   HelpSection,
   InstallDevDep,
   ScreenshotGuidesLink,
+  NoNeedUpdateCI,
 } from "@site/src/partials";
 
 # Cypress Quickstart
@@ -50,6 +51,8 @@ If you use TypeScript, update your `tsconfig.json`:
 
 ## 3. Register Argos in Cypress config
 
+Update `cypress.config.js` file to upload screenshots to Argos when your tests run on CI.
+
 ```js cypress.config.js
 const { defineConfig } = require("cypress");
 const { registerArgosTask } = require("@argos-ci/cypress/task");
@@ -61,7 +64,7 @@ module.exports = defineConfig({
       registerArgosTask(on, config, {
         // Enable upload to Argos only when it runs on CI.
         uploadToArgos: !!process.env.CI,
-        // Set your Argos token (required only if you don't use GitHub Actions).
+        // Set your Argos token (available in project settings on Argos).
         token: "<YOUR-ARGOS-TOKEN>",
       });
 
@@ -71,7 +74,9 @@ module.exports = defineConfig({
 });
 ```
 
-## 4. Take screesnhots
+<NoNeedUpdateCI />
+
+## 4. Take screenshots
 
 Use <code>argosScreenshot</code> helper to capture stable screenshots in your E2E tests.
 
