@@ -5,7 +5,6 @@ sidebar_position: 1
 ---
 
 import { InstallDevDep, RunPkgCommand } from "@site/src/partials";
-import { Tag } from "@site/src/components/Tag";
 
 # Argos Command Line Interface (CLI)
 
@@ -25,9 +24,15 @@ Note: You can also specify the token with the `--token=<your-repository-token>` 
 
 ## Upload Command
 
-Use the `upload` command to upload screenshots stored in your <Tag>./screenshots</Tag> directory.
+Use the `upload` command to upload screenshots stored in your <code>./screenshots</code> directory.
 
 <RunPkgCommand command="argos upload ./screenshots" />
+
+### Debug option
+
+You can enable debug mode by setting the `DEBUG` environment variable.
+
+<RunPkgCommand command="argos help upload" envVariable="DEBUG=*" />
 
 ## Help Command
 
