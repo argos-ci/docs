@@ -38,27 +38,31 @@ export const InstallDevDep = ({ dependency, showCliLink = false }) => {
   );
 };
 
-export const RunPkgCommand = ({ command }) => {
+export const RunPkgCommand = ({ command, envVariable }) => {
   const commands = Array.isArray(command) ? command : [command];
   return (
     <Tabs groupId="package-managers">
       <TabItem value="npm" label="npm" default>
         <CodeBlock>
+          {envVariable ? `${envVariable} ` : ""}
           {commands.map((command) => `npm exec ${command}`).join("\n")}
         </CodeBlock>
       </TabItem>
       <TabItem value="yarn" label="yarn">
         <CodeBlock>
+          {envVariable ? `${envVariable} ` : ""}
           {commands.map((command) => `yarn run ${command}`).join("\n")}
         </CodeBlock>
       </TabItem>
       <TabItem value="pnpm" label="pnpm">
         <CodeBlock>
+          {envVariable ? `${envVariable} ` : ""}
           {commands.map((command) => `pnpm exec ${command}`).join("\n")}
         </CodeBlock>
       </TabItem>
       <TabItem value="bun" label="bun">
         <CodeBlock>
+          {envVariable ? `${envVariable} ` : ""}
           {commands.map((command) => `bun x ${command}`).join("\n")}
         </CodeBlock>
       </TabItem>
