@@ -191,7 +191,11 @@ nav.menu {
 .theme-doc-sidebar-menu.theme-doc-sidebar-menu
   .theme-doc-sidebar-item-category
   ul.menu__list {
-  @apply ml-4 border-l font-normal mb-5;
+  @apply ml-4 border-l font-normal my-0;
+}
+
+.theme-doc-sidebar-menu.theme-doc-sidebar-menu .menu__list-item {
+  @apply first:pt-2 last:pb-4;
 }
 
 .theme-doc-sidebar-menu.theme-doc-sidebar-menu .menu__link {
