@@ -1,0 +1,35 @@
+---
+slug: /parallel-testing
+title: Parallel Testing
+---
+
+# Parallel Testing
+
+Parallel Testing, synonymous with Sharding, significantly boosts the efficiency of your test suite by enabling concurrent execution of tests. Argos elevates this capability by providing seamless, automated configuration processes.
+
+## Playwright
+
+Argos seamlessly integrates with Playwright, offering out-of-the-box support for [Playwright tests sharding](https://playwright.dev/docs/test-sharding). This means zero configuration hassle for you. For more details, refer to the [Argos Playwright SDK](/playwright).
+
+## Other SDKs
+
+For environments beyond Playwright, Argos facilitates sharding through two key environment variables, simplifying the setup:
+
+- `ARGOS_PARALLEL_TOTAL`: Specifies the number of parallel nodes. It's crucial to ensure equal calls to Argos upload across these nodes.
+- `ARGOS_PARALLEL_NONCE`: A unique identifier for each build. In most CI environments, Argos will automatically generate this for you.
+
+> **Note:** Alternatively, use `--parallel-nonce` and `--parallel-total` flags with the CLI or `parallel: { nonce: string, total: number }` within SDK options.
+
+### Implementing in GitHub Actions
+
+Below is a practical example showcasing how to configure Argos sharding within a GitHub Actions workflow:
+
+```yml title=".github/workflows/ci.yml"
+- name: Upload screenshots to argos-ci.com
+  continue-on-error: true
+  env:
+    ARGOS_PARALLEL_TOTAL: ${{ strategy['job-total'] }}
+    # ARGOS_PARALLEL_NONCE is automatically detected
+
+  run: npm exec argos upload --parallel ./screenshots
+```
