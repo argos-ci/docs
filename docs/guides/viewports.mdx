@@ -1,32 +1,31 @@
 ---
 slug: /viewports
 title: Responsive Viewports
-sidebar_position: 2
 ---
 
-# Responsive Viewports
+# Configuring Responsive Viewports
 
-Specify various viewports to capture screenshots across multiple screen sizes.
+Effortlessly test your web applications across a variety of screen sizes by specifying different viewports.
 
 ## Prerequisites
 
-This feature is available [Playwright](/playwright), [Cypress](/cypress) and [Puppeteer](/puppeteer) integrations.
+This advanced feature integrates smoothly with [Playwright](/playwright), [Cypress](/cypress), and [Puppeteer](/puppeteer) to enhance your testing capabilities.
 
-## Configuring Viewports
+## Viewport Configuration
 
-To tailor viewport settings, modify the `argosScreenshot()` command within your tests. This allows for capturing responsive views using either specific dimensions or predefined device presets:
+Adjust the `argosScreenshot()` command in your test scripts to capture responsive screenshots. You can specify exact dimensions or use device presets to mimic real-world scenarios:
 
 ```js
 await argosScreenshot(..., {
   viewports: [
-    "iphone-4", // Device preset
-    { width: 800, height: 600 }, // Direct dimensions
-    { preset: "ipad-2", orientation: "landscape" }, // Preset with options
+    "iphone-4", // Use device preset
+    { width: 800, height: 600 }, // Specify dimensions directly
+    { preset: "ipad-2", orientation: "landscape" }, // Device preset with orientation
   ],
 });
 ```
 
-## Supported Presets
+## Available Presets
 
 List of available device presets with their respective dimensions:
 
@@ -53,6 +52,4 @@ List of available device presets with their respective dimensions:
 
 ## Troubleshooting and Best Practices
 
-Setting the viewport using `page.setViewportSize()` will resize the page. However, many websites are not designed to adapt dynamically to different viewport sizes. Thus, it's recommended to set the viewport size **before** navigating to the page.
-
-It is recommended to run your entire test suite on a specific viewport to be sure everything is working as expected on every resolution.
+To ensure accurate rendering, always set the viewport size with `page.setViewportSize()` before navigating to the target page, as many sites do not dynamically adapt to changes in viewport size after the page has loaded. For comprehensive testing, consider running your tests across all intended viewports to validate responsive behavior across the board.

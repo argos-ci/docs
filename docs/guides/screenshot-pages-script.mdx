@@ -1,20 +1,20 @@
 ---
 slug: /screenshot-pages-script
-title: Screenshot pages
-sidebar_position: 1
+title: Screenshots from URLs
 ---
 
-# Screenshot pages
+# Capture Screenshots from URLs
 
-A practical guide to efficiently capture screenshots of various web pages.
+This guide walks you through capturing screenshots of web pages across different frameworks with efficiency and precision.
 
-## Playwright
+## Using Playwright
+
+Below is a step-by-step script for Playwright to take screenshots of specified pages. This script utilizes the Argos Playwright integration for streamlined screenshot capture:
 
 ```js title="screenshot-pages.spec.ts"
 import { test } from "@playwright/test";
 import { argosScreenshot } from "@argos-ci/playwright";
 
-const baseUrl = "http://localhost:3000";
 const pages = [
   { name: "homepage", path: "/" },
   { name: "faq", path: "/faq" },
@@ -22,22 +22,20 @@ const pages = [
   { name: "pricing", path: "/pricing" },
 ];
 
-test("screenshot pages", async ({ page }, workerInfo) => {
-  for (const { name, path } of pages) {
+for (const { name, path } of pages) {
+  test(`Run Argos on ${name} (${path})`, async ({ page }, workerInfo) => {
     const browserName = workerInfo.project.name;
-    await page.goto(`${baseUrl}${path}`);
+    await page.goto(path);
     await argosScreenshot(page, `${name}-${browserName}`);
-  }
-});
+  });
+}
 ```
 
-See [responsive screenshots](/viewports) option to capture screenshot on various screen sizes.
+## Using Cypress
 
-## Cypress
+Here's how you can capture screenshots within Cypress. The script navigates to each page and uses the Argos Cypress command for screenshots:
 
 ```js title="screenshot-pages.spec.ts"
-const baseUrl = "http://localhost:3000";
-
 const pages = [
   { name: "homepage", path: "/" },
   { name: "faq", path: "/faq" },
@@ -45,19 +43,17 @@ const pages = [
   { name: "pricing", path: "/pricing" },
 ];
 
-describe("Screenshot pages", () => {
-  for (const { name, path } of pages) {
-    it(`Screenshots for ${name}`, () => {
-      cy.visit(`${baseUrl}${path}`);
-      cy.argosScreenshot(name);
-    });
-  }
-});
+for (const { name, path } of pages) {
+  it(`Run Argos on ${name} (${path})`, () => {
+    cy.visit(path);
+    cy.argosScreenshot(name);
+  });
+}
 ```
 
-See [responsive screenshots](/viewports) option to capture screenshot on various screen sizes.
+## Using Puppeteer
 
-## Puppeteer
+or Puppeteer users, this script demonstrates how to capture page screenshots effectively. It employs Puppeteer for navigation and screenshot capture:
 
 ```js title="screenshot-pages.spec.ts"
 import puppeteer from "puppeteer";
@@ -83,5 +79,3 @@ const pages = [
   await browser.close();
 })();
 ```
-
-See [responsive screenshots](/viewports) option to capture screenshot on various screen sizes.

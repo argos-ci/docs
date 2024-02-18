@@ -123,6 +123,10 @@ nav.menu {
   @apply !text-low px-3 py-2 text-sm bg-mauve-2 border-b-mauve-6;
 }
 
+.theme-code-block-highlighted-line {
+  @apply !bg-mauve-4;
+}
+
 /* Code tabs */
 
 .tabs.tabs {
@@ -229,6 +233,20 @@ nav.menu {
   background: url("@site/src/img/discord-logo-white.png") no-repeat;
   background-size: 24px 24px;
   margin-right: 4px;
+}
+
+/* Toggle button */
+
+.toggleButton_node_modules-\@docusaurus-theme-classic-lib-theme-ColorModeToggle-styles-module
+  svg {
+  display: block !important;
+}
+
+[data-theme="light"]
+  .darkToggleIcon_node_modules-\@docusaurus-theme-classic-lib-theme-ColorModeToggle-styles-module,
+[data-theme="dark"]
+  .lightToggleIcon_node_modules-\@docusaurus-theme-classic-lib-theme-ColorModeToggle-styles-module {
+  display: none !important;
 }
 
 /* Mobile view */
