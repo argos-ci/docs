@@ -169,12 +169,17 @@ nav.menu {
 }
 
 /* Alert */
-.alert {
-  @apply flex;
+.alert.alert {
+  @apply flex shadow-none px-4 py-3 border bg-transparent border-l-4 border-alert;
+}
+
+.alert.alert--secondary::before {
+  content: "⚑";
+  @apply text-xl mr-3;
 }
 
 .alert > div:first-child {
-  @apply hidden;
+  display: none;
 }
 
 .alert p {
@@ -258,4 +263,10 @@ nav.menu {
   .navbar {
     @apply p-4;
   }
+}
+
+/* Img */
+
+article img {
+  @apply rounded;
 }
