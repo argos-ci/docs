@@ -23,10 +23,9 @@ const pages = [
 ];
 
 for (const { name, path } of pages) {
-  test(`Run Argos on ${name} (${path})`, async ({ page }, workerInfo) => {
-    const browserName = workerInfo.project.name;
+  test(`Run Argos on ${name} (${path})`, async ({ page }) => {
     await page.goto(path);
-    await argosScreenshot(page, `${name}-${browserName}`);
+    await argosScreenshot(page, name);
   });
 }
 ```
