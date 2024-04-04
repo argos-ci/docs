@@ -37,7 +37,7 @@ const config = {
           editUrl: "https://github.com/argos-ci/docs.argos-ci.com/blob/main",
         },
         theme: {
-          customCss: require.resolve("./src/css/custom.css"),
+          customCss: "./src/css/custom.css",
         },
         sitemap: {
           // Remove redirect and orphan pages from sitemap
