@@ -45,7 +45,7 @@ export const RunPkgCommand = ({ command, envVariable }) => {
       <TabItem value="npm" label="npm" default>
         <CodeBlock>
           {envVariable ? `${envVariable} ` : ""}
-          {commands.map((command) => `npm exec ${command}`).join("\n")}
+          {commands.map((command) => `npm exec -- ${command}`).join("\n")}
         </CodeBlock>
       </TabItem>
       <TabItem value="yarn" label="yarn">
@@ -57,7 +57,7 @@ export const RunPkgCommand = ({ command, envVariable }) => {
       <TabItem value="pnpm" label="pnpm">
         <CodeBlock>
           {envVariable ? `${envVariable} ` : ""}
-          {commands.map((command) => `pnpm exec ${command}`).join("\n")}
+          {commands.map((command) => `pnpm exec -- ${command}`).join("\n")}
         </CodeBlock>
       </TabItem>
       <TabItem value="bun" label="bun">
