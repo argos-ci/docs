@@ -43,6 +43,9 @@ const config = {
           // Remove redirect and orphan pages from sitemap
           ignorePatterns: ["/docs/", "/docs/search"],
         },
+        googleTagManager: {
+          gtmId: "GTM-NLJR9K93",
+        },
       }),
     ],
   ],
