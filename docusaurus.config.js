@@ -44,7 +44,7 @@ const config = {
           ignorePatterns: ["/docs/", "/docs/search"],
         },
         googleTagManager: {
-          gtmId: "GTM-NLJR9K93",
+          containerId: "GTM-NLJR9K93",
         },
       }),
     ],
