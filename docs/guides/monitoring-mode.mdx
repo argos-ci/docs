@@ -94,23 +94,23 @@ Monitoring mode in Argos is designed to provide continuous oversight of visual c
 
 ### 1. Regular Visual Health Checks
 
-**Scenario:** You have a live project that undergoes frequent updates, either content or minor style changes, which do not warrant a full CI pipeline run.
-**Solution:** Set up Monitoring mode to run periodically (e.g., daily or weekly) on your main branch. This ensures that any unexpected visual changes are detected early, even if they are not linked to specific code commits.
+- **Scenario:** You have a live project that undergoes frequent updates, either content or minor style changes, which do not warrant a full CI pipeline run.
+- **Solution:** Set up Monitoring mode to run periodically (e.g., daily or weekly) on your main branch. This ensures that any unexpected visual changes are detected early, even if they are not linked to specific code commits.
 
 ### 2. Pre-release Validation
 
-**Scenario:** Before rolling out a major release, you want to ensure that all visual aspects of your application are intact and there are no regressions.
-**Solution:** Use Monitoring mode to run a visual check on the release branch. This allows you to compare the current state with the last approved build, ensuring that everything looks as expected before the final deployment.
+- **Scenario:** Before rolling out a major release, you want to ensure that all visual aspects of your application are intact and there are no regressions.
+- **Solution:** Use Monitoring mode to run a visual check on the release branch. This allows you to compare the current state with the last approved build, ensuring that everything looks as expected before the final deployment.
 
 ### 3. Post-deployment Monitoring
 
-**Scenario:** After deploying to a staging or production environment, you want to continuously monitor the visual integrity of your application to catch any discrepancies caused by environmental differences.
-**Solution:** Configure Monitoring mode to run after each deployment to these environments. This helps in identifying any issues that might not be evident in the development or CI environments but manifest in staging or production.
+- **Scenario:** After deploying to a staging or production environment, you want to continuously monitor the visual integrity of your application to catch any discrepancies caused by environmental differences.
+- **Solution:** Configure Monitoring mode to run after each deployment to these environments. This helps in identifying any issues that might not be evident in the development or CI environments but manifest in staging or production.
 
 ### 4. Third-party Integrations
 
-**Scenario:** Your application integrates with third-party services or widgets that may update independently.
-**Solution:** Set up Monitoring mode to regularly check the visual integration points of these third-party services to ensure they remain consistent and do not disrupt the user experience.
+- **Scenario:** Your application integrates with third-party services or widgets that may update independently.
+- **Solution:** Set up Monitoring mode to regularly check the visual integration points of these third-party services to ensure they remain consistent and do not disrupt the user experience.
 
 By leveraging Monitoring mode in these scenarios, you can maintain high visual standards for your application and catch issues early, ensuring a seamless experience for your users.
 
