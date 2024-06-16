@@ -3,7 +3,7 @@ slug: /parallel-testing
 title: Parallel Testing
 ---
 
-# Parallel Testing
+# Parallel Testing (Sharding)
 
 Boost test suite efficiency with Argos Parallel Testing: Automate and streamline concurrent test executions across multiple environments effortlessly.
 
@@ -16,20 +16,38 @@ Argos seamlessly integrates with Playwright, offering out-of-the-box support for
 For environments beyond Playwright, Argos facilitates sharding through two key environment variables, simplifying the setup:
 
 - `ARGOS_PARALLEL_TOTAL`: Specifies the number of parallel nodes. It's crucial to ensure equal calls to Argos upload across these nodes.
+- `ARGOS_PARALLEL_INDEX`: Specifies the index of the current parallel node.
 - `ARGOS_PARALLEL_NONCE`: A unique identifier for each build. In most CI environments, Argos will automatically generate this for you.
 
-> **Note:** Alternatively, use `--parallel-nonce` and `--parallel-total` flags with the CLI or `parallel: { nonce: string, total: number }` within SDK options.
+:::note
+
+Alternatively, use `--parallel-nonce`, `--parallel-total` and `--parallel-index` flags with the CLI or `parallel: { nonce: string, total: number, index: number }` within SDK options.
+
+:::
 
 ### Implementing in GitHub Actions
 
 Below is a practical example showcasing how to configure Argos sharding within a GitHub Actions workflow:
 
 ```yml title=".github/workflows/ci.yml"
-- name: Upload screenshots to argos-ci.com
-  continue-on-error: true
-  env:
-    ARGOS_PARALLEL_TOTAL: ${{ strategy['job-total'] }}
-    # ARGOS_PARALLEL_NONCE is automatically detected
+jobs:
+  e2e-tests:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2, 3, 4]
+        shardTotal: [4]
+    steps:
+      # ---
+      # Here you setup your repo and run your E2E tests
+      # ---
+      - name: Upload screenshots to Argos
+        env:
+          ARGOS_PARALLEL_TOTAL: ${{ matrix.shardTotal }}
+          ARGOS_PARALLEL_INDEX: ${{ matrix.shardIndex }}
+          # ARGOS_PARALLEL_NONCE is automatically detected
 
-  run: npm exec -- argos upload --parallel ./screenshots
+        run: npm exec -- argos upload --parallel ./screenshots
 ```
