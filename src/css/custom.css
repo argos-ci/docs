@@ -69,6 +69,7 @@ svg {
 }
 .main-wrapper > div {
   max-width: 1440px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -115,7 +116,11 @@ nav.menu {
 }
 
 .theme-code-block {
-  @apply !border !shadow-none !bg-mauve-2;
+  @apply !border !shadow-none !bg-mauve-2 !relative;
+
+  & > div {
+    @apply !border-base;
+  }
 }
 
 .markdown
