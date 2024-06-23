@@ -36,6 +36,7 @@ module.exports = {
       },
       borderColor: {
         DEFAULT: radixColors.alias("mauve.6"),
+        base: radixColors.alias("mauve.6"),
         alert: radixColors.alias("mauve.8"),
       },
     },
