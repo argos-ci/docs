@@ -44,7 +44,7 @@ const config = {
             ) {
               return undefined;
             }
-            return `https://github.com/argos-ci/docs/blob/main/${params.docPath}`;
+            return `https://github.com/argos-ci/docs/blob/main/docs/${params.docPath}`;
           },
         },
         theme: {
