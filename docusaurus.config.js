@@ -34,7 +34,7 @@ const config = {
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           sidebarCollapsible: true,
-          editUrl: "https://github.com/argos-ci/docs.argos-ci.com/blob/main",
+          editUrl: "https://github.com/argos-ci/docs/blob/main",
         },
         theme: {
           customCss: "./src/css/custom.css",
