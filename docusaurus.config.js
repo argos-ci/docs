@@ -35,7 +35,17 @@ const config = {
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           sidebarCollapsible: true,
-          editUrl: "https://github.com/argos-ci/docs/blob/main",
+          editUrl: (params) => {
+            // External docs
+            if (
+              params.docPath.includes("sdks/cypress") ||
+              params.docPath.includes("sdks/playwright") ||
+              params.docPath.includes("sdks/puppeteer")
+            ) {
+              return undefined;
+            }
+            return `https://github.com/argos-ci/docs/blob/main/${params.docPath}`;
+          },
         },
         theme: {
           customCss: "./src/css/custom.css",
