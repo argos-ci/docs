@@ -17,6 +17,7 @@ const config = {
   projectName: "docs",
   deploymentBranch: "main",
   trailingSlash: false,
+  titleDelimiter: "-",
   i18n: { defaultLocale: "en", locales: ["en"] },
   scripts: [
     {
@@ -93,7 +94,7 @@ const config = {
       navbar: {
         title: "",
         logo: {
-          alt: "Argos CI",
+          alt: "Argos",
           src: "img/logo-nav-light.svg",
           srcDark: "img/logo-nav-dark.svg",
           href: "/getting-started",
