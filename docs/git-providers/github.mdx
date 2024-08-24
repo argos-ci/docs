@@ -4,37 +4,56 @@ title: GitHub
 sidebar_position: 30
 ---
 
-import githubRepoAccess from "@site/src/img/github-repo-access.png";
-
 # Integrating Argos with GitHub
 
-Seamlessly integrate Argos with GitHub for automated visual testing directly within your workflow. Connect and receive instant feedback on PRs.
+Seamlessly integrate Argos with GitHub for automated visual testing directly within your workflow. Connect Argos to your repositories and receive instant feedback on your pull requests, making it easier to maintain visual consistency across your project.
 
-## 1. GitHub Connect
+## GitHub Connect
 
-GitHub Connect to log in into Argos.
+Use GitHub Connect to log in to Argos with your GitHub account. This integration allows Argos to access your repositories and streamline the setup process.
 
-## 2. Argos' GitHub App
+## Argos' GitHub App
 
-Argos has a dedicated GitHub App to connect to your repositories and provide real-time feedback on pull requests.
+Argos provides a dedicated GitHub App that connects directly to your repositories, enabling real-time visual testing feedback on pull requests.
 
-#### Install
+### Install the Argos GitHub App
 
-Visit the [Argos app page on GitHub](https://github.com/apps/argos-ci), click on "Configure" and choose the organization for Argos installation.
+1. Visit the [Argos app page on GitHub](https://github.com/apps/argos-ci).
+2. Click on "Configure" and select the organization where you want to install Argos.
+3. Follow the prompts to complete the installation.
 
-#### Import GitHub Repository to Argos
+### Import a GitHub Repository to Argos
 
-1. Sign in to Argos and click on "Create a new project"
-2. Choose your Git provider and click on "import your repository".
+1. Sign in to Argos and click on "Create a new project".
+2. Choose GitHub as your provider, then click "Import your repository."
 
-#### Update the repositories list shared with Argos
+### Update the Repositories Shared with Argos
 
-1. Head to the [Argos app page on GitHub](https://github.com/apps/argos-ci) and select "Configure".
-2. Select the organization you aim to adjust.
-3. Under "Repository access" select "Only select repositories" and choose the repositories you want to share with Argos.<br/>
-   <img
-     src={githubRepoAccess}
-     alt="Argos build example"
-     className="rounded"
-     style={{ marginBottom: 4, marginTop: 8, width: 450 }}
-   />
+1. Go to the [Argos app page on GitHub](https://github.com/apps/argos-ci) and click "Configure".
+2. Select the organization where you want to manage repository access.
+3. Under "Repository access," choose "Only select repositories" and select the specific repositories you wish to share with Argos.
+
+![Required Argos status check in GitHub](./github/repository-access.jpg)
+
+## GitHub Integration without Content Permission
+
+If you prefer to use Argos without granting full content access to your repositories, you can now integrate via a more restricted setup.
+
+### Setting Up Argos with Limited GitHub Access
+
+1. Navigate to Team Settings in your Argos dashboard.
+2. In the "GitHub without content access" section, click Install GitHub App.
+
+![GitHub without content access settings in Argos](./github/github-light-settings.jpg)
+
+3. On the next screen you are redirected to GitHub, choose the specific repositories where you want to install the Argos app.
+
+![Argos GitHub app without content access](./github/github-light-app.jpg)
+
+4. Go to Team Projects in Argos.
+5. Click Create a new project.
+6. Select Continue with GitHub (no-content access).
+
+![Argos GitHub app without content access](./github/create-project.jpg)
+
+7. Choose the repository you want to connect.
