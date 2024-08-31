@@ -78,7 +78,6 @@ jobs:
       fail-fast: false
       matrix:
         shardIndex: [1, 2, 3, 4]
-        shardTotal: [4]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -89,7 +88,7 @@ jobs:
       - name: Upload screenshots to Argos
         env:
           ARGOS_PARALLEL: true
-          ARGOS_PARALLEL_TOTAL: ${{ matrix.shardTotal }}
+          ARGOS_PARALLEL_TOTAL: -1
           ARGOS_PARALLEL_INDEX: ${{ matrix.shardIndex }}
           # ARGOS_PARALLEL_NONCE is automatically detected
 
