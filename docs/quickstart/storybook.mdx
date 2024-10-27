@@ -40,7 +40,7 @@ If use a legacy version of Storybook (\<v8), follow our [legacy Storybook quicks
 
 Add the following scripts to your `package.json`:
 
-```json
+```json title="package.json"
 {
   "scripts": {
     "test-storybook": "NODE_NO_WARNINGS=1 NODE_OPTIONS=--experimental-vm-modules test-storybook"
@@ -58,7 +58,7 @@ Add the following scripts to your `package.json`:
 
 Add `.storybook/test-runner.ts` file to your project:
 
-```ts
+```ts title=".storybook/test-runner.ts"
 import type { TestRunnerConfig } from "@storybook/test-runner";
 import { argosScreenshot } from "@argos-ci/storybook";
 
