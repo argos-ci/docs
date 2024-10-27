@@ -23,6 +23,10 @@ const config = {
       target: "docs/sdks/playwright",
     },
     {
+      src: "packages/storybook/docs",
+      target: "docs/sdks/storybook",
+    },
+    {
       src: "packages/webdriverio/docs",
       target: "docs/sdks/webdriverio",
     },
