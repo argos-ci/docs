@@ -9,6 +9,8 @@
 /docs/sdks/puppeteer/
 /docs/sdks/cypress/
 /docs/sdks/playwright/
+/docs/sdks/storybook/
+/docs/sdks/webdriverio/
 
 # Generated files
 .docusaurus
