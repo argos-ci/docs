@@ -2,6 +2,7 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const { themes } = require("prism-react-renderer");
+const { externalPackages } = require("./scripts/external-packages.cjs");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -37,12 +38,12 @@ const config = {
           sidebarCollapsible: true,
           editUrl: (params) => {
             // External docs
-            if (
-              params.docPath.includes("sdks/cypress") ||
-              params.docPath.includes("sdks/playwright") ||
-              params.docPath.includes("sdks/puppeteer")
-            ) {
-              return undefined;
+            const fullPath = `docs/${params.docPath}`;
+            const externalPackage = externalPackages.find((p) =>
+              fullPath.startsWith(p.target),
+            );
+            if (externalPackage) {
+              return `https://github.com/argos-ci/argos-javascript/blob/main/${externalPackage.src}/index.mdx`;
             }
             return `https://github.com/argos-ci/docs/blob/main/docs/${params.docPath}`;
           },

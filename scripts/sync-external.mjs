@@ -2,6 +2,7 @@ import { stat, mkdir } from "node:fs/promises";
 import { promisify } from "node:util";
 import { exec as execCb } from "node:child_process";
 import { join } from "node:path";
+import { externalPackages } from "./external-packages.cjs";
 
 const exec = promisify(execCb);
 
@@ -9,28 +10,7 @@ const config = {
   root: "external",
   branch: "main",
   repo: "argos-ci/argos-javascript",
-  packages: [
-    {
-      src: "packages/puppeteer/docs",
-      target: "docs/sdks/puppeteer",
-    },
-    {
-      src: "packages/cypress/docs",
-      target: "docs/sdks/cypress",
-    },
-    {
-      src: "packages/playwright/docs",
-      target: "docs/sdks/playwright",
-    },
-    {
-      src: "packages/storybook/docs",
-      target: "docs/sdks/storybook",
-    },
-    {
-      src: "packages/webdriverio/docs",
-      target: "docs/sdks/webdriverio",
-    },
-  ],
+  packages: externalPackages,
 };
 
 /**
