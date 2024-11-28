@@ -8,7 +8,7 @@ const { externalPackages } = require("./scripts/external-packages.cjs");
 const config = {
   title: "Argos",
   tagline:
-    "Argos is a visual testing solution that fits in your workflow to avoid visual regression. Takes screenshots on each commit and be notified if something changes.",
+    "Official documentation of Argos, the visual testing platform for modern engineering teams.",
   url: "https://argos-ci.com",
   baseUrl: process.env.VERCEL_ENV === "production" ? "/docs" : "/",
   onBrokenLinks: "throw",
@@ -97,7 +97,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      image: "img/social.png",
+      image: "img/social-card.png",
       colorMode: {
         disableSwitch: false,
         respectPrefersColorScheme: true,
