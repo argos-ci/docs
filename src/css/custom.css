@@ -57,10 +57,6 @@ html[data-theme="dark"] {
   --ifm-toc-border-color: theme(colors.mauve.6);
 }
 
-svg {
-  @apply !inline-block;
-}
-
 /* Main layout */
 .navbar__inner {
   max-width: 1420px;
@@ -73,10 +69,6 @@ svg {
   margin: 0 auto;
 }
 
-/* Navbar */
-nav.navbar:not(.navbar-sidebar--show) {
-  @apply backdrop-blur-md bg-transparent;
-}
 nav.menu {
   @apply p-6;
 }
@@ -250,11 +242,6 @@ nav.menu {
 }
 
 /* Toggle button */
-
-.toggleButton_node_modules-\@docusaurus-theme-classic-lib-theme-ColorModeToggle-styles-module
-  svg {
-  display: block !important;
-}
 
 [data-theme="light"]
   .darkToggleIcon_node_modules-\@docusaurus-theme-classic-lib-theme-ColorModeToggle-styles-module,
