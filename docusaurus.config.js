@@ -89,6 +89,10 @@ const config = {
             from: "/quickstart",
             to: "/getting-started",
           },
+          {
+            from: "/quickstart/remix",
+            to: "/quickstart/react-router",
+          },
         ],
       },
     ],
