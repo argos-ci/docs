@@ -124,6 +124,12 @@ nav.menu {
   @apply !bg-mauve-4;
 }
 
+/* Edit this page */
+
+.theme-edit-this-page {
+  @apply !inline-flex !items-center;
+}
+
 /* Code tabs */
 
 .tabs.tabs {
