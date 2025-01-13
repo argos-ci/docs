@@ -185,6 +185,19 @@ nav.menu {
   display: none;
 }
 
+.alert.alert--warning {
+  @apply border-amber-8 text-sm text-amber-12 bg-amber-1;
+
+  &::before {
+    content: "⚠";
+    @apply text-xl mr-3 text-amber-11;
+  }
+
+  a {
+    @apply text-amber-12;
+  }
+}
+
 .alert p {
   @apply m-0;
 }
