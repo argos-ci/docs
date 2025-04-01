@@ -22,18 +22,19 @@
   --ifm-color-primary-lighter: theme(colors.violet.7);
   --ifm-color-primary-lightest: theme(colors.violet.6);
 
-  --ifm-color-info: theme(colors.sky.9);
-  --ifm-color-info-dark: theme(colors.sky.10);
-  --ifm-color-info-darker: theme(colors.sky.11);
-  --ifm-color-info-darkest: theme(colors.sky.12);
-  --ifm-color-info-light: theme(colors.sky.8);
-  --ifm-color-info-lighter: theme(colors.sky.7);
-  --ifm-color-info-lightest: theme(colors.sky.6);
+  --ifm-color-info: theme(colors.mauve.9);
+  --ifm-color-info-dark: theme(colors.mauve.8);
+  --ifm-color-info-darker: theme(colors.mauve.11);
+  --ifm-color-info-darkest: theme(colors.mauve.12);
+  --ifm-color-info-light: theme(colors.mauve.8);
+  --ifm-color-info-lighter: theme(colors.mauve.7);
+  --ifm-color-info-lightest: theme(colors.mauve.6);
 
   --ifm-background-color: theme(colors.mauve.1);
   --ifm-toc-border-color: theme(colors.mauve.6);
 
   --ifm-spacing-horizontal: 2rem;
+  --ifm-code-background: theme(colors.mauve.2);
 }
 
 html[data-theme="dark"] {
@@ -45,16 +46,20 @@ html[data-theme="dark"] {
   --ifm-color-primary-lighter: theme(colors.violet.7);
   --ifm-color-primary-lightest: theme(colors.violet.6);
 
-  --ifm-color-info: theme(colors.sky.9);
-  --ifm-color-info-dark: theme(colors.sky.10);
-  --ifm-color-info-darker: theme(colors.sky.11);
-  --ifm-color-info-darkest: theme(colors.sky.12);
-  --ifm-color-info-light: theme(colors.sky.8);
-  --ifm-color-info-lighter: theme(colors.sky.7);
-  --ifm-color-info-lightest: theme(colors.sky.6);
+  --ifm-color-info: theme(colors.mauve.9);
+  --ifm-color-info-dark: theme(colors.mauve.10);
+  --ifm-color-info-darker: theme(colors.mauve.11);
+  --ifm-color-info-darkest: theme(colors.mauve.12);
+  --ifm-color-info-light: theme(colors.mauve.8);
+  --ifm-color-info-lighter: theme(colors.mauve.7);
+  --ifm-color-info-lightest: theme(colors.mauve.6);
 
   --ifm-background-color: theme(colors.mauve.1);
   --ifm-toc-border-color: theme(colors.mauve.6);
+}
+
+.alert {
+  --ifm-code-background: theme(colors.mauve.2);
 }
 
 /* Main layout */
@@ -171,22 +176,30 @@ nav.menu {
   @apply w-4 h-4 align-middle;
 }
 
-/* Alert */
+/* Alert and details */
+
 .alert.alert {
-  @apply flex shadow-none px-4 py-3 border bg-transparent border-l-4 border-alert;
+  @apply shadow-none px-4 py-3 border bg-transparent border-alert;
 }
 
-.alert.alert p {
+div.alert.alert {
+  @apply flex bg-transparent border-l-4;
+}
+
+div .alert.alert p {
   @apply first:mt-0 last:mb-0;
 }
 
-.alert.alert--secondary::before {
+div .alert.alert--secondary::before {
   content: "⚑";
   @apply text-xl mr-3;
 }
 
-.alert > div:first-child {
+div .alert > div:first-child {
   display: none;
+}
+
+.alert.alert--info {
 }
 
 .alert.alert--warning {
@@ -202,12 +215,16 @@ nav.menu {
   }
 }
 
-.alert p {
+summary {
+  display: block;
+}
+
+div.alert p {
   @apply m-0;
 }
 
 /* Sidebar */
-..theme-doc-sidebar-menu.theme-doc-sidebar-menu
+.theme-doc-sidebar-menu.theme-doc-sidebar-menu
   .menu__list-item-collapsible
   .menu__link {
   @apply text text-sm;
