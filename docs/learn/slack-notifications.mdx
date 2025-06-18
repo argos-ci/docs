@@ -1,0 +1,71 @@
+---
+slug: /slack-notifications
+title: Slack notifications
+---
+
+import slackNotification from "./slack-notifications/slack-notification-example.png";
+import automationConditions from "./slack-notifications/automation-conditions.png";
+import slackChannelId from "./slack-notifications/slack-channel-id.png";
+
+Argos can send Slack notifications when a build is completed or reviewed to keep your team informed of changes.
+
+:::note
+Slack notifications are available on Pro and Enterprise plans
+:::
+
+<img
+  src={slackNotification}
+  alt="Slack notification sent by Argos"
+  className="rounded"
+  style={{ marginBottom: 20, width: 600 }}
+/>
+_Example of a Slack notification sent by Argos_
+
+## Set up Slack notifications
+
+Set up a Slack notification rule using Argos automations.
+
+1. Go to the **Automations** tab in your Argos project and click on **New Automation**.
+2. Name your automation, e.g., "Notify Slack on build completion".
+3. Under **WHEN**, select one or several events that will trigger the notification.
+4. (Optional) Under **IF**, add conditions such as "Build type is check".
+
+   <img
+     src={automationConditions}
+     alt="Automation conditions example"
+     className="rounded"
+     style={{ marginBottom: 30, marginTop: 0, paddingTop: 0, width: 600 }}
+   />
+
+5. Under **THEN**, choose the action **Send notification to Slack**.
+
+   If this is your first time using Slack with Argos, click **Connect to Slack** and follow the connection flow.
+
+6. Select the Slack channel and optionally provide the channel ID.
+
+   <img
+     src={slackChannelId}
+     alt="Locate Slack channel ID"
+     className="rounded"
+     style={{ marginBottom: 30, marginTop: 0, paddingTop: 0, width: 600 }}
+   />
+   _Finding the ID of a Slack Channel_
+
+7. Click **Send test notification** to verify the connection. A test message will be sent to the selected channel.
+8. Click **Create Rule** to activate it.
+
+## Common use cases
+
+- Notify #qa when a build is created and should be reviewed
+- Notify #frontend-team when a build changes are requested
+- Alert #product when auto-approved builds are created
+- Post only failed builds to #build-failures
+
+## Troubleshooting and Tips
+
+- Make sure the Argos app is authorized in your Slack workspace.
+- For private channels, manually invite the bot with `/invite @Argos`.
+- Only Argos team admins can configure Slack integrations.
+- You can test notifications anytime using **Send test notification**.
+
+Need help setting up Slack integration? Reach out via [Discord](https://argos-ci.com/discord) or [contact support](mailto:contact@argos-ci.com).
