@@ -40,7 +40,7 @@ const config = {
             // External docs
             const fullPath = `docs/${params.docPath}`;
             const externalPackage = externalPackages.find((p) =>
-              fullPath.startsWith(p.target),
+              fullPath.startsWith(p.target)
             );
             if (externalPackage) {
               return `https://github.com/argos-ci/argos-javascript/blob/main/${externalPackage.src}/index.mdx`;
@@ -92,6 +92,10 @@ const config = {
           {
             from: "/quickstart/remix",
             to: "/quickstart/react-router",
+          },
+          {
+            from: "/notifications",
+            to: "/pull-request-comments",
           },
         ],
       },
