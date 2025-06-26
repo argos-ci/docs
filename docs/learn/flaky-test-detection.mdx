@@ -1,0 +1,44 @@
+---
+slug: /flaky-test-detection
+title: Flaky Test Detection
+---
+
+import flakyIndicator from "./flaky-test-detection/flaky-indicator.png";
+import testPageExample from "./flaky-test-detection/test-page-example.png";
+
+Argos flags unstable tests so you can decide with confidence. See a flaky badge next to every changed test and dive into detailed history and stability scores on a dedicated test page
+
+<img
+  src={flakyIndicator}
+  alt="Flaky indicator next to a test change"
+  className="rounded"
+  style={{ marginBottom: 20, width: 600 }}
+/>
+_Example of the flaky indicator in a build review_
+
+## View flaky indicators in your build review
+
+1. Open any build in Argos
+2. Spot the flaky badge beside each changed test
+3. Hover over the badge to see details about the test's stability
+
+## Explore the test page
+
+By clicking on the flaky badge, you will be taken to the test page where you can see the full history of the test and its stability score.
+
+<img
+  src={testPageExample}
+  alt="Test page showing history and flaky score"
+  className="rounded"
+  style={{ marginBottom: 20, width: 600 }}
+/>
+_A sample test page with history timeline and score_
+
+On the test page you will find:
+
+- Timeline of every change that affected the test
+- Stability graph showing pass rate over time
+- Calculated flaky score from zero up to one hundred
+- List of changes happened to the test
+
+Use this information to approve stable tests or flag flaky ones for fixes.
