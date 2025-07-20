@@ -42,3 +42,16 @@ On the test page you will find:
 - List of changes happened to the test
 
 Use this information to approve stable tests or flag flaky ones for fixes.
+
+## Ignore changes
+
+When reviewing a visual test result in Argos, you may encounter changes that are not relevant or are caused by flakiness. You can **ignore a specific change** directly from the UI.
+
+From the build page or the test page, click on the "Ignore" button next to the change you want to ignore.
+
+Once ignored, Argos will no longer notify you if this **exact same change** happens again in future builds. This lets you filter out noise while keeping future regressions detectable.
+
+### Best Use Cases
+
+- Flaky UI elements that appear/disappear randomly or render inconsistently.
+- Non-deterministic image rendering (e.g. base64 previews, antialiasing issues).
