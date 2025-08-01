@@ -14,61 +14,103 @@ import {
 
 # Storybook Quickstart
 
-Learn how to setup visual testing in a Storybook using Argos.
+Learn how to setup visual testing in a Storybook using Vitest + Argos.
 
 ## Prerequisites
 
 To get the most out of this guide, you'll need to:
 
 - [Use Storybook v8+](https://storybook.js.org/docs/get-started/install)
+- [Install Storybook Vitest Addon](https://storybook.js.org/docs/writing-tests/integrations/vitest-addon)
 - [Create your project in Argos](https://app.argos-ci.com/new)
 
 :::note
 
-If use a legacy version of Storybook (\<v8), follow our [legacy Storybook quickstart](/quickstart/legacy-storybook).
+If use a legacy version of Storybook (\<v8), follow our [legacy Storybook quickstart](/quickstart/storybook-legacy).
 
 :::
 
 ## 1. Install
 
-<InstallDevDep
-  dependency="@argos-ci/cli @argos-ci/storybook @storybook/test-runner"
-  showCliLink
-/>
+<InstallDevDep dependency="@argos-ci/storybook" showCliLink />
 
-## 2. Update your package.json
+## 2. Add Argos plugin to your Vitest configuration
 
-Add the following scripts to your `package.json`:
+The Argos plugin for Vitest captures screenshots of your stories and uploads them to Argos. Add it to your Vitest or Vite configuration file (e.g., `vitest.config.ts` or `vite.config.ts`):
 
-```json title="package.json"
-{
-  "scripts": {
-    "test-storybook": "NODE_NO_WARNINGS=1 NODE_OPTIONS=--experimental-vm-modules test-storybook"
-  }
-}
+```ts title="vitest.config.ts"
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+import { defineConfig } from "vitest/config";
+
+import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
+import { argosVitestPlugin } from "@argos-ci/storybook/vitest-plugin";
+
+const dirname =
+  typeof __dirname !== "undefined"
+    ? __dirname
+    : path.dirname(fileURLToPath(import.meta.url));
+
+// More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
+export default defineConfig({
+  test: {
+    projects: [
+      {
+        extends: true,
+        plugins: [
+          // The plugin will run tests for the stories defined in your Storybook config
+          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+          storybookTest({ configDir: path.join(dirname, ".storybook") }),
+
+          // The plugin will capture screenshots of your stories and upload them to Argos.
+          // See options at: https://argos-ci.com/docs/storybook
+          argosVitestPlugin({
+            // Upload to Argos on CI only.
+            uploadToArgos: !!process.env.CI,
+
+            // Set your Argos token (required if not using GitHub Actions).
+            token: "<YOUR-ARGOS-TOKEN>",
+          }),
+        ],
+        test: {
+          name: "storybook",
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: "playwright",
+            instances: [{ browser: "chromium" }],
+          },
+          setupFiles: [".storybook/vitest.setup.ts"],
+        },
+      },
+    ],
+  },
+});
 ```
 
 :::note
 
-`NODE_OPTIONS=--experimental-vm-modules` is required because Storybook uses Jest that requires this flag to run modern packages like Argos Storybook SDK.
+Be sure to have already installed the [Storybook Vitest Addon](https://storybook.js.org/docs/writing-tests/integrations/vitest-addon) in your project.
 
 :::
 
 ## 3. Capture screenshots
 
-Add `.storybook/test-runner.ts` file to your project:
+All your stories will be automatically captured when you run the tests.
 
-```ts title=".storybook/test-runner.ts"
-import type { TestRunnerConfig } from "@storybook/test-runner";
-import { argosScreenshot } from "@argos-ci/storybook";
+You can also capture screenshots in the [play function](https://storybook.js.org/docs/writing-stories/play-function) by using the `argosScreenshot` function:
 
-const config: TestRunnerConfig = {
-  async postVisit(page, context) {
-    await argosScreenshot(page, context);
+```ts title="example.stories.ts"
+import { argosScreenshot } from "@argos-ci/storybook/vitest";
+
+export const Example: Story = {
+  play: async (ctx) => {
+    // It captures a screenshot of the current story and uploads it to Argos
+    // See options at: https://argos-ci.com/docs/storybook
+    await argosScreenshot(ctx, "example-screenshot");
   },
 };
-
-export default config;
 ```
 
 It will capture screenshots of your stories in `./screenshots` directory.
@@ -77,53 +119,15 @@ It will capture screenshots of your stories in `./screenshots` directory.
 
 ## 4. Setup CI to run tests and upload screenshots
 
-Below is a complete GitHub Actions workflow to build your Storybook, run tests, capture screenshots, and upload them to Argos.
-If you use another CI provider, adapt the steps accordingly.
+Argos is just a plugin running on top of Storybook Vitest Addon, so you can run the tests in your CI as you would normally do with Vitest.
 
-```yml title=".github/workflows/storybook-test.yml"
-name: Storybook Test
-
-on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build Storybook
-        run: npm run build-storybook
-
-      - name: Install Playwright dependencies
-        run: npx playwright install --with-deps chromium
-
-      - name: Run Storybook tests and capture screenshots
-        run: |
-          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
-            "npx http-server ./storybook-static --port 6006 --silent" \
-            "npx wait-on tcp:127.0.0.1:6006 && npm run test-storybook"
-
-      - name: Upload screenshots to Argos
-        # 👇 Replace `<ARGOS_TOKEN>` with your project token, available in your Argos project settings.
-        run: npm exec -- argos upload --token <ARGOS_TOKEN> ./screenshots
-```
-
-To learn how to run tests on a deployed Storybook, refer to the [Storybook test runner documentation](https://storybook.js.org/docs/writing-tests/test-runner#set-up-ci-to-run-tests).
+To run the tests in your CI, please refer to the [Testing in CI guide of Storybook](https://storybook.js.org/docs/writing-tests/in-ci).
 
 <Congratulation />
 
 ## Additional resources
 
-- [Argos + Storybook example](https://github.com/argos-ci/argos-javascript/tree/main/examples/storybook)
+- [Argos + Storybook + Vitest example](https://github.com/argos-ci/argos-javascript/tree/main/examples/storybook-vitest)
 - [Argos Storybook SDK reference](/storybook)
 - [Storybook documentation](https://storybook.js.org/docs)
 - [Storybook test runner documentation](https://storybook.js.org/docs/writing-tests/test-runner)
