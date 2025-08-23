@@ -302,3 +302,7 @@ div.alert p {
 article img {
   @apply rounded;
 }
+
+.navbar__logo img {
+  display: block;
+}
