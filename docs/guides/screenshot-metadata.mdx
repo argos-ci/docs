@@ -1,0 +1,177 @@
+---
+slug: /screenshot-metadata
+title: Screenshot Metadata
+---
+
+# Adding Screenshot Metadata
+
+Enrich your screenshots in Argos with metadata by adding a companion JSON file. This metadata appears on the build page and helps contextualize how and why a screenshot was generated.
+
+## How It Works
+
+For each screenshot file, you can create a metadata file with the same name and the `.argos.json` suffix:
+
+```
+myscreenshot.png
+myscreenshot.png.argos.json
+```
+
+The `.argos.json` file must be valid JSON following the Argos metadata schema.
+
+## Schema Autocomplete
+
+To enable autocompletion, type checking, and schema validation in editors like VS Code, you can add a `$schema` field at the top of your `.argos.json` file:
+
+```json
+{
+  "$schema": "https://api.argos-ci.com/v2/screenshot-metadata.json"
+}
+```
+
+## Top-Level Fields
+
+| Field               | Type                                      | Description                                                                            |
+| ------------------- | ----------------------------------------- | -------------------------------------------------------------------------------------- |
+| `$schema`           | `string?`                                 | Ignored. Can be set to get completions, validations and documentation in some editors. |
+| `url`               | `string?`                                 | The URL of the page that was screenshotted.                                            |
+| `previewUrl`        | `string?`                                 | A URL to an accessible preview of the screenshot.                                      |
+| `viewport`          | [Viewport](#viewport)?                    | The viewport dimensions when the screenshot was taken.                                 |
+| `colorScheme`       | `"light" \| "dark" `                      | The color scheme when the screenshot was taken.                                        |
+| `mediaType`         | `"screen" \| "print" `                    | The media type when the screenshot was taken.                                          |
+| `test`              | [Test](#test)?                            | Information about the test that generated the screenshot.                              |
+| `browser`           | [Browser](#browser)?                      | The browser that generated the screenshot.                                             |
+| `automationLibrary` | [Automation Library](#automation-library) | The automation library that generated the screenshot. _(Required)_                     |
+| `sdk`               | [SDK](#sdk)                               | The Argos SDK that generated the screenshot. _(Required)_                              |
+
+## Viewport
+
+```json
+{
+  "width": 1280,
+  "height": 720
+}
+```
+
+- `width` (number): Width of the viewport.
+- `height` (number): Height of the viewport.
+
+## Test
+
+```json
+{
+  "id": "test-id",
+  "title": "should render homepage correctly",
+  "titlePath": ["E2E", "Homepage"],
+  "retries": 1,
+  "retry": 0,
+  "repeat": 0,
+  "location": { "file": "tests/homepage.spec.ts", "line": 42, "column": 3 },
+  "annotations": [
+    {
+      "type": "slow",
+      "description": "Known performance issue",
+      "location": { "file": "tests/homepage.spec.ts", "line": 40, "column": 1 }
+    }
+  ]
+}
+```
+
+- `id` (string?): The unique identifier of the test.
+- `title` (string): The title of the test.
+- `titlePath` (string[]): The hierarchy of titles leading to the test.
+- `retries` (number?): Number of retries for the test.
+- `retry` (number?): The current retry count.
+- `repeat` (number?): The repeat count for the test.
+- `location` ([Location](#location)?): Where the test is located in the source code.
+- `annotations` ([Test Annotation](#test-annotation)[]?): Extra information about the test.
+
+## Location
+
+```json
+{
+  "file": "src/components/Button.tsx",
+  "line": 10,
+  "column": 5
+}
+```
+
+- `file` (string): The source file.
+- `line` (number): The line number.
+- `column` (number): The column number.
+
+## Test Annotation
+
+```json
+{
+  "type": "skip",
+  "description": "Flaky test",
+  "location": { "file": "tests/button.spec.ts", "line": 12, "column": 1 }
+}
+```
+
+- `type` (string): Type of annotation.
+- `description` (string?): Optional explanation.
+- `location` ([Location](#location)?): Where the annotation is located in the source code.
+
+## Browser
+
+```json
+{
+  "name": "chromium",
+  "version": "112.0.0"
+}
+```
+
+- `name` (string): Browser name.
+- `version` (string): Browser version.
+
+## Automation Library
+
+```json
+{
+  "name": "playwright",
+  "version": "1.45.0"
+}
+```
+
+- `name` (string): The name of the automation library (e.g. `playwright`, `cypress`).
+- `version` (string): The version of the automation library.
+
+## SDK
+
+```json
+{
+  "name": "@argos-ci/playwright",
+  "version": "2.0.0"
+}
+```
+
+- `name` (string): The name of the Argos SDK.
+- `version` (string): The version of the Argos SDK.
+
+## Complete Example
+
+Here’s a full example of `myscreenshot.png.argos.json`:
+
+```json
+{
+  "url": "https://example.com/home",
+  "viewport": { "width": 1280, "height": 720 },
+  "colorScheme": "light",
+  "mediaType": "screen",
+  "test": {
+    "title": "renders homepage correctly",
+    "titlePath": ["E2E", "Homepage"],
+    "location": { "file": "tests/homepage.spec.ts", "line": 42, "column": 3 }
+  },
+  "browser": { "name": "chromium", "version": "112.0.0" },
+  "automationLibrary": { "name": "playwright", "version": "1.45.0" },
+  "sdk": { "name": "@argos-ci/playwright", "version": "2.0.0" }
+}
+```
+
+## Notes
+
+- Fields marked as **required** must be included.
+- Unknown fields are ignored.
+- Each screenshot can have its own metadata file.
