@@ -18,6 +18,12 @@ myscreenshot.png.argos.json
 
 The `.argos.json` file must be valid JSON following the Argos metadata schema.
 
+:::note
+
+If you use an official Argos SDK like `@argos-ci/playwright`, `@argos-ci/cypress`, `@argos-ci/puppeteer` or `@argos-ci/storybook`, the SDK automatically generates and uploads this metadata for you. If you don't use any SDK you may want to implement your own metadata generation and using `@argos-ci/core` or `@argos-ci/cli`.
+
+:::
+
 ## Schema Autocomplete
 
 To enable autocompletion, type checking, and schema validation in editors like VS Code, you can add a `$schema` field at the top of your `.argos.json` file:
