@@ -19,7 +19,7 @@ For environments beyond Playwright, Argos facilitates sharding through two key e
 
 - `ARGOS_PARALLEL`: Activate the parallel mode.
 - `ARGOS_PARALLEL_TOTAL`: Specifies the number of parallel nodes. It's crucial to ensure equal calls to Argos upload across these nodes.
-- `ARGOS_PARALLEL_INDEX`: Specifies the index of the current parallel node.
+- `ARGOS_PARALLEL_INDEX`: Specifies the index of the current parallel node. Must start from `1`.
 - `ARGOS_PARALLEL_NONCE`: A unique identifier for each build. In most CI environments, Argos will automatically generate this for you.
 
 :::note
