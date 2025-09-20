@@ -101,6 +101,10 @@ const config = {
             from: "/quickstart/legacy-storybook",
             to: "/quickstart/storybook-legacy",
           },
+          {
+            from: "/monitoring-mode",
+            to: "/build-modes#monitoring-mode",
+          },
         ],
       },
     ],

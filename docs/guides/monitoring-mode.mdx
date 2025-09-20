@@ -1,130 +1,172 @@
 ---
-slug: /monitoring-mode
-title: Monitoring mode
+slug: /build-modes
+title: Build modes
 ---
 
 import { RunPkgCommand } from "@site/src/partials";
 
-# Monitoring mode
+# Build modes
 
-Argos offers two modes for visual testing: Continuous Integration (CI) mode and Monitoring mode. This documentation explains how to use Monitoring mode to periodically monitor visual changes or perform checks before releases.
+Argos provides two build modes for visual testing: **Continuous Integration (CI) mode** and **Monitoring mode**. This page explains how each mode works, their key differences, and when to use them to best fit your workflow.
 
-## Build modes
-
-### Continous Integration Mode
+## Continous Integration Mode
 
 The Continuous Integration (CI) mode is the default mode in Argos, designed to prevent visual regressions by integrating visual testing into your CI pipeline. In CI mode, Argos typically runs on each pull request and on the default branch of your repository.
 
-In this mode, screenshots from your pull request branch are compared with baseline screenshots from the reference branch. Argos determines the appropriate build for comparison by analyzing your Git history and identifying the common ancestor between your code and the reference branch, ensuring only relevant differences are highlighted. To establish baseline builds, Argos must be run on your reference branch (usually "main"). Approval or rejection of a build does not affect the reference; only the merged code and uploaded screenshots from the reference branch are considered. **If unexpected changes are detected by Argos, avoid merging the pull request.** If merged, these discrepancies become the new reference.
+In this mode, screenshots from your pull request branch are compared with screenshots from a [baseline build](/baseline-build) determined by Git history analysis and [other criterias](/baseline-build).
 
-#### Workflow
+### Workflow
 
-1. **Code Commit & Pull Request**
+1. **Feature Development**
 
-- Developer commits code to a feature branch.
-- A pull request (PR) is created.
+- A developer commits code to a feature or bugfix branch.
+- Optionally, a pull request (PR) is opened for review.
 
-2. **Visual Test on PR Branch**
+2. **Visual Tests on the Feature Branch**
 
-- Argos runs visual tests on the PR branch.
-- Screenshots are taken on the PR branch.
+- Argos integrates with your test framework [via SDKs](/getting-started).
+- During CI, your test framework runs visual tests.
+- Screenshots are captured and uploaded to Argos.
 
-3. **Comparison with Baseline**
+3. **Baseline Comparison**
 
-- Argos compares screenshots from the PR branch with baseline screenshots from the reference branch (e.g., "main").
-- The common ancestor between the PR branch and the reference branch is used to find the baseline.
+- Argos determines the [baseline build](/baseline-build) from Git history and other criteria.
+- New screenshots are compared against the baseline.
 
-4. **Approval Process**
+4. **Results & Notifications**
 
-- If visual differences are found, the PR is reviewed.
-- Changes must be approved before merging.
-- If merged, new screenshots from the reference branch become the baseline for future comparisons.
+- When the build completes:
+  - ✅ No differences → commit status set to _success_.
+  - ❌ Differences found → commit status set to _failed_, with diffs visible in the Argos dashboard.
+- On GitHub, Argos also posts a summary comment with a link to the dashboard.
+
+5. **Approval Process**
+
+- The team reviews differences in the Argos dashboard.
+- Changes are either approved or rejected.
+- The commit status updates accordingly.
+- If branch protection requires passing visual tests, the PR cannot be merged until approvals are granted.
 
 ```mermaid
 graph TD;
-    A[Code Commit & PR] --> B[Visual Test on PR Branch];
-    B --> C[Comparison with Baseline];
-    C --> D[Approval Process];
-    D -->|Approved| E[Merged to Reference Branch];
-    D -->|Not Approved| F[Fix Issues & Retest];
-    E --> G[New Baseline for Future Comparisons];
+  A[Code Commit & optional PR] --> B[CI runs visual tests with Argos];
+  B --> C[Screenshots uploaded & compared to Baseline Build];
+  C --> D[Results & Notifications];
+  D --> E[Team reviews in Argos dashboard];
+  E -->|Approved| F[Merged to main/reference branch];
+  E -->|Changes Requested| G[Fix Issues & Retest];
+  F --> H[New Baseline established for future comparisons];
 ```
 
-### Monitoring Mode
+### Notifications
 
-Monitoring mode is an opt-in feature in Argos, designed to keep track of visual changes over time or before a release. This mode typically runs periodically on a specific branch.
+In CI mode, Argos integrates directly with your Git provider to surface results where developers work:
 
-In Monitoring mode, screenshots are compared with the latest approved build, **ignoring all Git history**. Only the approval status of the build determines the baseline for comparison.
+- **Commit status updates**: Each build sets the commit status to ✅ success or ❌ failed.
+- **Pull request comments**: On GitHub, Argos posts a summary comment with a link to the Argos dashboard.
+- **Slack notifications**: For faster team awareness, you can enable [Slack notifications](/slack-notifications). This ensures your team is notified immediately when visual differences are detected.
 
-#### Workflow
+### Use Cases
 
-1. **Setup Monitoring Mode**
+CI mode is designed to be the primary workflow for preventing regressions during development. Typical scenarios include:
 
-- Monitoring mode is enabled for periodic checks or pre-release validation.
+#### 1. Pull Request Validation
 
-2. **Periodic Visual Test**
+- **When:** A developer opens a PR with UI changes.
+- **How:** Argos runs during CI, compares screenshots with the baseline, and blocks merging until visual changes are reviewed and approved.
 
-- Argos runs visual tests periodically on a specific branch or before a release.
-- Screenshots are taken during each run.
+#### 2. Default Branch Verification
 
-3. **Comparison with Latest Approved Build**
+- **When:** Code is merged into the main/reference branch.
+- **How:** Argos runs on the default branch to ensure the new baseline is validated and ready for future comparisons.
 
-- Argos compares screenshots with the latest approved build.
-- Git history is ignored; only the approval status of the build matters.
+#### 3. Continuous Feedback Loop
 
-4. **Notification of Differences**
+- **When:** Teams want fast feedback on every commit.
+- **How:** CI mode surfaces results directly in GitHub, ensuring regressions are caught early in the workflow.
 
-- If visual differences are detected, notifications are sent.
-- The project is reviewed, and changes are either approved or corrected.
+### Usage
+
+CI mode is enabled by default.
+
+Follow the [Get Started guide](/getting-started) to integrate Argos into your CI pipeline.
+
+## Monitoring Mode
+
+Monitoring mode is an **opt-in feature** in Argos that tracks visual changes outside the standard CI flow. It runs periodically on a chosen branch or before a release, providing continuous oversight of your project’s visuals.
+
+In this mode, screenshots are compared against the **latest approved build only**. Git history is ignored; the approval status alone defines the baseline.
+
+### Workflow
+
+1. **Enable Monitoring Mode**
+
+- Activate monitoring for periodic checks or pre-release validation.
+
+2. **Run Periodic Visual Tests**
+
+- Argos captures screenshots on the target branch (e.g., daily, weekly, or before a release).
+
+3. **Compare with Latest Approved Build**
+
+- Screenshots are compared only with the most recently approved build.
+
+4. **Notify on Differences**
+
+- If differences are found, notifications are sent.
+- Changes must then be reviewed, approved, or corrected.
 
 ```mermaid
 graph TD;
-    A[Setup Monitoring Mode] --> B[Periodic Visual Test];
-    B --> C[Comparison with Latest Approved Build];
-    C --> D[Notification of Differences];
+    A[Enable Monitoring Mode] --> B[Periodic Visual Test];
+    B --> C[Compare with Latest Approved Build];
+    C --> D[Notify on Differences];
     D -->|No Differences| E[Continue Monitoring];
-    D -->|Differences Detected| F[Review & Approval];
+    D -->|Differences Found| F[Review & Approval];
     F -->|Approved| G[Update Latest Approved Build];
-    F -->|Not Approved| H[Fix Issues & Retest];
+    F -->|Not Approved| H[Fix & Retest];
 ```
 
-## Use Cases for Monitoring Mode
+### Notifications
 
-Monitoring mode in Argos is designed to provide continuous oversight of visual changes in your project, especially outside the typical CI/CD pipeline scenarios. Here are some common use cases where Monitoring mode proves beneficial:
+The most effective way to use Monitoring mode is to enable [**Slack notifications**](/slack-notifications).  
+This ensures your team is alerted immediately when visual differences are detected, so you can review and act quickly.
 
-### 1. Regular Visual Health Checks
+### Use Cases
 
-- **Scenario:** You have a live project that undergoes frequent updates, either content or minor style changes, which do not warrant a full CI pipeline run.
-- **Solution:** Set up Monitoring mode to run periodically (e.g., daily or weekly) on your main branch. This ensures that any unexpected visual changes are detected early, even if they are not linked to specific code commits.
+Monitoring mode is useful when you need visual oversight beyond standard CI/CD pipelines:
 
-### 2. Pre-release Validation
+#### 1. Regular Health Checks
 
-- **Scenario:** Before rolling out a major release, you want to ensure that all visual aspects of your application are intact and there are no regressions.
-- **Solution:** Use Monitoring mode to run a visual check on the release branch. This allows you to compare the current state with the last approved build, ensuring that everything looks as expected before the final deployment.
+- **When:** Your live project changes often (content or style tweaks) but doesn’t justify running CI each time.
+- **How:** Schedule monitoring on the main branch (e.g., daily/weekly) to catch unexpected changes early.
 
-### 3. Post-deployment Monitoring
+#### 2. Pre-release Validation
 
-- **Scenario:** After deploying to a staging or production environment, you want to continuously monitor the visual integrity of your application to catch any discrepancies caused by environmental differences.
-- **Solution:** Configure Monitoring mode to run after each deployment to these environments. This helps in identifying any issues that might not be evident in the development or CI environments but manifest in staging or production.
+- **When:** Before a major release, you need to confirm no regressions slipped in.
+- **How:** Run monitoring on the release branch and compare with the last approved build before deployment.
 
-### 4. Third-party Integrations
+#### 3. Post-deployment Monitoring
 
-- **Scenario:** Your application integrates with third-party services or widgets that may update independently.
-- **Solution:** Set up Monitoring mode to regularly check the visual integration points of these third-party services to ensure they remain consistent and do not disrupt the user experience.
+- **When:** After staging or production deployments, you want to detect environment-specific visual issues.
+- **How:** Run monitoring after each deployment to catch discrepancies not visible in development.
 
-By leveraging Monitoring mode in these scenarios, you can maintain high visual standards for your application and catch issues early, ensuring a seamless experience for your users.
+#### 4. Third-party Integrations
 
-## Using monitoring mode
+- **When:** Your app depends on external widgets or services that can change independently.
+- **How:** Use monitoring to ensure third-party visuals remain stable over time.
 
-To use Monitoring mode, set the `mode` to `"monitoring"` in the build options of your SDK.
+### Usage
 
-**Using CLI**
+Enable Monitoring mode by setting `mode: "monitoring"` in your SDK configuration.
+
+**CLI**
 
 <RunPkgCommand
   command={["argos upload --mode=monitoring components ./screenshots"]}
 />
 
-**Using Playwright**
+**Playwright**
 
 ```ts title="playwright.config.ts"
 import { defineConfig } from "@playwright/test";
@@ -142,11 +184,10 @@ export default defineConfig({
       },
     ],
   ],
-  // Other config
 });
 ```
 
-**Using Cypress**
+**Cypress**
 
 ```js cypress.config.js
 const { defineConfig } = require("cypress");
@@ -161,8 +202,6 @@ module.exports = defineConfig({
         // highlight-next-line
         mode: "monitoring",
       });
-
-      // include any other plugin code...
     },
   },
 });
