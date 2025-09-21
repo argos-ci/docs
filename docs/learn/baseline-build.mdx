@@ -24,10 +24,10 @@ A **baseline build** serves as the reference point for comparing screenshots to 
 
 Argos selects the baseline build by finding the most recent **candidate build** that meets all of the following conditions:
 
-- Has the same build name as the triggered build
-- All framework tests passed
-- Be auto-approved, manually approved or orphan
-- Its commit is an ancestor of the merge base between the triggered build's commit and the baseline branch
+1. Has the same build name as the triggered build
+2. All framework tests passed
+3. Be auto-approved, manually approved or orphan
+4. Its commit is an ancestor of the merge base between the triggered build's commit and the baseline branch
 
 ## What is the baseline branch?
 

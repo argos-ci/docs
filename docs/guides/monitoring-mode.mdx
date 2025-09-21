@@ -9,50 +9,57 @@ import { RunPkgCommand } from "@site/src/partials";
 
 Argos provides two build modes for visual testing: **Continuous Integration (CI) mode** and **Monitoring mode**. This page explains how each mode works, their key differences, and when to use them to best fit your workflow.
 
-## Continous Integration Mode
+## Continuous Integration Mode
 
-The Continuous Integration (CI) mode is the default mode in Argos, designed to prevent visual regressions by integrating visual testing into your CI pipeline. In CI mode, Argos typically runs on each pull request and on the default branch of your repository.
+Continuous Integration (CI) mode is the default in Argos. It is designed to review the visual changes introduced by a feature branch and prevent regressions.
 
-In this mode, screenshots from your pull request branch are compared with screenshots from a [baseline build](/baseline-build) determined by Git history analysis and [other criterias](/baseline-build).
+During your CI pipeline, screenshots of the application are captured on each pull request and on the default branch (main, production, etc.). These screenshots are uploaded to Argos, where they are compared against a [baseline build](/baseline-build).
+
+The [baseline build](/baseline-build) represents the most recent approved state of your application and is automatically selected based on Git history analysis and [other criteria](/baseline-build).
+
+In the Argos app, you can review highlighted differences, approve intended updates, and block regressions before merging.
+
+**Note:** Your CI pipeline must also run on the default branch (main, production, etc.) to keep the baseline build up to date.
 
 ### Workflow
 
 1. **Feature Development**
 
-- A developer commits code to a feature or bugfix branch.
-- Optionally, a pull request (PR) is opened for review.
+   - A developer creates a feature (or bugfix) branch and commits changes.
+   - Optionally, a pull request (PR) is opened.
 
-2. **Visual Tests on the Feature Branch**
+2. **Visual Tests in CI**
 
-- Argos integrates with your test framework [via SDKs](/getting-started).
-- During CI, your test framework runs visual tests.
-- Screenshots are captured and uploaded to Argos.
+   - During these tests, your test framework (Playwright, Cypress, etc.) captures screenshots of the app. Argos offers [SDKs](/getting-started) for easy integration with popular frameworks.
+   - At the end of the tests, screenshots are uploaded to Argos automatically with the SDK, or manually using the Argos CLI.
 
-3. **Baseline Comparison**
+3. **Comparison with Baseline**
 
-- Argos determines the [baseline build](/baseline-build) from Git history and other criteria.
-- New screenshots are compared against the baseline.
+   - Argos receives the build containing screenshots and metadata.
+   - It automatically determines the [baseline build](/baseline-build) using Git history analysis and other criteria.
+   - The new screenshots are compared against the baseline.
 
 4. **Results & Notifications**
 
-- When the build completes:
-  - ✅ No differences → commit status set to _success_.
-  - ❌ Differences found → commit status set to _failed_, with diffs visible in the Argos dashboard.
-- On GitHub, Argos also posts a summary comment with a link to the dashboard.
+   - The build is complete once all screenshots have been compared:
+     - ✅ No differences → commit status set to _success_.
+     - ❌ Differences found → commit status set to _failed_. The changes are visible in the Argos app for review and approval.
+   - Argos notifies the Git providers (GitHub, GitLab, etc.) about the build status.
+   - On GitHub, Argos also posts a summary comment with a link to the dashboard.
+   - On Git providers, if branch protection rules require Argos checks to pass, pull requests will be blocked from merging until all visual changes are reviewed and approved in Argos.
 
 5. **Approval Process**
 
-- The team reviews differences in the Argos dashboard.
-- Changes are either approved or rejected.
-- The commit status updates accordingly.
-- If branch protection requires passing visual tests, the PR cannot be merged until approvals are granted.
+   - The team reviews the changes in the Argos app:
+     - Each screenshot change can be approved or rejected.
+     - The build as a whole must then be approved or rejected. The check status on Git providers (GitHub, GitLab, etc.) is automatically updated accordingly.
 
 ```mermaid
 graph TD;
   A[Code Commit & optional PR] --> B[CI runs visual tests with Argos];
   B --> C[Screenshots uploaded & compared to Baseline Build];
   C --> D[Results & Notifications];
-  D --> E[Team reviews in Argos dashboard];
+  D --> E[Team reviews in Argos app];
   E -->|Approved| F[Merged to main/reference branch];
   E -->|Changes Requested| G[Fix Issues & Retest];
   F --> H[New Baseline established for future comparisons];
@@ -64,11 +71,11 @@ In CI mode, Argos integrates directly with your Git provider to surface results 
 
 - **Commit status updates**: Each build sets the commit status to ✅ success or ❌ failed.
 - **Pull request comments**: On GitHub, Argos posts a summary comment with a link to the Argos dashboard.
-- **Slack notifications**: For faster team awareness, you can enable [Slack notifications](/slack-notifications). This ensures your team is notified immediately when visual differences are detected.
+- **Slack notifications**: Enable [Slack notifications](/slack-notifications) to alert your team immediately when visual differences are detected.
 
 ### Use Cases
 
-CI mode is designed to be the primary workflow for preventing regressions during development. Typical scenarios include:
+CI mode is designed to be the primary workflow for preventing regressions during development. Common scenarios include:
 
 #### 1. Pull Request Validation
 
@@ -93,9 +100,9 @@ Follow the [Get Started guide](/getting-started) to integrate Argos into your CI
 
 ## Monitoring Mode
 
-Monitoring mode is an **opt-in feature** in Argos that tracks visual changes outside the standard CI flow. It runs periodically on a chosen branch or before a release, providing continuous oversight of your project’s visuals.
+Monitoring mode is an **opt-in feature** in Argos. It is designed to track visual changes outside the standard CI flow, either on a schedule or before a release.
 
-In this mode, screenshots are compared against the **latest approved build only**. Git history is ignored; the approval status alone defines the baseline.
+In this mode, your tests capture screenshots on the chosen branch (e.g., main or a release branch). The screenshots are uploaded to Argos and compared only against the **latest approved build**. Git history is ignored. The approval status alone defines the baseline.
 
 ### Workflow
 
@@ -105,7 +112,7 @@ In this mode, screenshots are compared against the **latest approved build only*
 
 2. **Run Periodic Visual Tests**
 
-- Argos captures screenshots on the target branch (e.g., daily, weekly, or before a release).
+- Your tests capture screenshots on the target branch (daily, weekly, or before a release).
 
 3. **Compare with Latest Approved Build**
 
@@ -129,16 +136,15 @@ graph TD;
 
 ### Notifications
 
-The most effective way to use Monitoring mode is to enable [**Slack notifications**](/slack-notifications).  
-This ensures your team is alerted immediately when visual differences are detected, so you can review and act quickly.
+Enable [**Slack notifications**](/slack-notifications) to be alerted immediately when visual differences are detected, so your team can review and act quickly.
 
 ### Use Cases
 
-Monitoring mode is useful when you need visual oversight beyond standard CI/CD pipelines:
+Monitoring mode is useful when you need oversight beyond standard CI/CD pipelines:
 
 #### 1. Regular Health Checks
 
-- **When:** Your live project changes often (content or style tweaks) but doesn’t justify running CI each time.
+- **When:** Your project changes frequently (content or style tweaks) but running CI on every change isn't practical.
 - **How:** Schedule monitoring on the main branch (e.g., daily/weekly) to catch unexpected changes early.
 
 #### 2. Pre-release Validation
