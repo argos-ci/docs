@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "dev": "docusaurus start",
     "start": "docusaurus start",
     "build": "rm -rf external && npm run sync-external && docusaurus build",
     "swizzle": "docusaurus swizzle",
