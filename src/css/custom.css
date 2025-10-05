@@ -199,15 +199,12 @@ div .alert > div:first-child {
   display: none;
 }
 
-.alert.alert--info {
-}
-
 .alert.alert--warning {
   @apply border-amber-8 text-sm text-amber-12 bg-amber-1;
 
   &::before {
     content: "⚠";
-    @apply text-xl mr-3 text-amber-11;
+    @apply text-xl leading-5 mr-3 text-amber-11;
   }
 
   a {
