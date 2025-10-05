@@ -1,0 +1,45 @@
+# Skipping a Build
+
+In some cases, you may want to skip Argos checks for a commit or pull request.  
+This is especially useful when Argos is configured as a **required status check** in GitHub, but screenshots are not needed (e.g. documentation-only changes, emergency hotfixes). Running Argos in these situations would be unnecessary and could even block your workflow.
+
+To address this, you can use the `skipped` option.  
+When `skipped: true` is set, **no screenshots are uploaded** and the commit status is immediately marked as **success**.
+
+## When to use `skipped`
+
+- Documentation changes with no impact on the UI
+- Hotfixes where visual testing is not relevant
+- Branches or pull requests that don’t require screenshots
+- Scheduled builds you want to disable selectively
+
+:::warning
+
+Skipping should only be used in exceptional cases. It is not meant to replace regular visual testing.
+
+:::
+
+## How to enable skipping
+
+You can enable skipping in two ways:
+
+1. **Environment variable**  
+   Set `ARGOS_SKIPPED` to `"true"` in your CI configuration.
+
+2. **Configuration option**  
+   Add `skipped: true` in your Argos SDK configuration.
+
+## GitHub Actions example
+
+```yaml title="ci.yml"
+jobs:
+  visual-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+      - name: Run tests
+        run: npm run visual-tests # or your test command
+        env:
+          ARGOS_SKIPPED: "true" # Marks Argos check as "success" without uploading screenshots
+```
