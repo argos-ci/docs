@@ -5,53 +5,118 @@ title: Run on Preview Deployments
 
 # Run on Preview Deployments
 
-Seamlessly test preview deployments with Argos: Automate visual testing on platforms like Vercel, Cloudflare, and Netlify via GitHub Actions.
+Catch visual regressions **before merging** by running automated tests on every preview deployment.
 
-## Configure a GitHub Action
+Argos integrates with GitHub Actions and connects seamlessly with providers like **Vercel, Netlify, and Cloudflare**.
 
-For Argos to work with your deployment previews, your deployment service must be integrated with GitHub to create deployments. This setup allows Argos to trigger tests on successful deployment previews.
+With this setup:
 
-### GitHub Workflow Configuration
+- Each deployment preview is tested automatically
+- Regressions are surfaced directly in your pull requests
+- Your production baseline stays reliable and up to date
 
-Here's how to configure a GitHub Action to trigger tests with Argos on deployment previews. Create a workflow file in `.github/workflows` directory like so:
+## Setup with Vercel repository dispatch events
 
-```yml
+Vercel can notify GitHub on every deployment via a [`repository_dispatch` event](https://vercel.com/docs/git/vercel-for-github#repository-dispatch-events).
+
+Argos can use this payload to run visual tests against the preview URL.
+
+```yaml title=".github/workflows/ci.yml"
+name: Playwright + Argos Tests
+
+on:
+  repository_dispatch:
+    types:
+      - "vercel.deployment.success"
+
+permissions:
+  contents: read
+  # Required to access pull request metadata for Argos with GITHUB_TOKEN
+  pull-requests: read
+
+jobs:
+  run-e2es:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+
+      - name: Install dependencies
+        run: npm ci && npx playwright install --with-deps
+
+      - name: Print context for debugging optional
+        run: |
+          echo "URL: ${{ github.event.client_payload.deployment.url || 'none' }}"
+
+      - name: Run Playwright tests with Argos reporter
+        run: npx playwright test
+        env:
+          # URL of the preview deployment used by your test as the base URL.
+          BASE_URL: ${{ github.event.client_payload.deployment.url }}
+          # Provided by GitHub used by Argos to link builds to branches and pull requests
+          # Optional, if not provided Argos will not link builds to PRs
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+## Setup with GitHub deployment status events
+
+If your hosting provider emits GitHub Deployments events Vercel, Netlify, Cloudflare, you can trigger tests from the [`deployment_status` event](https://docs.github.com/en/webhooks/webhook-events-and-payloads#deployment_status).
+
+The event carries the preview URL when a deployment becomes successful.
+
+```yaml title=".github/workflows/ci.yml"
 name: Playwright + Argos Tests
 
 on:
   deployment_status:
+
+permissions:
+  contents: read
+  # Required to access pull request metadata for Argos with GITHUB_TOKEN
+  pull-requests: read
+
 jobs:
   run-e2es:
     # Run tests only if the deployment is successful
     if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
+
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+
+      - uses: actions/setup-node@v4
+
       - name: Install dependencies
         run: npm ci && npx playwright install --with-deps
-      - name: Run tests
+
+      - name: Print context for debugging optional
+        run: |
+          echo "URL: ${{ github.event.deployment_status.environment_url || 'none' }}"
+          echo "Production: ${{ github.event.deployment_status.environment == 'Production' || false }}"
+
+      - name: Run Playwright tests with Argos reporter recommended
         run: npx playwright test
         env:
-          # Use this environment variable as `baseUrl` in your playwright.config.ts
-          BASE_URL: ${{ github.event.deployment_status.environment_url }}
-          # Argos uses GITHUB_TOKEN to collect branch and pull request information
+          # URL of the preview deployment used by your test as the base URL.
+          BASE_URL: ${{ github.event.client_payload.deployment.url }}
+          # Set only for production deployments to ensure stable baselines usually `main`.
+          ARGOS_BRANCH: ${{ github.event.client_payload.deployment.meta.production && 'main' || '' }}
+          # Provided by GitHub used by Argos to link builds to branches and pull requests
+          # Optional, if not provided Argos will not link builds to PRs
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Set the branch when your deployment runs on "Production" environment.
-          ARGOS_BRANCH: ${{ github.event.deployment_status.environment == 'Production' && 'main' || '' }}
 ```
 
-**Environment Variables Explained:**
+## Disable the Vercel Toolbar
 
-- `BASE_URL`: Set to your deployment URL, for running E2E tests on the actual preview.
-- `GITHUB_TOKEN`: Used by Argos for accessing branch and PR info. [Provided by default by GitHub](https://docs.github.com/en/actions/security-guides/automatic-token-authentication).
-- `ARGOS_BRANCH`: Needed when deploying to "Production". Argos requires you to manually specify the branch in this case.
+By default, Vercel may inject a toolbar overlay into preview deployments. This can interfere with automated screenshots.
 
-### Disable Vercel Toolbar
+To avoid false diffs, disable the toolbar in your tests by sending the [`x-vercel-skip-toolbar` header](https://vercel.com/docs/vercel-toolbar/managing-toolbar#disable-toolbar-for-automation) with every request.
 
-The Vercel Toolbar might appear in your screenshots. Here's [how to disable it](https://vercel.com/docs/workflow-collaboration/vercel-toolbar#disable-toolbar-for-session) for cleaner test visuals:
+### Playwright
 
-**For Playwright:**
+Add the header in your `playwright.config.ts` so all test requests skip the toolbar:
 
 ```ts title="playwright.config.ts"
 import { defineConfig } from "@playwright/test";
@@ -65,9 +130,11 @@ export default defineConfig({
 });
 ```
 
-**For Cypress:**
+### Cypress
 
-```ts title="support/index.js"
+Inject the header for all network requests in your test suite:
+
+```ts title="support/index.ts"
 beforeEach(() => {
   cy.intercept(`${Cypress.config("baseUrl")}**`, (req) => {
     req.headers["x-vercel-skip-toolbar"] = "1";
@@ -75,38 +142,18 @@ beforeEach(() => {
 });
 ```
 
-### Opting Out of `GITHUB_TOKEN`
+## Running without GITHUB_TOKEN
 
-If you prefer not to use `GITHUB_TOKEN` due to security concerns, be aware of the following limitations:
+You can run Argos tests without exposing `GITHUB_TOKEN`. This is useful if you want to limit token scope in deployment workflows.
 
-- Deployments will be linked to the branch name rather than specific PR info.
-- No direct PR link will be available in Argos.
+However, some features will not be available:
 
-To mitigate these limitations, it's important to designate your main production environment (e.g., "Production" in Vercel) as the "reference branch" in your project's Argos settings.
+- Builds are only associated with a branch (no pull request metadata).
+- No pull request link will appear in Argos.
 
-![Screenshot showing how to configure "Production" as the reference branch in Argos project settings](./run-on-preview-deployment/configure-reference-branch.png)
+:::note
 
-To configure without GITHUB_TOKEN:
+Argos SDKs warn if `GITHUB_TOKEN` is missing. To silence this, set
+`DISABLE_GITHUB_TOKEN_WARNING=true`.
 
-```yml
-name: Playwright + Argos Tests
-
-on:
-  deployment_status:
-jobs:
-  run-e2es:
-    # Run tests only if the deployment is successful
-    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install dependencies
-        run: npm ci && npx playwright install --with-deps
-      - name: Run tests
-        run: npx playwright test
-        env:
-          # Use this environment variable as `baseUrl` in your plawright.config.ts
-          BASE_URL: ${{ github.event.deployment_status.environment_url }}
-```
-
-Argos SDKs show a warning when a `GITHUB_TOKEN` is not set. You can suppress this warning by setting the `DISABLE_GITHUB_TOKEN_WARNING` environment variable to true.
+:::
