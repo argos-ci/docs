@@ -25,7 +25,7 @@ A mode is a preset that configures various Storybook globals. For instance, you 
 
 ## Setting up globals & addons
 
-Before you define any modes, make sure you’ve configured the relevant Storybook addons in your .storybook/preview.js (or .storybook/preview.ts) file. Examples include:
+Before you define any modes, make sure you’ve configured the relevant Storybook addons in your `.storybook/preview.ts` (or `.js`) file. Examples include:
 
 - [`@storybook/addon-viewport`](https://www.npmjs.com/package/@storybook/addon-viewport) for screen sizes
 - [`@storybook/addon-themes`](https://www.npmjs.com/package/@storybook/addon-themes) for light/dark themes
@@ -34,8 +34,7 @@ Before you define any modes, make sure you’ve configured the relevant Storyboo
 
 These addons utilize Storybook “globals” and “decorators” under the hood. Argos modes simply manipulate those globals at test time to generate multiple snapshots of the same story.
 
-```ts
-// .storybook/preview.js
+```ts title=".storybook/preview.ts"
 import { withThemeByClassName } from "@storybook/addon-themes";
 import "../src/styles.css";
 
@@ -76,11 +75,9 @@ export default preview;
 
 ## Defining modes
 
-Create a `.storybook/modes.js` (or `.ts`) file that exports an object where each key is a mode name and each value is a set of overrides for the Storybook globals. For example:
+Create a `.storybook/modes.ts` (or `.js`) file that exports an object where each key is a mode name and each value is a set of overrides for the Storybook globals. For example:
 
-```ts
-// .storybook/modes.js
-
+```ts title=".storybook/modes.ts"
 export const allModes = {
   dark: {
     backgrounds: { value: "#1A1A1A" },
@@ -106,17 +103,18 @@ Each object can include as many or as few globals as you need. If a mode doesn�
 
 ## Applying modes
 
-Attach modes to any level of your Storybook: globally in `.storybook/preview.js`, at the component (default export) level, or in an individual story’s parameters. Argos merges all modes defined up the chain.
+Attach modes to any level of your Storybook: globally in `.storybook/preview.ts` (or `.js`), at the component (default export) level, or in an individual story’s parameters. Argos merges all modes defined up the chain.
 
 ### Basic usage in a story file
 
-```ts
-// src/components/ProductCard/ProductCard.stories.js
+```ts title="ProductCard.stories.ts"
+// Replace your-framework with the framework you are using, e.g. react-vite, nextjs, nextjs-vite, etc.
+import type { Meta, StoryObj } from "@storybook/your-framework";
 
 import { ProductCard } from "./ProductCard";
 import { allModes } from "../../../.storybook/modes";
 
-export default {
+const meta = {
   title: "Components/ProductCard",
   component: ProductCard,
   parameters: {
@@ -128,18 +126,19 @@ export default {
       },
     },
   },
-};
+} satisfies Meta<typeof ProductCard>;
 
-// Story #1
-export const DefaultView = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const DefaultView: Story = {
   args: {
     productName: "Coffee Beans",
     price: 9.99,
   },
 };
 
-// Story #2
-export const SoldOutView = {
+export const SoldOutView: Story = {
   args: {
     productName: "Coffee Beans",
     price: 9.99,
@@ -152,12 +151,11 @@ In this example, Argos will generate two snapshots for each story (DefaultView a
 
 ## Combining modes from multiple levels
 
-You can add modes in your .storybook/preview.js at the project level, then define additional modes in a story file. Argos “stacks” these modes, creating a snapshot for every combination.
+You can add modes in your `.storybook/preview.ts` (or `.js`) at the project level, then define additional modes in a story file. Argos “stacks” these modes, creating a snapshot for every combination.
 
 ### Project-level modes
 
-```ts
-// .storybook/preview.js
+```ts title=".storybook/modes.ts"
 import { allModes } from "./modes";
 
 const preview = {
@@ -175,12 +173,13 @@ export default preview;
 
 ### Component-level modes
 
-```ts
-// ProductCard.stories.js
+```ts title="ProductCard.stories.ts"
+// Replace your-framework with the framework you are using, e.g. react-vite, nextjs, nextjs-vite, etc.
+import type { Meta, StoryObj } from "@storybook/your-framework";
 import { ProductCard } from "./ProductCard";
 import { allModes } from "../../../.storybook/modes";
 
-export default {
+const meta = {
   title: "Components/ProductCard",
   component: ProductCard,
   parameters: {
@@ -190,25 +189,28 @@ export default {
       },
     },
   },
-};
+} satisfies Meta<typeof ProductCard>;
 
-// Single story for brevity
-export const Basic = {
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Basic: Story = {
   args: {
     /* ... */
   },
 };
 ```
 
-When Argos runs, it will generate snapshots for each mode defined at the project level and the component level. So for Basic, you get “light mobile” (from `preview.js`) plus “dark widescreen” (from the component’s parameter).
+When Argos runs, it will generate snapshots for each mode defined at the project level and the component level. So for Basic, you get “light mobile” (from `preview.ts`) plus “dark widescreen” (from the component’s parameter).
 
 ## Excluding or disabling modes
 
 Sometimes you want to turn off a certain higher-level mode for a specific story. You can do this by passing a disable property:
 
-```ts
-// ProductCard.stories.js
-export const SpecialCard = {
+```ts title="ProductCard.stories.ts"
+// ...
+
+export const SpecialCard: Story = {
   args: {
     /* ... */
   },
