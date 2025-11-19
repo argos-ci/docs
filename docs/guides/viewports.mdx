@@ -5,29 +5,35 @@ title: Responsive Viewports
 
 # Configuring Responsive Viewports
 
-Master responsive testing with Argos: Easily configure viewports for Playwright, Cypress, and Puppeteer, ensuring your app looks great on any device.
+Argos lets you capture the same page at multiple breakpoints with a single test. Configure viewports once and get consistent responsive coverage across Playwright, Cypress and Puppeteer.
 
 ## Prerequisites
 
 This advanced feature integrates smoothly with [Playwright](/playwright), [Cypress](/cypress), and [Puppeteer](/puppeteer) to enhance your testing capabilities.
 
+This feature works seamlessly with [Playwright](/playwright), [Cypress](/cypress) and [Puppeteer](/puppeteer).
+
+:::note
+
+If you use Storybook, see the dedicated guide on [Storybook modes](/storybook-story-modes).
+
+:::
+
 ## Viewport Configuration
 
-Adjust the `argosScreenshot()` command in your test scripts to capture responsive screenshots. You can specify exact dimensions or use device presets to mimic real-world scenarios:
+Pass a viewports array to `argosScreenshot()` to generate screenshots for each dimension or preset you define. You can mix explicit sizes and device presets.
 
 ```js
 await argosScreenshot(..., {
   viewports: [
-    "iphone-4", // Use device preset
-    { width: 800, height: 600 }, // Specify dimensions directly
-    { preset: "ipad-2", orientation: "landscape" }, // Device preset with orientation
+    "iphone-4",
+    { width: 800, height: 600 },
+    { preset: "ipad-2", orientation: "landscape" },
   ],
 });
 ```
 
 ## Available Presets
-
-List of available device presets with their respective dimensions:
 
 | Preset        | Width (px) | Height (px) |
 | ------------- | ---------- | ----------- |
@@ -52,4 +58,40 @@ List of available device presets with their respective dimensions:
 
 ## Troubleshooting and Best Practices
 
-To ensure accurate rendering, always set the viewport size with `page.setViewportSize()` before navigating to the target page, as many sites do not dynamically adapt to changes in viewport size after the page has loaded. For comprehensive testing, consider running your tests across all intended viewports to validate responsive behavior across the board.
+Many sites compute layout at load time and will not adapt cleanly if the viewport changes later. If you notice issues, you may want to run your test suite entirely for each viewport instead of changing the viewport before taking each screenshot.
+
+For example, in Playwright you can create a separate browser context for each viewport size.
+
+```ts title="playrwight.config.ts"
+import { defineConfig, devices } from "@playwright/test";
+
+export default defineConfig({
+  projects: [
+    {
+      name: "chromium-mobile",
+      use: {
+        ...devices["Desktop Chrome"],
+        channel: "chrome",
+      },
+    },
+    {
+      name: "chromium-mobile",
+      use: {
+        ...devices["Desktop Chrome"],
+        channel: "chrome",
+        viewport: { width: 402, height: 874 }, // iPhone 7 viewport
+      },
+    },
+  ],
+});
+```
+
+You can also run `page.setViewportSize()` before navigating to the page to ensure the layout is computed correctly.
+
+```ts
+await page.setViewportSize({
+  width: 640,
+  height: 480,
+});
+await page.goto("https://example.com");
+```
