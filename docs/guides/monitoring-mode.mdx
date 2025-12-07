@@ -24,23 +24,19 @@ In the Argos app, you can review highlighted differences, approve intended updat
 ### Workflow
 
 1. **Feature Development**
-
    - A developer creates a feature (or bugfix) branch and commits changes.
    - Optionally, a pull request (PR) is opened.
 
 2. **Visual Tests in CI**
-
    - During these tests, your test framework (Playwright, Cypress, etc.) captures screenshots of the app. Argos offers [SDKs](/getting-started) for easy integration with popular frameworks.
    - At the end of the tests, screenshots are uploaded to Argos automatically with the SDK, or manually using the Argos CLI.
 
 3. **Comparison with Baseline**
-
    - Argos receives the build containing screenshots and metadata.
    - It automatically determines the [baseline build](/baseline-build) using Git history analysis and other criteria.
    - The new screenshots are compared against the baseline.
 
 4. **Results & Notifications**
-
    - The build is complete once all screenshots have been compared:
      - ✅ No differences → commit status set to _success_.
      - ❌ Differences found → commit status set to _failed_. The changes are visible in the Argos app for review and approval.
@@ -49,7 +45,6 @@ In the Argos app, you can review highlighted differences, approve intended updat
    - On Git providers, if branch protection rules require Argos checks to pass, pull requests will be blocked from merging until all visual changes are reviewed and approved in Argos.
 
 5. **Approval Process**
-
    - The team reviews the changes in the Argos app:
      - Each screenshot change can be approved or rejected.
      - The build as a whole must then be approved or rejected. The check status on Git providers (GitHub, GitLab, etc.) is automatically updated accordingly.
@@ -71,7 +66,7 @@ In CI mode, Argos integrates directly with your Git provider to surface results 
 
 - **Commit status updates**: Each build sets the commit status to ✅ success or ❌ failed.
 - **Pull request comments**: On GitHub, Argos posts a summary comment with a link to the Argos dashboard.
-- **Slack notifications**: Enable [Slack notifications](/slack-notifications) to alert your team immediately when visual differences are detected.
+- **Slack notifications**: Enable [Slack notifications](/slack) to alert your team immediately when visual differences are detected.
 
 ### Use Cases
 
@@ -136,7 +131,7 @@ graph TD;
 
 ### Notifications
 
-Enable [**Slack notifications**](/slack-notifications) to be alerted immediately when visual differences are detected, so your team can review and act quickly.
+[Set up **Slack notifications**](/slack#set-up-slack-notifications) to be alerted immediately when visual differences are detected, so your team can review and act quickly.
 
 ### Use Cases
 
