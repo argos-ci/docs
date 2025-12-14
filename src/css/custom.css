@@ -492,3 +492,8 @@ div.alert p {
 article img {
   @apply rounded-sm;
 }
+
+.DocSearch-Input,
+.DocSearch-Modal-heading {
+  @apply font-normal!;
+}
