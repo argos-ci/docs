@@ -1,5 +1,3 @@
-import React from "react";
-
 export const FeatureImage = (props) => (
   <img style={{ maxHeight: 40, maxWidth: 40, margin: "auto" }} {...props} />
 );
