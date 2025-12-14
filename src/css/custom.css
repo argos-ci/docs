@@ -1,65 +1,252 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@import url("https://fonts.googleapis.com/css?family=Inter:400,500,600,700&display=swap");
+@plugin "@tailwindcss/typography";
 
-/* You can override the default Infima variables here. */
-:root {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+@custom-variant dark (&:is([data-theme="dark"] *));
 
-  --ifm-heading-font-family: "Inter", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
+@import "@radix-ui/colors/gray" layer(base);
+@layer base {
+  [data-theme="dark"] {
+    --gray-1: #111111;
+    --gray-2: #191919;
+    --gray-3: #222222;
+    --gray-4: #2a2a2a;
+    --gray-5: #313131;
+    --gray-6: #3a3a3a;
+    --gray-7: #484848;
+    --gray-8: #606060;
+    --gray-9: #6e6e6e;
+    --gray-10: #7b7b7b;
+    --gray-11: #b4b4b4;
+    --gray-12: #eeeeee;
+  }
 
-  --ifm-color-primary: theme(colors.violet.9);
-  --ifm-color-primary-dark: theme(colors.violet.10);
-  --ifm-color-primary-darker: theme(colors.violet.11);
-  --ifm-color-primary-darkest: theme(colors.violet.12);
-  --ifm-color-primary-light: theme(colors.violet.8);
-  --ifm-color-primary-lighter: theme(colors.violet.7);
-  --ifm-color-primary-lightest: theme(colors.violet.6);
+  @supports (color: color(display-p3 1 1 1)) {
+    @media (color-gamut: p3) {
+      [data-theme="dark"] {
+        --gray-1: color(display-p3 0.067 0.067 0.067);
+        --gray-2: color(display-p3 0.098 0.098 0.098);
+        --gray-3: color(display-p3 0.135 0.135 0.135);
+        --gray-4: color(display-p3 0.163 0.163 0.163);
+        --gray-5: color(display-p3 0.192 0.192 0.192);
+        --gray-6: color(display-p3 0.228 0.228 0.228);
+        --gray-7: color(display-p3 0.283 0.283 0.283);
+        --gray-8: color(display-p3 0.375 0.375 0.375);
+        --gray-9: color(display-p3 0.431 0.431 0.431);
+        --gray-10: color(display-p3 0.484 0.484 0.484);
+        --gray-11: color(display-p3 0.706 0.706 0.706);
+        --gray-12: color(display-p3 0.933 0.933 0.933);
+      }
+    }
+  }
+}
+@import "@radix-ui/colors/violet" layer(base);
+@layer base {
+  [data-theme="dark"] {
+    --violet-1: #14121f;
+    --violet-2: #1b1525;
+    --violet-3: #291f43;
+    --violet-4: #33255b;
+    --violet-5: #3c2e69;
+    --violet-6: #473876;
+    --violet-7: #56468b;
+    --violet-8: #6958ad;
+    --violet-9: #6e56cf;
+    --violet-10: #7d66d9;
+    --violet-11: #baa7ff;
+    --violet-12: #e2ddfe;
+  }
 
-  --ifm-color-info: theme(colors.mauve.9);
-  --ifm-color-info-dark: theme(colors.mauve.8);
-  --ifm-color-info-darker: theme(colors.mauve.11);
-  --ifm-color-info-darkest: theme(colors.mauve.12);
-  --ifm-color-info-light: theme(colors.mauve.8);
-  --ifm-color-info-lighter: theme(colors.mauve.7);
-  --ifm-color-info-lightest: theme(colors.mauve.6);
+  @supports (color: color(display-p3 1 1 1)) {
+    @media (color-gamut: p3) {
+      [data-theme="dark"] {
+        --violet-1: color(display-p3 0.077 0.071 0.118);
+        --violet-2: color(display-p3 0.101 0.084 0.141);
+        --violet-3: color(display-p3 0.154 0.123 0.256);
+        --violet-4: color(display-p3 0.191 0.148 0.345);
+        --violet-5: color(display-p3 0.226 0.182 0.396);
+        --violet-6: color(display-p3 0.269 0.223 0.449);
+        --violet-7: color(display-p3 0.326 0.277 0.53);
+        --violet-8: color(display-p3 0.399 0.346 0.656);
+        --violet-9: color(display-p3 0.417 0.341 0.784);
+        --violet-10: color(display-p3 0.477 0.402 0.823);
+        --violet-11: color(display-p3 0.72 0.65 1);
+        --violet-12: color(display-p3 0.883 0.867 0.986);
+      }
+    }
+  }
+}
+@import "@radix-ui/colors/amber" layer(base);
+@layer base {
+  [data-theme="dark"] {
+    --amber-1: #16120c;
+    --amber-2: #1d180f;
+    --amber-3: #302008;
+    --amber-4: #3f2700;
+    --amber-5: #4d3000;
+    --amber-6: #5c3d05;
+    --amber-7: #714f19;
+    --amber-8: #8f6424;
+    --amber-9: #ffc53d;
+    --amber-10: #ffd60a;
+    --amber-11: #ffca16;
+    --amber-12: #ffe7b3;
+  }
 
-  --ifm-background-color: theme(colors.mauve.1);
-  --ifm-toc-border-color: theme(colors.mauve.6);
-
-  --ifm-spacing-horizontal: 2rem;
-  --ifm-code-background: theme(colors.mauve.2);
+  @supports (color: color(display-p3 1 1 1)) {
+    @media (color-gamut: p3) {
+      [data-theme="dark"] {
+        --amber-1: color(display-p3 0.082 0.07 0.05);
+        --amber-2: color(display-p3 0.111 0.094 0.064);
+        --amber-3: color(display-p3 0.178 0.128 0.049);
+        --amber-4: color(display-p3 0.239 0.156 0);
+        --amber-5: color(display-p3 0.29 0.193 0);
+        --amber-6: color(display-p3 0.344 0.245 0.076);
+        --amber-7: color(display-p3 0.422 0.314 0.141);
+        --amber-8: color(display-p3 0.535 0.399 0.189);
+        --amber-9: color(display-p3 1 0.77 0.26);
+        --amber-10: color(display-p3 1 0.87 0.15);
+        --amber-11: color(display-p3 1 0.8 0.29);
+        --amber-12: color(display-p3 0.984 0.909 0.726);
+      }
+    }
+  }
 }
 
-html[data-theme="dark"] {
-  --ifm-color-primary: theme(colors.violet.9);
-  --ifm-color-primary-dark: theme(colors.violet.10);
-  --ifm-color-primary-darker: theme(colors.violet.11);
-  --ifm-color-primary-darkest: theme(colors.violet.12);
-  --ifm-color-primary-light: theme(colors.violet.8);
-  --ifm-color-primary-lighter: theme(colors.violet.7);
-  --ifm-color-primary-lightest: theme(colors.violet.6);
+@import url("https://fonts.googleapis.com/css?family=Inter:400,500,600,700&display=swap")
+layer(theme);
 
-  --ifm-color-info: theme(colors.mauve.9);
-  --ifm-color-info-dark: theme(colors.mauve.10);
-  --ifm-color-info-darker: theme(colors.mauve.11);
-  --ifm-color-info-darkest: theme(colors.mauve.12);
-  --ifm-color-info-light: theme(colors.mauve.8);
-  --ifm-color-info-lighter: theme(colors.mauve.7);
-  --ifm-color-info-lightest: theme(colors.mauve.6);
+@theme {
+  --primary-1: var(--violet-1);
+  --primary-2: var(--violet-2);
+  --primary-3: var(--violet-3);
+  --primary-4: var(--violet-4);
+  --primary-5: var(--violet-5);
+  --primary-6: var(--violet-6);
+  --primary-7: var(--violet-7);
+  --primary-8: var(--violet-8);
+  --primary-9: var(--violet-9);
+  --primary-10: var(--violet-10);
+  --primary-11: var(--violet-11);
+  --primary-12: var(--violet-12);
 
-  --ifm-background-color: theme(colors.mauve.1);
-  --ifm-toc-border-color: theme(colors.mauve.6);
+  --neutral-1: var(--gray-1);
+  --neutral-2: var(--gray-2);
+  --neutral-3: var(--gray-3);
+  --neutral-4: var(--gray-4);
+  --neutral-5: var(--gray-5);
+  --neutral-6: var(--gray-6);
+  --neutral-7: var(--gray-7);
+  --neutral-8: var(--gray-8);
+  --neutral-9: var(--gray-9);
+  --neutral-10: var(--gray-10);
+  --neutral-11: var(--gray-11);
+  --neutral-12: var(--gray-12);
+
+  --font-sans:
+    Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+
+  --text-color-default: var(--neutral-12);
+  --text-color-base: var(--neutral-12);
+  --text-color-low: var(--neutral-11);
+  --text-color-hover: var(--neutral-10);
+
+  --border-color-default: var(--neutral-6);
+  --border-color-base: var(--neutral-6);
+  --border-color-alert: var(--neutral-8);
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--neutral-6);
+  }
+}
+
+@utility prose-neutral {
+  --tw-prose-body: var(--neutral-12);
+  --tw-prose-headings: var(--neutral-12);
+  --tw-prose-lead: var(--neutral-7);
+  --tw-prose-links: var(--neutral-12);
+  --tw-prose-bold: var(--neutral-12);
+  --tw-prose-counters: var(--neutral-10);
+  --tw-prose-bullets: var(--neutral-10);
+  --tw-prose-hr: var(--neutral-6);
+  --tw-prose-quotes: var(--neutral-12);
+  --tw-prose-quote-borders: var(--neutral-6);
+  --tw-prose-captions: var(--neutral-7);
+  --tw-prose-code: var(--neutral-12);
+  --tw-prose-pre-code: var(--neutral-1);
+  --tw-prose-pre-bg: var(--neutral-12);
+  --tw-prose-th-borders: var(--neutral-6);
+  --tw-prose-td-borders: var(--neutral-6);
+}
+
+/* You can override the default Infima variables here. */
+:root:root {
+  font-family: var(--font-sans);
+
+  --ifm-heading-font-family: var(--font-sans);
+
+  --ifm-color-primary: var(--primary-9);
+  --ifm-color-primary-dark: var(--primary-10);
+  --ifm-color-primary-darker: var(--primary-11);
+  --ifm-color-primary-darkest: var(--primary-12);
+  --ifm-color-primary-light: var(--primary-8);
+  --ifm-color-primary-lighter: var(--primary-7);
+  --ifm-color-primary-lightest: var(--primary-6);
+
+  --ifm-color-info: var(--neutral-9);
+  --ifm-color-info-dark: var(--neutral-8);
+  --ifm-color-info-darker: var(--neutral-11);
+  --ifm-color-info-darkest: var(--neutral-12);
+  --ifm-color-info-light: var(--neutral-8);
+  --ifm-color-info-lighter: var(--neutral-7);
+  --ifm-color-info-lightest: var(--neutral-6);
+
+  --ifm-background-color: var(--neutral-1);
+  --ifm-background-surface-color: var(--neutral-2);
+  --ifm-toc-border-color: var(--neutral-6);
+
+  --ifm-spacing-horizontal: 2rem;
+  --ifm-code-background: var(--neutral-2);
+
+  --ifm-link-color: var(--primary-11);
+
+  --docsearch-text-color: var(--neutral-12);
+  --docsearch-secondary-text-color: var(--neutral-11);
+  --docsearch-subtle-color: var(--neutral-6);
+  --docsearch-background-color: var(--neutral-2);
+  --docsearch-icon-color: var(--neutral-11);
+  --docsearch-container-background: rgba(0, 0, 0, 0.5);
+  --docsearch-modal-background: var(--neutral-3);
+  --docsearch-searchbox-background: var(--neutral-2);
+  --docsearch-searchbox-focus-background: var(--neutral-4);
+  --docsearch-key-background: var(--neutral-3);
+  --docsearch-hit-background: var(--neutral-1);
+  --docsearch-hit-highlight-color: var(--primary-4);
+  --docsearch-key-color: var(--neutral-11);
+  --docsearch-logo-color: var(--primary-10);
+  --docsearch-focus-color: var(--primary-10);
+  --docsearch-highlight-color: var(--primary-10);
+  --docsearch-muted-color: var(--neutral-11);
 }
 
 .alert {
-  --ifm-code-background: theme(colors.mauve.2);
+  --ifm-code-background: var(--neutral-2);
 }
 
 /* Main layout */
@@ -83,15 +270,21 @@ nav.menu {
 
 /* Markdown */
 .markdown {
-  @apply prose prose-mauve max-w-none prose-code:font-normal
+  @apply prose prose-neutral max-w-none prose-code:font-normal
   prose-code:before:hidden prose-code:after:hidden
-  prose-code:px-1 prose-code:border prose-hr:bg-none
+  prose-code:px-1 prose-hr:bg-none
   prose-td:px-4 prose-th:px-4;
+}
+
+@supports (color: oklab(0% 0 0%)) {
+  .markdown {
+    @apply prose-neutral;
+  }
 }
 
 .markdown hr {
   border-top: 1px solid var(--ifm-color-primary-lightest);
-  @apply border-mauve-6;
+  @apply border-base;
 }
 
 /* Table of contents */
@@ -103,36 +296,36 @@ nav.menu {
 .table-of-contents__link:hover code,
 .table-of-contents__link--active,
 .table-of-contents__link--active code {
-  @apply text;
+  @apply text-base;
 }
 
 /* Code blcok */
 .markdown
   :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-  @apply !bg-mauve-2;
+  @apply bg-(--neutral-2)!;
 }
 
 .theme-code-block {
-  @apply !border !shadow-none !bg-mauve-2 !relative;
+  @apply border! shadow-none! bg-(--neutral-2)! relative!;
 
   & > div {
-    @apply !border-base;
+    @apply border-base!;
   }
 }
 
 .markdown
   .codeBlockTitle_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
-  @apply !text-low px-3 py-2 text-sm bg-mauve-2 border-b-mauve-6;
+  @apply text-low! px-3 py-2 text-sm bg-(--neutral-2) border-b-(--neutral-6);
 }
 
 .theme-code-block-highlighted-line {
-  @apply !bg-mauve-4;
+  @apply bg-(--neutral-4)!;
 }
 
 /* Edit this page */
 
 .theme-edit-this-page {
-  @apply !inline-flex !items-center;
+  @apply inline-flex! items-center!;
 }
 
 /* Code tabs */
@@ -142,12 +335,12 @@ nav.menu {
 }
 
 .tabs.tabs .tabs__item {
-  @apply text-low px-4 py-1 rounded mr-2;
+  @apply text-low px-4 py-1 rounded-sm mr-2;
 }
 
 .tabs.tabs .tabs__item:active,
 .tabs.tabs .tabs__item--active {
-  @apply text border-none rounded bg-mauve-3;
+  @apply text-base border-none rounded-sm bg-(--neutral-3);
 }
 
 /* Breadcrumbs */
@@ -164,12 +357,12 @@ nav.menu {
 
 /* Style the active  */
 .breadcrumbs__item--active .breadcrumbs__link {
-  @apply bg-transparent text;
+  @apply bg-transparent text-base;
 }
 
 /* Edit this page */
 .theme-edit-this-page {
-  @apply !text-low;
+  @apply text-low!;
 }
 
 .theme-edit-this-page svg {
@@ -200,15 +393,15 @@ div .alert > div:first-child {
 }
 
 .alert.alert--warning {
-  @apply border-amber-8 text-sm text-amber-12 bg-amber-1;
+  @apply border-(--amber-8) text-sm text-(--amber-12) bg-(--amber-1);
 
   &::before {
     content: "⚠";
-    @apply text-xl leading-5 mr-3 text-amber-11;
+    @apply text-xl leading-5 mr-3 text-(--amber-11);
   }
 
   a {
-    @apply text-amber-12;
+    @apply text-(--amber-12);
   }
 }
 
@@ -224,7 +417,7 @@ div.alert p {
 .theme-doc-sidebar-menu.theme-doc-sidebar-menu
   .menu__list-item-collapsible
   .menu__link {
-  @apply text text-sm;
+  @apply text-base text-sm;
 }
 
 .theme-doc-sidebar-menu.theme-doc-sidebar-menu
@@ -242,7 +435,7 @@ div.alert p {
 }
 
 .theme-doc-sidebar-menu.theme-doc-sidebar-menu .menu__link--active {
-  @apply text-mauve-12 font-medium;
+  @apply text-base font-medium;
 }
 
 .theme-doc-sidebar-menu.theme-doc-sidebar-menu
@@ -297,9 +490,5 @@ div.alert p {
 /* Img */
 
 article img {
-  @apply rounded;
-}
-
-.navbar__logo img {
-  display: block;
+  @apply rounded-sm;
 }

@@ -1,5 +1,4 @@
-import React, { Children } from "react";
-import { Card } from "./Card";
+import { Children } from "react";
 
 export const Step = (props) => <div {...props} />;
 export const StepTitle = (props) => (
