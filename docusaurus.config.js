@@ -12,7 +12,13 @@ const config = {
   url: "https://argos-ci.com",
   baseUrl: process.env.VERCEL_ENV === "production" ? "/docs" : "/",
   onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "throw",
+  markdown: {
+    mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: "throw",
+      onBrokenMarkdownImages: "throw",
+    },
+  },
   favicon: "img/favicon.png",
   organizationName: "Argos",
   projectName: "docs",
@@ -62,9 +68,6 @@ const config = {
     ],
   ],
   themes: ["@docusaurus/theme-mermaid"],
-  markdown: {
-    mermaid: true,
-  },
   plugins: [
     function myPlugin(context, options) {
       return {
