@@ -8,6 +8,10 @@ sidebar_position: 10
 
 Seamlessly integrate Argos with GitHub for automated visual testing directly within your workflow. Connect Argos to your repositories and receive instant feedback on your pull requests, making it easier to maintain visual consistency across your project.
 
+## Why Argos needs repository access
+
+Argos analyzes commit history to choose the right [baseline build](/baseline-build) and posts commit statuses or pull request comments. Granting repository access lets Argos read commits, find merge bases, and report build results back to GitHub.
+
 ## GitHub Connect
 
 Use GitHub Connect to log in to Argos with your GitHub account. This integration allows Argos to access your repositories and streamline the setup process.
@@ -34,6 +38,17 @@ Argos provides a dedicated GitHub App that connects directly to your repositorie
 3. Under "Repository access," choose "Only select repositories" and select the specific repositories you wish to share with Argos
 
 ![Required Argos status check in GitHub](./github/repository-access.jpg)
+
+## Required GitHub App permissions
+
+Argos needs the following permissions to operate:
+
+- **Contents** — used to find a common commit ancestor between branches
+- **Statuses** — used to add statuses to commits
+- **Pull requests** — used to add comments in pull requests
+- **Actions** — used to allow tokenless authentication
+
+We take your security and privacy seriously. If you have any concerns or questions, please [contact us](https://argos-ci.com/contact).
 
 ## GitHub Integration without Content Permission
 

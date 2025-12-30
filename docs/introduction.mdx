@@ -1,6 +1,6 @@
 ---
 slug: /getting-started
-title: Getting Started
+title: Introduction
 sidebar_position: 1
 ---
 
@@ -15,10 +15,16 @@ import ReactRouterLogo from "@site/src/img/frameworks/react-router.png";
 import WebdriverIOLogo from "@site/src/img/frameworks/webdriverio.png";
 import StorybookLogo from "@site/src/img/frameworks/storybook.png";
 import OthersLogo from "@site/src/img/frameworks/others.png";
+import CameraIcon from "@site/src/img/camera-icon.png";
+import GithubLogo from "@site/src/img/github-logo.png";
+import UploadIcon from "@site/src/img/upload-icon.png";
+import CheckIcon from "@site/src/img/check-icon.png";
+import TeamSelectIcon from "@site/src/img/team-select.png";
+import PlanCardIcon from "@site/src/img/plan-card.png";
 
-# Get started with Argos
+# Introduction
 
-Dive into visual testing with Argos: Discover our developer tools designed for efficient debugging and regression detection across multiple frameworks.
+Argos detects unintended visual changes in your UI, helping teams maintain high product quality as they ship faster.
 
 ## Quick start
 
@@ -29,6 +35,11 @@ Learn how to setup Argos in your project:
     logo={PlaywrightLogo}
     text="Playwright Quickstart"
     to="/quickstart/playwright"
+  />
+  <XCard
+    logo={StorybookLogo}
+    text="Storybook Quickstart"
+    to="/quickstart/storybook"
   />
   <XCard
     logo={CypressLogo}
@@ -52,17 +63,18 @@ Learn how to setup Argos in your project:
     to="/quickstart/react-router"
   />
   <XCard
-    logo={StorybookLogo}
-    text="Storybook Quickstart"
-    to="/quickstart/storybook"
-  />
-  <XCard
     logo={OthersLogo}
     text="Any E2E Quickstart"
     to="/quickstart/with-any-e2e-tool"
   />
 </div>
 
-## Need help?
+## Explore
 
-<HelpSection />
+Dig deeper into Argos topics:
+
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap">
+  <XCard text="Baselines & monitoring" to="/baseline-build" />
+  <XCard text="Integrations" to="/integrations" />
+  <XCard text="Flaky test detection" to="/flaky-test-detection" />
+</div>
