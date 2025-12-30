@@ -104,7 +104,7 @@ const config = {
           },
           {
             from: "/monitoring-mode",
-            to: "/build-modes#monitoring-mode",
+            to: "/build-modes",
           },
           {
             from: "/slack-notifications",
