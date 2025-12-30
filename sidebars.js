@@ -40,7 +40,6 @@ const sidebars = {
       type: "category",
       label: "Resources",
       items: [
-        "resources/faq",
         {
           type: "link",
           label: "About",

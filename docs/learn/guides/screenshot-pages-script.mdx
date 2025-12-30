@@ -17,7 +17,7 @@ import { argosScreenshot } from "@argos-ci/playwright";
 
 const pages = [
   { name: "homepage", path: "/" },
-  { name: "faq", path: "/faq" },
+  { name: "integrations", path: "/integrations" },
   { name: "contact", path: "/contact-us" },
   { name: "pricing", path: "/pricing" },
 ];
@@ -37,7 +37,7 @@ Here's how you can capture screenshots within Cypress. The script navigates to e
 ```js title="screenshot-pages.spec.ts"
 const pages = [
   { name: "homepage", path: "/" },
-  { name: "faq", path: "/faq" },
+  { name: "integrations", path: "/integrations" },
   { name: "contact", path: "/contact-us" },
   { name: "pricing", path: "/pricing" },
 ];
@@ -61,7 +61,7 @@ import { argosScreenshot } from "@argos-ci/puppeteer";
 const baseUrl = "http://localhost:3000";
 const pages = [
   { name: "homepage", path: "/" },
-  { name: "faq", path: "/faq" },
+  { name: "integrations", path: "/integrations" },
   { name: "contact", path: "/contact-us" },
   { name: "pricing", path: "/pricing" },
 ];
