@@ -170,6 +170,7 @@ export const PlaywrightConfig = () => (
     <CodeBlock language="js" title="playwright.config.ts">
       {`
 import { defineConfig } from "@playwright/test";
+import { createArgosReporterOptions } from "@argos-ci/playwright/reporter";
 
 export default defineConfig({
   // ... other configuration
@@ -181,13 +182,13 @@ export default defineConfig({
     // Add Argos reporter.
     [
       "@argos-ci/playwright/reporter",
-      {
+      createArgosReporterOptions({
         // Upload to Argos on CI only.
         uploadToArgos: !!process.env.CI,
 
         // Set your Argos token (required if not using GitHub Actions).
         token: "<YOUR-ARGOS-TOKEN>",
-      },
+      }),
     ],
   ],
 
