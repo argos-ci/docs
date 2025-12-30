@@ -250,6 +250,14 @@ layer(theme);
 
 .alert {
   --ifm-code-background: var(--neutral-2);
+
+  & > div > ul:first-child {
+    @apply mt-0;
+
+    li:first-child {
+      @apply mt-0;
+    }
+  }
 }
 
 /* Main layout */

@@ -110,6 +110,18 @@ const config = {
             from: "/slack-notifications",
             to: "/slack",
           },
+          {
+            from: "/github-enterprise",
+            to: "/github",
+          },
+          {
+            from: "/gitlab-self-managed",
+            to: "/gitlab",
+          },
+          {
+            from: "/bitbucket-server",
+            to: "/bitbucket",
+          },
         ],
       },
     ],
