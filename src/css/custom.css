@@ -226,6 +226,9 @@ layer(theme);
 
   --ifm-link-color: var(--primary-11);
 
+  --ifm-menu-link-padding-vertical: 0.325rem;
+  --ifm-menu-link-padding-horizontal: 0.5rem;
+
   --docsearch-text-color: var(--neutral-12);
   --docsearch-secondary-text-color: var(--neutral-11);
   --docsearch-subtle-color: var(--neutral-6);
@@ -438,9 +441,30 @@ div.alert p {
   @apply text-base font-medium;
 }
 
-.theme-doc-sidebar-menu.theme-doc-sidebar-menu
-  .menu__link--sublist-caret:after {
-  background: var(--ifm-menu-link-sublist-icon) 50% / 1.25rem 1.25rem;
+.menu__link--sublist-caret:after {
+  background: var(--ifm-menu-link-sublist-icon) 50% / 1rem 1rem;
+}
+
+.menu__caret:before {
+  background: var(--ifm-menu-link-sublist-icon) 50% / 1rem 1rem;
+}
+
+.external-link.external-link {
+  &:nth-last-child(3) {
+    @apply mt-4;
+  }
+
+  a {
+    @apply flex gap-4 justify-between pr-3;
+  }
+
+  a::after {
+    content: "↗";
+  }
+
+  svg {
+    display: none;
+  }
 }
 
 /* GitHub navbar icon */
