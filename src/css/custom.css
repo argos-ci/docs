@@ -458,7 +458,7 @@ div.alert p {
 }
 
 .external-link.external-link {
-  &:nth-last-child(3) {
+  &:nth-last-child(4) {
     @apply mt-4;
   }
 

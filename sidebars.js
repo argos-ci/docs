@@ -33,6 +33,12 @@ const sidebars = {
     },
     {
       type: "link",
+      label: "Website",
+      href: "https://argos-ci.com/homepage",
+      className: "external-link",
+    },
+    {
+      type: "link",
       label: "Discord",
       href: "https://argos-ci.com/discord",
       className: "external-link",
