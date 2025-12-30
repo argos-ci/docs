@@ -127,6 +127,56 @@ const config = {
     ],
   ],
 
+  headTags: [
+    {
+      tagName: "script",
+      attributes: {
+        type: "application/ld+json",
+      },
+      innerHTML: JSON.stringify({
+        "@type": "Organization",
+        url: "https://argos-ci.com",
+        logo: "https://argos-ci.com/logo.png",
+        name: "Argos",
+        legalName: "Argos by Smooth Code",
+        description:
+          "Argos helps product teams ship faster without sacrificing quality by catching visual regressions early with reliable visual testing for Storybook and Playwright.",
+        email: "contact@argos-ci.com",
+        contactPoint: {
+          "@type": "ContactPoint",
+          email: "contact@argos-ci.com",
+        },
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "30 boulevard Sebastopol",
+          addressLocality: "Paris",
+          addressCountry: "FR",
+          addressRegion: "FR",
+          postalCode: "75004",
+        },
+        foundingDate: "2016-12-15",
+        founder: {
+          "@type": "Person",
+          name: "Greg Bergé",
+          familyName: "Bergé",
+          givenName: "Greg",
+          jobTitle: "CEO",
+          url: "https://gregberge.com",
+        },
+        numberOfEmployees: {
+          "@type": "QuantitativeValue",
+          minValue: 0,
+          maxValue: 10,
+        },
+        sameAs: [
+          "https://github.com/argos-ci/argos",
+          "https://x.com/argos-ci",
+          "https://www.linkedin.com/company/argos-testing",
+        ],
+      }),
+    },
+  ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -135,6 +185,12 @@ const config = {
         disableSwitch: false,
         respectPrefersColorScheme: true,
       },
+      metadata: [
+        {
+          name: "og:type",
+          content: "website",
+        },
+      ],
       navbar: {
         title: "",
         logo: {
