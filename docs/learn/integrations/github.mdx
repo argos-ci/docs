@@ -66,29 +66,23 @@ Argos supports GitHub Merge Queue when you use the full-access Argos GitHub App.
 
 Listen to both `pull_request` and `merge_group` events so Argos uploads run for PR reviews and for queued merges:
 
-```yaml
+```yaml title=".github/workflows/ci.yml"
 name: Visual tests
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
   merge_group:
 
 jobs:
   argos:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      statuses: write
-      pull-requests: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
       - run: npm ci
-      - run: npm run test:visual # produces screenshots in ./screenshots
-      - run: npx argos upload --token ${{ secrets.ARGOS_TOKEN }} ./screenshots
+      - run: npm run test:e2e # Run E2E tests with Argos SDK integration
+        env:
+          ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }} # Argos token stored in GitHub Secrets
 ```
 
 ## GitHub Integration without Content Permission
