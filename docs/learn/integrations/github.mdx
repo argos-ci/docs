@@ -7,11 +7,11 @@ description: Connect Argos to GitHub for automated visual testing on pull reques
 
 # GitHub Integration
 
-Seamlessly integrate Argos with GitHub for automated visual testing directly within your workflow. Connect Argos to your repositories and receive instant feedback on your pull requests, making it easier to maintain visual consistency across your project.
+Connect Argos to GitHub for automated visual testing on every pull request and merge queue run. Argos reads commit history to pick the right baseline build and reports results back to GitHub so you can ship with confidence.
 
-## What the GitHub integration does
+## What Argos does on GitHub
 
-- Add commit and pull request checks, so Argos results can block merges if required in GitHub.
+- Add commit and pull request checks, so Argos results can block merges when required in GitHub.
 - Post [pull request comments](/pull-request-comments) with the latest build results and links back to Argos.
 - Analyze commit history to find the right merge base and select the correct [baseline build](/baseline-build) for visual comparisons.
 
@@ -19,21 +19,22 @@ Seamlessly integrate Argos with GitHub for automated visual testing directly wit
 
 Argos analyzes commit history to choose the right [baseline build](/baseline-build) and posts commit statuses or pull request comments. Granting repository access lets Argos read commits, find merge bases, and report build results back to GitHub.
 
-## GitHub Connect
+## Choose your access level
 
-Use GitHub Connect to log in to Argos with your GitHub account. This integration allows Argos to access your repositories and streamline the setup process.
+- **Full access (recommended)** — Required for Merge Queue and baseline selection based on commit history.
+- **Limited access (no content)** — Works for basic checks without reading repository content; Merge Queue is not supported. See [GitHub Integration without Content Permission](#github-integration-without-content-permission).
 
-## Argos' GitHub App
+Use GitHub Connect to log in with your GitHub account, then install the Argos GitHub App to link repositories.
+
+## Install the Argos GitHub App
 
 Argos provides a dedicated GitHub App that connects directly to your repositories, enabling real-time visual testing feedback on pull requests.
-
-### Install the Argos GitHub App
 
 1. Visit the [Argos app page on GitHub](https://github.com/apps/argos-ci)
 2. Click on "Configure" and select the organization where you want to install Argos
 3. Follow the prompts to complete the installation
 
-### Import a GitHub Repository to Argos
+### Import a GitHub repository to Argos
 
 1. Sign in to Argos and click on "Create a new project"
 2. Choose GitHub as your provider, then click "Import your repository"
@@ -59,9 +60,7 @@ We take your security and privacy seriously. If you have any concerns or questio
 
 ## GitHub Merge Queue support
 
-Argos supports GitHub Merge Queue when you use the full-access Argos GitHub App. Merge Queue relies on Argos reading commit history to compute merge bases and publish required checks, so the restricted “GitHub without content access” integration does not support it.
-
-When Argos runs inside the merge queue, it compares your queued change against the previously approved commit on the target branch to ensure only clean visual changes are merged.
+Argos supports GitHub Merge Queue when you use the full-access Argos GitHub App. Merge Queue relies on Argos reading commit history to compute merge bases and publish required checks, so the restricted “GitHub without content access” integration does not support it. When Argos runs inside the merge queue, it compares your queued change against the previously approved commit on the target branch to ensure only clean visual changes are merged.
 
 ### GitHub Actions setup for Merge Queue
 
@@ -94,28 +93,28 @@ jobs:
 
 ## GitHub Integration without Content Permission
 
-If you prefer to use Argos without granting full content access to your repositories, you can now integrate via a more restricted setup.
+If you prefer to use Argos without granting full content access to your repositories, you can integrate via a more restricted setup. This mode does not support Merge Queue because Argos cannot read commit history.
 
 ### Setting Up Argos with Limited GitHub Access
 
-1. From the dashboard, select your team from the scope selector
-2. Select the **Settings** tab and go to the **Integrations** section
-3. Scroll to "GitHub without content access"
-4. Click **Install GitHub App**
+1. From the dashboard, select your team from the scope selector.
+2. Select the **Settings** tab and go to the **Integrations** section.
+3. Scroll to "GitHub without content access".
+4. Click **Install GitHub App**.
 
 ![GitHub without content access settings in Argos](./github/github-light-settings.jpg)
 
-3. On the next screen you are redirected to GitHub, choose the specific repositories where you want to install the Argos app
+5. On GitHub, choose the specific repositories where you want to install the Argos app.
 
 ![Argos GitHub app without content access](./github/github-light-app.jpg)
 
-4. Select **Projects** tab
-5. Click **Create a new project** at the top right
-6. Select **Continue with GitHub (no-content access)**
+6. Back in Argos, go to the **Projects** tab.
+7. Click **Create a new project** at the top right.
+8. Select **Continue with GitHub (no-content access)**.
 
 ![Argos GitHub app without content access](./github/create-project.jpg)
 
-7. Choose the repository you want to connect
+9. Choose the repository you want to connect.
 
 ## GitHub Enterprise
 
