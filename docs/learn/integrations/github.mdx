@@ -9,6 +9,12 @@ description: Connect Argos to GitHub for automated visual testing on pull reques
 
 Seamlessly integrate Argos with GitHub for automated visual testing directly within your workflow. Connect Argos to your repositories and receive instant feedback on your pull requests, making it easier to maintain visual consistency across your project.
 
+## What the GitHub integration does
+
+- Add commit and pull request checks, so Argos results can block merges if required in GitHub.
+- Post [pull request comments](/pull-request-comments) with the latest build results and links back to Argos.
+- Analyze commit history to find the right merge base and select the correct [baseline build](/baseline-build) for visual comparisons.
+
 ## Why Argos needs repository access
 
 Argos analyzes commit history to choose the right [baseline build](/baseline-build) and posts commit statuses or pull request comments. Granting repository access lets Argos read commits, find merge bases, and report build results back to GitHub.
@@ -50,6 +56,41 @@ Argos needs the following permissions to operate:
 - **Actions** — used to allow tokenless authentication
 
 We take your security and privacy seriously. If you have any concerns or questions, please [contact us](https://argos-ci.com/contact).
+
+## GitHub Merge Queue support
+
+Argos supports GitHub Merge Queue when you use the full-access Argos GitHub App. Merge Queue relies on Argos reading commit history to compute merge bases and publish required checks, so the restricted “GitHub without content access” integration does not support it.
+
+When Argos runs inside the merge queue, it compares your queued change against the previously approved commit on the target branch to ensure only clean visual changes are merged.
+
+### GitHub Actions setup for Merge Queue
+
+Listen to both `pull_request` and `merge_group` events so Argos uploads run for PR reviews and for queued merges:
+
+```yaml
+name: Visual tests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  merge_group:
+
+jobs:
+  argos:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      statuses: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run test:visual # produces screenshots in ./screenshots
+      - run: npx argos upload --token ${{ secrets.ARGOS_TOKEN }} ./screenshots
+```
 
 ## GitHub Integration without Content Permission
 
