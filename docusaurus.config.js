@@ -187,7 +187,7 @@ const config = {
       },
       metadata: [
         {
-          name: "og:type",
+          property: "og:type",
           content: "website",
         },
       ],
