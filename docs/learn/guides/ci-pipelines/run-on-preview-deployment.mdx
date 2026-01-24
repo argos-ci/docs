@@ -47,7 +47,7 @@ jobs:
 
       - name: Print context for debugging optional
         run: |
-          echo "URL: ${{ github.event.client_payload.deployment.url || 'none' }}"
+          echo "URL: $BASE_URL"
 
       - name: Run Playwright tests with Argos reporter
         run: npx playwright test
@@ -93,8 +93,8 @@ jobs:
 
       - name: Print context for debugging optional
         run: |
-          echo "URL: ${{ github.event.deployment_status.environment_url || 'none' }}"
-          echo "Production: ${{ github.event.deployment_status.environment == 'Production' || false }}"
+          echo "URL: $BASE_URL"
+          echo "Branch: $ARGOS_BRANCH"
 
       - name: Run Playwright tests with Argos reporter recommended
         run: npx playwright test
