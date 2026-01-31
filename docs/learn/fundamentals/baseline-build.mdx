@@ -25,8 +25,9 @@ Argos selects the baseline build by finding the most recent **candidate build** 
 
 1. Has the same build name as the triggered build
 2. All framework tests passed
-3. Be auto-approved, manually approved or orphan
-4. Its commit is an ancestor of the merge base between the triggered build's commit and the baseline branch
+3. Build is not marked as [_subset_](/subset-builds)
+4. Be auto-approved, manually approved or orphan
+5. Its commit is an ancestor of the merge base between the triggered build's commit and the baseline branch
 
 ## What is the baseline branch?
 
