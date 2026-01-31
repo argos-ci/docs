@@ -1,0 +1,135 @@
+---
+slug: /subset-builds
+sidebar_label: Subset builds
+---
+
+import { RunPkgCommand } from "@site/src/partials";
+
+# Subset builds
+
+Subset builds are designed for CI runs that **don't execute the full E2E test suite** on a branch. When a build is marked as subset, Argos **ignores removed screenshots** and only notifies you about **changed and added screenshots** from the tests you did run.
+
+This is helpful for speeding up feature-branch validation while still getting reliable visual feedback from the relevant tests.
+
+:::note
+
+You still need to run your full test suite on your main branch to create and update **baseline builds**. Subset builds are not eligible as baselines. See [Baseline build](/baseline-build).
+
+:::
+
+## Diagram flow
+
+```mermaid
+flowchart TB
+  %% Subset builds vertical layout
+
+  Start["CI run starts"]
+
+  subgraph Main["Main branch"]
+    direction TB
+    M1["Run full E2E suite"]
+    M2["Upload screenshots"]
+    M3["Baseline build<br/>added · changed · removed"]
+    M1 --> M2 --> M3
+  end
+
+  subgraph Feature["Feature branch"]
+    direction TB
+    F0["ARGOS_SUBSET=true<br/>or --subset"]
+    F1["Run partial suite"]
+    F2["Upload screenshots"]
+    F3["Subset build notifications<br/>only changed and added screenshots"]
+    F0 --> F1 --> F2 --> F3
+  end
+
+  Start --> Main
+  Start --> Feature
+
+  M3 -. "Compare against baseline" .-> F3
+```
+
+## Enable subset builds
+
+You can enable subset builds in any Argos SDK or the CLI.
+
+### Environment variable
+
+Set the environment variable `ARGOS_SUBSET` to `"true"` in your CI configuration.
+
+```yml title=".github/workflows/ci.yml"
+steps:
+  - name: Run tests
+    run: npm test
+    env:
+      ARGOS_SUBSET: "true"
+```
+
+### CLI
+
+Use the `--subset` flag with the CLI.
+
+<RunPkgCommand command="argos upload --subset ./screenshots" />
+
+### SDK option
+
+Most SDKs expose a `subset` option on the upload configuration.
+
+```js title="upload.js"
+import { upload } from "@argos-ci/core";
+
+await upload({
+  root: "./screenshots",
+  subset: true,
+});
+```
+
+## Examples
+
+### Node.js
+
+```js title="scripts/argos-upload.js"
+import { upload } from "@argos-ci/core";
+
+await upload({
+  root: "./screenshots",
+  subset: true,
+});
+```
+
+### Playwright
+
+For Playwright, simply set `ARGOS_SUBSET=true` in your CI job. The reporter will mark the build as a subset build.
+
+```yml title=".github/workflows/ci.yml"
+steps:
+  - uses: actions/checkout@v4
+  - uses: actions/setup-node@v4
+  - run: npm ci
+  - name: Run Playwright tests
+    env:
+      ARGOS_SUBSET: "true"
+    run: npx playwright test
+```
+
+### Cypress
+
+For Cypress, set `ARGOS_SUBSET=true` in your CI job that runs Cypress and uploads screenshots.
+
+```yml title=".github/workflows/ci.yml"
+steps:
+  - uses: actions/checkout@v4
+  - uses: actions/setup-node@v4
+  - run: npm ci
+  - name: Run Cypress tests
+    env:
+      ARGOS_SUBSET: "true"
+    run: npx cypress run
+```
+
+## Troubleshooting / FAQ
+
+**Why are removed screenshots ignored?**  
+Subset builds only include a portion of your test suite, so missing screenshots may simply be from skipped tests, not actual deletions. Ignoring removals avoids false positives.
+
+**Why can’t a subset build be a baseline?**  
+Baselines must represent the full test suite. Subset builds are incomplete by design and would cause missing screenshots in comparisons.
