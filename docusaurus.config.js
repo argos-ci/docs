@@ -69,6 +69,7 @@ const config = {
   ],
   themes: ["@docusaurus/theme-mermaid"],
   plugins: [
+    "docusaurus-plugin-generate-llms-txt",
     function myPlugin(context, options) {
       return {
         name: "docusaurus-tailwindcss",
