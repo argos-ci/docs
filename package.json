@@ -24,6 +24,7 @@
     "@react-icons/all-files": "^4.1.0",
     "@tailwindcss/postcss": "^4.1.18",
     "clsx": "^2.1.1",
+    "docusaurus-plugin-generate-llms-txt": "^0.0.1",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
