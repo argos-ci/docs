@@ -54,6 +54,23 @@ From the build page or the test page, click on the "Ignore" button next to the c
 
 Once ignored, Argos will no longer notify you if this **exact same change** happens again in future builds. This lets you filter out noise while keeping future regressions detectable.
 
+## Automatically ignore recurring flaky changes
+
+You can also configure Argos to automatically ignore recurring flaky changes across builds.
+
+To configure auto-ignore:
+
+1. Open your project in Argos
+2. Go to **Project Settings**
+3. Find **Automatically ignore flaky changes**
+4. Enable the toggle
+5. Set **Minimum occurrences to consider a change flaky (last 7 days)**
+6. Click **Save**
+
+![Auto-ignore flaky changes in project settings](./flaky-test-detection/auto-ignore.png)
+
+The minimum occurrences value controls how many times the same change must appear in the last 7 days before Argos starts ignoring it automatically.
+
 ### Best Use Cases
 
 - Flaky UI elements that appear/disappear randomly or render inconsistently.
