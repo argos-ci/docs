@@ -48,6 +48,7 @@ To enable autocompletion, type checking, and schema validation in editors like V
 | `browser`           | [Browser](#browser)?                      | The browser that generated the screenshot.                                             |
 | `automationLibrary` | [Automation Library](#automation-library) | The automation library that generated the screenshot. _(Required)_                     |
 | `sdk`               | [SDK](#sdk)                               | The Argos SDK that generated the screenshot. _(Required)_                              |
+| `tags`              | `string[]?`                               | Custom tags to categorize the screenshot.                                              |
 
 ## Viewport
 
@@ -72,6 +73,7 @@ To enable autocompletion, type checking, and schema validation in editors like V
   "retry": 0,
   "repeat": 0,
   "location": { "file": "tests/homepage.spec.ts", "line": 42, "column": 3 },
+  "tags": ["@slow", "@regression"],
   "annotations": [
     {
       "type": "slow",
@@ -89,6 +91,7 @@ To enable autocompletion, type checking, and schema validation in editors like V
 - `retry` (number?): The current retry count.
 - `repeat` (number?): The repeat count for the test.
 - `location` ([Location](#location)?): Where the test is located in the source code.
+- `tags` (string[]?): Tags associated with the test (e.g. Playwright's [test tags](https://playwright.dev/docs/test-annotations#tag-tests)).
 - `annotations` ([Test Annotation](#test-annotation)[]?): Extra information about the test.
 
 ## Location
@@ -165,9 +168,11 @@ Here’s a full example of `myscreenshot.png.argos.json`:
   "viewport": { "width": 1280, "height": 720 },
   "colorScheme": "light",
   "mediaType": "screen",
+  "tags": ["homepage", "desktop"],
   "test": {
     "title": "renders homepage correctly",
     "titlePath": ["E2E", "Homepage"],
+    "tags": ["@regression"],
     "location": { "file": "tests/homepage.spec.ts", "line": 42, "column": 3 }
   },
   "browser": { "name": "chromium", "version": "112.0.0" },
