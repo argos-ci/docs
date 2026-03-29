@@ -58,11 +58,11 @@ Argos needs the following permissions to operate:
 
 We take your security and privacy seriously. If you have any concerns or questions, please [contact us](https://argos-ci.com/contact).
 
-## GitHub Merge Queue support
+## Merge Queue support
 
-Argos supports GitHub Merge Queue when you use the full-access Argos GitHub App. Merge Queue relies on Argos reading commit history to compute merge bases and publish required checks, so the restricted “GitHub without content access” integration does not support it. When Argos runs inside the merge queue, it compares your queued change against the previously approved commit on the target branch to ensure only clean visual changes are merged.
+When Argos runs inside the merge queue, it compares the queued changes against the merge base of all pull requests in the queue, ensuring that visual tests reflect the final merged state. This is supported out of the box with [GitHub's native Merge Queue](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue), and can be configured for custom merge queue systems as well.
 
-### GitHub Actions setup for Merge Queue
+### GitHub Actions setup for GitHub Merge Queue
 
 Listen to both `pull_request` and `merge_group` events so Argos uploads run for PR reviews and for queued merges:
 
@@ -85,9 +85,24 @@ jobs:
           ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }} # Argos token stored in GitHub Secrets
 ```
 
+### Custom merge queue systems
+
+When you are using a merge queue system other than GitHub’s built-in Merge Queue (like [Mergify](https://mergify.com/)), you can set `ARGOS_MERGE_QUEUE_PRS` to the comma-separated pull request numbers included in the queued build. This tells Argos to treat the upload as a merge queue build and use the right baseline for visual comparisons.
+
+```yml
+steps:
+  - name: Upload screenshots to Argos
+    env:
+      ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
+      ARGOS_MERGE_QUEUE_PRS: "101,102"
+    run: npm exec -- argos upload ./screenshots
+```
+
+Use the pull request numbers included in the merge queue batch. Passing `ARGOS_MERGE_QUEUE_PRS` tells Argos to treat the upload as a merge queue build.
+
 ## GitHub Integration without Content Permission
 
-If you prefer to use Argos without granting full content access to your repositories, you can integrate via a more restricted setup. This mode does not support Merge Queue because Argos cannot read commit history.
+If you prefer to use Argos without granting full content access to your repositories, you can integrate via a more restricted setup.
 
 ### Setting Up Argos with Limited GitHub Access
 
