@@ -89,7 +89,7 @@ jobs:
 
 ### Custom merge queue systems
 
-When you are using another merge queue system than the one provided by GitHub, you can set `ARGOS_MERGE_QUEUE_PRS` to the comma-separated pull request numbers included in the queued build. This tells Argos to treat the upload as a merge queue build and use the right baseline for visual comparisons.
+When you are using a merge queue system other than GitHub’s built-in Merge Queue, you can set `ARGOS_MERGE_QUEUE_PRS` to the comma-separated pull request numbers included in the queued build. This tells Argos to treat the upload as a merge queue build and use the right baseline for visual comparisons.
 
 ```yml
 steps:
