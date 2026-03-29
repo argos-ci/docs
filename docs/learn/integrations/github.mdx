@@ -60,7 +60,7 @@ We take your security and privacy seriously. If you have any concerns or questio
 
 ## Merge Queue support
 
-When Argos runs inside the merge queue, it compares the queued changes against the merge base of all pull requests in the queue, ensuring that visual tests reflect the final merged state. This is supported out of the box with GitHub's native Merge Queue, and can be configured for custom merge queue systems as well.
+When Argos runs inside the merge queue, it compares the queued changes against the merge base of all pull requests in the queue, ensuring that visual tests reflect the final merged state. This is supported out of the box with [GitHub's native Merge Queue](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue), and can be configured for custom merge queue systems as well.
 
 ### GitHub Actions setup for GitHub Merge Queue
 
@@ -87,7 +87,7 @@ jobs:
 
 ### Custom merge queue systems
 
-When you are using a merge queue system other than GitHub’s built-in Merge Queue, you can set `ARGOS_MERGE_QUEUE_PRS` to the comma-separated pull request numbers included in the queued build. This tells Argos to treat the upload as a merge queue build and use the right baseline for visual comparisons.
+When you are using a merge queue system other than GitHub’s built-in Merge Queue (like [Mergify](https://mergify.com/)), you can set `ARGOS_MERGE_QUEUE_PRS` to the comma-separated pull request numbers included in the queued build. This tells Argos to treat the upload as a merge queue build and use the right baseline for visual comparisons.
 
 ```yml
 steps:
