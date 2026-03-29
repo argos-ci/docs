@@ -6,6 +6,7 @@
     "dev": "docusaurus start",
     "start": "docusaurus start",
     "build": "rm -rf external && npm run sync-external && docusaurus build",
+    "check-types": "tsc --noEmit",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -22,12 +23,12 @@
     "@mdx-js/react": "^3.1.1",
     "@radix-ui/colors": "^3.0.0",
     "@react-icons/all-files": "^4.1.0",
-    "@tailwindcss/postcss": "^4.1.18",
+    "@tailwindcss/postcss": "^4.2.2",
     "clsx": "^2.1.1",
     "docusaurus-plugin-generate-llms-txt": "^0.0.1",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
     "@docusaurus/eslint-plugin": "^3.9.2",
@@ -35,8 +36,8 @@
     "@docusaurus/tsconfig": "^3.9.2",
     "@docusaurus/types": "^3.9.2",
     "@tailwindcss/typography": "^0.5.19",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3"
+    "tailwindcss": "^4.2.2",
+    "typescript": "^6.0.2"
   },
   "browserslist": {
     "production": [
