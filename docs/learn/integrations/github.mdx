@@ -58,13 +58,11 @@ Argos needs the following permissions to operate:
 
 We take your security and privacy seriously. If you have any concerns or questions, please [contact us](https://argos-ci.com/contact).
 
-## GitHub Merge Queue support
+## Merge Queue support
 
-Argos supports GitHub Merge Queue when you use the full-access Argos GitHub App. Merge Queue relies on Argos reading commit history to compute merge bases and publish required checks, so the restricted “GitHub without content access” integration does not support it. When Argos runs inside the merge queue, it compares your queued change against the previously approved commit on the target branch to ensure only clean visual changes are merged.
+When Argos runs inside the merge queue, it compares the queued changes against the merge base of all pull requests in the queue, ensuring that visual tests reflect the final merged state. This is supported out of the box with GitHub's native Merge Queue, and can be configured for custom merge queue systems as well.
 
-GitHub Actions `merge_group` runs are detected automatically. If you use a different merge queue system, you can opt in manually by setting `ARGOS_MERGE_QUEUE_PRS` to the comma-separated pull request numbers included in the queued build.
-
-### GitHub Actions setup for Merge Queue
+### GitHub Actions setup for GitHub Merge Queue
 
 Listen to both `pull_request` and `merge_group` events so Argos uploads run for PR reviews and for queued merges:
 
