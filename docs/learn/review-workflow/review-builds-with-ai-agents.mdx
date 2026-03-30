@@ -1,0 +1,113 @@
+---
+slug: /review-builds-with-ai-agents
+sidebar_label: AI agents
+description: Use Argos to allow AI agents to review visual changes in a PR.
+---
+
+# Review builds with AI agents
+
+Argos lets AI agents review visual changes in a pull request. The agent can use Argos build data to understand what changed, check whether the screenshots match the pull request's intent, and detect regressions.
+
+By default, ask the agent to summarize the visual changes first. If you want it to take action, it can also create an Argos build review to approve the changes or request changes.
+
+## What you need
+
+- A pull request with an Argos build.
+- The [Argos CLI](/argos-cli).
+- The Argos agent skills, when your assistant supports skills.
+- An Argos project token to read build data with `build get` and `build snapshots`.
+- A user token to create a build review, only if you want the agent to approve or request changes.
+
+## Quick start
+
+Install the skills:
+
+```bash
+npx skills add argos-ci/argos-javascript@argos-cli
+npx skills add argos-ci/argos-javascript@argos-pr-review
+```
+
+Set a project token so the agent can read Argos build data:
+
+```bash
+export ARGOS_TOKEN=<project-token>
+```
+
+If you want the agent to create the Argos build review from your local CLI session, authenticate as your Argos user:
+
+```bash
+argos login
+```
+
+Then start a new AI chat and give the agent the pull request URL:
+
+```text
+Use $argos-pr-review to review this pull request with its Argos build.
+https://github.com/acme/app/pull/123
+```
+
+The `$argos-pr-review` skill contains the detailed review workflow. The `$argos-cli` skill gives the agent the CLI commands, flags, authentication rules, and output formats.
+
+## What the agent does
+
+The agent will inspect the pull request, find the Argos build from the pull request status check or Argos comment, and use Argos build data to understand the visual changes.
+
+It should first summarize what changed visually. Then it compares the screenshots with the pull request intent.
+
+When the screenshots match the pull request intent, the agent can suggest approving the build. When they reveal a regression, it can suggest requesting changes and explain which snapshots are affected.
+
+If the build is still pending, the agent should wait before reviewing. If there are no visual changes or the build is already accepted, no visual review is needed.
+
+---
+
+## Other cases
+
+### If the agent cannot access the pull request
+
+You can provide the Argos build URL and a short description of the expected change:
+
+```text
+Use $argos-pr-review to review this Argos build:
+https://app.argos-ci.com/acme/app/builds/456
+
+Expected change:
+The login page was redesigned with social login options.
+```
+
+The build data still lets the agent explain what changed visually, but the pull request context makes the review decision stronger.
+
+### If your assistant does not support skills
+
+Use a more explicit prompt:
+
+```text
+Review the visual changes in this pull request with Argos:
+https://github.com/acme/app/pull/123
+
+Use the pull request title, description, linked issue, and code diff to understand the intended change.
+Find the Argos build, fetch the build metadata, and fetch the snapshots that need review.
+Use the diff mask, baseline file, current file, and metadata as visual evidence.
+
+First summarize what changed visually in the build.
+Then compare the screenshots with the pull request intent.
+
+If the snapshots match the intent, suggest approving the Argos build.
+If they reveal a regression, suggest requesting changes and list the affected snapshot names.
+If they look flaky, explain the flake signal and do not suggest approval until it is resolved.
+```
+
+To let the assistant create the Argos build review, add an explicit instruction. The CLI must be authenticated as an Argos user with `argos login`, or the assistant must pass a personal access token to `build review`:
+
+```text
+After summarizing the visual changes, create an Argos build review with the appropriate conclusion.
+```
+
+### Authentication details
+
+Reading build data requires a project token. Creating a build review requires a user token because the review is attributed to an Argos user and checked against that user's project permissions.
+
+For details about token precedence, `--token`, and personal access tokens, see [Argos CLI authentication](/argos-cli#authentication).
+
+## Limits
+
+Argos still performs deterministic visual comparison. AI agents use Argos build data as review evidence; they do not replace your team's ownership of review decisions.

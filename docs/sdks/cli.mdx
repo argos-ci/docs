@@ -5,10 +5,11 @@ sidebar_position: 1
 ---
 
 import { InstallDevDep, RunPkgCommand } from "@site/src/partials";
+import personalSettingsTokensPage from "../../src/img/personal-settings-tokens.png";
 
 # Argos Command Line Interface (CLI)
 
-Use the Argos CLI for seamless screenshot uploads to our visual testing platform, ideally integrated into your CI workflow.
+Use the Argos CLI to upload screenshots, inspect builds, and create build reviews from scripts, local workflows, or AI agents.
 
 You can access `@argos-ci/cli` through our [npm package](https://www.npmjs.com/package/@argos-ci/cli). The source code is available on our [GitHub repository](https://github.com/argos-ci/argos-javascript/tree/main/packages/cli).
 
@@ -16,13 +17,27 @@ You can access `@argos-ci/cli` through our [npm package](https://www.npmjs.com/p
 
 <InstallDevDep dependency="@argos-ci/cli" showCliLink={false} />
 
-## Configuration
+## Authentication
 
-Your configuration requirements may vary depending on the CI you use. Typically, you'll need to set ARGOS_TOKEN as a environment variable (ie. secret).
+Your configuration requirements vary depending on the command you run.
+
+For CI uploads, set `ARGOS_TOKEN` as an environment variable, usually as a CI secret.
 
 :::note
 
 You can also specify the token with the `--token=<your-repository-token>` argument. However, for security reasons, we recommend using an environment variable instead.
+
+:::
+
+For local review commands, sign in once with the browser-based login flow:
+
+<RunPkgCommand command="argos login" />
+
+`argos login` authorizes the CLI and stores a user token on your machine. This token is used by commands that need to act as a user, such as creating a build review.
+
+:::warning
+
+Do not use `argos login` in CI. CI uploads should use `ARGOS_TOKEN`, `--token`, or tokenless authentication when supported by your CI integration.
 
 :::
 
@@ -40,6 +55,83 @@ You can enable debug mode by setting the `DEBUG` environment variable.
   command="argos upload ./screenshots"
   envVariable="DEBUG=@argos-ci/core"
 />
+
+## Build Commands
+
+Use `build` commands to fetch build metadata, fetch snapshot diffs, and create a review on a build.
+
+### Get build metadata
+
+Use `build get` to fetch status, branch, commit, stats, and the build URL.
+
+<RunPkgCommand command="argos build get <buildNumber>" />
+
+You can also pass an Argos build URL directly:
+
+<RunPkgCommand command="argos build get https://app.argos-ci.com/team/project/builds/72652" />
+
+Use `--json` when another tool needs to parse the response:
+
+<RunPkgCommand command="argos build get https://app.argos-ci.com/team/project/builds/72652 --json" />
+
+### Fetch snapshot diffs
+
+Use `build snapshots` to fetch snapshot diffs for a build.
+
+<RunPkgCommand command="argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --json" />
+
+Add `--needs-review` to only return snapshots that need a review decision:
+
+<RunPkgCommand command="argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --needs-review --json" />
+
+Each snapshot diff includes the status, score, diff mask URL, baseline file, current file, and metadata provided by the SDK.
+
+### Submit a build review
+
+Use `build review` to approve a build or request changes.
+
+<RunPkgCommand command="argos build review https://app.argos-ci.com/team/project/builds/72652 --conclusion approve" />
+
+To reject the visual changes:
+
+<RunPkgCommand command="argos build review https://app.argos-ci.com/team/project/builds/72652 --conclusion request-changes" />
+
+When you pass a build number instead of a full URL, also pass the project path:
+
+<RunPkgCommand command="argos build review 72652 --project team/project --conclusion approve" />
+
+### Project tokens and personal access tokens
+
+Uploads and build reads can use a project token.
+
+Creating a build review requires a personal access token because the review is attributed to an Argos user and checked against that user's project permissions.
+
+To create a personal access token manually, go to your personal account settings, open **Tokens**, then click **Generate new token**.
+
+<img
+  src={personalSettingsTokensPage}
+  alt="Personal settings tokens page"
+  className="rounded border"
+  style={{ marginBottom: 20 }}
+/>
+_A personal settings tokens page_
+
+For `build review`, authentication is resolved in this order:
+
+1. `--token <token>`
+2. `ARGOS_TOKEN`
+3. token stored by `argos login`
+
+Project tokens can inspect build data, but they cannot create reviews. If `ARGOS_TOKEN` contains a project token, use `argos login` locally or pass a personal access token with `--token`.
+
+## AI Agent Skills
+
+The [`argos-javascript`](https://github.com/argos-ci/argos-javascript) repository includes skills that help AI agents use Argos CLI commands and review pull requests with Argos build data:
+
+- [`argos-cli`](https://github.com/argos-ci/argos-javascript/tree/main/skills/argos-cli): use Argos CLI commands, flags, authentication, and output formats.
+- [`argos-pr-review`](https://github.com/argos-ci/argos-javascript/tree/main/skills/argos-pr-review): review a pull request with an Argos build as visual evidence.
+
+See [Review builds with AI agents](/review-builds-with-ai-agents) to install and use the skills in a pull request review workflow.
 
 ## Help Command
 
