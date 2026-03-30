@@ -41,6 +41,27 @@ You can enable debug mode by setting the `DEBUG` environment variable.
   envVariable="DEBUG=@argos-ci/core"
 />
 
+## Builds Command
+
+Use the `builds get` command to fetch build metadata and all snapshot diffs as JSON. This is useful for integrating Argos into scripts or AI agents.
+
+<RunPkgCommand command="argos builds get <buildNumber>" />
+
+You can also pass an Argos build URL directly:
+
+<RunPkgCommand command="argos builds get https://app.argos-ci.com/team/project/builds/72652" />
+
+The command outputs a JSON object with:
+
+- **`build`** — metadata: status, branch, commit, stats, url…
+- **`snapshots`** — full list of snapshot diffs, each with `status`, `score`, `diffImageUrl`, and `base`/`head` image URLs
+
+### Use with AI agents
+
+The JSON output is designed to be consumed by AI agents. Each snapshot includes image URLs that a vision model can inspect to classify changes as regressions, intentional updates, or noise.
+
+A ready-to-use prompt is available at [`prompts/review-build.md`](https://github.com/argos-ci/argos-javascript/blob/main/prompts/review-build.md) in the repository. It works with any AI assistant — Claude, Cursor, Copilot, ChatGPT, and others.
+
 ## Help Command
 
 To view a list of available options, use the argos help command.
