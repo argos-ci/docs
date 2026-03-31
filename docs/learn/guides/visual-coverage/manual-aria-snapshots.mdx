@@ -1,0 +1,72 @@
+---
+slug: /manual-aria-snapshots
+description: Upload ARIA snapshots manually by adding .aria.yml files and optional companion metadata to associate them with screenshots in Argos.
+---
+
+import { RunPkgCommand } from "@site/src/partials";
+
+# Adding ARIA snapshots manually
+
+If you upload files to Argos manually, you can include ARIA snapshots alongside screenshots.
+
+This setup is mainly useful if you are using Playwright for Python or another tool that can generate ARIA snapshots but does not have direct Argos support for them.
+
+If you use Playwright with Node.js, use the official [Argos Playwright SDK](/playwright), which supports ARIA snapshots directly.
+
+## Configure uploaded files
+
+When you upload a folder with the Argos CLI, pass the `--files` flag so Argos picks up both screenshot files and ARIA snapshot files:
+
+```json
+["**/*.png", "**/*.aria.yml"]
+```
+
+For example, if your screenshots are stored in `./screenshots`, upload that directory with:
+
+<RunPkgCommand
+  command={[
+    'argos upload --files "**/*.png" "**/*.aria.yml" ./screenshots',
+  ]}
+/>
+
+Argos will then detect every `.png` screenshot and every `.aria.yml` ARIA snapshot found in that folder tree.
+
+## Add an ARIA snapshot
+
+Create an ARIA snapshot file with the `.aria.yml` extension:
+
+```text
+my-snapshot-name.aria.yml
+```
+
+You can also add metadata in a companion file using the `.argos.json` suffix:
+
+```text
+my-snapshot-name.aria.yml.argos.json
+```
+
+For general metadata conventions, see [Adding Screenshot metadata](/screenshot-metadata). ARIA snapshot companion metadata follows the same conventions and can additionally define ARIA-specific transient fields, such as `transient.parentName`.
+
+## Attach an ARIA snapshot to a screenshot
+
+To associate an ARIA snapshot with a screenshot, set `transient.parentName` to the exact screenshot identifier used by Argos. This value must match the uploaded screenshot path and filename exactly, including subfolders and the file extension.
+
+Example file structure:
+
+```text
+folder/
+  my-snapshot.png
+  my-snapshot.png.argos.json
+  my-aria-snapshot.aria.yml
+  my-aria-snapshot.aria.yml.argos.json
+```
+
+```json title="my-aria-snapshot.aria.yml.argos.json"
+{
+  "transient": {
+    "parentName": "folder/my-snapshot.png"
+  }
+}
+```
+
+When `parentName` exactly matches the screenshot identifier, Argos displays the ARIA snapshot as attached to that screenshot.
