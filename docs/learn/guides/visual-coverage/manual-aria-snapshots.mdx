@@ -15,7 +15,7 @@ If you use Playwright with Node.js, use the official [Argos Playwright SDK](/pla
 
 ## Configure uploaded files
 
-When you upload a folder with the Argos CLI, set the `files` option so Argos picks up both screenshot files and ARIA snapshot files:
+When you upload a folder with the Argos CLI, pass the `--files` flag so Argos picks up both screenshot files and ARIA snapshot files:
 
 ```json
 ["**/*.png", "**/*.aria.yml"]
@@ -45,11 +45,11 @@ You can also add metadata in a companion file using the `.argos.json` suffix:
 my-snapshot-name.aria.yml.argos.json
 ```
 
-For general metadata conventions, see [Adding Screenshot metadata](/screenshot-metadata).
+For general metadata conventions, see [Adding Screenshot metadata](/screenshot-metadata). ARIA snapshot companion metadata follows the same conventions and can additionally define ARIA-specific transient fields, such as `transient.parentName`.
 
 ## Attach an ARIA snapshot to a screenshot
 
-To associate an ARIA snapshot with a screenshot, set the screenshot name in the ARIA snapshot metadata using `transient.parentName`.
+To associate an ARIA snapshot with a screenshot, set `transient.parentName` to the exact screenshot identifier used by Argos. This value must match the uploaded screenshot path and filename exactly, including subfolders and the file extension.
 
 Example file structure:
 
@@ -69,4 +69,4 @@ folder/
 }
 ```
 
-When `parentName` matches the screenshot name, Argos displays the ARIA snapshot as attached to that screenshot.
+When `parentName` exactly matches the screenshot identifier, Argos displays the ARIA snapshot as attached to that screenshot.
