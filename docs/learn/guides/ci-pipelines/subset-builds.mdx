@@ -102,8 +102,8 @@ For Playwright, simply set `ARGOS_SUBSET=true` in your CI job. The reporter will
 
 ```yml title=".github/workflows/ci.yml"
 steps:
-  - uses: actions/checkout@v4
-  - uses: actions/setup-node@v4
+  - uses: actions/checkout@v6
+  - uses: actions/setup-node@v6
   - run: npm ci
   - name: Run Playwright tests
     env:
@@ -117,8 +117,8 @@ For Cypress, set `ARGOS_SUBSET=true` in your CI job that runs Cypress and upload
 
 ```yml title=".github/workflows/ci.yml"
 steps:
-  - uses: actions/checkout@v4
-  - uses: actions/setup-node@v4
+  - uses: actions/checkout@v6
+  - uses: actions/setup-node@v6
   - run: npm ci
   - name: Run Cypress tests
     env:
