@@ -92,8 +92,12 @@ const config = {
             to: "/getting-started",
           },
           {
-            from: "/quickstart/remix",
-            to: "/quickstart/react-router",
+            from: ["/quickstart/remix", "/quickstart/react-router"],
+            to: "/quickstart/playwright",
+          },
+          {
+            from: "/quickstart/next-js",
+            to: "/quickstart/playwright",
           },
           {
             from: "/notifications",
