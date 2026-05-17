@@ -308,7 +308,6 @@ jobs:
 
 - `repository_dispatch` events trigger workflow runs only when the workflow file is on the **default branch**. To test a new workflow on a feature branch, add a `workflow_dispatch` trigger and run it manually.
 - Repositories installed with the [GitHub app without content access](/github#github-integration-without-content-permission) do **not** receive `repository_dispatch` events — that app lacks the required `contents: write` permission.
-- Events are best-effort. If a repository becomes inaccessible (deleted, transferred, renamed, archived, or permissions revoked between the build and the dispatch), Argos drops the event silently rather than failing the build notification.
 
 ## See also
 
