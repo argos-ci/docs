@@ -278,7 +278,7 @@ jobs:
               "buildId": "${{ github.event.client_payload.argos.build.id }}",
               "buildUrl": "${{ github.event.client_payload.argos.build.url }}",
               "commit": "${{ github.event.client_payload.argos.build.commit }}",
-              "pr": ${{ github.event.client_payload.argos.build.prNumber }}
+              "pr": ${{ toJSON(github.event.client_payload.argos.build.prNumber) }}
             }'
 ```
 
