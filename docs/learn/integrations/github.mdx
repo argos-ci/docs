@@ -14,6 +14,7 @@ Connect Argos to GitHub for automated visual testing on every pull request and m
 - Add commit and pull request checks, so Argos results can block merges when required in GitHub.
 - Post [pull request comments](/pull-request-comments) with the latest build results and links back to Argos.
 - Analyze commit history to find the right merge base and select the correct [baseline build](/baseline-build) for visual comparisons.
+- Emit [`repository_dispatch` events](/github-repository-dispatch) so GitHub Actions workflows can react to Argos build and deployment state changes.
 
 ## Why Argos needs repository access
 
@@ -99,6 +100,18 @@ steps:
 ```
 
 Use the pull request numbers included in the merge queue batch. Passing `ARGOS_MERGE_QUEUE_PRS` tells Argos to treat the upload as a merge queue build.
+
+## GitHub Actions automation with repository dispatch
+
+When a repository is connected through the main Argos GitHub App, Argos emits [`repository_dispatch` events](/github-repository-dispatch) to GitHub on every build and deployment state change. You can use these events to trigger GitHub Actions workflows — for example, run end-to-end tests after a successful preview deployment, or call internal tooling when a diff is rejected.
+
+The full list of event types and payload schemas is documented on the [GitHub repository dispatch events](/github-repository-dispatch) page.
+
+:::note
+
+`repository_dispatch` events are only emitted when the repository uses the main Argos GitHub App. The [GitHub app without content access](#github-integration-without-content-permission) lacks the `contents: write` permission required by the GitHub API and does not emit these events.
+
+:::
 
 ## GitHub Integration without Content Permission
 

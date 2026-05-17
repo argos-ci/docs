@@ -1,0 +1,317 @@
+---
+slug: /github-repository-dispatch
+sidebar_label: GitHub repository dispatch
+sidebar_position: 13
+description: Trigger GitHub Actions workflows on Argos build and deployment events using repository_dispatch — with the full event payload available to your workflow.
+---
+
+# GitHub repository dispatch events
+
+Argos sends [`repository_dispatch` events](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#repository_dispatch) to GitHub whenever a build or deployment changes state. These events can trigger GitHub Actions workflows, enabling continuous integration tasks that depend on Argos results — running end-to-end tests after a successful preview deployment, kicking off a downstream pipeline once visual diffs are accepted, posting to an internal system when a regression is detected, and so on.
+
+Each event carries a rich JSON payload describing the build or deployment, accessible in your workflow as `github.event.client_payload`.
+
+## Availability
+
+Repository dispatch events are sent **only when the repository is connected through the main [Argos GitHub App](/github)**.
+
+The "GitHub without content access" app does not have the `contents: write` permission required by the [GitHub repository dispatch API](https://docs.github.com/en/rest/repos/repos#create-a-repository-dispatch-event), so no events are emitted for repositories installed with that limited app. If you rely on `repository_dispatch` events, install the main Argos GitHub App. See [Choose your access level](/github#choose-your-access-level).
+
+| Argos GitHub App                     | Repository dispatch events |
+| ------------------------------------ | -------------------------- |
+| Main app (full access)               | Emitted                    |
+| Without content access (limited app) | Not emitted                |
+
+## Why use `repository_dispatch`
+
+- **Trigger on real Argos state.** Run a job when a build is `diff-accepted`, when a deployment is `success`, or when a diff is `rejected` — not just on a generic check-completed signal.
+- **Rich payload.** Build number, status, conclusion, commit, branch, base branch, PR number, build URL, project information are all included. No follow-up API call needed to figure out what happened.
+- **Decoupled workflows.** Your post-build automation lives in a workflow file, not in a separate webhook handler. Triggering jobs is just a YAML `on:` entry.
+
+:::tip
+
+`repository_dispatch` only triggers a workflow run if the workflow file exists on the **default branch** (for example `main`). To test a workflow before merging, add a [`workflow_dispatch` trigger](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#workflow_dispatch) so you can run it manually from any branch.
+
+:::
+
+## Event types
+
+Argos emits two families of events: **build events** and **deployment events**. The dispatch `event_type` is always of the form `argos.<resource>.<action>`.
+
+### Build events
+
+Build events fire on every state change of an Argos build.
+
+```yaml
+on:
+  repository_dispatch:
+    types:
+      # Build has been received and queued for processing.
+      - "argos.build.queued"
+      # Build is being processed (screenshots being compared).
+      - "argos.build.progress"
+      # Build completed with no visual differences against the baseline.
+      - "argos.build.no-diff-detected"
+      # Build completed and visual differences were detected — waiting for review.
+      - "argos.build.diff-detected"
+      # A reviewer accepted the visual differences.
+      - "argos.build.diff-accepted"
+      # A reviewer rejected the visual differences.
+      - "argos.build.diff-rejected"
+```
+
+### Deployment events
+
+Deployment events fire when an Argos deployment is created or completes successfully. Deployments represent a preview or production environment tracked by Argos (for example, a Vercel preview).
+
+```yaml
+on:
+  repository_dispatch:
+    types:
+      # Deployment has been registered and is being processed.
+      - "argos.deployment.progress"
+      # Deployment is live and ready (preview URL is reachable).
+      - "argos.deployment.success"
+```
+
+## Payloads
+
+Every event has the same top-level shape:
+
+```json
+{
+  "event_type": "argos.build.diff-detected",
+  "client_payload": {
+    "argos": {
+      /* event-specific fields */
+    }
+  }
+}
+```
+
+In GitHub Actions, the payload is exposed under `github.event.client_payload`. The Argos-specific fields are nested under `client_payload.argos` so future top-level metadata can be added without breaking existing workflows.
+
+### Build event payload
+
+```json title="github.event.client_payload"
+{
+  "argos": {
+    "type": "build",
+    "action": "diff-detected",
+    "build": {
+      "id": "01H8X9Y2ZQABCDEFGHJKMNPQRS",
+      "number": 42,
+      "name": "default",
+      "type": "check",
+      "status": "diff-detected",
+      "conclusion": "changes-detected",
+      "url": "https://app.argos-ci.com/my-team/my-project/builds/42",
+      "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "branch": "feature/login",
+      "baseCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "baseBranch": "main",
+      "prNumber": 123,
+      "prHeadCommit": "cccccccccccccccccccccccccccccccccccccccc"
+    },
+    "project": {
+      "id": "01H8X9Y2ZQ0000000000000000",
+      "name": "my-project",
+      "url": "https://app.argos-ci.com/my-team/my-project"
+    }
+  }
+}
+```
+
+#### `argos.build` fields
+
+| Field          | Type                                                      | Description                                                                                                                                                                   |
+| -------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | `string`                                                  | Unique identifier of the build.                                                                                                                                               |
+| `number`       | `number`                                                  | Sequential build number scoped to the project. Matches the number shown in the Argos UI.                                                                                      |
+| `name`         | `string`                                                  | Build name used to group screenshots (defaults to `default`). Useful when a project produces multiple parallel builds.                                                        |
+| `type`         | `"reference" \| "check" \| "orphan" \| "skipped" \| null` | Whether the build is a baseline (`reference`), a comparison build (`check`), has no baseline available (`orphan`), or was skipped.                                            |
+| `status`       | `string`                                                  | Same as the `action` field — the notification type that triggered the dispatch (`queued`, `progress`, `no-diff-detected`, `diff-detected`, `diff-accepted`, `diff-rejected`). |
+| `conclusion`   | `"no-changes" \| "changes-detected" \| null`              | Final outcome once the build has been processed. `null` while the build is still in progress.                                                                                 |
+| `url`          | `string`                                                  | Direct link to the build in Argos.                                                                                                                                            |
+| `commit`       | `string`                                                  | SHA of the commit the build was uploaded for.                                                                                                                                 |
+| `branch`       | `string \| null`                                          | Branch the build belongs to.                                                                                                                                                  |
+| `baseCommit`   | `string \| null`                                          | SHA of the baseline commit Argos compared against.                                                                                                                            |
+| `baseBranch`   | `string \| null`                                          | Branch of the baseline build. Usually the project's reference branch (for example `main`).                                                                                    |
+| `prNumber`     | `number \| null`                                          | Pull request number associated with the build, when applicable.                                                                                                               |
+| `prHeadCommit` | `string \| null`                                          | SHA of the pull request's head commit. Differs from `commit` when the build was uploaded from a merge commit (for example inside a merge queue).                              |
+
+#### `argos.project` fields
+
+| Field  | Type     | Description                          |
+| ------ | -------- | ------------------------------------ |
+| `id`   | `string` | Argos project identifier.            |
+| `name` | `string` | Project name.                        |
+| `url`  | `string` | Direct link to the project in Argos. |
+
+### Deployment event payload
+
+```json title="github.event.client_payload"
+{
+  "argos": {
+    "type": "deployment",
+    "action": "success",
+    "deployment": {
+      "id": "01H8X9Y2ZQABCDEFGHJKMNPQRS",
+      "status": "ready",
+      "url": "https://my-app-pr-123.preview.example.com",
+      "environment": "preview",
+      "branch": "feature/login",
+      "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "prNumber": 123
+    },
+    "project": {
+      "id": "01H8X9Y2ZQ0000000000000000",
+      "name": "my-project"
+    }
+  }
+}
+```
+
+#### `argos.deployment` fields
+
+| Field         | Type                              | Description                                                                                       |
+| ------------- | --------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `id`          | `string`                          | Unique identifier of the deployment.                                                              |
+| `status`      | `"pending" \| "ready" \| "error"` | Lifecycle state of the deployment. `ready` means the URL is reachable.                            |
+| `url`         | `string`                          | URL of the deployment — the preview URL for `preview` environments, the production URL otherwise. |
+| `environment` | `"preview" \| "production"`       | Target environment for this deployment.                                                           |
+| `branch`      | `string`                          | Branch the deployment was built from.                                                             |
+| `commit`      | `string`                          | Commit SHA the deployment was built from.                                                         |
+| `prNumber`    | `number \| null`                  | Pull request number associated with the deployment, when applicable.                              |
+
+#### `argos.project` fields
+
+| Field  | Type     | Description               |
+| ------ | -------- | ------------------------- |
+| `id`   | `string` | Argos project identifier. |
+| `name` | `string` | Project name.             |
+
+## Examples
+
+### Run end-to-end tests after a successful preview deployment
+
+A common pattern: Argos tracks your preview deployments, and you want to run an end-to-end test suite as soon as the preview is live.
+
+```yaml title=".github/workflows/e2e.yml"
+name: End-to-end tests
+
+on:
+  repository_dispatch:
+    types:
+      - "argos.deployment.success"
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.client_payload.argos.deployment.commit }}
+
+      - uses: actions/setup-node@v6
+
+      - run: npm ci
+      - run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: npx playwright test
+        env:
+          BASE_URL: ${{ github.event.client_payload.argos.deployment.url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+### React to a rejected visual review
+
+Block downstream automation as soon as a reviewer rejects a visual diff.
+
+```yaml title=".github/workflows/visual-review.yml"
+name: Visual review
+
+on:
+  repository_dispatch:
+    types:
+      - "argos.build.diff-rejected"
+      - "argos.build.diff-accepted"
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify on rejection
+        if: github.event.client_payload.argos.action == 'diff-rejected'
+        run: |
+          echo "Build #${{ github.event.client_payload.argos.build.number }} was rejected"
+          echo "See: ${{ github.event.client_payload.argos.build.url }}"
+          # Call your incident, Slack, or release-management tooling here.
+```
+
+### Trigger only when changes are detected
+
+Listen for `argos.build.diff-detected` to run an automation (a screenshot archive, a downstream design review, etc.) only when there is something to look at.
+
+```yaml title=".github/workflows/visual-diff.yml"
+name: Archive visual diffs
+
+on:
+  repository_dispatch:
+    types:
+      - "argos.build.diff-detected"
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Archive build
+        run: |
+          curl -X POST https://internal.example.com/visual-diffs \
+            -H "Content-Type: application/json" \
+            -d '{
+              "buildId": "${{ github.event.client_payload.argos.build.id }}",
+              "buildUrl": "${{ github.event.client_payload.argos.build.url }}",
+              "commit": "${{ github.event.client_payload.argos.build.commit }}",
+              "pr": ${{ github.event.client_payload.argos.build.prNumber }}
+            }'
+```
+
+## Accessing payload values
+
+In a workflow, the payload is available at `github.event.client_payload`. Argos nests its fields under `argos`:
+
+```yaml
+${{ github.event.client_payload.argos.build.url }}
+${{ github.event.client_payload.argos.build.commit }}
+${{ github.event.client_payload.argos.deployment.url }}
+${{ github.event.client_payload.argos.project.name }}
+```
+
+You can also filter on the event name itself using the `action` field of the payload — useful when a single workflow subscribes to several event types:
+
+```yaml
+jobs:
+  on-completion:
+    if: github.event.client_payload.argos.action == 'no-diff-detected'
+    runs-on: ubuntu-latest
+    steps:
+      # ...
+```
+
+## Limitations
+
+- `repository_dispatch` events trigger workflow runs only when the workflow file is on the **default branch**. To test a new workflow on a feature branch, add a `workflow_dispatch` trigger and run it manually.
+- Repositories installed with the [GitHub app without content access](/github#github-integration-without-content-permission) do **not** receive `repository_dispatch` events — that app lacks the required `contents: write` permission.
+- Events are best-effort. If a repository becomes inaccessible (deleted, transferred, renamed, archived, or permissions revoked between the build and the dispatch), Argos drops the event silently rather than failing the build notification.
+
+## See also
+
+- [GitHub integration](/github) — install the main Argos GitHub App.
+- [Run on preview deployments](/run-on-preview-deployment) — full end-to-end testing setup with `repository_dispatch`.
+- [GitHub: `repository_dispatch` event](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#repository_dispatch) — official GitHub Actions reference.
