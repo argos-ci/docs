@@ -9,11 +9,17 @@ import {
   HelpSection,
   InstallDevDep,
   AddToGitIgnore,
+  RunPkgCommand,
 } from "@site/src/partials";
 
 # Storybook Quickstart
 
-Learn how to setup visual testing in a Storybook using Vitest + Argos.
+Learn how to set up Argos with Storybook to get **visual testing** and **live deployment URLs** on every pull request.
+
+By the end of this guide, every pull request will:
+
+- Run visual tests on your stories with Vitest.
+- Deploy your Storybook to a unique URL you can share with your team.
 
 ## Prerequisites
 
@@ -25,8 +31,8 @@ To get the most out of this guide, you'll need to:
 
 :::note
 
-If use Test Runner and not Vitest, follow our [Storybook Test Runner quickstart](/quickstart/storybook-test-runner).<br/>
-If use a legacy version of Storybook (\<v8), follow our [legacy Storybook quickstart](/quickstart/storybook-legacy).
+If you use Test Runner instead of Vitest, follow our [Storybook Test Runner quickstart](/quickstart/storybook-test-runner).<br/>
+If you use a legacy version of Storybook (\<v8), follow our [legacy Storybook quickstart](/quickstart/storybook-legacy).
 
 :::
 
@@ -120,16 +126,49 @@ It will capture screenshots of your stories in `./screenshots` directory.
 
 <AddToGitIgnore path="./screenshots" />
 
-## 4. Setup CI to run tests and upload screenshots
+## 4. Set up CI
 
-Argos is just a plugin running on top of Storybook Vitest Addon, so you can run the tests in your CI as you would normally do with Vitest.
+Add a workflow that runs your visual tests **and** deploys your Storybook on every pull request. Argos serves the built Storybook on a unique URL—no extra hosting required.
 
-To run the tests in your CI, please refer to the [Testing in CI guide of Storybook](https://storybook.js.org/docs/writing-tests/in-ci).
+```yaml title=".github/workflows/argos.yml"
+name: Argos
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  argos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+      - run: npm ci
+
+      # Run visual tests
+      - run: npx playwright install --with-deps chromium
+      - run: npx vitest --project=storybook
+        env:
+          ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
+
+      # Build and deploy the Storybook
+      - run: npm run build-storybook
+      - run: npx --no-install argos deploy ./storybook-static
+        env:
+          ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
+```
+
+`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC](/github-oidc) or [tokenless authentication](/github-tokenless) to avoid managing a secret.
+
+For other CI providers, follow [Use deployments in CI](/deployments/ci).
 
 <Congratulation />
 
 ## Additional resources
 
+- [Deployments overview](/deployments)
 - [Argos + Storybook + Vitest example](https://github.com/argos-ci/argos-javascript/tree/main/examples/storybook-vitest)
 - [Argos Storybook SDK reference](/storybook)
 - [Storybook documentation](https://storybook.js.org/docs)

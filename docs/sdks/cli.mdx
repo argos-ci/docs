@@ -56,6 +56,30 @@ You can enable debug mode by setting the `DEBUG` environment variable.
   envVariable="DEBUG=@argos-ci/core"
 />
 
+## Deploy Command
+
+Use the `deploy` command to deploy a static build (Storybook or any static site) to Argos. See [Deployments](/deployments) for an overview of the feature.
+
+<RunPkgCommand command="argos deploy ./storybook-static" />
+
+The argument is the directory containing the static files to deploy.
+
+### Production deployments
+
+By default, `deploy` creates a **preview** deployment. Add `--prod` to force a **production** deployment regardless of the branch:
+
+<RunPkgCommand command="argos deploy ./storybook-static --prod" />
+
+If the branch matches the project's production branch pattern, the deployment is created as production even without `--prod`. See [Environments](/deployments/environments) for the full rules.
+
+### Authentication
+
+`deploy` uses the same authentication as `upload`:
+
+1. `ARGOS_TOKEN` environment variable (recommended).
+2. `--token <token>` argument.
+3. [GitHub OIDC](/github-oidc) or [tokenless authentication](/github-tokenless) on GitHub Actions.
+
 ## Build Commands
 
 Use `build` commands to fetch build metadata, fetch snapshot diffs, and create a review on a build.
