@@ -1,30 +1,41 @@
 ---
 slug: /about-flaky
 sidebar_position: 10
-description: Tackle flaky tests with Argos strategies that improve reliability, reduce noise, and support accessibility for a stable visual testing workflow.
+description: Understand what makes visual tests flaky and how Argos helps you detect, ignore, and fix the root causes for a stable testing workflow.
 ---
 
 # Flaky Tests
 
-Navigate the challenge of flaky tests with Argos: Discover strategies to enhance test reliability and promote accessibility for a stable visual testing environment.
+Flaky tests fail or change without a meaningful code change, eroding trust in your test suite. Argos tackles flakiness from two angles: it **detects** unstable tests so you can decide with confidence, and it gives you **tools and strategies** to address the root causes.
 
-## Emphasis on Accessibility
+## How Argos helps
 
-At Argos, we advocate for accessibility-focused end-to-end testing. Enhancing accessibility not only supports users with disabilities but also strengthens test consistency.
+- **Flaky test detection**: Argos flags unstable tests with a flaky badge, a stability score, and a detailed history view. See [Flaky Test Detection](/flaky-test-detection) for details.
+- **Ignore noisy changes**: Dismiss a specific change directly from the build or test page so the same change is no longer reported.
+- **Auto-ignore recurring flaky changes**: Configure Argos to automatically ignore changes that recur over the last 7 days, filtering out noise while keeping real regressions visible.
 
-## Common Causes
+These features let you separate signal from noise without losing the ability to catch real regressions.
 
-Flakiness often stems from:
+## Common causes
 
-- **Dynamic Content**: Flakiness due to content changes, like ads or user-generated content.
-- **Asynchronous Loading**: Inconsistent element or style loading affecting visuals.
-- **Rendering Differences**: Browser or device variations altering visual output.
-- **External Dependencies**: Reliance on external systems causing variability.
-- **Animations and Transitions**: Unhandled animations leading to different visual states.
-- **Resolution and Scaling**: Screen resolution or scaling differences impacting visuals.
+Visual flakiness usually stems from one of the following:
 
-Solutions involve identifying and addressing these root causes.
+- **Dynamic content**: Ads, user-generated content, or other data that changes between runs.
+- **Asynchronous loading**: Elements or styles that render at inconsistent times.
+- **Rendering differences**: Browser, OS, or device variations that alter visual output.
+- **External dependencies**: Reliance on third-party systems that introduce variability.
+- **Animations and transitions**: Unhandled motion captured mid-frame.
+- **Resolution and scaling**: Screen size or pixel density differences between environments.
 
-## Policy
+## Fix the root cause
 
-We don't offer a "flaky test ignore" option, aligning with our ethos that addressing issues is preferable to bypassing them.
+Ignoring noise is useful, but the most reliable suite is one where flakiness is addressed at the source. The Playbook covers practical techniques:
+
+- [Wait for Loading](/wait-for-loading) — capture screenshots only after the page is fully loaded.
+- [Stabilize Date & Time](/date-stabilization) — hide or freeze dynamic dates and times.
+- [Browser Glitches](/browser-glitches) — standardize environments and handle rendering quirks.
+- [Argos Helpers](/argos-helpers) — use `data-visual-test` attributes to control how dynamic elements are captured.
+
+## Emphasis on accessibility
+
+At Argos, we advocate for accessibility-focused end-to-end testing. Improving accessibility (semantic markup, `aria-busy`, predictable focus states) not only supports users with disabilities but also makes tests more deterministic and less prone to flakiness.
