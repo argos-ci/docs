@@ -139,7 +139,7 @@ jobs:
 ```
 {% endcode %}
 
-To learn how to run tests on a deployed Storybook, refer to the [Storybook test runner documentation](https://storybook.js.org/docs/writing-tests/test-runner#set-up-ci-to-run-tests).
+To learn how to run tests on a deployed Storybook, refer to the [Storybook test runner documentation](https://storybook.js.org/docs/writing-tests/integrations/test-runner).
 {% endstep %}
 {% endstepper %}
 
