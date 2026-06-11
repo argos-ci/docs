@@ -51,6 +51,6 @@ When login protection is enabled, a viewer must:
 1. Be signed in to Argos.
 2. Have access to the project the deployment belongs to.
 
-Project access follows the [team roles and permissions](https://argos-ci.com/docs/team-members-and-roles) rules: team members, contributors invited to the project, and account owners.
+Project access follows the [team roles and permissions](../account-and-access/team-members-and-roles.md) rules: team members, contributors invited to the project, and account owners.
 
 A viewer who does not have access sees a 404-style screen rather than a sign-in prompt, so the existence of the project is not disclosed.

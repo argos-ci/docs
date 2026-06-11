@@ -103,6 +103,6 @@ There is currently no flag to force a preview from a production branch—simply 
 
 ### Related
 
-* [Deployments overview](https://argos-ci.com/docs/deployments)
+* [Deployments overview](./)
 * [URLs and domains](urls-and-domains.md)
 * [Use deployments in CI](use-deployments-in-ci.md)

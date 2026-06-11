@@ -4,7 +4,7 @@ Flaky tests fail or change without a meaningful code change, eroding trust in yo
 
 ### How Argos helps
 
-* **Flaky test detection**: Argos flags unstable tests with a flaky badge, a stability score, and a detailed history view. See [Flaky Test Detection](https://argos-ci.com/docs/flaky-test-detection) for details.
+* **Flaky test detection**: Argos flags unstable tests with a flaky badge, a stability score, and a detailed history view. See [Flaky Test Detection](../flaky-test-detection.md) for details.
 * **Ignore noisy changes**: Dismiss a specific change directly from the build or test page so the same change is no longer reported.
 * **Auto-ignore recurring flaky changes**: Configure Argos to automatically ignore changes that recur over the last 7 days, filtering out noise while keeping real regressions visible.
 
@@ -26,9 +26,9 @@ Visual flakiness usually stems from one of the following:
 Ignoring noise is useful, but the most reliable suite is one where flakiness is addressed at the source. The Playbook covers practical techniques:
 
 * [Wait for Loading](wait-for-loading.md) — capture screenshots only after the page is fully loaded.
-* [Stabilize Date & Time](https://argos-ci.com/docs/date-stabilization) — hide or freeze dynamic dates and times.
-* [Browser Glitches](https://argos-ci.com/docs/browser-glitches) — standardize environments and handle rendering quirks.
-* [Argos Helpers](https://argos-ci.com/docs/argos-helpers) — use `data-visual-test` attributes to control how dynamic elements are captured.
+* [Stabilize Date & Time](stabilize-date-and-time.md) — hide or freeze dynamic dates and times.
+* [Browser Glitches](browser-glitches.md) — standardize environments and handle rendering quirks.
+* [Argos Helpers](argos-helpers.md) — use `data-visual-test` attributes to control how dynamic elements are captured.
 
 ### Emphasis on accessibility
 

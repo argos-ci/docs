@@ -64,4 +64,4 @@ In Argos, navigate to "Project Settings" → "Connect Git Repository" and select
 
 ### GitLab Self-Managed
 
-GitLab Self-Managed deployments are supported on the Argos Enterprise plan. These setups often require tailored configuration alongside SAML SSO and other enterprise features. To discuss enabling GitLab Self-Managed, [contact sales](mailto:contact@argos-ci.com).
+GitLab Self-Managed deployments are supported on the Argos Enterprise plan. These setups often require tailored configuration alongside SAML SSO and other enterprise features. To discuss enabling GitLab Self-Managed, [contact sales](https://argos-ci.com/contact).

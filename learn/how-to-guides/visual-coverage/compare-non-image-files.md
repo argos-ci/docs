@@ -82,4 +82,4 @@ Argos currently supports these non-image content types:
 
 ### Framework support
 
-Non-image comparisons are only supported through the CLI for now. [Contact us](mailto:contact@argos-ci.com) if you are interested in using this feature from a test framework like Vitest.
+Non-image comparisons are only supported through the CLI for now. [Contact us](https://argos-ci.com/contact) if you are interested in using this feature from a test framework like Vitest.

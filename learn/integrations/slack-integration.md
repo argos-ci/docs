@@ -80,4 +80,4 @@ Set up a Slack notification rule using Argos automations.
 * Only Argos team admins can configure Slack integrations.
 * You can test notifications anytime using **Send test notification**.
 
-Need help setting up Slack integration? Reach out via [Discord](https://argos-ci.com/discord) or [contact support](mailto:contact@argos-ci.com).
+Need help setting up Slack integration? Reach out via [Discord](https://argos-ci.com/discord) or [contact support](https://argos-ci.com/contact).

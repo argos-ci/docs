@@ -36,4 +36,4 @@ We sponsor selected [open-source projects](open-source.md) with free usage, eval
 
 For large organizations with custom requirements. Tailor your plan directly with us.
 
-👉 [Contact us](mailto:contact@argos-ci.com) to discuss your needs. We’ll help design the right plan for your business.
+👉 [Contact us](https://argos-ci.com/contact) to discuss your needs. We’ll help design the right plan for your business.

@@ -128,4 +128,4 @@ GitHub Enterprise Cloud works out of the box. Follow the same GitHub App setup d
 
 #### GitHub Enterprise Server (self-hosted)
 
-Self-hosted GitHub Enterprise Server deployments are supported on the Argos Enterprise plan, which also includes SAML SSO and other advanced features. To upgrade to Enterprise, [contact sales](mailto:contact@argos-ci.com).
+Self-hosted GitHub Enterprise Server deployments are supported on the Argos Enterprise plan, which also includes SAML SSO and other advanced features. To upgrade to Enterprise, [contact sales](https://argos-ci.com/contact).
