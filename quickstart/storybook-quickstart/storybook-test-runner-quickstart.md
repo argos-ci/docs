@@ -156,7 +156,7 @@ You can now review changes of your app for each pull request, avoid visual bugs 
 * [Argos + Storybook + Test Runner example](https://github.com/argos-ci/argos-javascript/tree/main/examples/storybook-test-runner)
 * [Argos Storybook SDK reference](../../sdks-reference/storybook.md)
 * [Storybook documentation](https://storybook.js.org/docs)
-* [Storybook test runner documentation](https://storybook.js.org/docs/writing-tests/test-runner)
+* [Storybook test runner documentation](https://storybook.js.org/docs/writing-tests/integrations/test-runner)
 
 ***
 
