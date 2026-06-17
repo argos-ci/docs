@@ -98,6 +98,10 @@ After committing and pushing your changes, the Argos check status will appear on
 
 You can now review changes of your app for each pull request, avoid visual bugs and merge with confidence. Welcome on board!
 
+### Next step: keep your screenshots stable
+
+Now that Argos is running, the next thing to learn is how to keep your screenshots free of flakiness. Read [Best practices for stable screenshots](../../learn/reliability-and-flakiness/flaky-tests/README.md) to avoid false positives before they reach your pull requests.
+
 ### Additional resources
 
 * [Argos + Storybook legacy example](https://github.com/argos-ci/argos-javascript/tree/main/examples/storybook-legacy)

@@ -21,14 +21,19 @@ Visual flakiness usually stems from one of the following:
 * **Animations and transitions**: Unhandled motion captured mid-frame.
 * **Resolution and scaling**: Screen size or pixel density differences between environments.
 
-### Fix the root cause
+### Best practices for stable screenshots
 
-Ignoring noise is useful, but the most reliable suite is one where flakiness is addressed at the source. The Playbook covers practical techniques:
+Ignoring noise is useful, but the most reliable suite is one where flakiness is addressed at the source. Follow these practices—each one targets a common cause above:
 
-* [Wait for Loading](wait-for-loading.md) — capture screenshots only after the page is fully loaded.
-* [Stabilize Date & Time](stabilize-date-and-time.md) — hide or freeze dynamic dates and times.
-* [Browser Glitches](browser-glitches.md) — standardize environments and handle rendering quirks.
-* [Argos Helpers](argos-helpers.md) — use `data-visual-test` attributes to control how dynamic elements are captured.
+* **Wait until the page is ready before capturing.** Mark loading elements with `aria-busy` so `argosScreenshot()` waits for them. → [Wait for Loading](wait-for-loading.md)
+* **Make dates and times deterministic.** Hide or freeze any value that changes between runs. → [Stabilize Date & Time](stabilize-date-and-time.md)
+* **Force consistent text rendering.** Disable subpixel text and font hinting so glyphs look identical on every machine. → [Stabilize Text Rendering](stabilize-text-rendering.md)
+* **Run the same environment everywhere, and tame rendering quirks.** Use the same OS and browser locally and on CI, and smooth over properties like `border-radius`. → [Browser Glitches](browser-glitches.md)
+* **Mask or hide unavoidable dynamic content.** Use `data-visual-test` attributes for anything you can't stabilize at the source. → [Argos Helpers](argos-helpers.md)
+
+{% hint style="success" %}
+**New to visual testing?** Start with [Stabilize Text Rendering](stabilize-text-rendering.md) and [Wait for Loading](wait-for-loading.md). Together they prevent the large majority of flaky screenshots.
+{% endhint %}
 
 ### Emphasis on accessibility
 

@@ -33,6 +33,7 @@
   * [Flaky Tests](learn/reliability-and-flakiness/flaky-tests/README.md "Playbook")
     * [Wait for Loading](learn/reliability-and-flakiness/flaky-tests/wait-for-loading.md)
     * [Stabilize Date & Time](learn/reliability-and-flakiness/flaky-tests/stabilize-date-and-time.md)
+    * [Stabilize Text Rendering](learn/reliability-and-flakiness/flaky-tests/stabilize-text-rendering.md)
     * [Browser Glitches](learn/reliability-and-flakiness/flaky-tests/browser-glitches.md)
     * [Argos Helpers](learn/reliability-and-flakiness/flaky-tests/argos-helpers.md)
   * [Tests Dashboard](learn/reliability-and-flakiness/tests-dashboard.md)
