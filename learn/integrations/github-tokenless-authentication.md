@@ -58,6 +58,43 @@ jobs:
 
 If you want OIDC for internal PRs _and_ tokenless for fork PRs in the same workflow, add `id-token: write` to the job's `permissions` block. The SDK uses OIDC when GitHub issues a token and automatically falls back to tokenless on fork PRs where it doesn't.
 
+### Specify a project when several share a repository
+
+Tokenless authentication identifies your Argos project from the GitHub repository running the workflow. If you have **multiple Argos projects linked to the same repository**, Argos cannot tell which one the upload belongs to, and the upload is rejected.
+
+To disambiguate, pass the project slug (`account/project-name`) so Argos knows which project to use. You can set it three ways, all equivalent:
+
+{% tabs %}
+{% tab title="Environment variable" %}
+```yaml
+- run: npm run test:e2e
+  env:
+    ARGOS_PROJECT: my-account/my-project
+```
+{% endtab %}
+
+{% tab title="CLI flag" %}
+```bash
+argos upload ./screenshots --project my-account/my-project
+```
+{% endtab %}
+
+{% tab title="SDK option" %}
+```javascript
+import { upload } from "@argos-ci/core";
+
+await upload({
+  files: ["screenshots/**/*.png"],
+  project: "my-account/my-project",
+});
+```
+{% endtab %}
+{% endtabs %}
+
+{% hint style="info" %}
+You only need this when more than one Argos project is connected to the same GitHub repository. With a single linked project, tokenless resolves it automatically.
+{% endhint %}
+
 ### Limitations
 
 * **GitHub Actions only.** Tokenless authentication relies on the GitHub workflow run lookup. It does not work outside GitHub Actions — for other CI providers, use `ARGOS_TOKEN`.
@@ -69,6 +106,8 @@ If you want OIDC for internal PRs _and_ tokenless for fork PRs in the same workf
 **`No matching workflow run found`.** Argos could not find an in-progress workflow run on GitHub matching the commit and branch the SDK reported. Check that the repository linked to the Argos project matches the one running the workflow, and that the workflow is still in progress when the upload runs.
 
 **`Repository does not match the Argos project`.** The repository running the workflow is not the one linked to the Argos project. Update the project's connected repository in Argos, or run the workflow from the linked repository.
+
+**`Multiple projects are linked to this repository`.** More than one Argos project is connected to the repository, so tokenless cannot pick one automatically. Specify which project to use with the project slug — see [Specify a project when several share a repository](#specify-a-project-when-several-share-a-repository).
 
 **Uploads work but are missing pull request metadata.** Tokenless authenticates the upload but does not by itself link the build to a pull request. Pass `GITHUB_TOKEN` in the job environment so the SDK can resolve the PR — see Running without `GITHUB_TOKEN`.
 
