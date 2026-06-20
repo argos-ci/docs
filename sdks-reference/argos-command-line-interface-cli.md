@@ -114,6 +114,36 @@ bun x argos upload ./screenshots
 
 Use `-f` or `--files` to upload text-based artifacts such as JSON, YAML, XML, HTML, Markdown, CSS, or JavaScript files. See [Compare non-image files](../learn/how-to-guides/visual-coverage/compare-non-image-files.md) for examples and the full list of supported content types.
 
+#### Specify the project
+
+Use `--project <slug>` to set the Argos project slug (`account/project-name`). This disambiguates [tokenless authentication](../learn/integrations/github-tokenless-authentication.md) when multiple Argos projects are linked to the same repository. You can also set it with the `ARGOS_PROJECT` environment variable.
+
+{% tabs %}
+{% tab title="npm" %}
+```
+npm exec -- argos upload ./screenshots --project my-account/my-project
+```
+{% endtab %}
+
+{% tab title="yarn" %}
+```
+yarn run argos upload ./screenshots --project my-account/my-project
+```
+{% endtab %}
+
+{% tab title="pnpm" %}
+```
+pnpm exec -- argos upload ./screenshots --project my-account/my-project
+```
+{% endtab %}
+
+{% tab title="bun" %}
+```
+bun x argos upload ./screenshots --project my-account/my-project
+```
+{% endtab %}
+{% endtabs %}
+
 #### Debug mode
 
 You can enable debug mode by setting the `DEBUG` environment variable.
