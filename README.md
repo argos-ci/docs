@@ -1,45 +1,18 @@
----
-description: Learn how Argos works and where to start.
-icon: book-open
----
+# Argos Documentation
 
-# Overview
+This repository contains the official [Argos](https://argos-ci.com) documentation, hosted on [GitBook](https://www.gitbook.com).
 
-### What is Argos?
+The content is authored as Markdown files and synced with GitBook, so the published docs at [argos-ci.com/docs](https://argos-ci.com/docs) and the files in this repository stay in sync.
 
-Argos helps teams catch visual regressions before they reach production.
+## Structure
 
-It works with your existing tools, such as Playwright, Storybook, Cypress, or any custom screenshot pipeline. Your CI uploads screenshots to Argos, then Argos compares them against a baseline and lets you review visual changes as part of your pull request workflow.
+The documentation lives under [docs/](docs/):
 
-### How it works
+- [docs/SUMMARY.md](docs/SUMMARY.md) — the table of contents that defines the page hierarchy
+- [docs/quickstart/](docs/quickstart/) — getting-started guides for each test framework
+- [docs/learn/](docs/learn/) — conceptual guides and how-tos
+- [docs/sdks-reference/](docs/sdks-reference/) — SDK and API reference
 
-<figure><img src=".gitbook/assets/argos-schema-web.png" alt=""><figcaption></figcaption></figure>
+## Contributing
 
-1. **Your tests capture** screenshots in CI
-2. **Your CI uploads** the screenshots to Argos
-3. **Argos compares** them against the baseline
-4. **You review** visual diffs on pull requests
-5. **You approve** expected changes or request fixes
-6. **Argos updates** the pull request check
-
-### When to use Argos
-
-Use Argos when visual changes can affect product quality or release confidence:
-
-* **UI regressions:** broken layouts, CSS changes, missing images, icons, or fonts
-* **Design systems:** component changes, theme changes, browser, viewport, or theme issues
-* **Product variants:** white-labeled interfaces, translations, and localized layouts
-* **AI generated UI:** visual validation before merging generated change
-
-### Next steps
-
-Ready to add Argos to your project? Start with the [Quickstart](quickstart/).
-
-### Explore more
-
-Once Argos is set up, you can learn more about advanced workflows:
-
-* [baseline-build.md](learn/platform-fundamentals/baseline-build.md "mention")
-* [deployments](learn/deployments/ "mention")
-* [integrations](learn/integrations/ "mention")
-* [flaky-test-detection.md](learn/reliability-and-flakiness/flaky-test-detection.md "mention")
+When writing or editing documentation, follow the GitBook authoring conventions documented in the `writing-docs` skill (see [AGENTS.md](AGENTS.md) for details). This covers GitBook-flavored Markdown, custom blocks, frontmatter, and reusable content.
