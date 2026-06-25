@@ -1,5 +1,9 @@
 # Table of contents
 
+* [Introduction](introduction.md)
+* [Pagination](pagination.md)
+* [Rate limits](rate-limits.md)
+* [Errors](errors.md)
 * ```yaml
   type: builtin:openapi
   props:
