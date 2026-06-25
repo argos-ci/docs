@@ -6,7 +6,7 @@ description: Capture the same page at multiple breakpoints in one test with Argo
 
 Argos lets you capture the same page at multiple breakpoints with a single test. Configure viewports once and get consistent responsive coverage across Playwright, Cypress and Puppeteer.
 
-## Prerequisites
+### Prerequisites
 
 This feature works seamlessly with [Playwright](../../../sdks-reference/playwright.md), [Cypress](../../../sdks-reference/cypress.md) and [Puppeteer](../../../sdks-reference/puppeteer.md).
 
@@ -14,7 +14,7 @@ This feature works seamlessly with [Playwright](../../../sdks-reference/playwrig
 If you use Storybook, see the dedicated guide on [Storybook modes](storybook-story-modes.md).
 {% endhint %}
 
-## Viewport Configuration
+### Viewport Configuration
 
 Pass a viewports array to `argosScreenshot()` to generate screenshots for each dimension or preset you define. You can mix explicit sizes and device presets.
 
@@ -28,7 +28,7 @@ await argosScreenshot(..., {
 });
 ```
 
-## Available Presets
+### Available Presets
 
 | Preset            | Width (px) | Height (px) |
 | ----------------- | ---------- | ----------- |
@@ -87,7 +87,7 @@ await argosScreenshot(..., {
 | samsung-s10       | 360        | 760         |
 | samsung-note9     | 414        | 846         |
 
-## Troubleshooting and Best Practices
+### Troubleshooting and Best Practices
 
 Many sites compute layout at load time and will not adapt cleanly if the viewport changes later. If you notice issues, you may want to run your test suite entirely for each viewport instead of changing the viewport before taking each screenshot.
 
