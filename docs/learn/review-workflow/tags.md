@@ -9,7 +9,7 @@ Tags let you categorize screenshots so you can quickly filter a build down to th
 1. Open a build in Argos.
 2. Click the **Filter button**.
 3. Select one or more tags to narrow the screenshot list.
-4. Once selected filter chip appears.
+4. Once selected, a filter chip appears.
 
 ### Where tags come from
 

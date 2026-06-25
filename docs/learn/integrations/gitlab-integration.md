@@ -28,7 +28,7 @@ By leveraging GitLab's Personal Access Token, Argos communicates via a dedicated
 ![Generate a Personal Access Token in GitLab](<../../.gitbook/assets/gitlab create token 01eecee687ee76bd683c82d45c88df99.png>)
 
 {% hint style="info" %}
-You can also use a [Project Access Token](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html) if you want to restrict access to a single project. If you choose this option, be sure to use set the role of the token as **developer**.
+You can also use a [Project Access Token](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html) if you want to restrict access to a single project. If you choose this option, be sure to set the role of the token to **Developer**.
 {% endhint %}
 {% endstep %}
 
@@ -56,7 +56,7 @@ You can also use a [Project Access Token](https://docs.gitlab.com/ee/user/projec
 {% endstep %}
 {% endstepper %}
 
-### Connecting a Argos project to a GitLab Repository
+### Connecting an Argos project to a GitLab repository
 
 First, ensure the [GitLab Personal Access Token has been configured correctly](gitlab-integration.md#connecting-a-gitlab-repository).
 

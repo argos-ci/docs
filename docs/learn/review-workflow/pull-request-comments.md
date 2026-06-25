@@ -4,7 +4,7 @@ Stay informed with Argos: Get build results directly in your GitHub pull request
 
 ### Overview
 
-Every time there's an update to a build status, Argos automatically comment to the associated pull request thread. This comment contains the latest build status, together with a convenient link that leads you directly to the detailed build page on Argos.
+Every time there's an update to a build status, Argos automatically comments on the associated pull request thread. This comment contains the latest build status, together with a convenient link that leads you directly to the detailed build page on Argos.
 
 ![Argos GitHub pull request comment](<../../.gitbook/assets/github pr comment 54bebb73962dc705b32c33f577fb9dd0.png>)
 

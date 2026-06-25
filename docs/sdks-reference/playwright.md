@@ -110,7 +110,7 @@ Argos also supports [Currents orchestration](https://currents.dev/) using [Argos
 
 For tailored visual testing, the `data-visual-test` attributes provide control over how elements appear in Argos screenshots. This can be especially useful for obscuring or modifying elements with dynamic content, like dates.
 
-* `[data-visual-test="transparent"]`: Renders the element transparent (`visiblity: hidden`).
+* `[data-visual-test="transparent"]`: Renders the element transparent (`visibility: hidden`).
 * `[data-visual-test="removed"]`: Removes the element from view (`display: none`).
 * `[data-visual-test="blackout"]`: Masks the element with a blackout effect.
 * `[data-visual-test-no-radius]`: Strips the border radius from the element.
@@ -319,8 +319,8 @@ Each ARIA snapshot counts as an additional screenshot for billing.
 * `options.stabilize.waitForAriaBusy`: Wait for the `aria-busy` attribute to be removed from the document. Default to `true`.
 * `options.stabilize.waitForFonts`: Wait for fonts to be loaded. Default to `true`.
 * `options.stabilize.waitForImages`: Wait for images to be loaded. Default to `true`.
-* `options.beforeScreenshot`: Run a function before taking the screenshot. When using viewports, this function will run before taking sreenshots on each viewport.
-* `options.afterScreenshot`: Run a function after taking the screenshot. When using viewports, this function will run after taking sreenshots on each viewport.
+* `options.beforeScreenshot`: Run a function before taking the screenshot. When using viewports, this function will run before taking screenshots on each viewport.
+* `options.afterScreenshot`: Run a function after taking the screenshot. When using viewports, this function will run after taking screenshots on each viewport.
 * `options.tag`: Tag or array of tags to attach to the screenshot for filtering in Argos.
 
 Playwright test tags (from `test.describe` or `test` annotations) are automatically captured in the metadata.
