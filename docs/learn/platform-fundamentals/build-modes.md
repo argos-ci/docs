@@ -196,17 +196,19 @@ bun x argos upload --mode=monitoring components ./screenshots
 {% code title="playwright.config.ts" %}
 ```ts
 import { defineConfig } from "@playwright/test";
+import { createArgosReporterOptions } from "@argos-ci/playwright/reporter";
 
 export default defineConfig({
   reporter: [
     process.env.CI ? ["dot"] : ["list"],
     [
       "@argos-ci/playwright/reporter",
-      {
+      createArgosReporterOptions({
         uploadToArgos: !!process.env.CI,
+        // Set your Argos token (required if not using GitHub Actions).
         token: "<YOUR-ARGOS-TOKEN>",
         mode: "monitoring",
-      },
+      }),
     ],
   ],
 });
@@ -215,6 +217,7 @@ export default defineConfig({
 
 **Cypress**
 
+{% code title="cypress.config.js" %}
 ```js
 const { defineConfig } = require("cypress");
 const { registerArgosTask } = require("@argos-ci/cypress/task");
@@ -224,6 +227,7 @@ module.exports = defineConfig({
     async setupNodeEvents(on, config) {
       registerArgosTask(on, config, {
         uploadToArgos: !!process.env.CI,
+        // Set your Argos token (required if not using GitHub Actions).
         token: "<YOUR-ARGOS-TOKEN>",
         mode: "monitoring",
       });
@@ -231,3 +235,4 @@ module.exports = defineConfig({
   },
 });
 ```
+{% endcode %}
