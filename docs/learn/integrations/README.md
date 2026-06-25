@@ -12,8 +12,8 @@ Each integration has its own dedicated setup guide.
 
 * [GitHub](github-integration.md)
 * [GitLab](gitlab-integration.md)
-* [Bitbucket](bitbucket-integration.md)
-* [Azure DevOps](azure-devops-integration.md)
+* [Bitbucket](bitbucket-integration.md) (not yet supported)
+* [Azure DevOps](azure-devops-integration.md) (not yet supported)
 
 ### Authentication
 
