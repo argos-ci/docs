@@ -39,7 +39,7 @@ There is two parallel modes available:
 Below is a practical example showcasing how to configure Argos sharding within a GitHub Actions workflow.
 
 {% code title=".github/workflows/ci.yml" %}
-```yml
+```yaml
 jobs:
   e2e-tests:
     timeout-minutes: 60
@@ -69,7 +69,7 @@ jobs:
 Below is a practical example showcasing how to configure Argos sharding within a GitHub Actions workflow.
 
 {% code title=".github/workflows/ci.yml" %}
-```yml
+```yaml
 jobs:
   e2e-tests:
     timeout-minutes: 60

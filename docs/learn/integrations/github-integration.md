@@ -88,7 +88,7 @@ jobs:
 
 When you are using a merge queue system other than GitHub’s built-in Merge Queue (like [Mergify](https://mergify.com/)), you can set `ARGOS_MERGE_QUEUE_PRS` to the comma-separated pull request numbers included in the queued build. This tells Argos to treat the upload as a merge queue build and use the right baseline for visual comparisons.
 
-```yml
+```yaml
 steps:
   - name: Upload screenshots to Argos
     env:

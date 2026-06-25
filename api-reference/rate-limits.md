@@ -31,7 +31,7 @@ When you receive a `429` response, a `Retry-After` header tells you how many sec
 
 The recommended way to deal with rate limits is to **respect the `Retry-After` header** and back off before retrying. Here's a small helper that retries a request once it's allowed:
 
-```javascript
+```js
 async function requestWithRetry(url, options) {
   while (true) {
     const response = await fetch(url, options);

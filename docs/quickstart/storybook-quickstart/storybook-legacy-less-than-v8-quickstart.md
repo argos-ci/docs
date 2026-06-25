@@ -57,14 +57,14 @@ There are two ways to capture screenshots of your Storybook:
 
 * If your Storybook is running and accessible via an URL, add this command to your CI pipeline to capture screenshots of your stories:
 
-```sh
+```bash
 # Capture screenshots of your stories
 npm exec -- storycap <STORYBOOK-URL> --outDir ./screenshots
 ```
 
 * If your Storybook is not deployed, you need to serve your Storybook before capturing the screenshots. Use the following commands:
 
-```sh
+```bash
 # Build Storybook
 npm exec -- storybook build --output-dir ./storybook-static
 

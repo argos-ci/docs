@@ -101,7 +101,7 @@ Add `./screenshots` to your `.gitignore` file, to avoid uploading screenshots to
 Below is a complete GitHub Actions workflow to build your Storybook, run tests, capture screenshots, and upload them to Argos. If you use another CI provider, adapt the steps accordingly.
 
 {% code title=".github/workflows/storybook-test.yml" %}
-```yml
+```yaml
 name: Storybook Test
 
 on:

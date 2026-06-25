@@ -20,7 +20,7 @@ You can enable subset builds in any Argos SDK or the CLI.
 
 Set the environment variable `ARGOS_SUBSET` to `"true"` in your CI configuration.
 
-```yml
+```yaml
 steps:
   - name: Run tests
     run: npm test
@@ -93,7 +93,7 @@ await upload({
 For Playwright, simply set `ARGOS_SUBSET=true` in your CI job. The reporter will mark the build as a subset build.
 
 {% code title=".github/workflows/ci.yml" %}
-```yml
+```yaml
 steps:
   - uses: actions/checkout@v4
   - uses: actions/setup-node@v4
@@ -110,7 +110,7 @@ steps:
 For Cypress, set `ARGOS_SUBSET=true` in your CI job that runs Cypress and uploads screenshots.
 
 {% code title=".github/workflows/ci.yml" %}
-```yml
+```yaml
 steps:
   - uses: actions/checkout@v4
   - uses: actions/setup-node@v4

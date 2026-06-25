@@ -84,7 +84,7 @@ argos upload ./screenshots --project my-account/my-project
 {% endtab %}
 
 {% tab title="SDK option" %}
-```javascript
+```js
 import { upload } from "@argos-ci/core";
 
 await upload({

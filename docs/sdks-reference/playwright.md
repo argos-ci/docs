@@ -162,7 +162,7 @@ export default defineConfig({
 
 To debug flaky tests, Argos supports using the [Playwright --repeat-each option](https://playwright.dev/docs/test-cli#reference). This runs each test multiple times to detect discrepancies.
 
-```sh
+```bash
 npm exec -- playwright test --repeat-each 5
 ```
 

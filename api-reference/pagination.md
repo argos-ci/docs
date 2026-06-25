@@ -59,7 +59,7 @@ curl "https://api.argos-ci.com/v2/projects/my-team/my-project/builds?page=2&perP
 {% endtab %}
 
 {% tab title="JavaScript" %}
-```javascript
+```js
 const url = new URL(
   "https://api.argos-ci.com/v2/projects/my-team/my-project/builds",
 );
@@ -79,7 +79,7 @@ const { pageInfo, results } = await response.json();
 
 Use `pageInfo.total` and `perPage` to compute how many pages exist, then loop until you've fetched them all.
 
-```javascript
+```js
 async function fetchAllBuilds(owner, project) {
   const perPage = 100;
   let page = 1;
