@@ -33,25 +33,25 @@ The following steps get a Storybook deployed in under a minute. The same flow wo
 {% tabs %}
 {% tab title="npm" %}
 ```
-npm exec -- npm install --save-dev @argos-ci/cli
+npm i --save-dev @argos-ci/cli
 ```
 {% endtab %}
 
 {% tab title="yarn" %}
 ```
-yarn run npm install --save-dev @argos-ci/cli
+yarn add --dev @argos-ci/cli
 ```
 {% endtab %}
 
 {% tab title="pnpm" %}
 ```
-pnpm exec -- npm install --save-dev @argos-ci/cli
+pnpm add --save-dev @argos-ci/cli
 ```
 {% endtab %}
 
 {% tab title="bun" %}
 ```
-bun x npm install --save-dev @argos-ci/cli
+bun add --dev @argos-ci/cli
 ```
 {% endtab %}
 {% endtabs %}
