@@ -35,4 +35,4 @@ Tests are sorted by **flakiness score** (descending). The tests at the top are t
 
 ### Open a test page
 
-Click any row to open the detailed test page and review history and stability details. See [Flaky Test Detection](flaky-test-detection.md) for more information.
+Click any row to open the detailed test page and review history and stability details. See [Flaky test detection](flaky-test-detection.md) for more information.
