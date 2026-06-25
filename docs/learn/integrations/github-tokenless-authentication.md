@@ -1,3 +1,7 @@
+---
+description: Upload builds from GitHub Actions without a token or OIDC, the default fallback for forked pull requests.
+---
+
 # GitHub tokenless authentication
 
 Tokenless authentication lets the Argos SDK upload builds from GitHub Actions without an `ARGOS_TOKEN` secret and without OIDC. Argos verifies the run by looking it up on GitHub from the commit and branch the SDK reports.

@@ -1,3 +1,7 @@
+---
+description: Let an AI agent read Argos build data to summarize visual changes, check intent, and approve or request changes.
+---
+
 # Review builds with AI agents
 
 Argos lets AI agents review visual changes in a pull request. The agent can use Argos build data to understand what changed, check whether the screenshots match the pull request's intent, and detect regressions.

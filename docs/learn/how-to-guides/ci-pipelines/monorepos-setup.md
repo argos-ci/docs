@@ -1,3 +1,7 @@
+---
+description: Use build splitting to run separate Argos visual tests for each package or app in your monorepo within one commit.
+---
+
 # Monorepos setup
 
 ## Leveraging Build Splitting in Monorepos

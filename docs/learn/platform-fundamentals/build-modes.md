@@ -1,3 +1,7 @@
+---
+description: Compare Argos Continuous Integration mode and Monitoring mode to choose the right one for your workflow.
+---
+
 # Build modes
 
 Argos provides two build modes for visual testing: **Continuous Integration (CI) mode** and **Monitoring mode**. This page explains how each mode works, their key differences, and when to use them to best fit your workflow.

@@ -1,3 +1,7 @@
+---
+description: Detect unstable tests and use Argos tools and strategies to track and fix flakiness in your visual suite.
+---
+
 # Reliability & flakiness
 
 Flaky tests fail or change without a meaningful code change and erode trust in your suite. Argos detects unstable tests and gives you the tools to track and fix them.

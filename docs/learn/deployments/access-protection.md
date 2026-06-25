@@ -1,3 +1,7 @@
+---
+description: Require viewers to sign in before opening deployment URLs to keep your Argos previews private per project.
+---
+
 # Access protection
 
 By default, deployment URLs are reachable by anyone who has the link. For most internal projects, that's not what you want—a Storybook can leak unreleased designs, copy, or features. Argos lets you require viewers to sign in with an Argos account before opening any deployment URL.

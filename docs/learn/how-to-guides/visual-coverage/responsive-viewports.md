@@ -1,3 +1,7 @@
+---
+description: Capture the same page at multiple breakpoints in one test with Argos using Playwright, Cypress, or Puppeteer.
+---
+
 # Responsive viewports
 
 Argos lets you capture the same page at multiple breakpoints with a single test. Configure viewports once and get consistent responsive coverage across Playwright, Cypress and Puppeteer.

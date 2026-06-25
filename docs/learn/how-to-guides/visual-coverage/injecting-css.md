@@ -1,3 +1,7 @@
+---
+description: Apply custom CSS at capture time to hide or restyle elements and fix flaky visual diffs in your Argos screenshots.
+---
+
 # Injecting CSS
 
 Enhance Argos screenshots with custom CSS: Perfect for addressing flaky tests or complex scenarios, ensuring your visual diffs are precise and reliable.

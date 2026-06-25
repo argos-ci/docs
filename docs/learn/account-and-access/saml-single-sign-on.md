@@ -1,3 +1,7 @@
+---
+description: Configure SAML single sign-on with providers like Okta or Auth0 to authenticate your Argos team members.
+---
+
 # SAML single sign-on
 
 {% hint style="info" %}

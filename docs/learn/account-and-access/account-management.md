@@ -1,3 +1,7 @@
+---
+description: Create and manage your Argos account, sign up with Google, GitHub, or GitLab, and pick the plan that fits.
+---
+
 # Account management
 
 When you sign up for Argos, you create an account that manages your projects and subscriptions.

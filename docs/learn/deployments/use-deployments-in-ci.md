@@ -1,3 +1,7 @@
+---
+description: Run argos deploy from CI to create a deployment on every pull request, with a GitHub Actions Storybook example.
+---
+
 # Use deployments in CI
 
 Running `argos deploy` from CI is the most common setup: a new deployment is created on every push to a pull request, and the deployment link appears in the PR comment alongside Argos visual tests.

@@ -1,3 +1,7 @@
+---
+description: Get a project-wide view of test stability, with every test ranked by flakiness score in the Argos dashboard.
+---
+
 # Tests dashboard
 
 The Tests dashboard gives you a project-wide view of test stability. It lists all tests sorted by flakiness score so the most flaky tests show up first.

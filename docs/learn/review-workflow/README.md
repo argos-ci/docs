@@ -1,3 +1,7 @@
+---
+description: Bring Argos visual changes into your review process across the dashboard, pull requests, and status checks.
+---
+
 # Review workflow
 
 Once your builds run, Argos brings visual changes into your everyday review process — in the dashboard, on your pull requests, and through your status checks.

@@ -1,3 +1,7 @@
+---
+description: Track your team's monthly screenshot usage and understand consumption metrics from your billing settings.
+---
+
 # Usage monitoring
 
 Effortlessly track your monthly usage with Argos. Access your team's usage details in just a few clicks, ensuring transparency and informed decision-making.

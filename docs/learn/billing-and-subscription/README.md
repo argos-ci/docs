@@ -1,3 +1,7 @@
+---
+description: Understand Argos plans, payment, and usage so you can keep your team's billing under control.
+---
+
 # Billing & subscription
 
 Everything about plans, payment, and keeping your usage under control.

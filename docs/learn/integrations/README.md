@@ -1,3 +1,7 @@
+---
+description: Connect Argos to GitHub, GitLab, Bitbucket, and Azure DevOps source control and to Slack notifications.
+---
+
 # Integrations
 
 Argos integrates with the most common source control platforms and collaboration tools.

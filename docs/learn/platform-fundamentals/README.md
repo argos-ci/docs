@@ -1,3 +1,7 @@
+---
+description: Understand the core concepts behind Argos — what it compares, how it picks a baseline, and its build modes.
+---
+
 # Platform fundamentals
 
 The core concepts behind how Argos turns screenshots into a reliable visual review signal. Start here to understand what Argos compares, how it picks a baseline, and the modes a build can run in.

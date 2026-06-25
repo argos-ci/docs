@@ -1,3 +1,7 @@
+---
+description: Patterns for running Argos efficiently in CI, from monorepos and sharding to preview deployments and subset builds.
+---
+
 # CI pipelines
 
 Patterns for running Argos efficiently inside your continuous integration pipeline.

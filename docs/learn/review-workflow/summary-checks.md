@@ -1,3 +1,7 @@
+---
+description: Configure Argos summary checks to combine commit statuses into one required status check before merging.
+---
+
 # Summary checks
 
 Argos Summary Checks simplify merge decisions with a unified view of commit statuses, enhancing your workflow with configurable, insightful checks.

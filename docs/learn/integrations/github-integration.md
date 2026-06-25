@@ -1,3 +1,7 @@
+---
+description: Connect Argos to GitHub for automated visual testing, commit and pull request checks, and baseline selection.
+---
+
 # GitHub integration
 
 Connect Argos to GitHub for automated visual testing on every pull request and merge queue run. Argos reads commit history to pick the right baseline build and reports results back to GitHub so you can ship with confidence.

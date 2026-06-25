@@ -1,3 +1,7 @@
+---
+description: Combine Argos with Cypress to stabilize screenshots, wait for fonts and images, and surface test failures.
+---
+
 # Cypress
 
 Boost your visual testing capabilities by combining Argos with your [Cypress](https://www.cypress.io/) tests.

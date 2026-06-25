@@ -1,3 +1,7 @@
+---
+description: Get the latest Argos build status and a link to the build page posted automatically on your GitHub pull requests.
+---
+
 # Pull request comments
 
 Stay informed with Argos: Get build results directly in your GitHub pull requests for a streamlined review process and efficient change management.

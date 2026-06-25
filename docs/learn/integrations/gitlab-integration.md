@@ -1,3 +1,7 @@
+---
+description: Connect Argos to GitLab for visual testing, baseline selection, and direct feedback on your merge requests.
+---
+
 # GitLab integration
 
 Enhance your GitLab workflow with Argos for streamlined visual testing, direct feedback on merge requests, and easy GitLab repository access.

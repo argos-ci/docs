@@ -1,3 +1,7 @@
+---
+description: See flaky badges, stability scores, and detailed history so you can review changed tests in Argos with confidence.
+---
+
 # Flaky test detection
 
 Argos flags unstable tests so you can decide with confidence. See a flaky badge next to every changed test and dive into detailed history and stability scores on a dedicated test page

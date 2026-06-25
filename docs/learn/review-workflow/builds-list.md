@@ -1,3 +1,7 @@
+---
+description: Browse, filter, and open builds for a project to scan status and drill into the runs you care about in Argos.
+---
+
 # Builds list
 
 The Builds list is the main view for tracking every Argos build in a project. It helps you scan status, drill into a specific build, and filter down to exactly the runs you care about.

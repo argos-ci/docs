@@ -1,3 +1,7 @@
+---
+description: Subscribe to a paid Argos plan by upgrading a team or creating a new one to unlock premium features.
+---
+
 # How to subscribe
 
 Unlock Argos team features with a subscription. Upgrade your existing team or create a new one to access premium capabilities.

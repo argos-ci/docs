@@ -1,3 +1,7 @@
+---
+description: Disable subpixel text and font hinting in Chromium so glyphs render identically across macOS, Linux, and CI.
+---
+
 # Stabilize text rendering
 
 Force consistent glyph rendering across operating systems: disable subpixel (LCD) text and font hinting so the same text looks identical on macOS, Linux, and CI—eliminating one of the most common sources of screenshot flakiness.

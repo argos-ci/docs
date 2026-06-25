@@ -1,3 +1,7 @@
+---
+description: Manage your Argos account, configure how your team signs in, and control who can access which projects.
+---
+
 # Account & access
 
 Manage your Argos account, how you sign in, and who on your team can access what.

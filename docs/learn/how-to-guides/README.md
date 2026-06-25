@@ -1,3 +1,7 @@
+---
+description: Task-focused guides for wiring Argos into your CI pipeline and expanding what your screenshots cover.
+---
+
 # How-to guides
 
 Task-focused guides for getting the most out of Argos in real projects — from wiring it into your CI pipeline to expanding what your screenshots cover.

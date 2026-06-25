@@ -1,3 +1,7 @@
+---
+description: Techniques to capture more of your interface, from responsive viewports and injected CSS to non-image file diffs.
+---
+
 # Visual coverage
 
 Techniques to capture more of your interface and make every screenshot count.

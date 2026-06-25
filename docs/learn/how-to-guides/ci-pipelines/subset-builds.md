@@ -1,3 +1,7 @@
+---
+description: Run subset builds to upload a partial test run without affecting the baseline of screenshots it didn't cover.
+---
+
 # Subset builds
 
 Subset builds are designed for CI runs that **don't execute the full E2E test suite** on a branch. When a build is marked as subset, Argos **ignores removed screenshots** and only notifies you about **changed and added screenshots** from the tests you did run.

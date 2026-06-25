@@ -1,3 +1,7 @@
+---
+description: Connect Argos to Slack for build notifications and rich previews when you paste an Argos build URL.
+---
+
 # Slack integration
 
 Argos integrates with Slack to keep your team aligned on visual changes and reviews.

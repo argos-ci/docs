@@ -1,3 +1,7 @@
+---
+description: Subscribe to a paid Argos plan via Stripe when your invoiced GitHub account cannot use the GitHub Marketplace.
+---
+
 # Invoiced customers
 
 Discover how invoiced GitHub accounts affect subscribing to Argos' paid plan and explore alternative subscription options.

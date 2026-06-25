@@ -1,3 +1,7 @@
+---
+description: Choose an Argos plan, start a subscription, and manage or change it as your team's needs evolve.
+---
+
 # Subscription
 
 Pick the plan that fits your team and manage it as your needs change.

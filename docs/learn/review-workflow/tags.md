@@ -1,3 +1,7 @@
+---
+description: Categorize and filter screenshots by tag so you can focus a build review on the changes you care about.
+---
+
 # Tags
 
 Tags let you categorize screenshots so you can quickly filter a build down to the changes you care about. For example, you might tag screenshots by page area, feature, or test suite and then review only the relevant subset during a build review.
