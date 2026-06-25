@@ -29,7 +29,7 @@ The two groups are further divided into specific roles, each with its own set of
 * [Project level roles](team-members-and-roles.md#project-level-roles): Users who have restricted access at the project level. Only contributors can have configurable project roles
   * [Project Administrator](team-members-and-roles.md#project-administrator)
   * [Project Reviewer](team-members-and-roles.md#project-reviewer)
-  * [Project Viewer](team-members-and-roles.md#project-reviewer)
+  * [Project Viewer](team-members-and-roles.md#project-viewer)
 
 ### Team level roles
 

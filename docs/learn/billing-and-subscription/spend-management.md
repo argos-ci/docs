@@ -43,7 +43,7 @@ To enable spend management, you must have an **Owner** role on your team.
 {% endstep %}
 
 {% step %}
-### Select the **Settings** tab and go to the **Billings** section
+### Select the **Settings** tab and go to the **Billing** section
 {% endstep %}
 
 {% step %}

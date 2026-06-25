@@ -5,7 +5,7 @@
   * [Playwright Quickstart](quickstart/playwright-quickstart.md "Playwright")
   * [Storybook Quickstart](quickstart/storybook-quickstart/README.md "Storybook")
     * [Storybook Test Runner Quickstart](quickstart/storybook-quickstart/storybook-test-runner-quickstart.md "Test Runner")
-    * [Storybook Legacy (\<v8) Quickstart](quickstart/storybook-quickstart/storybook-legacy-less-than-v8-quickstart.md "Legacy (<v8)")
+    * [Storybook Legacy (\<v8) Quickstart](quickstart/storybook-quickstart/storybook-legacy-less-than-v8-quickstart.md "Legacy (\<v8)")
   * [Cypress Quickstart](quickstart/cypress-quickstart.md "Cypress")
   * [WebdriverIO Quickstart](quickstart/webdriverio-quickstart.md)
   * [Puppeteer Quickstart](quickstart/puppeteer-quickstart.md)

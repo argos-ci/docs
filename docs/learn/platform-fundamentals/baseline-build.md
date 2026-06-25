@@ -7,7 +7,7 @@ description: >-
 # Baseline build
 
 {% hint style="info" %}
-This documentation covers Argos' Continuous Integration (CI) mode. For Monitoring mode, refer to the [Monitoring documentation](build-modes.md#monitoring-mode).
+This documentation covers Argos's Continuous Integration (CI) mode. For Monitoring mode, refer to the [Monitoring documentation](build-modes.md#monitoring-mode).
 {% endhint %}
 
 ### What is a baseline build?

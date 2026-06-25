@@ -188,7 +188,7 @@ Return to the login page.
 
 Log back in with the account you want to use.
 
-From **Account Settings → Connections**, link your provider account.
+From the **Authentication** section, link your provider account.
 {% endstep %}
 {% endstepper %}
 
