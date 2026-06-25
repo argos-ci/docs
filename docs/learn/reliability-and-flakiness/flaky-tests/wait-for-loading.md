@@ -15,3 +15,7 @@ Master timing in visual tests with Argos: Use `aria-busy` to ensure screenshots 
 ```
 
 **We recommend applying `aria-busy` to your loader components to ensure that your page is fully loaded before a screenshot is taken.**
+
+{% hint style="info" %}
+Waiting for `aria-busy` is part of the SDK's default stabilization (the `stabilize.waitForAriaBusy` option), so there's nothing to enable—you only need to mark your loaders.
+{% endhint %}

@@ -29,6 +29,10 @@ Visual flakiness usually stems from one of the following:
 
 Ignoring noise is useful, but the most reliable suite is one where flakiness is addressed at the source. Follow these practices—each one targets a common cause above:
 
+{% hint style="info" %}
+Most stabilization is automatic. The Argos SDK stabilizes every screenshot by default—waiting for `aria-busy`, fonts, and images to settle, forcing font antialiasing, hiding carets and scrollbars, and more. You can customize or disable any of it through the [`stabilize` option](../../../sdks-reference/playwright.md). The practices below cover what the SDK can't infer on its own, such as which elements are loaders or which values are dynamic.
+{% endhint %}
+
 * **Wait until the page is ready before capturing.** Mark loading elements with `aria-busy` so `argosScreenshot()` waits for them. → [Wait for Loading](wait-for-loading.md)
 * **Make dates and times deterministic.** Hide or freeze any value that changes between runs. → [Stabilize Date & Time](stabilize-date-and-time.md)
 * **Force consistent text rendering.** Disable subpixel text and font hinting so glyphs look identical on every machine. → [Stabilize Text Rendering](stabilize-text-rendering.md)
