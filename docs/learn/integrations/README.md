@@ -15,6 +15,11 @@ Each integration has its own dedicated setup guide.
 * [Bitbucket](bitbucket-integration.md)
 * [Azure DevOps](azure-devops-integration.md)
 
+### Authentication
+
+* [GitHub OIDC authentication](github-oidc-authentication.md)
+* [GitHub tokenless authentication](github-tokenless-authentication.md)
+
 ### Notifications
 
 * [Slack](slack-integration.md)

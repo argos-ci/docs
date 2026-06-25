@@ -113,9 +113,9 @@ You only need this when more than one Argos project is connected to the same Git
 
 **`Multiple projects are linked to this repository`.** More than one Argos project is connected to the repository, so tokenless cannot pick one automatically. Specify which project to use with the project slug — see [Specify a project when several share a repository](#specify-a-project-when-several-share-a-repository).
 
-**Uploads work but are missing pull request metadata.** Tokenless authenticates the upload but does not by itself link the build to a pull request. Pass `GITHUB_TOKEN` in the job environment so the SDK can resolve the PR — see Running without `GITHUB_TOKEN`.
+**Uploads work but are missing pull request metadata.** Tokenless authenticates the upload but does not by itself link the build to a pull request. Pass `GITHUB_TOKEN` in the job environment so the SDK can resolve the PR.
 
 ### Further reading
 
-* GitHub OIDC authentication — the more secure option, preferred where available.
-* Argos GitHub Integration
+* [GitHub OIDC authentication](github-oidc-authentication.md) — the more secure option, preferred where available.
+* [Argos GitHub integration](github-integration.md)
