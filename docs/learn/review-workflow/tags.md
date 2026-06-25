@@ -30,7 +30,7 @@ Playwright test tags are automatically forwarded to Argos. You have several opti
 </strong>import { argosScreenshot } from "@argos-ci/playwright";
 
 // Option 1: At the describe level with the @ prefix
-describe("Homepage @desktop @homepage", () => {
+test.describe("Homepage @desktop @homepage", () => {
   // Option 2: In the test name with the @ prefix
   test("homepage @desktop @homepage", async ({ page }) => {
     await page.goto("/");
@@ -61,8 +61,8 @@ In Cypress, you can add tags to screenshots through the `tags` option in the `cy
 
 {% code title="cypress/e2e/homepage.cy.js" %}
 ```js
-it("screenshot homepage", async ({ page }) => {
-  cy.visit("https://localhost:3000/");
+it("screenshot homepage", () => {
+  cy.visit("http://localhost:3000/");
   cy.argosScreenshot("homepage", { tags: ["@desktop", "@homepage"] });
 });
 ```

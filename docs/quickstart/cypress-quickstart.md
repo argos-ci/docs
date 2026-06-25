@@ -99,8 +99,8 @@ Use `argosScreenshot` helper to capture stable screenshots in your E2E tests.
 
 {% code title="cypress/e2e/homepage.cy.js" %}
 ```js
-it("screenshot homepage", async ({ page }) => {
-  cy.visit("https://localhost:3000/");
+it("screenshot homepage", () => {
+  cy.visit("http://localhost:3000/");
   cy.argosScreenshot("homepage");
 });
 ```
