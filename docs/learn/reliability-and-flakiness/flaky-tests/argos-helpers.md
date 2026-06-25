@@ -1,4 +1,4 @@
-# Argos Helpers
+# Argos helpers
 
 Enhance your visual tests with Argos SDKs: Use `data-visual-test` attributes to manage dynamic content, ensuring consistent, flakiness-free screenshots.
 

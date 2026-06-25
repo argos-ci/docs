@@ -1,4 +1,4 @@
-# Tests Dashboard
+# Tests dashboard
 
 The Tests dashboard gives you a project-wide view of test stability. It lists all tests sorted by flakiness score so the most flaky tests show up first.
 

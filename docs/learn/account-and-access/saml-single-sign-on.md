@@ -1,4 +1,4 @@
-# SAML Single Sign-On
+# SAML single sign-on
 
 {% hint style="info" %}
 SAML is available on the [Enterprise](../billing-and-subscription/subscription/pricing-plans.md#enterprise-plan) plan.

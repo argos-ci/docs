@@ -1,4 +1,4 @@
-# Flaky Test Detection
+# Flaky test detection
 
 Argos flags unstable tests so you can decide with confidence. See a flaky badge next to every changed test and dive into detailed history and stability scores on a dedicated test page
 

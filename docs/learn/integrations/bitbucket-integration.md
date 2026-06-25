@@ -1,4 +1,4 @@
-# Bitbucket Integration
+# Bitbucket integration
 
 ### Bitbucket Cloud
 

@@ -1,4 +1,4 @@
-# Wait for Loading
+# Wait for loading
 
 Master timing in visual tests with Argos: Use `aria-busy` to ensure screenshots are captured post full page load, enhancing accuracy and consistency.
 

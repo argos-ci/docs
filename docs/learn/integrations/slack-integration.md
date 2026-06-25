@@ -1,4 +1,4 @@
-# Slack Integration
+# Slack integration
 
 Argos integrates with Slack to keep your team aligned on visual changes and reviews.
 

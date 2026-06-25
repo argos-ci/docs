@@ -1,4 +1,4 @@
-# GitLab Integration
+# GitLab integration
 
 Enhance your GitLab workflow with Argos for streamlined visual testing, direct feedback on merge requests, and easy GitLab repository access.
 

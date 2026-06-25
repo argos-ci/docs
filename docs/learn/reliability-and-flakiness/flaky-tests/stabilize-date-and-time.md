@@ -1,4 +1,4 @@
-# Stabilize Date & Time
+# Stabilize date & time
 
 Mitigate UI flakiness with stable date & time in visual testing: Hide dynamic dates or freeze them for consistency using Argos's practical solutions.
 

@@ -1,4 +1,4 @@
-# GitHub OIDC Authentication
+# GitHub OIDC authentication
 
 Authenticate the Argos SDK from GitHub Actions using [OpenID Connect (OIDC)](https://docs.github.com/en/actions/reference/security/oidc) instead of storing a long-lived `ARGOS_TOKEN` secret in your repository.
 

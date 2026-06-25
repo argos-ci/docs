@@ -1,4 +1,4 @@
-# Spend Management
+# Spend management
 
 Learn how to get notified about your team's spend and block further usage when you reach your budget.
 

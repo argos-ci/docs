@@ -1,4 +1,4 @@
-# Stabilize Text Rendering
+# Stabilize text rendering
 
 Force consistent glyph rendering across operating systems: disable subpixel (LCD) text and font hinting so the same text looks identical on macOS, Linux, and CI—eliminating one of the most common sources of screenshot flakiness.
 

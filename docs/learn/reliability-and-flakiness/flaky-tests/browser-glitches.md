@@ -1,4 +1,4 @@
-# Browser Glitches
+# Browser glitches
 
 Eliminate browser-induced visual discrepancies: Ensure consistent environments and utilize Argos helpers to address properties like `border-radius` for glitch-free visual testing.
 

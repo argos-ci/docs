@@ -1,4 +1,4 @@
-# GitHub Tokenless Authentication
+# GitHub tokenless authentication
 
 Tokenless authentication lets the Argos SDK upload builds from GitHub Actions without an `ARGOS_TOKEN` secret and without OIDC. Argos verifies the run by looking it up on GitHub from the commit and branch the SDK reports.
 

@@ -1,4 +1,4 @@
-# Team Members & Roles
+# Team members & roles
 
 Learn how to manage team members on Argos, and how to assign roles to each member with role-based access control (RBAC).
 

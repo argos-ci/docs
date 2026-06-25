@@ -1,4 +1,4 @@
-# Account Management
+# Account management
 
 When you sign up for Argos, you create an account that manages your projects and subscriptions.
 

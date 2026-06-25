@@ -1,4 +1,4 @@
-# Azure DevOps Integration
+# Azure DevOps integration
 
 We currently do not support Azure DevOps.
 

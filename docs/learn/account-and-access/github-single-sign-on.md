@@ -1,4 +1,4 @@
-# GitHub Single Sign-On
+# GitHub single sign-on
 
 Streamline access with GitHub SSO: Integrate your Argos team and GitHub organization for seamless member sync, enhancing security and management ease.
 

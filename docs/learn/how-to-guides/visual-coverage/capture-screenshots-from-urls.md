@@ -1,4 +1,4 @@
-# Capture Screenshots from URLs
+# Capture screenshots from URLs
 
 Efficiently capture web page screenshots across frameworks with Argos: A step-by-step guide for Playwright, Cypress, and Puppeteer integration.
 

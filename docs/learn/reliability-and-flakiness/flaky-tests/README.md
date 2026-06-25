@@ -1,4 +1,4 @@
-# Flaky Tests
+# Flaky tests
 
 Flaky tests fail or change without a meaningful code change, eroding trust in your test suite. Argos tackles flakiness from two angles: it **detects** unstable tests so you can decide with confidence, and it gives you **tools and strategies** to address the root causes.
 
