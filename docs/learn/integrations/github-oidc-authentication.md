@@ -1,4 +1,8 @@
-# GitHub OIDC Authentication
+---
+description: Authenticate the Argos SDK from GitHub Actions with OIDC instead of storing a long-lived ARGOS_TOKEN secret.
+---
+
+# GitHub OIDC authentication
 
 Authenticate the Argos SDK from GitHub Actions using [OpenID Connect (OIDC)](https://docs.github.com/en/actions/reference/security/oidc) instead of storing a long-lived `ARGOS_TOKEN` secret in your repository.
 
@@ -98,4 +102,5 @@ No code change is required in your tests — the SDK picks up OIDC automatically
 
 * [GitHub: About security hardening with OpenID Connect](https://docs.github.com/en/actions/reference/security/oidc)
 * [GitHub: Assigning permissions to jobs](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token)
-* Argos GitHub Integration
+* [GitHub tokenless authentication](github-tokenless-authentication.md) — the automatic fallback for pull requests from forked repositories.
+* [Argos GitHub integration](github-integration.md)

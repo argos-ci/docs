@@ -1,3 +1,7 @@
+---
+description: Compare Argos Continuous Integration mode and Monitoring mode to choose the right one for your workflow.
+---
+
 # Build modes
 
 Argos provides two build modes for visual testing: **Continuous Integration (CI) mode** and **Monitoring mode**. This page explains how each mode works, their key differences, and when to use them to best fit your workflow.
@@ -192,17 +196,19 @@ bun x argos upload --mode=monitoring components ./screenshots
 {% code title="playwright.config.ts" %}
 ```ts
 import { defineConfig } from "@playwright/test";
+import { createArgosReporterOptions } from "@argos-ci/playwright/reporter";
 
 export default defineConfig({
   reporter: [
     process.env.CI ? ["dot"] : ["list"],
     [
       "@argos-ci/playwright/reporter",
-      {
+      createArgosReporterOptions({
         uploadToArgos: !!process.env.CI,
+        // Set your Argos token (required if not using GitHub Actions).
         token: "<YOUR-ARGOS-TOKEN>",
         mode: "monitoring",
-      },
+      }),
     ],
   ],
 });
@@ -211,6 +217,7 @@ export default defineConfig({
 
 **Cypress**
 
+{% code title="cypress.config.js" %}
 ```js
 const { defineConfig } = require("cypress");
 const { registerArgosTask } = require("@argos-ci/cypress/task");
@@ -220,6 +227,7 @@ module.exports = defineConfig({
     async setupNodeEvents(on, config) {
       registerArgosTask(on, config, {
         uploadToArgos: !!process.env.CI,
+        // Set your Argos token (required if not using GitHub Actions).
         token: "<YOUR-ARGOS-TOKEN>",
         mode: "monitoring",
       });
@@ -227,3 +235,4 @@ module.exports = defineConfig({
   },
 });
 ```
+{% endcode %}

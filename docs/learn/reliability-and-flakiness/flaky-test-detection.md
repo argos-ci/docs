@@ -1,4 +1,8 @@
-# Flaky Test Detection
+---
+description: See flaky badges, stability scores, and detailed history so you can review changed tests in Argos with confidence.
+---
+
+# Flaky test detection
 
 Argos flags unstable tests so you can decide with confidence. See a flaky badge next to every changed test and dive into detailed history and stability scores on a dedicated test page
 
@@ -24,10 +28,14 @@ On the test page you will find:
 
 * Timeline of every change that affected the test
 * Stability graph showing pass rate over time
-* Calculated flaky score from zero up to one hundred
+* Flakiness score from 0 to 100, summarizing the test's stability and consistency
 * List of changes happened to the test
 
 Use this information to approve stable tests or flag flaky ones for fixes.
+
+### See all flaky tests at a glance
+
+The test page focuses on a single test. For a project-wide view that ranks every test by flakiness score, open the [Tests dashboard](tests-dashboard.md).
 
 ### Ignore changes
 

@@ -75,7 +75,7 @@ Add this command to your CI pipeline to upload the screenshots to Argos.
 npm exec -- argos upload --token <ARGOS_TOKEN> ./screenshots
 ```
 
-Note: The value ofARGOS\_TOKEN is available your project settings on Argos.
+Note: The value of `ARGOS_TOKEN` is available in your project settings on Argos.
 {% endstep %}
 {% endstepper %}
 

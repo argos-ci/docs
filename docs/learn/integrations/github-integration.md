@@ -1,4 +1,8 @@
-# GitHub Integration
+---
+description: Connect Argos to GitHub for automated visual testing, commit and pull request checks, and baseline selection.
+---
+
+# GitHub integration
 
 Connect Argos to GitHub for automated visual testing on every pull request and merge queue run. Argos reads commit history to pick the right baseline build and reports results back to GitHub so you can ship with confidence.
 
@@ -84,7 +88,7 @@ jobs:
 
 When you are using a merge queue system other than GitHub’s built-in Merge Queue (like [Mergify](https://mergify.com/)), you can set `ARGOS_MERGE_QUEUE_PRS` to the comma-separated pull request numbers included in the queued build. This tells Argos to treat the upload as a merge queue build and use the right baseline for visual comparisons.
 
-```yml
+```yaml
 steps:
   - name: Upload screenshots to Argos
     env:
@@ -129,3 +133,11 @@ GitHub Enterprise Cloud works out of the box. Follow the same GitHub App setup d
 #### GitHub Enterprise Server (self-hosted)
 
 Self-hosted GitHub Enterprise Server deployments are supported on the Argos Enterprise plan, which also includes SAML SSO and other advanced features. To upgrade to Enterprise, [contact sales](https://argos-ci.com/contact).
+
+### Authenticating Argos in CI
+
+Uploads from GitHub Actions can authenticate in three ways:
+
+* **`ARGOS_TOKEN`** — a project token stored as a GitHub secret (used in the examples above).
+* [**GitHub OIDC authentication**](github-oidc-authentication.md) — short-lived signed tokens with no secret to manage. Preferred where available.
+* [**GitHub tokenless authentication**](github-tokenless-authentication.md) — the automatic fallback for pull requests from forked repositories.

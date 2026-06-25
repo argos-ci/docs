@@ -1,3 +1,7 @@
+---
+description: Set up Argos with Storybook and Vitest to get visual testing and live deployment URLs on every pull request.
+---
+
 # Storybook Quickstart
 
 Learn how to set up Argos with Storybook to get **visual testing** and **live deployment URLs** on every pull request.

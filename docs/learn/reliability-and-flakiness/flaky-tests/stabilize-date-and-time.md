@@ -1,4 +1,8 @@
-# Stabilize Date & Time
+---
+description: Hide or freeze dynamic dates and times to remove a common source of flaky visual diffs in Argos.
+---
+
+# Stabilize date & time
 
 Mitigate UI flakiness with stable date & time in visual testing: Hide dynamic dates or freeze them for consistency using Argos's practical solutions.
 

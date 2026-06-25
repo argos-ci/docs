@@ -1,4 +1,8 @@
-# Adding Screenshot metadata
+---
+description: Attach custom metadata to screenshots with a companion JSON file to add context on the Argos build page.
+---
+
+# Adding screenshot metadata
 
 Enrich your screenshots in Argos with metadata by adding a companion JSON file. This metadata appears on the build page and helps contextualize how and why a screenshot was generated.
 

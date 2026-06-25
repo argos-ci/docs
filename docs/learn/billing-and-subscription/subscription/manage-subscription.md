@@ -1,3 +1,7 @@
+---
+description: View invoices, update payment methods, and cancel your Argos subscription from your team settings.
+---
+
 # Manage subscription
 
 Seamlessly manage your Argos subscription: view invoices, update payment methods, or cancel plans with ease.

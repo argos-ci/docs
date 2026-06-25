@@ -52,7 +52,7 @@ curl https://api.argos-ci.com/v2/project \
 {% endtab %}
 
 {% tab title="JavaScript" %}
-```javascript
+```js
 const response = await fetch("https://api.argos-ci.com/v2/project", {
   headers: {
     Authorization: `Bearer ${process.env.ARGOS_TOKEN}`,

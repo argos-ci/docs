@@ -99,8 +99,8 @@ Use `argosScreenshot` helper to capture stable screenshots in your E2E tests.
 
 {% code title="cypress/e2e/homepage.cy.js" %}
 ```js
-it("screenshot homepage", async ({ page }) => {
-  cy.visit("https://localhost:3000/");
+it("screenshot homepage", () => {
+  cy.visit("http://localhost:3000/");
   cy.argosScreenshot("homepage");
 });
 ```
@@ -111,6 +111,40 @@ Add `/cypress/screenshots` to your `.gitignore` file, to avoid uploading screens
 {% hint style="info" %}
 Check out our guides to [screenshot multiple pages](../learn/how-to-guides/visual-coverage/capture-screenshots-from-urls.md) or [capture multiple viewports](../learn/how-to-guides/visual-coverage/responsive-viewports.md).
 {% endhint %}
+{% endstep %}
+
+{% step %}
+### Set up CI
+
+Run your Cypress tests in CI with `ARGOS_TOKEN` set. The Argos task uploads screenshots automatically when it detects a CI environment.
+
+{% code title=".github/workflows/argos.yml" %}
+```yaml
+name: Argos
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  argos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+      - run: npm ci
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm start # command that serves your app
+        env:
+          ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
+```
+{% endcode %}
+
+`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC](../learn/integrations/github-oidc-authentication.md) or [tokenless authentication](../learn/integrations/github-tokenless-authentication.md) to avoid managing a secret.
 {% endstep %}
 {% endstepper %}
 

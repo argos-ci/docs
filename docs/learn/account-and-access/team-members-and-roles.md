@@ -1,4 +1,8 @@
-# Team Members & Roles
+---
+description: Invite team members and assign team and project roles to control permissions with role-based access control.
+---
+
+# Team members & roles
 
 Learn how to manage team members on Argos, and how to assign roles to each member with role-based access control (RBAC).
 
@@ -25,7 +29,7 @@ The two groups are further divided into specific roles, each with its own set of
 * [Project level roles](team-members-and-roles.md#project-level-roles): Users who have restricted access at the project level. Only contributors can have configurable project roles
   * [Project Administrator](team-members-and-roles.md#project-administrator)
   * [Project Reviewer](team-members-and-roles.md#project-reviewer)
-  * [Project Viewer](team-members-and-roles.md#project-reviewer)
+  * [Project Viewer](team-members-and-roles.md#project-viewer)
 
 ### Team level roles
 
@@ -119,18 +123,6 @@ Project level roles provide fine-grained control and access to specific projects
 The project administrator role is available on Enterprise plans
 {% endhint %}
 
-Project reviewers play a key role in working on projects, mirroring the functions of team members, but with a narrowed project focus.
-
-**Key responsibilities**
-
-* Review builds
-
-#### Project Reviewer
-
-{% hint style="info" %}
-The project reviewer role is available on Enterprise plans
-{% endhint %}
-
 Project administrators hold significant authority at the project level, operating as the project-level counterparts to team members and owners.
 
 **Key responsibilities**
@@ -142,6 +134,18 @@ Project administrators hold significant authority at the project level, operatin
 **Access and permission**
 
 Their authority doesn't extend across all projects within the team. Project administrators are restricted to the projects they're assigned to.
+
+#### Project Reviewer
+
+{% hint style="info" %}
+The project reviewer role is available on Enterprise plans
+{% endhint %}
+
+Project reviewers play a key role in working on projects, mirroring the functions of team members, but with a narrowed project focus.
+
+**Key responsibilities**
+
+* Review builds
 
 #### Project Viewer
 

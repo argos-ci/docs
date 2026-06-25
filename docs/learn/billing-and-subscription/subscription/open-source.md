@@ -1,3 +1,7 @@
+---
+description: Find out how qualifying open-source projects can get sponsored, free access to Argos visual testing.
+---
+
 # Open source
 
 At Argos, we understand the value of open source projects and want to do our part in fostering and supporting the growth of the open source community.

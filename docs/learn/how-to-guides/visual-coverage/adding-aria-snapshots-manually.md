@@ -1,3 +1,7 @@
+---
+description: Include ARIA accessibility snapshots alongside screenshots when uploading files to Argos manually with the CLI.
+---
+
 # Adding ARIA snapshots manually
 
 If you upload files to Argos manually, you can include ARIA snapshots alongside screenshots.

@@ -1,7 +1,11 @@
-# SAML Single Sign-On
+---
+description: Configure SAML single sign-on with providers like Okta or Auth0 to authenticate your Argos team members.
+---
+
+# SAML single sign-on
 
 {% hint style="info" %}
-SAML is available [Enterprise](../billing-and-subscription/subscription/pricing-plans.md#enterprise-plan) plan.
+SAML is available on the [Enterprise](../billing-and-subscription/subscription/pricing-plans.md#enterprise-plan) plan.
 
 Only team members with the [owner role](team-members-and-roles.md#owner-role) can configure SAML SSO.
 {% endhint %}

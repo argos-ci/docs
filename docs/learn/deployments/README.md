@@ -1,3 +1,7 @@
+---
+description: Deploy your Storybook or static build to a unique Argos URL on every pull request to preview and share it.
+---
+
 # Deployments
 
 A **deployment** on Argos is a static build—most commonly a Storybook—served on a unique URL that you can open, share, and review. Every time you run the Argos CLI, Argos uploads your build, generates a URL, and posts the status back to your pull request.
@@ -33,25 +37,25 @@ The following steps get a Storybook deployed in under a minute. The same flow wo
 {% tabs %}
 {% tab title="npm" %}
 ```
-npm exec -- npm install --save-dev @argos-ci/cli
+npm i --save-dev @argos-ci/cli
 ```
 {% endtab %}
 
 {% tab title="yarn" %}
 ```
-yarn run npm install --save-dev @argos-ci/cli
+yarn add --dev @argos-ci/cli
 ```
 {% endtab %}
 
 {% tab title="pnpm" %}
 ```
-pnpm exec -- npm install --save-dev @argos-ci/cli
+pnpm add --save-dev @argos-ci/cli
 ```
 {% endtab %}
 
 {% tab title="bun" %}
 ```
-bun x npm install --save-dev @argos-ci/cli
+bun add --dev @argos-ci/cli
 ```
 {% endtab %}
 {% endtabs %}

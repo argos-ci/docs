@@ -118,6 +118,38 @@ test("screenshot homepage", async ({ page }) => {
 
 Tip: Check out our guides to [screenshot multiple pages](../learn/how-to-guides/visual-coverage/capture-screenshots-from-urls.md) or [capture multiple viewports](../learn/how-to-guides/visual-coverage/responsive-viewports.md).
 {% endstep %}
+
+{% step %}
+### Set up CI
+
+Run your Playwright tests in CI with `ARGOS_TOKEN` set. The Argos reporter uploads screenshots automatically when it detects a CI environment.
+
+{% code title=".github/workflows/argos.yml" %}
+```yaml
+name: Argos
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  argos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test
+        env:
+          ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
+```
+{% endcode %}
+
+`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC](../learn/integrations/github-oidc-authentication.md) or [tokenless authentication](../learn/integrations/github-tokenless-authentication.md) to avoid managing a secret.
+{% endstep %}
 {% endstepper %}
 
 ### Congratulations on installing Argos! 👏

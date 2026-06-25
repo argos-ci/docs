@@ -7,9 +7,9 @@ description: >-
 
 # Storybook
 
-### Getting Started
+### Get started
 
-To get started with Argos and Storybook, check out our quick start guides:
+To get started with Argos and Storybook, check out our Quickstart guides:
 
 * [Storybook + Vitest](../quickstart/storybook-quickstart/)
 * [Storybook + Test Runner](../quickstart/storybook-quickstart/storybook-test-runner-quickstart.md)
@@ -152,7 +152,7 @@ export default defineConfig({
 });
 ```
 
-* **`uploadToArgos`**: Set to `true` to upload screenshots to Argos CI.
+* **`uploadToArgos`**: Set to `true` to upload screenshots to Argos.
 
 Also supports all options from the [Playwright `argosScreenshot` function](playwright.md#argosscreenshotpage-name-options) and [upload parameters](https://js-sdk-reference.argos-ci.com/interfaces/UploadParameters.html).
 

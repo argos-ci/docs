@@ -1,3 +1,7 @@
+---
+description: Understand the deployment, branch, and production URLs Argos generates and when to share each one.
+---
+
 # URLs and domains
 
 Every deployment is reachable through one or more URLs. The exact URLs depend on the deployment's environment and the project's configuration. All deployment URLs are served from the shared root domain `argos-ci.live`.

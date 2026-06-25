@@ -1,4 +1,8 @@
-# Account Management
+---
+description: Create and manage your Argos account, sign up with Google, GitHub, or GitLab, and pick the plan that fits.
+---
+
+# Account management
 
 When you sign up for Argos, you create an account that manages your projects and subscriptions.
 
@@ -184,7 +188,7 @@ Return to the login page.
 
 Log back in with the account you want to use.
 
-From **Account Settings → Connections**, link your provider account.
+From the **Authentication** section, link your provider account.
 {% endstep %}
 {% endstepper %}
 

@@ -1,12 +1,16 @@
+---
+description: Use build splitting to run separate Argos visual tests for each package or app in your monorepo within one commit.
+---
+
 # Monorepos setup
 
-## Leveraging Build Splitting in Monorepos
+### Leveraging Build Splitting in Monorepos
 
 Monorepos, containing multiple packages or applications, can greatly benefit from Argos's build splitting feature. This allows for distinct visual testing builds within the same commit, catering to diverse screenshot categories such as component libraries and end-to-end (E2E) tests.
 
 Argos supports build splitting across all SDKs, offering a streamlined approach to manage visual tests for different parts of your monorepo. By specifying a unique build name for each category of screenshots, you can isolate and target tests more effectively.
 
-## Practical Application
+### Practical Application
 
 Imagine your monorepo includes both a component library and an application undergoing E2E testing. You can differentiate these test suites in Argos by assigning a unique `build-name` to each, ensuring clear separation and organization of visual tests. This is achieved by setting the `buildName` option in your Argos integration, as shown in the examples below for both component screenshots and E2E tests:
 

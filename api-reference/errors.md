@@ -46,7 +46,7 @@ When a request fails, the response body contains an `error` message. For validat
 
 Always check the response status before parsing the result. Status codes in the `2xx` range indicate success; anything else carries an error body you can inspect.
 
-```javascript
+```js
 const response = await fetch("https://api.argos-ci.com/v2/project", {
   headers: { Authorization: `Bearer ${process.env.ARGOS_TOKEN}` },
 });

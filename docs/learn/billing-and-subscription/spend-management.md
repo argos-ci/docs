@@ -1,4 +1,8 @@
-# Spend Management
+---
+description: Set spend thresholds to get notified or automatically pause builds when your team reaches its budget.
+---
+
+# Spend management
 
 Learn how to get notified about your team's spend and block further usage when you reach your budget.
 
@@ -39,7 +43,7 @@ To enable spend management, you must have an **Owner** role on your team.
 {% endstep %}
 
 {% step %}
-### Select the **Settings** tab and go to the **Billings** section
+### Select the **Settings** tab and go to the **Billing** section
 {% endstep %}
 
 {% step %}

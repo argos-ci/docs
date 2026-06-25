@@ -1,3 +1,7 @@
+---
+description: Skip an Argos build to report success without screenshots when a required check shouldn't run a visual comparison.
+---
+
 # Skipping a build
 
 Sometimes you want Argos to report success without running visual tests.

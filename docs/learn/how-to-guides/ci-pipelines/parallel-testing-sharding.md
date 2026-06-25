@@ -1,3 +1,7 @@
+---
+description: Collect screenshots from sharded or parallelized test runs into a single Argos build across your CI nodes.
+---
+
 # Parallel testing (sharding)
 
 Boost test suite efficiency with Argos Parallel Testing: Automate and streamline concurrent test executions across multiple environments effortlessly.
@@ -35,7 +39,7 @@ There is two parallel modes available:
 Below is a practical example showcasing how to configure Argos sharding within a GitHub Actions workflow.
 
 {% code title=".github/workflows/ci.yml" %}
-```yml
+```yaml
 jobs:
   e2e-tests:
     timeout-minutes: 60
@@ -65,7 +69,7 @@ jobs:
 Below is a practical example showcasing how to configure Argos sharding within a GitHub Actions workflow.
 
 {% code title=".github/workflows/ci.yml" %}
-```yml
+```yaml
 jobs:
   e2e-tests:
     timeout-minutes: 60

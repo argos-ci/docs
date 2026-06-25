@@ -1,4 +1,8 @@
-# Argos Helpers
+---
+description: Use data-visual-test attributes to hide, remove, or mask dynamic elements for consistent, flake-free screenshots.
+---
+
+# Argos helpers
 
 Enhance your visual tests with Argos SDKs: Use `data-visual-test` attributes to manage dynamic content, ensuring consistent, flakiness-free screenshots.
 

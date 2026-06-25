@@ -1,3 +1,7 @@
+---
+description: Discover how Argos uses deterministic pixel diffing with the odiff library to surface meaningful visual changes.
+---
+
 # How Argos detects visual differences
 
 Argos uses **deterministic pixel diffing**, not AI-based visual comparison.\

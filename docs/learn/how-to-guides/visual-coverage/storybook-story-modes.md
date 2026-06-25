@@ -1,3 +1,7 @@
+---
+description: Capture separate Storybook snapshots for each mode, combining theme, viewport, and locale globals in Argos.
+---
+
 # Storybook story modes
 
 Argos can capture multiple versions of your stories by applying different “modes,” which are essentially combinations of global Storybook settings (such as theme, viewport, locale, etc.). With modes, you can automatically generate a separate snapshot for each unique configuration.

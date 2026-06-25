@@ -1,3 +1,7 @@
+---
+description: Upload and diff text-based artifacts like JSON, HTML, Markdown, and CSS in Argos using the CLI files option.
+---
+
 # Compare non-image files
 
 Argos can compare more than screenshots. With the CLI, you can upload text-based artifacts such as API snapshots, generated HTML, Markdown files, CSS output, JavaScript bundles, XML documents, YAML files, or JSON fixtures and review their changes in Argos.

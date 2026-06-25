@@ -1,3 +1,7 @@
+---
+description: Understand how Argos assigns each deployment to a preview or production environment from your branch patterns.
+---
+
 # Environments
 
 Every deployment is created in one of two environments:

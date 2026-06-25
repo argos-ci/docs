@@ -1,3 +1,7 @@
+---
+description: Track your team's monthly screenshot usage and understand consumption metrics from your billing settings.
+---
+
 # Usage monitoring
 
 Effortlessly track your monthly usage with Argos. Access your team's usage details in just a few clicks, ensuring transparency and informed decision-making.
@@ -27,8 +31,8 @@ Should you exceed your plan's limit, the ability to upload additional screenshot
 
 #### Hobby Plan
 
-If your usage demands on the Hobby Plan exceed the limit, consider transitioning to a Team Plan. You can easily transfer your project to a newly created team.
+If your usage demands on the Hobby Plan exceed the limit, consider upgrading to the Pro Plan. You can easily transfer your project to a newly created team.
 
-#### Limited Pro Plan
+#### Pro Plan
 
-In case you surpass the threshold of your Limited Pro Plan, you'll need to [upgrade your plan](https://github.com/marketplace/argos-ci) to continue uploading screenshots seamlessly.
+If you reach the screenshot limit included in your Pro Plan, [upgrade your plan](https://github.com/marketplace/argos-ci) to a larger size to continue uploading screenshots. Pro Plans purchased through GitHub Marketplace come in fixed sizes (S, M, L, XL).

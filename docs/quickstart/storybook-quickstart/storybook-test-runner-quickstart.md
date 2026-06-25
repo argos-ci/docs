@@ -4,7 +4,7 @@ description: Learn how to setup visual testing in a Storybook using Test Runner
 
 # Storybook Test Runner Quickstart
 
-## Prerequisites
+### Prerequisites
 
 To get the most out of this guide, you'll need to:
 
@@ -101,7 +101,7 @@ Add `./screenshots` to your `.gitignore` file, to avoid uploading screenshots to
 Below is a complete GitHub Actions workflow to build your Storybook, run tests, capture screenshots, and upload them to Argos. If you use another CI provider, adapt the steps accordingly.
 
 {% code title=".github/workflows/storybook-test.yml" %}
-```yml
+```yaml
 name: Storybook Test
 
 on:
@@ -143,7 +143,7 @@ To learn how to run tests on a deployed Storybook, refer to the [Storybook test 
 {% endstep %}
 {% endstepper %}
 
-## Congratulations on installing Argos! 👏
+### Congratulations on installing Argos! 👏
 
 After committing and pushing your changes, the Argos check status will appear on your pull request in GitHub (or GitLab).
 
@@ -151,11 +151,11 @@ After committing and pushing your changes, the Argos check status will appear on
 
 You can now review changes of your app for each pull request, avoid visual bugs and merge with confidence. Welcome on board!
 
-## Next step: keep your screenshots stable
+### Next step: keep your screenshots stable
 
 Now that Argos is running, the next thing to learn is how to keep your screenshots free of flakiness. Read [Best practices for stable screenshots](../../learn/reliability-and-flakiness/flaky-tests/README.md) to avoid false positives before they reach your pull requests.
 
-## Additional resources
+### Additional resources
 
 * [Argos + Storybook + Test Runner example](https://github.com/argos-ci/argos-javascript/tree/main/examples/storybook-test-runner)
 * [Argos Storybook SDK reference](../../sdks-reference/storybook.md)

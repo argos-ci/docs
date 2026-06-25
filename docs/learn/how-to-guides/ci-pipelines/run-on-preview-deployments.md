@@ -1,3 +1,7 @@
+---
+description: Run Argos visual tests against Vercel, Netlify, or Cloudflare preview deployments to catch regressions before merging.
+---
+
 # Run on preview deployments
 
 Catch visual regressions **before merging** by running automated tests on every preview deployment.

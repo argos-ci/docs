@@ -1,3 +1,7 @@
+---
+description: Compare the Hobby, Pro, and Enterprise plans to find the right Argos pricing for individuals, teams, or companies.
+---
+
 # Pricing plans
 
 Argos offers flexible plans for individuals, teams, and enterprises. From the free Hobby Plan to fully customizable Enterprise options.

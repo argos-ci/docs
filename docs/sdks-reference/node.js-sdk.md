@@ -10,7 +10,7 @@ The SDK is available as an [npm package](https://www.npmjs.com/package/@argos-ci
 
 ### Installation
 
-```sh
+```bash
 npm install --save-dev @argos-ci/core
 ```
 
