@@ -6,12 +6,14 @@ The content is authored as Markdown files and synced with GitBook, so the publis
 
 ## Structure
 
-The documentation lives under [docs/](docs/):
+This repository holds two GitBook spaces:
 
-- [docs/SUMMARY.md](docs/SUMMARY.md) — the table of contents that defines the page hierarchy
-- [docs/quickstart/](docs/quickstart/) — getting-started guides for each test framework
-- [docs/learn/](docs/learn/) — conceptual guides and how-tos
-- [docs/sdks-reference/](docs/sdks-reference/) — SDK and API reference
+- [docs/](docs/) — the main documentation space
+  - [docs/SUMMARY.md](docs/SUMMARY.md) — the table of contents that defines the page hierarchy
+  - [docs/quickstart/](docs/quickstart/) — getting-started guides for each test framework
+  - [docs/learn/](docs/learn/) — conceptual guides and how-tos
+  - [docs/sdks-reference/](docs/sdks-reference/) — SDK and CLI reference
+- [api-reference/](api-reference/) — the REST API reference space (introduction, pagination, rate limits, errors, and the OpenAPI spec)
 
 ## Contributing
 
