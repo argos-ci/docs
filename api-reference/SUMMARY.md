@@ -1,15 +1,18 @@
 # Table of contents
 
-* [Introduction](introduction.md)
+* [Introduction](README.md)
 * [Pagination](pagination.md)
 * [Rate limits](rate-limits.md)
 * [Errors](errors.md)
+
+## Reference
+
 * ```yaml
-  type: builtin:openapi
   props:
     models: true
     downloadLink: true
     grouping: by-tag
+  type: builtin:openapi
   dependencies:
     spec:
       ref:
