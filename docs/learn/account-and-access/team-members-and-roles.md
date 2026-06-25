@@ -119,18 +119,6 @@ Project level roles provide fine-grained control and access to specific projects
 The project administrator role is available on Enterprise plans
 {% endhint %}
 
-Project reviewers play a key role in working on projects, mirroring the functions of team members, but with a narrowed project focus.
-
-**Key responsibilities**
-
-* Review builds
-
-#### Project Reviewer
-
-{% hint style="info" %}
-The project reviewer role is available on Enterprise plans
-{% endhint %}
-
 Project administrators hold significant authority at the project level, operating as the project-level counterparts to team members and owners.
 
 **Key responsibilities**
@@ -142,6 +130,18 @@ Project administrators hold significant authority at the project level, operatin
 **Access and permission**
 
 Their authority doesn't extend across all projects within the team. Project administrators are restricted to the projects they're assigned to.
+
+#### Project Reviewer
+
+{% hint style="info" %}
+The project reviewer role is available on Enterprise plans
+{% endhint %}
+
+Project reviewers play a key role in working on projects, mirroring the functions of team members, but with a narrowed project focus.
+
+**Key responsibilities**
+
+* Review builds
 
 #### Project Viewer
 
