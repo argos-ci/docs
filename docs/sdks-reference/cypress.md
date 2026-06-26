@@ -105,6 +105,7 @@ module.exports = defineConfig({
 * `options.stabilize.waitForAriaBusy`: Wait for the `aria-busy` attribute to be removed from the document. Default to `true`.
 * `options.stabilize.waitForFonts`: Wait for fonts to be loaded. Default to `true`.
 * `options.stabilize.waitForImages`: Wait for images to be loaded. Default to `true`.
+* `options.stabilize.waitForBackgroundImages`: Wait for CSS background images (including `::before`/`::after`) to load before taking the screenshot. **Disabled by default**—opt in by passing `true` to scan the whole document, or `{ selector: string }` to limit the scan to matching elements. A failed image (e.g. a 404) is treated as loaded so it never blocks stabilization.
 * `options.tag`: Tag or array of tags to attach to the screenshot for filtering in Argos.
 
 ### Helper Attributes for Visual Testing
