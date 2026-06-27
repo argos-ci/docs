@@ -37,6 +37,8 @@ In most cases this is a **project token**, which you can find in your project se
 Your token carries the ability to create and update builds in your project. Keep it secret: store it as a CI secret or environment variable, and never commit it to version control or expose it in client-side code.
 {% endhint %}
 
+Some endpoints act on behalf of a user rather than a project — for example, submitting a review, posting a comment, or resolving a thread. These require a **personal access token**, which is attributed to your Argos user and checked against your project permissions. You can create one in your personal settings on [argos-ci.com](https://argos-ci.com).
+
 Requests without a valid token return a [`401 Unauthorized`](errors.md) response.
 
 ## Making a request

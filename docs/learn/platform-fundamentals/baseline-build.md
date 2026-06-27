@@ -24,6 +24,28 @@ Argos selects the baseline build by finding the most recent **candidate build** 
 4. Be auto-approved, manually approved or orphan
 5. Its commit is an ancestor of the merge base between the triggered build's commit and the baseline branch
 
+### Check whether a build can be a baseline
+
+Every completed build shows whether it's **eligible to become a baseline** for future builds. Look for the baseline-eligibility chip next to the build status on the build page, in the [Builds list](../review-workflow/builds-list.md), and in the build's **Info** panel:
+
+* **Eligible as baseline** — "This build is eligible to be used as a baseline by future builds."
+* **Not eligible as baseline** — "This build is not eligible to be used as a baseline by future builds."
+
+![The baseline eligibility chip and its explanation on the build page](../../.gitbook/assets/baseline-eligibility-chip.png)
+
+When a build isn't eligible, the **Baseline eligibility** section of the Info panel lists which criteria it failed to meet. A build is eligible when all of the following are true:
+
+* **The build is complete.** Argos has finished processing it.
+* **Its tests passed.** None of the end-to-end tests that produced the screenshots failed.
+* **It's approved or merged.** The build is auto-approved, manually approved, an orphan, or its pull request was merged.
+* **It isn't a subset.** The build uploaded the full set of snapshots, not a [subset](../how-to-guides/ci-pipelines/subset-builds.md).
+
+![The Baseline eligibility section in the build Info panel listing the unmet criteria](../../.gitbook/assets/baseline-eligibility-info-panel.png)
+
+{% hint style="info" %}
+The chip appears only once a build is complete, and it reflects the build on its own. The remaining conditions above — matching build name and commit ancestry — depend on the build being compared, so Argos evaluates them when a new build looks for its baseline.
+{% endhint %}
+
 ### What is the baseline branch?
 
 The **baseline branch** is the branch Argos uses as the reference for determining the baseline build:
