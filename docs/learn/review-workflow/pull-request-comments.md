@@ -12,6 +12,10 @@ Every time there's an update to a build status, Argos automatically comments on 
 
 ![Argos GitHub pull request comment](<../../.gitbook/assets/github pr comment 54bebb73962dc705b32c33f577fb9dd0.png>)
 
+### What the comment shows
+
+For each build, the comment lists its status, a link to inspect it, and a **Details** column that summarizes the changes — for example `2 added` or `4 changed, 3 ignored`. [Ignored screenshots](../reliability-and-flakiness/flaky-test-detection.md#ignore-changes) are counted here too, so you can see at a glance how much was filtered out as noise.
+
 ### Silence pull request comments
 
 If you would like to stop automatic comments from appearing on your pull request by the Argos GitHub bot, you can silence them through the project Settings:

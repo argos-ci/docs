@@ -4,13 +4,13 @@ description: Get a project-wide view of test stability, with every test ranked b
 
 # Tests dashboard
 
-The Tests dashboard gives you a project-wide view of test stability. It lists all tests sorted by flakiness score so the most flaky tests show up first.
+The Tests dashboard gives you a view of test stability ranked by flakiness score, so the most flaky tests show up first. It comes in two scopes: a **project** dashboard for a single project, and an **account** dashboard that aggregates tests across every project you can access.
 
 ![Tests dashboard showing a list of tests with flakiness metrics](<../../.gitbook/assets/tests dashboard 0e272203e4b55b8d11f669564169009f.png>)
 
 _**A project Tests dashboard with flakiness metrics**_
 
-### Open the dashboard
+### Open the project dashboard
 
 1. Open your project in Argos.
 2. Click the **Tests** tab.
@@ -36,3 +36,15 @@ Tests are sorted by **flakiness score** (descending). The tests at the top are t
 ### Open a test page
 
 Click any row to open the detailed test page and review history and stability details. See [Flaky test detection](flaky-test-detection.md) for more information.
+
+### See tests across all your projects
+
+Flaky tests are no longer buried per project. The account-level **Tests** dashboard aggregates the active tests across every project you can see and ranks them by flakiness, so the noisiest tests surface first — wherever they live.
+
+1. Select your account or team in Argos.
+2. Click the **Tests** tab.
+
+<!-- 📸 IMAGE NEEDED: The account-level Tests dashboard listing tests from multiple projects, with the Project column visible. -->
+
+It shows the same flakiness, stability, and consistency metrics as the project dashboard, plus a **Project** column so you can tell where each test comes from. A test counts as **active** when it appears in the latest reference build for its build name. You only see tests from projects you have access to.
+

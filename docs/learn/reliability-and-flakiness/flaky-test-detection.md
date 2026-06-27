@@ -39,30 +39,45 @@ The test page focuses on a single test. For a project-wide view that ranks every
 
 ### Ignore changes
 
-When reviewing a visual test result in Argos, you may encounter changes that are not relevant or are caused by flakiness. You can **ignore a specific change** directly from the UI.
+When reviewing a build in Argos, you may encounter changes that are not relevant or are caused by flakiness. You can **ignore a specific change** directly from the UI.
 
-From the build page or the test page, click on the "Ignore" button next to the change you want to ignore.
+From the build page or the test page, click the **Ignore** button next to the change you want to ignore.
 
 Once ignored, Argos will no longer notify you if this **exact same change** happens again in future builds. This lets you filter out noise while keeping future regressions detectable.
 
+Ignored screenshots are also reflected in the [pull request comment](../review-workflow/pull-request-comments.md): the **Details** column reports how many screenshots were ignored alongside the other counts (for example, `4 changed, 3 ignored`).
+
+### Configure what Argos ignores
+
+You control the ignore feature per project from **Project Settings → Flaky detection**.
+
+The **Ignore changes** card has a single toggle, **Enable the ignore feature for this project**, which is on by default. When you turn it off:
+
+* New builds ignore nothing — every change is treated as not ignored.
+* Auto-ignore is turned off.
+* The **Ignore** button is hidden when reviewing builds.
+
+{% hint style="info" %}
+Disabling the feature only changes how **new** builds are computed. Previous builds are not affected — changes already ignored stay ignored on those builds.
+{% endhint %}
+
 ### Automatically ignore recurring flaky changes
 
-You can also configure Argos to automatically ignore recurring flaky changes across builds.
+When the ignore feature is enabled, Argos can automatically ignore recurring flaky changes across builds, so you don't have to ignore each one by hand.
 
 To configure auto-ignore:
 
-1. Open your project in Argos
-2. Go to **Project Settings**
-3. Find **Automatically ignore flaky changes**
-4. Enable the toggle
-5. Set **Minimum occurrences to consider a change flaky (last 7 days)**
-6. Click **Save**
+1. Open your project in Argos.
+2. Go to **Project Settings → Flaky detection**.
+3. In the **Automatically ignore flaky changes** card, enable **Auto-ignore flaky changes**.
+4. Set **Minimum occurrences to consider a change flaky (last 7 days)**.
+5. Click **Save**.
 
 ![Auto-ignore flaky changes in project settings](<../../.gitbook/assets/auto ignore fce4000798bcef00801460c36c56dbad.png>)
 
-The minimum occurrences value controls how many times the same change must appear in the last 7 days before Argos starts ignoring it automatically.
+A change is considered flaky once it appears at least this many times in auto-approved builds within the last 7 days. The default threshold is **3** occurrences.
 
-#### Best Use Cases
+#### Best use cases
 
 * Flaky UI elements that appear/disappear randomly or render inconsistently.
 * Non-deterministic image rendering (e.g. base64 previews, antialiasing issues).

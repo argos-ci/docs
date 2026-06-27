@@ -19,6 +19,7 @@
   * [Build modes](learn/platform-fundamentals/build-modes.md)
 * [Review workflow](learn/review-workflow/README.md)
   * [Builds list](learn/review-workflow/builds-list.md)
+  * [Review a build](learn/review-workflow/review-a-build.md)
   * [Pull request comments](learn/review-workflow/pull-request-comments.md)
   * [Review builds with AI agents](learn/review-workflow/review-builds-with-ai-agents.md "AI agents")
   * [Summary checks](learn/review-workflow/summary-checks.md)

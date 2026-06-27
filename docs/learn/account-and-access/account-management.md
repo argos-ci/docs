@@ -45,11 +45,33 @@ SAML SSO allows Enterprise users to log in with their organization’s identity 
 
 For setup and login instructions, see [SAML Single Sign-On](saml-single-sign-on.md).
 
-#### Choosing a connection when creating a project
+### Creating a project
 
-When you create your first project, you’ll be asked to connect a Git provider.
+You can create a project in two ways from the **New Project** page — import an existing Git repository, or start with just a name and connect a repository later.
 
-This connection is required and will also serve as a login method.
+{% tabs %}
+{% tab title="Import a Git repository" %}
+Choose **Import a Git repository** and select a Git provider (GitHub or GitLab) to import a repository. Argos links the project to that repository, which enables [pull request comments](../review-workflow/pull-request-comments.md) and status checks.
+{% endtab %}
+
+{% tab title="Create without Git" %}
+Choose **Create a project without Git**, enter a **Project name**, and click **Create project**.
+
+A project without a connected repository still receives builds through the [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md) using its project token. Features that depend on a repository — such as pull request comments — become available once you link one.
+{% endtab %}
+{% endtabs %}
+
+![The New Project page with two paths: import a Git repository or create a project without Git](../../.gitbook/assets/new-project-page.png)
+
+#### Connect a repository later
+
+To link a repository to a project you created without Git:
+
+1. Open the project's **Settings**.
+2. Go to the **Connected Git Repository** section.
+3. Select a Git provider and choose the repository to connect.
+
+You can disconnect or change the repository from the same section at any time.
 
 ### Teams
 
