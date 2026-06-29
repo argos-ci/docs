@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "write-gitbook": {
+      "source": "gitbookio/gitbook-ai",
+      "sourceType": "github",
+      "skillPath": "skills/write-gitbook/SKILL.md",
+      "computedHash": "3c1bb2fdb87391cf5b58158d197d78db313ee61cec7bdcb1c8d302bce08285ea"
+    }
+  }
+}
