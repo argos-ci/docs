@@ -65,6 +65,10 @@ The Argos Playwright reporter automatically reports failure screenshots and play
 * **Failure Screenshots**: View failure screenshots from your CI tests directly in Argos. No extra steps, just immediate clarity where you need it most.
 * **Playwright Traces**: “Time travel” through your failing tests with remote Playwright traces. Gain a complete, step-by-step visual journey to the heart of any test issue.
 
+{% hint style="info" %}
+Each uploaded snapshot — including screenshots and Playwright traces — is limited to 50 MB. See [Snapshot size limit](argos-command-line-interface-cli.md#snapshot-size-limit).
+{% endhint %}
+
 To enable Test Debugging, you have to add Argos reporter and to turn on [Playwright test use options](https://playwright.dev/docs/test-use-options) in your Playwright config:
 
 {% code title="playwright.config.ts" %}

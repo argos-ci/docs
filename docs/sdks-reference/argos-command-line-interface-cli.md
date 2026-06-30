@@ -110,6 +110,10 @@ bun x argos upload ./screenshots
 {% endtab %}
 {% endtabs %}
 
+#### Snapshot size limit
+
+Each snapshot uploaded to Argos is limited to **50 MB**. This applies to every artifact type — a screenshot, a [non-image snapshot](#compare-non-image-files), or a [Playwright trace](playwright.md). Files larger than 50 MB are skipped and won't appear in your build.
+
 #### Compare non-image files
 
 Use `-f` or `--files` to upload text-based artifacts such as JSON, YAML, XML, HTML, Markdown, CSS, or JavaScript files. See [Compare non-image files](../learn/how-to-guides/visual-coverage/compare-non-image-files.md) for examples and the full list of supported content types.
