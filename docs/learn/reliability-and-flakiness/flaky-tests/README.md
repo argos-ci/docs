@@ -36,6 +36,7 @@ Most stabilization is automatic. The Argos SDK stabilizes every screenshot by de
 
 * **Wait until the page is ready before capturing.** Mark loading elements with `aria-busy` so `argosScreenshot()` waits for them. → [Wait for loading](wait-for-loading.md)
 * **Wait for CSS background images to load.** Enable the opt-in `waitForBackgroundImages` option when responsive or decorative backgrounds render late. → [Wait for background images](wait-for-background-images.md)
+* **Freeze animated GIFs.** GIFs are paused on their first frame by default so they don't capture a random frame on each run. → [Pause animated GIFs](pause-gifs.md)
 * **Make dates and times deterministic.** Hide or freeze any value that changes between runs. → [Stabilize date & time](stabilize-date-and-time.md)
 * **Force consistent text rendering.** Disable subpixel text and font hinting so glyphs look identical on every machine. → [Stabilize text rendering](stabilize-text-rendering.md)
 * **Run the same environment everywhere, and tame rendering quirks.** Use the same OS and browser locally and on CI, and smooth over properties like `border-radius`. → [Browser glitches](browser-glitches.md)
