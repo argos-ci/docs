@@ -69,6 +69,7 @@ Screenshots are stored in `screenshots/argos` folder, relative to current direct
 * `options.stabilize.hideCarets`: Hide text carets before taking the screenshot. Default to `true`.
 * `options.stabilize.hideScrollbars`: Hide scrollbars before taking the screenshot. Default to `true`.
 * `options.stabilize.loadImageSrcset`: Force the loading of images with `srcset` attributes when the viewport changes. Default to `true`.
+* `options.stabilize.pauseGifs`: Pause animated GIFs on their first frame so they don't capture a random frame on each run. Default to `true`.
 * `options.stabilize.roundImageSize`: Round image sizes to the nearest integer. Default to `true`.
 * `options.stabilize.stabilizeSticky`: Stabilize sticky and fixed elements by switching to `position: absolute`. Default to `true`.
 * `options.stabilize.waitForAriaBusy`: Wait for the `aria-busy` attribute to be removed from the document. Default to `true`.

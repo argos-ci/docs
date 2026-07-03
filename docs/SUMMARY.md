@@ -34,6 +34,7 @@
   * [Flaky tests](learn/reliability-and-flakiness/flaky-tests/README.md "Playbook")
     * [Wait for loading](learn/reliability-and-flakiness/flaky-tests/wait-for-loading.md)
     * [Wait for background images](learn/reliability-and-flakiness/flaky-tests/wait-for-background-images.md)
+    * [Pause animated GIFs](learn/reliability-and-flakiness/flaky-tests/pause-gifs.md)
     * [Stabilize date & time](learn/reliability-and-flakiness/flaky-tests/stabilize-date-and-time.md)
     * [Stabilize text rendering](learn/reliability-and-flakiness/flaky-tests/stabilize-text-rendering.md)
     * [Browser glitches](learn/reliability-and-flakiness/flaky-tests/browser-glitches.md)
