@@ -20,6 +20,16 @@ For each `<img>` that resolves to a GIF, the SDK loads a fresh copy of the image
 
 A cross-origin GIF served without the right CORS headers taints the canvas and can't be frozen; those are left animating rather than blocking the screenshot.
 
+### Flagging GIFs that aren't detected automatically
+
+The SDK recognizes GIFs from their URL—a `.gif` extension or a `data:image/gif` URI. A GIF served from a URL that carries neither (for example a CDN endpoint like `/media/1234`) can't be detected this way, so it keeps animating.
+
+Flag those images explicitly with the `data-image-type="gif"` attribute and they'll be paused like any other GIF:
+
+```html
+<img src="https://cdn.example.com/media/1234" data-image-type="gif" />
+```
+
 ### Disabling it
 
 If you specifically want to capture the live animation, disable the plugin:

@@ -14,6 +14,8 @@ For tailored visual testing, the `data-visual-test` attributes provide control o
 * `[data-visual-test="removed"]`: Removes the element from view (`display: none`).
 * `[data-visual-test="blackout"]`: Masks the element with a blackout effect (Storybook, Playwright, and Cypress SDK only).
 * `[data-visual-test-no-radius]`: Strips the border radius from the element.
+* `[data-visual-test-wait-bg-img]`: Waits for the element's (and its descendants') CSS background images to load before capturing. See [Wait for background images](wait-for-background-images.md).
+* `[data-image-type="gif"]`: Flags an image as a GIF so it's paused even when its URL has no `.gif` extension. See [Pause animated GIFs](pause-gifs.md).
 
 **Example: Using a helper attribute to hide a div from the captured screenshot:**
 

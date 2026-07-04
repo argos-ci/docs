@@ -318,13 +318,13 @@ Each ARIA snapshot counts as an additional screenshot for billing.
 * `options.stabilize.hideCarets`: Hide text carets before taking the screenshot. Default to `true`.
 * `options.stabilize.hideScrollbars`: Hide scrollbars before taking the screenshot. Default to `true`.
 * `options.stabilize.loadImageSrcset`: Force the loading of images with `srcset` attributes when the viewport changes. Default to `true`.
-* `options.stabilize.pauseGifs`: Pause animated GIFs on their first frame so they don't capture a random frame on each run. Default to `true`.
+* `options.stabilize.pauseGifs`: Pause animated GIFs on their first frame so they don't capture a random frame on each run. Default to `true`. Flag GIFs served from extension-less URLs with `data-image-type="gif"` so they're detected too.
 * `options.stabilize.roundImageSize`: Round image sizes to the nearest integer. Default to `true`.
 * `options.stabilize.stabilizeSticky`: Stabilize sticky and fixed elements by switching to `position: absolute`. Default to `true`.
 * `options.stabilize.waitForAriaBusy`: Wait for the `aria-busy` attribute to be removed from the document. Default to `true`.
 * `options.stabilize.waitForFonts`: Wait for fonts to be loaded. Default to `true`.
 * `options.stabilize.waitForImages`: Wait for images to be loaded. Default to `true`.
-* `options.stabilize.waitForBackgroundImages`: Wait for CSS background images (including `::before`/`::after`) to load before taking the screenshot. **Disabled by default**—opt in by passing `true` to scan the whole document, or `{ selector: string }` to limit the scan to matching elements. A failed image (e.g. a 404) is treated as loaded so it never blocks stabilization.
+* `options.stabilize.waitForBackgroundImages`: Wait for CSS background images (including `::before`/`::after`) to load before taking the screenshot. Enabled by default, scoped to elements flagged with the `data-visual-test-wait-bg-img` attribute (and their descendants). Pass `true` to scan the whole document, `{ selector: string }` to target a custom selector, or `false` to disable it. A failed image (e.g. a 404) is treated as loaded so it never blocks stabilization.
 * `options.beforeScreenshot`: Run a function before taking the screenshot. When using viewports, this function will run before taking screenshots on each viewport.
 * `options.afterScreenshot`: Run a function after taking the screenshot. When using viewports, this function will run after taking screenshots on each viewport.
 * `options.tag`: Tag or array of tags to attach to the screenshot for filtering in Argos.
@@ -346,13 +346,13 @@ Unlike [Playwright's `screenshot` method](https://playwright.dev/docs/api/class-
 * `options.stabilize.hideCarets`: Hide text carets before taking the screenshot. Default to `true`.
 * `options.stabilize.hideScrollbars`: Hide scrollbars before taking the screenshot. Default to `true`.
 * `options.stabilize.loadImageSrcset`: Force the loading of images with `srcset` attributes when the viewport changes. Default to `true`.
-* `options.stabilize.pauseGifs`: Pause animated GIFs on their first frame so they don't capture a random frame on each run. Default to `true`.
+* `options.stabilize.pauseGifs`: Pause animated GIFs on their first frame so they don't capture a random frame on each run. Default to `true`. Flag GIFs served from extension-less URLs with `data-image-type="gif"` so they're detected too.
 * `options.stabilize.roundImageSize`: Round image sizes to the nearest integer. Default to `true`.
 * `options.stabilize.stabilizeSticky`: Stabilize sticky and fixed elements by switching to `position: absolute`. Default to `true`.
 * `options.stabilize.waitForAriaBusy`: Wait for the `aria-busy` attribute to be removed from the document. Default to `true`.
 * `options.stabilize.waitForFonts`: Wait for fonts to be loaded. Default to `true`.
 * `options.stabilize.waitForImages`: Wait for images to be loaded. Default to `true`.
-* `options.stabilize.waitForBackgroundImages`: Wait for CSS background images (including `::before`/`::after`) to load before taking the screenshot. **Disabled by default**—opt in by passing `true` to scan the whole document, or `{ selector: string }` to limit the scan to matching elements. A failed image (e.g. a 404) is treated as loaded so it never blocks stabilization.
+* `options.stabilize.waitForBackgroundImages`: Wait for CSS background images (including `::before`/`::after`) to load before taking the screenshot. Enabled by default, scoped to elements flagged with the `data-visual-test-wait-bg-img` attribute (and their descendants). Pass `true` to scan the whole document, `{ selector: string }` to target a custom selector, or `false` to disable it. A failed image (e.g. a 404) is treated as loaded so it never blocks stabilization.
 
 #### getCSPScriptHash()
 
