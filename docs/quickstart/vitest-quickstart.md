@@ -167,6 +167,10 @@ test("API response", async () => {
 ```
 {% endcode %}
 
+{% hint style="success" %}
+`argosSnapshot` lets you visually diff **anything**, not just UI—API responses, generated HTML, config files, Markdown, and more. Pass the `extension` option (e.g. `.json`, `.html`, `.yml`) to control how Argos renders and diffs it. See the [SDK reference](../sdks-reference/vitest.md#capturing-snapshots) for details.
+{% endhint %}
+
 Both are written to the `./screenshots` directory by default. Add `./screenshots` to your `.gitignore` file to avoid committing them to your Git repository.
 
 Tip: Check out our guides to [capture multiple viewports](../learn/how-to-guides/visual-coverage/responsive-viewports.md) or [add ARIA snapshots](../learn/how-to-guides/visual-coverage/adding-aria-snapshots-manually.md), and the [SDK reference](../sdks-reference/vitest.md) for all `argosSnapshot` options.
