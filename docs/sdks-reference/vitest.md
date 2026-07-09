@@ -18,33 +18,63 @@ Using **Storybook**? The [Storybook SDK](storybook.md) builds on this same Vites
 
 ### Requirements
 
-`@argos-ci/vitest` runs in [Vitest browser mode](https://vitest.dev/guide/browser/) with the [Playwright provider](https://vitest.dev/guide/browser/playwright). Install it alongside its peer dependencies:
+Install `@argos-ci/vitest`:
 
 {% tabs %}
 {% tab title="npm" %}
 ```
-npm i --save-dev @argos-ci/vitest vitest @vitest/browser @vitest/browser-playwright playwright
+npm i --save-dev @argos-ci/vitest
 ```
 {% endtab %}
 
 {% tab title="yarn" %}
 ```
-yarn add --dev @argos-ci/vitest vitest @vitest/browser @vitest/browser-playwright playwright
+yarn add --dev @argos-ci/vitest
 ```
 {% endtab %}
 
 {% tab title="pnpm" %}
 ```
-pnpm add --save-dev @argos-ci/vitest vitest @vitest/browser @vitest/browser-playwright playwright
+pnpm add --save-dev @argos-ci/vitest
 ```
 {% endtab %}
 
 {% tab title="bun" %}
 ```
-bun add --dev @argos-ci/vitest vitest @vitest/browser @vitest/browser-playwright playwright
+bun add --dev @argos-ci/vitest
 ```
 {% endtab %}
 {% endtabs %}
+
+Capturing **screenshots** requires [Vitest browser mode](https://vitest.dev/guide/browser/) with the [Playwright provider](https://vitest.dev/guide/browser/playwright). Install these peer dependencies as well:
+
+{% tabs %}
+{% tab title="npm" %}
+```
+npm i --save-dev vitest @vitest/browser @vitest/browser-playwright playwright
+```
+{% endtab %}
+
+{% tab title="yarn" %}
+```
+yarn add --dev vitest @vitest/browser @vitest/browser-playwright playwright
+```
+{% endtab %}
+
+{% tab title="pnpm" %}
+```
+pnpm add --save-dev vitest @vitest/browser @vitest/browser-playwright playwright
+```
+{% endtab %}
+
+{% tab title="bun" %}
+```
+bun add --dev vitest @vitest/browser @vitest/browser-playwright playwright
+```
+{% endtab %}
+{% endtabs %}
+
+**Snapshots** (`argosSnapshot`) run in any Vitest test—browser or Node—and require none of the browser-mode dependencies.
 
 ### Capturing screenshots
 
