@@ -3,6 +3,7 @@
 * [Overview](README.md)
 * [Quickstart](quickstart/README.md)
   * [Playwright Quickstart](quickstart/playwright-quickstart.md "Playwright")
+  * [Vitest Quickstart](quickstart/vitest-quickstart.md "Vitest")
   * [Storybook Quickstart](quickstart/storybook-quickstart/README.md "Storybook")
     * [Storybook Test Runner Quickstart](quickstart/storybook-quickstart/storybook-test-runner-quickstart.md "Test Runner")
     * [Storybook Legacy (\<v8) Quickstart](quickstart/storybook-quickstart/storybook-legacy-less-than-v8-quickstart.md "Legacy (\<v8)")
@@ -87,6 +88,7 @@
 ## SDKs Reference
 
 * [Playwright](sdks-reference/playwright.md)
+* [Vitest](sdks-reference/vitest.md)
 * [Storybook](sdks-reference/storybook.md)
 * [Cypress](sdks-reference/cypress.md)
 * [WebdriverIO](sdks-reference/webdriverio.md)
