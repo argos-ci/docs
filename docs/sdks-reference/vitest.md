@@ -181,7 +181,7 @@ Available options:
 * **`argosCSS`**: Custom CSS evaluated during the screenshot process.
 * **`threshold`**: Sensitivity threshold between `0` and `1`. The higher the threshold, the less sensitive the diff (default: `0.5`).
 * **`tag`**: A [tag](../learn/review-workflow/tags.md) or array of tags to attach to the screenshot.
-* **`ariaSnapshot`**: Capture an [ARIA snapshot](../learn/how-to-guides/visual-coverage/adding-aria-snapshots-manually.md) along with the screenshot (default: `false`).
+* **`ariaSnapshot`**: Capture an [ARIA snapshot](../learn/how-to-guides/visual-coverage/adding-aria-snapshots-manually.md) along with the screenshot (default: `false`). Each ARIA snapshot counts as an additional screenshot for billing.
 * **`disableHover`**: Disable hover effects by moving the mouse to the top-left corner (default: `true`).
 * **`stabilize`**: Wait for the UI to stabilize before taking the screenshot. Set to `false` to disable or pass an object to customize it (default: `true`).
 
