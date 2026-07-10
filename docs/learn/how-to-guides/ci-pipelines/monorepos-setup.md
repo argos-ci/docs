@@ -66,3 +66,7 @@ export default defineConfig({
 {% endcode %}
 
 This approach not only enhances the clarity of your visual testing efforts in a monorepo context but also improves the efficiency of identifying and addressing potential visual regressions across different scopes of your project.
+
+{% hint style="info" %}
+If your monorepo uses a task cache like Turborepo or Nx that decides which test suites actually run, see [Cached CI pipelines (Turborepo, Nx)](cached-pipelines.md) — it covers aggregating packages into a single build and keeping baselines and required checks reliable when suites are skipped.
+{% endhint %}
