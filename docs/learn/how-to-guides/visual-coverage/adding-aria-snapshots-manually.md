@@ -10,6 +10,10 @@ This setup is mainly useful if you are using Playwright for Python or another to
 
 If you use Playwright with Node.js, use the official [Argos Playwright SDK](../../../sdks-reference/playwright.md), which supports ARIA snapshots directly.
 
+{% hint style="info" %}
+Each ARIA snapshot counts as an additional screenshot for billing.
+{% endhint %}
+
 ### Configure uploaded files
 
 When you upload a folder with the Argos CLI, pass the `--files` flag so Argos picks up both screenshot files and ARIA snapshot files:
