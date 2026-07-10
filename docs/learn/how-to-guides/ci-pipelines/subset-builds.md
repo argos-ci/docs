@@ -6,7 +6,7 @@ description: Run subset builds to upload a partial test run without affecting th
 
 Subset builds are designed for CI runs that **don't execute the full E2E test suite** on a branch. When a build is marked as subset, Argos **ignores removed screenshots** and only notifies you about **changed and added screenshots** from the tests you did run.
 
-This is helpful for speeding up feature-branch validation while still getting reliable visual feedback from the relevant tests.
+This is helpful for speeding up feature-branch validation while still getting reliable visual feedback from the relevant tests. It's a key ingredient of pipelines where a task cache decides which suites run — see [Cached CI pipelines (Turborepo, Nx)](cached-pipelines.md) for the full setup.
 
 {% hint style="info" %}
 You still need to run your full test suite on your main branch to create and update **baseline builds**. Subset builds are not eligible as baselines. See [Baseline build](../../platform-fundamentals/baseline-build.md).

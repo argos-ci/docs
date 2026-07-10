@@ -178,6 +178,80 @@ DEBUG=@argos-ci/core bun x argos upload ./screenshots
 {% endtab %}
 {% endtabs %}
 
+### Finalize Command
+
+Use the `finalize` command to close a [parallel build](../learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md) running in finalize mode (`ARGOS_PARALLEL_TOTAL=-1`). Run it once every upload has completed: Argos then aggregates the uploaded shards and starts the comparison.
+
+{% tabs %}
+{% tab title="npm" %}
+```
+npm exec -- argos finalize
+```
+{% endtab %}
+
+{% tab title="yarn" %}
+```
+yarn run argos finalize
+```
+{% endtab %}
+
+{% tab title="pnpm" %}
+```
+pnpm exec -- argos finalize
+```
+{% endtab %}
+
+{% tab title="bun" %}
+```
+bun x argos finalize
+```
+{% endtab %}
+{% endtabs %}
+
+The shards are matched by their nonce, read from `--parallel-nonce` or the `ARGOS_PARALLEL_NONCE` environment variable. In most CI environments the nonce is detected automatically, so no flag is needed as long as `finalize` runs in the same pipeline as the uploads.
+
+#### Handle runs without uploads
+
+When every upload step is conditional — skipped by a task cache such as Turborepo or Nx, or by change detection — a run may produce no shard at all, and `finalize` has nothing to close. Use `--skip-if-empty` to create a [skipped build](../learn/how-to-guides/ci-pipelines/skipping-a-build.md) in that case, so a required Argos status check still reports success on the commit:
+
+```
+npm exec -- argos finalize --skip-if-empty --build-name unit
+```
+
+`--build-name` (or `ARGOS_BUILD_NAME`) names the skipped build; use the same name as your uploads so the status check context matches.
+
+### Skip Command
+
+Use the `skip` command to create a [skipped build](../learn/how-to-guides/ci-pipelines/skipping-a-build.md): a build with no screenshots and no comparison that immediately reports a successful status. This keeps a required Argos check green on commits where you intentionally don't run visual tests.
+
+{% tabs %}
+{% tab title="npm" %}
+```
+npm exec -- argos skip
+```
+{% endtab %}
+
+{% tab title="yarn" %}
+```
+yarn run argos skip
+```
+{% endtab %}
+
+{% tab title="pnpm" %}
+```
+pnpm exec -- argos skip
+```
+{% endtab %}
+
+{% tab title="bun" %}
+```
+bun x argos skip
+```
+{% endtab %}
+{% endtabs %}
+
+Use `--build-name` to match the build name of the check you want to satisfy.
+
 ### Deploy Command
 
 Use the `deploy` command to deploy a static build (Storybook or any static site) to Argos. See [Deployments](../learn/deployments/) for an overview of the feature.

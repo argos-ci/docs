@@ -45,6 +45,7 @@
   * [CI pipelines](learn/how-to-guides/ci-pipelines/README.md)
     * [Monorepos setup](learn/how-to-guides/ci-pipelines/monorepos-setup.md)
     * [Parallel testing (sharding)](learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md)
+    * [Cached CI pipelines (Turborepo, Nx)](learn/how-to-guides/ci-pipelines/cached-pipelines.md)
     * [Run on preview deployments](learn/how-to-guides/ci-pipelines/run-on-preview-deployments.md)
     * [Skipping a build](learn/how-to-guides/ci-pipelines/skipping-a-build.md)
     * [Subset builds](learn/how-to-guides/ci-pipelines/subset-builds.md)

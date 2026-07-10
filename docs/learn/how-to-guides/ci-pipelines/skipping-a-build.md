@@ -57,3 +57,7 @@ jobs:
 {% endcode %}
 
 This immediately creates a successful Argos build with no visual testing.
+
+{% hint style="info" %}
+For [parallel builds in finalize mode](parallel-testing-sharding.md#finalize-mode) where every upload step may be skipped (e.g. by a task cache), use `argos finalize --skip-if-empty` instead: it finalizes the build when shards were uploaded, and creates a skipped build otherwise. See [Cached CI pipelines (Turborepo, Nx)](cached-pipelines.md).
+{% endhint %}
