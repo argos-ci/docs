@@ -12,50 +12,22 @@ Three problems follow:
 2. **Missing screenshots look like removed screenshots.** If a build only contains the suites that ran, Argos would report every cached suite's screenshots as removed.
 3. **Baselines on your main branch can go stale.** A baseline must be a complete build. If the suite that produces a screenshot doesn't run on main, no build contains its up-to-date version.
 
-This guide sets up a pipeline that handles all three, using one aggregated build per run. The examples use Turborepo and GitHub Actions; the same pattern applies to Nx or any cache that skips tasks.
+There are two ways to handle this. The examples use Turborepo and GitHub Actions; the same patterns apply to Nx or any cache that skips tasks.
 
-### 1. Aggregate uploads into one build with finalize mode
+## Preferred: cache the snapshot files as task outputs
 
-Each Argos-enabled package uploads its screenshots as a shard of a single [parallel build](parallel-testing-sharding.md) in [finalize mode](parallel-testing-sharding.md#finalize-mode), since the number of uploads varies per run. Set the configuration once at the job level:
+The key insight: **Argos doesn't need your tests to run — it needs their snapshot files.** Build system caches can restore task outputs without executing the task. Declare the snapshot directory as a cached output, and upload the full set in a single step after the build-system run:
 
-{% code title=".github/workflows/tests.yml" %}
-```yaml
-env:
-  ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
-  # All packages upload as shards of a single "unit" build.
-  ARGOS_BUILD_NAME: unit
-  ARGOS_PARALLEL: true
-  ARGOS_PARALLEL_TOTAL: -1
-  # ARGOS_PARALLEL_NONCE is automatically detected
-```
-{% endcode %}
+* Suites that ran contribute fresh files.
+* Suites replayed from cache contribute their **restored** files — identical to the run that populated the cache, which is exactly right: a cache hit means the suite's inputs are unchanged.
 
-Every package that ran uploads a shard; cached packages upload nothing. After the test run, a finalize step closes the build (see [step 4](#4-finalize-and-keep-a-required-check-green)).
+Every build is complete, on pull requests and on main. A suite executes at most once per content change, on any branch, and baselines are always fresh.
 
-{% hint style="info" %}
-If you prefer one Argos build per package ([build splitting](monorepos-setup.md)), the caching problems and the fixes below apply per build name. A single aggregated build keeps review and required checks simpler when many small packages are involved.
-{% endhint %}
+### 1. Write snapshots to a directory inside the package
 
-### 2. Mark pull request builds as subset
+Capture snapshots to a directory owned by the task's package — Argos SDKs default to `./screenshots`. Don't upload from inside the test task (skip the SDK reporter / `uploadToArgos` option): the upload moves to a later step, outside the cache boundary.
 
-On pull requests, cached suites are absent from the build. Mark these builds as [subset builds](subset-builds.md) so Argos ignores the missing screenshots instead of reporting them as removed:
-
-{% code title=".github/workflows/tests.yml" %}
-```yaml
-env:
-  # On PRs the cache may skip suites, so builds only contain a subset of the
-  # screenshots. On main, suites are forced to run (see next section).
-  ARGOS_SUBSET: ${{ github.ref != 'refs/heads/main' }}
-```
-{% endcode %}
-
-The semantics work out naturally: a suite is cached exactly when its inputs are unchanged, so its screenshots are the same as a previous run's — there is nothing new to review.
-
-### 3. Guarantee complete builds on your main branch
-
-Subset builds are **not eligible as baselines** — a baseline must represent the full suite. If main builds were subset too, your baselines would never include the packages the cache skipped, and every PR would diff against stale screenshots.
-
-The fix is to force the Argos-enabled test tasks — and only those — to run on every main commit. Declare an environment variable in the task's hashed inputs, and give it a fresh value (the commit SHA) on main only:
+### 2. Declare the directory as a cached task output
 
 {% code title="packages/my-package/turbo.json" %}
 ```json
@@ -63,84 +35,93 @@ The fix is to force the Argos-enabled test tasks — and only those — to run o
   "extends": ["//"],
   "tasks": {
     "test": {
-      "env": ["ARGOS_BASELINE_KEY"]
+      "outputs": ["screenshots/**"]
     }
   }
 }
 ```
 {% endcode %}
 
+With Nx, add the directory to the target's [`outputs`](https://nx.dev/reference/project-configuration#outputs).
+
+### 3. Upload once after the run
+
 {% code title=".github/workflows/tests.yml" %}
 ```yaml
 env:
-  # Part of the turbo cache key of Argos-enabled test tasks: a fresh value on
-  # every main commit forces them to run, producing complete builds that are
-  # eligible as baselines. Empty on PRs, where caching stays effective.
+  ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
+
+steps:
+  - name: Run tests
+    run: npx turbo test
+
+  - name: Upload snapshots to Argos
+    run: >-
+      npx argos upload . --build-name unit
+      --files "**/screenshots/**/*"
+      --ignore "**/node_modules/**" "**/*.argos.json"
+```
+{% endcode %}
+
+That's the whole setup: no parallel mode, no subset builds, no finalize step, and nothing special on your main branch.
+
+{% hint style="warning" %}
+Scope the `--files` globs so they match only the snapshot directories your cached tasks produce — a repo-root glob can accidentally sweep up unrelated screenshot folders (a Storybook suite from another workflow, stray local artifacts). Always ignore `**/node_modules/**` and the `**/*.argos.json` metadata sidecars.
+{% endhint %}
+
+### Caveats
+
+* **Snapshots must be deterministic and machine-independent.** Cached files are reused across runners and branches; anything environment-dependent in them (timestamps, absolute paths, font rendering differences) will produce diffs that depend on which machine populated the cache. Text snapshots and stabilized screenshots are fine.
+* **You extend the cache's trust model to baselines.** With a remote cache, files produced on a pull-request runner can end up in a main-branch build. That's the same trust you already place in the cache for test *results* — but it's worth stating.
+* **Screenshot names become upload-root-relative.** Uploading from the repository root names snapshots by their full path (`packages/app/screenshots/home.png`), which also prevents name collisions between packages sharing a build.
+
+## Alternative: subset builds + finalize
+
+When the snapshot files can't be treated as cacheable outputs — uploads happen deep inside the test process, or suites are skipped by change detection rather than an artifact-restoring cache — use [parallel finalize mode](parallel-testing-sharding.md#finalize-mode) with [subset builds](subset-builds.md):
+
+1. **Aggregate uploads into one build with finalize mode.** Each suite uploads as a shard (`ARGOS_PARALLEL=true`, `ARGOS_PARALLEL_TOTAL=-1`, one shared `ARGOS_BUILD_NAME`); the number of uploads may vary per run.
+2. **Mark pull request builds as subset** (`ARGOS_SUBSET=true` on non-main runs), so screenshots missing from skipped suites are ignored instead of reported as removed.
+3. **Guarantee complete builds on your main branch.** Subset builds are not eligible as baselines, so on main the Argos-enabled suites must actually run. Declare a variable in the task's **hashed** `env` (not the passthrough list — passthrough doesn't invalidate the cache) and give it a fresh value on main only:
+
+{% code title=".github/workflows/tests.yml" %}
+```yaml
+env:
+  ARGOS_SUBSET: ${{ github.ref != 'refs/heads/main' }}
+  # Hashed into the Argos-enabled test tasks (turbo.json `env`): a fresh value
+  # on every main commit forces them to re-run and produce complete builds.
   ARGOS_BASELINE_KEY: ${{ github.ref == 'refs/heads/main' && github.sha || '' }}
 ```
 {% endcode %}
 
-With Nx, declare the variable in the task's [`inputs`](https://nx.dev/reference/inputs) (`{ "env": "ARGOS_BASELINE_KEY" }`) for the same effect.
-
-{% hint style="warning" %}
-The baseline key must be declared in the task's **hashed** `env` list — that's what invalidates the cache. Passing it through an environment allowlist (Turborepo's `passThroughEnv`, for example) is not enough: passthrough variables reach the task but don't participate in the cache key. An `env` declaration invalidates the cache even when a passthrough wildcard like `ARGOS_*` also matches the variable.
-{% endhint %}
-
-The cost is bounded: only the Argos-enabled suites re-run on main pushes, and only there. Everything else keeps hitting the cache, and pull requests are unaffected.
-
-### 4. Finalize, and keep a required check green
-
-After the test run, close the build. On runs where **every** Argos-enabled suite was cached, no build exists at all — without one, a commit with Argos as a [required status check](../../review-workflow/summary-checks.md) would stay blocked. `--skip-if-empty` covers this case by creating a [skipped build](skipping-a-build.md) (an immediately-successful build with no comparison):
+4. **Finalize, and keep a required check green.** After the run, `argos finalize --skip-if-empty` closes the build — and creates a [skipped build](skipping-a-build.md) when every upload was skipped, so a required Argos check still reports success. Run it only when the tests succeeded, so a partial run can never become a baseline.
 
 {% code title=".github/workflows/tests.yml" %}
 ```yaml
 - name: Run tests
-  run: pnpm turbo test
+  run: npx turbo test
 
 - name: Finalize Argos build
-  run: pnpm exec argos finalize --skip-if-empty
+  run: npx argos finalize --skip-if-empty
 ```
 {% endcode %}
 
-Run the finalize step only when the tests succeeded (the default step behavior). Finalizing a partial run on main would produce an incomplete build that could be picked as a baseline.
+This costs a re-run of the Argos-enabled suites on every main commit, and uploads happen inside cached tasks — see the FAQ below for a logging gotcha that comes with that.
 
-### Complete example
+## Troubleshooting / FAQ
 
-{% code title=".github/workflows/tests.yml" %}
-```yaml
-name: Tests
+<details>
 
-on:
-  pull_request:
-  push:
-    branches:
-      - main
+<summary>How do PR builds compare against the right screenshots when suites are cached?</summary>
 
-jobs:
-  tests:
-    runs-on: ubuntu-latest
-    env:
-      ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
-      ARGOS_BUILD_NAME: unit
-      ARGOS_PARALLEL: true
-      ARGOS_PARALLEL_TOTAL: -1
-      ARGOS_SUBSET: ${{ github.ref != 'refs/heads/main' }}
-      ARGOS_BASELINE_KEY: ${{ github.ref == 'refs/heads/main' && github.sha || '' }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - run: npm ci
+Argos resolves the baseline by walking the ancestor commits of the pull request's merge base until it finds an eligible build. As long as main builds are complete — automatic with the outputs-caching pattern, forced in the subset + finalize pattern — the nearest ancestor build contains an up-to-date version of every screenshot.
 
-      - name: Run tests
-        run: npx turbo test
+</details>
 
-      - name: Finalize Argos build
-        run: npx argos finalize --skip-if-empty
-```
-{% endcode %}
+<details>
 
-{% hint style="info" %}
-Turborepo runs tasks in [strict environment mode](https://turborepo.com/docs/reference/configuration#envmode) by default: environment variables not declared in the configuration are stripped from the task's environment. Pass the Argos variables through without hashing them, so they reach your test processes without invalidating the cache:
+<summary>Turborepo strips my ARGOS_* variables inside tasks</summary>
+
+Turborepo runs tasks in [strict environment mode](https://turborepo.com/docs/reference/configuration#envmode) by default: undeclared variables never reach the task. This only matters when uploading from **inside** tasks (the subset + finalize pattern) — pass the variables through without hashing them:
 
 {% code title="turbo.json" %}
 ```json
@@ -150,24 +131,15 @@ Turborepo runs tasks in [strict environment mode](https://turborepo.com/docs/ref
 ```
 {% endcode %}
 
-`GITHUB_*` (or your CI provider's equivalent) lets the Argos SDK detect the branch, commit, and parallel nonce from inside the task.
-{% endhint %}
-
-### Troubleshooting / FAQ
-
-<details>
-
-<summary>How do PR builds compare against the right screenshots when suites are cached?</summary>
-
-Argos resolves the baseline by walking the ancestor commits of the pull request's merge base until it finds an eligible build. Since main builds are complete (step 3), the nearest ancestor build contains an up-to-date version of every screenshot, including those from suites the PR run skipped.
+With the outputs-caching pattern the upload runs outside the build system, so no passthrough is needed.
 
 </details>
 
 <details>
 
-<summary>Why not simply disable the cache for visual test suites everywhere?</summary>
+<summary>The logs show "Argos build created" but the build isn't in my finalized build</summary>
 
-That works, but you pay for it on every pull request push. Busting the cache on main only (step 3) keeps PR feedback fast while keeping baselines fresh: a suite skipped on a PR is by definition unchanged, and subset mode (step 2) makes Argos treat it that way.
+When uploading from inside cached tasks, a cache hit replays the cached task's **logs**, including the "Argos build created" line from the run that populated the cache — but no upload actually happens, and the replayed URL points to the old run's build. Trust the output of the `argos finalize` step: it lists the builds that were really uploaded and finalized in the current run. (The outputs-caching pattern doesn't have this problem: the only upload log line is the real one.)
 
 </details>
 
@@ -175,6 +147,6 @@ That works, but you pay for it on every pull request push. Busting the cache on 
 
 <summary>What about re-runs of a failed workflow?</summary>
 
-On GitHub Actions, the parallel nonce includes the run attempt, so a re-run starts a fresh build. Argos detects partial re-runs of parallel builds and fills the missing shards from the previous attempt automatically.
+With the outputs-caching pattern, the upload step simply runs again with the same files. In finalize mode, the parallel nonce includes the run attempt on GitHub Actions, so a re-run starts a fresh build; Argos detects partial re-runs of parallel builds and fills the missing shards from the previous attempt automatically.
 
 </details>
