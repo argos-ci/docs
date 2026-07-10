@@ -173,6 +173,14 @@ That works, but you pay for it on every pull request push. Busting the cache on 
 
 <details>
 
+<summary>The logs show "Argos build created" but the build isn't in my finalized build</summary>
+
+Task caches replay the cached task's **logs**, including the "Argos build created" line from the run that populated the cache — but no upload actually happens on a cache hit, and the replayed URL points to the old run's build. Trust the output of the `argos finalize` step: it lists the builds that were really uploaded and finalized in the current run.
+
+</details>
+
+<details>
+
 <summary>What about re-runs of a failed workflow?</summary>
 
 On GitHub Actions, the parallel nonce includes the run attempt, so a re-run starts a fresh build. Argos detects partial re-runs of parallel builds and fills the missing shards from the previous attempt automatically.
