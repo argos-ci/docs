@@ -4,7 +4,7 @@ description: Enable GitHub single sign-on to sync your Argos team with a GitHub 
 
 # GitHub single sign-on
 
-Streamline access with GitHub SSO: Integrate your Argos team and GitHub organization for seamless member sync, enhancing security and management ease.
+GitHub single sign-on (SSO) syncs your Argos team with a GitHub organization: members of the organization can join your Argos team automatically by signing in with GitHub.
 
 {% hint style="info" %}
 GitHub SSO is a paid add-on ($50 / month) available to teams on a Stripe-based subscription.
@@ -14,15 +14,15 @@ GitHub SSO is a paid add-on ($50 / month) available to teams on a Stripe-based s
 
 {% stepper %}
 {% step %}
-Navigate to team settings.
+Go to your team settings.
 {% endstep %}
 
 {% step %}
-Click **Enable and Pay** under the **GitHub Single Sign-On** section.
+Select **Enable and Pay** under the **GitHub Single Sign-On** section.
 {% endstep %}
 
 {% step %}
-Select your team, authorize Argos on GitHub, and the feature is activated.
+Select your team and authorize Argos on GitHub. The feature is activated immediately.
 {% endstep %}
 {% endstepper %}
 
@@ -30,12 +30,10 @@ Select your team, authorize Argos on GitHub, and the feature is activated.
 
 ### Disabling the feature
 
-In team settings, click **Disable** under the **GitHub Single Sign-On** section and confirm. The owners remain as members of the team.
+In team settings, select **Disable** under the **GitHub Single Sign-On** section and confirm. The owners remain as members of the team.
 
 ![GitHub SSO enabled](<../../.gitbook/assets/github sso enabled 3b6b2bfec185891f6a3ca6909e1f721a.png>)
 
-### Availability and payment
+### Billing
 
-The cost of this add-on is $50 / month and it's exclusive to Stripe subscribers.
-
-When you enable GitHub SSO, your team is charged for the feature on your monthly bill. You'll see an "Add-on: GitHub SSO" line on your invoice. You can disable this feature at any time.
+When you enable GitHub SSO, the add-on appears as an "Add-on: GitHub SSO" line on your monthly invoice. You can disable it at any time.

@@ -4,30 +4,11 @@ description: Create and manage your Argos account, sign up with Google, GitHub, 
 
 # Account management
 
-When you sign up for Argos, you create an account that manages your projects and subscriptions.
+When you sign up for Argos, you create an account that manages your projects and subscriptions. You can sign up with **Google**, **GitHub**, or **GitLab** — see [Pricing plans](../billing-and-subscription/pricing-plans.md) for what each plan includes.
 
-Argos offers three types of plans:
+### Sign up with a Git provider
 
-* [Hobby](../billing-and-subscription/pricing-plans.md#hobby-plan)
-* [Pro](../billing-and-subscription/pricing-plans.md#pro-plan)
-* [Enterprise](../billing-and-subscription/pricing-plans.md#enterprise-plan)
-
-Each plan provides different features and resources to match your needs.
-
-You can sign up with **Google**, **GitHub**, or **GitLab**.
-
-### Signing up with a Git provider
-
-Argos supports the following Git providers:
-
-* [GitHub](../integrations/github-integration.md)
-* [GitLab](../integrations/gitlab-integration.md)
-
-When you sign up, you’ll be asked to authorize Argos to access your Git provider.
-
-This connection becomes your default login method.
-
-After signing up, you can manage login methods in your **Personal Settings**.
+Argos supports [GitHub](../integrations/github-integration.md) and [GitLab](../integrations/gitlab-integration.md) as Git providers. When you sign up with one, you authorize Argos to access it, and that connection becomes your default login method. After signing up, you can manage login methods in your **Personal Settings**.
 
 ### Login methods and connections
 
@@ -55,7 +36,7 @@ Choose **Import a Git repository** and select a Git provider (GitHub or GitLab) 
 {% endtab %}
 
 {% tab title="Create without Git" %}
-Choose **Create a project without Git**, enter a **Project name**, and click **Create project**.
+Choose **Create a project without Git**, enter a **Project name**, and select **Create project**.
 
 A project without a connected repository still receives builds through the [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md) using its project token. Features that depend on a repository — such as pull request comments — become available once you link one.
 {% endtab %}
@@ -79,7 +60,7 @@ Teams let you collaborate on projects and share resources.
 
 #### Creating a team
 
-1. Click the **scope selector** in the top-left of the navbar.
+1. Select the **scope selector** in the top-left of the navbar.
 2. Choose **Create new team**.
 3. Enter a team name.
 4. By default, new teams start on the **Pro plan**. To switch plans, [contact us](https://argos-ci.com/contact).
@@ -100,10 +81,10 @@ See [Roles and permissions](team-members-and-roles.md#owner-role) for details.
 
 **Inviting teammates**
 
-1. From the dashboard, select your team from the scope selector
-2. Open the **Settings** tab and go to the **Members** section
-3. Click **Invite Link** and copy the generated link
-4. Share the link with anyone you want to join the team
+1. From the dashboard, select your team from the scope selector.
+2. Open the **Settings** tab and go to the **Members** section.
+3. Select **Invite Link** and copy the generated link.
+4. Share the link with anyone you want to join the team.
 
 {% hint style="info" %}
 Public repositories on Argos are accessible to everyone.
@@ -115,33 +96,33 @@ You cannot leave a team if you are the **last owner** or the **last member**.
 
 To leave a team:
 
-1. If necessary, assign another owner first
-2. Go to your team’s **Settings** tab and go to the **Members** section
-3. Scroll to **Leave Team** and select **Leave Team**
-4. Confirm the action
-5. If you are the last member, [delete the team](account-management.md#deleting-a-team) instead
+1. If necessary, assign another owner first.
+2. Go to your team's **Settings** tab and go to the **Members** section.
+3. Scroll to **Leave Team** and select **Leave Team**.
+4. Confirm the action.
+5. If you are the last member, [delete the team](account-management.md#deleting-a-team) instead.
 
 #### Deleting a team
 
-1. Remove all team projects
-2. Open the team’s **Settings** tab
-3. Scroll to **Delete Team** and select **Delete Team**
-4. Confirm the action
+1. Remove all team projects.
+2. Open the team's **Settings** tab.
+3. Scroll to **Delete Team** and select **Delete Team**.
+4. Confirm the action.
 
 ### Managing emails
 
 To access email settings:
 
-1. Select your avatar in the top-right corner
-2. Choose **Settings**
-3. Scroll to **Emails** section
-4. From here, you can [add](account-management.md#adding-a-new-email-address), [remove](account-management.md#removing-an-email-address), or [change](account-management.md#changing-your-primary-email-address) your primary email
+1. Select your avatar in the top-right corner.
+2. Choose **Settings**.
+3. Scroll to the **Emails** section.
+4. From here, you can [add](account-management.md#adding-a-new-email-address), [remove](account-management.md#removing-an-email-address), or [change](account-management.md#changing-your-primary-email-address) your primary email.
 
 ### Adding a new email address
 
-1. In the **Emails** section, click **Add Another**
-2. Verify the new address using the link sent to your inbox
-3. Once verified, any email address on your account can be used to log in
+1. In the **Emails** section, select **Add Another**.
+2. Verify the new address using the link sent to your inbox.
+3. Once verified, any email address on your account can be used to log in.
 
 ![Your account email addresses.](<../../.gitbook/assets/email management 2ddc061d8706486091f2cff3c1784d19.png>)
 

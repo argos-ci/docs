@@ -8,18 +8,16 @@ Connect Argos to GitHub for automated visual testing on every pull request and m
 
 ### What Argos does on GitHub
 
-* Add commit and pull request checks, so Argos results can block merges when required in GitHub.
-* Post [pull request comments](../review-workflow/pull-request-comments.md) with the latest build results and links back to Argos.
-* Analyze commit history to find the right merge base and select the correct [baseline build](../platform-fundamentals/baseline-build.md) for visual comparisons.
+* Adds commit and pull request checks, so Argos results can block merges when required in GitHub.
+* Posts [pull request comments](../review-workflow/pull-request-comments.md) with the latest build results and links back to Argos.
+* Analyzes commit history to find the right merge base and select the correct [baseline build](../platform-fundamentals/baseline-build.md) for visual comparisons.
 
-### Why Argos needs repository access
-
-Argos analyzes commit history to choose the right [baseline build](../platform-fundamentals/baseline-build.md) and posts commit statuses or pull request comments. Granting repository access lets Argos read commits, find merge bases, and report build results back to GitHub.
+This is why Argos asks for repository access: it reads commits to find merge bases, and writes statuses and comments to report results.
 
 ### Choose your access level
 
 * **Full access (recommended)** — Required for Merge Queue and baseline selection based on commit history.
-* **Limited access (no content)** — Works for basic checks without reading repository content; Merge Queue is not supported. See [GitHub Integration without Content Permission](github-integration.md#github-integration-without-content-permission).
+* **Limited access (no content)** — Works for basic checks without reading repository content; Merge Queue is not supported. See [GitHub integration without content permission](github-integration.md#github-integration-without-content-permission).
 
 Use GitHub Connect to log in with your GitHub account, then install the Argos GitHub App to link repositories.
 
@@ -27,22 +25,22 @@ Use GitHub Connect to log in with your GitHub account, then install the Argos Gi
 
 Argos provides a dedicated GitHub App that connects directly to your repositories, enabling real-time visual testing feedback on pull requests.
 
-1. Visit the [Argos app page on GitHub](https://github.com/apps/argos-ci)
-2. Click on "Configure" and select the organization where you want to install Argos
-3. Follow the prompts to complete the installation
+1. Visit the [Argos app page on GitHub](https://github.com/apps/argos-ci).
+2. Select **Configure** and pick the organization where you want to install Argos.
+3. Follow the prompts to complete the installation.
 
 #### Import a GitHub repository to Argos
 
-1. Sign in to Argos and click on "Create a new project"
-2. Choose GitHub as your provider, then click "Import your repository"
+1. Sign in to Argos and select **Create a new project**.
+2. Choose GitHub as your provider, then select **Import your repository**.
 
-#### Update the Repositories Shared with Argos
+#### Update the repositories shared with Argos
 
-1. Go to the [Argos app page on GitHub](https://github.com/apps/argos-ci) and click "Configure"
-2. Select the organization where you want to manage repository access
-3. Under "Repository access," choose "Only select repositories" and select the specific repositories you wish to share with Argos
+1. Go to the [Argos app page on GitHub](https://github.com/apps/argos-ci) and select **Configure**.
+2. Select the organization where you want to manage repository access.
+3. Under **Repository access**, choose **Only select repositories** and pick the repositories you want to share with Argos.
 
-![Required Argos status check in GitHub](<../../.gitbook/assets/repository access 9f17c9ae0a701fcacc914b10dea40a5e.jpg>)
+![Repository access settings for the Argos GitHub App](<../../.gitbook/assets/repository access 9f17c9ae0a701fcacc914b10dea40a5e.jpg>)
 
 ### Required GitHub App permissions
 
@@ -97,18 +95,16 @@ steps:
     run: npm exec -- argos upload ./screenshots
 ```
 
-Use the pull request numbers included in the merge queue batch. Passing `ARGOS_MERGE_QUEUE_PRS` tells Argos to treat the upload as a merge queue build.
-
-### GitHub Integration without Content Permission
+### GitHub integration without content permission
 
 If you prefer to use Argos without granting full content access to your repositories, you can integrate via a more restricted setup.
 
-#### Setting Up Argos with Limited GitHub Access
+#### Set up Argos with limited GitHub access
 
 1. From the dashboard, select your team from the scope selector.
 2. Select the **Settings** tab and go to the **Integrations** section.
-3. Scroll to "GitHub without content access".
-4. Click **Install GitHub App**.
+3. Scroll to **GitHub without content access**.
+4. Select **Install GitHub App**.
 
 ![GitHub without content access settings in Argos](<../../.gitbook/assets/github light settings f92cce07ed0ba7ddcd67bdaf4d189c51.jpg>)
 
@@ -117,7 +113,7 @@ If you prefer to use Argos without granting full content access to your reposito
 ![Argos GitHub app without content access](<../../.gitbook/assets/github light app 2fab2975617916eb69fa710a113d9882.jpg>)
 
 6. Back in Argos, go to the **Projects** tab.
-7. Click **Create a new project** at the top right.
+7. Select **Create a new project** at the top right.
 8. Select **Continue with GitHub (no-content access)**.
 
 ![Argos GitHub app without content access](<../../.gitbook/assets/create project 97d56ce76dfd351b29e727076e01021c.jpg>)
@@ -128,7 +124,7 @@ If you prefer to use Argos without granting full content access to your reposito
 
 #### GitHub Enterprise Cloud
 
-GitHub Enterprise Cloud works out of the box. Follow the same GitHub App setup described above—no extra configuration is needed in Argos.
+GitHub Enterprise Cloud works out of the box. Follow the same GitHub App setup described above — no extra configuration is needed in Argos.
 
 #### GitHub Enterprise Server (self-hosted)
 

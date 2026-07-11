@@ -4,32 +4,28 @@ description: Connect Argos to Slack for build notifications and rich previews wh
 
 # Slack integration
 
-Argos integrates with Slack to keep your team aligned on visual changes and reviews.
-
-It sends notifications and also unfurls Argos build URLs directly inside Slack.
+Connect Argos to Slack to notify your team about visual changes and get rich previews when an Argos build URL is shared in Slack.
 
 {% hint style="info" %}
-Slack integration is available on Pro and Enterprise plans
+The Slack integration is available on Pro and Enterprise plans.
 {% endhint %}
 
 ### What you get
 
-* Automatic Slack notifications when builds are created, reviewed, approved, or rejected
-* Rich previews when pasting an Argos build URL in Slack
-* Fine grained control using Automations conditions
+* Automatic Slack notifications when builds are created, reviewed, approved, or rejected.
+* Rich previews when pasting an Argos build URL in Slack.
+* Fine-grained control over notifications using automation conditions.
 
 ### Slack notifications
 
-Use Automations to post messages in the right channels at the right time.
+Notifications are driven by **automations**: rules that post messages to the right channels at the right time. Typical signals you may want to route to Slack:
 
-Typical signals you may want to route to Slack:
+* A build is ready for review.
+* Changes are requested.
+* A build is auto-approved on main.
+* Only failed or blocking builds.
 
-* A build is ready for review
-* Changes are requested
-* A build is auto approved on main
-* Only failed or blocking builds
-
-Notifications include build status, branch, author, and a direct link to the build.
+Notifications include the build status, branch, author, and a direct link to the build.
 
 ![Slack notification sent by Argos](<../../.gitbook/assets/slack notification example 937c6480622562c1b7b2641fd364e254.png>)
 
@@ -47,37 +43,36 @@ The preview includes:
 
 This works in messages, threads, and shared links, which makes reviews and handoffs easier without extra clicks.
 
-### Set up Slack integration
+### Connect Slack to your team
 
-Set up a Slack integration to unfurl Argos build URLs.
+Connecting your Slack workspace enables URL unfurling and makes Slack available as an automation action.
 
-1. Verify that you have selected the correct team in the top, if not click the double arrow icon to select the right team.
-2. Go to the team’s **Settings** tab.
+1. From the dashboard, select your team from the scope selector.
+2. Go to the team's **Settings** tab.
 3. Select the **Integrations** section.
-4. Click on **Connect to Slack**.
+4. Select **Connect to Slack** and follow the connection flow.
 
 ### Set up Slack notifications
 
-Set up a Slack notification rule using Argos automations.
+Create a notification rule with Argos automations:
 
 1. Select a project in your Argos team.
-2. Go to the **Automations** tab in your Argos project and click on **New Automation**.
+2. Go to the **Automations** tab and select **New Automation**.
 3. Name your automation, e.g., "Notify Slack on build completion".
-4. Under **WHEN**, select one or several events that will trigger the notification.
+4. Under **WHEN**, select one or several events that trigger the notification.
 5.  (Optional) Under **IF**, add conditions such as "Build type is check".
 
     ![Automation conditions example](<../../.gitbook/assets/automation conditions 6bc66f9d8c99db7e8601ac368a9fda4c.png>)
-6.  Under **THEN**, choose the action **Send notification to Slack**.
-
-    If this is your first time using Slack with Argos, click **Connect to Slack** and follow the connection flow.
+6. Under **THEN**, choose the action **Send notification to Slack**. If your workspace isn't connected yet, select **Connect to Slack** and follow the connection flow.
 7.  Select the Slack channel and optionally provide the channel ID.
 
-    ![Locate Slack channel ID](<../../.gitbook/assets/slack channel id 7e607e0f5800c51bc38f17bb856ac88c.png>)\
-    &#xNAN;_&#x46;inding the ID of a Slack Channel_
-8. Click **Send test notification** to verify the connection. A test message will be sent to the selected channel.
-9. Click **Create Rule** to activate it.
+    ![Locate Slack channel ID](<../../.gitbook/assets/slack channel id 7e607e0f5800c51bc38f17bb856ac88c.png>)
 
-### Troubleshooting and Tips
+    _Finding the ID of a Slack channel_
+8. Select **Send test notification** to verify the connection. A test message is sent to the selected channel.
+9. Select **Create Rule** to activate it.
+
+### Troubleshooting and tips
 
 * Make sure the Argos app is authorized in your Slack workspace.
 * For private channels, manually invite the bot with `/invite @Argos`.
