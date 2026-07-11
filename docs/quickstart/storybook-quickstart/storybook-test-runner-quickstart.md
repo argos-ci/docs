@@ -1,25 +1,27 @@
 ---
-description: Learn how to setup visual testing in a Storybook using Test Runner
+description: Set up visual testing in Storybook with Test Runner and the Argos CLI.
 ---
 
 # Storybook Test Runner Quickstart
 
-### Prerequisites
-
-To get the most out of this guide, you'll need to:
-
-* [Use Storybook v8+](https://storybook.js.org/docs/get-started/install)
-* [Create your project in Argos](https://app.argos-ci.com/new)
+Set up Argos with [Storybook Test Runner](https://storybook.js.org/docs/writing-tests/integrations/test-runner) to run visual tests on every pull request: capture a screenshot of each story during the test run, then upload them with the Argos CLI.
 
 {% hint style="info" %}
-If use Vitest and not Test Runner, follow our [Storybook Vitest quickstart](./).
+If you use Vitest instead of Test Runner, follow the [Storybook Quickstart](README.md).
 
-If use a legacy version of Storybook (\<v8), follow our [legacy Storybook quickstart](storybook-legacy-less-than-v8-quickstart.md).
+If you use a legacy version of Storybook (\<v8), follow the [legacy Storybook Quickstart](storybook-legacy-less-than-v8-quickstart.md).
 {% endhint %}
+
+### Prerequisites
+
+* [Storybook v8+](https://storybook.js.org/docs/get-started/install) set up in your project
+* [A project created in Argos](https://app.argos-ci.com/new)
 
 {% stepper %}
 {% step %}
 ### Install
+
+Install the Argos CLI, the Argos Storybook SDK, and Storybook Test Runner:
 
 {% tabs %}
 {% tab title="npm" %}
@@ -46,17 +48,14 @@ bun add --dev @argos-ci/cli @argos-ci/storybook @storybook/test-runner
 ```
 {% endtab %}
 {% endtabs %}
-
-Read the [CLI documentation](../../sdks-reference/argos-command-line-interface-cli.md) if you need information about advanced usages.
 {% endstep %}
 
 {% step %}
-### Update your package.json
+### Add a test script
 
-Add the following scripts to your `package.json`:
+Add the following script to your `package.json`:
 
-package.json
-
+{% code title="package.json" %}
 ```json
 {
   "scripts": {
@@ -64,16 +63,17 @@ package.json
   }
 }
 ```
+{% endcode %}
 
 {% hint style="info" %}
-`NODE_OPTIONS=--experimental-vm-modules` is required because Storybook uses Jest that requires this flag to run modern packages like Argos Storybook SDK.
+`NODE_OPTIONS=--experimental-vm-modules` is required because Storybook Test Runner uses Jest, which needs this flag to run modern packages like the Argos Storybook SDK.
 {% endhint %}
 {% endstep %}
 
 {% step %}
 ### Capture screenshots
 
-Add `.storybook/test-runner.ts` file to your project:
+Add a `.storybook/test-runner.ts` file to your project. The `postVisit` hook captures a screenshot of every story:
 
 {% code title=".storybook/test-runner.ts" %}
 ```ts
@@ -90,33 +90,31 @@ export default config;
 ```
 {% endcode %}
 
-It will capture screenshots of your stories in `./screenshots` directory.
-
-Add `./screenshots` to your `.gitignore` file, to avoid uploading screenshots to your Git repository.
+Screenshots are written to the `./screenshots` directory. Add `./screenshots` to your `.gitignore` file to avoid committing them.
 {% endstep %}
 
 {% step %}
-### Setup CI to run tests and upload screenshots
+### Set up CI
 
-Below is a complete GitHub Actions workflow to build your Storybook, run tests, capture screenshots, and upload them to Argos. If you use another CI provider, adapt the steps accordingly.
+Add a workflow that builds your Storybook, runs the tests, and uploads the screenshots to Argos. If you use another CI provider, adapt the steps accordingly:
 
-{% code title=".github/workflows/storybook-test.yml" %}
+{% code title=".github/workflows/argos.yml" %}
 ```yaml
-name: Storybook Test
+name: Argos
 
 on:
-  push:
-    branches: [main, master]
   pull_request:
-    branches: [main, master]
+  push:
+    branches:
+      - main
 
 jobs:
-  test:
+  argos:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
 
       - name: Install dependencies
         run: npm ci
@@ -134,34 +132,32 @@ jobs:
             "npx wait-on tcp:127.0.0.1:6006 && npm run test-storybook"
 
       - name: Upload screenshots to Argos
-        # 👇 Replace `<ARGOS_TOKEN>` with your project token, available in your Argos project settings.
-        run: npm exec -- argos upload --token <ARGOS_TOKEN> ./screenshots
+        run: npm exec -- argos upload ./screenshots
+        env:
+          ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
 ```
 {% endcode %}
 
-To learn how to run tests on a deployed Storybook, refer to the [Storybook test runner documentation](https://storybook.js.org/docs/writing-tests/integrations/test-runner).
+`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
+
+To learn how to run tests on a deployed Storybook, refer to the [Storybook Test Runner documentation](https://storybook.js.org/docs/writing-tests/integrations/test-runner).
 {% endstep %}
 {% endstepper %}
 
-### Congratulations on installing Argos! 👏
+### You're all set
 
-After committing and pushing your changes, the Argos check status will appear on your pull request in GitHub (or GitLab).
+Push your changes and open a pull request — the Argos check appears on it once the build is uploaded. Review the visual changes, approve or reject them, and merge with confidence.
 
-**Note:** you need a reference build to compare your changes with. If you don't have one, builds will remain orphan until you run Argos on your reference branch.
+{% hint style="info" %}
+Argos needs a baseline to compare against. Until a build runs on your default branch, pull request builds are marked as [orphan](../../learn/platform-fundamentals/baseline-build.md#orphan-builds). Merge this setup or run the workflow once on your default branch to establish the baseline.
+{% endhint %}
 
-You can now review changes of your app for each pull request, avoid visual bugs and merge with confidence. Welcome on board!
+### Next steps
 
-### Next step: keep your screenshots stable
-
-Now that Argos is running, the next thing to learn is how to keep your screenshots free of flakiness. Read [Best practices for stable screenshots](../../learn/reliability-and-flakiness/flaky-tests/README.md) to avoid false positives before they reach your pull requests.
-
-### Additional resources
-
-* [Argos + Storybook + Test Runner example](https://github.com/argos-ci/argos-javascript/tree/main/examples/storybook-test-runner)
-* [Argos Storybook SDK reference](../../sdks-reference/storybook.md)
-* [Storybook documentation](https://storybook.js.org/docs)
-* [Storybook test runner documentation](https://storybook.js.org/docs/writing-tests/integrations/test-runner)
+* [Stabilize screenshots](../../learn/reliability-and-flakiness/flaky-tests/README.md) – Prevent flaky diffs before they reach your pull requests
+* [Storybook SDK reference](../../sdks-reference/storybook.md) – All options and helpers
+* [Storybook + Test Runner example](https://github.com/argos-ci/argos-javascript/tree/main/examples/storybook-test-runner) – A complete working setup
 
 ***
 
-[Join our Discord](https://argos-ci.com/discord), [submit an issue on GitHub](https://github.com/argos-ci/argos/issues) or just [send an email](mailto:contact@argos-ci.com) if you need help.
+Need help? [Join our Discord](https://argos-ci.com/discord), [open an issue on GitHub](https://github.com/argos-ci/argos/issues), or [send us an email](mailto:contact@argos-ci.com).

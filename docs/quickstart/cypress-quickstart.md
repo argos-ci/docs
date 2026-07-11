@@ -1,22 +1,22 @@
 ---
-description: Learn how to setup visual testing using the Argos Cypress SDK.
+description: Set up visual testing in your Cypress tests with the Argos Cypress SDK.
 ---
 
 # Cypress Quickstart
 
+Set up Argos with [Cypress](https://www.cypress.io/) to run visual tests on every pull request: install the SDK, register the command and task, capture screenshots, and run it in CI.
+
 ### Prerequisites
 
-To get the most out of this guide, you’ll need to:
-
-* [Use Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress)
-* [Run Cypress on your CI/CD](https://learn.cypress.io/advanced-cypress-concepts/running-cypress-in-ci)
-* [Create your project in Argos](https://app.argos-ci.com/new)
+* [Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress) set up in your project
+* [Cypress running on your CI](https://learn.cypress.io/advanced-cypress-concepts/running-cypress-in-ci)
+* [A project created in Argos](https://app.argos-ci.com/new)
 
 {% stepper %}
 {% step %}
 ### Install
 
-Get the Argos Cypress SDK.
+Install the Argos Cypress SDK:
 
 {% tabs %}
 {% tab title="npm" %}
@@ -43,33 +43,36 @@ bun add --dev @argos-ci/cypress
 ```
 {% endtab %}
 {% endtabs %}
-
-Read the [CLI documentation](../sdks-reference/argos-command-line-interface-cli.md) if you need information about advanced usages.
 {% endstep %}
 
 {% step %}
-### Add `cy.argosScreenshot` command
+### Set up Argos in your Cypress config
 
-Add this line to your `cypress/support/e2e.js` file:
+Two pieces wire Argos into Cypress: the support file adds the `cy.argosScreenshot` command, and the task uploads the captured screenshots.
 
+Add the command to your `cypress/support/e2e.js` file:
+
+{% code title="cypress/support/e2e.js" %}
 ```js
 import "@argos-ci/cypress/support";
 ```
+{% endcode %}
 
-If you use TypeScript, update your `tsconfig.json`:
+If you use TypeScript, add the types to your `tsconfig.json`:
 
-```js
+{% code title="tsconfig.json" %}
+```json
 {
   "compilerOptions": {
     "types": ["cypress", "@argos-ci/cypress/support"]
   }
 }
 ```
-{% endstep %}
+{% endcode %}
 
-{% step %}
-### Register Argos in Cypress config
+Then register the Argos task in your Cypress config:
 
+{% code title="cypress.config.js" %}
 ```js
 const { defineConfig } = require("cypress");
 const { registerArgosTask } = require("@argos-ci/cypress/task");
@@ -79,10 +82,8 @@ module.exports = defineConfig({
   e2e: {
     async setupNodeEvents(on, config) {
       registerArgosTask(on, config, {
-        // Enable upload to Argos only when it runs on CI.
+        // Upload to Argos on CI only.
         uploadToArgos: !!process.env.CI,
-        // Set your Argos token (required only if you don't use GitHub Actions).
-        token: "<YOUR-ARGOS-TOKEN>",
       });
 
       // include any other plugin code...
@@ -90,12 +91,13 @@ module.exports = defineConfig({
   },
 });
 ```
+{% endcode %}
 {% endstep %}
 
 {% step %}
-### Take screenshots
+### Capture screenshots
 
-Use `argosScreenshot` helper to capture stable screenshots in your E2E tests.
+Use the `cy.argosScreenshot` command to capture stable screenshots in your tests:
 
 {% code title="cypress/e2e/homepage.cy.js" %}
 ```js
@@ -106,17 +108,15 @@ it("screenshot homepage", () => {
 ```
 {% endcode %}
 
-Add `/cypress/screenshots` to your `.gitignore` file, to avoid uploading screenshots to your Git repository.
+Screenshots are written to the `/cypress/screenshots` directory. Add `/cypress/screenshots` to your `.gitignore` file to avoid committing them.
 
-{% hint style="info" %}
-Check out our guides to [screenshot multiple pages](../learn/how-to-guides/visual-coverage/capture-screenshots-from-urls.md) or [capture multiple viewports](../learn/how-to-guides/visual-coverage/responsive-viewports.md).
-{% endhint %}
+Tip: Check out our guides to [screenshot multiple pages](../learn/how-to-guides/visual-coverage/capture-screenshots-from-urls.md) or [capture multiple viewports](../learn/how-to-guides/visual-coverage/responsive-viewports.md).
 {% endstep %}
 
 {% step %}
 ### Set up CI
 
-Run your Cypress tests in CI with `ARGOS_TOKEN` set. The Argos task uploads screenshots automatically when it detects a CI environment.
+Run your Cypress tests in CI with `ARGOS_TOKEN` set. The Argos task uploads screenshots automatically when it detects a CI environment:
 
 {% code title=".github/workflows/argos.yml" %}
 ```yaml
@@ -144,27 +144,24 @@ jobs:
 ```
 {% endcode %}
 
-`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
+`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret. On other CI providers, pass the token with the `ARGOS_TOKEN` environment variable or the task's `token` option.
 {% endstep %}
 {% endstepper %}
 
-### Congratulations on installing Argos! 👏
+### You're all set
 
-After committing and pushing your changes, the Argos check status will appear on your pull request in GitHub (or GitLab).
+Push your changes and open a pull request — the Argos check appears on it once the build is uploaded. Review the visual changes, approve or reject them, and merge with confidence.
 
-**Note:** you need a reference build to compare your changes with. If you don't have one, builds will remain orphan until you run Argos on your reference branch.
+{% hint style="info" %}
+Argos needs a baseline to compare against. Until a build runs on your default branch, pull request builds are marked as [orphan](../learn/platform-fundamentals/baseline-build.md#orphan-builds). Merge this setup or run the workflow once on your default branch to establish the baseline.
+{% endhint %}
 
-You can now review changes of your app for each pull request, avoid visual bugs and merge with confidence. Welcome on board!
+### Next steps
 
-### Next step: keep your screenshots stable
-
-Now that Argos is running, the next thing to learn is how to keep your screenshots free of flakiness. Read [Best practices for stable screenshots](../learn/reliability-and-flakiness/flaky-tests/README.md) to avoid false positives before they reach your pull requests.
-
-### Additional resources
-
-* [Cypress example](https://github.com/argos-ci/argos-javascript/tree/main/examples/cypress)
-* [Argos Cypress SDK reference](../sdks-reference/cypress.md)
+* [Stabilize screenshots](../learn/reliability-and-flakiness/flaky-tests/README.md) – Prevent flaky diffs before they reach your pull requests
+* [Cypress SDK reference](../sdks-reference/cypress.md) – All options and helpers
+* [Cypress example](https://github.com/argos-ci/argos-javascript/tree/main/examples/cypress) – A complete working setup
 
 ***
 
-[Join our Discord](https://argos-ci.com/discord), [submit an issue on GitHub](https://github.com/argos-ci/argos/issues) or just [send an email](mailto:contact@argos-ci.com) if you need help.
+Need help? [Join our Discord](https://argos-ci.com/discord), [open an issue on GitHub](https://github.com/argos-ci/argos/issues), or [send us an email](mailto:contact@argos-ci.com).

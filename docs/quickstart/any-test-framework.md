@@ -1,20 +1,22 @@
 ---
-description: Learn how to setup visual testing using Argos SDK.
+description: Set up visual testing with any test framework by uploading screenshots with the Argos CLI.
 ---
 
 # Any test framework
 
+Argos works with any tool that produces screenshots. If your framework has no dedicated Argos SDK, capture screenshots however you like and upload the folder with the Argos CLI.
+
 ### Prerequisites
 
-To get the most out of this guide, you’ll need to:
-
-* Take screenshots while your E2E tests are running
-* Run your E2E tests on CI
-* [Create your project in Argos](https://app.argos-ci.com/new)
+* Your tests capture screenshots into a folder (e.g. `./screenshots`)
+* Your tests run on CI
+* [A project created in Argos](https://app.argos-ci.com/new)
 
 {% stepper %}
 {% step %}
 ### Install
+
+Install the Argos CLI:
 
 {% tabs %}
 {% tab title="npm" %}
@@ -41,38 +43,60 @@ bun add --dev @argos-ci/cli
 ```
 {% endtab %}
 {% endtabs %}
-
-Read the [CLI documentation](../sdks-reference/argos-command-line-interface-cli.md) if you need information about advanced usages.
 {% endstep %}
 
 {% step %}
-### Upload screenshots on CI
+### Set up CI
 
-Add this command to your CI pipeline to upload the screenshots to Argos.
+Run your tests, then upload the screenshots folder to Argos with the CLI:
 
+{% code title=".github/workflows/argos.yml" %}
+```yaml
+name: Argos
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  argos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+      - run: npm ci
+      - name: Run tests and capture screenshots
+        run: npm test
+
+      - name: Upload screenshots to Argos
+        run: npm exec -- argos upload ./screenshots
+        env:
+          ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
 ```
-npm exec -- argos upload --token <ARGOS_TOKEN> ./screenshots
-```
+{% endcode %}
 
-Note: The value of `ARGOS_TOKEN` is available in your project settings on Argos.
+`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret. On other CI providers, set `ARGOS_TOKEN` as a secret environment variable.
+
+The CLI detects your CI context (commit, branch, pull request) automatically. See the [CLI reference](../sdks-reference/argos-command-line-interface-cli.md) for all options.
 {% endstep %}
 {% endstepper %}
 
-### Congratulations on installing Argos! 👏
+### You're all set
 
-After committing and pushing your changes, the Argos check status will appear on your pull request in GitHub (or GitLab).
+Push your changes and open a pull request — the Argos check appears on it once the build is uploaded. Review the visual changes, approve or reject them, and merge with confidence.
 
-**Note:** you need a reference build to compare your changes with. If you don't have one, builds will remain orphan until you run Argos on your reference branch.
+{% hint style="info" %}
+Argos needs a baseline to compare against. Until a build runs on your default branch, pull request builds are marked as [orphan](../learn/platform-fundamentals/baseline-build.md#orphan-builds). Merge this setup or run the workflow once on your default branch to establish the baseline.
+{% endhint %}
 
-You can now review changes of your app for each pull request, avoid visual bugs and merge with confidence. Welcome on board!
+### Next steps
 
-### Next step: keep your screenshots stable
+* [Stabilize screenshots](../learn/reliability-and-flakiness/flaky-tests/README.md) – Prevent flaky diffs before they reach your pull requests
+* [CLI reference](../sdks-reference/argos-command-line-interface-cli.md) – All upload options
+* [Screenshot metadata](../sdks-reference/screenshot-metadata.md) – Enrich screenshots with context shown on the build page
 
-Now that Argos is running, the next thing to learn is how to keep your screenshots free of flakiness. Read [Best practices for stable screenshots](../learn/reliability-and-flakiness/flaky-tests/README.md) to avoid false positives before they reach your pull requests.
+***
 
-### Additional resources
-
-* [Argos CLI reference](../sdks-reference/argos-command-line-interface-cli.md)
-* [Enrich screenshots with metadata](../sdks-reference/screenshot-metadata.md)
-
-[Join our Discord](https://argos-ci.com/discord), [submit an issue on GitHub](https://github.com/argos-ci/argos/issues) or just [send an email](mailto:contact@argos-ci.com) if you need help.
+Need help? [Join our Discord](https://argos-ci.com/discord), [open an issue on GitHub](https://github.com/argos-ci/argos/issues), or [send us an email](mailto:contact@argos-ci.com).
