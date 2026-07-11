@@ -78,7 +78,6 @@ By default, Argos screenshots are cropped to fit the rendered component (`fitToC
 
 ```ts
 import { ProductPage } from "./ProductPage";
-import { allModes } from "../../../.storybook/modes";
 
 export default {
   title: "Pages/ProductPage",
@@ -96,8 +95,6 @@ export default {
 `.storybook/preview.js`
 
 ```ts
-import { allModes } from "./modes";
-
 const preview = {
   parameters: {
     argos: {
