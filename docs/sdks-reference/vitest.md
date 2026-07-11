@@ -104,7 +104,7 @@ test("Button", async () => {
 
 Unlike Vitest—which keeps a per-file `.snap`, so its keys only need to be unique within a file—Argos names are **global** across the build. The generated name therefore includes the test file path, so two tests with the same title in different files never collide. It is also truncated when needed so the resulting filename stays within the filesystem's 255-character limit.
 
-Screenshots are written to the `./screenshots` directory by default and uploaded by the plugin when `uploadToArgos` is enabled.
+Screenshots are written to the `./snapshots` directory by default and uploaded by the plugin when `uploadToArgos` is enabled.
 
 ### Capturing snapshots
 
@@ -136,7 +136,7 @@ await argosSnapshot(JSON.stringify(config, null, 2), {
 });
 ```
 
-Snapshots are written to the same folder as screenshots and uploaded by the plugin when `uploadToArgos` is enabled.
+Snapshots are written to the same `./snapshots` folder as screenshots and uploaded by the plugin when `uploadToArgos` is enabled.
 
 ### API Overview
 
@@ -168,7 +168,7 @@ export default defineConfig({
 ```
 
 * **`uploadToArgos`**: Upload the captured files to Argos at the end of the run (default: `false`).
-* **`root`**: Folder where screenshots and snapshots are written (default: `"./screenshots"`).
+* **`root`**: Folder where screenshots and snapshots are written (default: `"./snapshots"`).
 
 The plugin also accepts every option supported by the [Playwright `argosScreenshot` function](playwright.md#argosscreenshothandler-name-options)—including non-serializable ones like `beforeScreenshot` and `afterScreenshot`—and all [upload parameters](https://js-sdk-reference.argos-ci.com/interfaces/UploadParameters.html). These act as defaults for every screenshot and can be overridden per call.
 
@@ -220,7 +220,7 @@ await argosSnapshot(user, { name: "user" }); // explicit name
 Available options:
 
 * **`name`**: A unique name for the snapshot. When omitted, Argos derives one from the current test (including the test file path, so names stay unique across files).
-* **`root`**: Folder where the snapshot is written. In Node tests it defaults to `"./screenshots"`; in browser tests it defaults to the plugin `root`.
+* **`root`**: Folder where the snapshot is written. In Node tests it defaults to `"./snapshots"`; in browser tests it defaults to the plugin `root`.
 * **`extension`**: Extension of the snapshot file. It also determines how Argos renders and diffs the snapshot, e.g. `.txt`, `.json`, `.yml`, `.html`, `.md` (default: `".txt"`).
 * **`tag`**: A [tag](../learn/review-workflow/tags.md) or array of tags to attach to the snapshot.
 * **`serialize`**: Custom serializer used when `content` is not already a string. Defaults to `@vitest/pretty-format`.
