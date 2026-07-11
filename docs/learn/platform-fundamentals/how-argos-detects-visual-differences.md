@@ -1,116 +1,53 @@
 ---
-description: Discover how Argos uses deterministic pixel diffing with the odiff library to surface meaningful visual changes.
+description: >-
+  Discover how Argos uses deterministic pixel diffing with the odiff library to
+  surface meaningful visual changes.
 ---
 
 # How Argos detects visual differences
 
-Argos uses **deterministic pixel diffing**, not AI-based visual comparison.\
-Instead of compensating for flakiness, Argos focuses on eliminating it at the source. This keeps visual tests precise, explainable, and reliable over time.
+Argos uses **deterministic pixel diffing**, not AI-based visual comparison. Instead of compensating for flakiness, Argos focuses on eliminating it at the source. This keeps visual tests precise, explainable, and reliable over time.
 
 ### What Argos compares
 
-Argos compares **rendered screenshots** and [**ARIA snapshots**](../../sdks-reference/playwright.md#aria-snapshots) produced by your E2E and Storybook tests.
+Argos compares the snapshots produced by your tests against their counterparts in the [baseline build](baseline-build.md):
 
-Each snapshot is compared against a baseline using a **pixel-level diff algorithm** executed in multiple refinement passes.
+* **Screenshots** — rendered images of your pages, components, or stories.
+* **ARIA snapshots** — text representations of your page's accessibility tree, captured by the [Playwright SDK](../../sdks-reference/playwright.md#aria-snapshots), that catch regressions invisible in pixels.
+* **Text files** — any [non-image file](../how-to-guides/visual-coverage/compare-non-image-files.md) you upload, such as JSON or Markdown, diffed as text.
 
-The question we answer is intentionally simple:
-
-> Did the UI visually change, or not?
-
-No interpretation. No probability. No guesswork.
+For each pair, the question Argos answers is intentionally simple: did it change, or not? No interpretation, no probability, no guesswork.
 
 ### The diff algorithm
 
-Argos relies on the open source [**odiff** library](https://github.com/dmtrKovalenko/odiff) maintained by the talented Dmitriy Kovalenko.
+Argos relies on the open-source [**odiff** library](https://github.com/dmtrKovalenko/odiff) by Dmitriy Kovalenko. The full diff implementation is also open source — you can [inspect it here](https://github.com/argos-ci/argos/blob/main/apps/backend/src/screenshot-diff/diff/image/index.ts).
 
-Our full diff implementation is also open source and can be [inspected here](https://github.com/argos-ci/argos/blob/main/apps/backend/src/screenshot-diff/diff/image/index.ts).
+Each comparison runs in four stages:
 
-#### High-level flow
+1. **Image normalization**: Resolution, color space, and alpha channels are aligned.
+2. **Multiple diff passes**: Each pass uses different thresholds to detect both strict and subtle changes.
+3. **Pixel clustering**: Random noise is separated from meaningful visual changes.
+4. **Final diff output**: A diff mask and score are produced.
 
-1.  **Image normalization**
+Running multiple passes lets Argos stay strict while remaining resilient to minor, explainable noise.
 
-    Resolution, color space, and alpha channels are aligned.
-2.  **Multiple diff passes**
-
-    Each pass uses different thresholds to detect both strict and subtle changes.
-3.  **Pixel clustering**
-
-    Random noise is separated from meaningful visual changes.
-4.  **Final diff output**
-
-    A diff mask and score are produced for review in Argos.
-
-Running multiple passes allows Argos to stay strict while remaining resilient to minor, explainable noise.
+When at least one snapshot differs from the baseline, the build concludes with **Changes detected** and the diffs await [review](../review-workflow/review-a-build.md). When every snapshot matches, the build concludes with **No changes detected** and the commit status passes.
 
 ### Why pixel diffing instead of AI
 
-Some tools use AI or ML models to decide whether a change is acceptable.
+Some tools use AI or ML models to decide whether a change is acceptable. Argos intentionally does not: AI compensates for flakiness, while Argos removes it. AI-based approaches often hide small changes without clear explanations, mask rendering inconsistencies, and blur the line between what changed and what was approved — which leads to silent regressions and declining trust in the test suite.
 
-Argos intentionally does not.
+Deterministic pixel diffing has the properties that matter in CI:
 
-**AI compensates for flakiness.**
+* **Deterministic**: Same input, same result.
+* **Explainable**: The exact pixels that changed are visible.
+* **Review-friendly**: Reviewers assess facts, not model guesses.
+* **Auditable**: Approvals have a clear meaning.
 
-**Argos removes it.**
-
-AI-based approaches often:
-
-* Hide small changes without clear explanations
-* Mask rendering inconsistencies
-* Create ambiguity between what changed and what was approved
-
-Over time this leads to silent regressions and declining trust in the test suite.
+And because the diff engine is open source, there is no black box and no hidden thresholds — visual testing should be infrastructure, not magic.
 
 ### Flakiness is a signal
 
-A flaky visual test usually points to an underlying problem, such as:
+A flaky visual test usually points to an underlying problem: non-deterministic animations, time-dependent rendering, uncontrolled fonts, async layout shifts, or environment-specific rendering differences. Argos treats flakiness as **technical debt to fix**, not noise to ignore.
 
-* Non deterministic animations
-* Time-dependent rendering
-* Uncontrolled fonts
-* Async layout shifts
-* Environment-specific rendering differences
-
-Argos treats flakiness as **technical debt to fix**, not noise to ignore.
-
-### Flaky management and resolution
-
-Argos provides explicit tools to identify and resolve flakiness:
-
-* Flaky indicators and reports
-* Ignore changes on specific screenshots
-* SDK-level stabilization for fonts, animations, images, and loading states
-* [Helpers](../reliability-and-flakiness/flaky-tests/argos-helpers.md) to mask specific regions or elements
-
-Learn more in [managing flaky tests](../reliability-and-flakiness/flaky-tests/).
-
-### Determinism over probability
-
-Pixel diffing offers properties that matter in CI:
-
-* **Deterministic**: same input, same result
-* **Explainable**: exact pixels that changed are visible
-* **Review-friendly**: reviewers assess facts, not model guesses
-* **Auditable**: approvals have a clear meaning
-
-AI introduces probability and hidden heuristics, which is a poor fit for regression testing.
-
-### Built for long-term health
-
-Argos optimizes for:
-
-* Trust in failures
-* High signal to noise ratio
-* Stable baselines
-* Predictable reviews
-
-The result is visual testing teams rely on every day, not something they mute after a few weeks.
-
-### Open by design
-
-The diff engine and its surrounding logic are open source:
-
-* No black box
-* No hidden thresholds
-* Fully inspectable and debuggable
-
-Visual testing should be infrastructure, not magic.
+Argos gives you the tools for both sides of the problem: [flaky test detection](../reliability-and-flakiness/flaky-test-detection.md) identifies unstable screenshots automatically, and the [stabilization playbook](../reliability-and-flakiness/flaky-tests/README.md) helps you fix them at the source.

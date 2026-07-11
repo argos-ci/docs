@@ -1,5 +1,7 @@
 ---
-description: Browse, filter, and open builds for a project to scan status and drill into the runs you care about in Argos.
+description: >-
+  Browse, filter, and open builds for a project to scan status and drill into
+  the runs you care about in Argos.
 ---
 
 # Builds list
@@ -13,14 +15,14 @@ _A project Builds list with status badges, change counts, and filters_
 ### Open the Builds list
 
 1. Open your project in Argos.
-2. Click the **Builds** tab.
+2. Select the **Builds** tab.
 
 ### What each row shows
 
-Each row represents a single build and typically includes:
+Each row represents a single build:
 
-* **Build ID** and status (for example: Auto-approved, Approved, Changes detected, or Rejected).
-* **Change counts** for the build (changes, additions, and removals when applicable).
+* **Build number and status** — for example **Auto-approved**, **Changes approved**, **Changes detected**, or **Changes rejected**.
+* **Change counts** — changes, additions, and removals when applicable.
 * **Pull request metadata** when the build is linked to a PR.
 * **Branch and commit** information.
 * **Timestamp** for when the build was created.
@@ -29,9 +31,9 @@ Each row represents a single build and typically includes:
 
 Use the filters at the top of the page to narrow the list:
 
-* **Type**: Filter by build category (for example: check, orphan, or auto-approved builds).
-* **Status**: Filter by review state (for example: approved, changes detected, or rejected).
-* **Build name**: Filter to a specific build name when your CI splits builds (see [Build splitting](../how-to-guides/ci-pipelines/monorepos-setup.md)).
+* **Type**: Filter by [build type](../platform-fundamentals/README.md#build-types) — check, orphan, or auto-approved builds.
+* **Status**: Filter by review state — approved, changes detected, or rejected.
+* **Build name**: Filter to a specific build name when your CI [splits builds](../how-to-guides/ci-pipelines/monorepos-setup.md).
 
 Build names in the filter are sourced from builds created in the **last month**. Builds can't be deleted, but unused build names drop out of the filter list after about a month of inactivity.
 
@@ -49,6 +51,6 @@ No. Builds are immutable records and cannot be deleted.
 
 <summary>Why did a build name disappear from the filter?</summary>
 
-The build name list only includes names used in builds created within the last month. If a build name has no recent activity, it will no longer appear.
+The build name list only includes names used in builds created within the last month. If a build name has no recent activity, it no longer appears.
 
 </details>
