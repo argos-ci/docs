@@ -25,7 +25,7 @@ Every build is complete, on pull requests and on main. A suite executes at most 
 
 ### 1. Write snapshots to a directory inside the package
 
-Capture snapshots to a directory owned by the task's package — Argos SDKs default to `./screenshots`. Don't upload from inside the test task (skip the SDK reporter / `uploadToArgos` option): the upload moves to a later step, outside the cache boundary.
+Capture snapshots to a directory owned by the task's package — the Argos Vitest SDK writes snapshots to `./snapshots` by default, Playwright screenshots land in `./screenshots`. Don't upload from inside the test task (skip the SDK reporter / `uploadToArgos` option): the upload moves to a later step, outside the cache boundary.
 
 ### 2. Declare the directory as a cached task output
 
@@ -35,7 +35,7 @@ Capture snapshots to a directory owned by the task's package — Argos SDKs defa
   "extends": ["//"],
   "tasks": {
     "test": {
-      "outputs": ["screenshots/**"]
+      "outputs": ["snapshots/**"]
     }
   }
 }
@@ -58,7 +58,7 @@ steps:
   - name: Upload snapshots to Argos
     run: >-
       npx argos upload . --build-name unit
-      --files "**/screenshots/**/*"
+      --files "**/snapshots/**/*"
       --ignore "**/node_modules/**" "**/*.argos.json"
 ```
 {% endcode %}
@@ -73,7 +73,7 @@ Scope the `--files` globs so they match only the snapshot directories your cache
 
 * **Snapshots must be deterministic and machine-independent.** Cached files are reused across runners and branches; anything environment-dependent in them (timestamps, absolute paths, font rendering differences) will produce diffs that depend on which machine populated the cache. Text snapshots and stabilized screenshots are fine.
 * **You extend the cache's trust model to baselines.** With a remote cache, files produced on a pull-request runner can end up in a main-branch build. That's the same trust you already place in the cache for test *results* — but it's worth stating.
-* **Screenshot names become upload-root-relative.** Uploading from the repository root names snapshots by their full path (`packages/app/screenshots/home.png`), which also prevents name collisions between packages sharing a build.
+* **Screenshot names become upload-root-relative.** Uploading from the repository root names snapshots by their full path (`packages/app/snapshots/home.png`), which also prevents name collisions between packages sharing a build.
 
 ## Alternative: subset builds + finalize
 
