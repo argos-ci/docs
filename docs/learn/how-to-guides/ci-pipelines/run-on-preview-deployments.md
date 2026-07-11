@@ -6,13 +6,13 @@ description: Run Argos visual tests against Vercel, Netlify, or Cloudflare previ
 
 Catch visual regressions **before merging** by running automated tests on every preview deployment.
 
-Argos integrates with GitHub Actions and connects seamlessly with providers like **Vercel, Netlify, and Cloudflare**.
+Argos integrates with GitHub Actions and works with providers like **Vercel, Netlify, and Cloudflare**.
 
 With this setup:
 
-* Each deployment preview is tested automatically
-* Regressions are surfaced directly in your pull requests
-* Your production baseline stays reliable and up to date
+* Each deployment preview is tested automatically.
+* Regressions are surfaced directly in your pull requests.
+* Your production baseline stays reliable and up to date.
 
 ### Setup with Vercel repository dispatch events
 
@@ -38,14 +38,14 @@ jobs:
   run-e2es:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
 
       - name: Install dependencies
         run: npm ci && npx playwright install --with-deps
 
-      - name: Print context for debugging optional
+      - name: Print context (optional)
         run: |
           echo "URL: $BASE_URL"
 
@@ -62,11 +62,9 @@ jobs:
 
 ### Setup with GitHub deployment status events
 
-If your hosting provider emits GitHub Deployments events Vercel, Netlify, Cloudflare, you can trigger tests from the [`deployment_status` event](https://docs.github.com/en/webhooks/webhook-events-and-payloads#deployment_status).
+If your hosting provider emits GitHub Deployments events (Vercel, Netlify, Cloudflare), you can trigger tests from the [`deployment_status` event](https://docs.github.com/en/webhooks/webhook-events-and-payloads#deployment_status).
 
 The event carries the preview URL when a deployment becomes successful.
-
-
 
 {% code title=".github/workflows/ci.yml" %}
 ```yaml
@@ -88,25 +86,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
 
       - name: Install dependencies
         run: npm ci && npx playwright install --with-deps
 
-      - name: Print context for debugging optional
+      - name: Print context (optional)
         run: |
           echo "URL: $BASE_URL"
           echo "Branch: $ARGOS_BRANCH"
 
-      - name: Run Playwright tests with Argos reporter recommended
+      - name: Run Playwright tests with Argos reporter
         run: npx playwright test
         env:
-          # URL of the preview deployment used by your test as the base URL.
-          BASE_URL: ${{ github.event.client_payload.deployment.url }}
-          # Set only for production deployments to ensure stable baselines usually `main`.
-          ARGOS_BRANCH: ${{ github.event.client_payload.deployment.meta.production && 'main' || '' }}
+          # URL of the preview deployment, used by your tests as the base URL.
+          BASE_URL: ${{ github.event.deployment_status.environment_url }}
+          # Set only for production deployments to keep baselines stable (usually `main`).
+          ARGOS_BRANCH: ${{ github.event.deployment_status.environment == 'Production' && 'main' || '' }}
           # Provided by GitHub used by Argos to link builds to branches and pull requests
           # Optional, if not provided Argos will not link builds to PRs
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

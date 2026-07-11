@@ -190,7 +190,7 @@ Open the build in Argos and approve it in the [review UI](../../review-workflow/
 
 <summary>What about <code>maxDiffPixels</code> and <code>threshold</code>?</summary>
 
-Argos applies its own [diff algorithm](../../platform-fundamentals/how-argos-detects-visual-differences.md) with tolerance for anti-aliasing and sub-pixel noise, so you don't tune per-assertion pixel thresholds.
+Argos applies its own [diff algorithm](../../platform-fundamentals/how-argos-detects-visual-differences.md) with tolerance for anti-aliasing and sub-pixel noise, so you rarely need per-assertion tuning. If a specific screenshot needs a different sensitivity, pass the `threshold` option to `argosScreenshot` (between 0 and 1).
 
 </details>
 

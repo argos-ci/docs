@@ -154,11 +154,11 @@ In this example, Argos will generate two snapshots for each story (DefaultView a
 
 ### Combining modes from multiple levels
 
-You can add modes in your `.storybook/preview.ts` (or `.js`) at the project level, then define additional modes in a story file. Argos “stacks” these modes, creating a snapshot for every combination.
+You can add modes in your `.storybook/preview.ts` (or `.js`) at the project level, then define additional modes in a story file. Argos merges the modes defined at every level and captures one snapshot per mode name.
 
 #### Project-level modes
 
-{% code title=".storybook/modes.ts" %}
+{% code title=".storybook/preview.ts" %}
 ```ts
 import { allModes } from "./modes";
 
@@ -269,4 +269,4 @@ If you remove a mode from your code, Argos will stop capturing new snapshots for
 
 </details>
 
-Enjoy your multi-mode visual tests! By setting up modes for dark vs. light, mobile vs. desktop, and everything in between, you can verify all key variants of your UI without writing extra stories.
+By setting up modes for dark vs. light, mobile vs. desktop, and everything in between, you verify all key variants of your UI without writing extra stories.

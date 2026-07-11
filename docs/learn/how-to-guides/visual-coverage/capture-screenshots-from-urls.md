@@ -4,11 +4,11 @@ description: Capture screenshots of a list of web pages with Argos using Playwri
 
 # Capture screenshots from URLs
 
-Efficiently capture web page screenshots across frameworks with Argos: A step-by-step guide for Playwright, Cypress, and Puppeteer integration.
+Cover many pages with little code: loop over a list of URLs and capture a screenshot of each. The same pattern works in Playwright, Cypress, and Puppeteer.
 
 ### Using Playwright
 
-Below is a step-by-step script for Playwright to take screenshots of specified pages. This script utilizes the Argos Playwright integration for streamlined screenshot capture:
+Generate one test per page, each capturing a screenshot with the Argos Playwright SDK:
 
 {% code title="screenshot-pages.spec.ts" %}
 ```js
@@ -33,9 +33,9 @@ for (const { name, path } of pages) {
 
 ### Using Cypress
 
-Here's how you can capture screenshots within Cypress. The script navigates to each page and uses the Argos Cypress command for screenshots:
+Generate one test per page with the Argos Cypress command:
 
-{% code title="screenshot-pages.spec.ts" %}
+{% code title="screenshot-pages.cy.js" %}
 ```js
 const pages = [
   { name: "homepage", path: "/" },
@@ -55,9 +55,9 @@ for (const { name, path } of pages) {
 
 ### Using Puppeteer
 
-or Puppeteer users, this script demonstrates how to capture page screenshots effectively. It employs Puppeteer for navigation and screenshot capture:
+Loop over the pages in a standalone script and capture each with the Argos Puppeteer SDK:
 
-{% code title="screenshot-pages.spec.ts" %}
+{% code title="screenshot-pages.mjs" %}
 ```js
 import puppeteer from "puppeteer";
 import { argosScreenshot } from "@argos-ci/puppeteer";
@@ -70,16 +70,14 @@ const pages = [
   { name: "pricing", path: "/pricing" },
 ];
 
-(async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+const browser = await puppeteer.launch();
+const page = await browser.newPage();
 
-  for (const { name, path } of pages) {
-    await page.goto(`${baseUrl}${path}`);
-    await page.screenshot({ path: `${name}.png` });
-  }
+for (const { name, path } of pages) {
+  await page.goto(`${baseUrl}${path}`);
+  await argosScreenshot(page, name);
+}
 
-  await browser.close();
-})();
+await browser.close();
 ```
 {% endcode %}

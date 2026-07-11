@@ -20,7 +20,7 @@ Both select baselines automatically and gate the pull request, so the review wor
 | Chromatic                                          | Argos                                                                             |
 | -------------------------------------------------- | --------------------------------------------------------------------------------- |
 | `chromatic` CLI + `@chromatic-com/storybook`       | `@argos-ci/storybook` + `argos deploy`                                            |
-| `npx chromatic --project-token=<token>`            | `npx vitest --project=storybook` + `npx argos deploy ./storybook-static`         |
+| `npx chromatic --project-token=<token>`            | `npx vitest run --project=storybook` + `npx argos deploy ./storybook-static`         |
 | `CHROMATIC_PROJECT_TOKEN`                          | `ARGOS_TOKEN`                                                                      |
 | TurboSnap (`--only-changed`)                       | [Subset builds](../ci-pipelines/subset-builds.md) / [sharding](../ci-pipelines/parallel-testing-sharding.md) |
 | Modes (viewports, themes, globals)                 | [Storybook story modes](../visual-coverage/storybook-story-modes.md)             |

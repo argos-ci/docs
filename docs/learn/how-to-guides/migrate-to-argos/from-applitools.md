@@ -112,6 +112,7 @@ Replace each `open` → `check` → `close` sequence with a single `argosScreens
 **Before (Applitools)**
 
 ```ts
+import { Target } from "@applitools/eyes-playwright";
 import { test } from "@applitools/eyes-playwright/fixture";
 
 test("homepage", async ({ page, eyes }) => {

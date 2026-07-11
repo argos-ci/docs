@@ -4,9 +4,7 @@ description: Apply custom CSS at capture time to hide or restyle elements and fi
 
 # Injecting CSS
 
-Enhance Argos screenshots with custom CSS: Perfect for addressing flaky tests or complex scenarios, ensuring your visual diffs are precise and reliable.
-
-In addition to [built-in helpers](../../reliability-and-flakiness/flaky-tests/argos-helpers.md#helpers), Argos offers the possibility to add custom CSS evaluated during the screenshot process. It can be helpful for complex use cases that produce flaky visual diffs.
+Argos can apply custom CSS while a screenshot is taken — useful to hide or restyle elements that the [built-in helpers](../../reliability-and-flakiness/flaky-tests/argos-helpers.md#helpers) don't cover, such as third-party iframes or complex dynamic regions.
 
 ### Add CSS while taking the screenshot
 
@@ -34,4 +32,4 @@ Argos adds a `__argos__` class to the HTML element during screenshots. You can t
 }
 ```
 
-This feature enhances control over the visual testing environment, helping to manage complex scenarios or resolve flaky visual differences.
+Both approaches only affect screenshots — your app's rendering outside Argos is untouched.

@@ -97,8 +97,8 @@ jobs:
       matrix:
         shardIndex: [1, 2, 3, 4]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
       - run: npm ci
       # ---
       # Here you setup your repo and run your E2E tests
@@ -118,8 +118,8 @@ jobs:
     if: ${{ always() }}
     needs: ["e2e-tests"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
       - run: npm ci
       - name: Finalize Argos build
         # ARGOS_PARALLEL_NONCE is automatically detected
