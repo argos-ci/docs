@@ -92,6 +92,16 @@ test("Button", async () => {
 });
 ```
 
+The name is optional. When omitted, Argos derives one from the current test—mimicking [Vitest's snapshot naming](https://vitest.dev/guide/snapshot) (`` `${test.fullName} ${count}` ``)—so several unnamed captures in the same test stay unique:
+
+```ts
+test("Button", async () => {
+  render(<Button>Click me</Button>);
+  await argosScreenshot(); // -> "Button 1"
+  await argosScreenshot(); // -> "Button 2"
+});
+```
+
 Screenshots are written to the `./screenshots` directory by default and uploaded by the plugin when `uploadToArgos` is enabled.
 
 ### Capturing snapshots
@@ -100,6 +110,8 @@ Screenshots are written to the `./screenshots` directory by default and uploaded
 
 Strings are written verbatim; any other value is serialized with [`@vitest/pretty-format`](https://www.npmjs.com/package/@vitest/pretty-format) (the serializer Vitest itself uses).
 
+The value comes first; the name is optional. Omit it to auto-name the snapshot from the current test (like screenshots above), or pass `options.name` to set it explicitly:
+
 ```ts
 import { test } from "vitest";
 import { argosSnapshot } from "@argos-ci/vitest";
@@ -107,14 +119,16 @@ import { argosSnapshot } from "@argos-ci/vitest";
 test("API response", async () => {
   const user = await fetchUser();
   // Objects are serialized automatically.
-  await argosSnapshot("user", user);
+  await argosSnapshot(user); // -> "API response 1"
+  await argosSnapshot(user, { name: "user" }); // explicit name
 });
 ```
 
 Use the `extension` option to control how Argos renders and diffs the snapshot, and `tag` to attach tags:
 
 ```ts
-await argosSnapshot("config", JSON.stringify(config, null, 2), {
+await argosSnapshot(JSON.stringify(config, null, 2), {
+  name: "config",
   extension: ".json",
   tag: "config",
 });
@@ -156,17 +170,19 @@ export default defineConfig({
 
 The plugin also accepts every option supported by the [Playwright `argosScreenshot` function](playwright.md#argosscreenshothandler-name-options)—including non-serializable ones like `beforeScreenshot` and `afterScreenshot`—and all [upload parameters](https://js-sdk-reference.argos-ci.com/interfaces/UploadParameters.html). These act as defaults for every screenshot and can be overridden per call.
 
-#### `argosScreenshot(name, options?)`
+#### `argosScreenshot(name?, options?)`
 
 Take a screenshot in a Vitest browser test. Import it from `@argos-ci/vitest`.
 
 ```ts
 import { argosScreenshot } from "@argos-ci/vitest";
 
-await argosScreenshot("button");
+await argosScreenshot("button"); // explicit name
+await argosScreenshot(); // automatic name, derived from the current test
+await argosScreenshot({ fullPage: true }); // automatic name, with options
 ```
 
-* **`name`**: A unique name for the screenshot.
+* **`name`**: A unique name for the screenshot. When omitted, Argos derives one from the current test (`` `${test.fullName} ${count}` ``).
 * **`options`**: Serializable screenshot options (see below).
 
 {% hint style="info" %}
@@ -185,22 +201,23 @@ Available options:
 * **`disableHover`**: Disable hover effects by moving the mouse to the top-left corner (default: `true`).
 * **`stabilize`**: Wait for the UI to stabilize before taking the screenshot. Set to `false` to disable or pass an object to customize it (default: `true`).
 
-#### `argosSnapshot(name, content, options?)`
+#### `argosSnapshot(content, options?)`
 
 Take a snapshot of any serializable value. Works in both browser and Node tests. Import it from `@argos-ci/vitest`.
 
 ```ts
 import { argosSnapshot } from "@argos-ci/vitest";
 
-await argosSnapshot("user", user);
+await argosSnapshot(user); // automatic name, derived from the current test
+await argosSnapshot(user, { name: "user" }); // explicit name
 ```
 
-* **`name`**: A unique name for the snapshot.
 * **`content`**: The value to snapshot. Strings are written as-is; any other value is serialized.
 * **`options`**: Snapshot options (see below).
 
 Available options:
 
+* **`name`**: A unique name for the snapshot. When omitted, Argos derives one from the current test (`` `${test.fullName} ${count}` ``).
 * **`root`**: Folder where the snapshot is written. In Node tests it defaults to `"./screenshots"`; in browser tests it defaults to the plugin `root`.
 * **`extension`**: Extension of the snapshot file. It also determines how Argos renders and diffs the snapshot, e.g. `.txt`, `.json`, `.yml`, `.html`, `.md` (default: `".txt"`).
 * **`tag`**: A [tag](../learn/review-workflow/tags.md) or array of tags to attach to the snapshot.
