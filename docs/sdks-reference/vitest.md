@@ -78,7 +78,7 @@ bun add --dev vitest @vitest/browser @vitest/browser-playwright playwright
 
 ### Capturing screenshots
 
-Use the `argosScreenshot` function to capture a screenshot during a browser test. It requires the Argos Vitest plugin to be registered in your config (see [`argosVitestPlugin`](#argosvitestplugin) below).
+Use the `argosScreenshot` function to capture a screenshot during a browser test. It requires the Argos Vitest plugin to be registered in your config (see [`argosVitestPlugin`](#argosvitestpluginoptions) below).
 
 ```ts
 import { test } from "vitest";
@@ -154,7 +154,7 @@ export default defineConfig({
 * **`uploadToArgos`**: Upload the captured files to Argos at the end of the run (default: `false`).
 * **`root`**: Folder where screenshots and snapshots are written (default: `"./screenshots"`).
 
-The plugin also accepts every option supported by the [Playwright `argosScreenshot` function](playwright.md#argosscreenshotpage-name-options)—including non-serializable ones like `beforeScreenshot` and `afterScreenshot`—and all [upload parameters](https://js-sdk-reference.argos-ci.com/interfaces/UploadParameters.html). These act as defaults for every screenshot and can be overridden per call.
+The plugin also accepts every option supported by the [Playwright `argosScreenshot` function](playwright.md#argosscreenshothandler-name-options)—including non-serializable ones like `beforeScreenshot` and `afterScreenshot`—and all [upload parameters](https://js-sdk-reference.argos-ci.com/interfaces/UploadParameters.html). These act as defaults for every screenshot and can be overridden per call.
 
 #### `argosScreenshot(name, options?)`
 

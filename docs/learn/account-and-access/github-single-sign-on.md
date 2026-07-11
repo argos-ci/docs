@@ -1,5 +1,5 @@
 ---
-description: Enable GitHub single sign-on to sync your Argos team with a GitHub organization and let members sign in seamlessly.
+description: Enable GitHub single sign-on to sync your Argos team with a GitHub organization and let members sign in with GitHub.
 ---
 
 # GitHub single sign-on

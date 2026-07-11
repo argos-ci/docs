@@ -84,8 +84,6 @@ import { argosVitestPlugin } from "@argos-ci/storybook/vitest-plugin";
 
 argosVitestPlugin({
   uploadToArgos: !!process.env.CI,
-  // Required only if you are not using GitHub Actions.
-  token: "<YOUR-ARGOS-TOKEN>",
 }),
 ```
 {% endcode %}

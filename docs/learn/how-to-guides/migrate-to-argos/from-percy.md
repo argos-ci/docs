@@ -89,8 +89,6 @@ export default defineConfig({
       "@argos-ci/playwright/reporter",
       createArgosReporterOptions({
         uploadToArgos: !!process.env.CI,
-        // Required only if you are not using GitHub Actions.
-        token: "<YOUR-ARGOS-TOKEN>",
       }),
     ],
   ],

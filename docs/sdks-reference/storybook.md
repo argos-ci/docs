@@ -1,6 +1,6 @@
 ---
 description: >-
-  Integrate visual testing with your Storybook seamlessly using Argos. This SDK
+  Integrate visual testing with your Storybook using Argos. This SDK
   allows you to capture and review visual changes in your Storybook components
   directly within your CI.
 ---
@@ -151,7 +151,7 @@ export default defineConfig({
 
 * **`uploadToArgos`**: Set to `true` to upload screenshots to Argos.
 
-Also supports all options from the [Playwright `argosScreenshot` function](playwright.md#argosscreenshotpage-name-options) and [upload parameters](https://js-sdk-reference.argos-ci.com/interfaces/UploadParameters.html).
+Also supports all options from the [Playwright `argosScreenshot` function](playwright.md#argosscreenshothandler-name-options) and [upload parameters](https://js-sdk-reference.argos-ci.com/interfaces/UploadParameters.html).
 
 #### `@argos-ci/storybook/vitest`
 
@@ -192,7 +192,7 @@ export default config;
 
 * **`page`**: The [Playwright Page](https://playwright.dev/docs/api/class-page) instance.
 * **`context`**: The test context provided by the Storybook test runner.
-* **`options`**: Customizable options for `argosScreenshot`. Explore [available options](playwright.md#argosscreenshotpage-name-options).
+* **`options`**: Customizable options for `argosScreenshot`. Explore [available options](playwright.md#argosscreenshothandler-name-options).
 
 ### Additional Resources
 

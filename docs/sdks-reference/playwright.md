@@ -106,7 +106,7 @@ export default defineConfig({
 
 ### Tests Sharding
 
-Argos seamlessly integrates with [Playwright test sharding](https://playwright.dev/docs/test-sharding), enabling efficient test distribution without the need for manual configuration. [Argos Sharding/Parallel mode](../learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md) is automatically configured for you.
+Argos integrates with [Playwright test sharding](https://playwright.dev/docs/test-sharding), enabling efficient test distribution without the need for manual configuration. [Argos Sharding/Parallel mode](../learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md) is automatically configured for you.
 
 Argos also supports [Currents orchestration](https://currents.dev/) using [Argos parallel + finalize](../learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md).
 
