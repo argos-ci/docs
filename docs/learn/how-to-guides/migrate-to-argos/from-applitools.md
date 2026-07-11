@@ -87,8 +87,6 @@ export default defineConfig({
       "@argos-ci/playwright/reporter",
       createArgosReporterOptions({
         uploadToArgos: !!process.env.CI,
-        // Required only if you are not using GitHub Actions.
-        token: "<YOUR-ARGOS-TOKEN>",
       }),
     ],
   ],
@@ -112,6 +110,7 @@ Replace each `open` → `check` → `close` sequence with a single `argosScreens
 **Before (Applitools)**
 
 ```ts
+import { Target } from "@applitools/eyes-playwright";
 import { test } from "@applitools/eyes-playwright/fixture";
 
 test("homepage", async ({ page, eyes }) => {
@@ -151,7 +150,7 @@ Rename the secret from `APPLITOOLS_API_KEY` to `ARGOS_TOKEN` and run your tests 
     ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
 ```
 
-On GitHub Actions you can use [OIDC](../../integrations/github-oidc-authentication.md) or [tokenless authentication](../../integrations/github-tokenless-authentication.md) instead of a secret.
+On GitHub Actions you can use [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md) instead of a secret.
 {% endstep %}
 
 {% step %}

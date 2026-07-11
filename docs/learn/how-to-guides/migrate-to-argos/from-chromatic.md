@@ -20,7 +20,7 @@ Both select baselines automatically and gate the pull request, so the review wor
 | Chromatic                                          | Argos                                                                             |
 | -------------------------------------------------- | --------------------------------------------------------------------------------- |
 | `chromatic` CLI + `@chromatic-com/storybook`       | `@argos-ci/storybook` + `argos deploy`                                            |
-| `npx chromatic --project-token=<token>`            | `npx vitest --project=storybook` + `npx argos deploy ./storybook-static`         |
+| `npx chromatic --project-token=<token>`            | `npx vitest run --project=storybook` + `npx argos deploy ./storybook-static`         |
 | `CHROMATIC_PROJECT_TOKEN`                          | `ARGOS_TOKEN`                                                                      |
 | TurboSnap (`--only-changed`)                       | [Subset builds](../ci-pipelines/subset-builds.md) / [sharding](../ci-pipelines/parallel-testing-sharding.md) |
 | Modes (viewports, themes, globals)                 | [Storybook story modes](../visual-coverage/storybook-story-modes.md)             |
@@ -84,8 +84,6 @@ import { argosVitestPlugin } from "@argos-ci/storybook/vitest-plugin";
 
 argosVitestPlugin({
   uploadToArgos: !!process.env.CI,
-  // Required only if you are not using GitHub Actions.
-  token: "<YOUR-ARGOS-TOKEN>",
 }),
 ```
 {% endcode %}
@@ -126,7 +124,7 @@ Swap the single `chromatic` command for two steps: run the visual tests, then de
 {% endcolumn %}
 {% endcolumns %}
 
-`ARGOS_TOKEN` comes from **Settings → General → Token**. On GitHub Actions you can use [OIDC](../../integrations/github-oidc-authentication.md) or [tokenless authentication](../../integrations/github-tokenless-authentication.md) instead of a secret.
+`ARGOS_TOKEN` comes from **Settings → General → Token**. On GitHub Actions you can use [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md) instead of a secret.
 {% endstep %}
 
 {% step %}
@@ -248,7 +246,7 @@ They don't transfer. The first Argos build on your reference branch establishes 
 
 <summary>Is there an open-source plan?</summary>
 
-Yes — see [Open source](../../billing-and-subscription/subscription/open-source.md).
+Yes — see [Open source](../../billing-and-subscription/open-source.md).
 
 </details>
 

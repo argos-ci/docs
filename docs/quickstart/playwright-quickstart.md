@@ -1,22 +1,22 @@
 ---
-description: Learn how to setup visual testing using the Argos Playwright SDK.
+description: Set up visual testing in your Playwright tests with the Argos Playwright SDK.
 ---
 
 # Playwright Quickstart
 
+Set up Argos with [Playwright](https://playwright.dev/) to run visual tests on every pull request: install the SDK, add the reporter, capture screenshots, and run it in CI.
+
 ### Prerequisites
 
-To get the most out of this guide, you’ll need to:
-
-* [Use Playwright](https://playwright.dev/docs/intro#installing-playwright)
-* [Run Playwright on your CI/CD](https://playwright.dev/docs/ci-intro#on-pushpull_request)
-* [Create your project in Argos](https://app.argos-ci.com/new)
+* [Playwright](https://playwright.dev/docs/intro#installing-playwright) set up in your project
+* [Playwright running on your CI](https://playwright.dev/docs/ci-intro#on-pushpull_request)
+* [A project created in Argos](https://app.argos-ci.com/new)
 
 {% stepper %}
 {% step %}
 ### Install
 
-Get the Argos Playwright SDK.
+Install the Argos Playwright SDK:
 
 {% tabs %}
 {% tab title="npm" %}
@@ -46,9 +46,9 @@ bun add --dev @argos-ci/playwright
 {% endstep %}
 
 {% step %}
-### Setup Argos in your Playwright config
+### Add the Argos reporter to your Playwright config
 
-The Argos reporter seamlessly uploads screenshots and traces to Argos in real-time.
+The Argos reporter uploads screenshots and traces to Argos as your tests run:
 
 {% code title="playwright.config.ts" %}
 ```js
@@ -68,9 +68,6 @@ export default defineConfig({
       createArgosReporterOptions({
         // Upload to Argos on CI only.
         uploadToArgos: !!process.env.CI,
-
-        // Set your Argos token (required if not using GitHub Actions).
-        token: "<YOUR-ARGOS-TOKEN>",
       }),
     ],
   ],
@@ -78,7 +75,7 @@ export default defineConfig({
   // Setup recording option to enable test debugging features.
   use: {
     // Collect trace when retrying the failed test.
-    trace: 'on-first-retry',
+    trace: "on-first-retry",
 
     // Capture screenshot after each test failure.
     screenshot: "only-on-failure",
@@ -92,17 +89,17 @@ export default defineConfig({
 ```
 {% endcode %}
 
-Playwright's [recording options](https://playwright.dev/docs/test-use-options#recording-options) facilitate the automated capture of screenshots upon test failures. Notably, these captured screenshots and traces are then automatically uploaded to Argos.
+With `trace` and `screenshot` enabled, Playwright records failure screenshots and traces — the reporter uploads them to Argos automatically, so you can debug failed tests visually.
 
 {% hint style="success" %}
-The `launchOptions` above disable subpixel text and font hinting, so glyphs render identically on your machine and on CI. This single change prevents one of the most common causes of flaky screenshots—learn why in [Stabilize Text Rendering](../learn/reliability-and-flakiness/flaky-tests/stabilize-text-rendering.md).
+The `launchOptions` above disable subpixel text and font hinting, so glyphs render identically on your machine and on CI. This single change prevents one of the most common causes of flaky screenshots — learn why in [Stabilize text rendering](../learn/reliability-and-flakiness/flaky-tests/stabilize-text-rendering.md).
 {% endhint %}
 {% endstep %}
 
 {% step %}
-### Take screenshots
+### Capture screenshots
 
-Use `argosScreenshot` helper to capture stable screenshots in your E2E tests.
+Use the `argosScreenshot` helper to capture stable screenshots in your tests:
 
 {% code title="tests/example.spec.ts" %}
 ```js
@@ -116,13 +113,15 @@ test("screenshot homepage", async ({ page }) => {
 ```
 {% endcode %}
 
+Screenshots are written to the `./screenshots` directory by default. Add `./screenshots` to your `.gitignore` file to avoid committing them.
+
 Tip: Check out our guides to [screenshot multiple pages](../learn/how-to-guides/visual-coverage/capture-screenshots-from-urls.md) or [capture multiple viewports](../learn/how-to-guides/visual-coverage/responsive-viewports.md).
 {% endstep %}
 
 {% step %}
 ### Set up CI
 
-Run your Playwright tests in CI with `ARGOS_TOKEN` set. The Argos reporter uploads screenshots automatically when it detects a CI environment.
+Run your Playwright tests in CI with `ARGOS_TOKEN` set. The Argos reporter uploads screenshots automatically when it detects a CI environment:
 
 {% code title=".github/workflows/argos.yml" %}
 ```yaml
@@ -148,27 +147,24 @@ jobs:
 ```
 {% endcode %}
 
-`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC](../learn/integrations/github-oidc-authentication.md) or [tokenless authentication](../learn/integrations/github-tokenless-authentication.md) to avoid managing a secret.
+`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret. On other CI providers, pass the token with the `ARGOS_TOKEN` environment variable or the reporter's `token` option.
 {% endstep %}
 {% endstepper %}
 
-### Congratulations on installing Argos! 👏
+### You're all set
 
-After committing and pushing your changes, the Argos check status will appear on your pull request in GitHub (or GitLab).
+Push your changes and open a pull request — the Argos check appears on it once the build is uploaded. Review the visual changes, approve or reject them, and merge with confidence.
 
-**Note:** you need a reference build to compare your changes with. If you don't have one, builds will remain orphan until you run Argos on your reference branch.
+{% hint style="info" %}
+Argos needs a baseline to compare against. Until a build runs on your default branch, pull request builds are marked as [orphan](../learn/platform-fundamentals/baseline-build.md#orphan-builds). Merge this setup or run the workflow once on your default branch to establish the baseline.
+{% endhint %}
 
-You can now review changes of your app for each pull request, avoid visual bugs and merge with confidence. Welcome on board!
+### Next steps
 
-### Next step: keep your screenshots stable
-
-Now that Argos is running, the next thing to learn is how to keep your screenshots free of flakiness. Read [Best practices for stable screenshots](../learn/reliability-and-flakiness/flaky-tests/README.md) to avoid false positives before they reach your pull requests.
-
-### Additional resources
-
-* [Playwright example](https://github.com/argos-ci/argos-javascript/tree/main/examples/playwright)
-* [Argos Playwright SDK reference](../sdks-reference/playwright.md)
+* [Stabilize screenshots](../learn/reliability-and-flakiness/flaky-tests/README.md) – Prevent flaky diffs before they reach your pull requests
+* [Playwright SDK reference](../sdks-reference/playwright.md) – All options and helpers
+* [Playwright example](https://github.com/argos-ci/argos-javascript/tree/main/examples/playwright) – A complete working setup
 
 ***
 
-[Join our Discord](https://argos-ci.com/discord), [submit an issue on GitHub](https://github.com/argos-ci/argos/issues) or just [send an email](mailto:contact@argos-ci.com) if you need help.
+Need help? [Join our Discord](https://argos-ci.com/discord), [open an issue on GitHub](https://github.com/argos-ci/argos/issues), or [send us an email](mailto:contact@argos-ci.com).

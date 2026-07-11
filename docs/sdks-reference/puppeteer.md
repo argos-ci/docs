@@ -41,8 +41,9 @@ describe("Integration test with visual testing", () => {
   it("loads the homepage", async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto(TEST_URL);
-    await argosScreenshot(page, this.test.fullTitle());
+    await page.goto("http://localhost:3000");
+    await argosScreenshot(page, "homepage");
+    await browser.close();
   });
 });
 ```
@@ -56,29 +57,29 @@ Screenshots are stored in `screenshots/argos` folder, relative to current direct
 #### argosScreenshot(page, name\[, options])
 
 * `page` - A `puppeteer` page instance
-* `name` - The screenshot name; must be unique. If ends by `.png` we treat it as a path.
+* `name` - The screenshot name; must be unique. If it ends with `.png`, it is treated as a path.
 * `options` - See [Page.screenshot command options](https://pptr.dev/api/puppeteer.page.screenshot)
 * `options.element` - Accept an ElementHandle or a string selector to screenshot an element
 * `options.viewports` - Specifies the viewports for which to capture screenshots. See [viewports configuration](../learn/how-to-guides/visual-coverage/responsive-viewports.md).
 * `options.argosCSS`: Specific CSS applied during the screenshot process. More on [injecting CSS](../learn/how-to-guides/visual-coverage/injecting-css.md)
-* `options.disableHover`: Disable hover effects by moving the mouse to the top-left corner of the page. Default to `true`.
-* `options.threshold`: Sensitivity threshold between 0 and 1. The higher the threshold, the less sensitive the diff will be. Default to `0.5`.
-* `options.stabilize`: Wait for the UI to stabilize before taking the screenshot. Set to `false` to disable stabilization. Pass an object to customize the stabilization. Default to `true`.
-* `options.stabilize.disableSpellCheck`: Disable spell check before taking the screenshot. Default to `true`.
-* `options.stabilize.fontAntialiasing`: Force font antialiasing. Default to `true`.
-* `options.stabilize.hideCarets`: Hide text carets before taking the screenshot. Default to `true`.
-* `options.stabilize.hideScrollbars`: Hide scrollbars before taking the screenshot. Default to `true`.
-* `options.stabilize.loadImageSrcset`: Force the loading of images with `srcset` attributes when the viewport changes. Default to `true`.
-* `options.stabilize.pauseGifs`: Pause animated GIFs on their first frame so they don't capture a random frame on each run. Default to `true`. Flag GIFs served from extension-less URLs with `data-image-type="gif"` so they're detected too.
-* `options.stabilize.roundImageSize`: Round image sizes to the nearest integer. Default to `true`.
-* `options.stabilize.stabilizeSticky`: Stabilize sticky and fixed elements by switching to `position: absolute`. Default to `true`.
-* `options.stabilize.waitForAriaBusy`: Wait for the `aria-busy` attribute to be removed from the document. Default to `true`.
-* `options.stabilize.waitForFonts`: Wait for fonts to be loaded. Default to `true`.
-* `options.stabilize.waitForImages`: Wait for images to be loaded. Default to `true`.
+* `options.disableHover`: Disable hover effects by moving the mouse to the top-left corner of the page. Defaults to `true`.
+* `options.threshold`: Sensitivity threshold between 0 and 1. The higher the threshold, the less sensitive the diff will be. Defaults to `0.5`.
+* `options.stabilize`: Wait for the UI to stabilize before taking the screenshot. Set to `false` to disable stabilization. Pass an object to customize the stabilization. Defaults to `true`.
+* `options.stabilize.disableSpellCheck`: Disable spell check before taking the screenshot. Defaults to `true`.
+* `options.stabilize.fontAntialiasing`: Force font antialiasing. Defaults to `true`.
+* `options.stabilize.hideCarets`: Hide text carets before taking the screenshot. Defaults to `true`.
+* `options.stabilize.hideScrollbars`: Hide scrollbars before taking the screenshot. Defaults to `true`.
+* `options.stabilize.loadImageSrcset`: Force the loading of images with `srcset` attributes when the viewport changes. Defaults to `true`.
+* `options.stabilize.pauseGifs`: Pause animated GIFs on their first frame so they don't capture a random frame on each run. Defaults to `true`. Flag GIFs served from extension-less URLs with `data-image-type="gif"` so they're detected too.
+* `options.stabilize.roundImageSize`: Round image sizes to the nearest integer. Defaults to `true`.
+* `options.stabilize.stabilizeSticky`: Stabilize sticky and fixed elements by switching to `position: absolute`. Defaults to `true`.
+* `options.stabilize.waitForAriaBusy`: Wait for the `aria-busy` attribute to be removed from the document. Defaults to `true`.
+* `options.stabilize.waitForFonts`: Wait for fonts to be loaded. Defaults to `true`.
+* `options.stabilize.waitForImages`: Wait for images to be loaded. Defaults to `true`.
 * `options.stabilize.waitForBackgroundImages`: Wait for CSS background images (including `::before`/`::after`) to load before taking the screenshot. Enabled by default, scoped to elements flagged with the `data-visual-test-wait-bg-img` attribute (and their descendants). Pass `true` to scan the whole document, `{ selector: string }` to target a custom selector, or `false` to disable it. A failed image (e.g. a 404) is treated as loaded so it never blocks stabilization.
 * `options.tag`: Tag or array of tags to attach to the screenshot for filtering in Argos.
 
-Unlike [Puppeteer's `screenshot` method](https://playwright.dev/docs/api/class-page#page-screenshot), `argosScreenshot` set `fullPage` option to `true` by default. Feel free to override this option if you prefer partial screenshots of your pages.
+Unlike [Puppeteer's `screenshot` method](https://pptr.dev/api/puppeteer.page.screenshot), `argosScreenshot` sets the `fullPage` option to `true` by default. Override it if you prefer partial screenshots of your pages.
 
 ### Helper Attributes for Visual Testing
 
@@ -86,7 +87,6 @@ For tailored visual testing, the `data-visual-test` attributes provide control o
 
 * `[data-visual-test="transparent"]`: Renders the element transparent (`visibility: hidden`).
 * `[data-visual-test="removed"]`: Removes the element from view (`display: none`).
-* `[data-visual-test="blackout"]`: Masks the element with a blackout effect.
 * `[data-visual-test-no-radius]`: Strips the border radius from the element.
 
 **Example: Using a helper attribute to hide a div from the captured screenshot:**

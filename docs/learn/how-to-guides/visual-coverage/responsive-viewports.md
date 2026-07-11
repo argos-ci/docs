@@ -8,13 +8,13 @@ Argos lets you capture the same page at multiple breakpoints with a single test.
 
 ### Prerequisites
 
-This feature works seamlessly with [Playwright](../../../sdks-reference/playwright.md), [Cypress](../../../sdks-reference/cypress.md) and [Puppeteer](../../../sdks-reference/puppeteer.md).
+This feature works with [Playwright](../../../sdks-reference/playwright.md), [Cypress](../../../sdks-reference/cypress.md) and [Puppeteer](../../../sdks-reference/puppeteer.md).
 
 {% hint style="info" %}
 If you use Storybook, see the dedicated guide on [Storybook modes](storybook-story-modes.md).
 {% endhint %}
 
-### Viewport Configuration
+### Viewport configuration
 
 Pass a viewports array to `argosScreenshot()` to generate screenshots for each dimension or preset you define. You can mix explicit sizes and device presets.
 
@@ -28,7 +28,7 @@ await argosScreenshot(..., {
 });
 ```
 
-### Available Presets
+### Available presets
 
 | Preset            | Width (px) | Height (px) |
 | ----------------- | ---------- | ----------- |
@@ -38,18 +38,26 @@ await argosScreenshot(..., {
 | macbook-16        | 1536       | 960         |
 | macbook-15        | 1440       | 900         |
 | macbook-13        | 1280       | 800         |
+| macbook-neo       | 1204       | 753         |
 | macbook-11        | 1366       | 768         |
+| ipad-13-pro       | 1032       | 1376        |
+| ipad-11-pro-m5    | 834        | 1210        |
+| ipad-13-air       | 1024       | 1366        |
+| ipad-11-air       | 820        | 1180        |
+| ipad-11           | 820        | 1180        |
 | ipad-12-pro       | 1024       | 1366        |
 | ipad-11-pro       | 834        | 1194        |
 | ipad-10           | 810        | 1080        |
 | ipad-10-pro       | 834        | 1112        |
 | ipad-9-pro        | 768        | 1024        |
 | ipad-2            | 768        | 1024        |
+| ipad-mini-a17     | 744        | 1133        |
 | ipad-mini         | 768        | 1024        |
 | iphone-air        | 420        | 912         |
 | iphone-17         | 402        | 874         |
 | iphone-17-pro     | 402        | 873         |
 | iphone-17-pro-max | 440        | 956         |
+| iphone-17e        | 390        | 844         |
 | iphone-16         | 393        | 852         |
 | iphone-16e        | 390        | 844         |
 | iphone-16-plus    | 430        | 932         |
@@ -87,7 +95,7 @@ await argosScreenshot(..., {
 | samsung-s10       | 360        | 760         |
 | samsung-note9     | 414        | 846         |
 
-### Troubleshooting and Best Practices
+### Troubleshooting and best practices
 
 Many sites compute layout at load time and will not adapt cleanly if the viewport changes later. If you notice issues, you may want to run your test suite entirely for each viewport instead of changing the viewport before taking each screenshot.
 
@@ -99,7 +107,7 @@ import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   projects: [
     {
-      name: "chromium-mobile",
+      name: "chromium-desktop",
       use: {
         ...devices["Desktop Chrome"],
         channel: "chrome",
@@ -110,7 +118,7 @@ export default defineConfig({
       use: {
         ...devices["Desktop Chrome"],
         channel: "chrome",
-        viewport: { width: 402, height: 874 }, // iPhone 7 viewport
+        viewport: { width: 402, height: 874 }, // iphone-16-pro preset size
       },
     },
   ],

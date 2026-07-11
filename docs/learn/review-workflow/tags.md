@@ -17,7 +17,7 @@ Tags let you categorize screenshots so you can quickly filter a build down to th
 
 ### Where tags come from
 
-Tags can come from two sources in [screenshot metadata](../how-to-guides/visual-coverage/adding-screenshot-metadata.md):
+Tags can come from two sources in [screenshot metadata](../../sdks-reference/screenshot-metadata.md):
 
 | Source         | Field       | Description                                                                                                                                       |
 | -------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -76,19 +76,17 @@ it("screenshot homepage", () => {
 
 In Puppeteer, you can add tags to screenshots through the `tags` option in the `argosScreenshot` function.
 
-{% code title="tests/homepage.spec.js" %}
+{% code title="screenshot.mjs" %}
 ```js
+import puppeteer from "puppeteer";
 import { argosScreenshot } from "@argos-ci/puppeteer";
-const puppeteer = require("puppeteer");
 
-(async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto("https://localhost:3000/");
-  await argosScreenshot(page, "homepage", {
-    tags: ["@desktop", "@homepage"],
-  });
-  await browser.close();
-})();
+const browser = await puppeteer.launch();
+const page = await browser.newPage();
+await page.goto("http://localhost:3000/");
+await argosScreenshot(page, "homepage", {
+  tags: ["@desktop", "@homepage"],
+});
+await browser.close();
 ```
 {% endcode %}

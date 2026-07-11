@@ -102,7 +102,7 @@ If they reveal a regression, suggest requesting changes and list the affected sn
 If they look flaky, explain the flake signal and do not suggest approval until it is resolved.
 ```
 
-To let the assistant create the Argos build review, add an explicit instruction. The CLI must be authenticated as an Argos user with `argos login`, or the assistant must pass a personal access token to `build review`:
+To let the assistant create the Argos build review, add an explicit instruction. The CLI must be authenticated as an Argos user with `argos login`, or the assistant must pass a personal access token to `argos review create`:
 
 ```
 After summarizing the visual changes, create an Argos build review with the appropriate conclusion.

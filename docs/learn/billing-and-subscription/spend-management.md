@@ -1,96 +1,84 @@
 ---
-description: Set spend thresholds to get notified or automatically pause builds when your team reaches its budget.
+description: >-
+  Track your team's screenshot usage, understand what happens at your plan
+  limit, and set spend thresholds to get notified or pause builds.
 ---
 
-# Spend management
+# Usage & spend management
 
-Learn how to get notified about your team's spend and block further usage when you reach your budget.
+Argos bills on screenshot usage, so keeping an eye on it is how you keep costs under control. This page covers where to find your usage, what happens when you reach your plan's limit, and how to cap spending with spend management.
+
+### Monitor your usage
+
+To see your team's usage details:
+
+1. From the dashboard, select your team from the scope selector.
+2. Select the **Settings** tab and go to the **Billing** section.
+
+![The plan card showing screenshot usage in the Billing settings](<../../.gitbook/assets/plan card 9000747fcacb6b2b42aeeb9677d81816.png>)
+
+The plan card breaks down your consumption:
+
+* **Private project**: Screenshots taken from private projects. These count toward your plan limit and are subject to charges.
+* **Public project**: Screenshots taken from open-source projects.
+
+### What happens at your plan's limit
+
+When you approach your plan's included screenshots, Argos alerts you. What happens when you exceed them depends on your plan:
+
+* **Hobby plan**: Uploads are paused until the next billing period. To keep uploading, upgrade to the [Pro plan](pricing-plans.md) — you can transfer your project to a newly created team.
+* **Pro plan (Stripe, usage-based)**: Extra screenshots are billed at the [per-screenshot rate](pricing-plans.md). Uploads continue uninterrupted — use [spend management](#manage-your-spend) to cap the extra cost.
+* **Pro plan (GitHub Marketplace, fixed size)**: Uploads are paused until the next billing period. To keep uploading, [upgrade your plan](https://github.com/marketplace/argos-ci) to a larger size (S, M, L, XL).
+
+### Manage your spend
 
 {% hint style="info" %}
-Spend management is available on Pro and Enterprise plans (usage based)
+Spend management is available on Pro and Enterprise plans with usage-based pricing.
 {% endhint %}
 
-Spend management is a way for you to notify or to automatically take action on your account when your team hits a set spend amount. The actions you can take are:
+Spend management lets you act automatically when your team reaches a spend amount you set:
 
-* [Receive a notification](spend-management.md#alert-threshold-notifications) when you reach certain thresholds of your spend amount
-* [Pause the builds on all your projects](spend-management.md#pausing-projects)
+* **Get notified** when you reach thresholds of your spend amount.
+* **Pause builds** on all your projects when the amount is reached.
+
+The spend amount covers additional screenshots beyond your plan's included usage, across all projects on your team. It does not include separate **add-ons**, which Argos charges per billing period. The amount is set per billing cycle, and Argos checks your usage against it at every build.
 
 {% hint style="warning" %}
-Setting a spend amount does not automatically stop usage. If you want to pause all your projects at a certain amount, you must [enable the option](spend-management.md#pausing-projects).
+Setting a spend amount does not stop usage by itself. To stop builds at the amount, keep the [Pause builds](#pause-builds-at-the-spend-amount) option enabled.
 {% endhint %}
 
-The spend amount is set per billing cycle.
+#### Set a spend amount
 
-Setting the amount halfway through a billing cycle considers your current spend. You can increase or decrease your spend amount as needed. If you configure it below the current monthly spend, Spend Management will trigger any configured actions (including pausing all projects).
-
-### What does Spend Management include?
-
-The spend amount that you set covers additional screenshots that go beyond your plan usage for all projects on your team.
-
-It does not include separate **add-ons**, which Argos charges per billing period.
-
-#### How Argos checks your spend amount
-
-Argos checks your additional screenshots usage often to determine if you are approaching or have exceeded your spend amount. This check happens at every build processed by Argos.
-
-### Managing your spend amount
-
-To enable spend management, you must have an **Owner** role on your team.
+To configure spend management, you need the **Owner** role on your team.
 
 {% stepper %}
 {% step %}
-### From the dashboard, select your team from the scope selector
+### Open your team's billing settings
+
+From the dashboard, select your team from the scope selector, then open the **Settings** tab and go to the **Billing** section.
 {% endstep %}
 
 {% step %}
-### Select the **Settings** tab and go to the **Billing** section
+### Enable Spend Management
+
+Scroll to **Spend Management** and enable the switch.
+
+![The Spend Management section enabled in Billing settings](<../../.gitbook/assets/spend management section 9076213ed403afcd2136d0f06cc85c8b.jpg>)
 {% endstep %}
 
 {% step %}
-### Scroll to **Spend Management** and enable the switch
+### Set your spend amount
 
-![Spend Management Enabled](<../../.gitbook/assets/spend management section 9076213ed403afcd2136d0f06cc85c8b.jpg>)
-{% endstep %}
-
-{% step %}
-### Set your spend amount at which you want to be notified or take action
-{% endstep %}
-
-{% step %}
-### Choose to [pause all projects](spend-management.md#pausing-projects) when you reach your spend amount
+Enter the amount at which you want to be notified or take action. Setting the amount halfway through a billing cycle takes your current spend into account — if you set it below what you have already spent, the configured actions (including pausing projects) trigger immediately.
 {% endstep %}
 {% endstepper %}
 
-### Alert threshold notifications
+#### Threshold notifications
 
-When you set a spend amount, Argos will send an email to all your team owner members when spending on your team reaches **50%**, **75%**, and **100%** of the spend amount.
+Once a spend amount is set, Argos emails all team owners when spending reaches **50%**, **75%**, and **100%** of the amount. The thresholds are not customizable.
 
-It's not currently possible to customize the alert threshold notifications.
+#### Pause builds at the spend amount
 
-### Pausing projects
+When spend management is enabled, the **Pause builds** option is on by default: once your team reaches the spend amount, Argos pauses builds for all projects on the team. To confirm the option, enter the team slug and select **Continue**.
 
-Argos provides an option to automatically pause the builds for all of your projects when your spend amount is reached. This option is on by default.
-
-{% stepper %}
-{% step %}
-In the Spend Management section of your team's settings, enable and set your [spend amount](spend-management.md#managing-your-spend-amount)
-{% endstep %}
-
-{% step %}
-Ensure the Pause builds switch is Enabled
-{% endstep %}
-
-{% step %}
-Confirm the action by entering the team slug and select Continue.
-{% endstep %}
-
-{% step %}
-When your team reaches the spend amount, Argos automatically pauses the builds for all projects on your team
-{% endstep %}
-{% endstepper %}
-
-When you try to create a new build, you will get an error message that the builds are paused due to reaching the spend amount. **It will make your CI builds fail until you increase your spend amount or disable the pause builds option.**
-
-#### Unpausing projects
-
-To unpause your projects, you must increase your spend amount or disable the pause builds option.
+When builds are paused, creating a new build fails with an error explaining that the spend amount was reached. **Your CI builds will fail until you increase the spend amount or disable the Pause builds option.**

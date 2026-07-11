@@ -16,13 +16,7 @@ Each ARIA snapshot counts as an additional screenshot for billing.
 
 ### Configure uploaded files
 
-When you upload a folder with the Argos CLI, pass the `--files` flag so Argos picks up both screenshot files and ARIA snapshot files:
-
-```json
-["**/*.png", "**/*.aria.yml"]
-```
-
-For example, if your screenshots are stored in `./screenshots`, upload that directory with:
+When you upload a folder with the Argos CLI, pass the `--files` flag so Argos picks up both screenshot files and ARIA snapshot files. For example, if your snapshots are stored in `./screenshots`, upload that directory with:
 
 {% tabs %}
 {% tab title="npm" %}
@@ -66,7 +60,7 @@ You can also add metadata in a companion file using the `.argos.json` suffix:
 my-snapshot-name.aria.yml.argos.json
 ```
 
-For general metadata conventions, see [Adding Screenshot metadata](adding-screenshot-metadata.md). ARIA snapshot companion metadata follows the same conventions and can additionally define ARIA-specific transient fields, such as `transient.parentName`.
+For general metadata conventions, see [Screenshot metadata](../../../sdks-reference/screenshot-metadata.md). ARIA snapshot companion metadata follows the same conventions and can additionally define ARIA-specific transient fields, such as `transient.parentName`.
 
 ### Attach an ARIA snapshot to a screenshot
 

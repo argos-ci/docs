@@ -1,14 +1,18 @@
 ---
 description: >-
-  Use the Argos CLI to upload screenshots, inspect builds, and create build
-  reviews from scripts, local workflows, or AI agents.
+  Use the Argos CLI to upload screenshots, deploy static builds, inspect
+  builds, and submit reviews from scripts, local workflows, or AI agents.
 ---
 
-# Argos Command Line Interface (CLI)
+# CLI
 
-You can access `@argos-ci/cli` through our [npm package](https://www.npmjs.com/package/@argos-ci/cli). The source code is available on our [GitHub repository](https://github.com/argos-ci/argos-javascript/tree/main/packages/cli).
+The Argos command-line interface (CLI) uploads screenshots, deploys static builds, and lets you inspect and review builds from a terminal, a CI pipeline, or an AI agent. It is distributed as the [`@argos-ci/cli`](https://www.npmjs.com/package/@argos-ci/cli) npm package; the source code is available on [GitHub](https://github.com/argos-ci/argos-javascript/tree/main/packages/cli).
+
+The examples on this page call the `argos` binary directly. Depending on your package manager, run it with `npm exec -- argos`, `yarn run argos`, `pnpm exec -- argos`, or `bun x argos`.
 
 ### Installation
+
+The CLI requires **Node.js 22 or later**. Install it as a dev dependency:
 
 {% tabs %}
 {% tab title="npm" %}
@@ -38,77 +42,63 @@ bun add --dev @argos-ci/cli
 
 ### Authentication
 
-Your configuration requirements vary depending on the command you run.
+Authentication depends on where the CLI runs:
 
-For CI uploads, set `ARGOS_TOKEN` as an environment variable, usually as a CI secret.
+* **In CI**, set the `ARGOS_TOKEN` environment variable to your project token (from **Settings → General → Token**), usually as a CI secret. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
+* **Locally**, sign in once with the browser-based login flow:
 
-{% hint style="info" %}
-You can also specify the token with the `--token=<your-repository-token>` argument. However, for security reasons, we recommend using an environment variable instead.
-{% endhint %}
+```bash
+argos login
+```
 
-For local review commands, sign in once with the browser-based login flow:
+`argos login` authorizes the CLI and stores a user token on your machine. This token is used by commands that act as a user, such as submitting a review.
 
-{% tabs %}
-{% tab title="npm" %}
-```
-npm exec -- argos login
-```
-{% endtab %}
+Commands resolve authentication in this order:
 
-{% tab title="yarn" %}
-```
-yarn run argos login
-```
-{% endtab %}
-
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos login
-```
-{% endtab %}
-
-{% tab title="bun" %}
-```
-bun x argos login
-```
-{% endtab %}
-{% endtabs %}
-
-`argos login` authorizes the CLI and stores a user token on your machine. This token is used by commands that need to act as a user, such as creating a build review.
+1. The `--token <token>` argument.
+2. The `ARGOS_TOKEN` environment variable.
+3. The token stored by `argos login`.
 
 {% hint style="warning" %}
-Do not use `argos login` in CI. CI uploads should use `ARGOS_TOKEN`, `--token`, or [GitHub OIDC authentication](../learn/integrations/github-oidc-authentication.md)
+Do not use `argos login` in CI. CI uploads should use `ARGOS_TOKEN` or [GitHub OIDC authentication](../learn/integrations/github-actions-authentication.md).
 {% endhint %}
 
-### Upload Command
+#### Project tokens and personal access tokens
 
-Use the `upload` command to upload screenshots stored in your `./screenshots` directory.
+Uploads and build reads work with a **project token**. Submitting or dismissing a review requires a **personal access token**, because the review is attributed to an Argos user and checked against that user's project permissions.
 
-{% tabs %}
-{% tab title="npm" %}
-```
-npm exec -- argos upload ./screenshots
-```
-{% endtab %}
+To create a personal access token manually, go to your personal account settings, open **Tokens**, then select **Generate new token**.
 
-{% tab title="yarn" %}
-```
-yarn run argos upload ./screenshots
-```
-{% endtab %}
+![Personal settings tokens page](<../.gitbook/assets/personal settings tokens d3d1a5de5368576c1caf5660d0041e07.png>)
 
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos upload ./screenshots
-```
-{% endtab %}
+_A personal settings tokens page_
 
-{% tab title="bun" %}
+## Commands
+
+### `upload`
+
+Upload snapshots from a directory and create a build:
+
+```bash
+argos upload ./screenshots
 ```
-bun x argos upload ./screenshots
-```
-{% endtab %}
-{% endtabs %}
+
+| Option                      | Description                                                                                                                          |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `-f, --files <patterns...>` | One or more globs matching the files to upload. Defaults to `**/*.{png,jpg,jpeg}`.                                                  |
+| `-i, --ignore <patterns...>` | One or more globs matching file paths to ignore.                                                                                     |
+| `--token <token>`           | Project token. Prefer the `ARGOS_TOKEN` environment variable.                                                                        |
+| `--project <slug>`          | Argos project slug (`account/project-name`). Also `ARGOS_PROJECT`.                                                                   |
+| `--build-name <string>`     | Name of the build, to run [multiple builds on a single commit](../learn/how-to-guides/ci-pipelines/monorepos-setup.md). Also `ARGOS_BUILD_NAME`. |
+| `--mode <mode>`             | `ci` (default) or `monitoring`. See [Build modes](../learn/platform-fundamentals/build-modes.md).                                    |
+| `--parallel`                | Enable [parallel mode](../learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md). Also `ARGOS_PARALLEL`.                     |
+| `--parallel-total <number>` | The number of parallel nodes, or `-1` for finalize mode. Also `ARGOS_PARALLEL_TOTAL`.                                                |
+| `--parallel-index <number>` | The index of the parallel node (starts at 1). Also `ARGOS_PARALLEL_INDEX`.                                                           |
+| `--parallel-nonce <nonce>`  | Unique identifier shared by the jobs of one run. Detected automatically on most CI providers. Also `ARGOS_PARALLEL_NONCE`.           |
+| `--reference-branch <name>` | Branch used as the [baseline](../learn/platform-fundamentals/baseline-build.md) for comparison. Also `ARGOS_REFERENCE_BRANCH`.       |
+| `--reference-commit <sha>`  | Commit used as the baseline for comparison. Also `ARGOS_REFERENCE_COMMIT`.                                                           |
+| `--threshold <number>`      | Sensitivity threshold between 0 and 1. The higher the threshold, the less sensitive the diff. Defaults to `0.5`.                     |
+| `--subset`                  | Mark the build as a [subset build](../learn/how-to-guides/ci-pipelines/subset-builds.md). Also `ARGOS_SUBSET`.                       |
 
 #### Snapshot size limit
 
@@ -120,467 +110,171 @@ Use `-f` or `--files` to upload text-based artifacts such as JSON, YAML, XML, HT
 
 #### Specify the project
 
-Use `--project <slug>` to set the Argos project slug (`account/project-name`). This disambiguates [tokenless authentication](../learn/integrations/github-tokenless-authentication.md) when multiple Argos projects are linked to the same repository. You can also set it with the `ARGOS_PROJECT` environment variable.
+Use `--project <slug>` to set the Argos project slug (`account/project-name`). This disambiguates [tokenless authentication](../learn/integrations/github-actions-authentication.md#tokenless-authentication) when multiple Argos projects are linked to the same repository:
 
-{% tabs %}
-{% tab title="npm" %}
+```bash
+argos upload ./screenshots --project my-account/my-project
 ```
-npm exec -- argos upload ./screenshots --project my-account/my-project
-```
-{% endtab %}
-
-{% tab title="yarn" %}
-```
-yarn run argos upload ./screenshots --project my-account/my-project
-```
-{% endtab %}
-
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos upload ./screenshots --project my-account/my-project
-```
-{% endtab %}
-
-{% tab title="bun" %}
-```
-bun x argos upload ./screenshots --project my-account/my-project
-```
-{% endtab %}
-{% endtabs %}
 
 #### Debug mode
 
-You can enable debug mode by setting the `DEBUG` environment variable.
+Enable debug logging by setting the `DEBUG` environment variable:
 
-{% tabs %}
-{% tab title="npm" %}
+```bash
+DEBUG=@argos-ci/core argos upload ./screenshots
 ```
-DEBUG=@argos-ci/core npm exec -- argos upload ./screenshots
-```
-{% endtab %}
 
-{% tab title="yarn" %}
-```
-DEBUG=@argos-ci/core yarn run argos upload ./screenshots
-```
-{% endtab %}
+### `finalize`
 
-{% tab title="pnpm" %}
-```
-DEBUG=@argos-ci/core pnpm exec -- argos upload ./screenshots
-```
-{% endtab %}
+Close a [parallel build](../learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md) running in finalize mode (`ARGOS_PARALLEL_TOTAL=-1`). Run it once every upload has completed — Argos then aggregates the uploaded shards and starts the comparison:
 
-{% tab title="bun" %}
+```bash
+argos finalize
 ```
-DEBUG=@argos-ci/core bun x argos upload ./screenshots
-```
-{% endtab %}
-{% endtabs %}
-
-### Finalize Command
-
-Use the `finalize` command to close a [parallel build](../learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md) running in finalize mode (`ARGOS_PARALLEL_TOTAL=-1`). Run it once every upload has completed: Argos then aggregates the uploaded shards and starts the comparison.
-
-{% tabs %}
-{% tab title="npm" %}
-```
-npm exec -- argos finalize
-```
-{% endtab %}
-
-{% tab title="yarn" %}
-```
-yarn run argos finalize
-```
-{% endtab %}
-
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos finalize
-```
-{% endtab %}
-
-{% tab title="bun" %}
-```
-bun x argos finalize
-```
-{% endtab %}
-{% endtabs %}
 
 The shards are matched by their nonce, read from `--parallel-nonce` or the `ARGOS_PARALLEL_NONCE` environment variable. In most CI environments the nonce is detected automatically, so no flag is needed as long as `finalize` runs in the same pipeline as the uploads.
 
-#### Handle runs without uploads
+When every upload step is conditional — skipped by a task cache such as Turborepo or Nx, or by change detection — a run may produce no shard at all. Use `--skip-if-empty` to create a [skipped build](../learn/how-to-guides/ci-pipelines/skipping-a-build.md) in that case, so a required Argos status check still reports success on the commit:
 
-When every upload step is conditional — skipped by a task cache such as Turborepo or Nx, or by change detection — a run may produce no shard at all, and `finalize` has nothing to close. Use `--skip-if-empty` to create a [skipped build](../learn/how-to-guides/ci-pipelines/skipping-a-build.md) in that case, so a required Argos status check still reports success on the commit:
-
-```
-npm exec -- argos finalize --skip-if-empty --build-name unit
+```bash
+argos finalize --skip-if-empty --build-name unit
 ```
 
 `--build-name` (or `ARGOS_BUILD_NAME`) names the skipped build; use the same name as your uploads so the status check context matches.
 
-### Skip Command
+### `skip`
 
-Use the `skip` command to create a [skipped build](../learn/how-to-guides/ci-pipelines/skipping-a-build.md): a build with no screenshots and no comparison that immediately reports a successful status. This keeps a required Argos check green on commits where you intentionally don't run visual tests.
+Create a [skipped build](../learn/how-to-guides/ci-pipelines/skipping-a-build.md): a build with no screenshots and no comparison that immediately reports a successful status. This keeps a required Argos check green on commits where you intentionally don't run visual tests:
 
-{% tabs %}
-{% tab title="npm" %}
+```bash
+argos skip
 ```
-npm exec -- argos skip
-```
-{% endtab %}
-
-{% tab title="yarn" %}
-```
-yarn run argos skip
-```
-{% endtab %}
-
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos skip
-```
-{% endtab %}
-
-{% tab title="bun" %}
-```
-bun x argos skip
-```
-{% endtab %}
-{% endtabs %}
 
 Use `--build-name` to match the build name of the check you want to satisfy.
 
-### Deploy Command
+### `deploy`
 
-Use the `deploy` command to deploy a static build (Storybook or any static site) to Argos. See [Deployments](../learn/deployments/) for an overview of the feature.
+Deploy a static build (Storybook or any static site) to Argos. The argument is the directory containing the static files. See [Deployments](../learn/deployments/README.md) for an overview:
 
-{% tabs %}
-{% tab title="npm" %}
+```bash
+argos deploy ./storybook-static
 ```
-npm exec -- argos deploy ./storybook-static
-```
-{% endtab %}
-
-{% tab title="yarn" %}
-```
-yarn run argos deploy ./storybook-static
-```
-{% endtab %}
-
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos deploy ./storybook-static
-```
-{% endtab %}
-
-{% tab title="bun" %}
-```
-bun x argos build deploy ./storybook-static
-```
-{% endtab %}
-{% endtabs %}
-
-The argument is the directory containing the static files to deploy.
-
-#### Production deployments
 
 By default, `deploy` creates a **preview** deployment. Add `--prod` to force a **production** deployment regardless of the branch:
 
-{% tabs %}
-{% tab title="npm" %}
+```bash
+argos deploy ./storybook-static --prod
 ```
-npm exec -- argos deploy ./storybook-static --prod
-```
-{% endtab %}
-
-{% tab title="yarn" %}
-```
-yarn run argos deploy ./storybook-static --prod
-```
-{% endtab %}
-
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos deploy ./storybook-static --prod
-```
-{% endtab %}
-
-{% tab title="bun" %}
-```
-bun x argos build deploy ./storybook-static --prod
-```
-{% endtab %}
-{% endtabs %}
 
 If the branch matches the project's production branch pattern, the deployment is created as production even without `--prod`. See [Environments](../learn/deployments/environments.md) for the full rules.
 
-#### Authentication
+`deploy` uses the same [authentication](#authentication) as `upload`.
 
-`deploy` uses the same authentication as `upload`:
+### `build get`
 
-1. `ARGOS_TOKEN` environment variable (recommended).
-2. `--token <token>` argument.
-3. [GitHub OIDC](../learn/integrations/github-oidc-authentication.md) or [tokenless authentication](../learn/integrations/github-tokenless-authentication.md) on GitHub Actions.
+Fetch a build's status, branch, commit, stats, and URL. The argument is a build number or an Argos build URL:
 
-### Build Commands
+```bash
+argos build get https://app.argos-ci.com/team/project/builds/72652
+```
 
-Use `build` commands to fetch build metadata, fetch snapshot diffs, and create a review on a build.
+When you pass a build number instead of a URL, also pass `--project team/project`. Use `--json` when another tool needs to parse the response:
 
-#### Get build metadata
+```bash
+argos build get 72652 --project team/project --json
+```
 
-Use `build get` to fetch status, branch, commit, stats, and the build URL.
+### `build snapshots`
 
-{% tabs %}
-{% tab title="npm" %}
-```
-npm exec -- argos build get <buildNumber>
-```
-{% endtab %}
+Fetch the snapshot diffs of a build:
 
-{% tab title="yarn" %}
+```bash
+argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --json
 ```
-yarn run argos build get <buildNumber>
-```
-{% endtab %}
-
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos build get <buildNumber>
-```
-{% endtab %}
-
-{% tab title="bun" %}
-```
-bun x argos build get <buildNumber>
-```
-{% endtab %}
-{% endtabs %}
-
-You can also pass an Argos build URL directly:
-
-{% tabs %}
-{% tab title="npm" %}
-```
-npm exec -- argos build get https://app.argos-ci.com/team/project/builds/72652
-```
-{% endtab %}
-
-{% tab title="yarn" %}
-```
-yarn run argos build get https://app.argos-ci.com/team/project/builds/72652
-```
-{% endtab %}
-
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos build get https://app.argos-ci.com/team/project/builds/72652
-```
-{% endtab %}
-
-{% tab title="bun" %}
-```
-bun x argos build get https://app.argos-ci.com/team/project/builds/72652
-```
-{% endtab %}
-{% endtabs %}
-
-Use `--json` when another tool needs to parse the response:
-
-{% tabs %}
-{% tab title="npm" %}
-```
-npm exec -- argos build get https://app.argos-ci.com/team/project/builds/72652 --json
-```
-{% endtab %}
-
-{% tab title="yarn" %}
-```
-yarn run argos build get https://app.argos-ci.com/team/project/builds/72652 --json
-```
-{% endtab %}
-
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos build get https://app.argos-ci.com/team/project/builds/72652 --json
-```
-{% endtab %}
-
-{% tab title="bun" %}
-```
-bun x argos build get https://app.argos-ci.com/team/project/builds/72652 --json
-```
-{% endtab %}
-{% endtabs %}
-
-#### Fetch snapshot diffs
-
-Use `build snapshots` to fetch snapshot diffs for a build.
-
-{% tabs %}
-{% tab title="npm" %}
-```
-npm exec -- argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --json
-```
-{% endtab %}
-
-{% tab title="yarn" %}
-```
-yarn run argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --json
-```
-{% endtab %}
-
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --json
-```
-{% endtab %}
-
-{% tab title="bun" %}
-```
-bun x argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --json
-```
-{% endtab %}
-{% endtabs %}
 
 Add `--needs-review` to only return snapshots that need a review decision:
 
-{% tabs %}
-{% tab title="npm" %}
+```bash
+argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --needs-review --json
 ```
-npm exec -- argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --needs-review --json
-```
-{% endtab %}
-
-{% tab title="yarn" %}
-```
-yarn run argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --needs-review --json
-```
-{% endtab %}
-
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --needs-review --json
-```
-{% endtab %}
-
-{% tab title="bun" %}
-```
-bun x argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --needs-review --json
-```
-{% endtab %}
-{% endtabs %}
 
 Each snapshot diff includes the status, score, diff mask URL, baseline file, current file, and metadata provided by the SDK.
 
-#### Submit a build review
+### `review create`
 
-Use `build review` to approve a build or request changes.
+Submit a review on a build. Requires a [personal access token](#project-tokens-and-personal-access-tokens):
 
-{% tabs %}
-{% tab title="npm" %}
+```bash
+argos review create https://app.argos-ci.com/team/project/builds/72652 --event approve
 ```
-npm exec -- argos build review https://app.argos-ci.com/team/project/builds/72652 --conclusion approve
-```
-{% endtab %}
 
-{% tab title="yarn" %}
-```
-yarn run argos build review https://app.argos-ci.com/team/project/builds/72652 --conclusion approve
-```
-{% endtab %}
-
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos build review https://app.argos-ci.com/team/project/builds/72652 --conclusion approve
-```
-{% endtab %}
-
-{% tab title="bun" %}
-```
-bun x argos build review https://app.argos-ci.com/team/project/builds/72652 --conclusion approve
-```
-{% endtab %}
-{% endtabs %}
+| Option               | Description                                                     |
+| -------------------- | ---------------------------------------------------------------- |
+| `--event <event>`    | Review event: `approve`, `reject`, or `comment`. Required.      |
+| `--body <markdown>`  | Markdown comment to attach to the review.                       |
+| `--body-file <path>` | Read the review comment from a Markdown file.                   |
 
 To reject the visual changes:
 
-{% tabs %}
-{% tab title="npm" %}
+```bash
+argos review create https://app.argos-ci.com/team/project/builds/72652 --event reject --body "The header spacing regressed."
 ```
-npm exec -- argos build review https://app.argos-ci.com/team/project/builds/72652 --conclusion request-changes
+
+As with `build get`, you can pass a build number with `--project team/project` instead of a URL.
+
+### `review list`
+
+List the reviews submitted on a build:
+
+```bash
+argos review list https://app.argos-ci.com/team/project/builds/72652 --json
 ```
-{% endtab %}
 
-{% tab title="yarn" %}
+### `review dismiss`
+
+Dismiss a submitted review so it no longer counts toward the [build status](../learn/review-workflow/review-a-build.md#how-reviews-decide-the-build-status):
+
+```bash
+argos review dismiss https://app.argos-ci.com/team/project/builds/72652 <reviewId>
 ```
-yarn run argos build review https://app.argos-ci.com/team/project/builds/72652 --conclusion request-changes
+
+### `comment`
+
+List, post, and act on build comments. The `comment` command groups the following subcommands: `list`, `create`, `get`, `edit`, `delete`, `resolve`, `unresolve`, `react`, `unreact`, `subscribe`, and `unsubscribe`.
+
+```bash
+argos comment list https://app.argos-ci.com/team/project/builds/72652 --json
 ```
-{% endtab %}
 
-{% tab title="pnpm" %}
+Run `argos help comment` to see each subcommand's arguments and options.
+
+### `login`, `logout`, and `whoami`
+
+Manage the CLI's user session:
+
+```bash
+argos login   # Log in to Argos by opening your browser
+argos whoami  # Display the user authenticated with the current token
+argos logout  # Log out from Argos
 ```
-pnpm exec -- argos build review https://app.argos-ci.com/team/project/builds/72652 --conclusion request-changes
+
+### `create-project`
+
+Create a new project in an account you administer. Pass the account with `--account <slug>` or the `ARGOS_ACCOUNT` environment variable:
+
+```bash
+argos create-project my-new-project --account my-team
 ```
-{% endtab %}
 
-{% tab title="bun" %}
+### `help`
+
+Display the available commands and options:
+
+```bash
+argos help upload
 ```
-bun x argos build review https://app.argos-ci.com/team/project/builds/72652 --conclusion request-changes
-```
-{% endtab %}
-{% endtabs %}
 
-When you pass a build number instead of a full URL, also pass the project path:
-
-{% tabs %}
-{% tab title="npm" %}
-```
-npm exec -- argos build review 72652 --project team/project --conclusion approve
-```
-{% endtab %}
-
-{% tab title="yarn" %}
-```
-yarn run argos build review 72652 --project team/project --conclusion approve
-```
-{% endtab %}
-
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos build review 72652 --project team/project --conclusion approve
-```
-{% endtab %}
-
-{% tab title="bun" %}
-```
-bun x argos build review 72652 --project team/project --conclusion approve
-```
-{% endtab %}
-{% endtabs %}
-
-#### Project tokens and personal access tokens
-
-Uploads and build reads can use a project token.
-
-Creating a build review requires a personal access token because the review is attributed to an Argos user and checked against that user's project permissions.
-
-To create a personal access token manually, go to your personal account settings, open **Tokens**, then click **Generate new token**.
-
-![Personal settings tokens page](<../.gitbook/assets/personal settings tokens d3d1a5de5368576c1caf5660d0041e07.png>)
-
-_A personal settings tokens page_
-
-For `build review`, authentication is resolved in this order:
-
-1. `--token <token>`
-2. `ARGOS_TOKEN`
-3. token stored by `argos login`
-
-Project tokens can inspect build data, but they cannot create reviews. If `ARGOS_TOKEN` contains a project token, use `argos login` locally or pass a personal access token with `--token`.
-
-### AI Agent Skills
+## AI agent skills
 
 The [`argos-javascript`](https://github.com/argos-ci/argos-javascript) repository includes skills that help AI agents use Argos CLI commands and review pull requests with Argos build data:
 
@@ -588,33 +282,3 @@ The [`argos-javascript`](https://github.com/argos-ci/argos-javascript) repositor
 * [`argos-pr-review`](https://github.com/argos-ci/argos-javascript/tree/main/skills/argos-pr-review): review a pull request with an Argos build as visual evidence.
 
 See [Review builds with AI agents](../learn/review-workflow/review-builds-with-ai-agents.md) to install and use the skills in a pull request review workflow.
-
-### Help Command
-
-To view a list of available options, use the argos help command.
-
-{% tabs %}
-{% tab title="npm" %}
-```
-npm exec -- argos help upload
-```
-{% endtab %}
-
-{% tab title="yarn" %}
-```
-yarn run argos help upload
-```
-{% endtab %}
-
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos help upload
-```
-{% endtab %}
-
-{% tab title="bun" %}
-```
-bun x argos help upload
-```
-{% endtab %}
-{% endtabs %}

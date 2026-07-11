@@ -4,7 +4,7 @@ description: See flaky badges, stability scores, and detailed history so you can
 
 # Flaky test detection
 
-Argos flags unstable tests so you can decide with confidence. See a flaky badge next to every changed test and dive into detailed history and stability scores on a dedicated test page
+Argos flags unstable tests so you can decide with confidence. See a flaky badge next to every changed test and dive into detailed history and stability scores on a dedicated test page.
 
 ![Flaky indicator next to a test change](<../../.gitbook/assets/flaky indicator 8b0a3212a9d038be252e87cea60354d8.png>)
 
@@ -12,13 +12,13 @@ _Example of the flaky indicator in a build review_
 
 ### View flaky indicators in your build review
 
-1. Open any build in Argos
-2. Spot the flaky badge beside each changed test
-3. Hover over the badge to see details about the test's stability
+1. Open any build in Argos.
+2. Spot the flaky badge beside each changed test.
+3. Hover over the badge to see details about the test's stability.
 
 ### Explore the test page
 
-By clicking on the flaky badge, you will be taken to the test page where you can see the full history of the test and its stability score.
+Select the flaky badge to open the test page, which shows the full history of the test and its stability score.
 
 ![Test page showing history and flaky score](<../../.gitbook/assets/test page example 44fb44458d2d5a457bad6eb9d6ddb29c.png>)
 
@@ -26,10 +26,10 @@ _A sample test page with history timeline and score_
 
 On the test page you will find:
 
-* Timeline of every change that affected the test
-* Stability graph showing pass rate over time
-* Flakiness score from 0 to 100, summarizing the test's stability and consistency
-* List of changes happened to the test
+* A timeline of every change that affected the test.
+* A stability graph showing the pass rate over time.
+* A flakiness score from 0 to 100, summarizing the test's stability and consistency.
+* The list of changes detected on the test.
 
 Use this information to approve stable tests or flag flaky ones for fixes.
 
@@ -41,7 +41,7 @@ The test page focuses on a single test. For a project-wide view that ranks every
 
 When reviewing a build in Argos, you may encounter changes that are not relevant or are caused by flakiness. You can **ignore a specific change** directly from the UI.
 
-From the build page or the test page, click the **Ignore** button next to the change you want to ignore.
+From the build page or the test page, select the **Ignore** button next to the change you want to ignore.
 
 Once ignored, Argos will no longer notify you if this **exact same change** happens again in future builds. This lets you filter out noise while keeping future regressions detectable.
 
@@ -71,7 +71,7 @@ To configure auto-ignore:
 2. Go to **Project Settings → Flaky detection**.
 3. In the **Automatically ignore flaky changes** card, enable **Auto-ignore flaky changes**.
 4. Set **Minimum occurrences to consider a change flaky (last 7 days)**.
-5. Click **Save**.
+5. Select **Save**.
 
 ![Auto-ignore flaky changes in project settings](<../../.gitbook/assets/auto ignore fce4000798bcef00801460c36c56dbad.png>)
 

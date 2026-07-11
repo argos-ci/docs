@@ -81,8 +81,6 @@ export default defineConfig({
       "@argos-ci/playwright/reporter",
       createArgosReporterOptions({
         uploadToArgos: !!process.env.CI,
-        // Required only if you are not using GitHub Actions.
-        token: "<YOUR-ARGOS-TOKEN>",
       }),
     ],
   ],
@@ -156,7 +154,7 @@ Run your tests in CI with `ARGOS_TOKEN` set. **Run on your default branch first*
     ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
 ```
 
-`ARGOS_TOKEN` comes from **Settings → General → Token**. On GitHub Actions you can use [OIDC](../../integrations/github-oidc-authentication.md) or [tokenless authentication](../../integrations/github-tokenless-authentication.md) instead.
+`ARGOS_TOKEN` comes from **Settings → General → Token**. On GitHub Actions you can use [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md) instead.
 {% endstep %}
 {% endstepper %}
 
@@ -190,7 +188,7 @@ Open the build in Argos and approve it in the [review UI](../../review-workflow/
 
 <summary>What about <code>maxDiffPixels</code> and <code>threshold</code>?</summary>
 
-Argos applies its own [diff algorithm](../../platform-fundamentals/how-argos-detects-visual-differences.md) with tolerance for anti-aliasing and sub-pixel noise, so you don't tune per-assertion pixel thresholds.
+Argos applies its own [diff algorithm](../../platform-fundamentals/how-argos-detects-visual-differences.md) with tolerance for anti-aliasing and sub-pixel noise, so you rarely need per-assertion tuning. If a specific screenshot needs a different sensitivity, pass the `threshold` option to `argosScreenshot` (between 0 and 1).
 
 </details>
 

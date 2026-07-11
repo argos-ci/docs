@@ -4,15 +4,13 @@ description: Use build splitting to run separate Argos visual tests for each pac
 
 # Monorepos setup
 
-### Leveraging Build Splitting in Monorepos
+In a monorepo, several packages or apps produce screenshots on the same commit. **Build splitting** keeps them apart: give each test suite its own build name, and Argos creates a separate build — with its own baseline and its own status check — for each name.
 
-Monorepos, containing multiple packages or applications, can greatly benefit from Argos's build splitting feature. This allows for distinct visual testing builds within the same commit, catering to diverse screenshot categories such as component libraries and end-to-end (E2E) tests.
+Build splitting works across all SDKs and the CLI. Set a unique build name per suite with the `--build-name` CLI flag or the `buildName` SDK option.
 
-Argos supports build splitting across all SDKs, offering a streamlined approach to manage visual tests for different parts of your monorepo. By specifying a unique build name for each category of screenshots, you can isolate and target tests more effectively.
+### Example
 
-### Practical Application
-
-Imagine your monorepo includes both a component library and an application undergoing E2E testing. You can differentiate these test suites in Argos by assigning a unique `build-name` to each, ensuring clear separation and organization of visual tests. This is achieved by setting the `buildName` option in your Argos integration, as shown in the examples below for both component screenshots and E2E tests:
+Say your monorepo has a component library and an app with end-to-end (E2E) tests. Give each suite its own build name:
 
 **For components:**
 
@@ -47,17 +45,17 @@ bun x argos upload --build-name components ./screenshots/components
 {% code title="playwright.config.ts" %}
 ```ts
 import { defineConfig } from "@playwright/test";
+import { createArgosReporterOptions } from "@argos-ci/playwright/reporter";
 
 export default defineConfig({
   reporter: [
     process.env.CI ? ["dot"] : ["list"],
     [
       "@argos-ci/playwright/reporter",
-      {
+      createArgosReporterOptions({
         uploadToArgos: !!process.env.CI,
-        token: "<YOUR-ARGOS-TOKEN>",
         buildName: "e2e",
-      },
+      }),
     ],
   ],
   // Other config
@@ -65,7 +63,7 @@ export default defineConfig({
 ```
 {% endcode %}
 
-This approach not only enhances the clarity of your visual testing efforts in a monorepo context but also improves the efficiency of identifying and addressing potential visual regressions across different scopes of your project.
+Each build appears separately in Argos — `components` and `e2e` are compared against their own baselines and report their own status checks, so a visual change in one suite never blocks the other.
 
 {% hint style="info" %}
 If your monorepo uses a task cache like Turborepo or Nx that decides which test suites actually run, see [Cached CI pipelines (Turborepo, Nx)](cached-pipelines.md) — it covers aggregating packages into a single build and keeping baselines and required checks reliable when suites are skipped.

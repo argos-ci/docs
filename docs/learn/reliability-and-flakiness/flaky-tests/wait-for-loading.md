@@ -1,21 +1,23 @@
 ---
-description: Use aria-busy so argosScreenshot waits for full page load before capturing, improving screenshot consistency.
+description: >-
+  Use aria-busy so argosScreenshot waits for full page load before capturing,
+  improving screenshot consistency.
 ---
 
 # Wait for loading
 
-Master timing in visual tests with Argos: Use `aria-busy` to ensure screenshots are captured post full page load, enhancing accuracy and consistency.
+A screenshot taken while the page is still loading produces a different image on every run. Mark your loading states with `aria-busy`, and `argosScreenshot()` waits until they are gone before capturing.
 
 ### Usage
 
-`argosScreenshot()` delays capturing screenshots until no elements with `aria-busy` are detected, ensuring full page load.
+Add `aria-busy` to your loader components:
 
 ```jsx
 <Loader aria-busy={true} />
 ```
 
-**We recommend applying `aria-busy` to your loader components to ensure that your page is fully loaded before a screenshot is taken.**
+`argosScreenshot()` delays the capture until no element with `aria-busy` remains on the page, so the screenshot always shows the fully loaded state. Make sure your app removes the attribute (or the loader) once loading completes.
 
 {% hint style="info" %}
-Waiting for `aria-busy` is part of the SDK's default stabilization (the `stabilize.waitForAriaBusy` option), so there's nothing to enable—you only need to mark your loaders.
+Waiting for `aria-busy` is part of the SDK's default stabilization (the `stabilize.waitForAriaBusy` option) — there's nothing to enable, you only need to mark your loaders.
 {% endhint %}

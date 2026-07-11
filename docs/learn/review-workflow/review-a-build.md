@@ -44,6 +44,15 @@ Each reviewer shows one of the following states:
 | **Pending**   | The reviewer was requested but hasn't reviewed yet.           |
 | **Dismissed** | The review was dismissed and no longer counts.                |
 
+#### How reviews decide the build status
+
+Only each reviewer's **latest** review counts, and dismissed reviews are ignored. The build status follows two rules:
+
+* **One rejection blocks.** If any reviewer's latest review is a rejection, the build is **rejected** — even if others approved.
+* **Otherwise, one approval passes.** With no active rejection, a single approval marks the build **approved**.
+
+Comment reviews and pending requests don't affect the outcome. To unblock a rejected build, the rejecting reviewer can submit a new review, or an administrator can dismiss the rejection.
+
 ### Submit a review
 
 Open the review popover from the build header and choose one of three actions:
@@ -121,4 +130,4 @@ See [Team members & roles](../account-and-access/team-members-and-roles.md) for 
 
 Every review and comment action is also available in the [Argos REST API](https://argos-ci.com/docs/api-reference): submit, list, and dismiss reviews; create, read, update, and delete comments and replies; add and remove reactions; and resolve or reopen threads. Because these actions are attributed to a user and checked against that user's project permissions, they require a **personal access token** rather than a project token.
 
-You can also submit reviews from the [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md#submit-a-build-review) with `build review`, or let an [AI agent review builds](review-builds-with-ai-agents.md) for you.
+You can also submit reviews from the [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md#review-create) with `argos review create`, or let an [AI agent review builds](review-builds-with-ai-agents.md) for you.

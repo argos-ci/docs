@@ -75,19 +75,6 @@ await upload({
 
 ### Examples
 
-#### Node.js
-
-{% code title="scripts/argos-upload.js" %}
-```js
-import { upload } from "@argos-ci/core";
-
-await upload({
-  root: "./screenshots",
-  subset: true,
-});
-```
-{% endcode %}
-
 #### Playwright
 
 For Playwright, simply set `ARGOS_SUBSET=true` in your CI job. The reporter will mark the build as a subset build.
@@ -95,8 +82,8 @@ For Playwright, simply set `ARGOS_SUBSET=true` in your CI job. The reporter will
 {% code title=".github/workflows/ci.yml" %}
 ```yaml
 steps:
-  - uses: actions/checkout@v4
-  - uses: actions/setup-node@v4
+  - uses: actions/checkout@v6
+  - uses: actions/setup-node@v6
   - run: npm ci
   - name: Run Playwright tests
     env:
@@ -112,8 +99,8 @@ For Cypress, set `ARGOS_SUBSET=true` in your CI job that runs Cypress and upload
 {% code title=".github/workflows/ci.yml" %}
 ```yaml
 steps:
-  - uses: actions/checkout@v4
-  - uses: actions/setup-node@v4
+  - uses: actions/checkout@v6
+  - uses: actions/setup-node@v6
   - run: npm ci
   - name: Run Cypress tests
     env:

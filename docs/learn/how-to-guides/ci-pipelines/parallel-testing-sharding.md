@@ -43,7 +43,7 @@ If fewer uploads than `ARGOS_PARALLEL_TOTAL` arrive — a job failed before uplo
 
 #### Finalize mode
 
-Set `ARGOS_PARALLEL_TOTAL` to `-1`. Each upload joins the build as a shard, and the build stays open until you explicitly close it by running [`argos finalize`](../../../sdks-reference/argos-command-line-interface-cli.md#finalize-command) in a step that runs after all uploads.
+Set `ARGOS_PARALLEL_TOTAL` to `-1`. Each upload joins the build as a shard, and the build stays open until you explicitly close it by running [`argos finalize`](../../../sdks-reference/argos-command-line-interface-cli.md#finalize) in a step that runs after all uploads.
 
 Use finalize mode whenever the number of uploads **isn't known upfront or isn't guaranteed**:
 
@@ -97,8 +97,8 @@ jobs:
       matrix:
         shardIndex: [1, 2, 3, 4]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
       - run: npm ci
       # ---
       # Here you setup your repo and run your E2E tests
@@ -118,8 +118,8 @@ jobs:
     if: ${{ always() }}
     needs: ["e2e-tests"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
       - run: npm ci
       - name: Finalize Argos build
         # ARGOS_PARALLEL_NONCE is automatically detected

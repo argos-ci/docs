@@ -5,7 +5,7 @@ description: Configure SAML single sign-on with providers like Okta or Auth0 to 
 # SAML single sign-on
 
 {% hint style="info" %}
-SAML is available on the [Enterprise](../billing-and-subscription/subscription/pricing-plans.md#enterprise-plan) plan.
+SAML is available on the [Enterprise](../billing-and-subscription/pricing-plans.md#enterprise-plan) plan.
 
 Only team members with the [owner role](team-members-and-roles.md#owner-role) can configure SAML SSO.
 {% endhint %}

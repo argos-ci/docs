@@ -14,7 +14,7 @@ Every deployment has an **immutable deployment URL** that always points to that 
 https://<project>-<random>-<account>.argos-ci.live
 ```
 
-For example: `https://storybook-gdhgxamjo-argos-ci.argos-ci.live`
+For example: `https://storybook-gdhgxamjo-acme.argos-ci.live`
 
 The deployment URL never changes and never moves. It's the safest URL to share when you want a stable reference to a specific build—for example, in a pull request review or a bug report.
 

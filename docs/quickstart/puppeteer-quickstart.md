@@ -1,20 +1,22 @@
 ---
-description: Learn how to setup visual testing using the Argos Puppeteer SDK.
+description: Set up visual testing in your Puppeteer scripts with the Argos Puppeteer SDK.
 ---
 
 # Puppeteer Quickstart
 
+Set up Argos with [Puppeteer](https://pptr.dev/) to run visual tests on every pull request: capture screenshots with the SDK, then upload them with the Argos CLI.
+
 ### Prerequisites
 
-To get the most out of this guide, you’ll need to:
-
-* [Use Puppeteer](https://pptr.dev/#getting-started)
-* Run Puppeteer on your CI/CD
-* [Create your project in Argos](https://app.argos-ci.com/new)
+* [Puppeteer](https://pptr.dev/#getting-started) set up in your project
+* [Puppeteer running on your CI](https://pptr.dev/guides/running-puppeteer-in-the-cloud)
+* [A project created in Argos](https://app.argos-ci.com/new)
 
 {% stepper %}
 {% step %}
 ### Install
+
+Install the Argos CLI and the Argos Puppeteer SDK:
 
 {% tabs %}
 {% tab title="npm" %}
@@ -42,60 +44,82 @@ bun add --dev @argos-ci/cli @argos-ci/puppeteer
 {% endtab %}
 {% endtabs %}
 
-Read the [CLI documentation](../sdks-reference/argos-command-line-interface-cli.md) if you need information about advanced usages.
+No configuration is needed — the SDK works directly in your scripts.
 {% endstep %}
 
 {% step %}
-### Take screenshots
+### Capture screenshots
 
-Use `argosScreenshot` helper to capture stable screenshots in your E2E tests.
+Use the `argosScreenshot` helper to capture stable screenshots in your tests:
 
+{% code title="screenshot.mjs" %}
 ```js
+import puppeteer from "puppeteer";
 import { argosScreenshot } from "@argos-ci/puppeteer";
-const puppeteer = require("puppeteer");
 
-(async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto("http://example.com");
-  await argosScreenshot(page, "example.png");
-  await browser.close();
-})();
+const browser = await puppeteer.launch();
+const page = await browser.newPage();
+await page.goto("http://localhost:3000");
+await argosScreenshot(page, "homepage");
+await browser.close();
 ```
+{% endcode %}
+
+Screenshots are written to the `./screenshots/argos` directory. Add `screenshots/` to your `.gitignore` file to avoid committing them.
 
 Tip: Check out our guides to [screenshot multiple pages](../learn/how-to-guides/visual-coverage/capture-screenshots-from-urls.md) or [capture multiple viewports](../learn/how-to-guides/visual-coverage/responsive-viewports.md).
 {% endstep %}
 
 {% step %}
-### Setup your CI
+### Set up CI
 
-Add this command to your CI pipeline to upload the screenshots to Argos.
+Run your Puppeteer tests in CI, then upload the screenshots to Argos with the CLI:
 
+{% code title=".github/workflows/argos.yml" %}
+```yaml
+name: Argos
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  argos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+      - run: npm ci
+      - name: Run Puppeteer tests
+        run: npm test
+
+      - name: Upload screenshots to Argos
+        run: npm exec -- argos upload ./screenshots/argos
+        env:
+          ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
 ```
-npm exec -- argos upload --token <ARGOS_TOKEN> ./screenshots
-```
+{% endcode %}
 
-Note: The value of `ARGOS_TOKEN` is available in your project settings on Argos.
+`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
 {% endstep %}
 {% endstepper %}
 
-### Congratulations on installing Argos! 👏
+### You're all set
 
-After committing and pushing your changes, the Argos check status will appear on your pull request in GitHub (or GitLab).
+Push your changes and open a pull request — the Argos check appears on it once the build is uploaded. Review the visual changes, approve or reject them, and merge with confidence.
 
-**Note:** you need a reference build to compare your changes with. If you don't have one, builds will remain orphan until you run Argos on your reference branch.
+{% hint style="info" %}
+Argos needs a baseline to compare against. Until a build runs on your default branch, pull request builds are marked as [orphan](../learn/platform-fundamentals/baseline-build.md#orphan-builds). Merge this setup or run the workflow once on your default branch to establish the baseline.
+{% endhint %}
 
-You can now review changes of your app for each pull request, avoid visual bugs and merge with confidence. Welcome on board!
+### Next steps
 
-### Next step: keep your screenshots stable
-
-Now that Argos is running, the next thing to learn is how to keep your screenshots free of flakiness. Read [Best practices for stable screenshots](../learn/reliability-and-flakiness/flaky-tests/README.md) to avoid false positives before they reach your pull requests.
-
-### Additional resources
-
-* [Puppeteer example](https://github.com/argos-ci/argos-javascript/tree/main/examples/puppeteer)
-* [Argos Puppeteer SDK reference](../sdks-reference/puppeteer.md)
+* [Stabilize screenshots](../learn/reliability-and-flakiness/flaky-tests/README.md) – Prevent flaky diffs before they reach your pull requests
+* [Puppeteer SDK reference](../sdks-reference/puppeteer.md) – All options and helpers
+* [Puppeteer example](https://github.com/argos-ci/argos-javascript/tree/main/examples/puppeteer) – A complete working setup
 
 ***
 
-[Join our Discord](https://argos-ci.com/discord), [submit an issue on GitHub](https://github.com/argos-ci/argos/issues) or just [send an email](mailto:contact@argos-ci.com) if you need help.
+Need help? [Join our Discord](https://argos-ci.com/discord), [open an issue on GitHub](https://github.com/argos-ci/argos/issues), or [send us an email](mailto:contact@argos-ci.com).

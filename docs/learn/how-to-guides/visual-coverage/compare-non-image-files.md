@@ -43,25 +43,25 @@ The `-f` option replaces the default screenshot glob. If you want to upload scre
 {% tabs %}
 {% tab title="npm" %}
 ```
-npm exec -- argos upload -f "**/*.{png,jpg,jpeg}" "**/*.{txt,json,yaml,yml,xml,html,md,css,js}" ./snapshots
+npm exec -- argos upload -f "**/*.{png,jpg,jpeg,webp,avif,gif}" "**/*.{txt,json,yaml,yml,xml,html,md,css,js}" ./snapshots
 ```
 {% endtab %}
 
 {% tab title="yarn" %}
 ```
-yarn run argos upload -f "**/*.{png,jpg,jpeg}" "**/*.{txt,json,yaml,yml,xml,html,md,css,js}" ./snapshots
+yarn run argos upload -f "**/*.{png,jpg,jpeg,webp,avif,gif}" "**/*.{txt,json,yaml,yml,xml,html,md,css,js}" ./snapshots
 ```
 {% endtab %}
 
 {% tab title="pnpm" %}
 ```
-pnpm exec -- argos upload -f "**/*.{png,jpg,jpeg}" "**/*.{txt,json,yaml,yml,xml,html,md,css,js}" ./snapshots
+pnpm exec -- argos upload -f "**/*.{png,jpg,jpeg,webp,avif,gif}" "**/*.{txt,json,yaml,yml,xml,html,md,css,js}" ./snapshots
 ```
 {% endtab %}
 
 {% tab title="bun" %}
 ```
-bun x argos upload -f "**/*.{png,jpg,jpeg}" "**/*.{txt,json,yaml,yml,xml,html,md,css,js}" ./snapshots
+bun x argos upload -f "**/*.{png,jpg,jpeg,webp,avif,gif}" "**/*.{txt,json,yaml,yml,xml,html,md,css,js}" ./snapshots
 ```
 {% endtab %}
 {% endtabs %}

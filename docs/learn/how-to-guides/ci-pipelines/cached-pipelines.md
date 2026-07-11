@@ -81,15 +81,16 @@ When the snapshot files can't be treated as cacheable outputs — uploads happen
 
 1. **Aggregate uploads into one build with finalize mode.** Each suite uploads as a shard (`ARGOS_PARALLEL=true`, `ARGOS_PARALLEL_TOTAL=-1`, one shared `ARGOS_BUILD_NAME`); the number of uploads may vary per run.
 2. **Mark pull request builds as subset** (`ARGOS_SUBSET=true` on non-main runs), so screenshots missing from skipped suites are ignored instead of reported as removed.
-3. **Guarantee complete builds on your main branch.** Subset builds are not eligible as baselines, so on main the Argos-enabled suites must actually run. Declare a variable in the task's **hashed** `env` (not the passthrough list — passthrough doesn't invalidate the cache) and give it a fresh value on main only:
+3. **Guarantee complete builds on your main branch.** Subset builds are not eligible as baselines, so on main the Argos-enabled suites must actually run. Declare a cache-busting variable in the task's **hashed** `env` (not the passthrough list — passthrough doesn't invalidate the cache) and give it a fresh value on main only:
 
 {% code title=".github/workflows/tests.yml" %}
 ```yaml
 env:
   ARGOS_SUBSET: ${{ github.ref != 'refs/heads/main' }}
-  # Hashed into the Argos-enabled test tasks (turbo.json `env`): a fresh value
-  # on every main commit forces them to re-run and produce complete builds.
-  ARGOS_BASELINE_KEY: ${{ github.ref == 'refs/heads/main' && github.sha || '' }}
+  # Not read by Argos — hashed into the Argos-enabled test tasks
+  # (turbo.json `env`) so a fresh value on every main commit forces
+  # them to re-run and produce complete builds.
+  CACHE_BUST_KEY: ${{ github.ref == 'refs/heads/main' && github.sha || '' }}
 ```
 {% endcode %}
 

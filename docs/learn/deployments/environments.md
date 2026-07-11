@@ -70,40 +70,18 @@ Any branch matching the pattern produces a production deployment on the next CLI
 
 ### Forcing an environment from the CLI
 
-You can force the environment regardless of the branch with the `--prod` flag:
+You can force a production deployment regardless of the branch with the `--prod` flag:
 
-{% tabs %}
-{% tab title="npm" %}
-```
+```bash
 npm exec -- argos deploy ./storybook-static --prod
 ```
-{% endtab %}
-
-{% tab title="yarn" %}
-```
-yarn run argos deploy ./storybook-static --prod
-```
-{% endtab %}
-
-{% tab title="pnpm" %}
-```
-pnpm exec -- argos deploy ./storybook-static --prod
-```
-{% endtab %}
-
-{% tab title="bun" %}
-```
-bun x argos deploy ./storybook-static --prod
-```
-{% endtab %}
-{% endtabs %}
 
 This is useful when you want to:
 
 * Deploy a one-off production build from a local machine.
 * Promote a deployment from a non-standard branch (for example, a release branch that doesn't match the configured pattern).
 
-There is currently no flag to force a preview from a production branch—simply do not pass `--prod` and adjust the production branch pattern if needed.
+There is no flag to force a preview from a branch that matches the production pattern — a matching branch always deploys to production. If you need previews from such a branch, narrow the production branch pattern instead.
 
 ### Related
 
