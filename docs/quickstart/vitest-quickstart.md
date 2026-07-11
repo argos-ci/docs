@@ -159,7 +159,7 @@ import { fetchUser } from "./api";
 
 test("API response", async () => {
   const user = await fetchUser();
-  await argosSnapshot(user); // -> "API response 1"
+  await argosSnapshot(user); // -> "src/user.test.ts > API response 1"
 });
 ```
 {% endcode %}

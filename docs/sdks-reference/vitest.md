@@ -92,15 +92,17 @@ test("Button", async () => {
 });
 ```
 
-The name is optional. When omitted, Argos derives one from the current test—mimicking [Vitest's snapshot naming](https://vitest.dev/guide/snapshot) (`` `${test.fullName} ${count}` ``)—so several unnamed captures in the same test stay unique:
+The name is optional. When omitted, Argos derives one from the current test—mimicking [Vitest's snapshot naming](https://vitest.dev/guide/snapshot)—with a per-test counter so several unnamed captures in the same test stay unique:
 
 ```ts
 test("Button", async () => {
   render(<Button>Click me</Button>);
-  await argosScreenshot(); // -> "Button 1"
-  await argosScreenshot(); // -> "Button 2"
+  await argosScreenshot(); // -> "src/Button.test.tsx > Button 1"
+  await argosScreenshot(); // -> "src/Button.test.tsx > Button 2"
 });
 ```
+
+Unlike Vitest—which keeps a per-file `.snap`, so its keys only need to be unique within a file—Argos names are **global** across the build. The generated name therefore includes the test file path, so two tests with the same title in different files never collide. It is also truncated when needed so the resulting filename stays within the filesystem's 255-character limit.
 
 Screenshots are written to the `./screenshots` directory by default and uploaded by the plugin when `uploadToArgos` is enabled.
 
@@ -119,7 +121,7 @@ import { argosSnapshot } from "@argos-ci/vitest";
 test("API response", async () => {
   const user = await fetchUser();
   // Objects are serialized automatically.
-  await argosSnapshot(user); // -> "API response 1"
+  await argosSnapshot(user); // -> "src/user.test.ts > API response 1"
   await argosSnapshot(user, { name: "user" }); // explicit name
 });
 ```
@@ -182,7 +184,7 @@ await argosScreenshot(); // automatic name, derived from the current test
 await argosScreenshot({ fullPage: true }); // automatic name, with options
 ```
 
-* **`name`**: A unique name for the screenshot. When omitted, Argos derives one from the current test (`` `${test.fullName} ${count}` ``).
+* **`name`**: A unique name for the screenshot. When omitted, Argos derives one from the current test (including the test file path, so names stay unique across files).
 * **`options`**: Serializable screenshot options (see below).
 
 {% hint style="info" %}
@@ -217,7 +219,7 @@ await argosSnapshot(user, { name: "user" }); // explicit name
 
 Available options:
 
-* **`name`**: A unique name for the snapshot. When omitted, Argos derives one from the current test (`` `${test.fullName} ${count}` ``).
+* **`name`**: A unique name for the snapshot. When omitted, Argos derives one from the current test (including the test file path, so names stay unique across files).
 * **`root`**: Folder where the snapshot is written. In Node tests it defaults to `"./screenshots"`; in browser tests it defaults to the plugin `root`.
 * **`extension`**: Extension of the snapshot file. It also determines how Argos renders and diffs the snapshot, e.g. `.txt`, `.json`, `.yml`, `.html`, `.md` (default: `".txt"`).
 * **`tag`**: A [tag](../learn/review-workflow/tags.md) or array of tags to attach to the snapshot.
