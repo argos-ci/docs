@@ -266,6 +266,30 @@ Create a new project in an account you administer. Pass the account with `--acco
 argos create-project my-new-project --account my-team
 ```
 
+### `analytics`
+
+Fetch build and screenshot metrics for an account. Requires a [personal access token](#project-tokens-and-personal-access-tokens) scoped to the account. Pass the account with `--account <slug>` or the `ARGOS_ACCOUNT` environment variable:
+
+```bash
+argos analytics --account my-team
+```
+
+| Option                | Description                                                                          |
+| --------------------- | ------------------------------------------------------------------------------------ |
+| `--account <slug>`    | Account (personal or team) to fetch analytics for. Also `ARGOS_ACCOUNT`. Required.   |
+| `--from <datetime>`   | Start of the period, as an ISO 8601 datetime. Defaults to 30 days ago.               |
+| `--to <datetime>`     | End of the period, as an ISO 8601 datetime. Defaults to now.                         |
+| `--group-by <period>` | Group each series data point by `day`, `week`, or `month`. Defaults to `day`.        |
+| `--project <name>`    | Filter by project name. Repeat the flag to include multiple projects.                |
+| `--token <token>`     | Personal access token. Also `ARGOS_TOKEN`.                                           |
+| `--json`              | Output machine-readable JSON instead of human-readable text.                         |
+
+The response reports totals and a per-period series for both screenshots and builds (including how many builds detected changes and how many were accepted or rejected), broken down by project. Use `--json` when another tool needs to parse the result:
+
+```bash
+argos analytics --account my-team --from 2026-01-01 --group-by month --json
+```
+
 ### `help`
 
 Display the available commands and options:
