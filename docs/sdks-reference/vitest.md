@@ -138,6 +138,19 @@ await argosSnapshot(JSON.stringify(config, null, 2), {
 
 Snapshots are written to the same `./snapshots` folder as screenshots and uploaded by the plugin when `uploadToArgos` is enabled.
 
+### Tests Sharding
+
+Argos integrates with [Vitest sharding](https://vitest.dev/guide/improving-performance#sharding) (`vitest --shard=<index>/<count>`). When a shard is detected, [Argos Sharding/Parallel mode](../learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md) is configured automatically — you only need to set the `ARGOS_PARALLEL_NONCE` environment variable to a value shared across the shards.
+
+```bash
+# Each machine runs a shard; they upload into a single Argos build.
+ARGOS_PARALLEL_NONCE=$CI_RUN_ID vitest run --shard=1/4
+ARGOS_PARALLEL_NONCE=$CI_RUN_ID vitest run --shard=2/4
+# …
+```
+
+The parallel `total` and `index` default to the shard's `count` and `index`, and can be overridden with `ARGOS_PARALLEL_TOTAL` and `ARGOS_PARALLEL_INDEX` if needed.
+
 ### API Overview
 
 #### `argosVitestPlugin(options)`
