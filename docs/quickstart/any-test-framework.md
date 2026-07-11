@@ -73,6 +73,6 @@ Now that Argos is running, the next thing to learn is how to keep your screensho
 ### Additional resources
 
 * [Argos CLI reference](../sdks-reference/argos-command-line-interface-cli.md)
-* [Enrich screenshots with metadata](../learn/how-to-guides/visual-coverage/adding-screenshot-metadata.md)
+* [Enrich screenshots with metadata](../sdks-reference/screenshot-metadata.md)
 
 [Join our Discord](https://argos-ci.com/discord), [submit an issue on GitHub](https://github.com/argos-ci/argos/issues) or just [send an email](mailto:contact@argos-ci.com) if you need help.

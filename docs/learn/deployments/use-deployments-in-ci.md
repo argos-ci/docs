@@ -11,7 +11,7 @@ This page walks through a GitHub Actions setup for Storybook. The same pattern w
 ### Prerequisites
 
 * A static build step that produces a directory (for Storybook: `npm run build-storybook` → `storybook-static/`).
-* An `ARGOS_TOKEN` available as a CI secret. You can also use [GitHub OIDC](../integrations/github-oidc-authentication.md) or [tokenless authentication](../integrations/github-tokenless-authentication.md) to avoid managing a secret.
+* An `ARGOS_TOKEN` available as a CI secret. You can also use [OIDC or tokenless authentication](../integrations/github-actions-authentication.md) to avoid managing a secret.
 
 ### GitHub Actions example
 

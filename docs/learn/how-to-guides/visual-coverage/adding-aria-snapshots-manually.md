@@ -66,7 +66,7 @@ You can also add metadata in a companion file using the `.argos.json` suffix:
 my-snapshot-name.aria.yml.argos.json
 ```
 
-For general metadata conventions, see [Adding Screenshot metadata](adding-screenshot-metadata.md). ARIA snapshot companion metadata follows the same conventions and can additionally define ARIA-specific transient fields, such as `transient.parentName`.
+For general metadata conventions, see [Screenshot metadata](../../../sdks-reference/screenshot-metadata.md). ARIA snapshot companion metadata follows the same conventions and can additionally define ARIA-specific transient fields, such as `transient.parentName`.
 
 ### Attach an ARIA snapshot to a screenshot
 

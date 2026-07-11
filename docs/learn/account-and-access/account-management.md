@@ -8,9 +8,9 @@ When you sign up for Argos, you create an account that manages your projects and
 
 Argos offers three types of plans:
 
-* [Hobby](../billing-and-subscription/subscription/pricing-plans.md#hobby-plan)
-* [Pro](../billing-and-subscription/subscription/pricing-plans.md#pro-plan)
-* [Enterprise](../billing-and-subscription/subscription/pricing-plans.md#enterprise-plan)
+* [Hobby](../billing-and-subscription/pricing-plans.md#hobby-plan)
+* [Pro](../billing-and-subscription/pricing-plans.md#pro-plan)
+* [Enterprise](../billing-and-subscription/pricing-plans.md#enterprise-plan)
 
 Each plan provides different features and resources to match your needs.
 

@@ -168,7 +168,7 @@ Drop `percy exec --` and run your tests directly. Rename the token secret from `
 {% endcolumn %}
 {% endcolumns %}
 
-`ARGOS_TOKEN` comes from **Settings → General → Token** in your Argos project. On GitHub Actions you can skip the secret entirely with [OIDC](../../integrations/github-oidc-authentication.md) or [tokenless authentication](../../integrations/github-tokenless-authentication.md).
+`ARGOS_TOKEN` comes from **Settings → General → Token** in your Argos project. On GitHub Actions you can skip the secret entirely with [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md).
 {% endstep %}
 
 {% step %}
@@ -250,7 +250,7 @@ No. The Argos reporter uploads screenshots as part of your normal test run when 
 
 <summary>Is Argos open-source friendly?</summary>
 
-Yes. Argos has a [free plan for open-source projects](../../billing-and-subscription/subscription/open-source.md).
+Yes. Argos has a [free plan for open-source projects](../../billing-and-subscription/open-source.md).
 
 </details>
 

@@ -126,7 +126,7 @@ Swap the single `chromatic` command for two steps: run the visual tests, then de
 {% endcolumn %}
 {% endcolumns %}
 
-`ARGOS_TOKEN` comes from **Settings → General → Token**. On GitHub Actions you can use [OIDC](../../integrations/github-oidc-authentication.md) or [tokenless authentication](../../integrations/github-tokenless-authentication.md) instead of a secret.
+`ARGOS_TOKEN` comes from **Settings → General → Token**. On GitHub Actions you can use [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md) instead of a secret.
 {% endstep %}
 
 {% step %}
@@ -248,7 +248,7 @@ They don't transfer. The first Argos build on your reference branch establishes 
 
 <summary>Is there an open-source plan?</summary>
 
-Yes — see [Open source](../../billing-and-subscription/subscription/open-source.md).
+Yes — see [Open source](../../billing-and-subscription/open-source.md).
 
 </details>
 

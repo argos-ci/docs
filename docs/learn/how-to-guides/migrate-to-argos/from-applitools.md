@@ -151,7 +151,7 @@ Rename the secret from `APPLITOOLS_API_KEY` to `ARGOS_TOKEN` and run your tests 
     ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
 ```
 
-On GitHub Actions you can use [OIDC](../../integrations/github-oidc-authentication.md) or [tokenless authentication](../../integrations/github-tokenless-authentication.md) instead of a secret.
+On GitHub Actions you can use [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md) instead of a secret.
 {% endstep %}
 
 {% step %}

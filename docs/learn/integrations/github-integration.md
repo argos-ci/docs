@@ -139,5 +139,5 @@ Self-hosted GitHub Enterprise Server deployments are supported on the Argos Ente
 Uploads from GitHub Actions can authenticate in three ways:
 
 * **`ARGOS_TOKEN`** — a project token stored as a GitHub secret (used in the examples above).
-* [**GitHub OIDC authentication**](github-oidc-authentication.md) — short-lived signed tokens with no secret to manage. Preferred where available.
-* [**GitHub tokenless authentication**](github-tokenless-authentication.md) — the automatic fallback for pull requests from forked repositories.
+* [**GitHub OIDC**](github-actions-authentication.md#oidc) — short-lived signed tokens with no secret to manage. Preferred where available.
+* [**Tokenless authentication**](github-actions-authentication.md#tokenless-authentication) — the automatic fallback for pull requests from forked repositories.

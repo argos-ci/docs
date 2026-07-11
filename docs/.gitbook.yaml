@@ -1,0 +1,19 @@
+root: ./
+
+structure:
+  readme: ./README.md
+  summary: ./SUMMARY.md
+
+redirects:
+  learn/billing-and-subscription/subscription: ./learn/billing-and-subscription/README.md
+  learn/billing-and-subscription/subscription/pricing-plans: ./learn/billing-and-subscription/pricing-plans.md
+  learn/billing-and-subscription/subscription/open-source: ./learn/billing-and-subscription/open-source.md
+  learn/billing-and-subscription/subscription/how-to-subscribe: ./learn/billing-and-subscription/how-to-subscribe.md
+  learn/billing-and-subscription/subscription/manage-subscription: ./learn/billing-and-subscription/how-to-subscribe.md
+  learn/billing-and-subscription/subscription/invoiced-customers: ./learn/billing-and-subscription/how-to-subscribe.md
+  learn/billing-and-subscription/subscription/usage-monitoring: ./learn/billing-and-subscription/spend-management.md
+  learn/integrations/github-oidc-authentication: ./learn/integrations/github-actions-authentication.md
+  learn/integrations/github-tokenless-authentication: ./learn/integrations/github-actions-authentication.md
+  learn/integrations/bitbucket-integration: ./learn/integrations/other-git-providers.md
+  learn/integrations/azure-devops-integration: ./learn/integrations/other-git-providers.md
+  learn/how-to-guides/visual-coverage/adding-screenshot-metadata: ./sdks-reference/screenshot-metadata.md

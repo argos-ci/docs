@@ -77,7 +77,7 @@ bun x argos login
 `argos login` authorizes the CLI and stores a user token on your machine. This token is used by commands that need to act as a user, such as creating a build review.
 
 {% hint style="warning" %}
-Do not use `argos login` in CI. CI uploads should use `ARGOS_TOKEN`, `--token`, or [GitHub OIDC authentication](../learn/integrations/github-oidc-authentication.md)
+Do not use `argos login` in CI. CI uploads should use `ARGOS_TOKEN`, `--token`, or [GitHub OIDC authentication](../learn/integrations/github-actions-authentication.md)
 {% endhint %}
 
 ### Upload Command
@@ -120,7 +120,7 @@ Use `-f` or `--files` to upload text-based artifacts such as JSON, YAML, XML, HT
 
 #### Specify the project
 
-Use `--project <slug>` to set the Argos project slug (`account/project-name`). This disambiguates [tokenless authentication](../learn/integrations/github-tokenless-authentication.md) when multiple Argos projects are linked to the same repository. You can also set it with the `ARGOS_PROJECT` environment variable.
+Use `--project <slug>` to set the Argos project slug (`account/project-name`). This disambiguates [tokenless authentication](../learn/integrations/github-actions-authentication.md#tokenless-authentication) when multiple Argos projects are linked to the same repository. You can also set it with the `ARGOS_PROJECT` environment variable.
 
 {% tabs %}
 {% tab title="npm" %}
@@ -322,7 +322,7 @@ If the branch matches the project's production branch pattern, the deployment is
 
 1. `ARGOS_TOKEN` environment variable (recommended).
 2. `--token <token>` argument.
-3. [GitHub OIDC](../learn/integrations/github-oidc-authentication.md) or [tokenless authentication](../learn/integrations/github-tokenless-authentication.md) on GitHub Actions.
+3. [GitHub OIDC](../learn/integrations/github-actions-authentication.md) or [tokenless authentication](../learn/integrations/github-actions-authentication.md#tokenless-authentication) on GitHub Actions.
 
 ### Build Commands
 

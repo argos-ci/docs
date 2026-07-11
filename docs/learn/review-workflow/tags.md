@@ -17,7 +17,7 @@ Tags let you categorize screenshots so you can quickly filter a build down to th
 
 ### Where tags come from
 
-Tags can come from two sources in [screenshot metadata](../how-to-guides/visual-coverage/adding-screenshot-metadata.md):
+Tags can come from two sources in [screenshot metadata](../../sdks-reference/screenshot-metadata.md):
 
 | Source         | Field       | Description                                                                                                                                       |
 | -------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
