@@ -277,7 +277,7 @@ argos analytics --account my-team
 | Option                | Description                                                                          |
 | --------------------- | ------------------------------------------------------------------------------------ |
 | `--account <slug>`    | Account (personal or team) to fetch analytics for. Also `ARGOS_ACCOUNT`. Required.   |
-| `--from <datetime>`   | Start of the period, as an ISO 8601 datetime. Defaults to 30 days ago.               |
+| `--from <datetime>`   | Start of the period, as an ISO 8601 datetime. Defaults to 30 days ago. The range cannot exceed 365 days. |
 | `--to <datetime>`     | End of the period, as an ISO 8601 datetime. Defaults to now.                         |
 | `--group-by <period>` | Group each series data point by `day`, `week`, or `month`. Defaults to `day`.        |
 | `--project <name>`    | Filter by project name. Repeat the flag to include multiple projects.                |
