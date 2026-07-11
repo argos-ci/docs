@@ -92,13 +92,27 @@ test("Button", async () => {
 });
 ```
 
-Screenshots are written to the `./screenshots` directory by default and uploaded by the plugin when `uploadToArgos` is enabled.
+The name is optional. When omitted, Argos derives one from the current test—mimicking [Vitest's snapshot naming](https://vitest.dev/guide/snapshot)—with a per-test counter so several unnamed captures in the same test stay unique:
+
+```ts
+test("Button", async () => {
+  render(<Button>Click me</Button>);
+  await argosScreenshot(); // -> "src/Button.test.tsx > Button 1"
+  await argosScreenshot(); // -> "src/Button.test.tsx > Button 2"
+});
+```
+
+Unlike Vitest—which keeps a per-file `.snap`, so its keys only need to be unique within a file—Argos names are **global** across the build. The generated name therefore includes the test file path, so two tests with the same title in different files never collide. It is also truncated when needed so the resulting filename stays within the filesystem's 255-character limit.
+
+Screenshots are written to the `./snapshots` directory by default and uploaded by the plugin when `uploadToArgos` is enabled.
 
 ### Capturing snapshots
 
 `argosSnapshot` captures a snapshot of **any value**—not just a screenshot—and uploads it to Argos to diff across builds, mimicking [Vitest snapshots](https://vitest.dev/guide/snapshot). Unlike `argosScreenshot`, it does **not** need a browser and works in **both** browser and Node tests.
 
 Strings are written verbatim; any other value is serialized with [`@vitest/pretty-format`](https://www.npmjs.com/package/@vitest/pretty-format) (the serializer Vitest itself uses).
+
+The value comes first; the name is optional. Omit it to auto-name the snapshot from the current test (like screenshots above), or pass `options.name` to set it explicitly:
 
 ```ts
 import { test } from "vitest";
@@ -107,20 +121,35 @@ import { argosSnapshot } from "@argos-ci/vitest";
 test("API response", async () => {
   const user = await fetchUser();
   // Objects are serialized automatically.
-  await argosSnapshot("user", user);
+  await argosSnapshot(user); // -> "src/user.test.ts > API response 1"
+  await argosSnapshot(user, { name: "user" }); // explicit name
 });
 ```
 
 Use the `extension` option to control how Argos renders and diffs the snapshot, and `tag` to attach tags:
 
 ```ts
-await argosSnapshot("config", JSON.stringify(config, null, 2), {
+await argosSnapshot(JSON.stringify(config, null, 2), {
+  name: "config",
   extension: ".json",
   tag: "config",
 });
 ```
 
-Snapshots are written to the same folder as screenshots and uploaded by the plugin when `uploadToArgos` is enabled.
+Snapshots are written to the same `./snapshots` folder as screenshots and uploaded by the plugin when `uploadToArgos` is enabled.
+
+### Tests Sharding
+
+Argos integrates with [Vitest sharding](https://vitest.dev/guide/improving-performance#sharding) (`vitest --shard=<index>/<count>`). When a shard is detected, [Argos Sharding/Parallel mode](../learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md) is configured automatically — you only need to set the `ARGOS_PARALLEL_NONCE` environment variable to a value shared across the shards.
+
+```bash
+# Each machine runs a shard; they upload into a single Argos build.
+ARGOS_PARALLEL_NONCE=$CI_RUN_ID vitest run --shard=1/4
+ARGOS_PARALLEL_NONCE=$CI_RUN_ID vitest run --shard=2/4
+# …
+```
+
+The parallel `total` and `index` default to the shard's `count` and `index`, and can be overridden with `ARGOS_PARALLEL_TOTAL` and `ARGOS_PARALLEL_INDEX` if needed.
 
 ### API Overview
 
@@ -152,21 +181,23 @@ export default defineConfig({
 ```
 
 * **`uploadToArgos`**: Upload the captured files to Argos at the end of the run (default: `false`).
-* **`root`**: Folder where screenshots and snapshots are written (default: `"./screenshots"`).
+* **`root`**: Folder where screenshots and snapshots are written (default: `"./snapshots"`).
 
 The plugin also accepts every option supported by the [Playwright `argosScreenshot` function](playwright.md#argosscreenshothandler-name-options)—including non-serializable ones like `beforeScreenshot` and `afterScreenshot`—and all [upload parameters](https://js-sdk-reference.argos-ci.com/interfaces/UploadParameters.html). These act as defaults for every screenshot and can be overridden per call.
 
-#### `argosScreenshot(name, options?)`
+#### `argosScreenshot(name?, options?)`
 
 Take a screenshot in a Vitest browser test. Import it from `@argos-ci/vitest`.
 
 ```ts
 import { argosScreenshot } from "@argos-ci/vitest";
 
-await argosScreenshot("button");
+await argosScreenshot("button"); // explicit name
+await argosScreenshot(); // automatic name, derived from the current test
+await argosScreenshot({ fullPage: true }); // automatic name, with options
 ```
 
-* **`name`**: A unique name for the screenshot.
+* **`name`**: A unique name for the screenshot. When omitted, Argos derives one from the current test (including the test file path, so names stay unique across files).
 * **`options`**: Serializable screenshot options (see below).
 
 {% hint style="info" %}
@@ -185,23 +216,24 @@ Available options:
 * **`disableHover`**: Disable hover effects by moving the mouse to the top-left corner (default: `true`).
 * **`stabilize`**: Wait for the UI to stabilize before taking the screenshot. Set to `false` to disable or pass an object to customize it (default: `true`).
 
-#### `argosSnapshot(name, content, options?)`
+#### `argosSnapshot(content, options?)`
 
 Take a snapshot of any serializable value. Works in both browser and Node tests. Import it from `@argos-ci/vitest`.
 
 ```ts
 import { argosSnapshot } from "@argos-ci/vitest";
 
-await argosSnapshot("user", user);
+await argosSnapshot(user); // automatic name, derived from the current test
+await argosSnapshot(user, { name: "user" }); // explicit name
 ```
 
-* **`name`**: A unique name for the snapshot.
 * **`content`**: The value to snapshot. Strings are written as-is; any other value is serialized.
 * **`options`**: Snapshot options (see below).
 
 Available options:
 
-* **`root`**: Folder where the snapshot is written. In Node tests it defaults to `"./screenshots"`; in browser tests it defaults to the plugin `root`.
+* **`name`**: A unique name for the snapshot. When omitted, Argos derives one from the current test (including the test file path, so names stay unique across files).
+* **`root`**: Folder where the snapshot is written. In Node tests it defaults to `"./snapshots"`; in browser tests it defaults to the plugin `root`.
 * **`extension`**: Extension of the snapshot file. It also determines how Argos renders and diffs the snapshot, e.g. `.txt`, `.json`, `.yml`, `.html`, `.md` (default: `".txt"`).
 * **`tag`**: A [tag](../learn/review-workflow/tags.md) or array of tags to attach to the snapshot.
 * **`serialize`**: Custom serializer used when `content` is not already a string. Defaults to `@vitest/pretty-format`.

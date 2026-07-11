@@ -146,10 +146,10 @@ test("Button", async () => {
 {% endcode %}
 
 {% hint style="info" %}
-Unlike other Argos SDKs, `argosScreenshot` takes no `page` argument here — Vitest browser tests already run in the page context, so a name is enough.
+Unlike other Argos SDKs, `argosScreenshot` takes no `page` argument here — Vitest browser tests already run in the page context. The name is optional too: omit it and Argos derives one from the current test.
 {% endhint %}
 
-Use `argosSnapshot` to capture a snapshot of any value — it works in **browser and Node** tests, no browser required. Strings are written verbatim; any other value is serialized automatically:
+Use `argosSnapshot` to capture a snapshot of any value — it works in **browser and Node** tests, no browser required. The value comes first and the name is optional (omit it to auto-name from the current test, or pass `options.name`). Strings are written verbatim; any other value is serialized automatically:
 
 {% code title="user.test.ts" %}
 ```ts
@@ -159,7 +159,7 @@ import { fetchUser } from "./api";
 
 test("API response", async () => {
   const user = await fetchUser();
-  await argosSnapshot("user", user);
+  await argosSnapshot(user); // -> "src/user.test.ts > API response 1"
 });
 ```
 {% endcode %}
@@ -168,7 +168,7 @@ test("API response", async () => {
 `argosSnapshot` lets you visually diff **anything**, not just UI — API responses, generated HTML, config files, Markdown, and more. Pass the `extension` option (e.g. `.json`, `.html`, `.yml`) to control how Argos renders and diffs it. See the [SDK reference](../sdks-reference/vitest.md#capturing-snapshots) for details.
 {% endhint %}
 
-Both are written to the `./screenshots` directory by default. Add `./screenshots` to your `.gitignore` file to avoid committing them.
+Both are written to the `./snapshots` directory by default. Add `./snapshots` to your `.gitignore` file to avoid committing them.
 
 Tip: Check out our guides to [capture multiple viewports](../learn/how-to-guides/visual-coverage/responsive-viewports.md) or [add ARIA snapshots](../learn/how-to-guides/visual-coverage/adding-aria-snapshots-manually.md).
 {% endstep %}
