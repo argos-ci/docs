@@ -2,18 +2,13 @@
 description: A playbook for tackling visual flakiness, with detection, ignoring noisy changes, and stabilization strategies.
 ---
 
-# Flaky tests
+# Stabilize screenshots
 
-Flaky tests fail or change without a meaningful code change, eroding trust in your test suite. Argos tackles flakiness from two angles: it **detects** unstable tests so you can decide with confidence, and it gives you **tools and strategies** to address the root causes.
+The most reliable visual test suite is one where flakiness is fixed at the source. This playbook covers the strategies that make screenshots deterministic — from waiting for loading to freezing dynamic values.
 
-### How Argos helps
-
-* **Flaky test detection**: Argos flags unstable tests with a flaky badge, a stability score, and a detailed history view. See [Flaky test detection](../flaky-test-detection.md) for details.
-* **Ignore noisy changes**: Dismiss a specific change directly from the build or test page so the same change is no longer reported.
-* **Auto-ignore recurring flaky changes**: Configure Argos to automatically ignore changes that recur over the last 7 days, filtering out noise while keeping real regressions visible.
-* **See flakiness across your project**: The [Tests dashboard](../tests-dashboard.md) ranks every test by flakiness score so the most unstable tests surface first.
-
-These features let you separate signal from noise without losing the ability to catch real regressions.
+{% hint style="info" %}
+Argos also detects and filters flakiness for you: see [Flaky test detection](../flaky-test-detection.md) for flaky badges, ignore, and auto-ignore, and the [Tests dashboard](../tests-dashboard.md) for a project-wide ranking.
+{% endhint %}
 
 ### Common causes
 
@@ -28,14 +23,14 @@ Visual flakiness usually stems from one of the following:
 
 ### Best practices for stable screenshots
 
-Ignoring noise is useful, but the most reliable suite is one where flakiness is addressed at the source. Follow these practices—each one targets a common cause above:
+Follow these practices — each one targets a common cause above:
 
 {% hint style="info" %}
-Most stabilization is automatic. The Argos SDK stabilizes every screenshot by default—waiting for `aria-busy`, fonts, and images to settle, forcing font antialiasing, hiding carets and scrollbars, and more. You can customize or disable any of it through the [`stabilize` option](../../../sdks-reference/playwright.md). The practices below cover what the SDK can't infer on its own, such as which elements are loaders or which values are dynamic.
+Most stabilization is automatic. The Argos SDK stabilizes every screenshot by default — waiting for `aria-busy`, fonts, and images to settle, forcing font antialiasing, hiding carets and scrollbars, and more. You can customize or disable any of it through the [`stabilize` option](../../../sdks-reference/playwright.md). The practices below cover what the SDK can't infer on its own, such as which elements are loaders or which values are dynamic.
 {% endhint %}
 
 * **Wait until the page is ready before capturing.** Mark loading elements with `aria-busy` so `argosScreenshot()` waits for them. → [Wait for loading](wait-for-loading.md)
-* **Wait for CSS background images to load.** Enable the opt-in `waitForBackgroundImages` option when responsive or decorative backgrounds render late. → [Wait for background images](wait-for-background-images.md)
+* **Wait for CSS background images to load.** Flag elements with `data-visual-test-wait-bg-img` so Argos waits for their backgrounds — or extend the check to the whole page. → [Wait for background images](wait-for-background-images.md)
 * **Freeze animated GIFs.** GIFs are paused on their first frame by default so they don't capture a random frame on each run. → [Pause animated GIFs](pause-gifs.md)
 * **Make dates and times deterministic.** Hide or freeze any value that changes between runs. → [Stabilize date & time](stabilize-date-and-time.md)
 * **Force consistent text rendering.** Disable subpixel text and font hinting so glyphs look identical on every machine. → [Stabilize text rendering](stabilize-text-rendering.md)

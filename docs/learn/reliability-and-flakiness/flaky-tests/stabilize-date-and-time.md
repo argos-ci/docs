@@ -1,19 +1,28 @@
 ---
-description: Hide or freeze dynamic dates and times to remove a common source of flaky visual diffs in Argos.
+description: >-
+  Hide or freeze dynamic dates and times to remove a common source of flaky
+  visual diffs in Argos.
 ---
 
 # Stabilize date & time
 
-Mitigate UI flakiness with stable date & time in visual testing: Hide dynamic dates or freeze them for consistency using Argos's practical solutions.
+Dates and times change between test runs, so any visible timestamp produces a diff on every build. Hide them from screenshots, or freeze them so they render the same value on every run.
 
-### Hiding the Date
+### Hide the date
 
-Using Argos helpers, you can choose to hide a date or a time by adding `data-visual-test="transparent"`.
+Add the `data-visual-test="transparent"` [Argos helper](argos-helpers.md) to render the element invisible in screenshots while keeping its layout space:
 
 ```html
-<time data-visual-test="transparent">10 oct, 2012</time>
+<time data-visual-test="transparent">Oct 10, 2024</time>
 ```
 
-### Freezing the Date
+### Freeze the date
 
-If you are using dates (not precise time), you can stabilize them in your seeds by running a script that updates dates just before running your E2E tests.
+To keep dates visible in your screenshots, make them deterministic instead:
+
+* **Freeze the clock in your tests.** Playwright's [Clock API](https://playwright.dev/docs/clock) pins the browser time to a fixed value:
+
+  ```js
+  await page.clock.setFixedTime(new Date("2024-10-10T10:00:00"));
+  ```
+* **Pin dates in your test data.** If your UI renders dates from seeded data, run a script that resets those dates just before your tests, so relative labels like "2 days ago" stay constant.

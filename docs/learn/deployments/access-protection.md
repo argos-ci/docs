@@ -40,7 +40,7 @@ This option requires a Team plan.
 
 1. Open your project in Argos.
 2. Go to **Settings → Deployments**.
-3. Toggle **Log in protection** and pick the level.
+3. Under **Deployment authentication**, pick the protection mode.
 
 ![Deployment authentication setting](<../../.gitbook/assets/auth setting 35a93c077ad9f57c75638510db260243.png>)
 

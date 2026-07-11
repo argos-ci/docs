@@ -4,11 +4,13 @@ description: Deploy your Storybook or static build to a unique Argos URL on ever
 
 # Deployments
 
-A **deployment** on Argos is a static build—most commonly a Storybook—served on a unique URL that you can open, share, and review. Every time you run the Argos CLI, Argos uploads your build, generates a URL, and posts the status back to your pull request.
+A **deployment** on Argos is a static build — most commonly a Storybook — served on a unique URL that you can open, share, and review. When you run `argos deploy` in CI, Argos uploads the build, generates a URL, and posts the status back to your pull request.
+
+Deployments pair naturally with visual testing: the same Storybook you test with Argos becomes a live preview reviewers can browse, right from the pull request — with no hosting of your own to maintain.
 
 Use deployments to:
 
-* Preview a Storybook for every pull request, with no infrastructure of your own to maintain.
+* Preview a Storybook for every pull request.
 * Share a live link with designers, product, or stakeholders to review work in context.
 * Browse the history of every deployed build across branches and commits.
 
@@ -28,7 +30,7 @@ Each deployment is **immutable**. Re-running the deploy command always produces 
 
 ### Quickstart
 
-The following steps get a Storybook deployed in under a minute. The same flow works for any static directory (Vite build, Next.js export, plain HTML, etc.).
+The following steps deploy a Storybook. The same flow works for any static directory (Vite build, Next.js export, plain HTML, etc.).
 
 {% stepper %}
 {% step %}
