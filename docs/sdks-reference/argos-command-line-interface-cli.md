@@ -290,6 +290,8 @@ The response reports totals and a per-period series for both screenshots and bui
 argos analytics --account my-team --from 2026-01-01 --group-by month --json
 ```
 
+See [Analytics](../learn/account-and-access/analytics.md) for the dashboard view of these metrics.
+
 ### `help`
 
 Display the available commands and options:
