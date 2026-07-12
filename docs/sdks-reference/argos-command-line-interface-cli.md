@@ -198,7 +198,40 @@ Add `--needs-review` to only return snapshots that need a review decision:
 argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --needs-review --json
 ```
 
-Each snapshot diff includes the status, score, diff mask URL, baseline file, current file, and metadata provided by the SDK.
+Each snapshot diff includes the status, score, diff mask URL, baseline file, current file, and metadata provided by the SDK. When a diff belongs to a tracked test, it also carries that test's [flakiness metrics](../learn/reliability-and-flakiness/flaky-test-detection.md) under `test.metrics` and, when the diff is a change, its ignore state and occurrence count under `change`. Use `--metrics-period` to set the window those metrics are computed over — `24h`, `3d`, `7d`, `30d`, or `90d` (defaults to `7d`):
+
+```bash
+argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --metrics-period 30d --json
+```
+
+A change with a high occurrence count or flakiness score is a strong flakiness signal — pass its `change.id` to [`argos change ignore`](#change-ignore) to silence it.
+
+### `change ignore`
+
+Ignore a flaky test change so its diffs stop requiring review and are automatically approved on future builds. This is the CLI equivalent of the **Ignore** button in a build review — see [Ignore changes](../learn/reliability-and-flakiness/flaky-test-detection.md#ignore-changes). Requires a [personal access token](#project-tokens-and-personal-access-tokens) with review permission on the project.
+
+The `<changeId>` comes from a diff's `change.id` in `argos build snapshots --json`. A change ID doesn't include the account, so pass the project with `--project owner/project` or the `ARGOS_PROJECT` environment variable:
+
+```bash
+argos change ignore <changeId> --project team/project
+```
+
+| Option                      | Description                                                                               |
+| --------------------------- | ----------------------------------------------------------------------------------------- |
+| `--project <owner/project>` | Project the change belongs to, in `owner/project` format. Also `ARGOS_PROJECT`. Required. |
+| `--metrics-period <period>` | Window for the returned occurrence count: `24h`, `3d`, `7d`, `30d`, or `90d`. Defaults to `7d`. |
+| `--token <token>`           | Personal access token. Also `ARGOS_TOKEN`.                                                |
+| `--json`                    | Output machine-readable JSON instead of human-readable text.                              |
+
+The ignore feature must be enabled for the project (**Project Settings → Flaky detection**, on by default). Argos can also [ignore recurring flaky changes automatically](../learn/reliability-and-flakiness/flaky-test-detection.md#automatically-ignore-recurring-flaky-changes).
+
+### `change unignore`
+
+Stop ignoring a test change so its diffs require review again on future builds. It takes the same argument and options as `change ignore`:
+
+```bash
+argos change unignore <changeId> --project team/project
+```
 
 ### `review create`
 
@@ -265,6 +298,32 @@ Create a new project in an account you administer. Pass the account with `--acco
 ```bash
 argos create-project my-new-project --account my-team
 ```
+
+### `analytics`
+
+Fetch build and screenshot metrics for an account. Requires a [personal access token](#project-tokens-and-personal-access-tokens) scoped to the account. Pass the account with `--account <slug>` or the `ARGOS_ACCOUNT` environment variable:
+
+```bash
+argos analytics --account my-team
+```
+
+| Option                | Description                                                                          |
+| --------------------- | ------------------------------------------------------------------------------------ |
+| `--account <slug>`    | Account (personal or team) to fetch analytics for. Also `ARGOS_ACCOUNT`. Required.   |
+| `--from <datetime>`   | Start of the period, as an ISO 8601 datetime. Defaults to 30 days ago. The range cannot exceed 365 days. |
+| `--to <datetime>`     | End of the period, as an ISO 8601 datetime. Defaults to now.                         |
+| `--group-by <period>` | Group each series data point by `day`, `week`, or `month`. Defaults to `day`.        |
+| `--project <name>`    | Filter by project name. Repeat the flag to include multiple projects.                |
+| `--token <token>`     | Personal access token. Also `ARGOS_TOKEN`.                                           |
+| `--json`              | Output machine-readable JSON instead of human-readable text.                         |
+
+The response reports totals and a per-period series for both screenshots and builds (including how many builds detected changes and how many were accepted or rejected), broken down by project. Use `--json` when another tool needs to parse the result:
+
+```bash
+argos analytics --account my-team --from 2026-01-01 --group-by month --json
+```
+
+See [Analytics](../learn/account-and-access/analytics.md) for the dashboard view of these metrics.
 
 ### `help`
 
