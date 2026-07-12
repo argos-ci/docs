@@ -198,7 +198,40 @@ Add `--needs-review` to only return snapshots that need a review decision:
 argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --needs-review --json
 ```
 
-Each snapshot diff includes the status, score, diff mask URL, baseline file, current file, and metadata provided by the SDK.
+Each snapshot diff includes the status, score, diff mask URL, baseline file, current file, and metadata provided by the SDK. When a diff belongs to a tracked test, it also carries that test's [flakiness metrics](../learn/reliability-and-flakiness/flaky-test-detection.md) under `test.metrics` and, when the diff is a change, its ignore state and occurrence count under `change`. Use `--metrics-period` to set the window those metrics are computed over — `24h`, `3d`, `7d`, `30d`, or `90d` (defaults to `7d`):
+
+```bash
+argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --metrics-period 30d --json
+```
+
+A change with a high occurrence count or flakiness score is a strong flakiness signal — pass its `change.id` to [`argos change ignore`](#change-ignore) to silence it.
+
+### `change ignore`
+
+Ignore a flaky test change so its diffs stop requiring review and are automatically approved on future builds. This is the CLI equivalent of the **Ignore** button in a build review — see [Ignore changes](../learn/reliability-and-flakiness/flaky-test-detection.md#ignore-changes). Requires a [personal access token](#project-tokens-and-personal-access-tokens) with review permission on the project.
+
+The `<changeId>` comes from a diff's `change.id` in `argos build snapshots --json`. A change ID doesn't include the account, so pass the project with `--project owner/project` or the `ARGOS_PROJECT` environment variable:
+
+```bash
+argos change ignore <changeId> --project team/project
+```
+
+| Option                      | Description                                                                               |
+| --------------------------- | ----------------------------------------------------------------------------------------- |
+| `--project <owner/project>` | Project the change belongs to, in `owner/project` format. Also `ARGOS_PROJECT`. Required. |
+| `--metrics-period <period>` | Window for the returned occurrence count: `24h`, `3d`, `7d`, `30d`, or `90d`. Defaults to `7d`. |
+| `--token <token>`           | Personal access token. Also `ARGOS_TOKEN`.                                                |
+| `--json`                    | Output machine-readable JSON instead of human-readable text.                              |
+
+The ignore feature must be enabled for the project (**Project Settings → Flaky detection**, on by default). Argos can also [ignore recurring flaky changes automatically](../learn/reliability-and-flakiness/flaky-test-detection.md#automatically-ignore-recurring-flaky-changes).
+
+### `change unignore`
+
+Stop ignoring a test change so its diffs require review again on future builds. It takes the same argument and options as `change ignore`:
+
+```bash
+argos change unignore <changeId> --project team/project
+```
 
 ### `review create`
 
