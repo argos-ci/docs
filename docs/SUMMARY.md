@@ -80,6 +80,13 @@
   * [Usage & spend management](learn/billing-and-subscription/spend-management.md)
   * [Open source](learn/billing-and-subscription/open-source.md)
 
+## Agents
+
+* [Overview](agents/README.md)
+* [MCP server](agents/mcp-server.md)
+* [Agent skills](agents/agent-skills.md)
+* [AI-ready docs](agents/ai-ready-docs.md)
+
 ## Reference
 
 * [Playwright](sdks-reference/playwright.md)
@@ -89,7 +96,6 @@
 * [WebdriverIO](sdks-reference/webdriverio.md)
 * [Puppeteer](sdks-reference/puppeteer.md)
 * [CLI](sdks-reference/argos-command-line-interface-cli.md)
-* [MCP server](sdks-reference/argos-mcp.md)
 * [Node.js SDK](sdks-reference/node.js-sdk.md)
 * [Screenshot metadata](sdks-reference/screenshot-metadata.md)
 

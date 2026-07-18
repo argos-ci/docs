@@ -12,7 +12,7 @@ By default, ask the agent to summarize the visual changes first. If you want it 
 
 * A pull request with an Argos build.
 * The [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md).
-* The Argos agent skills, when your assistant supports skills.
+* The [Argos agent skills](../../agents/agent-skills.md), when your assistant supports skills.
 * An Argos project token to read build data with `build get` and `build snapshots`.
 * A user token to create a build review, only if you want the agent to approve or request changes.
 
