@@ -89,6 +89,7 @@
 * [WebdriverIO](sdks-reference/webdriverio.md)
 * [Puppeteer](sdks-reference/puppeteer.md)
 * [CLI](sdks-reference/argos-command-line-interface-cli.md)
+* [MCP server](sdks-reference/argos-mcp.md)
 * [Node.js SDK](sdks-reference/node.js-sdk.md)
 * [Screenshot metadata](sdks-reference/screenshot-metadata.md)
 
