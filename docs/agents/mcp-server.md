@@ -29,14 +29,7 @@ The server implements the latest [MCP Authorization](https://modelcontextprotoco
 
 Tools are generated directly from the [Argos REST API](https://argos-ci.com/docs/api-reference): every API operation that a user can call is exposed as an MCP tool with the same name, parameters, and permissions. When the API gains an endpoint, the MCP server gains the matching tool.
 
-| Category  | Tools                                                                                                                                                                                                                                  |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Builds    | `listBuilds`, `getBuild`, `listBuildDiffs`, `ignoreChange`, `unignoreChange`                                                                                                                                                           |
-| Reviews   | `createReview`, `listReviews`, `dismissReview`                                                                                                                                                                                         |
-| Comments  | `listComments`, `createComment`, `getComment`, `updateComment`, `deleteComment`, `addCommentReaction`, `removeCommentReaction`, `resolveCommentThread`, `unresolveCommentThread`, `subscribeCommentThread`, `unsubscribeCommentThread` |
-| Projects  | `getProject`, `createProject`                                                                                                                                                                                                          |
-| Analytics | `getAccountAnalytics`                                                                                                                                                                                                                  |
-| Users     | `getMe`                                                                                                                                                                                                                                |
+Agents can list builds and inspect their screenshot diffs, approve or reject changes, read and post comments, manage projects, and retrieve account analytics. Ask your client to list the server's tools, or see the [API reference](https://argos-ci.com/docs/api-reference) for the underlying operations.
 
 ## Authentication
 
