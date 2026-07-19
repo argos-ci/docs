@@ -80,6 +80,13 @@
   * [Usage & spend management](learn/billing-and-subscription/spend-management.md)
   * [Open source](learn/billing-and-subscription/open-source.md)
 
+## Agents
+
+* [Overview](agents/README.md)
+* [MCP server](agents/mcp-server.md)
+* [Agent skills](agents/agent-skills.md)
+* [AI-ready docs](agents/ai-ready-docs.md)
+
 ## Reference
 
 * [Playwright](sdks-reference/playwright.md)
