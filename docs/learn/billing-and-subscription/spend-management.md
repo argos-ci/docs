@@ -13,7 +13,7 @@ Argos bills on screenshot usage, so keeping an eye on it is how you keep costs u
 Argos counts every screenshot registered in a build during the billing period. A few rules worth knowing:
 
 * **Unchanged screenshots count.** Every screenshot in a build counts toward your quota, whether or not it differs from the baseline — comparing is the work Argos does on each one.
-* **Storage is deduplicated, usage is not.** Files are stored by content hash, so an identical screenshot is uploaded and stored only once — re-uploads are fast. But each screenshot in each build still counts toward usage, even when it is byte-identical to a previous one.
+* **Identical screenshots are not deduplicated.** Each screenshot in each build counts toward usage, even when it is identical to one uploaded in a previous build.
 * **Failed builds count.** Screenshots count once their upload completes, including builds whose test suite failed or that errored during comparison. A build that never finishes uploading contributes nothing.
 
 ### Monitor your usage
