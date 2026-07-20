@@ -25,7 +25,7 @@ It integrates with popular AI assistants like Claude, enabling them to:
 - Read and post comments on builds
 - Retrieve project metadata and account analytics
 
-The server implements the latest [MCP Authorization](https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization) and [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#streamable-http) specifications.
+The server is remote and uses the **streamable HTTP** transport — there is no package to install or process to run locally. Configure your client with the transport `http` (sometimes labeled `streamable-http`) and the URL above. It implements the latest [MCP Authorization](https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization) and [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#streamable-http) specifications.
 
 ## Available tools
 
