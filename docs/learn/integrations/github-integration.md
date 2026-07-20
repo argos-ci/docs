@@ -28,6 +28,17 @@ Argos reports results as [commit statuses](https://docs.github.com/en/pull-reque
 
 Use these exact context names when you configure [required status checks](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches#require-status-checks-before-merging) in branch protection.
 
+#### Which commit receives the status
+
+On GitHub Actions `pull_request` events, `GITHUB_SHA` points to an ephemeral merge commit, not to your branch's head. Argos records that merge commit as the build commit — what you tested is the merged result — but detects the pull request from the event payload and **posts the status on the pull request's head commit**, so the check shows up on your PR as expected.
+
+Two special cases:
+
+* On `pull_request_target` events, `GITHUB_SHA` points to the base branch, so Argos uses the pull request head commit as the build commit instead.
+* Outside a pull request (a push to a branch), the status is posted on the commit the screenshots were captured from.
+
+To override detection — for example in a custom pipeline — set the `ARGOS_COMMIT` (full 40-character SHA) and `ARGOS_BRANCH` environment variables.
+
 ### Choose your access level
 
 * **Full access (recommended)** — Required for Merge Queue and baseline selection based on commit history.
