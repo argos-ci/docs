@@ -29,6 +29,12 @@ Use Argos when visual changes affect product quality or release confidence:
 * **Product variants**: Validate white-labeled interfaces, translations, and localized layouts.
 * **AI-generated UI**: Visually validate generated changes before merging them.
 
+### Open source and self-hosting
+
+Argos is open source: the whole platform — backend, frontend, and the screenshot comparison engine — is developed in the open in the MIT-licensed [argos-ci/argos](https://github.com/argos-ci/argos) repository. There is no closed-source component behind the diff service.
+
+Argos is operated as a managed cloud service, and that is the supported way to run it. Self-hosting is not officially supported or documented: the production setup targets AWS and depends on PostgreSQL, RabbitMQ, Redis, S3, and DynamoDB, plus integrations such as the GitHub App and Stripe — you would be on your own to deploy and operate them. If your organization has strict hosting or compliance requirements, [contact us](https://argos-ci.com/contact) about the Enterprise plan.
+
 ### Get started
 
 Ready to add Argos to your project? Pick your framework in the [Quickstart](quickstart/README.md) — you'll upload your first build and see it on a pull request in a few minutes.
