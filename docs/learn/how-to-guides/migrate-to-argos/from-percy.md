@@ -246,6 +246,14 @@ No. The Argos reporter uploads screenshots as part of your normal test run when 
 
 <details>
 
+<summary>How does pull request feedback differ from Percy?</summary>
+
+Percy reports results through a GitHub status check that links to its dashboard. Argos posts a [commit status](../../integrations/github-integration.md#commit-status-names) too, and additionally a [pull request comment](../../review-workflow/pull-request-comments.md) summarizing the build — screenshots changed, ignored, and links to the review. During the review itself, Argos supports [comments pinned to the exact pixel or line that changed](../../review-workflow/review-a-build.md#comment-on-exactly-what-changed), with threads, mentions, and reactions — feedback lives on the snapshot, not in a separate tool.
+
+</details>
+
+<details>
+
 <summary>Is Argos open-source friendly?</summary>
 
 Yes. Argos has a [free plan for open-source projects](../../billing-and-subscription/open-source.md).
