@@ -17,6 +17,15 @@ Both tools catch visual regressions on every pull request, but the capture model
 
 The practical upshot: with Argos, what you see in your test is exactly what gets diffed, and there is no separate rendering configuration to maintain. Baselines are selected automatically from your [Git history](../../platform-fundamentals/baseline-build.md) — there is no equivalent of managing them per branch in a dashboard.
 
+### Why teams switch
+
+Beyond the capture model, the reasons teams pick Argos over Percy:
+
+* **Review where you work** — a [pull request comment](../../review-workflow/pull-request-comments.md) summarizes every build, and reviews support [comments pinned to the exact pixel that changed](../../review-workflow/review-a-build.md#comment-on-exactly-what-changed), threads, and real-time collaboration.
+* **Flakiness under control** — [flaky test detection](../../reliability-and-flakiness/flaky-test-detection.md) scores unstable tests, and recurring flaky changes can be ignored once or [auto-ignored](../../reliability-and-flakiness/flaky-test-detection.md#automatically-ignore-recurring-flaky-changes).
+* **Built for agents** — an [MCP server](../../../agents/mcp-server.md), a scriptable [CLI](../../../sdks-reference/argos-command-line-interface-cli.md), and [AI agent skills](../../review-workflow/review-builds-with-ai-agents.md) let AI tools review builds with you.
+* **Open source** — the whole platform, diff engine included, is MIT-licensed on [GitHub](https://github.com/argos-ci/argos).
+
 ### Concept mapping
 
 | Percy                                   | Argos                                                                    |
