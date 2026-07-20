@@ -116,9 +116,21 @@ Use `--project <slug>` to set the Argos project slug (`account/project-name`). T
 argos upload ./screenshots --project my-account/my-project
 ```
 
-#### Debug mode
+#### Override Git detection
 
-Enable debug logging by setting the `DEBUG` environment variable:
+`argos upload` detects the commit, branch, and pull request from your CI environment — or from the local Git repository when running outside CI. To override detection, set these environment variables (there are no flag equivalents):
+
+| Environment variable  | Description                                                                          |
+| --------------------- | ------------------------------------------------------------------------------------ |
+| `ARGOS_COMMIT`        | Commit SHA of the build. Must be a full 40-character SHA — short SHAs are rejected. |
+| `ARGOS_BRANCH`        | Branch of the build.                                                                 |
+| `ARGOS_PR_NUMBER`     | Number of the pull request associated with the build.                                |
+| `ARGOS_PR_HEAD_COMMIT`| Head commit of the pull request.                                                     |
+| `ARGOS_PR_BASE_BRANCH`| Base branch of the pull request.                                                     |
+
+In a non-Git environment, `ARGOS_COMMIT` and `ARGOS_BRANCH` are required — without them the upload fails with "Argos requires a branch and a commit to be set".
+
+To find the [baseline](../learn/platform-fundamentals/baseline-build.md), Argos resolves ancestor commits. When your project is connected to GitHub or GitLab, this happens server-side. Otherwise the CLI fetches history from the `origin` remote — in a repository without `origin` (for example a local mirror), it falls back to the local history, so make sure enough history is available locally, or pin the baseline explicitly with `--reference-commit` and `--reference-branch`. Parent commits are always computed automatically and cannot be set manually.
 
 ```bash
 DEBUG=@argos-ci/core argos upload ./screenshots
