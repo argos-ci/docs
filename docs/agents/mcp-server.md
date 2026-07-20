@@ -8,6 +8,8 @@ description: >-
 
 Connect your AI tools to Argos using the [Model Context Protocol (MCP)](https://modelcontextprotocol.io), an open standard that lets AI assistants interact with your Argos projects.
 
+MCP defines a common way for an AI assistant to discover the tools a service exposes and call them on your behalf. Instead of a bespoke plugin for each assistant, a service publishes one MCP server, and every MCP-compatible client — Claude, Cursor, VS Code, and others — can use it.
+
 ## What is the Argos MCP server?
 
 The Argos MCP server is the official remote MCP server for Argos, available at:
