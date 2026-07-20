@@ -23,6 +23,35 @@ You can open a build from several places:
 
 The build page shows each screenshot with its **baseline** (the reference) next to the **changes** (the new screenshot), and highlights the visual diff between them. See [How Argos detects visual differences](../platform-fundamentals/how-argos-detects-visual-differences.md) for how the diff is computed, and use [Tags](tags.md) to filter the screenshot list down to what you care about.
 
+### Compare baseline and changes
+
+The diff viewer offers several ways to compare a snapshot:
+
+* **Split view** — baseline and changes side by side. This is the default.
+* **Single view** — one image at a time, switching between **Baseline** and **Changes**.
+* **Changes overlay** — changed pixels are highlighted with a red overlay. Toggle it on and off, and customize its color and opacity from the toolbar.
+* **Highlight and navigate changes** — flash the changed regions and jump from one to the next.
+* **Fit or expand** — fit the screenshot to the screen or inspect it at full size; zoom and pan stay in sync between the baseline and changes panes.
+* **ARIA view** — when a snapshot has an [ARIA snapshot](../how-to-guides/visual-coverage/adding-aria-snapshots-manually.md), switch between the screenshot and its accessibility tree.
+
+### Keyboard shortcuts
+
+Press `?` on a build page to see the full list of shortcuts. The ones you'll use most while reviewing:
+
+| Shortcut  | Action                                    |
+| --------- | ----------------------------------------- |
+| `↑` / `↓` | Go to the previous / next snapshot        |
+| `←` / `→` | Show only the baseline / only the changes |
+| `S`       | Toggle side-by-side view                  |
+| `D`       | Toggle the changes overlay                |
+| `H`       | Highlight the changed regions             |
+| `J` / `K` | Go to the previous / next change          |
+| `Space`   | Toggle fit to screen                      |
+| `Y` / `N` | Mark a change as accepted / rejected      |
+| `I`       | Ignore a flaky change                     |
+| `C`       | Toggle the comment tool                   |
+| `↵`       | Open the review popover                   |
+
 ### Request reviewers
 
 Use the **Reviewers** section in the build sidebar to request the people you want to weigh in.

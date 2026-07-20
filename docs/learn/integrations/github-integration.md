@@ -14,6 +14,31 @@ Connect Argos to GitHub for automated visual testing on every pull request and m
 
 This is why Argos asks for repository access: it reads commits to find merge bases, and writes statuses and comments to report results.
 
+### Commit status names
+
+Argos reports results as [commit statuses](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks) on the pull request's head commit, not as check runs. The status context depends on your setup:
+
+| Context                             | When it is used                                                                                              |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `argos`                             | The default — one Argos project on the repository, default build name.                                       |
+| `argos/<build-name>`                | The build has a custom name (for example `argos/e2e` with `--build-name e2e`), as in [monorepo setups](../how-to-guides/ci-pipelines/monorepos-setup.md). |
+| `argos/<project-name>`              | Several Argos projects share the same repository — the project name disambiguates them.                       |
+| `argos/<project-name>/<build-name>` | Several projects share the repository and the build has a custom name.                                        |
+| `argos/summary`                     | The [summary check](../review-workflow/summary-checks.md) that combines all Argos builds on a commit.         |
+
+Use these exact context names when you configure [required status checks](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches#require-status-checks-before-merging) in branch protection.
+
+#### Which commit receives the status
+
+On GitHub Actions `pull_request` events, `GITHUB_SHA` points to an ephemeral merge commit, not to your branch's head. Argos records that merge commit as the build commit — what you tested is the merged result — but detects the pull request from the event payload and **posts the status on the pull request's head commit**, so the check shows up on your PR as expected.
+
+Two special cases:
+
+* On `pull_request_target` events, `GITHUB_SHA` points to the base branch, so Argos uses the pull request head commit as the build commit instead.
+* Outside a pull request (a push to a branch), the status is posted on the commit the screenshots were captured from.
+
+To override detection — for example in a custom pipeline — set the `ARGOS_COMMIT` (full 40-character SHA) and `ARGOS_BRANCH` environment variables.
+
 ### Choose your access level
 
 * **Full access (recommended)** — Required for Merge Queue and baseline selection based on commit history.

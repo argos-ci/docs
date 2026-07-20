@@ -104,6 +104,8 @@ argos upload ./screenshots
 
 Each snapshot uploaded to Argos is limited to **50 MB**. This applies to every artifact type — a screenshot, a [non-image snapshot](#compare-non-image-files), or a [Playwright trace](playwright.md). Files larger than 50 MB are skipped and won't appear in your build.
 
+A build is also limited to **5,000 screenshots**. Beyond that, the upload is rejected with an error — use [parallel mode](../learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md) to split a larger test suite across several uploads.
+
 #### Compare non-image files
 
 Use `-f` or `--files` to upload text-based artifacts such as JSON, YAML, XML, HTML, Markdown, CSS, or JavaScript files. See [Compare non-image files](../learn/how-to-guides/visual-coverage/compare-non-image-files.md) for examples and the full list of supported content types.
@@ -116,9 +118,21 @@ Use `--project <slug>` to set the Argos project slug (`account/project-name`). T
 argos upload ./screenshots --project my-account/my-project
 ```
 
-#### Debug mode
+#### Override Git detection
 
-Enable debug logging by setting the `DEBUG` environment variable:
+`argos upload` detects the commit, branch, and pull request from your CI environment — or from the local Git repository when running outside CI. To override detection, set these environment variables (there are no flag equivalents):
+
+| Environment variable  | Description                                                                          |
+| --------------------- | ------------------------------------------------------------------------------------ |
+| `ARGOS_COMMIT`        | Commit SHA of the build. Must be a full 40-character SHA — short SHAs are rejected. |
+| `ARGOS_BRANCH`        | Branch of the build.                                                                 |
+| `ARGOS_PR_NUMBER`     | Number of the pull request associated with the build.                                |
+| `ARGOS_PR_HEAD_COMMIT`| Head commit of the pull request.                                                     |
+| `ARGOS_PR_BASE_BRANCH`| Base branch of the pull request.                                                     |
+
+In a non-Git environment, `ARGOS_COMMIT` and `ARGOS_BRANCH` are required — without them the upload fails with "Argos requires a branch and a commit to be set".
+
+To find the [baseline](../learn/platform-fundamentals/baseline-build.md), Argos resolves ancestor commits. When your project is connected to GitHub or GitLab, this happens server-side. Otherwise the CLI fetches history from the `origin` remote — in a repository without `origin` (for example a local mirror), it falls back to the local history, so make sure enough history is available locally, or pin the baseline explicitly with `--reference-commit` and `--reference-branch`. Parent commits are always computed automatically and cannot be set manually.
 
 ```bash
 DEBUG=@argos-ci/core argos upload ./screenshots

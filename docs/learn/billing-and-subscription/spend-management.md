@@ -8,6 +8,13 @@ description: >-
 
 Argos bills on screenshot usage, so keeping an eye on it is how you keep costs under control. This page covers where to find your usage, what happens when you reach your plan's limit, and how to cap spending with spend management.
 
+### How usage is counted
+
+Argos counts every screenshot registered in a build during the billing period. A few rules worth knowing:
+
+- **Unchanged screenshots count.** Every screenshot in a build counts toward your quota, whether or not it differs from the baseline — comparing is the work Argos does on each one.
+- **Failed builds count.** Screenshots count once their upload completes, including builds whose test suite failed or that errored during comparison. A build that never finishes uploading contributes nothing.
+
 ### Monitor your usage
 
 To see your team's usage details:
@@ -19,16 +26,16 @@ To see your team's usage details:
 
 The plan card breaks down your consumption:
 
-* **Private project**: Screenshots taken from private projects. These count toward your plan limit and are subject to charges.
-* **Public project**: Screenshots taken from open-source projects.
+- **Private project**: Screenshots taken from private projects. These count toward your plan limit and are subject to charges.
+- **Public project**: Screenshots taken from open-source projects.
 
 ### What happens at your plan's limit
 
 When you approach your plan's included screenshots, Argos alerts you. What happens when you exceed them depends on your plan:
 
-* **Hobby plan**: Uploads are paused until the next billing period. To keep uploading, upgrade to the [Pro plan](pricing-plans.md) — you can transfer your project to a newly created team.
-* **Pro plan (Stripe, usage-based)**: Extra screenshots are billed at the [per-screenshot rate](pricing-plans.md). Uploads continue uninterrupted — use [spend management](#manage-your-spend) to cap the extra cost.
-* **Pro plan (GitHub Marketplace, fixed size)**: Uploads are paused until the next billing period. To keep uploading, [upgrade your plan](https://github.com/marketplace/argos-ci) to a larger size (S, M, L, XL).
+- **Hobby plan**: Uploads are paused until the next billing period. To keep uploading, upgrade to the [Pro plan](pricing-plans.md) — you can transfer your project to a newly created team.
+- **Pro plan (Stripe, usage-based)**: Extra screenshots are billed at the [per-screenshot rate](pricing-plans.md). Uploads continue uninterrupted — use [spend management](#manage-your-spend) to cap the extra cost.
+- **Pro plan (GitHub Marketplace, fixed size)**: Uploads are paused until the next billing period. To keep uploading, [upgrade your plan](https://github.com/marketplace/argos-ci) to a larger size (S, M, L, XL).
 
 ### Manage your spend
 
@@ -38,8 +45,8 @@ Spend management is available on Pro and Enterprise plans with usage-based prici
 
 Spend management lets you act automatically when your team reaches a spend amount you set:
 
-* **Get notified** when you reach thresholds of your spend amount.
-* **Pause builds** on all your projects when the amount is reached.
+- **Get notified** when you reach thresholds of your spend amount.
+- **Pause builds** on all your projects when the amount is reached.
 
 The spend amount covers additional screenshots beyond your plan's included usage, across all projects on your team. It does not include separate **add-ons**, which Argos charges per billing period. The amount is set per billing cycle, and Argos checks your usage against it at every build.
 
@@ -53,12 +60,14 @@ To configure spend management, you need the **Owner** role on your team.
 
 {% stepper %}
 {% step %}
+
 ### Open your team's billing settings
 
 From the dashboard, select your team from the scope selector, then open the **Settings** tab and go to the **Billing** section.
 {% endstep %}
 
 {% step %}
+
 ### Enable Spend Management
 
 Scroll to **Spend Management** and enable the switch.
@@ -67,6 +76,7 @@ Scroll to **Spend Management** and enable the switch.
 {% endstep %}
 
 {% step %}
+
 ### Set your spend amount
 
 Enter the amount at which you want to be notified or take action. Setting the amount halfway through a billing cycle takes your current spend into account — if you set it below what you have already spent, the configured actions (including pausing projects) trigger immediately.

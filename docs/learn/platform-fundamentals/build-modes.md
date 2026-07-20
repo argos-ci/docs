@@ -93,6 +93,12 @@ If differences are found, Argos notifies you — enable [Slack notifications](..
 {% endstep %}
 {% endstepper %}
 
+#### Commit statuses in Monitoring mode
+
+Monitoring builds report to your Git provider exactly like CI builds: Argos posts a [commit status](../integrations/github-integration.md#commit-status-names) (`argos`, or `argos/<build-name>`) on the commit the screenshots were captured from — including on a pull request, if the commit belongs to one. When changes are detected, the status is **failure** with the description "waiting for your decision"; it turns to **success** once the build is approved.
+
+The difference with CI mode is auto-approval: a CI build on an auto-approved branch (such as your default branch, outside a pull request) passes automatically, while a monitoring build is never auto-approved — a detected change always waits for a review.
+
 #### When to use Monitoring mode
 
 * **Regular health checks**: Catch unexpected changes on a schedule when running CI on every change isn't practical.

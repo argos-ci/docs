@@ -6,6 +6,8 @@ description: >-
 
 # WebdriverIO
 
+[WebdriverIO](https://webdriver.io/) is a Node.js test automation framework for web and mobile applications, built on the WebDriver and WebDriver BiDi protocols. The `@argos-ci/webdriverio` SDK captures screenshots from your WebdriverIO tests so Argos can detect visual changes on every pull request.
+
 ### Get started
 
 Follow the [WebdriverIO Quickstart](../quickstart/webdriverio-quickstart.md) to set up Argos with WebdriverIO.

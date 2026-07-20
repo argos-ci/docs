@@ -25,3 +25,7 @@ Looking for how to sign in to Argos itself? See [Account & access](../account-an
 ### Notifications
 
 * [Slack integration](slack-integration.md) – Send build notifications to Slack channels with automations
+
+### Webhooks
+
+Argos does not offer user-configurable outgoing webhooks. To react to build events, use [Slack notifications](slack-integration.md), the commit statuses posted on your Git provider, or poll builds from the [REST API](https://argos-ci.com/docs/api-reference) or the [CLI](../../sdks-reference/argos-command-line-interface-cli.md#build-get). If webhooks would unblock your workflow, [tell us about your use case](https://argos-ci.com/contact).
