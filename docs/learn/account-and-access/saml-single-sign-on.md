@@ -5,7 +5,7 @@ description: Configure SAML single sign-on with providers like Okta or Auth0 to 
 # SAML single sign-on
 
 {% hint style="info" %}
-SAML is available on the [Enterprise](../billing-and-subscription/pricing-plans.md#enterprise-plan) plan.
+SAML SSO is a paid add-on ($200 / month) available to teams on a Stripe-based subscription. It is included in the [Enterprise](../billing-and-subscription/pricing-plans.md#enterprise-plan) plan.
 
 Only team members with the [owner role](team-members-and-roles.md#owner-role) can configure SAML SSO.
 {% endhint %}
@@ -15,6 +15,26 @@ To manage your [team members](team-members-and-roles.md) through a third-party i
 Once enabled, team members can authenticate with your configured identity provider, and new users signing in with SAML will be added to your team.
 
 ![The SAML SSO settings for a Team.](<../../.gitbook/assets/saml settings 4a875c027de3b7cc49da61c3b7cbfcbd.png>)
+
+### Enabling the add-on
+
+Unless your plan includes SAML SSO, enable it as an add-on first:
+
+{% stepper %}
+{% step %}
+Go to your team settings and open the **Billing** tab.
+{% endstep %}
+
+{% step %}
+In the **Add-ons** section, select **Enable** next to **SAML Single Sign-On**.
+{% endstep %}
+
+{% step %}
+Select **Confirm and Pay**. The feature is activated immediately.
+{% endstep %}
+{% endstepper %}
+
+The add-on appears as a "SAML SSO" line on your monthly invoice. You can disable it at any time from the **Add-ons** section; team members will then no longer be able to sign in with SAML.
 
 ### Configuring SAML SSO
 
@@ -68,26 +88,26 @@ When SAML SSO is enforced, team members must have an active SAML session to acce
 
 Argos supports the following SAML providers:
 
-* [Okta](https://www.okta.com/)
-* [Auth0](https://auth0.com/)
-* [Google](https://accounts.google.com/)
-* [Microsoft Entra (formerly Azure Active Directory)](https://www.microsoft.com/en-in/security/business/identity-access/microsoft-entra-single-sign-on)
-* [Microsoft ADFS](https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services)
-* [OneLogin](https://onelogin.com/)
-* [Duo](https://duo.com/product/single-sign-on-sso/)
-* [JumpCloud](https://jumpcloud.com/)
-* [PingFederate](https://www.pingidentity.com/en/platform/capabilities/single-sign-on.html)
-* [ADP](https://apps.adp.com/en-US/home)
-* [Keycloak](https://www.keycloak.org/)
-* [Cyberark](https://www.cyberark.com/products/single-sign-on/)
-* [OpenID](https://openid.net/)
-* [VMware](https://kb.vmware.com/s/article/2034918)
-* [LastPass](https://www.lastpass.com/)
-* [miniOrange](https://www.miniorange.com/products/single-sign-on-sso)
-* [NetIQ](https://www.microfocus.com/en-us/cyberres/identity-access-management/secure-login)
-* [Oracle Cloud](https://docs.oracle.com/en/cloud/paas/content-cloud/administer/enable-single-sign-sso.html)
-* [Salesforce](https://help.salesforce.com/s/articleView?id=sf.sso_about.htm\&type=5)
-* [CAS](https://www.apereo.org/projects/cas)
-* [ClassLink](https://www.classlink.com/)
-* [Cloudflare](https://developers.cloudflare.com/cloudflare-one/applications/configure-apps/dash-sso-apps/)
-* [SimpleSAMLphp](https://simplesamlphp.org/)
+- [Okta](https://www.okta.com/)
+- [Auth0](https://auth0.com/)
+- [Google](https://accounts.google.com/)
+- [Microsoft Entra (formerly Azure Active Directory)](https://www.microsoft.com/en-in/security/business/identity-access/microsoft-entra-single-sign-on)
+- [Microsoft ADFS](https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services)
+- [OneLogin](https://onelogin.com/)
+- [Duo](https://duo.com/product/single-sign-on-sso/)
+- [JumpCloud](https://jumpcloud.com/)
+- [PingFederate](https://www.pingidentity.com/en/platform/capabilities/single-sign-on.html)
+- [ADP](https://apps.adp.com/en-US/home)
+- [Keycloak](https://www.keycloak.org/)
+- [Cyberark](https://www.cyberark.com/products/single-sign-on/)
+- [OpenID](https://openid.net/)
+- [VMware](https://kb.vmware.com/s/article/2034918)
+- [LastPass](https://www.lastpass.com/)
+- [miniOrange](https://www.miniorange.com/products/single-sign-on-sso)
+- [NetIQ](https://www.microfocus.com/en-us/cyberres/identity-access-management/secure-login)
+- [Oracle Cloud](https://docs.oracle.com/en/cloud/paas/content-cloud/administer/enable-single-sign-sso.html)
+- [Salesforce](https://help.salesforce.com/s/articleView?id=sf.sso_about.htm&type=5)
+- [CAS](https://www.apereo.org/projects/cas)
+- [ClassLink](https://www.classlink.com/)
+- [Cloudflare](https://developers.cloudflare.com/cloudflare-one/applications/configure-apps/dash-sso-apps/)
+- [SimpleSAMLphp](https://simplesamlphp.org/)

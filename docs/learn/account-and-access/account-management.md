@@ -22,7 +22,7 @@ To manage login connections:
 
 #### Logging in with SAML Single Sign-On (SSO)
 
-SAML SSO allows Enterprise users to log in with their organization’s identity provider.
+SAML SSO allows team members to log in with their organization’s identity provider.
 
 For setup and login instructions, see [SAML Single Sign-On](saml-single-sign-on.md).
 
@@ -132,8 +132,8 @@ Your primary email is used for Argos notifications.
 
 To change it:
 
-* Add and verify a new email.
-* Open the dot menu next to the address and choose **Set as Primary**.
+- Add and verify a new email.
+- Open the dot menu next to the address and choose **Set as Primary**.
 
 ![Setting your primary email address.](<../../.gitbook/assets/set email as primary 8aa94036efe6d5e3efd5a3c1b77f6504.png>)
 
@@ -155,12 +155,14 @@ it means the provider account you are trying to connect is already associated wi
 
 {% stepper %}
 {% step %}
+
 ### Log out of Argos
 
 Select your avatar in the top-right corner, then select **Log out**.
 {% endstep %}
 
 {% step %}
+
 ### Log back in with your provider
 
 From the login page, choose **Continue with&#x20;**_**GitHub|GitLab|Google**_.
@@ -169,6 +171,7 @@ This will sign you into the Argos account that currently owns your provider link
 {% endstep %}
 
 {% step %}
+
 ### Disconnect or delete the account
 
 Once logged in, select your avatar in the top-right corner, choose **Settings**.
@@ -181,12 +184,14 @@ Alternatively, if the account is no longer needed, you can delete it entirely fr
 {% endstep %}
 
 {% step %}
+
 ### Log out again
 
 Return to the login page.
 {% endstep %}
 
 {% step %}
+
 ### Reconnect with the right account
 
 Log back in with the account you want to use.
