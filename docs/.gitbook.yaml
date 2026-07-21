@@ -17,3 +17,109 @@ redirects:
   learn/integrations/bitbucket-integration: ./learn/integrations/other-git-providers.md
   learn/integrations/azure-devops-integration: ./learn/integrations/other-git-providers.md
   learn/how-to-guides/visual-coverage/adding-screenshot-metadata: ./sdks-reference/screenshot-metadata.md
+
+  # Quickstart (framework pages renamed / moved)
+  quickstart/storybook-test-runner: ./quickstart/storybook-quickstart/storybook-test-runner-quickstart.md
+  quickstart/storybook: ./quickstart/storybook-quickstart/README.md
+  quickstart/storybook-legacy: ./quickstart/storybook-quickstart/storybook-legacy-less-than-v8-quickstart.md
+  quickstart/legacy-storybook: ./quickstart/storybook-quickstart/storybook-legacy-less-than-v8-quickstart.md
+  quickstart/playwright: ./quickstart/playwright-quickstart.md
+  quickstart/puppeteer: ./quickstart/puppeteer-quickstart.md
+  quickstart/webdriverio: ./quickstart/webdriverio-quickstart.md
+  quickstart/cypress: ./quickstart/cypress-quickstart.md
+  quickstart/with-any-e2e-tool: ./quickstart/any-test-framework.md
+  quickstart/react-router: ./quickstart/any-test-framework.md
+  other-framework: ./quickstart/any-test-framework.md
+  getting-started: ./quickstart/README.md
+  installation: ./quickstart/README.md
+
+  # Test frameworks covered by the generic guide
+  test-cafe: ./quickstart/any-test-framework.md
+  selenium: ./quickstart/any-test-framework.md
+  nightwatch: ./quickstart/any-test-framework.md
+  capybara: ./quickstart/any-test-framework.md
+  webdriver-io: ./sdks-reference/webdriverio.md
+
+  # CLI & SDK reference
+  argos-cli: ./sdks-reference/argos-command-line-interface-cli.md
+  guides/argos-cli: ./sdks-reference/argos-command-line-interface-cli.md
+  screenshot-metadata: ./sdks-reference/screenshot-metadata.md
+  node: ./sdks-reference/node.js-sdk.md
+  node-sdk: ./sdks-reference/node.js-sdk.md
+
+  # Integrations
+  github: ./learn/integrations/github-integration.md
+  github-actions: ./learn/integrations/github-actions-authentication.md
+  github-tokenless: ./learn/integrations/github-actions-authentication.md
+  github-oidc: ./learn/integrations/github-actions-authentication.md
+  gitlab: ./learn/integrations/gitlab-integration.md
+  gitlab-ci: ./learn/integrations/gitlab-integration.md
+  gitlab-self-managed: ./learn/integrations/other-git-providers.md
+  azure-devops: ./learn/integrations/other-git-providers.md
+  bitbucket-server: ./learn/integrations/other-git-providers.md
+  github-enterprise: ./learn/integrations/other-git-providers.md
+  slack: ./learn/integrations/slack-integration.md
+  slack-notifications: ./learn/integrations/slack-integration.md
+  category/git-providers: ./learn/integrations/README.md
+  category/integration-guides: ./learn/integrations/README.md
+
+  # CI pipelines (per-provider pages consolidated)
+  run-on-preview-deployment: ./learn/how-to-guides/ci-pipelines/run-on-preview-deployments.md
+  guides/skip-build: ./learn/how-to-guides/ci-pipelines/skipping-a-build.md
+  skip-build: ./learn/how-to-guides/ci-pipelines/skipping-a-build.md
+  build-splitting: ./learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md
+  parallel-testing: ./learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md
+  circle-ci: ./learn/how-to-guides/ci-pipelines/README.md
+  buildkite: ./learn/how-to-guides/ci-pipelines/README.md
+  codeship: ./learn/how-to-guides/ci-pipelines/README.md
+  semaphore-ci: ./learn/how-to-guides/ci-pipelines/README.md
+  semaphore: ./learn/how-to-guides/ci-pipelines/README.md
+  drone-ci: ./learn/how-to-guides/ci-pipelines/README.md
+  travis-ci: ./learn/how-to-guides/ci-pipelines/README.md
+  other-ci: ./learn/how-to-guides/ci-pipelines/README.md
+  configure-ci: ./learn/how-to-guides/ci-pipelines/README.md
+  category/ci-guides: ./learn/how-to-guides/ci-pipelines/README.md
+
+  # Visual coverage
+  screenshot-pages-script: ./learn/how-to-guides/visual-coverage/capture-screenshots-from-urls.md
+  capture-screenshots: ./learn/how-to-guides/visual-coverage/capture-screenshots-from-urls.md
+  upload-screenshots: ./learn/how-to-guides/visual-coverage/capture-screenshots-from-urls.md
+  screenshots-stabilization/style-injection: ./learn/how-to-guides/visual-coverage/injecting-css.md
+  style-injection: ./learn/how-to-guides/visual-coverage/injecting-css.md
+  code-injection: ./learn/how-to-guides/visual-coverage/injecting-css.md
+  css-preflight: ./learn/how-to-guides/visual-coverage/injecting-css.md
+  manual-aria-snapshots: ./learn/how-to-guides/visual-coverage/adding-aria-snapshots-manually.md
+  viewports: ./learn/how-to-guides/visual-coverage/responsive-viewports.md
+
+  # Reliability & flakiness
+  date-stabilization: ./learn/reliability-and-flakiness/flaky-tests/stabilize-date-and-time.md
+  data-stabilization: ./learn/reliability-and-flakiness/flaky-tests/stabilize-date-and-time.md
+  screenshots-stabilization/data-stabilization: ./learn/reliability-and-flakiness/flaky-tests/stabilize-date-and-time.md
+  borders-radius: ./learn/reliability-and-flakiness/flaky-tests/browser-glitches.md
+  about-flaky: ./learn/reliability-and-flakiness/flaky-tests/README.md
+  screenshots-stabilization: ./learn/reliability-and-flakiness/flaky-tests/README.md
+  screenshots-stabilization/about-flaky: ./learn/reliability-and-flakiness/flaky-tests/README.md
+
+  # Platform fundamentals
+  monitoring-mode: ./learn/platform-fundamentals/build-modes.md
+  diff-algorithm: ./learn/platform-fundamentals/how-argos-detects-visual-differences.md
+
+  # Account & access
+  saml-sso: ./learn/account-and-access/saml-single-sign-on.md
+  github-sso: ./learn/account-and-access/github-single-sign-on.md
+  account: ./learn/account-and-access/README.md
+
+  # Billing & subscription
+  usage: ./learn/billing-and-subscription/spend-management.md
+  subscription: ./learn/billing-and-subscription/README.md
+
+  # Deployments
+  deployments/environments: ./learn/deployments/environments.md
+
+  # Legacy intro / marketing URLs
+  introduction: ./README.md
+  about-argos-ci: ./README.md
+  why-argos: ./README.md
+  visual-testing: ./README.md
+  visual-testing-routine: ./README.md
+  category: ./README.md
