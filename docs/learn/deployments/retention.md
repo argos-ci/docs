@@ -27,8 +27,6 @@ So from a reviewer's point of view, a new deploy on the same branch effectively 
 
 Individual deployments can't be deleted, the same way [builds are immutable records](../review-workflow/builds-list.md#faq). There's no bulk-delete and nothing you need to clear out: deployments don't age, and they don't count toward your [screenshot quota](../billing-and-subscription/pricing-plans.md) (that quota applies to visual testing, not deployments).
 
-Repeated deploys are also cheap to keep. Argos stores each file once by content hash, so re-deploying a build that's mostly unchanged uploads only the files that actually differ—accumulating many similar deployments adds little storage.
-
 If you ever need to remove every deployment for a project, delete the project from **Settings → General**. This removes the project entirely, including its builds and deployments, and can't be undone.
 
 ### Choosing a deploy cadence
@@ -63,7 +61,7 @@ No. Every deploy creates a new immutable deployment. The branch URL and producti
 
 <summary>Do I have to bulk-delete old deployments to clear them out?</summary>
 
-No. There's nothing to clean up—deployments don't age out, don't count toward your screenshot quota, and are stored deduplicated by content hash. Individual deployments can't be deleted; the only way to remove them all is to delete the project.
+No. There's nothing to clean up—deployments don't age out and don't count toward your screenshot quota. Individual deployments can't be deleted; the only way to remove them all is to delete the project.
 
 </details>
 
