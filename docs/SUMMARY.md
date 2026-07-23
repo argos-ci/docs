@@ -41,6 +41,7 @@
   * [Environments](learn/deployments/environments.md)
   * [URLs and domains](learn/deployments/urls-and-domains.md)
   * [Access protection](learn/deployments/access-protection.md)
+  * [Lifecycle and retention](learn/deployments/retention.md)
 * [How-to guides](learn/how-to-guides/README.md)
   * [CI pipelines](learn/how-to-guides/ci-pipelines/README.md)
     * [Parallel testing (sharding)](learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md)

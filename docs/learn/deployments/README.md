@@ -158,3 +158,4 @@ You can find the project token in **Settings → General → Token**. On GitHub 
 * [**URLs and domains**](urls-and-domains.md) — The URLs Argos generates for each deployment, and how to set the production domain.
 * [**Access protection**](access-protection.md) — Restrict who can open deployment URLs.
 * [**Use in CI**](use-deployments-in-ci.md) — Deploy automatically on every pull request with GitHub Actions.
+* [**Lifecycle and retention**](retention.md) — How long deployments last, why they can't be overwritten, and how to pick a deploy cadence.
