@@ -28,6 +28,13 @@ import { createArgosReporterOptions } from "@argos-ci/playwright/reporter";
 export default defineConfig({
   // ... other configurations
 
+  use: {
+    // Stabilize text rendering so screenshots match across macOS and CI.
+    launchOptions: {
+      args: ["--disable-lcd-text", "--font-render-hinting=none"],
+    },
+  },
+
   // Setup Argos reporter to send screenshots and traces to Argos.
   reporter: [
     // Use "dot" reporter on CI, "list" otherwise (Playwright default).
@@ -43,6 +50,10 @@ export default defineConfig({
 });
 ```
 {% endcode %}
+
+{% hint style="success" %}
+The `launchOptions` above disable subpixel text and font hinting, so glyphs render identically on your machine and on CI. This prevents one of the most common causes of flaky screenshots. The Argos reporter warns you at startup if these flags are missing from a Chromium project — learn why in [Stabilize text rendering](../learn/reliability-and-flakiness/flaky-tests/stabilize-text-rendering.md).
+{% endhint %}
 
 And use `argosScreenshot` helper to capture stable screenshots in your E2E tests:
 
