@@ -51,10 +51,12 @@ In Teams, hover the channel you want to notify, open its **More options** menu, 
 
 #### Choose the right template
 
-Search for `webhook` and select **Post to a channel when a webhook request is received**.
+Search for `webhook` and select **Send webhook alerts to a channel**.
+
+![The four webhook templates offered by Workflows](../../.gitbook/assets/msteams-webhook-templates.png)
 
 {% hint style="warning" %}
-Several similar templates exist, and picking the wrong one breaks every notification. Do **not** use the "from specific people" or "from anyone in an organization" variants: they authenticate the caller through Microsoft Entra ID, and Argos posts server-to-server without a user identity.
+Four similar templates exist, and picking the wrong one breaks every notification. Do **not** use **Send webhook alerts from specific people to a channel** or **Send webhook alerts from people in an org to a channel**: they authenticate the caller through Microsoft Entra ID, and Argos posts server-to-server without a user identity. **Send webhook alerts to a chat** targets a chat instead of a channel.
 {% endhint %}
 {% endstep %}
 
