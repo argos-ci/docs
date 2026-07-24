@@ -18,6 +18,10 @@ The Microsoft Teams integration is configured at team level and is available on 
 - Fine-grained control over notifications using automation conditions.
 - Notifications rendered as adaptive cards, with the build status, project, screenshot counts, commit, branch, and a direct link to the build.
 
+![Microsoft Teams notification sent by Argos](../../.gitbook/assets/msteams-notification-example.png)
+
+_Example of a Microsoft Teams notification sent by Argos_
+
 ### How it works
 
 Unlike Slack, Argos does not install an app in your Microsoft 365 tenant. You create a **Workflows** flow in Teams that listens for an incoming webhook, and paste the URL it gives you into Argos. Argos then posts adaptive cards to that URL.
@@ -39,6 +43,8 @@ Microsoft Teams for personal use (`teams.live.com`) does not support Workflows. 
 #### Open the Workflows dialog
 
 In Teams, hover the channel you want to notify, open its **More options** menu, and select **Workflows**.
+
+![Opening Workflows from a channel menu](../../.gitbook/assets/msteams-channel-workflows-menu.png)
 {% endstep %}
 
 {% step %}
