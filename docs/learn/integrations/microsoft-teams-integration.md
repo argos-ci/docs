@@ -79,6 +79,8 @@ The URL looks like `https://<tenant>.<region>.environment.api.powerplatform.com/
 
 {% hint style="warning" %}
 The webhook URL contains an access signature. Anyone holding it can post messages to that channel. Treat it like a secret and avoid sharing it in tickets or chat.
+
+Argos lists each connected channel with its webhook URL underneath, so you can tell two flows apart. Only team admins see the whole URL; for everybody else the signature is masked as `***`.
 {% endhint %}
 
 ### Connect the channel to your team
@@ -104,7 +106,9 @@ The name is only a label: a webhook URL never reveals which channel it points to
 
 #### Send a test message
 
-Select the send icon next to the channel to post a confirmation card. If it arrives in Teams, the connection works.
+Open the channel's actions menu (**⋯**) and select **Send a test message** to post a confirmation card. If it arrives in Teams, the connection works.
+
+The same menu holds **Copy webhook URL** and **Remove channel**.
 {% endstep %}
 {% endstepper %}
 
@@ -119,15 +123,15 @@ Create a notification rule with Argos automations:
 5. (Optional) Under **IF**, add conditions such as "Build type is check".
 6. Under **THEN**, choose the action **Post in Microsoft Teams channel**. If no channel is connected yet, select **Connect Microsoft Teams** and follow the steps above.
 7. Select the channel to notify.
-8. Select **Send test notification** to verify the rule. A card built from your project's latest build is sent to the selected channel.
+8. Select **Send Test Notification** to verify the rule. A card built from your project's latest build is sent to the selected channel.
 9. Select **Create Rule** to activate it.
 
 ### Troubleshooting and tips
 
 - **"This does not look like a Microsoft Teams webhook URL".** Argos only accepts URLs served by Microsoft: `powerplatform.com`, `logic.azure.com`, and `webhook.office.com`. Copy the URL from the flow details page rather than retyping it.
-- **Nothing arrives in the channel.** Check that the flow is still **Active** in Teams. Deleting or disabling the flow silently stops delivery; use the send icon in Argos to surface the error.
+- **Nothing arrives in the channel.** Check that the flow is still **Active** in Teams. Deleting or disabling the flow silently stops delivery; use **Send a test message** in Argos to surface the error.
 - **Notifications stopped after a while.** The webhook signature can be rotated or revoked on the Microsoft side. Recreate the flow and replace the URL in Argos.
-- **Send test notification does nothing.** The automation form must be valid first, including the rule name.
-- Only Argos team admins can add or remove channels.
+- **Send Test Notification does nothing.** The automation form must be valid first, including the rule name.
+- Only Argos team admins can add, test, or remove channels.
 
 Need help setting up the Microsoft Teams integration? Reach out via [Discord](https://argos-ci.com/discord) or [contact support](https://argos-ci.com/contact).
