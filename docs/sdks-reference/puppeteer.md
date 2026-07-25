@@ -64,6 +64,7 @@ Screenshots are stored in `screenshots/argos` folder, relative to current direct
 * `options.argosCSS`: Specific CSS applied during the screenshot process. More on [injecting CSS](../learn/how-to-guides/visual-coverage/injecting-css.md)
 * `options.disableHover`: Disable hover effects by moving the mouse to the top-left corner of the page. Defaults to `true`.
 * `options.threshold`: Sensitivity threshold between 0 and 1. The higher the threshold, the less sensitive the diff will be. Defaults to `0.5`.
+* `options.baseName`: Name, or list of names, to compare this screenshot against instead of its own name. Useful to compare a variant against an existing screenshot. More on [fallback baselines](../learn/how-to-guides/visual-coverage/fallback-baselines.md).
 * `options.stabilize`: Wait for the UI to stabilize before taking the screenshot. Set to `false` to disable stabilization. Pass an object to customize the stabilization. Defaults to `true`.
 * `options.stabilize.disableSpellCheck`: Disable spell check before taking the screenshot. Defaults to `true`.
 * `options.stabilize.fontAntialiasing`: Force font antialiasing. Defaults to `true`.

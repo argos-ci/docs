@@ -185,13 +185,14 @@ Upload-time instructions consumed by the Argos CLI and SDKs. Unlike the other fi
 {
   "transient": {
     "threshold": 0.8,
+    "baseName": ["home-variant-b.png", "home.png"],
     "parentName": "folder/my-screenshot.png"
   }
 }
 ```
 
 * `threshold` (number?): Sensitivity threshold for this screenshot's comparison, between `0` and `1`.
-* `baseName` (string?): Override the name used to find the comparison baseline.
+* `baseName` (string | string\[]?): Name(s) used to find the comparison baseline, instead of the screenshot's own name. An array is tried in order and the first name found in the baseline wins, which lets a new screenshot fall back to an existing one. More on [fallback baselines](../learn/how-to-guides/visual-coverage/fallback-baselines.md).
 * `parentName` (string?): Name of the parent snapshot — used to attach a file to another snapshot, for example an [ARIA snapshot](../learn/how-to-guides/visual-coverage/adding-aria-snapshots-manually.md) to its screenshot.
 
 ### Complete example

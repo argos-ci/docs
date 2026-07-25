@@ -211,6 +211,7 @@ Available options:
 * **`fullPage`**: Capture the full page instead of fitting the screenshot to the content (default: `false`).
 * **`argosCSS`**: Custom CSS evaluated during the screenshot process.
 * **`threshold`**: Sensitivity threshold between `0` and `1`. The higher the threshold, the less sensitive the diff (default: `0.5`).
+* **`baseName`**: Name, or list of names, to compare this screenshot against instead of its own name. More on [fallback baselines](../learn/how-to-guides/visual-coverage/fallback-baselines.md).
 * **`tag`**: A [tag](../learn/review-workflow/tags.md) or array of tags to attach to the screenshot.
 * **`ariaSnapshot`**: Capture an [ARIA snapshot](../learn/how-to-guides/visual-coverage/adding-aria-snapshots-manually.md) along with the screenshot (default: `false`). Each ARIA snapshot counts as an additional screenshot for billing.
 * **`disableHover`**: Disable hover effects by moving the mouse to the top-left corner (default: `true`).
