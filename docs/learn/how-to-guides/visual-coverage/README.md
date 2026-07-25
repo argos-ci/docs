@@ -10,5 +10,6 @@ Techniques to capture more of your interface and make every screenshot count.
 * [Storybook story modes](storybook-story-modes.md) – Capture stories across multiple modes and themes
 * [Capture screenshots from URLs](capture-screenshots-from-urls.md) – Screenshot a list of URLs without writing tests
 * [Injecting CSS](injecting-css.md) – Apply custom CSS at capture time to hide or restyle elements
+* [Fallback baselines](fallback-baselines.md) – Compare a variant against an existing screenshot instead of reporting it as added
 * [Adding ARIA snapshots manually](adding-aria-snapshots-manually.md) – Attach accessibility snapshots alongside your screenshots
 * [Compare non-image files](compare-non-image-files.md) – Diff text, JSON, and other non-image files in Argos

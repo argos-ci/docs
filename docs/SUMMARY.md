@@ -55,6 +55,7 @@
     * [Storybook story modes](learn/how-to-guides/visual-coverage/storybook-story-modes.md)
     * [Capture screenshots from URLs](learn/how-to-guides/visual-coverage/capture-screenshots-from-urls.md)
     * [Injecting CSS](learn/how-to-guides/visual-coverage/injecting-css.md)
+    * [Fallback baselines](learn/how-to-guides/visual-coverage/fallback-baselines.md)
     * [Adding ARIA snapshots manually](learn/how-to-guides/visual-coverage/adding-aria-snapshots-manually.md)
     * [Compare non-image files](learn/how-to-guides/visual-coverage/compare-non-image-files.md)
   * [Migrate to Argos](learn/how-to-guides/migrate-to-argos/README.md)
