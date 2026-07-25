@@ -23,8 +23,7 @@ By default, ask the agent to summarize the visual changes first. If you want it 
 #### Install the skills
 
 ```bash
-npx skills add argos-ci/argos-javascript@argos-cli
-npx skills add argos-ci/argos-javascript@argos-pr-review
+npx skills add https://argos-ci.com
 ```
 {% endstep %}
 

@@ -18,11 +18,10 @@ Argos publishes [agent skills](https://skills.sh) — reusable instruction packs
 ## Installation
 
 ```bash
-npx skills add argos-ci/argos-javascript@argos-cli
-npx skills add argos-ci/argos-javascript@argos-pr-review
+npx skills add https://argos-ci.com
 ```
 
-The skills live in the [argos-javascript](https://github.com/argos-ci/argos-javascript) repository.
+This installs every skill Argos publishes. The skill content lives in the [argos-javascript](https://github.com/argos-ci/argos-javascript) repository.
 
 ## Usage
 
