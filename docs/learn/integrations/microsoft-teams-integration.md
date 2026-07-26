@@ -114,7 +114,7 @@ The same menu holds **Copy webhook URL** and **Remove channel**.
 
 ### Set up Microsoft Teams notifications
 
-Create a notification rule with Argos automations:
+Create a notification rule with Argos [automations](../review-workflow/automations.md):
 
 1. Select a project in your Argos team.
 2. Go to the **Automations** tab and select **New Automation**.

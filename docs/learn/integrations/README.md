@@ -6,7 +6,7 @@ description: >-
 
 # Integrations
 
-Argos integrates with your Git provider to post build statuses on pull requests, and with Slack or Microsoft Teams to notify your team.
+Argos integrates with your Git provider to post build statuses on pull requests, and with Slack or Microsoft Teams to notify your team. Which notifications go where is decided by [automations](../review-workflow/automations.md).
 
 ### Git providers
 
