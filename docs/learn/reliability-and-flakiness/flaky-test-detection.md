@@ -49,6 +49,8 @@ Once ignored, Argos will no longer notify you if this **exact same change** happ
 
 Each visual change carries a **fingerprint**: a stable signature computed from the shape of its diff. Visually similar diffs on the same test produce the same fingerprint, and an ignored change is a test-plus-fingerprint pair — any future diff matching the pair is ignored automatically. The fingerprint absorbs pixel-level noise such as antialiasing but distinguishes genuinely different changes, so ignoring one flaky change never hides a new regression elsewhere in the screenshot. You'll encounter the fingerprint in the [API](https://argos-ci.com/docs/api-reference) and [CLI](../../sdks-reference/argos-command-line-interface-cli.md#change-ignore) as part of a change's identity.
 
+Every change a project ignores is listed on the [Ignored changes](ignored-changes.md) page, with how often each one still fires — so an ignore that outlived its flake doesn't stay a blind spot.
+
 Ignored screenshots are also reflected in the [pull request comment](../review-workflow/pull-request-comments.md): the **Details** column reports how many screenshots were ignored alongside the other counts (for example, `4 changed, 3 ignored`).
 
 ### Configure what Argos ignores

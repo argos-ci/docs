@@ -18,7 +18,7 @@ The Slack integration is available on Pro and Enterprise plans.
 
 ### Slack notifications
 
-Notifications are driven by **automations**: rules that post messages to the right channels at the right time. Typical signals you may want to route to Slack:
+Notifications are driven by [**automations**](../review-workflow/automations.md): rules that post messages to the right channels at the right time. Typical signals you may want to route to Slack:
 
 * A build is ready for review.
 * Changes are requested.

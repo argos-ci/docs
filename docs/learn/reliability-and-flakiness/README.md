@@ -10,4 +10,5 @@ Flaky tests fail or change without a meaningful code change and erode trust in y
 
 * [Flaky test detection](flaky-test-detection.md) – How Argos flags unstable tests and ignores noisy changes
 * [Tests dashboard](tests-dashboard.md) – A project-wide view that ranks tests by flakiness
+* [Ignored changes](ignored-changes.md) – Review what a project ignores and unignore the changes that went quiet
 * [Stabilize screenshots](flaky-tests/README.md) – Strategies for writing stable, deterministic visual tests
