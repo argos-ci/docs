@@ -1,7 +1,8 @@
 ---
 description: >-
   Use the Argos CLI to upload screenshots, deploy static builds, inspect
-  builds, and submit reviews from scripts, local workflows, or AI agents.
+  builds and flaky tests, and submit reviews from scripts, local workflows, or
+  AI agents.
 ---
 
 # CLI
@@ -65,7 +66,7 @@ Do not use `argos login` in CI. CI uploads should use `ARGOS_TOKEN` or [GitHub O
 
 #### Project tokens and personal access tokens
 
-Uploads and build reads work with a **project token**. Submitting or dismissing a review requires a **personal access token**, because the review is attributed to an Argos user and checked against that user's project permissions.
+Uploads and read-only commands — `build get`, `build snapshots`, `test get`, `test changes` — work with a **project token**. Anything attributed to a user requires a **personal access token**, because the action is checked against that user's project permissions: submitting or dismissing a review, posting comments, and ignoring a change.
 
 To create a personal access token manually, go to your personal account settings, open **Tokens**, then select **Generate new token**.
 
@@ -218,7 +219,59 @@ Each snapshot diff includes the status, score, diff mask URL, baseline file, cur
 argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --metrics-period 30d --json
 ```
 
-A change with a high occurrence count or flakiness score is a strong flakiness signal — pass its `change.id` to [`argos change ignore`](#change-ignore) to silence it.
+A change with a high occurrence count or flakiness score is a strong flakiness signal. Pass its `change.id` to [`argos change ignore`](#change-ignore) to silence it, or its `test.id` to [`argos test get`](#test-get) to look at the whole test's history first.
+
+### `test get`
+
+Fetch a test with its [flakiness metrics](../learn/reliability-and-flakiness/flaky-test-detection.md): how many builds ran it, how many times it changed, and how stable and consistent those changes were. This is the CLI equivalent of the [test page](../learn/reliability-and-flakiness/test-page.md).
+
+The `<testId>` comes from a diff's `test.id` in `argos build snapshots --json`, or from a test page URL. It carries the project name but not the account, so pass the project with `--project owner/project` or the `ARGOS_PROJECT` environment variable — unless you authenticate with a project token, which already identifies its own project:
+
+```bash
+argos test get <testId> --project team/project --json
+```
+
+| Option                      | Description                                                                                                                     |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `--project <owner/project>` | Project the test belongs to, in `owner/project` format. Also `ARGOS_PROJECT`. Optional with a project token.                     |
+| `--metrics-period <period>` | Window the metrics are computed over: `24h`, `3d`, `7d`, `30d`, or `90d`. Defaults to `7d`.                                      |
+| `--token <token>`           | Project token or personal access token. Also `ARGOS_TOKEN`.                                                                     |
+| `--json`                    | Output machine-readable JSON instead of human-readable text.                                                                     |
+
+The response carries the test's name, build name, and `ongoing` or `removed` status; its `metrics` for the period; a `series` of the same counts bucketed over time, which is what distinguishes a test that has always been flaky from one that started recently; and `firstSeenChange` / `lastSeenChange`, each pointing at the build that captured it.
+
+### `test changes`
+
+List the distinct changes a test produced over a period, the ones that came back most often first:
+
+```bash
+argos test changes <testId> --project team/project --json
+```
+
+| Option                      | Description                                                                                                 |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `--ignored <boolean>`       | Only the changes currently ignored (`true`) or only the ones still under review (`false`). Omit for both.    |
+| `--project <owner/project>` | Project the test belongs to, in `owner/project` format. Also `ARGOS_PROJECT`. Optional with a project token. |
+| `--metrics-period <period>` | Window the occurrence counts are computed over: `24h`, `3d`, `7d`, `30d`, or `90d`. Defaults to `7d`.        |
+| `--token <token>`           | Project token or personal access token. Also `ARGOS_TOKEN`.                                                 |
+| `--json`                    | Output machine-readable JSON instead of human-readable text.                                                |
+
+Each change carries its `id` (which [`change ignore`](#change-ignore) takes), whether it is `ignored`, how many `occurrences` it has, when it was `firstSeen` and `lastSeen`, and the `diff` of its latest occurrence with the diff mask, baseline, and captured screenshot URLs.
+
+A change with `occurrences` above 1 that nothing in the UI explains is a flaky one. Give the images to an AI agent and let it [find the non-determinism](../learn/reliability-and-flakiness/fix-flaky-tests-with-ai-agents.md), or ignore the change if it can't be made deterministic.
+
+### `test comment`
+
+List, post, and act on the comments left on a test — the [Activity feed](../learn/reliability-and-flakiness/test-page.md#discuss-the-test-with-your-team) on its page. The `test comment` command groups the following subcommands: `list`, `create`, `get`, `edit`, `delete`, `resolve`, `unresolve`, `react`, `unreact`, `subscribe`, and `unsubscribe`.
+
+```bash
+argos test comment list <testId> --project team/project --json
+argos test comment create <testId> --project team/project --body "Flaky since the carousel landed."
+```
+
+Comments are attributed to a user, so these require a [personal access token](#project-tokens-and-personal-access-tokens) with review permission — and `--project owner/project` (or `ARGOS_PROJECT`), since a personal access token isn't bound to a project.
+
+Run `argos test comment --help` to see each subcommand's arguments and options. The equivalent commands for a build's comments are under [`comment`](#comment).
 
 ### `change ignore`
 
@@ -287,7 +340,7 @@ argos review dismiss https://app.argos-ci.com/team/project/builds/72652 <reviewI
 
 ### `comment`
 
-List, post, and act on build comments. The `comment` command groups the following subcommands: `list`, `create`, `get`, `edit`, `delete`, `resolve`, `unresolve`, `react`, `unreact`, `subscribe`, and `unsubscribe`.
+List, post, and act on build comments. For the comments on a *test*, see [`test comment`](#test-comment). The `comment` command groups the following subcommands: `list`, `create`, `get`, `edit`, `delete`, `resolve`, `unresolve`, `react`, `unreact`, `subscribe`, and `unsubscribe`.
 
 ```bash
 argos comment list https://app.argos-ci.com/team/project/builds/72652 --json

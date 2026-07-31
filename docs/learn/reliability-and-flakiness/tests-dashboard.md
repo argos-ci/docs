@@ -35,7 +35,7 @@ Tests are sorted by **flakiness score** (descending). The tests at the top are t
 
 ### Open a test page
 
-Select any row to open the detailed test page and review history and stability details. See [Flaky test detection](flaky-test-detection.md) for more information.
+Select any row to open the [test page](test-page.md), which breaks the same metrics down over time, lists every change the test produced, and carries its discussion.
 
 ### See tests across all your projects
 

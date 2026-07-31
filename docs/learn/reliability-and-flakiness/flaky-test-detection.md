@@ -18,20 +18,7 @@ _Example of the flaky indicator in a build review_
 
 ### Explore the test page
 
-Select the flaky badge to open the test page, which shows the full history of the test and its stability score.
-
-![Test page showing history and flaky score](<../../.gitbook/assets/test page example 44fb44458d2d5a457bad6eb9d6ddb29c.png>)
-
-_A sample test page with history timeline and score_
-
-On the test page you will find:
-
-* A timeline of every change that affected the test.
-* A stability graph showing the pass rate over time.
-* A flakiness score from 0 to 100, summarizing the test's stability and consistency.
-* The list of changes detected on the test.
-
-Use this information to approve stable tests or flag flaky ones for fixes.
+Select the flaky badge to open the [test page](test-page.md), which gathers everything Argos knows about that one test: its flakiness score, how its metrics moved over time, every change it produced, the discussion your team had about it, and a prompt to hand to an AI agent.
 
 ### See all flaky tests at a glance
 
