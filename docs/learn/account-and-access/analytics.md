@@ -44,10 +44,10 @@ The endpoint requires a **personal access token** scoped to the account — proj
 
 ### CLI
 
-The [`argos analytics`](../../sdks-reference/argos-command-line-interface-cli.md#analytics) command wraps the REST endpoint in a single command:
+The [`argos analytics`](../../sdks-reference/argos-command-line-interface-cli.md#account-commands) command wraps the REST endpoint in a single command:
 
 ```bash
 argos analytics --account my-team --from 2026-01-01 --group-by week
 ```
 
-It prints a human-readable summary with a per-project breakdown, or machine-readable JSON with `--json` — handy when a script, a dashboard, or an AI agent needs to parse the result. See the [CLI reference](../../sdks-reference/argos-command-line-interface-cli.md#analytics) for all options.
+It prints a human-readable summary with a per-project breakdown, or machine-readable JSON with `--json` — handy when a script, a dashboard, or an AI agent needs to parse the result. See the [CLI reference](../../sdks-reference/argos-command-line-interface-cli.md#account-commands) for all options.

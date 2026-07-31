@@ -76,30 +76,61 @@ _A personal settings tokens page_
 
 ## Commands
 
-### `upload`
+Run `argos <command> --help` for a command's exact arguments, flags, and defaults — the CLI is the source of truth for those. This page covers what each command is for, and the things `--help` can't tell you.
 
-Upload snapshots from a directory and create a build:
+| Command                                | What it does                                                      |
+| -------------------------------------- | ----------------------------------------------------------------- |
+| `upload <directory>`                   | Upload snapshots from a directory and create a build.             |
+| `finalize`                             | Close a parallel build once every shard has uploaded.             |
+| `skip`                                 | Create a skipped build so a required check still reports success. |
+| `deploy <directory>`                   | Deploy a static build (Storybook or any static site).             |
+| `build get <buildReference>`           | Fetch a build's status, branch, commit, stats, and URL.           |
+| `build snapshots <buildReference>`     | Fetch a build's snapshot diffs, with flakiness data on each.      |
+| `test get <testId>`                    | Fetch a test with its flakiness metrics.                          |
+| `test changes <testId>`                | List a test's distinct changes, most frequent first.              |
+| `change ignore \| unignore <changeId>` | Silence a flaky change, or bring it back under review.            |
+| `review create \| list \| dismiss`     | Submit, list, and dismiss reviews on a build.                     |
+| `comment <subcommand>`                 | List, post, and act on the comments on a build.                   |
+| `test comment <subcommand>`            | The same, on the comments on a test.                              |
+| `login`, `logout`, `whoami`            | Manage the CLI's user session.                                    |
+| `create-project <name>`                | Create a project in an account you administer.                    |
+| `analytics`                            | Fetch build and screenshot metrics for an account.                |
+| `help [command]`                       | Display the available commands and options.                       |
+
+### Uploading from CI
+
+`upload` is the command that creates a build. Point it at the directory holding your snapshots:
 
 ```bash
 argos upload ./screenshots
 ```
 
-| Option                      | Description                                                                                                                          |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `-f, --files <patterns...>` | One or more globs matching the files to upload. Defaults to `**/*.{png,jpg,jpeg}`.                                                  |
-| `-i, --ignore <patterns...>` | One or more globs matching file paths to ignore.                                                                                     |
-| `--token <token>`           | Project token. Prefer the `ARGOS_TOKEN` environment variable.                                                                        |
-| `--project <slug>`          | Argos project slug (`account/project-name`). Also `ARGOS_PROJECT`.                                                                   |
-| `--build-name <string>`     | Name of the build, to run [multiple builds on a single commit](../learn/how-to-guides/ci-pipelines/monorepos-setup.md). Also `ARGOS_BUILD_NAME`. |
-| `--mode <mode>`             | `ci` (default) or `monitoring`. See [Build modes](../learn/platform-fundamentals/build-modes.md).                                    |
-| `--parallel`                | Enable [parallel mode](../learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md). Also `ARGOS_PARALLEL`.                     |
-| `--parallel-total <number>` | The number of parallel nodes, or `-1` for finalize mode. Also `ARGOS_PARALLEL_TOTAL`.                                                |
-| `--parallel-index <number>` | The index of the parallel node (starts at 1). Also `ARGOS_PARALLEL_INDEX`.                                                           |
-| `--parallel-nonce <nonce>`  | Unique identifier shared by the jobs of one run. Detected automatically on most CI providers. Also `ARGOS_PARALLEL_NONCE`.           |
-| `--reference-branch <name>` | Branch used as the [baseline](../learn/platform-fundamentals/baseline-build.md) for comparison. Also `ARGOS_REFERENCE_BRANCH`.       |
-| `--reference-commit <sha>`  | Commit used as the baseline for comparison. Also `ARGOS_REFERENCE_COMMIT`.                                                           |
-| `--threshold <number>`      | Sensitivity threshold between 0 and 1. The higher the threshold, the less sensitive the diff. Defaults to `0.5`.                     |
-| `--subset`                  | Mark the build as a [subset build](../learn/how-to-guides/ci-pipelines/subset-builds.md). Also `ARGOS_SUBSET`.                       |
+By default it uploads `**/*.{png,jpg,jpeg}`; narrow or widen that with `--files` and `--ignore`. Several flags map onto concepts documented elsewhere:
+
+- `--mode` switches between [build modes](../learn/platform-fundamentals/build-modes.md) (`ci` by default, or `monitoring`).
+- `--parallel`, `--parallel-total`, `--parallel-index` and `--parallel-nonce` drive [parallel testing](../learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md).
+- `--subset` marks a [subset build](../learn/how-to-guides/ci-pipelines/subset-builds.md).
+- `--build-name` runs [multiple builds on a single commit](../learn/how-to-guides/ci-pipelines/monorepos-setup.md).
+- `--reference-branch` and `--reference-commit` pin the [baseline](../learn/platform-fundamentals/baseline-build.md) instead of letting Argos resolve it.
+- `--threshold` sets diff sensitivity between 0 and 1 — the higher the threshold, the less sensitive the comparison.
+
+Most of these also read an `ARGOS_*` environment variable, which is usually how you set them in CI.
+
+**`finalize`** closes a [parallel build](../learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md) running in finalize mode (`ARGOS_PARALLEL_TOTAL=-1`). Run it once every upload has completed — Argos then aggregates the shards and starts the comparison:
+
+```bash
+argos finalize
+```
+
+The shards are matched by their nonce, read from `--parallel-nonce` or `ARGOS_PARALLEL_NONCE`. In most CI environments the nonce is detected automatically, so no flag is needed as long as `finalize` runs in the same pipeline as the uploads.
+
+When every upload step is conditional — skipped by a task cache such as Turborepo or Nx, or by change detection — a run may produce no shard at all. Use `--skip-if-empty` to create a [skipped build](../learn/how-to-guides/ci-pipelines/skipping-a-build.md) in that case, so a required Argos status check still reports success:
+
+```bash
+argos finalize --skip-if-empty --build-name unit
+```
+
+**`skip`** creates that same [skipped build](../learn/how-to-guides/ci-pipelines/skipping-a-build.md) directly: no screenshots, no comparison, an immediately successful status. It keeps a required Argos check green on commits where you intentionally don't run visual tests. Use `--build-name` to match the check you want to satisfy.
 
 #### Snapshot size limit
 
@@ -123,234 +154,102 @@ argos upload ./screenshots --project my-account/my-project
 
 `argos upload` detects the commit, branch, and pull request from your CI environment — or from the local Git repository when running outside CI. To override detection, set these environment variables (there are no flag equivalents):
 
-| Environment variable  | Description                                                                          |
-| --------------------- | ------------------------------------------------------------------------------------ |
-| `ARGOS_COMMIT`        | Commit SHA of the build. Must be a full 40-character SHA — short SHAs are rejected. |
-| `ARGOS_BRANCH`        | Branch of the build.                                                                 |
-| `ARGOS_PR_NUMBER`     | Number of the pull request associated with the build.                                |
-| `ARGOS_PR_HEAD_COMMIT`| Head commit of the pull request.                                                     |
-| `ARGOS_PR_BASE_BRANCH`| Base branch of the pull request.                                                     |
+| Environment variable   | Description                                                                         |
+| ---------------------- | ----------------------------------------------------------------------------------- |
+| `ARGOS_COMMIT`         | Commit SHA of the build. Must be a full 40-character SHA — short SHAs are rejected. |
+| `ARGOS_BRANCH`         | Branch of the build.                                                                |
+| `ARGOS_PR_NUMBER`      | Number of the pull request associated with the build.                               |
+| `ARGOS_PR_HEAD_COMMIT` | Head commit of the pull request.                                                    |
+| `ARGOS_PR_BASE_BRANCH` | Base branch of the pull request.                                                    |
 
 In a non-Git environment, `ARGOS_COMMIT` and `ARGOS_BRANCH` are required — without them the upload fails with "Argos requires a branch and a commit to be set".
 
 To find the [baseline](../learn/platform-fundamentals/baseline-build.md), Argos resolves ancestor commits. When your project is connected to GitHub or GitLab, this happens server-side. Otherwise the CLI fetches history from the `origin` remote — in a repository without `origin` (for example a local mirror), it falls back to the local history, so make sure enough history is available locally, or pin the baseline explicitly with `--reference-commit` and `--reference-branch`. Parent commits are always computed automatically and cannot be set manually.
 
+To see what the CLI detected, run it with debug output:
+
 ```bash
 DEBUG=@argos-ci/core argos upload ./screenshots
 ```
 
-### `finalize`
+### Deploying a static build
 
-Close a [parallel build](../learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md) running in finalize mode (`ARGOS_PARALLEL_TOTAL=-1`). Run it once every upload has completed — Argos then aggregates the uploaded shards and starts the comparison:
-
-```bash
-argos finalize
-```
-
-The shards are matched by their nonce, read from `--parallel-nonce` or the `ARGOS_PARALLEL_NONCE` environment variable. In most CI environments the nonce is detected automatically, so no flag is needed as long as `finalize` runs in the same pipeline as the uploads.
-
-When every upload step is conditional — skipped by a task cache such as Turborepo or Nx, or by change detection — a run may produce no shard at all. Use `--skip-if-empty` to create a [skipped build](../learn/how-to-guides/ci-pipelines/skipping-a-build.md) in that case, so a required Argos status check still reports success on the commit:
-
-```bash
-argos finalize --skip-if-empty --build-name unit
-```
-
-`--build-name` (or `ARGOS_BUILD_NAME`) names the skipped build; use the same name as your uploads so the status check context matches.
-
-### `skip`
-
-Create a [skipped build](../learn/how-to-guides/ci-pipelines/skipping-a-build.md): a build with no screenshots and no comparison that immediately reports a successful status. This keeps a required Argos check green on commits where you intentionally don't run visual tests:
-
-```bash
-argos skip
-```
-
-Use `--build-name` to match the build name of the check you want to satisfy.
-
-### `deploy`
-
-Deploy a static build (Storybook or any static site) to Argos. The argument is the directory containing the static files. See [Deployments](../learn/deployments/README.md) for an overview:
+`deploy` publishes a static site — a Storybook, a docs build, anything — to Argos. See [Deployments](../learn/deployments/README.md) for the overview:
 
 ```bash
 argos deploy ./storybook-static
 ```
 
-By default, `deploy` creates a **preview** deployment. Add `--prod` to force a **production** deployment regardless of the branch:
-
-```bash
-argos deploy ./storybook-static --prod
-```
-
-If the branch matches the project's production branch pattern, the deployment is created as production even without `--prod`. See [Environments](../learn/deployments/environments.md) for the full rules.
+By default this creates a **preview** deployment. Add `--prod` to force a **production** one regardless of the branch. If the branch matches the project's production branch pattern, it is created as production even without the flag — see [Environments](../learn/deployments/environments.md) for the full rules.
 
 `deploy` uses the same [authentication](#authentication) as `upload`.
 
-### `build get`
+### Inspecting builds and tests
 
-Fetch a build's status, branch, commit, stats, and URL. The argument is a build number or an Argos build URL:
+These commands read data, so a project token is enough. A `<buildReference>` is a build number or a full Argos build URL; with a number, add `--project team/project`, since a URL already carries it.
 
 ```bash
 argos build get https://app.argos-ci.com/team/project/builds/72652
+argos build snapshots 72652 --project team/project --needs-review --json
 ```
 
-When you pass a build number instead of a URL, also pass `--project team/project`. Use `--json` when another tool needs to parse the response:
+`build get` returns the build's status, branch, commit, stats, and URL. `build snapshots` returns its diffs — each with a status, score, diff mask URL, baseline file, current file, and the metadata your SDK provided. Add `--needs-review` to get only the diffs awaiting a decision.
+
+When a diff belongs to a tracked test it also carries that test's [flakiness metrics](../learn/reliability-and-flakiness/flaky-test-detection.md) under `test.metrics`, and — when the diff is a change — its ignore state and occurrence count under `change`. `--metrics-period` sets the window those are computed over (`24h`, `3d`, `7d`, `30d`, `90d`; defaults to `7d`).
+
+A high occurrence count or flakiness score is a strong flakiness signal. Take the diff's `test.id` and look at the whole test — the CLI equivalent of the [test page](../learn/reliability-and-flakiness/test-page.md):
 
 ```bash
-argos build get 72652 --project team/project --json
+argos test get <testId> --json
+argos test changes <testId> --json
 ```
 
-### `build snapshots`
+`test get` returns the test's name, build name, and `ongoing` or `removed` status; its `metrics` for the period; a `series` of the same counts bucketed over time, which distinguishes a test that has always been flaky from one that started recently; and `firstSeenChange` / `lastSeenChange`.
 
-Fetch the snapshot diffs of a build:
+`test changes` lists its distinct changes, the ones that came back most often first. Each carries its `id`, whether it is `ignored`, its `occurrences`, when it was `firstSeen` and `lastSeen`, and the `diff` of its latest occurrence with the mask, baseline, and captured screenshot URLs. `--ignored true|false` narrows the list to ignored or still-reviewable changes.
 
-```bash
-argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --json
-```
+A `<testId>` carries the project name but not the account, so pass `--project owner/project` (or `ARGOS_PROJECT`) — unless you authenticate with a project token, which already identifies its own project.
 
-Add `--needs-review` to only return snapshots that need a review decision:
+### Silencing a flaky change
 
-```bash
-argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --needs-review --json
-```
+`change ignore` stops a flaky change from requiring review, auto-approving it on future builds. `change unignore` reverses that. Both are the CLI equivalent of the **Ignore** button in a build review — see [Ignore changes](../learn/reliability-and-flakiness/flaky-test-detection.md#ignore-changes) — and both need a [personal access token](#project-tokens-and-personal-access-tokens) with review permission.
 
-Each snapshot diff includes the status, score, diff mask URL, baseline file, current file, and metadata provided by the SDK. When a diff belongs to a tracked test, it also carries that test's [flakiness metrics](../learn/reliability-and-flakiness/flaky-test-detection.md) under `test.metrics` and, when the diff is a change, its ignore state and occurrence count under `change`. Use `--metrics-period` to set the window those metrics are computed over — `24h`, `3d`, `7d`, `30d`, or `90d` (defaults to `7d`):
-
-```bash
-argos build snapshots https://app.argos-ci.com/team/project/builds/72652 --metrics-period 30d --json
-```
-
-A change with a high occurrence count or flakiness score is a strong flakiness signal. Pass its `change.id` to [`argos change ignore`](#change-ignore) to silence it, or its `test.id` to [`argos test get`](#test-get) to look at the whole test's history first.
-
-### `test get`
-
-Fetch a test with its [flakiness metrics](../learn/reliability-and-flakiness/flaky-test-detection.md): how many builds ran it, how many times it changed, and how stable and consistent those changes were. This is the CLI equivalent of the [test page](../learn/reliability-and-flakiness/test-page.md).
-
-The `<testId>` comes from a diff's `test.id` in `argos build snapshots --json`, or from a test page URL. It carries the project name but not the account, so pass the project with `--project owner/project` or the `ARGOS_PROJECT` environment variable — unless you authenticate with a project token, which already identifies its own project:
-
-```bash
-argos test get <testId> --project team/project --json
-```
-
-| Option                      | Description                                                                                                                     |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `--project <owner/project>` | Project the test belongs to, in `owner/project` format. Also `ARGOS_PROJECT`. Optional with a project token.                     |
-| `--metrics-period <period>` | Window the metrics are computed over: `24h`, `3d`, `7d`, `30d`, or `90d`. Defaults to `7d`.                                      |
-| `--token <token>`           | Project token or personal access token. Also `ARGOS_TOKEN`.                                                                     |
-| `--json`                    | Output machine-readable JSON instead of human-readable text.                                                                     |
-
-The response carries the test's name, build name, and `ongoing` or `removed` status; its `metrics` for the period; a `series` of the same counts bucketed over time, which is what distinguishes a test that has always been flaky from one that started recently; and `firstSeenChange` / `lastSeenChange`, each pointing at the build that captured it.
-
-### `test changes`
-
-List the distinct changes a test produced over a period, the ones that came back most often first:
-
-```bash
-argos test changes <testId> --project team/project --json
-```
-
-| Option                      | Description                                                                                                 |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `--ignored <boolean>`       | Only the changes currently ignored (`true`) or only the ones still under review (`false`). Omit for both.    |
-| `--project <owner/project>` | Project the test belongs to, in `owner/project` format. Also `ARGOS_PROJECT`. Optional with a project token. |
-| `--metrics-period <period>` | Window the occurrence counts are computed over: `24h`, `3d`, `7d`, `30d`, or `90d`. Defaults to `7d`.        |
-| `--token <token>`           | Project token or personal access token. Also `ARGOS_TOKEN`.                                                 |
-| `--json`                    | Output machine-readable JSON instead of human-readable text.                                                |
-
-Each change carries its `id` (which [`change ignore`](#change-ignore) takes), whether it is `ignored`, how many `occurrences` it has, when it was `firstSeen` and `lastSeen`, and the `diff` of its latest occurrence with the diff mask, baseline, and captured screenshot URLs.
-
-A change with `occurrences` above 1 that nothing in the UI explains is a flaky one. Give the images to an AI agent and let it [find the non-determinism](../learn/reliability-and-flakiness/fix-flaky-tests-with-ai-agents.md), or ignore the change if it can't be made deterministic.
-
-### `test comment`
-
-List, post, and act on the comments left on a test — the [Activity feed](../learn/reliability-and-flakiness/test-page.md#discuss-the-test-with-your-team) on its page. The `test comment` command groups the following subcommands: `list`, `create`, `get`, `edit`, `delete`, `resolve`, `unresolve`, `react`, `unreact`, `subscribe`, and `unsubscribe`.
-
-```bash
-argos test comment list <testId> --project team/project --json
-argos test comment create <testId> --project team/project --body "Flaky since the carousel landed."
-```
-
-Comments are attributed to a user, so these require a [personal access token](#project-tokens-and-personal-access-tokens) with review permission — and `--project owner/project` (or `ARGOS_PROJECT`), since a personal access token isn't bound to a project.
-
-Run `argos test comment --help` to see each subcommand's arguments and options. The equivalent commands for a build's comments are under [`comment`](#comment).
-
-### `change ignore`
-
-Ignore a flaky test change so its diffs stop requiring review and are automatically approved on future builds. This is the CLI equivalent of the **Ignore** button in a build review — see [Ignore changes](../learn/reliability-and-flakiness/flaky-test-detection.md#ignore-changes). Requires a [personal access token](#project-tokens-and-personal-access-tokens) with review permission on the project.
-
-The `<changeId>` comes from a diff's `change.id` in `argos build snapshots --json`. A change ID doesn't include the account, so pass the project with `--project owner/project` or the `ARGOS_PROJECT` environment variable:
+The `<changeId>` comes from a diff's `change.id` in `argos build snapshots --json`, or from `argos test changes --json`. Like a test id it doesn't carry the account, so pass the project:
 
 ```bash
 argos change ignore <changeId> --project team/project
-```
-
-| Option                      | Description                                                                               |
-| --------------------------- | ----------------------------------------------------------------------------------------- |
-| `--project <owner/project>` | Project the change belongs to, in `owner/project` format. Also `ARGOS_PROJECT`. Required. |
-| `--metrics-period <period>` | Window for the returned occurrence count: `24h`, `3d`, `7d`, `30d`, or `90d`. Defaults to `7d`. |
-| `--token <token>`           | Personal access token. Also `ARGOS_TOKEN`.                                                |
-| `--json`                    | Output machine-readable JSON instead of human-readable text.                              |
-
-The ignore feature must be enabled for the project (**Project Settings → Flaky detection**, on by default). Argos can also [ignore recurring flaky changes automatically](../learn/reliability-and-flakiness/flaky-test-detection.md#automatically-ignore-recurring-flaky-changes).
-
-### `change unignore`
-
-Stop ignoring a test change so its diffs require review again on future builds. It takes the same argument and options as `change ignore`:
-
-```bash
 argos change unignore <changeId> --project team/project
 ```
 
-### `review create`
+The ignore feature must be enabled for the project (**Project Settings → Flaky detection**, on by default). Argos can also [ignore recurring flaky changes automatically](../learn/reliability-and-flakiness/flaky-test-detection.md#automatically-ignore-recurring-flaky-changes).
 
-Submit a review on a build. Requires a [personal access token](#project-tokens-and-personal-access-tokens):
+To let an agent do the investigation instead, see [Fix flaky tests with AI agents](../learn/reliability-and-flakiness/fix-flaky-tests-with-ai-agents.md).
 
-```bash
-argos review create https://app.argos-ci.com/team/project/builds/72652 --event approve
-```
+### Reviewing and commenting
 
-| Option               | Description                                                     |
-| -------------------- | ---------------------------------------------------------------- |
-| `--event <event>`    | Review event: `approve`, `reject`, or `comment`. Required.      |
-| `--body <markdown>`  | Markdown comment to attach to the review.                       |
-| `--body-file <path>` | Read the review comment from a Markdown file.                   |
-
-To reject the visual changes:
+Every command in this group acts as a user, so they all require a [personal access token](#project-tokens-and-personal-access-tokens).
 
 ```bash
-argos review create https://app.argos-ci.com/team/project/builds/72652 --event reject --body "The header spacing regressed."
+argos review create <buildReference> --event approve
+argos review create <buildReference> --event reject --body "The header spacing regressed."
+argos review list <buildReference> --json
+argos review dismiss <buildReference> <reviewId>
 ```
 
-As with `build get`, you can pass a build number with `--project team/project` instead of a URL.
+`--event` is one of `approve`, `reject`, or `comment`, and `--body` / `--body-file` attach a Markdown summary. Dismissing a review stops it counting toward the [build status](../learn/review-workflow/review-a-build.md#how-reviews-decide-the-build-status).
 
-### `review list`
-
-List the reviews submitted on a build:
+Comments live in two groups: `comment` for a [build's review discussion](../learn/review-workflow/review-a-build.md#comment-on-exactly-what-changed), and `test comment` for a [test's own thread](../learn/reliability-and-flakiness/test-page.md#discuss-the-test-with-your-team). Both take the same subcommands — `list`, `create`, `get`, `edit`, `delete`, `resolve`, `unresolve`, `react`, `unreact`, `subscribe`, `unsubscribe`:
 
 ```bash
-argos review list https://app.argos-ci.com/team/project/builds/72652 --json
+argos comment list <buildReference> --json
+argos test comment create <testId> --project team/project --body "Flaky since the carousel landed."
 ```
 
-### `review dismiss`
+Run `argos comment --help` or `argos test comment --help` for each subcommand's arguments.
 
-Dismiss a submitted review so it no longer counts toward the [build status](../learn/review-workflow/review-a-build.md#how-reviews-decide-the-build-status):
+### Managing your session
 
-```bash
-argos review dismiss https://app.argos-ci.com/team/project/builds/72652 <reviewId>
-```
-
-### `comment`
-
-List, post, and act on build comments. For the comments on a *test*, see [`test comment`](#test-comment). The `comment` command groups the following subcommands: `list`, `create`, `get`, `edit`, `delete`, `resolve`, `unresolve`, `react`, `unreact`, `subscribe`, and `unsubscribe`.
-
-```bash
-argos comment list https://app.argos-ci.com/team/project/builds/72652 --json
-```
-
-Run `argos help comment` to see each subcommand's arguments and options.
-
-### `login`, `logout`, and `whoami`
-
-Manage the CLI's user session:
+`login`, `logout` and `whoami` manage the CLI's user session — see [Authentication](#authentication):
 
 ```bash
 argos login   # Log in to Argos by opening your browser
@@ -358,48 +257,23 @@ argos whoami  # Display the user authenticated with the current token
 argos logout  # Log out from Argos
 ```
 
-### `create-project`
+### Account commands
 
-Create a new project in an account you administer. Pass the account with `--account <slug>` or the `ARGOS_ACCOUNT` environment variable:
+`create-project` creates a project in an account you administer:
 
 ```bash
 argos create-project my-new-project --account my-team
 ```
 
-### `analytics`
-
-Fetch build and screenshot metrics for an account. Requires a [personal access token](#project-tokens-and-personal-access-tokens) scoped to the account. Pass the account with `--account <slug>` or the `ARGOS_ACCOUNT` environment variable:
-
-```bash
-argos analytics --account my-team
-```
-
-| Option                | Description                                                                          |
-| --------------------- | ------------------------------------------------------------------------------------ |
-| `--account <slug>`    | Account (personal or team) to fetch analytics for. Also `ARGOS_ACCOUNT`. Required.   |
-| `--from <datetime>`   | Start of the period, as an ISO 8601 datetime. Defaults to 30 days ago. The range cannot exceed 365 days. |
-| `--to <datetime>`     | End of the period, as an ISO 8601 datetime. Defaults to now.                         |
-| `--group-by <period>` | Group each series data point by `day`, `week`, or `month`. Defaults to `day`.        |
-| `--project <name>`    | Filter by project name. Repeat the flag to include multiple projects.                |
-| `--token <token>`     | Personal access token. Also `ARGOS_TOKEN`.                                           |
-| `--json`              | Output machine-readable JSON instead of human-readable text.                         |
-
-The response reports totals and a per-period series for both screenshots and builds (including how many builds detected changes and how many were accepted or rejected), broken down by project. Use `--json` when another tool needs to parse the result:
+`analytics` fetches build and screenshot metrics for an account. It reports totals and a per-period series for both screenshots and builds — including how many detected changes and how many were accepted or rejected — broken down by project:
 
 ```bash
 argos analytics --account my-team --from 2026-01-01 --group-by month --json
 ```
 
+`--from` defaults to 30 days ago and `--to` to now, with a range capped at 365 days; `--group-by` buckets by `day`, `week`, or `month`; and `--project` filters by project name, repeated for several. Both `create-project` and `analytics` take the account from `--account <slug>` or `ARGOS_ACCOUNT`, and need a [personal access token](#project-tokens-and-personal-access-tokens) scoped to it.
+
 See [Analytics](../learn/account-and-access/analytics.md) for the dashboard view of these metrics.
-
-### `help`
-
-Display the available commands and options:
-
-```bash
-argos help upload
-```
-
 ## AI agent skills
 
 The [`argos-javascript`](https://github.com/argos-ci/argos-javascript) repository includes skills that help AI agents use Argos CLI commands and review pull requests with Argos build data:

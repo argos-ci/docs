@@ -100,4 +100,4 @@ argos test get <testId> --json
 argos test changes <testId> --json
 ```
 
-See [`test get`](../../sdks-reference/argos-command-line-interface-cli.md#test-get) and [`test changes`](../../sdks-reference/argos-command-line-interface-cli.md#test-changes) in the CLI reference, [`test comment`](../../sdks-reference/argos-command-line-interface-cli.md#test-comment) for the discussion, or the [REST API](https://argos-ci.com/docs/api-reference) and the [MCP server](../../agents/mcp-server.md) for the same data over HTTP.
+See [Inspecting builds and tests](../../sdks-reference/argos-command-line-interface-cli.md#inspecting-builds-and-tests) in the CLI reference for what each command returns, and [Reviewing and commenting](../../sdks-reference/argos-command-line-interface-cli.md#reviewing-and-commenting) for `test comment`. The same data is available over the [REST API](https://argos-ci.com/docs/api-reference) and the [MCP server](../../agents/mcp-server.md).
