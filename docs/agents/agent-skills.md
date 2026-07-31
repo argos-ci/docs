@@ -34,6 +34,8 @@ https://github.com/acme/app/pull/123
 
 For the full workflow — tokens to set, what the agent does, and how to phrase prompts when your assistant does not support skills — see [Review builds with AI agents](../learn/review-workflow/review-builds-with-ai-agents.md).
 
+The `argos-cli` skill also covers the flakiness commands, so an agent can investigate an unstable test and silence a change it can't fix — see [Fix flaky tests with AI agents](../learn/reliability-and-flakiness/fix-flaky-tests-with-ai-agents.md).
+
 {% hint style="info" %}
 Skills drive the CLI, so they run wherever the agent has a terminal. If your assistant connects to remote services instead, use the [MCP server](mcp-server.md).
 {% endhint %}

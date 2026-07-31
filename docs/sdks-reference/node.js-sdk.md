@@ -24,7 +24,7 @@ import { upload } from "@argos-ci/core";
 await upload({ root: "./screenshots" });
 ```
 
-`upload` accepts the same options as the [CLI `upload` command](argos-command-line-interface-cli.md#upload) — files globs, build name, mode, parallel settings, threshold, and more.
+`upload` accepts the same options as the [CLI `upload` command](argos-command-line-interface-cli.md#uploading-from-ci) — files globs, build name, mode, parallel settings, threshold, and more.
 
 ### API reference
 

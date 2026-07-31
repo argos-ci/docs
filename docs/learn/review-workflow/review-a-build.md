@@ -159,4 +159,4 @@ See [Team members & roles](../account-and-access/team-members-and-roles.md) for 
 
 Every review and comment action is also available in the [Argos REST API](https://argos-ci.com/docs/api-reference): submit, list, and dismiss reviews; create, read, update, and delete comments and replies; add and remove reactions; and resolve or reopen threads. Because these actions are attributed to a user and checked against that user's project permissions, they require a **personal access token** rather than a project token.
 
-You can also submit reviews from the [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md#review-create) with `argos review create`, or let an [AI agent review builds](review-builds-with-ai-agents.md) for you.
+You can also submit reviews from the [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md#reviewing-and-commenting) with `argos review create`, or let an [AI agent review builds](review-builds-with-ai-agents.md) for you.

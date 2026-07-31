@@ -13,5 +13,6 @@ Argos is built to work with AI agents. Whether your assistant reviews visual cha
 ### Where to start
 
 - To review builds with an AI agent in a pull request, follow the [Review builds with AI agents](../learn/review-workflow/review-builds-with-ai-agents.md) guide — it combines the CLI and agent skills.
+- To let an agent track down what makes a screenshot unstable, follow [Fix flaky tests with AI agents](../learn/reliability-and-flakiness/fix-flaky-tests-with-ai-agents.md).
 - To give a general-purpose assistant access to your Argos account, connect it to the [MCP server](mcp-server.md).
 - To let an agent answer questions about Argos itself, point it at the [AI-ready docs](ai-ready-docs.md).

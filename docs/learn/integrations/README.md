@@ -29,4 +29,4 @@ Looking for how to sign in to Argos itself? See [Account & access](../account-an
 
 ### Webhooks
 
-Argos does not offer user-configurable outgoing webhooks. To react to build events, use [Slack](slack-integration.md) or [Microsoft Teams](microsoft-teams-integration.md) notifications, the commit statuses posted on your Git provider, or poll builds from the [REST API](https://argos-ci.com/docs/api-reference) or the [CLI](../../sdks-reference/argos-command-line-interface-cli.md#build-get). If webhooks would unblock your workflow, [tell us about your use case](https://argos-ci.com/contact).
+Argos does not offer user-configurable outgoing webhooks. To react to build events, use [Slack](slack-integration.md) or [Microsoft Teams](microsoft-teams-integration.md) notifications, the commit statuses posted on your Git provider, or poll builds from the [REST API](https://argos-ci.com/docs/api-reference) or the [CLI](../../sdks-reference/argos-command-line-interface-cli.md#inspecting-builds-and-tests). If webhooks would unblock your workflow, [tell us about your use case](https://argos-ci.com/contact).

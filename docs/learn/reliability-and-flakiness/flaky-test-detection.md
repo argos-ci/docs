@@ -18,20 +18,7 @@ _Example of the flaky indicator in a build review_
 
 ### Explore the test page
 
-Select the flaky badge to open the test page, which shows the full history of the test and its stability score.
-
-![Test page showing history and flaky score](<../../.gitbook/assets/test page example 44fb44458d2d5a457bad6eb9d6ddb29c.png>)
-
-_A sample test page with history timeline and score_
-
-On the test page you will find:
-
-* A timeline of every change that affected the test.
-* A stability graph showing the pass rate over time.
-* A flakiness score from 0 to 100, summarizing the test's stability and consistency.
-* The list of changes detected on the test.
-
-Use this information to approve stable tests or flag flaky ones for fixes.
+Select the flaky badge to open the [test page](test-page.md), which gathers everything Argos knows about that one test: its flakiness score, how its metrics moved over time, every change it produced, the discussion your team had about it, and a prompt to hand to an AI agent.
 
 ### See all flaky tests at a glance
 
@@ -47,7 +34,7 @@ Once ignored, Argos will no longer notify you if this **exact same change** happ
 
 #### How Argos recognizes the same change
 
-Each visual change carries a **fingerprint**: a stable signature computed from the shape of its diff. Visually similar diffs on the same test produce the same fingerprint, and an ignored change is a test-plus-fingerprint pair — any future diff matching the pair is ignored automatically. The fingerprint absorbs pixel-level noise such as antialiasing but distinguishes genuinely different changes, so ignoring one flaky change never hides a new regression elsewhere in the screenshot. You'll encounter the fingerprint in the [API](https://argos-ci.com/docs/api-reference) and [CLI](../../sdks-reference/argos-command-line-interface-cli.md#change-ignore) as part of a change's identity.
+Each visual change carries a **fingerprint**: a stable signature computed from the shape of its diff. Visually similar diffs on the same test produce the same fingerprint, and an ignored change is a test-plus-fingerprint pair — any future diff matching the pair is ignored automatically. The fingerprint absorbs pixel-level noise such as antialiasing but distinguishes genuinely different changes, so ignoring one flaky change never hides a new regression elsewhere in the screenshot. You'll encounter the fingerprint in the [API](https://argos-ci.com/docs/api-reference) and [CLI](../../sdks-reference/argos-command-line-interface-cli.md#silencing-a-flaky-change) as part of a change's identity.
 
 Every change a project ignores is listed on the [Ignored changes](ignored-changes.md) page, with how often each one still fires — so an ignore that outlived its flake doesn't stay a blind spot.
 
