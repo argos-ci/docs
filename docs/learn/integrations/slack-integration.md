@@ -63,7 +63,7 @@ Create a notification rule with Argos automations:
 5.  (Optional) Under **IF**, add conditions such as "Build type is check".
 
     ![Automation conditions example](<../../.gitbook/assets/automation conditions 6bc66f9d8c99db7e8601ac368a9fda4c.png>)
-6. Under **THEN**, choose the action **Send notification to Slack**. If your workspace isn't connected yet, select **Connect to Slack** and follow the connection flow.
+6. Under **THEN**, choose the action **Post in Slack channel**. If your workspace isn't connected yet, select **Connect to Slack** and follow the connection flow.
 7.  Select the Slack channel and optionally provide the channel ID.
 
     ![Locate Slack channel ID](<../../.gitbook/assets/slack channel id 7e607e0f5800c51bc38f17bb856ac88c.png>)

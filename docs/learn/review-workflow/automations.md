@@ -1,7 +1,7 @@
 ---
 description: >-
-  Create rules that react to build events and notify Slack or Microsoft Teams,
-  so nobody has to watch Argos to know a build needs review.
+  Create rules that react to build events and notify Slack, Microsoft Teams, or
+  Discord, so nobody has to watch Argos to know a build needs review.
 ---
 
 # Automations
@@ -42,8 +42,9 @@ Conditions are combined with AND. To notify on two unrelated cases — say, fail
 
 ### Then: actions
 
-* **Send notification to Slack** — posts to a Slack channel. Requires the [Slack integration](../integrations/slack-integration.md).
-* **Send notification to Microsoft Teams** — posts an adaptive card to a channel webhook. Requires the [Microsoft Teams integration](../integrations/microsoft-teams-integration.md).
+* **Post in Slack channel** — posts to a Slack channel. Requires the [Slack integration](../integrations/slack-integration.md).
+* **Post in Microsoft Teams channel** — posts an adaptive card to a channel webhook. Requires the [Microsoft Teams integration](../integrations/microsoft-teams-integration.md).
+* **Post in Discord channel** — posts an embed to a channel webhook. Requires the [Discord integration](../integrations/discord-integration.md).
 
 If the destination isn't connected yet, the action offers the connection flow.
 
