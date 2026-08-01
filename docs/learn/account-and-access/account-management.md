@@ -20,6 +20,12 @@ To manage login connections:
 
 ![The Authentication section of your account settings.](<../../.gitbook/assets/authentication 005df39b1abdc82a91a54c5c055a9dcd.png>)
 
+#### Logging in with a passkey
+
+A passkey lets you sign in with your fingerprint, face, screen lock, or a hardware security key instead of a code or a Git provider. You can register several and use any of them.
+
+For setup and login instructions, see [Passkeys](passkeys.md).
+
 #### Logging in with SAML Single Sign-On (SSO)
 
 SAML SSO allows team members to log in with their organization’s identity provider.

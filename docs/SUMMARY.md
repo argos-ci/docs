@@ -79,6 +79,7 @@
   * [Account management](learn/account-and-access/account-management.md)
   * [Analytics](learn/account-and-access/analytics.md)
   * [Team members & roles](learn/account-and-access/team-members-and-roles.md)
+  * [Passkeys](learn/account-and-access/passkeys.md)
   * [GitHub single sign-on](learn/account-and-access/github-single-sign-on.md)
   * [SAML single sign-on](learn/account-and-access/saml-single-sign-on.md)
 * [Billing & subscription](learn/billing-and-subscription/README.md)
