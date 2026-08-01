@@ -75,6 +75,7 @@
   * [Other Git providers](learn/integrations/other-git-providers.md)
   * [Slack integration](learn/integrations/slack-integration.md "Slack")
   * [Microsoft Teams integration](learn/integrations/microsoft-teams-integration.md "Microsoft Teams")
+  * [Discord integration](learn/integrations/discord-integration.md "Discord")
 * [Account & access](learn/account-and-access/README.md)
   * [Account management](learn/account-and-access/account-management.md)
   * [Analytics](learn/account-and-access/analytics.md)

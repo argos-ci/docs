@@ -14,4 +14,4 @@ Once your builds run, Argos brings visual changes into your everyday review proc
 * [Summary checks](summary-checks.md) – The commit status checks Argos reports back to your Git provider
 * [Tags](tags.md) – Filter screenshots by tag to focus your review
 * [Review builds with AI agents](review-builds-with-ai-agents.md) – Let an AI agent triage visual changes from your assistant or CI
-* [Automations](automations.md) – Rules that react to build events and notify Slack or Microsoft Teams
+* [Automations](automations.md) – Rules that react to build events and notify Slack, Microsoft Teams, or Discord
