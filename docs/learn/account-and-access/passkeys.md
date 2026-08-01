@@ -6,6 +6,8 @@ description: "Add passkeys to your Argos account and sign in with your fingerpri
 
 A passkey replaces a password with the unlock method you already use on your device — Touch ID, Face ID, Windows Hello, your phone's screen lock, or a hardware security key such as a YubiKey.
 
+Argos always asks the authenticator to verify it is really you, so the passkey is protected by your biometric, PIN, or screen lock. A security key with no PIN set cannot be registered.
+
 Because the key is bound to `argos-ci.com` and never leaves your device or password manager, a passkey cannot be phished, reused on a lookalike site, or leaked in a database breach.
 
 You can register as many passkeys as you like — one per laptop, one on your phone, one on a security key — and sign in with any of them.
@@ -49,7 +51,7 @@ The passkey appears in the **Passkeys** row, named after wherever it was stored 
 {% endstepper %}
 
 {% hint style="warning" %}
-If the dialog reports that registration "took too long or was canceled", the device prompt was dismissed or timed out. Select **Retry** to start over.
+If the dialog reports that the prompt was "canceled or timed out", the device prompt was dismissed or ran out of time. Select **Retry** to start over.
 {% endhint %}
 
 ### Signing in with a passkey
