@@ -110,8 +110,10 @@ Run `argos <command> --help` for a command's exact arguments, flags, and default
 | `account invite <subcommand>`              | Invite people, cancel invites, rotate the invite link.              |
 | `account domain <subcommand>`              | Manage the email domains a team is open to.                         |
 | `media upload <files...>`                  | Upload standalone images or videos and print their share URLs.       |
-| `media list`                               | List a team's uploaded media, most recent first.                    |
+| `media list`                               | List a project's uploaded media, most recent first.                 |
 | `media get \| delete <mediaId>`             | Fetch or delete one uploaded media.                                 |
+| `media feedback`                           | Read every open comment on a project's media, grouped by media.     |
+| `media comment <subcommand>`               | List, post, edit, resolve and react to comments on a media.         |
 | `login`, `logout`, `whoami`                | Manage the CLI's user session.                                      |
 | `create-project <name>`                    | Create a project in an account you administer.                      |
 | `analytics`                                | Fetch build and screenshot metrics for an account.                  |
@@ -438,7 +440,16 @@ Add `--pr 1234 --comment` to have Argos maintain a single comment on the pull re
 
 Copy the Markdown the command prints rather than writing your own. For a video it is a poster frame wrapped in a link, which is the only form GitHub renders — an inline player only works for media GitHub hosts itself.
 
-`media list` spans a whole team, so it needs a [personal access token](#project-tokens-and-personal-access-tokens) belonging to an administrator; `media upload`, `get` and `delete` accept either token type.
+Media belongs to a project and inherits its access. `media upload`, `list`, `get` and `feedback` accept either token type; with a [personal access token](#project-tokens-and-personal-access-tokens) pass `--project <owner/project>` or set `ARGOS_PROJECT`. `media delete` needs project administrator rights, since deleting a media breaks any share link already pasted somewhere.
+
+A human can pin a comment to a point on an uploaded screenshot, which is how an agent gets told what to change about an image it cannot see:
+
+```bash
+argos media feedback --pr 1234   # open threads, each with its pinned coordinates
+argos media comment resolve <mediaId> <threadId>
+```
+
+`media feedback` reads; `media comment create` and `resolve` write on the project's review surface, so they need a personal access token.
 
 See [Media sharing](../learn/media/) for retention, visibility and billing.
 

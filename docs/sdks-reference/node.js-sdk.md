@@ -46,7 +46,7 @@ console.log(media.url); // https://app.argos-ci.com/m/…
 console.log(media.markdown); // ![after.png](https://app.argos-ci.com/m/…)
 ```
 
-Options mirror the [CLI `media upload` command](argos-command-line-interface-cli.md#sharing-images-and-videos): `accountSlug`, `slug`, `visibility`, `retentionDays`, `prNumber`, `comment` and `keepMetadata`. See [Media sharing](../learn/media/) for retention, visibility and billing.
+Options mirror the [CLI `media upload` command](argos-command-line-interface-cli.md#sharing-images-and-videos): `project`, `slug`, `visibility`, `retentionDays`, `prNumber` and `comment`. See [Media sharing](../learn/media/) for retention, visibility and billing.
 
 ### API reference
 

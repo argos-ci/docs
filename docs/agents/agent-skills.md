@@ -15,7 +15,7 @@ Argos publishes [agent skills](https://skills.sh) — reusable instruction packs
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `argos-cli`       | The [Argos CLI](../sdks-reference/argos-command-line-interface-cli.md): commands, flags, authentication rules, and output formats.          |
 | `argos-pr-review` | A complete pull-request visual review workflow: find the Argos build, inspect snapshots, summarize changes, and approve or request changes. |
-| `argos-upload`    | When and how to share a screenshot or a screen recording by link, and how to embed it so a pull request actually renders it.                 |
+| `argos-upload`    | When and how to share a screenshot or a screen recording by link, how to embed it so a pull request actually renders it, and how to read back the comments a human pinned on it. |
 
 ## Installation
 

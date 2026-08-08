@@ -10,10 +10,10 @@ description: Who can open an Argos media share link, how long an uploaded file i
 
 | Visibility | Who can open the share page                              |
 | ---------- | -------------------------------------------------------- |
-| `team`     | Anyone signed in to Argos with access to the owning team. |
+| `team`     | Anyone signed in to Argos with access to the owning project. |
 | `public`   | Anyone holding the URL. No sign-in.                       |
 
-A share URL carries an unguessable token rather than the media's id, so a link cannot be found by guessing and does not reveal how much a team has uploaded. Share pages are `noindex`, so they don't turn up in search results.
+A share URL carries an unguessable token rather than the media's id, so a link cannot be found by guessing and does not reveal how much a project has uploaded. Share pages are `noindex`, so they don't turn up in search results.
 
 On **Pro**, `team` is the default. On **Hobby**, every share page is public.
 
@@ -22,7 +22,7 @@ On **Pro**, `team` is the default. On **Hobby**, every share page is public.
 
 That is a consequence of what the feature is for. GitHub renders an embedded image by fetching it **server-side**, through a proxy that carries no Argos session — so a file that required authentication could not appear in a pull request at all. Argos protects the bytes with an unguessable content-addressed URL rather than with a session, exactly as it already serves build screenshots.
 
-Treat a media file as "anyone with the link", and the share page as the part that respects your team. If a file must never be reachable by an outsider who obtains its URL, don't upload it.
+Treat a media file as "anyone with the link", and the share page as the part that respects your project's access. If a file must never be reachable by an outsider who obtains its URL, don't upload it.
 {% endhint %}
 
 ### Retention

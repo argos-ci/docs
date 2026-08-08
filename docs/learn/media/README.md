@@ -4,7 +4,7 @@ description: Upload a standalone image or video to Argos and get a shareable lin
 
 # Media sharing
 
-**Media** on Argos is a standalone image or video: uploaded on its own, with no build and no test run behind it. Argos stores it, serves it at a share URL, and hands you the Markdown to embed it.
+**Media** on Argos is a standalone image or video: uploaded on its own, with no build and no test run behind it. Argos stores it, serves it at a share URL, and hands you the Markdown to embed it. It belongs to a project, so it inherits that project's access and moves with it when the project is transferred.
 
 It exists because GitHub has no public API for comment attachments. Dragging an image into a pull request needs a signed-in browser session, which an agent — or a CI job — does not have. Committing the image bloats the repository, and release assets are a workaround nobody wants to maintain.
 
@@ -13,6 +13,7 @@ Use media sharing to:
 * Put a before/after of a UI change in the pull request that made it, so the reviewer doesn't check out the branch.
 * Attach a screen recording of a bug reproduction to an issue.
 * Share a screenshot with your team by link, from the terminal or by dropping a file into Argos.
+* Point at a spot on a screenshot an agent produced and have it read your comment back — see [Commenting on media](standalone-media-upload.md#commenting-on-media).
 
 {% hint style="info" %}
 Media is **not** visual testing. Nothing is compared to a baseline and nothing gates a build — it is a file with a link. To detect visual changes, see [Core concepts](../platform-fundamentals/).
@@ -89,7 +90,7 @@ Put the `Markdown` line in a pull request, an issue, or a chat message. Copy it 
 
 ### Where to find your uploads
 
-Team administrators get a **Media** tab on the team, listing everything uploaded across projects, with drag-and-drop upload and a copy-Markdown button on every row. It is administrator-only: the library spans projects a given member may have no access to.
+The team's **Media** tab lists everything uploaded to the projects you can see, with drag-and-drop upload and a copy-Markdown button on every row. It follows project access rather than being administrator-only, so a contributor scoped to one project sees that project's media and nothing else.
 
 ### What's next
 
