@@ -66,7 +66,9 @@ Do not use `argos login` in CI. CI uploads should use `ARGOS_TOKEN` or [GitHub O
 
 #### Project tokens and personal access tokens
 
-Uploads and read-only commands — `build get`, `build snapshots`, `test get`, `test changes` — work with a **project token**. Anything attributed to a user requires a **personal access token**, because the action is checked against that user's project permissions: submitting or dismissing a review, posting comments, and ignoring a change.
+Uploads and read-only commands — `build get`, `build snapshots`, `test list`, `test get`, `test changes`, `change list`, `project get`, `project deployments`, `project domain get` — work with a **project token**. Anything attributed to a user requires a **personal access token**, because the action is checked against that user's permissions: submitting or dismissing a review, requesting reviewers, posting comments, ignoring a change, configuring a project, and administering a team.
+
+Two read-only commands are the exception: `project contributor list` and `review reviewer list` return users, so they need a personal access token to resolve them against — a project token carries no identity.
 
 To create a personal access token manually, go to your personal account settings, open **Tokens**, then select **Generate new token**.
 
@@ -78,24 +80,39 @@ _A personal settings tokens page_
 
 Run `argos <command> --help` for a command's exact arguments, flags, and defaults — the CLI is the source of truth for those. This page covers what each command is for, and the things `--help` can't tell you.
 
-| Command                                | What it does                                                      |
-| -------------------------------------- | ----------------------------------------------------------------- |
-| `upload <directory>`                   | Upload snapshots from a directory and create a build.             |
-| `finalize`                             | Close a parallel build once every shard has uploaded.             |
-| `skip`                                 | Create a skipped build so a required check still reports success. |
-| `deploy <directory>`                   | Deploy a static build (Storybook or any static site).             |
-| `build get <buildReference>`           | Fetch a build's status, branch, commit, stats, and URL.           |
-| `build snapshots <buildReference>`     | Fetch a build's snapshot diffs, with flakiness data on each.      |
-| `test get <testId>`                    | Fetch a test with its flakiness metrics.                          |
-| `test changes <testId>`                | List a test's distinct changes, most frequent first.              |
-| `change ignore \| unignore <changeId>` | Silence a flaky change, or bring it back under review.            |
-| `review create \| list \| dismiss`     | Submit, list, and dismiss reviews on a build.                     |
-| `comment <subcommand>`                 | List, post, and act on the comments on a build.                   |
-| `test comment <subcommand>`            | The same, on the comments on a test.                              |
-| `login`, `logout`, `whoami`            | Manage the CLI's user session.                                    |
-| `create-project <name>`                | Create a project in an account you administer.                    |
-| `analytics`                            | Fetch build and screenshot metrics for an account.                |
-| `help [command]`                       | Display the available commands and options.                       |
+| Command                                    | What it does                                                        |
+| ------------------------------------------ | ------------------------------------------------------------------- |
+| `upload <directory>`                       | Upload snapshots from a directory and create a build.               |
+| `finalize`                                 | Close a parallel build once every shard has uploaded.               |
+| `skip`                                     | Create a skipped build so a required check still reports success.   |
+| `deploy <directory>`                       | Deploy a static build (Storybook or any static site).               |
+| `build get <buildReference>`               | Fetch a build's status, branch, commit, stats, and URL.             |
+| `build snapshots <buildReference>`         | Fetch a build's snapshot diffs, with flakiness data on each.        |
+| `build subscribe \| unsubscribe`           | Follow or stop following a build's notifications.                   |
+| `test list`                                | List a project's tests, flakiest first.                             |
+| `test get <testId>`                        | Fetch a test with its flakiness metrics.                            |
+| `test changes <testId>`                    | List a test's distinct changes, most frequent first.                |
+| `test subscribe \| unsubscribe <testId>`   | Follow or stop following a test's notifications.                    |
+| `change list`                              | List the changes currently ignored in a project.                    |
+| `change ignore \| unignore <changeId>`     | Silence a flaky change, or bring it back under review.              |
+| `review create \| list \| dismiss`         | Submit, list, and dismiss reviews on a build.                       |
+| `review reviewer list \| add \| remove`    | List, request, and cancel review requests on a build.               |
+| `comment <subcommand>`                     | List, post, and act on the comments on a build.                     |
+| `test comment <subcommand>`                | The same, on the comments on a test.                                |
+| `project get \| update`                    | Read a project's settings, and change them one flag at a time.      |
+| `project transfer`                         | Move a project to another account.                                  |
+| `project contributor list \| set \| remove` | Manage who can reach a project outside the team's own roles.        |
+| `project deployments`                      | List a project's deployments, most recent first.                    |
+| `project domain get \| set`                | Read or set the domain production deployments are served on.        |
+| `automation <subcommand>`                  | List, create, replace, and deactivate a project's automation rules. |
+| `account get \| update`                    | Read plan and usage, and set the role users get when they join.     |
+| `account member <subcommand>`              | List a team's members, change their role, remove them.              |
+| `account invite <subcommand>`              | Invite people, cancel invites, rotate the invite link.              |
+| `account domain <subcommand>`              | Manage the email domains a team is open to.                         |
+| `login`, `logout`, `whoami`                | Manage the CLI's user session.                                      |
+| `create-project <name>`                    | Create a project in an account you administer.                      |
+| `analytics`                                | Fetch build and screenshot metrics for an account.                  |
+| `help [command]`                           | Display the available commands and options.                         |
 
 ### Uploading from CI
 
@@ -197,6 +214,15 @@ argos build snapshots 72652 --project team/project --needs-review --json
 
 When a diff belongs to a tracked test it also carries that test's [flakiness metrics](../learn/reliability-and-flakiness/flaky-test-detection.md) under `test.metrics`, and — when the diff is a change — its ignore state and occurrence count under `change`. `--metrics-period` sets the window those are computed over (`24h`, `3d`, `7d`, `30d`, `90d`; defaults to `7d`).
 
+To start from the project rather than from a build, `test list` returns the tests currently running in it, flakiest first — the first page is your flakiness backlog:
+
+```bash
+argos test list --project team/project --limit 20 --json
+argos test list --project team/project --build-name unit --search carousel
+```
+
+A test is listed when it appeared in the latest reference build of its build name, so tests that were deleted, renamed, or skipped drop out on their own.
+
 A high occurrence count or flakiness score is a strong flakiness signal. Take the diff's `test.id` and look at the whole test — the CLI equivalent of the [test page](../learn/reliability-and-flakiness/test-page.md):
 
 ```bash
@@ -223,6 +249,12 @@ argos change unignore <changeId> --project team/project
 
 The ignore feature must be enabled for the project (**Project Settings → Flaky detection**, on by default). Argos can also [ignore recurring flaky changes automatically](../learn/reliability-and-flakiness/flaky-test-detection.md#automatically-ignore-recurring-flaky-changes).
 
+`change list` audits what has been silenced so far, most recently ignored first, with the test each change belongs to. Pass any of those ids back to `change unignore` to bring it under review again:
+
+```bash
+argos change list --project team/project --json
+```
+
 To let an agent do the investigation instead, see [Fix flaky tests with AI agents](../learn/reliability-and-flakiness/fix-flaky-tests-with-ai-agents.md).
 
 ### Reviewing and commenting
@@ -246,6 +278,140 @@ argos test comment create <testId> --project team/project --body "Flaky since th
 ```
 
 Run `argos comment --help` or `argos test comment --help` for each subcommand's arguments.
+
+`review reviewer` handles the review requests standing on a build. Requesting someone notifies them; requesting someone already requested is a no-op, and users without access to the project are ignored:
+
+```bash
+argos review reviewer list <buildReference> --json
+argos review reviewer add <buildReference> <userId> <userId>
+argos review reviewer remove <buildReference> <userId>
+```
+
+User ids come from `argos account member list --json` or `argos whoami --json`. You cannot request yourself.
+
+To follow a build or a test without commenting on it, subscribe to its notifications. Unsubscribing is recorded as intentional, so Argos won't subscribe you again automatically:
+
+```bash
+argos build subscribe <buildReference>
+argos test unsubscribe <testId> --project team/project
+```
+
+### Configuring a project
+
+`project get` prints a project's settings; `project update` changes them. Only the settings you pass are touched, and every one takes an explicit value — so a script never has to guess whether an omitted flag means "false" or "leave alone":
+
+```bash
+argos project get --project team/project --json
+argos project update --project team/project --summary-check auto --auto-ignore-after 3
+argos project update --project team/project --default-user-level reviewer --deployments true
+```
+
+Run `argos project update --help` for the full list. A few conventions are worth knowing:
+
+- Nullable settings reset to their inherited default when passed an empty value: `--default-base-branch ""` falls back to the repository's default branch.
+- `--private inherit` returns the project's visibility to whatever the linked repository says.
+- `--ignore-changes` and `--auto-ignore-after` drive [flaky change detection](../learn/reliability-and-flakiness/flaky-test-detection.md); `--auto-ignore-after off` turns automatic ignoring off while leaving manual ignoring on.
+
+`project contributor` grants access to users who aren't covered by their team role — team owners and members already reach every project, so this is for contributors:
+
+```bash
+argos project contributor list --project team/project --json
+argos project contributor set <userId> --level reviewer --project team/project
+argos project contributor remove <userId> --project team/project
+```
+
+Levels are `admin`, `reviewer`, and `viewer`. Revoking your own access never requires administrator rights — a contributor can always walk away from a project.
+
+`project transfer` moves a project to another account, optionally renaming it on the way. You must administer both the project and the account receiving it:
+
+```bash
+argos project transfer --project team/project --to other-team --name web
+```
+
+`project deployments` and `project domain` cover [deployments](../learn/deployments/README.md): the deployments a project has published, and the [custom domain](../learn/deployments/urls-and-domains.md) its production ones are served on. Only domains under `argos-ci.live` are accepted.
+
+```bash
+argos project deployments --project team/project --environment production --json
+argos project domain set acme-web.argos-ci.live --project team/project
+```
+
+### Automation rules
+
+`automation` manages the [automation rules](../learn/review-workflow/automations.md) that run when a build event matches. Rules are never deleted — deactivating one keeps its run history, which is what tells you why something fired:
+
+```bash
+argos automation list --project team/project --active true --json
+argos automation get <ruleId> --project team/project
+argos automation deactivate <ruleId> --project team/project
+```
+
+`create` and `update` take the rule definition as JSON, inline with `--definition` or from a file with `--definition-file`. `update` replaces the whole definition, so send the events, conditions, and actions you want the rule to end up with:
+
+```bash
+argos automation create --project team/project --definition-file rule.json
+```
+
+```json
+{
+  "name": "Notify on regressions",
+  "events": ["build.completed"],
+  "conditions": [{ "type": "build-conclusion", "value": "changes-detected" }],
+  "actions": [
+    { "type": "sendSlackMessage", "payload": { "name": "argos-alerts" } }
+  ]
+}
+```
+
+Action targets must belong to the project's account: a Slack channel connected to it, or the id of a Microsoft Teams or Discord webhook registered on it. Run `argos automation create --help` for the example inline.
+
+### Managing a team
+
+`account get` reports an account's plan and its usage for the current billing period — screenshots consumed against the plan, the consumption ratio, and the cost accrued beyond it. It's the CLI equivalent of watching your usage before it runs over:
+
+```bash
+argos account get --account my-team --json
+```
+
+`account member` lists a team's members and changes what they can reach:
+
+```bash
+argos account member list --account my-team --levels owner,member --json
+argos account member set-level <userId> --level member --account my-team
+argos account member remove <userId> --account my-team
+```
+
+Roles are `owner`, `member`, and `contributor` — owners administer the team, members see every project, contributors only the projects they are added to. A team can never be left without an administrator: the last member cannot be removed, and removing the second-to-last one promotes the survivor to owner.
+
+`account invite` covers everything that brings someone in. Re-inviting an address that already has a pending invite refreshes it, so a lost invite can always be resent:
+
+```bash
+argos account invite create dev@acme.com --account my-team --level contributor
+argos account invite list --account my-team --json
+argos account invite cancel <inviteId> --account my-team
+argos account invite reset-link --account my-team
+```
+
+`reset-link` rotates the team's shared invite link and invalidates the previous one.
+
+`account domain` opens a team to an email domain, so anyone signing up with a verified address on it joins automatically, at the team's default role. Public email providers are refused, and you must hold a verified address on the domain yourself:
+
+```bash
+argos account domain add acme.com --account my-team
+argos account domain list --account my-team --json
+argos account domain remove acme.com --account my-team
+```
+
+Removing a domain only stops new sign-ups from joining — members who already joined through it stay. `account update --default-user-level <member|contributor>` sets the role given to everyone who joins through the invite link or a verified domain.
+
+Every command in this section needs a [personal access token](#project-tokens-and-personal-access-tokens) with administrator rights on the team, and takes the account from `--account <slug>` or `ARGOS_ACCOUNT`.
+
+### Paginated lists
+
+`test list`, `change list`, `account member list`, `account invite list`, `project contributor list`, `project deployments`, and `automation list` follow pagination for you, up to `--limit` (100 by default). Raise it to walk a longer list:
+
+```bash
+argos project deployments --project team/project --limit 500 --json
+```
 
 ### Managing your session
 
