@@ -1,7 +1,7 @@
 ---
 description: >-
-  Upload screenshots programmatically from Node.js scripts, or build your own
-  Argos integration with @argos-ci/core.
+  Upload screenshots and standalone media programmatically from Node.js
+  scripts, or build your own Argos integration with @argos-ci/core.
 ---
 
 # Node.js SDK
@@ -25,6 +25,28 @@ await upload({ root: "./screenshots" });
 ```
 
 `upload` accepts the same options as the [CLI `upload` command](argos-command-line-interface-cli.md#uploading-from-ci) — files globs, build name, mode, parallel settings, threshold, and more.
+
+### Uploading standalone media
+
+`uploadMedia` uploads an image or a video on its own — no build, no comparison — and returns its share URL and a ready-to-paste Markdown embed:
+
+```js
+import { uploadMedia } from "@argos-ci/core";
+
+const [media] = await uploadMedia({
+  files: ["after.png"],
+  // Stable per-team identifier: re-uploading it replaces the file in place,
+  // so Markdown already posted to a pull request keeps working.
+  slug: "pr-1234-after",
+  prNumber: 1234,
+  comment: true,
+});
+
+console.log(media.url); // https://app.argos-ci.com/m/…
+console.log(media.markdown); // ![after.png](https://app.argos-ci.com/m/…)
+```
+
+Options mirror the [CLI `media upload` command](argos-command-line-interface-cli.md#sharing-images-and-videos): `accountSlug`, `slug`, `visibility`, `retentionDays`, `prNumber`, `comment` and `keepMetadata`. See [Media sharing](../learn/media/) for retention, visibility and billing.
 
 ### API reference
 
