@@ -21,17 +21,22 @@ https://mcp.argos-ci.com
 It integrates with popular AI assistants like Claude, enabling them to:
 
 - List builds and inspect their screenshot diffs
-- Approve or reject builds and dismiss reviews
-- Read and post comments on builds
-- Retrieve project metadata and account analytics
+- Approve or reject builds, dismiss reviews, and request reviewers
+- Read and post comments on builds and tests
+- Investigate flaky tests and ignore the changes behind them
+- Read and update project settings, contributors, deployments, and automation rules
+- Manage a team's members, invites, and email domains
+- Retrieve project metadata, account analytics, plan, and usage
 
 The server is remote and uses the **streamable HTTP** transport — there is no package to install or process to run locally. Configure your client with the transport `http` (sometimes labeled `streamable-http`) and the URL above. It implements the latest [MCP Authorization](https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization) and [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#streamable-http) specifications.
 
 ## Available tools
 
-Tools are generated directly from the [Argos REST API](https://argos-ci.com/docs/api-reference): every API operation that a user can call is exposed as an MCP tool with the same name, parameters, and permissions. When the API gains an endpoint, the MCP server gains the matching tool.
+Tools are generated directly from the [Argos REST API](https://argos-ci.com/docs/api-reference): every API operation that a user can call is exposed as an MCP tool with the same name, parameters, and permissions. When the API gains an endpoint, the MCP server gains the matching tool — with no client update on your side.
 
-Agents can list builds and inspect their screenshot diffs, approve or reject changes, read and post comments, manage projects, and retrieve account analytics. Ask your client to list the server's tools, or see the [API reference](https://argos-ci.com/docs/api-reference) for the underlying operations.
+Agents can list builds and inspect their screenshot diffs, approve or reject changes, request reviewers, read and post comments, diagnose flaky tests and ignore their recurring changes, configure projects and their contributors, manage automation rules, administer a team's members and invites, and retrieve account analytics and usage. Ask your client to list the server's tools, or see the [API reference](https://argos-ci.com/docs/api-reference) for the underlying operations.
+
+What an agent may actually do is decided by the scopes you grant it, not by the tool list: `projects:read` for inspecting projects, builds and tests, `reviews:write` for reviews, review requests and ignoring changes, `comments:write` for comments and notification subscriptions, `projects:write` for project configuration and automation rules, and `account:admin` for team administration.
 
 ## Authentication
 
