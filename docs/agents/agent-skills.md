@@ -1,7 +1,8 @@
 ---
 description: >-
-  Installable agent skills that teach your AI assistant the Argos CLI and a
-  complete pull-request visual review workflow.
+  Installable agent skills that teach your AI assistant the Argos CLI, a
+  complete pull-request visual review workflow, and how to share screenshots
+  and recordings by link.
 ---
 
 # Agent skills
@@ -14,6 +15,7 @@ Argos publishes [agent skills](https://skills.sh) — reusable instruction packs
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `argos-cli`       | The [Argos CLI](../sdks-reference/argos-command-line-interface-cli.md): commands, flags, authentication rules, and output formats.          |
 | `argos-pr-review` | A complete pull-request visual review workflow: find the Argos build, inspect snapshots, summarize changes, and approve or request changes. |
+| `argos-upload`    | When and how to share a screenshot or a screen recording by link, and how to embed it so a pull request actually renders it.                 |
 
 ## Installation
 

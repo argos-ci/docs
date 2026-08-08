@@ -15,6 +15,7 @@ Best for individuals and small projects.
 - **Price**: Free
 - **Screenshots included**: 5,000 / month
 - **Extra screenshots**: Not available
+- **Media sharing**: public share pages, 30-day retention, 50 MB per file
 
 ### Pro plan
 
@@ -28,8 +29,15 @@ Designed for teams, with usage-based pricing.
 - **Optional add-ons** (Stripe subscriptions only):
   - [GitHub SSO](../account-and-access/github-single-sign-on.md): $50 / month
   - [SAML SSO](../account-and-access/saml-single-sign-on.md): $200 / month
+- **Media sharing**: team-scoped or public share pages, 1-year retention, 500 MB per file
 
 You can subscribe to the Pro plan with a credit card through [Stripe](how-to-subscribe.md), or through [GitHub Marketplace](https://github.com/marketplace/argos-ci) to pay via your GitHub invoice. Marketplace plans come in fixed sizes (S, M, L, XL) with increasing screenshot limits instead of usage-based billing — see [Usage & spend management](spend-management.md) for how each model handles going over the limit.
+
+### What counts as a screenshot
+
+Every snapshot Argos stores for a build counts as one screenshot, whether it is an image or a non-image file such as Markdown, JSON or HTML.
+
+[Media uploads](../media/) draw on the same allowance rather than a separate quota: one uploaded image counts as 1 screenshot, and one uploaded video as 25 — a video costs more to store and to serve. Uploading the same file twice is free.
 
 ### Open-source plan
 

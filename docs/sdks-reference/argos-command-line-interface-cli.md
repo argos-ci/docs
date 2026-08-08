@@ -109,6 +109,9 @@ Run `argos <command> --help` for a command's exact arguments, flags, and default
 | `account member <subcommand>`              | List a team's members, change their role, remove them.              |
 | `account invite <subcommand>`              | Invite people, cancel invites, rotate the invite link.              |
 | `account domain <subcommand>`              | Manage the email domains a team is open to.                         |
+| `media upload <files...>`                  | Upload standalone images or videos and print their share URLs.       |
+| `media list`                               | List a team's uploaded media, most recent first.                    |
+| `media get \| delete <mediaId>`             | Fetch or delete one uploaded media.                                 |
 | `login`, `logout`, `whoami`                | Manage the CLI's user session.                                      |
 | `create-project <name>`                    | Create a project in an account you administer.                      |
 | `analytics`                                | Fetch build and screenshot metrics for an account.                  |
@@ -423,6 +426,22 @@ argos whoami  # Display the user authenticated with the current token
 argos logout  # Log out from Argos
 ```
 
+### Sharing images and videos
+
+`media upload` uploads a standalone image or video — no build, no test run — and prints a share URL with ready-to-paste Markdown:
+
+```bash
+argos media upload before.png after.png
+```
+
+Add `--pr 1234 --comment` to have Argos maintain a single comment on the pull request listing every media uploaded to it. Add `--slug <slug>` for a link that survives a re-run: re-uploading the same slug replaces the file in place, so Markdown already posted to a pull request never goes stale.
+
+Copy the Markdown the command prints rather than writing your own. For a video it is a poster frame wrapped in a link, which is the only form GitHub renders — an inline player only works for media GitHub hosts itself.
+
+`media list` spans a whole team, so it needs a [personal access token](#project-tokens-and-personal-access-tokens) belonging to an administrator; `media upload`, `get` and `delete` accept either token type.
+
+See [Media sharing](../learn/media/) for retention, visibility and billing.
+
 ### Account commands
 
 `create-project` creates a project in an account you administer:
@@ -446,5 +465,6 @@ The [`argos-javascript`](https://github.com/argos-ci/argos-javascript) repositor
 
 * [`argos-cli`](https://github.com/argos-ci/argos-javascript/tree/main/skills/argos-cli): use Argos CLI commands, flags, authentication, and output formats.
 * [`argos-pr-review`](https://github.com/argos-ci/argos-javascript/tree/main/skills/argos-pr-review): review a pull request with an Argos build as visual evidence.
+* [`argos-upload`](https://github.com/argos-ci/argos-javascript/tree/main/skills/argos-upload): share a screenshot or a screen recording by link, and embed it in a pull request.
 
 See [Review builds with AI agents](../learn/review-workflow/review-builds-with-ai-agents.md) to install and use the skills in a pull request review workflow.
