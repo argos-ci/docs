@@ -1,71 +1,86 @@
 ---
 description: >-
-  Subscribe to a paid Argos plan through Stripe or GitHub Marketplace, and
-  manage your subscription over time.
+  Move from the free Hobby plan to a Pro team, with a 14-day trial, Stripe
+  checkout, or GitHub Marketplace — and manage the subscription afterwards.
 ---
 
 # How to subscribe
 
-Upgrade a team to a paid plan to unlock higher screenshot volumes and team features. You can subscribe with a credit card through Stripe, or through GitHub Marketplace.
+Paid plans belong to **teams**, not to personal accounts. A personal account stays on the free [Hobby plan](pricing-plans.md) forever, so upgrading means creating a team on the Pro plan and transferring your projects to it.
 
 {% hint style="info" %}
-A 14-day trial is available for the first team upgrade.
+Your first team starts on a **14-day Pro trial**, with no credit card required. If you have already used your trial, you go straight to Stripe Checkout instead.
 {% endhint %}
 
-### Subscribe through Stripe
+### Upgrade a Hobby account to a Pro team
 
 {% stepper %}
 {% step %}
-### Create or open a team
+### Create a team
 
-If you do not have a team yet, [create a new team](https://app.argos-ci.com/teams/new). Otherwise, go to the settings of your existing team.
+From your personal account, go to **Settings → Billing** and select **Create a Team**.
+
+![The Plan card of a personal account on the Hobby plan](../../.gitbook/assets/hobby-plan-card.png)
 {% endstep %}
 
 {% step %}
-### Upgrade the plan
+### Name the team and continue
 
-In the **Plan** section, select **Upgrade**.
+Enter a team name, then select **Continue**. The line above the button tells you what happens next.
 
-![The Upgrade button in the team's Plan settings](<../../.gitbook/assets/upgrade button d0c6f6126b3fcc83f93b26211f5d90e4.png>)
+If you have never used the Pro trial, the team is created immediately on a 14-day trial — no payment details are asked for.
+
+![The Create a Team form starting a 14-day Pro plan trial](../../.gitbook/assets/create-team-trial.png)
+
+If you have already used your trial, you are redirected to Stripe Checkout to complete the subscription before the team becomes usable.
+
+![The Create a Team form redirecting to Stripe](../../.gitbook/assets/create-team-checkout.png)
+
+{% hint style="info" %}
+The optional **Let @your-domain emails join this team** checkbox only appears if you have a verified company email address. It can be changed later in the team settings.
+{% endhint %}
 {% endstep %}
 
 {% step %}
-### Choose the team to upgrade
+### Transfer your projects
 
-Select the team you want to upgrade.
+Your existing projects stay on your personal account until you move them. For each project, go to **Settings → Transfer Project**, select **Transfer**, then pick the new team.
 
-![The team selection dialog](<../../.gitbook/assets/team select 756d315674481bfe6885325ac9ce6df0.png>)
+![Selecting the destination team in the Transfer Project dialog](../../.gitbook/assets/transfer-project-select-team.png)
+
+The next screen lists the builds and screenshots that will move, and confirms the plan change, before you select **Transfer**.
 {% endstep %}
 
 {% step %}
-### Complete checkout
+### Add a payment method
 
-You are redirected to Stripe Checkout. Complete the payment form. Once the payment is confirmed, you receive a confirmation email.
+During the trial, the team's **Settings → Billing** page shows how many days are left. Select **Add a payment method** to open the Stripe portal and enter your card — without it, the team loses access to team features when the trial ends.
+
+![The Plan card of a team on the Pro trial](../../.gitbook/assets/team-pro-trial-plan-card.png)
 {% endstep %}
 {% endstepper %}
 
 {% hint style="info" %}
-The payment is processed at the end of the first month, based on your usage.
+The Pro plan is usage-based: the first payment is taken at the end of the billing period, based on the screenshots you actually used. See [Usage & spend management](spend-management.md).
 {% endhint %}
 
 ### Subscribe through GitHub Marketplace
 
-To pay via your GitHub invoice instead, start the subscription from the [Argos page on GitHub Marketplace](https://github.com/marketplace/argos-ci). Make sure you upgrade the correct organization on the Marketplace.
+To pay through your GitHub invoice instead of a card, start the subscription from the [Argos page on GitHub Marketplace](https://github.com/marketplace/argos-ci). Make sure you upgrade the correct organization.
 
 {% hint style="warning" %}
-GitHub does not allow **invoiced GitHub accounts** to purchase paid plans on the Marketplace. If you see the error "Unfortunately, invoiced customers cannot purchase paid plans on the GitHub Marketplace", subscribe [through Stripe](#subscribe-through-stripe) instead.
+GitHub does not allow **invoiced GitHub accounts** to purchase paid plans on the Marketplace. If you see the error "Unfortunately, invoiced customers cannot purchase paid plans on the GitHub Marketplace", subscribe through Stripe instead.
 {% endhint %}
+
+### Subscribe a team whose trial has expired
+
+If a team's trial has expired or its subscription was canceled, a banner at the top of the team pages offers a **Subscribe** button, which opens Stripe Checkout. A team that has never extended its trial also gets an **Extend trial** button there.
 
 ### Manage your subscription
 
-To view invoices, update your payment method, or cancel your plan:
+To view invoices, update your payment method, or cancel your plan, go to the team's **Settings → Billing** and select **Manage subscription**.
 
-1. Go to your team settings.
-2. Select the **Manage your subscription** link.
-
-You are redirected to your payment provider's portal — Stripe or GitHub Marketplace, depending on how you subscribed.
-
-![The Manage your subscription link in team settings](<../../.gitbook/assets/manage subscription link 13df1544ffba10019b57e7555e8a7a8e.png>)
+You are redirected to your payment provider — the Stripe customer portal, or GitHub Marketplace if you subscribed there.
 
 ### Next steps
 
