@@ -17,7 +17,8 @@ Pass as many files as you like. Each one is validated up front — an unsupporte
 | Flag                        | What it does                                                                                                                          |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | `--branch <branch>`         | Stage the media on a branch. Argos publishes it — and posts the pull request comment — by itself once a pull request opens for that branch. |
-| `--pr <number>`             | Publish the media to an existing pull request.                                                                                         |
+| `--pr <number>`             | Publish the media to an existing pull request. Detected with the GitHub CLI when neither this nor `--branch` is given.                  |
+| `--no-pr`                   | Skip that detection and upload the media unattached.                                                                                   |
 | `--state <before\|after>`   | Which half of a before/after pair these files are. Inferred from a file name ending in `-before` or `-after`.                          |
 | `--description <text>`      | Prose shown under the media in the pull request comment.                                                                               |
 | `--visibility <team\|public>` | Who can open the share page. Defaults to the most private option your plan allows. See [Share links](share-links-retention-and-limits.md). |
@@ -37,7 +38,23 @@ An agent produces screenshots while it is still doing the work; the pull request
 argos media upload checkout-before.png checkout-after.png --branch feat/checkout
 ```
 
-Neither flag is inferred from the environment, CI included — pass the one you mean. A media keeps its branch after publishing, as a record of where it came from, so `argos media list --branch <branch>` finds everything uploaded for the work in hand across the moment the pull request opens.
+A media keeps its branch after publishing, as a record of where it came from, so `argos media list --branch <branch>` finds everything uploaded for the work in hand across the moment the pull request opens.
+
+#### When you pass neither
+
+Argos asks the [GitHub CLI](https://cli.github.com) for the pull request of the branch you are on:
+
+```bash
+argos media upload after.png     # publishes to the pull request you are working in
+```
+
+Only when you pass neither flag. `--pr` is taken as given, and `--branch` is already an answer to the question — detecting a pull request over it would publish immediately and discard the staging you asked for.
+
+Detection never fails an upload. `gh` not installed, not signed in, no pull request open for the branch yet, not a git repository at all — all mean the same thing, "nothing to attach to", and the media uploads with its share URL either way. Pass `--no-pr` to skip the lookup, for a screenshot that has nothing to do with the branch that happens to be checked out.
+
+{% hint style="info" %}
+CI is the case where detection usually finds nothing: `gh` is often absent, and a checkout is frequently in a detached HEAD. Pass `--pr` or `--branch` explicitly in a workflow rather than relying on it.
+{% endhint %}
 
 Two boundaries: publishing needs the project connected to a GitHub repository with [pull request comments](../review-workflow/pull-request-comments.md) enabled, and a pull request opened from a **fork** never claims a branch's staged media.
 
@@ -81,16 +98,31 @@ Converting applies a photo's EXIF orientation, then drops the rest of its metada
 
 ### Embedding the result
 
-Copy the `Markdown` line the command prints. Do not hand-write the embed — the correct form differs by type:
+Copy the `Markdown` line the command prints. It is a picture wrapped in a link to the share page — `[![name](fileUrl)](url)` — so the media shows inline, and clicking it lands on the page where it can be compared, versioned and commented on.
 
-* An **image** embeds directly: `![name](url)`.
-* A **video** embeds its **poster frame wrapped in a link** to the share page: `[![name](posterUrl)](url)`.
+**Do not hand-write the embed from the share URL.** `url` is an HTML page: `![name](url)` renders as a broken image everywhere you paste it. The image part has to point at the file, which is what the `Markdown` line already does.
 
-That difference is not cosmetic. GitHub renders an inline video player only for media it hosts itself, so a `<video>` tag or a bare `.mp4` link pointing at Argos renders as a dead link. The poster-in-a-link is the form that shows something and plays when clicked.
+The picture is the file itself for an image, and the **poster frame** for a video. That difference is not cosmetic: GitHub renders an inline video player only for media it hosts itself, so a `<video>` tag or a bare `.mp4` link pointing at Argos renders as a dead link. The poster-in-a-link shows something and plays when clicked.
 
 {% hint style="info" %}
 The poster frame is derived by the CDN from the video itself, so it is available immediately — there is nothing to wait for and no second file to manage.
 {% endhint %}
+
+Uploading more than one file prints one extra block: the whole batch as a Markdown table, [pairs](#before-and-after-pairs) side by side in one row, exactly as the managed pull request comment renders them. That is the thing to paste when you want all of them at once.
+
+```
+Markdown for all of them:
+
+| Name | Before | After |
+| --- | --- | --- |
+| checkout.png | [![checkout.png](…)](…) | [![checkout.png](…)](…) |
+```
+
+#### Sharing the link anywhere else
+
+A **public** share link unfurls on its own. Argos serves OpenGraph and Twitter card tags with the page, and answers [oEmbed](https://oembed.com) at `/oembed`, so pasting one into Slack, Discord, Notion, Linear or a tweet shows the screenshot rather than a bare URL.
+
+A **team-only** link deliberately does not: unfurl metadata is read by a crawler carrying no session, so anything in it would be public to whoever holds the link — including the file name. Team links stay opaque until somebody signs in. Set `--visibility public` on the upload when you mean a link to travel.
 
 ### Reading the feedback left on a media
 
@@ -154,6 +186,8 @@ console.log(media.url, media.markdown);
 ```
 
 Options mirror the CLI: `token`, `project`, `branch`, `prNumber`, `state`, `description`, `visibility` and `compress` (`true` by default). It returns one media per file, uploaded sequentially in input order. See the [Node.js SDK reference](../../sdks-reference/node.js-sdk.md).
+
+Pull request detection is the CLI's, not the SDK's — nothing here shells out to `gh`. Pass `prNumber` or `branch` yourself.
 
 ### From the REST API
 
