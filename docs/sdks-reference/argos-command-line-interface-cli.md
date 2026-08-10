@@ -66,7 +66,7 @@ Do not use `argos login` in CI. CI uploads should use `ARGOS_TOKEN` or [GitHub O
 
 #### Project tokens and personal access tokens
 
-Uploads and read-only commands — `build get`, `build snapshots`, `test list`, `test get`, `test changes`, `change list`, `project get`, `project deployments`, `project domain get` — work with a **project token**. Anything attributed to a user requires a **personal access token**, because the action is checked against that user's permissions: submitting or dismissing a review, requesting reviewers, posting comments, ignoring a change, configuring a project, and administering a team.
+Uploads and read-only commands — `build get`, `build snapshots`, `test list`, `test get`, `test changes`, `change list`, `project get`, `project deployments`, `project domain get`, `media list`, `media get`, `media versions` — work with a **project token**. Anything attributed to a user requires a **personal access token**, because the action is checked against that user's permissions: submitting or dismissing a review, requesting reviewers, posting comments (on builds, tests, and media alike), ignoring a change, configuring a project, and administering a team.
 
 Two read-only commands are the exception: `project contributor list` and `review reviewer list` return users, so they need a personal access token to resolve them against — a project token carries no identity.
 
@@ -111,8 +111,8 @@ Run `argos <command> --help` for a command's exact arguments, flags, and default
 | `account domain <subcommand>`              | Manage the email domains a team is open to.                         |
 | `media upload <files...>`                  | Upload standalone images or videos and print their share URLs.       |
 | `media list`                               | List a project's uploaded media, most recent first.                 |
-| `media get \| delete <mediaId>`             | Fetch or delete one uploaded media.                                 |
-| `media feedback`                           | Read every open comment on a project's media, grouped by media.     |
+| `media get \| update \| delete <mediaId>`   | Fetch, edit, or delete one uploaded media.                          |
+| `media versions <mediaId>`                 | List a media's uploaded versions, newest first.                     |
 | `media comment <subcommand>`               | List, post, edit, resolve and react to comments on a media.         |
 | `login`, `logout`, `whoami`                | Manage the CLI's user session.                                      |
 | `create-project <name>`                    | Create a project in an account you administer.                      |
@@ -436,20 +436,25 @@ argos logout  # Log out from Argos
 argos media upload before.png after.png
 ```
 
-Add `--pr 1234 --comment` to have Argos maintain a single comment on the pull request listing every media uploaded to it. Add `--slug <slug>` for a link that survives a re-run: re-uploading the same slug replaces the file in place, so Markdown already posted to a pull request never goes stale.
+Add `--pr 1234` to publish to an existing pull request, or `--branch <branch>` while you are still working: the media is **staged**, and Argos publishes it — and posts a single managed comment listing every media — by itself once a pull request opens for that branch. Neither flag is inferred from the environment, CI included.
 
-Copy the Markdown the command prints rather than writing your own. For a video it is a poster frame wrapped in a link, which is the only form GitHub renders — an inline player only works for media GitHub hosts itself.
+Re-uploading the same file name adds a **version** rather than a second media: the share URL keeps pointing at the newest upload, so Markdown already posted to a pull request never goes stale. A file named `checkout-before.png` uploads as `checkout.png` labelled `before` and pairs with its `after` for side-by-side comparison; `--state` sets the label for files not named that way.
 
-Media belongs to a project and inherits its access. `media upload`, `list`, `get` and `feedback` accept either token type; with a [personal access token](#project-tokens-and-personal-access-tokens) pass `--project <owner/project>` or set `ARGOS_PROJECT`. `media delete` needs project administrator rights, since deleting a media breaks any share link already pasted somewhere.
+Images are converted to WebP before upload — `--no-compress` opts out — while the media keeps your file's name and extension. Copy the Markdown the command prints rather than writing your own. For a video it is a poster frame wrapped in a link, which is the only form GitHub renders — an inline player only works for media GitHub hosts itself.
+
+The rest of the group: `media list` filters by `--branch`, `--pr`, `--stage staged|published`, `--search` and `--type image|video`; `media update` edits a **staged** media's name, description or branch, which are fixed once it is published; `media versions` lists the uploads behind a media, newest first.
+
+Media belongs to a project and inherits its access. `media upload` and `media list` accept either token type; with a [personal access token](#project-tokens-and-personal-access-tokens) pass `--project <owner/project>` or set `ARGOS_PROJECT`. `media delete` needs project administrator rights, since deleting a media breaks any share link already pasted somewhere.
 
 A human can pin a comment to a point on an uploaded screenshot, which is how an agent gets told what to change about an image it cannot see:
 
 ```bash
-argos media feedback --pr 1234   # open threads, each with its pinned coordinates
-argos media comment resolve <mediaId> <threadId>
+argos media list --branch feat/checkout   # find what was uploaded for the branch
+argos media comment list <mediaId>        # open threads, each with its pinned coordinates
+argos media comment resolve <mediaId> <commentId>
 ```
 
-`media feedback` reads; `media comment create` and `resolve` write on the project's review surface, so they need a personal access token.
+A comment records the media **version** it was written against — `media versions` resolves it to the right file once the media has been re-uploaded. Every `media comment` command, reading included, needs a personal access token: a comment has an author.
 
 See [Media sharing](../learn/media/) for retention, visibility and billing.
 

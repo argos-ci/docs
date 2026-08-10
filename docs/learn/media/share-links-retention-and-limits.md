@@ -6,16 +6,16 @@ description: Who can open an Argos media share link, how long an uploaded file i
 
 ### Who can open a share link
 
-`visibility` controls the **share page** — the branded page with the project it came from, the expiry, and the copy-Markdown button:
+`visibility` controls the **share page** — the page with the file, its version history, its comment threads, and the copy-Markdown button:
 
-| Visibility | Who can open the share page                              |
-| ---------- | -------------------------------------------------------- |
-| `team`     | Anyone signed in to Argos with access to the owning project. |
-| `public`   | Anyone holding the URL. No sign-in.                       |
+| Visibility | Who can open the share page                                                    |
+| ---------- | ------------------------------------------------------------------------------ |
+| `team`     | Anyone signed in to Argos with access to the owning project. **Pro plans only.** |
+| `public`   | Anyone holding the URL. No sign-in.                                             |
 
-A share URL carries an unguessable token rather than the media's id, so a link cannot be found by guessing and does not reveal how much a project has uploaded. Share pages are `noindex`, so they don't turn up in search results.
+An upload that doesn't choose gets the most private option its plan allows: `team` on Pro, `public` on Hobby. Requesting `team` on Hobby is rejected — a team-scoped link is what the paid tier sells — so on Hobby every share page is public.
 
-On **Pro**, `team` is the default. On **Hobby**, every share page is public.
+A share URL carries an unguessable token rather than the media's id, so a link cannot be found by guessing and does not reveal how much a project has uploaded. The token survives re-uploads: new versions never change the URL. Share pages are `noindex`, so they don't turn up in search results.
 
 {% hint style="warning" %}
 **The file itself is always reachable without signing in**, at an unguessable URL on the Argos CDN, whatever the visibility.
@@ -29,31 +29,31 @@ Treat a media file as "anyone with the link", and the share page as the part tha
 
 An uploaded file is kept for a fixed window, then deleted:
 
-| Plan  | Retention                                 |
-| ----- | ----------------------------------------- |
-| Hobby | 30 days                                   |
-| Pro   | 1 year, shorter with `--retention <days>` |
+| Plan  | Retention |
+| ----- | --------- |
+| Hobby | 30 days   |
+| Pro   | 1 year    |
 
-The countdown runs from the **upload**, not from the last view, so "this link works for 30 days" is something you can reason about when you paste it somewhere.
+Retention is the plan's, not the upload's — there is no per-request setting, so "this link works for 30 days" is something you can reason about when you paste it somewhere. The countdown runs from the **upload**, not from the last view.
 
-`--retention` only shortens. A request longer than the plan allows is clamped rather than rejected, so an upload never fails over a flag.
+It applies **per version**: each upload of a media gets its own expiry, so an old version ages out of the share page's history while the media — and its share URL — live on with the newer ones. When the last version expires, the media disappears with its comment threads. Expired files are purged hourly, bytes included.
 
-An expired link renders an "unavailable" page instead of a 404, so an embed in a pull request degrades visibly rather than into a broken image.
+An expired link renders an "unavailable" page instead of a 404 — the same page a deleted media or a `team` page opened without access shows — so an embed in a pull request degrades visibly rather than into a broken image.
 
 {% hint style="info" %}
-Deleting a media takes effect immediately. Any share link or pull request embed pointing at it stops working, and the file is removed from storage.
+Deleting a media takes effect immediately. Any share link or pull request embed pointing at it stops working, its row drops out of the managed pull request comment, and the file is removed from storage.
 {% endhint %}
 
 ### Accepted formats
 
-| Type   | Formats                            |
-| ------ | ---------------------------------- |
-| Images | PNG, JPEG, WebP, AVIF, GIF         |
-| Videos | MP4, WebM, MOV (QuickTime)         |
+| Type   | Formats                    |
+| ------ | -------------------------- |
+| Images | PNG, JPEG, WebP, AVIF, GIF |
+| Videos | MP4, WebM, MOV (QuickTime) |
 
 Anything else is refused before the upload starts. SVG is deliberately excluded: it can carry scripts, and a share page serves media inline.
 
-Argos verifies the bytes, not the extension. A file whose contents don't match its declared type is rejected and its bytes are deleted, even if the name and the content type both said otherwise.
+Argos verifies the bytes, not the extension: finalizing reads the file's first 64 KB and identifies the actual container. A file declared as an image that turns out not to be one — or the reverse — is rejected and its bytes are deleted, even if the name and the content type both said otherwise. Since the file URL is reachable without a session, this check is what keeps active content off an Argos domain.
 
 ### File size
 
@@ -62,32 +62,32 @@ Argos verifies the bytes, not the extension. A file whose contents don't match i
 | Hobby | 50 MB               |
 | Pro   | 500 MB              |
 
-The limit is enforced by storage itself before the bytes land, so an oversized upload fails fast instead of transferring and then being rejected. A long screen recording is the usual thing that trips it — trim it before uploading.
+The limit is checked when the upload is registered, and enforced again by storage itself before the bytes land — so an oversized upload fails fast instead of transferring and then being rejected. A long screen recording is the usual thing that trips it; trim it before uploading.
 
 ### What Argos does to your file
 
-Nothing. Argos stores the bytes you uploaded and never rewrites them — there is no transcoding, no re-encoding, and no processing queue to wait on. A media is usable the moment the upload finishes.
+Nothing, server-side. Argos stores the bytes it received and never rewrites them — there is no transcoding, no re-encoding, and no processing queue to wait on. A media is usable the moment the upload finishes.
 
-Delivery is where the work happens, and the CDN does it on request:
+Two things do transform your file, both outside the stored original:
 
-* **Images** are converted to WebP or AVIF for browsers that prefer them, and resized on demand.
-* **A video's poster frame** is derived from the video itself, so it is available immediately and can never drift from the file it represents.
+* **The CLI compresses images before upload.** PNG and JPEG are converted to WebP client-side unless you pass `--no-compress` — see [Image compression](standalone-media-upload.md#image-compression). What Argos stores in that case is the WebP the CLI produced.
+* **The CDN works at delivery time.** Images are converted to WebP or AVIF for browsers that prefer them and resized on demand; a **video's poster frame** is derived from the video itself (a second in, where there is something to see), so it is available immediately and can never drift from the file it represents.
 
 Two consequences worth knowing:
 
-* **Embedded metadata is preserved.** A photo's EXIF — including GPS coordinates, if the device recorded them — stays in the stored file and is readable by anyone with the file URL. The CDN drops it from the converted variants a browser fetches, but not from the original. Strip it yourself before uploading if it matters.
+* **Embedded metadata survives in the stored file.** A photo's EXIF — including GPS coordinates, if the device recorded them — stays in the original and is readable by anyone with the file URL. The CDN drops it from the converted variants a browser fetches, but not from the original. The CLI's WebP conversion strips it (after applying the orientation), but a file uploaded untouched — a video, a GIF, or anything under `--no-compress` — keeps it. Strip it yourself before uploading if it matters.
 * **Video plays only if the browser can decode it.** Most MP4 and WebM is fine, and so is the H.264 that screen recorders normally produce. ProRes and some HEVC exports will not play inline — the viewer gets a download instead. Export to H.264 if you need inline playback.
 
 ### Billing
 
-Uploads draw on the **screenshot allowance you already have** — there is no second quota to track and no new line on the invoice.
+Uploads draw on the **screenshot allowance you already have** — there is no second quota to track and no new line on the invoice, and the usage detail breaks media out so four screen recordings never read as a hundred unexplained screenshots.
 
 | Upload | Screenshot units |
 | ------ | ---------------- |
 | Image  | 1                |
 | Video  | 25               |
 
-A video costs more because it costs more to store and to serve. Uploading the same file twice is free: the storage key is derived from the file's contents, so Argos recognizes it, skips the transfer and bills it once.
+A video costs more because it costs more to store and to serve. An upload is billed when it finalizes; re-uploading a file whose bytes haven't changed adds no version and costs nothing.
 
 Because uploads share the screenshot meter, they also share the existing [spend management](../billing-and-subscription/spend-management.md) thresholds and alerts — an upload is rejected when the account is over capacity or past its spend limit, exactly as a build would be.
 

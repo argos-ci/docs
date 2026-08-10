@@ -28,25 +28,25 @@ await upload({ root: "./screenshots" });
 
 ### Uploading standalone media
 
-`uploadMedia` uploads an image or a video on its own — no build, no comparison — and returns its share URL and a ready-to-paste Markdown embed:
+`uploadMedia` uploads images or videos on their own — no build, no comparison — and returns each one's share URL and a ready-to-paste Markdown embed:
 
 ```js
 import { uploadMedia } from "@argos-ci/core";
 
 const [media] = await uploadMedia({
-  files: ["after.png"],
-  // Stable per-team identifier: re-uploading it replaces the file in place,
-  // so Markdown already posted to a pull request keeps working.
-  slug: "pr-1234-after",
-  prNumber: 1234,
-  comment: true,
+  files: ["checkout-after.png"],
+  // Stage the media on the branch: Argos publishes it — and posts the pull
+  // request comment — by itself once a pull request opens for that branch.
+  branch: "feat/checkout",
 });
 
+// The `-after` suffix is lifted off the name: this media is
+// `checkout.png`, labelled `after`.
 console.log(media.url); // https://app.argos-ci.com/m/…
-console.log(media.markdown); // ![after.png](https://app.argos-ci.com/m/…)
+console.log(media.markdown); // ![checkout.png](https://app.argos-ci.com/m/…)
 ```
 
-Options mirror the [CLI `media upload` command](argos-command-line-interface-cli.md#sharing-images-and-videos): `project`, `slug`, `visibility`, `retentionDays`, `prNumber` and `comment`. See [Media sharing](../learn/media/) for retention, visibility and billing.
+Re-uploading the same name adds a **version** and keeps the URL, so Markdown already posted to a pull request shows the newest upload. Options mirror the [CLI `media upload` command](argos-command-line-interface-cli.md#sharing-images-and-videos): `token`, `project`, `branch`, `prNumber`, `state`, `description`, `visibility`, and `compress` (`true` by default — images are converted to WebP before upload). It returns one media per file, uploaded sequentially in input order. See [Media sharing](../learn/media/) for retention, visibility and billing.
 
 ### API reference
 
