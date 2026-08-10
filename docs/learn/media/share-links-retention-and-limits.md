@@ -17,6 +17,12 @@ An upload that doesn't choose gets the most private option its plan allows: `tea
 
 A share URL carries an unguessable token rather than the media's id, so a link cannot be found by guessing and does not reveal how much a project has uploaded. The token survives re-uploads: new versions never change the URL. Share pages are `noindex`, so they don't turn up in search results.
 
+#### Unfurling
+
+A `public` link unfurls wherever it is pasted. Argos serves OpenGraph and Twitter card tags with the page itself, and answers [oEmbed](https://oembed.com) at `/oembed`, so Slack, Discord, Notion, Linear and the rest show the screenshot rather than a bare URL. Images answer as an oEmbed `photo`; videos answer as a `link` with a thumbnail, because a `video` response means an embedded player and Argos pages refuse to be framed.
+
+A `team` link does not unfurl, on purpose. That metadata is read by a crawler carrying no session, so everything in it is public to whoever holds the link — the file name included, which is often the whole of what a private link was protecting.
+
 {% hint style="warning" %}
 **The file itself is always reachable without signing in**, at an unguessable URL on the Argos CDN, whatever the visibility.
 
