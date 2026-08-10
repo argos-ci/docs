@@ -24,6 +24,7 @@
   * [Pull request comments](learn/review-workflow/pull-request-comments.md)
   * [Summary checks](learn/review-workflow/summary-checks.md)
   * [Tags](learn/review-workflow/tags.md)
+  * [Flows](learn/review-workflow/flows.md)
   * [Review builds with AI agents](learn/review-workflow/review-builds-with-ai-agents.md "AI agents")
   * [Automations](learn/review-workflow/automations.md)
 * [Reliability & flakiness](learn/reliability-and-flakiness/README.md)
