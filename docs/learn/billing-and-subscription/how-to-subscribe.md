@@ -16,6 +16,7 @@ Your first team starts on a **14-day Pro trial**, with no credit card required. 
 
 {% stepper %}
 {% step %}
+
 ### Create a team
 
 From your personal account, go to **Settings → Billing** and select **Create a Team**.
@@ -24,6 +25,7 @@ From your personal account, go to **Settings → Billing** and select **Create a
 {% endstep %}
 
 {% step %}
+
 ### Name the team and continue
 
 Enter a team name, then select **Continue**. The line above the button tells you what happens next.
@@ -42,6 +44,7 @@ The optional **Let @your-domain emails join this team** checkbox only appears if
 {% endstep %}
 
 {% step %}
+
 ### Transfer your projects
 
 Your existing projects stay on your personal account until you move them. For each project, go to **Settings → Transfer Project**, select **Transfer**, then pick the new team.
@@ -52,6 +55,7 @@ The next screen lists the builds and screenshots that will move, and confirms th
 {% endstep %}
 
 {% step %}
+
 ### Add a payment method
 
 During the trial, the team's **Settings → Billing** page shows how many days are left. Select **Add a payment method** to open the Stripe portal and enter your card — without it, the team loses access to team features when the trial ends.
@@ -61,7 +65,7 @@ During the trial, the team's **Settings → Billing** page shows how many days a
 {% endstepper %}
 
 {% hint style="info" %}
-The Pro plan is usage-based: the first payment is taken at the end of the billing period, based on the screenshots you actually used. See [Usage & spend management](spend-management.md).
+The Pro plan's base price is charged at the start of each billing period. Extra screenshots beyond the included volume are billed at the end of the period, based on actual usage. See [Usage & spend management](spend-management.md).
 {% endhint %}
 
 ### Subscribe through GitHub Marketplace
@@ -69,7 +73,7 @@ The Pro plan is usage-based: the first payment is taken at the end of the billin
 To pay through your GitHub invoice instead of a card, start the subscription from the [Argos page on GitHub Marketplace](https://github.com/marketplace/argos-ci). Make sure you upgrade the correct organization.
 
 {% hint style="warning" %}
-GitHub does not allow **invoiced GitHub accounts** to purchase paid plans on the Marketplace. If you see the error "Unfortunately, invoiced customers cannot purchase paid plans on the GitHub Marketplace", subscribe through Stripe instead.
+GitHub does not allow **invoiced GitHub accounts** to purchase paid plans on the Marketplace. If you see the error "Unfortunately, invoiced customers cannot purchase paid plans on the GitHub Marketplace", [subscribe through Stripe](#subscribe-through-stripe) instead.
 {% endhint %}
 
 ### Subscribe a team whose trial has expired
@@ -84,5 +88,5 @@ You are redirected to your payment provider — the Stripe customer portal, or G
 
 ### Next steps
 
-* [Pricing plans](pricing-plans.md) – Compare what each plan includes
-* [Usage & spend management](spend-management.md) – Track usage and set spend limits
+- [Pricing plans](pricing-plans.md) – Compare what each plan includes
+- [Usage & spend management](spend-management.md) – Track usage and set spend limits
