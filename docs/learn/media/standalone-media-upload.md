@@ -21,7 +21,7 @@ Pass as many files as you like. Each one is validated up front — an unsupporte
 | `--no-pr`                   | Skip that detection and upload the media unattached.                                                                                   |
 | `--state <before\|after>`   | Which half of a before/after pair these files are. Inferred from a file name ending in `-before` or `-after`.                          |
 | `--description <text>`      | Prose shown under the media in the pull request comment.                                                                               |
-| `--visibility <team\|public>` | Who can open the share page. Defaults to the most private option your plan allows. See [Share links](share-links-retention-and-limits.md). |
+| `--visibility <team\|public>` | Who can open the share page. Defaults to your project's visibility — `public` for a public project, `team` for a private one. See [Share links](share-links-retention-and-limits.md). |
 | `--no-compress`             | Upload images exactly as they are instead of converting them to WebP.                                                                  |
 | `--project <owner/project>` | Project to upload to. Required with a personal access token; also `ARGOS_PROJECT`.                                                     |
 
@@ -122,7 +122,7 @@ Markdown for all of them:
 
 A **public** share link unfurls on its own. Argos serves OpenGraph and Twitter card tags with the page, and answers [oEmbed](https://oembed.com) at `/oembed`, so pasting one into Slack, Discord, Notion, Linear or a tweet shows the screenshot rather than a bare URL.
 
-A **team-only** link deliberately does not: unfurl metadata is read by a crawler carrying no session, so anything in it would be public to whoever holds the link — including the file name. Team links stay opaque until somebody signs in. Set `--visibility public` on the upload when you mean a link to travel.
+A **team-only** link deliberately does not: unfurl metadata is read by a crawler carrying no session, so anything in it would be public to whoever holds the link — including the file name. Team links stay opaque until somebody signs in. A public project's media is public by default, so its links already travel; from a private project, pass `--visibility public` on the upload when you mean one to.
 
 ### Reading the feedback left on a media
 

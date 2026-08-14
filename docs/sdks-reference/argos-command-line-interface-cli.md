@@ -444,7 +444,7 @@ Images are converted to WebP before upload — `--no-compress` opts out — whil
 
 The rest of the group: `media list` filters by `--branch`, `--pr`, `--stage staged|published`, `--search` and `--type image|video`; `media update` edits a **staged** media's name, description or branch, which are fixed once it is published; `media versions` lists the uploads behind a media, newest first.
 
-Media belongs to a project and inherits its access. `media upload` and `media list` accept either token type; with a [personal access token](#project-tokens-and-personal-access-tokens) pass `--project <owner/project>` or set `ARGOS_PROJECT`. `media delete` needs project administrator rights, since deleting a media breaks any share link already pasted somewhere.
+Media belongs to a project and inherits its access, its share page included: without `--visibility`, a public project's media is `public` and a private project's is `team`. `media upload` and `media list` accept either token type; with a [personal access token](#project-tokens-and-personal-access-tokens) pass `--project <owner/project>` or set `ARGOS_PROJECT`. `media delete` needs project administrator rights, since deleting a media breaks any share link already pasted somewhere.
 
 A human can pin a comment to a point on an uploaded screenshot, which is how an agent gets told what to change about an image it cannot see:
 

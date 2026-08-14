@@ -13,9 +13,18 @@ description: Who can open an Argos media share link, how long an uploaded file i
 | `team`     | Anyone signed in to Argos with access to the owning project. **Pro plans only.** |
 | `public`   | Anyone holding the URL. No sign-in.                                             |
 
-An upload that doesn't choose gets the most private option its plan allows: `team` on Pro, `public` on Hobby. Requesting `team` on Hobby is rejected — a team-scoped link is what the paid tier sells — so on Hobby every share page is public.
-
 A share URL carries an unguessable token rather than the media's id, so a link cannot be found by guessing and does not reveal how much a project has uploaded. The token survives re-uploads: new versions never change the URL. Share pages are `noindex`, so they don't turn up in search results.
+
+#### The default follows your project
+
+An upload that doesn't choose gets **its project's** visibility: `public` for a public project, `team` for a private one. So the everyday upload needs no flag — a public project's screenshots produce links a reviewer can open, and a private project's don't become world-readable by being uploaded.
+
+Requesting `team` on Hobby is rejected — a team-scoped link is what the paid tier sells — so on Hobby every share page is public, including a private project's.
+
+Two things this default does **not** do:
+
+* **It doesn't follow the project afterwards.** The visibility is fixed when the media is created, not looked up each time somebody opens the link. Making a project private closes the share pages of media uploaded from then on; the ones already pasted into pull requests keep working. To close one of those, upload it again with `--visibility team`, or delete it.
+* **It doesn't override a choice you made.** Re-uploading the same name keeps the visibility the media already has unless that upload passes `--visibility` itself, so a screenshot deliberately kept team-only on a public project stays team-only.
 
 #### Unfurling
 
