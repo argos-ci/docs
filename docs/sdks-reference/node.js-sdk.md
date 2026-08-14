@@ -46,7 +46,7 @@ console.log(media.url); // https://app.argos-ci.com/m/…
 console.log(media.markdown); // ![checkout.png](https://app.argos-ci.com/m/…)
 ```
 
-Re-uploading the same name adds a **version** and keeps the URL, so Markdown already posted to a pull request shows the newest upload. Options mirror the [CLI `media upload` command](argos-command-line-interface-cli.md#sharing-images-and-videos): `token`, `project`, `branch`, `prNumber`, `state`, `description`, `visibility`, and `compress` (`true` by default — images are converted to WebP before upload). It returns one media per file, uploaded sequentially in input order. See [Media sharing](../learn/media/) for retention, visibility and billing.
+Re-uploading the same name adds a **version** and keeps the URL, so Markdown already posted to a pull request shows the newest upload. Options mirror the [CLI `media upload` command](argos-command-line-interface-cli.md#sharing-images-and-videos): `token`, `project`, `branch`, `prNumber`, `state`, `description`, `visibility` (defaults to the project's — `public` for a public project, `team` for a private one), and `compress` (`true` by default — images are converted to WebP before upload). It returns one media per file, uploaded sequentially in input order. See [Media sharing](../learn/media/) for retention, visibility and billing.
 
 ### API reference
 
