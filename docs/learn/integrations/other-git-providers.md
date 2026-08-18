@@ -6,7 +6,7 @@ description: >-
 
 # Other Git providers
 
-Argos integrates natively with [GitHub](github-integration.md) and [GitLab](gitlab-integration.md). Other providers are not supported yet.
+Argos integrates natively with [GitHub](github-integration.md), [GitLab](gitlab-integration.md) and [Cursor Origin](cursor-origin-integration.md). Other providers are not supported yet.
 
 ### Bitbucket
 

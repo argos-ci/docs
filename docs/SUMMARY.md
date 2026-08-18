@@ -75,6 +75,7 @@
   * [GitHub integration](learn/integrations/github-integration.md "GitHub")
   * [GitHub Actions authentication](learn/integrations/github-actions-authentication.md "GitHub Actions auth")
   * [GitLab integration](learn/integrations/gitlab-integration.md "GitLab")
+  * [Cursor Origin integration](learn/integrations/cursor-origin-integration.md "Cursor Origin")
   * [Other Git providers](learn/integrations/other-git-providers.md)
   * [Slack integration](learn/integrations/slack-integration.md "Slack")
   * [Microsoft Teams integration](learn/integrations/microsoft-teams-integration.md "Microsoft Teams")
