@@ -38,7 +38,7 @@ You can create a project in two ways from the **New Project** page — import an
 
 {% tabs %}
 {% tab title="Import a Git repository" %}
-Choose **Import a Git repository** and select a Git provider (GitHub or GitLab) to import a repository. Argos links the project to that repository, which enables [pull request comments](../review-workflow/pull-request-comments.md) and status checks.
+Choose **Import a Git repository** and select a Git provider (GitHub, GitLab or Cursor Origin) to import a repository. Argos links the project to that repository, which enables [pull request comments](../review-workflow/pull-request-comments.md) and status checks.
 {% endtab %}
 
 {% tab title="Create without Git" %}
