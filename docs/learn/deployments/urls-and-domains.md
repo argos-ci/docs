@@ -50,7 +50,7 @@ The production domain is shared across all production deployments. When a new pr
 
 The production domain slug defaults to your project name. To change it, go to **Settings → Deployments → Domains** and click **Edit** next to the domain ending in `argos-ci.live`.
 
-<figure><img src="../../.gitbook/assets/production domain 87b8fa59af82051466948ed4543e7191.png" alt=""><figcaption><p><em>Project Settings → Deployments → Domains.</em></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/domains-settings.png" alt=""><figcaption><p><em>Project Settings → Deployments → Domains.</em></p></figcaption></figure>
 
 Rules for the slug:
 
@@ -142,7 +142,7 @@ Removing a domain from **Settings → Deployments → Domains** stops serving it
 
 All URLs above appear in the **Deployments** tab of your project in Argos.
 
-<figure><img src="../../.gitbook/assets/deployment urls 60fb2262b96e799e99ae8470f39075d2.png" alt=""><figcaption><p><em>The Deployments tab shows the deployment URL, branch URL, and—for production—the production domain.</em></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/deployment-urls.png" alt=""><figcaption><p><em>A production deployment in the Deployments tab: custom domain first, then the production domain, the branch URL, and the deployment URL.</em></p></figcaption></figure>
 
 ### Related
 
