@@ -1,10 +1,10 @@
 ---
-description: Understand the deployment, branch, and production URLs Argos generates and when to share each one.
+description: Understand the deployment, branch, and production URLs Argos generates, and serve production from a domain you own.
 ---
 
 # URLs and domains
 
-Every deployment is reachable through one or more URLs. The exact URLs depend on the deployment's environment and the project's configuration. All deployment URLs are served from the shared root domain `argos-ci.live`.
+Every deployment is reachable through one or more URLs. The exact URLs depend on the deployment's environment and the project's configuration. Argos generates all of them under the shared root domain `argos-ci.live`, and production deployments can additionally be served from a [custom domain](#custom-domain) you own.
 
 ### Deployment URL
 
@@ -48,9 +48,9 @@ The production domain is shared across all production deployments. When a new pr
 
 #### Configure the production domain
 
-The production domain slug defaults to your project name. You can change it in **Settings → Deployments → Production domain**.
+The production domain slug defaults to your project name. To change it, go to **Settings → Deployments → Domains** and click **Edit** next to the domain ending in `argos-ci.live`.
 
-<figure><img src="../../.gitbook/assets/production domain 87b8fa59af82051466948ed4543e7191.png" alt=""><figcaption><p><em>Project Settings → Deployments → Production domain.</em></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/domains-settings.png" alt=""><figcaption><p><em>Project Settings → Deployments → Domains.</em></p></figcaption></figure>
 
 Rules for the slug:
 
@@ -64,17 +64,85 @@ The final domain is `<slug>.argos-ci.live`.
 Changing the production domain takes effect immediately. Any existing links that used the previous domain will stop resolving.
 {% endhint %}
 
+### Custom domain
+
+Production deployments can also be served from a domain you own, such as `docs.example.com`. A custom domain behaves like the production domain—it always points at the latest production deployment—but it carries your own name instead of `argos-ci.live`.
+
+Once a custom domain is live, Argos uses it in the links it publishes back to GitHub, so the commit status and the pull request comment point at your domain rather than at the generated URL.
+
+{% hint style="info" %}
+Custom domains are included in paid plans and require a team. A personal account has no plan to upgrade—create a team and transfer the project to it first.
+{% endhint %}
+
+{% hint style="warning" %}
+Custom domains serve **production deployments only**. Preview deployments keep their own deployment and branch URLs.
+{% endhint %}
+
+#### Add a custom domain
+
+{% stepper %}
+{% step %}
+## Add the domain in Argos
+
+Go to **Settings → Deployments → Domains**, click **Add domain**, and enter the fully qualified domain you want to use—for example `docs.example.com`. Enter the domain on its own, not a URL.
+{% endstep %}
+
+{% step %}
+## Create the DNS record
+
+Argos shows the record to create as soon as the domain is added. Add it with your DNS provider:
+
+| Field | Value                                |
+| ----- | ------------------------------------ |
+| Type  | `CNAME`                              |
+| Name  | Your domain, e.g. `docs.example.com` |
+| Value | `cname.argos-ci.live`                |
+
+Copy the value from the interface rather than typing it—Argos displays it with a copy button next to the domain.
+{% endstep %}
+
+{% step %}
+## Wait for the certificate
+
+Argos issues and installs a TLS certificate as soon as the record resolves. There is no second record to add and no certificate to upload.
+
+Argos re-checks pending domains on its own. Click **Check** next to the domain if you want to verify right away instead of waiting.
+{% endstep %}
+{% endstepper %}
+
+{% hint style="warning" %}
+**A root domain needs an ALIAS record.** Most DNS providers cannot put a `CNAME` on a root domain such as `example.com`. Use an `ALIAS` or `ANAME` record pointing at the same value, or point a subdomain at Argos instead. This is the most common reason a domain never leaves **DNS not configured**.
+{% endhint %}
+
+#### Domain status
+
+Each custom domain shows where it is in the process:
+
+| Status                  | Meaning                                                                                               |
+| ----------------------- | ----------------------------------------------------------------------------------------------------- |
+| **DNS not configured**  | Argos cannot resolve the domain to `cname.argos-ci.live` yet. Check the record with your DNS provider. |
+| **Issuing certificate** | The record resolves and the certificate is being issued. Nothing to do.                               |
+| **Active**              | The domain is live and serving the latest production deployment.                                      |
+| **Failed**              | Something is blocking the domain. The reason is shown underneath it.                                   |
+
+A domain most often **fails** because the hostname is already attached to another CDN distribution. A domain can only be served by one at a time, so it has to be released there before Argos can take it.
+
+#### Remove a custom domain
+
+Removing a domain from **Settings → Deployments → Domains** stops serving it straight away. Delete the DNS record as well, or it keeps pointing at Argos with nothing behind it.
+
 ### Summary
 
-| URL type          | Stability                                              | When it exists              |
-| ----------------- | ------------------------------------------------------ | --------------------------- |
-| Deployment URL    | Immutable — always points at one build                 | Every deployment            |
-| Branch URL        | Updates when a new deployment lands on the same branch | Every deployment            |
-| Production domain | Updates when a new production deployment is promoted   | Production deployments only |
+| URL type          | Stability                                              | When it exists                     |
+| ----------------- | ------------------------------------------------------ | ---------------------------------- |
+| Deployment URL    | Immutable — always points at one build                 | Every deployment                   |
+| Branch URL        | Updates when a new deployment lands on the same branch | Every deployment                   |
+| Production domain | Updates when a new production deployment is promoted   | Production deployments only        |
+| Custom domain     | Updates when a new production deployment is promoted   | Production deployments, paid plans |
 
 All URLs above appear in the **Deployments** tab of your project in Argos.
 
-<figure><img src="../../.gitbook/assets/deployment urls 60fb2262b96e799e99ae8470f39075d2.png" alt=""><figcaption><p><em>The Deployments tab shows the deployment URL, branch URL, and—for production—the production domain.</em></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/deployment-urls.png" alt=""><figcaption><p><em>A production deployment in the Deployments tab: custom domain first, then the production domain, the branch URL, and the deployment URL.</em></p></figcaption></figure>
 
 ### Related
 
