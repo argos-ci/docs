@@ -34,23 +34,41 @@ The diff viewer offers several ways to compare a snapshot:
 * **Fit or expand** — fit the screenshot to the screen or inspect it at full size; zoom and pan stay in sync between the baseline and changes panes.
 * **ARIA view** — when a snapshot has an [ARIA snapshot](../how-to-guides/visual-coverage/adding-aria-snapshots-manually.md), switch between the screenshot and its accessibility tree.
 
+### Review a journey in order
+
+A test that walks a checkout, a signup or an onboarding captures a screenshot at each step. Argos groups those screenshots back into the **journey** the test walked — with nothing to configure — so you review a change with the screen before and after it in sight:
+
+* **Journey order** — inside each section of the screenshot list, the screenshots a test captured sit together, in the order the test took them: you review the cart before the confirmation, not alphabetically.
+* **Where you are** — the journey's name and your position in it (`complete a purchase · 4/5`) appear above the screenshot name, and a flow chip in the **Metadata** panel of the sidebar.
+* **Flow minimap** — the minimap toggle in the toolbar unfolds the whole journey as a strip of thumbnails under the header, marking the steps that need attention. Select a step to jump to it.
+* **`⇧` + `←` / `⇧` + `→`** move between the steps of the journey, staying on the same viewport, browser and color scheme.
+
+![A build review with the journey's name and step position above the screenshot name, the flow minimap under the header, and the flow chip in the metadata sidebar](../../.gitbook/assets/review-flow-context.png)
+
+The journey comes from the metadata your Argos SDK records: the test's title path (file, `describe` blocks and test name) for Playwright, Cypress and Vitest, or the component for Storybook, where each story is a step. Viewport, browser and color-scheme variants of one screen collapse into a single step, exactly as they do elsewhere in the review. A test that captures a single screen is regular visual testing, not a journey — it gets none of this.
+
+{% hint style="info" %}
+The order of the steps is the order in which the test captured them, which the Argos SDKs record as of `@argos-ci/playwright`, `@argos-ci/cypress` and `@argos-ci/vitest` — see [`capture` in the screenshot metadata](../../sdks-reference/screenshot-metadata.md#capture). Screenshots taken with an earlier SDK, or with an SDK that doesn't report a test title path (Puppeteer, WebdriverIO), fall back to alphabetical order within the journey.
+{% endhint %}
+
 ### Keyboard shortcuts
 
 Press `?` on a build page to see the full list of shortcuts. The ones you'll use most while reviewing:
 
-| Shortcut  | Action                                    |
-| --------- | ----------------------------------------- |
-| `↑` / `↓` | Go to the previous / next snapshot        |
-| `←` / `→` | Show only the baseline / only the changes |
-| `S`       | Toggle side-by-side view                  |
-| `D`       | Toggle the changes overlay                |
-| `H`       | Highlight the changed regions             |
-| `J` / `K` | Go to the previous / next change          |
-| `Space`   | Toggle fit to screen                      |
-| `Y` / `N` | Mark a change as accepted / rejected      |
-| `I`       | Ignore a flaky change                     |
-| `C`       | Toggle the comment tool                   |
-| `↵`       | Open the review popover                   |
+| Shortcut          | Action                                        |
+| ----------------- | --------------------------------------------- |
+| `↑` / `↓`         | Go to the previous / next snapshot            |
+| `←` / `→`         | Show only the baseline / only the changes     |
+| `⇧` `←` / `⇧` `→` | Go to the previous / next step of the journey |
+| `S`               | Toggle side-by-side view                      |
+| `D`               | Toggle the changes overlay                    |
+| `H`               | Highlight the changed regions                 |
+| `J` / `K`         | Go to the previous / next change              |
+| `Space`           | Toggle fit to screen                          |
+| `Y` / `N`         | Mark a change as accepted / rejected          |
+| `I`               | Ignore a flaky change                         |
+| `C`               | Toggle the comment tool                       |
+| `↵`               | Open the review popover                       |
 
 ### Request reviewers
 
