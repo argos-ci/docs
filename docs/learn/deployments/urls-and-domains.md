@@ -66,7 +66,7 @@ Changing the production domain takes effect immediately. Any existing links that
 
 ### Custom domain
 
-Production deployments can also be served from a domain you own, such as `docs.example.com`. A custom domain behaves like the production domain—it always points at the latest production deployment—but it carries your own name instead of `argos-ci.live`.
+Production deployments can also be served from a domain you own, such as `storybook.acme.com`. A custom domain behaves like the production domain—it always points at the latest production deployment—but it carries your own name instead of `argos-ci.live`.
 
 Once a custom domain is live, Argos uses it in the links it publishes back to GitHub, so the commit status and the pull request comment point at your domain rather than at the generated URL.
 
@@ -84,7 +84,7 @@ Custom domains serve **production deployments only**. Preview deployments keep t
 {% step %}
 ## Add the domain in Argos
 
-Go to **Settings → Deployments → Domains**, click **Add domain**, and enter the fully qualified domain you want to use—for example `docs.example.com`. Enter the domain on its own, not a URL.
+Go to **Settings → Deployments → Domains**, click **Add domain**, and enter the fully qualified domain you want to use—for example `storybook.acme.com`. Enter the domain on its own, not a URL.
 {% endstep %}
 
 {% step %}
@@ -92,11 +92,11 @@ Go to **Settings → Deployments → Domains**, click **Add domain**, and enter 
 
 Argos shows the record to create as soon as the domain is added. Add it with your DNS provider:
 
-| Field | Value                                |
-| ----- | ------------------------------------ |
-| Type  | `CNAME`                              |
-| Name  | Your domain, e.g. `docs.example.com` |
-| Value | `cname.argos-ci.live`                |
+| Field | Value                                   |
+| ----- | --------------------------------------- |
+| Type  | `CNAME`                                 |
+| Name  | Your domain, e.g. `storybook.acme.com`  |
+| Value | `cname.argos-ci.live`                   |
 
 Copy the value from the interface rather than typing it—Argos displays it with a copy button next to the domain.
 {% endstep %}
