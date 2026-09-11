@@ -22,14 +22,13 @@ A mode is a preset that configures various Storybook globals. For instance, you 
 
 ### Setting up globals & addons
 
-Before you define any modes, make sure you’ve configured the relevant Storybook addons in your `.storybook/preview.ts` (or `.js`) file. Examples include:
+Before you define any modes, make sure you’ve configured the relevant Storybook features and addons in your `.storybook/preview.ts` (or `.js`) file. Examples include:
 
-* [`@storybook/addon-viewport`](https://www.npmjs.com/package/@storybook/addon-viewport) for screen sizes
+* [Viewports](https://storybook.js.org/docs/essentials/viewport) and [backgrounds](https://storybook.js.org/docs/essentials/backgrounds), built into Storybook 9 and later (on Storybook 8, install [`@storybook/addon-viewport`](https://www.npmjs.com/package/@storybook/addon-viewport) and [`@storybook/addon-backgrounds`](https://www.npmjs.com/package/@storybook/addon-backgrounds))
 * [`@storybook/addon-themes`](https://www.npmjs.com/package/@storybook/addon-themes) for light/dark themes
-* [`@storybook/addon-backgrounds`](https://www.npmjs.com/package/@storybook/addon-backgrounds) for backgrounds
 * [`storybook-i18n`](https://www.npmjs.com/package/storybook-i18n) for locales
 
-These addons utilize Storybook “globals” and “decorators” under the hood. Argos modes simply manipulate those globals at test time to generate multiple snapshots of the same story.
+These features rely on Storybook “globals” and “decorators” under the hood. Argos modes simply set those globals at test time to generate multiple snapshots of the same story.
 
 {% code title=".storybook/preview.ts" %}
 ```ts
@@ -39,7 +38,7 @@ import "../src/styles.css";
 const preview = {
   parameters: {
     viewport: {
-      viewports: {
+      options: {
         compact: {
           name: "Compact",
           styles: { width: "600px", height: "900px" },
@@ -51,10 +50,10 @@ const preview = {
       },
     },
     backgrounds: {
-      values: [
-        { name: "Light", value: "#ffffff" },
-        { name: "Dark", value: "#1A1A1A" },
-      ],
+      options: {
+        light: { name: "Light", value: "#ffffff" },
+        dark: { name: "Dark", value: "#1A1A1A" },
+      },
     },
   },
   decorators: [
@@ -72,6 +71,10 @@ export default preview;
 ```
 {% endcode %}
 
+{% hint style="info" %}
+On Storybook 8, viewports are defined under `viewport.viewports` and backgrounds under `backgrounds.values` (an array of `{ name, value }`), and a mode selects a background by its color, for example `backgrounds: { value: "#1A1A1A" }`. Argos resolves a mode’s `viewport` against either format.
+{% endhint %}
+
 ### Defining modes
 
 Create a `.storybook/modes.ts` (or `.js`) file that exports an object where each key is a mode name and each value is a set of overrides for the Storybook globals. For example:
@@ -80,19 +83,19 @@ Create a `.storybook/modes.ts` (or `.js`) file that exports an object where each
 ```ts
 export const allModes = {
   dark: {
-    backgrounds: { value: "#1A1A1A" },
+    backgrounds: { value: "dark" },
     theme: "dark",
   },
   mobile: {
     viewport: "compact",
   },
   "dark widescreen": {
-    backgrounds: { value: "#1A1A1A" },
+    backgrounds: { value: "dark" },
     theme: "dark",
     viewport: "widescreen",
   },
   "light mobile": {
-    backgrounds: { value: "#ffffff" },
+    backgrounds: { value: "light" },
     theme: "light",
     viewport: "compact",
   },
@@ -101,6 +104,8 @@ export const allModes = {
 {% endcode %}
 
 Each object can include as many or as few globals as you need. If a mode doesn’t specify a particular global, that global simply won’t be changed in that mode.
+
+A mode’s `viewport` is a key of your `viewport.options` map: Argos resizes the browser to that viewport before capturing the story. Storybook’s own global format works too, so `viewport: { value: "compact", isRotated: true }` captures the viewport in landscape orientation. Likewise, `backgrounds.value` is a key of `backgrounds.options`, and `theme` is the global read by `withThemeByClassName`.
 
 ### Applying modes
 
@@ -257,7 +262,7 @@ Yes. Argos reads your `chromatic.modes` settings if present. However, for new us
 
 <summary>Do all Storybook addons work with Argos modes?</summary>
 
-Any addon that leverages Storybook globals should work, including [@storybook/addon-themes](https://storybook.js.org/addons/@storybook/addon-themes), [@storybook/addon-viewport](https://storybook.js.org/addons/@storybook/addon-viewport), [@storybook/addon-backgrounds](https://storybook.js.org/addons/@storybook/addon-backgrounds), or [storybook-i18n](https://storybook.js.org/addons/storybook-i18n). Modes just provide different values for those globals.
+Any feature or addon that leverages Storybook globals should work, including Storybook’s built-in viewports and backgrounds, [@storybook/addon-themes](https://storybook.js.org/addons/@storybook/addon-themes), or [storybook-i18n](https://storybook.js.org/addons/storybook-i18n). Modes just provide different values for those globals.
 
 </details>
 

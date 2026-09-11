@@ -19,7 +19,7 @@ If you use a legacy version of Storybook (\<v8), follow the [legacy Storybook Qu
 
 ### Prerequisites
 
-* [Storybook v8+](https://storybook.js.org/docs/get-started/install) set up in your project
+* [Storybook v9+](https://storybook.js.org/docs/get-started/install) set up in your project
 * [The Storybook Vitest addon](https://storybook.js.org/docs/writing-tests/integrations/vitest-addon) installed
 * [A project created in Argos](https://app.argos-ci.com/new)
 
