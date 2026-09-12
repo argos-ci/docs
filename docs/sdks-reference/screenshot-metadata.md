@@ -48,6 +48,7 @@ To enable autocompletion, type checking, and schema validation in editors like V
 | `automationLibrary` | [Automation library](screenshot-metadata.md#automation-library) | The automation library that generated the screenshot. _(Required)_                      |
 | `sdk`               | [SDK](screenshot-metadata.md#sdk)                               | The Argos SDK that generated the screenshot. _(Required)_                               |
 | `story`             | [Story](screenshot-metadata.md#story)?                          | Storybook story metadata.                                                               |
+| `capture`           | [Capture](screenshot-metadata.md#capture)?                      | Where the screenshot falls within its test.                                             |
 | `tags`              | `string[]?`                                                     | Custom tags to categorize the screenshot.                                               |
 | `transient`         | [Transient](screenshot-metadata.md#transient)?                  | Upload-time instructions, removed from the stored metadata.                             |
 
@@ -177,6 +178,20 @@ Storybook story metadata, set by the [Argos Storybook SDK](storybook.md).
 * `mode` (string?): The [story mode](../learn/how-to-guides/visual-coverage/storybook-story-modes.md) used for the capture.
 * `play` (boolean?): True if the story has a play function.
 
+### Capture
+
+Where the screenshot falls within its test, following capture order. Argos uses it to review the screenshots of a test in the order the test took them, see [Follow a journey step by step](../learn/review-workflow/review-a-build.md#follow-a-journey-step-by-step).
+
+```json
+{
+  "index": 2
+}
+```
+
+* `index` (number): The 0-based position of the screenshot within its test, following capture order. Variants of one screen taken by a single call, several viewports for example, share an index, and a retry starts over at `0`.
+
+Recorded by `@argos-ci/playwright` 7.5.1, `@argos-ci/cypress` 7.2.1 and `@argos-ci/vitest` 0.6.1 and above.
+
 ### Transient
 
 Upload-time instructions consumed by the Argos CLI and SDKs. Unlike the other fields, `transient` is not stored with the screenshot — the uploader reads it, applies it, and removes it from the metadata.
@@ -212,6 +227,7 @@ Here's a full example of `myscreenshot.png.argos.json`:
     "tags": ["@regression"],
     "location": { "file": "tests/homepage.spec.ts", "line": 42, "column": 3 }
   },
+  "capture": { "index": 0 },
   "browser": { "name": "chromium", "version": "112.0.0" },
   "automationLibrary": { "name": "playwright", "version": "1.45.0" },
   "sdk": { "name": "@argos-ci/playwright", "version": "2.0.0" }
