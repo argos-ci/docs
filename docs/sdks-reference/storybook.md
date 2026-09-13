@@ -15,6 +15,12 @@ To get started with Argos and Storybook, check out our Quickstart guides:
 * [Storybook + Test Runner](../quickstart/storybook-quickstart/storybook-test-runner-quickstart.md)
 * [Storybook Legacy (\<v8)](../quickstart/storybook-quickstart/storybook-legacy-less-than-v8-quickstart.md)
 
+### Compatibility
+
+* **Storybook** 8 through 11, including the 11 pre-releases. The Vitest addon needs Storybook 9 or later; the Test Runner works from Storybook 8.
+* **Vitest** 4 or 5, with `@vitest/browser` and `@vitest/browser-playwright`, when using the Vitest addon.
+* **Node.js** 22 or later.
+
 ### Comparing Argos and Chromatic
 
 While both Argos and Chromatic provide visual testing for Storybook, they take different approaches:
@@ -67,6 +73,16 @@ export const FormStory: Story = {
 ### Story Modes
 
 Argos supports Story modes to capture different states of your components. Read our [Story modes guide](../learn/how-to-guides/visual-coverage/storybook-story-modes.md) for more details.
+
+### Viewports
+
+Argos captures a story at the viewport selected by its `viewport` global, whether the global comes from a [story mode](../learn/how-to-guides/visual-coverage/storybook-story-modes.md) or from the story’s own `globals`. The value is resolved against `parameters.viewport.options` (`parameters.viewport.viewports` on Storybook 8):
+
+* `"compact"`: a key of the viewport options.
+* `{ value: "compact", isRotated: true }`: Storybook’s global format, where `isRotated` swaps the width and height.
+* `800`: a number is used as the width.
+
+When no viewport matches, the story is captured at the test browser’s default size.
 
 ### Fit to Content vs Page
 
