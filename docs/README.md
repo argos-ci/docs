@@ -5,9 +5,9 @@ icon: book-open
 
 # Overview
 
-Argos is a visual testing platform that catches visual regressions before they reach production. Your tests capture screenshots, Argos compares them against a baseline, and you review the changes on your pull requests.
+Argos is a visual testing platform that catches visual regressions before they reach production. Your tests capture screenshots, Argos compares them against a baseline, and you or your AI agents review the changes on your pull requests.
 
-It works with the tools you already use — Playwright, Storybook, Cypress, Vitest, or any pipeline that produces screenshots.
+It works with the tools you already use — Playwright, Storybook, Cypress, Vitest, or any pipeline that produces screenshots. Argos also [compares non-image files](learn/how-to-guides/visual-coverage/compare-non-image-files.md), [detects flaky tests](learn/reliability-and-flakiness/flaky-test-detection.md), and [deploys a preview](learn/deployments/README.md) of your Storybook or static site on every pull request.
 
 ### How it works
 
