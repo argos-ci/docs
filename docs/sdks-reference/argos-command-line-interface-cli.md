@@ -186,7 +186,7 @@ argos upload ./screenshots --project my-account/my-project
 
 In a non-Git environment, `ARGOS_COMMIT` and `ARGOS_BRANCH` are required — without them the upload fails with "Argos requires a branch and a commit to be set".
 
-To find the [baseline](../learn/platform-fundamentals/baseline-build.md), Argos resolves ancestor commits. When your project is connected to GitHub or GitLab, this happens server-side. Otherwise the CLI fetches history from the `origin` remote — in a repository without `origin` (for example a local mirror), it falls back to the local history, so make sure enough history is available locally, or pin the baseline explicitly with `--reference-commit` and `--reference-branch`. Parent commits are always computed automatically and cannot be set manually.
+To find the [baseline](../learn/platform-fundamentals/baseline-build.md), Argos resolves ancestor commits. When your project is connected to GitHub, GitLab or Cursor Origin, this happens server-side. Otherwise the CLI fetches history from the `origin` remote — in a repository without `origin` (for example a local mirror), it falls back to the local history, so make sure enough history is available locally, or pin the baseline explicitly with `--reference-commit` and `--reference-branch`. Parent commits are always computed automatically and cannot be set manually.
 
 To see what the CLI detected, run it with debug output:
 

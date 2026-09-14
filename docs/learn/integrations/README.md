@@ -6,12 +6,13 @@ description: >-
 
 # Integrations
 
-Argos integrates with your Git provider to post build statuses on pull requests, and with Slack, Microsoft Teams, or Discord to notify your team. Which notifications go where is decided by [automations](../review-workflow/automations.md).
+Argos integrates with your Git provider — GitHub, GitLab or Cursor Origin — to post build statuses on pull requests, and with Slack, Microsoft Teams, or Discord to notify your team. Which notifications go where is decided by [automations](../review-workflow/automations.md).
 
 ### Git providers
 
 * [GitHub integration](github-integration.md) – Install the Argos GitHub App for statuses, comments, and merge queue support
 * [GitLab integration](gitlab-integration.md) – Connect GitLab to get statuses on merge requests
+* [Cursor Origin integration](cursor-origin-integration.md) – Install the Argos Origin app for check runs and comments on Origin pull requests
 * [Other Git providers](other-git-providers.md) – Bitbucket and Azure DevOps status, and how to use Argos without a native integration
 
 ### CI authentication

@@ -8,7 +8,7 @@ description: >-
 
 A **summary check** is a single commit status — `argos/summary` — that combines the result of all Argos builds on a commit. When your CI produces several builds (for example, one per app in a monorepo), the summary check gives you one status to glance at, and one status to require.
 
-By default, Argos adds the summary check **only when a commit has more than one build** — a single build keeps its individual status (`argos`, or `argos/<build-name>` for a named build) with no summary added. See [Commit status names](../integrations/github-integration.md#commit-status-names) for the exact context of each status Argos posts.
+By default, Argos adds the summary check **only when a commit has more than one build** — a single build keeps its individual status (`argos`, or `argos/<build-name>` for a named build) with no summary added. See [Commit status names](../integrations/github-integration.md#commit-status-names) for the exact context of each status Argos posts on GitHub, and [Check run names](../integrations/cursor-origin-integration.md#check-run-names) for Cursor Origin, where the summary is a check run.
 
 ![Summary status check in GitHub](<../../.gitbook/assets/summary check d7953362698c802ff3f81de23bfb83cc.png>)
 

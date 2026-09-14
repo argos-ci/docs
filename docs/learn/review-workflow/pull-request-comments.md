@@ -1,17 +1,17 @@
 ---
 description: >-
   Get the latest Argos build status and a link to the build page posted
-  automatically on your GitHub pull requests.
+  automatically on your GitHub and Cursor Origin pull requests.
 ---
 
 # Pull request comments
 
-Argos posts a comment on your GitHub pull requests with the latest build results, so your team sees visual changes without leaving the PR.
+Argos posts a comment on your GitHub and Cursor Origin pull requests with the latest build results, so your team sees visual changes without leaving the PR.
 
 Every time a build status updates, Argos updates the comment with the latest status and a link to the build page.
 
 {% hint style="info" %}
-Pull request comments are available on GitHub. On GitLab, Argos reports results through [commit statuses](summary-checks.md) instead.
+Pull request comments are available on [GitHub](../integrations/github-integration.md) and [Cursor Origin](../integrations/cursor-origin-integration.md). On GitLab, Argos reports results through [commit statuses](summary-checks.md) instead.
 {% endhint %}
 
 ![Argos GitHub pull request comment](<../../.gitbook/assets/github pr comment 54bebb73962dc705b32c33f577fb9dd0.png>)
