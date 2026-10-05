@@ -4,7 +4,17 @@ description: Set up visual testing in your Cypress tests with the Argos Cypress 
 
 # Cypress visual testing quickstart
 
-Set up Argos with [Cypress](https://www.cypress.io/) to run visual tests on every pull request: install the SDK, register the command and task, capture screenshots, and run it in CI.
+To add visual testing to [Cypress](https://www.cypress.io/), install `@argos-ci/cypress`, import `@argos-ci/cypress/support` in your support file, register the Argos task with `registerArgosTask()` in `cypress.config.js`, call `cy.argosScreenshot("name")` in your tests, and run Cypress in CI with the `ARGOS_TOKEN` environment variable set. Argos compares every screenshot with a [baseline build](../learn/platform-fundamentals/baseline-build.md) picked from your Git history and reports the changes as a check on your pull request.
+
+### What Argos adds to Cypress
+
+Cypress takes screenshots with `cy.screenshot()`, but it doesn't compare them with a baseline. Argos adds:
+
+* **Visual comparison with automatic baselines.** Argos picks the baseline from your Git history, so there are no images to commit.
+* **Review on the pull request.** Visual changes become a pull request check that your team [approves or rejects](../learn/review-workflow/review-a-build.md).
+* **Stable screenshots.** `cy.argosScreenshot` waits for images and fonts to load before capturing.
+
+Coming from another tool? Follow [Migrate from Percy to Argos](../learn/how-to-guides/migrate-to-argos/from-percy.md) or [Migrate from Applitools to Argos](../learn/how-to-guides/migrate-to-argos/from-applitools.md); both cover Cypress.
 
 ### Prerequisites
 

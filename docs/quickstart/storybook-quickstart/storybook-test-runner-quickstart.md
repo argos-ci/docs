@@ -4,7 +4,13 @@ description: Set up visual testing in Storybook with Test Runner and the Argos C
 
 # Storybook Test Runner visual testing quickstart
 
-Set up Argos with [Storybook Test Runner](https://storybook.js.org/docs/writing-tests/integrations/test-runner) to run visual tests on every pull request: capture a screenshot of each story during the test run, then upload them with the Argos CLI.
+To add visual testing with [Storybook Test Runner](https://storybook.js.org/docs/writing-tests/integrations/test-runner), install `@argos-ci/storybook` and `@argos-ci/cli`, call `argosScreenshot(page, context)` in the `postVisit` hook of `.storybook/test-runner.ts`, run `test-storybook` against your built Storybook, and upload the screenshots with `npm exec -- argos upload ./screenshots` in CI with the `ARGOS_TOKEN` environment variable set.
+
+### What Argos adds
+
+* **A screenshot of every story.** The `postVisit` hook captures each story after Test Runner has rendered it and run its `play` function.
+* **Baselines from your Git history.** Argos picks the [baseline build](../../learn/platform-fundamentals/baseline-build.md) automatically, so there are no images to commit.
+* **Review on the pull request.** Visual changes become a pull request check that your team [approves or rejects](../../learn/review-workflow/review-a-build.md).
 
 {% hint style="info" %}
 If you use Vitest instead of Test Runner, follow the [Storybook Quickstart](README.md).

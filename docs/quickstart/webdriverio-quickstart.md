@@ -4,7 +4,13 @@ description: Set up visual testing in your WebdriverIO tests with the Argos Webd
 
 # WebdriverIO visual testing quickstart
 
-Set up Argos with [WebdriverIO](https://webdriver.io/), the Node.js test automation framework for web and mobile applications, to run visual tests on every pull request: capture screenshots with the SDK, then upload them with the Argos CLI.
+To add visual testing to [WebdriverIO](https://webdriver.io/), the Node.js test automation framework for web and mobile applications, install `@argos-ci/webdriverio` and `@argos-ci/cli`, call `argosScreenshot(browser, "name")` in your tests, then upload the screenshots with `npm exec -- argos upload ./screenshots/argos` in CI with the `ARGOS_TOKEN` environment variable set. Argos compares every screenshot with a [baseline build](../learn/platform-fundamentals/baseline-build.md) picked from your Git history and reports the changes as a check on your pull request.
+
+### What Argos adds
+
+* **Baselines from your Git history.** There are no reference images to commit or update.
+* **Review on the pull request.** Visual changes become a pull request check that your team [approves or rejects](../learn/review-workflow/review-a-build.md).
+* **Flaky test detection.** Argos [flags unstable tests](../learn/reliability-and-flakiness/flaky-test-detection.md) with a flaky badge and a stability score.
 
 ### Prerequisites
 

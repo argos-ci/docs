@@ -4,7 +4,17 @@ description: Set up visual testing in your Playwright tests with the Argos Playw
 
 # Playwright visual testing quickstart
 
-Set up Argos with [Playwright](https://playwright.dev/) to run visual tests on every pull request: install the SDK, add the reporter, capture screenshots, and run it in CI.
+To add visual testing to [Playwright](https://playwright.dev/), install `@argos-ci/playwright`, add the Argos reporter to `playwright.config.ts`, call `argosScreenshot(page, "name")` in your tests, and run `npx playwright test` in CI with the `ARGOS_TOKEN` environment variable set. Argos compares every screenshot with a [baseline build](../learn/platform-fundamentals/baseline-build.md) picked from your Git history and reports the changes as a check on your pull request.
+
+### What Argos adds over `toHaveScreenshot()`
+
+Playwright's built-in `toHaveScreenshot()` already compares screenshots. Argos keeps your Playwright tests and changes what happens around them:
+
+* **No baselines in your repository.** `toHaveScreenshot()` stores reference PNGs in `*-snapshots/` folders that you commit, with a separate image per platform. Argos picks the baseline from your Git history, so there are no images to commit or keep in sync.
+* **Review on the pull request.** A `toHaveScreenshot()` mismatch fails the test until you re-run with `--update-snapshots` and commit new images. Argos turns visual changes into a pull request check that your team [approves or rejects](../learn/review-workflow/review-a-build.md).
+* **Fewer flaky diffs.** `argosScreenshot` waits for fonts, images, and `aria-busy` loaders before capturing, and Argos [flags unstable tests](../learn/reliability-and-flakiness/flaky-test-detection.md) with a flaky badge and a stability score.
+
+Already using `toHaveScreenshot()`? Follow [Migrate from Playwright toHaveScreenshot to Argos](../learn/how-to-guides/migrate-to-argos/from-playwright-native-screenshots.md), or read the [Argos vs Playwright screenshots](https://argos-ci.com/compare/playwright) comparison.
 
 ### Prerequisites
 

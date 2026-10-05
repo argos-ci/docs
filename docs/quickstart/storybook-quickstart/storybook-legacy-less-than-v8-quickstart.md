@@ -4,7 +4,12 @@ description: Set up visual testing in a legacy Storybook (<v8) with Storycap and
 
 # Legacy Storybook (\<v8) visual testing quickstart
 
-Set up Argos with a legacy version of Storybook (\<v8) using [Storycap](https://github.com/reg-viz/storycap): Storycap crawls your Storybook and captures a screenshot of each story, then the Argos CLI uploads them.
+To add visual testing to a legacy Storybook (\<v8), capture every story with [Storycap](https://github.com/reg-viz/storycap), then upload the screenshots with `npm exec -- argos upload ./screenshots` in CI with the `ARGOS_TOKEN` environment variable set. Storycap crawls your Storybook and captures a screenshot of each story; Argos compares them with a [baseline build](../../learn/platform-fundamentals/baseline-build.md) picked from your Git history and reports the changes on your pull request.
+
+### What Argos adds
+
+* **Baselines from your Git history.** There are no reference images to commit or update.
+* **Review on the pull request.** Visual changes become a pull request check that your team [approves or rejects](../../learn/review-workflow/review-a-build.md).
 
 {% hint style="info" %}
 If you use Storybook v8 or later, follow the [Storybook Quickstart](README.md) instead.

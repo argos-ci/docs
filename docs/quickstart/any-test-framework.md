@@ -4,7 +4,15 @@ description: Set up visual testing with any test framework by uploading screensh
 
 # Visual testing with any test framework
 
+To add visual testing to any test framework, save your screenshots to a folder, install `@argos-ci/cli`, and run `npm exec -- argos upload ./screenshots` in CI with the `ARGOS_TOKEN` environment variable set. Argos compares every screenshot with a [baseline build](../learn/platform-fundamentals/baseline-build.md) picked from your Git history and reports the changes as a check on your pull request.
+
 Argos works with any tool that produces screenshots. If your framework has no dedicated Argos SDK, capture screenshots however you like and upload the folder with the Argos CLI.
+
+### What Argos adds
+
+* **Baselines from your Git history.** There are no reference images to commit or update.
+* **Review on the pull request.** Visual changes become a pull request check that your team [approves or rejects](../learn/review-workflow/review-a-build.md).
+* **Diff more than images.** The CLI also uploads text files such as JSON, HTML, or Markdown with `--files` — see [Compare non-image files](../learn/how-to-guides/visual-coverage/compare-non-image-files.md).
 
 ### Prerequisites
 

@@ -4,7 +4,15 @@ description: Set up visual testing in your Puppeteer scripts with the Argos Pupp
 
 # Puppeteer visual testing quickstart
 
-Set up Argos with [Puppeteer](https://pptr.dev/) to run visual tests on every pull request: capture screenshots with the SDK, then upload them with the Argos CLI.
+To add visual testing to [Puppeteer](https://pptr.dev/), install `@argos-ci/puppeteer` and `@argos-ci/cli`, call `argosScreenshot(page, "name")` in your scripts, then upload the screenshots with `npm exec -- argos upload ./screenshots/argos` in CI with the `ARGOS_TOKEN` environment variable set. Argos compares every screenshot with a [baseline build](../learn/platform-fundamentals/baseline-build.md) picked from your Git history and reports the changes as a check on your pull request.
+
+### What Argos adds to `page.screenshot()`
+
+Puppeteer captures images with `page.screenshot()`, but it doesn't compare them with a baseline. Argos adds:
+
+* **Visual comparison with automatic baselines.** Argos picks the baseline from your Git history, so there are no images to commit.
+* **Review on the pull request.** Visual changes become a pull request check that your team [approves or rejects](../learn/review-workflow/review-a-build.md).
+* **Stable screenshots.** `argosScreenshot` waits for images and fonts to load before capturing.
 
 ### Prerequisites
 

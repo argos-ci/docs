@@ -4,10 +4,20 @@ description: Set up visual testing in your Vitest browser tests with the Argos V
 
 # Vitest browser mode visual testing quickstart
 
-Set up Argos with [Vitest](https://vitest.dev/) to run visual tests on every pull request. The Argos Vitest SDK adds visual testing to Vitest in two ways:
+To add visual testing to [Vitest](https://vitest.dev/), install `@argos-ci/vitest`, add `argosVitestPlugin()` to your Vitest config, call `argosScreenshot()` in a [browser mode](https://vitest.dev/guide/browser/) test, and run `npx vitest run` in CI with the `ARGOS_TOKEN` environment variable set. Argos compares every screenshot with a [baseline build](../learn/platform-fundamentals/baseline-build.md) picked from your Git history and reports the changes as a check on your pull request.
+
+The Argos Vitest SDK captures two kinds of files:
 
 * **Screenshots** of your rendered components, captured from [Vitest browser tests](https://vitest.dev/guide/browser/).
 * **Snapshots** of any value — objects, JSON, HTML, and more — captured from browser **or** plain Node tests. No browser required.
+
+### What Argos adds over `toMatchScreenshot()`
+
+Vitest's built-in `toMatchScreenshot()` already compares screenshots in browser mode. Argos keeps your Vitest tests and changes what happens around them:
+
+* **No reference images in your repository.** `toMatchScreenshot()` stores references in `__screenshots__` folders that you commit, named per browser and platform (for example `button-chromium-darwin.png`), so references captured on macOS are not used on Linux CI. Argos picks the baseline from your Git history.
+* **Review on the pull request.** A `toMatchScreenshot()` mismatch fails the test until you re-run with `--update`. Argos turns visual changes into a pull request check that your team [approves or rejects](../learn/review-workflow/review-a-build.md).
+* **Diff more than pixels.** `argosSnapshot()` compares any value — API responses, generated HTML, Markdown — from browser or Node tests.
 
 {% hint style="info" %}
 Using **Storybook**? Follow the [Storybook Quickstart](storybook-quickstart/README.md) instead — it builds on this same Vitest integration.

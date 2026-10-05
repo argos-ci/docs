@@ -6,10 +6,20 @@ description: >-
 
 # Storybook visual testing quickstart
 
-Set up Argos with [Storybook](https://storybook.js.org/) to get **visual testing** and **live deployment URLs** on every pull request. By the end of this guide, every pull request will:
+To add visual testing to [Storybook](https://storybook.js.org/), install `@argos-ci/storybook`, add `argosVitestPlugin()` next to `storybookTest()` in your Vitest config, and run `npx vitest run --project=storybook` in CI with the `ARGOS_TOKEN` environment variable set: Argos captures every story automatically. Add `npx argos deploy ./storybook-static` to publish your built Storybook on a unique URL for each pull request.
+
+By the end of this guide, every pull request will:
 
 * Run visual tests on your stories with Vitest.
 * Deploy your Storybook to a unique URL you can share with your team.
+
+### What Argos adds over Chromatic
+
+* **Capture in your own CI.** The Storybook Vitest addon renders each story in a real Playwright browser on your CI, and Argos diffs exactly what your tests rendered. Chromatic renders stories on its own infrastructure.
+* **Your Chromatic modes keep working.** Argos reads `parameters.chromatic.modes`, so existing [story modes](../../learn/how-to-guides/visual-coverage/storybook-story-modes.md) carry over.
+* **Open source.** The whole platform, diff engine included, is MIT-licensed on [GitHub](https://github.com/argos-ci/argos).
+
+Coming from Chromatic? Follow [Migrate from Chromatic to Argos](../../learn/how-to-guides/migrate-to-argos/from-chromatic.md), or read the [Argos vs Chromatic](https://argos-ci.com/compare/chromatic) comparison.
 
 {% hint style="info" %}
 If you use Test Runner instead of Vitest, follow the [Storybook Test Runner Quickstart](storybook-test-runner-quickstart.md).
