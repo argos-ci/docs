@@ -31,6 +31,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
       - run: npm run build-storybook
       - run: npx --no-install argos deploy ./storybook-static

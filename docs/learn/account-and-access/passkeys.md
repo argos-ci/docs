@@ -99,7 +99,7 @@ Your browser does not support passkeys. Argos hides the option rather than offer
 
 The device you are on holds no Argos passkey. Either sign in another way and [add a passkey](passkeys.md#adding-a-passkey) on this device, or use the [QR-code flow](passkeys.md#using-a-passkey-from-another-device) to sign in with a passkey stored on your phone.
 
-Passkeys are also bound to the domain they were created for, so one registered on a self-hosted Argos instance will not work on `app.argos-ci.com`.
+Passkeys are also bound to the domain they were created for, so only a passkey created on `app.argos-ci.com` works there.
 
 </details>
 

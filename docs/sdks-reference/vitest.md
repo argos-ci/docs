@@ -17,6 +17,12 @@ To get started with Argos and Vitest, follow our [Vitest Quickstart](../quicksta
 Using **Storybook**? The [Storybook SDK](storybook.md) builds on this same Vitest integration. Follow the [Storybook Quickstart](../quickstart/storybook-quickstart/) instead.
 {% endhint %}
 
+### Compatibility
+
+* **Vitest** 4 or later.
+* **`@vitest/browser`** and **`@vitest/browser-playwright`** 4 or later, and **`playwright`** 1 or later, for screenshots in browser mode. Snapshots run in any Vitest test, with or without a browser.
+* **Node.js** 22 or later.
+
 ### Requirements
 
 Install `@argos-ci/vitest`:

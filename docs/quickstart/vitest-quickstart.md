@@ -25,6 +25,7 @@ Using **Storybook**? Follow the [Storybook Quickstart](storybook-quickstart/READ
 
 ### Prerequisites
 
+* Node.js 22 or later
 * [Vitest](https://vitest.dev/) set up in your project
 * [Vitest running on your CI](https://vitest.dev/guide/cli)
 * [A project created in Argos](https://app.argos-ci.com/new)
@@ -63,30 +64,30 @@ bun add --dev @argos-ci/vitest
 {% endtab %}
 {% endtabs %}
 
-To capture **screenshots**, also install the [Vitest browser mode](https://vitest.dev/guide/browser/) peer dependencies (skip this if you only need snapshots):
+To capture **screenshots**, also install the [Vitest browser mode](https://vitest.dev/guide/browser/) peer dependencies, plus [`vitest-browser-react`](https://www.npmjs.com/package/vitest-browser-react) to render the React component in the example below (skip this if you only need snapshots). On Vue or Svelte, install [`vitest-browser-vue`](https://www.npmjs.com/package/vitest-browser-vue) or [`vitest-browser-svelte`](https://www.npmjs.com/package/vitest-browser-svelte) instead:
 
 {% tabs %}
 {% tab title="npm" %}
 ```
-npm i --save-dev vitest @vitest/browser @vitest/browser-playwright playwright
+npm i --save-dev vitest @vitest/browser @vitest/browser-playwright playwright vitest-browser-react
 ```
 {% endtab %}
 
 {% tab title="yarn" %}
 ```
-yarn add --dev vitest @vitest/browser @vitest/browser-playwright playwright
+yarn add --dev vitest @vitest/browser @vitest/browser-playwright playwright vitest-browser-react
 ```
 {% endtab %}
 
 {% tab title="pnpm" %}
 ```
-pnpm add --save-dev vitest @vitest/browser @vitest/browser-playwright playwright
+pnpm add --save-dev vitest @vitest/browser @vitest/browser-playwright playwright vitest-browser-react
 ```
 {% endtab %}
 
 {% tab title="bun" %}
 ```
-bun add --dev vitest @vitest/browser @vitest/browser-playwright playwright
+bun add --dev vitest @vitest/browser @vitest/browser-playwright playwright vitest-browser-react
 ```
 {% endtab %}
 {% endtabs %}
@@ -204,6 +205,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npx vitest run

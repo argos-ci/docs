@@ -22,6 +22,11 @@ While Cypress inherently provides screenshot functionality, the Argos Cypress in
 
 Please refer to our [Quickstart guide](../quickstart/cypress-quickstart.md) to get started with Argos and Cypress.
 
+### Compatibility
+
+* **Cypress** 12 through 15.
+* **Node.js** 22 or later.
+
 ### Set a Preview URL
 
 Argos displays the URL of the page when a screenshot is taken, helping you understand the screenshot’s context in the Argos UI. If you run tests locally and deploy your pull requests (PRs) to a preview URL, you can link the two by setting the `ARGOS_PREVIEW_BASE_URL` environment variable or configuring the `previewUrl` option in the Cypress configuration.

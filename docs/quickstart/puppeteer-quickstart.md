@@ -16,6 +16,7 @@ Puppeteer captures images with `page.screenshot()`, but it doesn't compare them 
 
 ### Prerequisites
 
+- Node.js 22 or later
 - [Puppeteer](https://pptr.dev/#getting-started) set up in your project
 - [A project created in Argos](https://app.argos-ci.com/new)
 
@@ -112,6 +113,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
       - name: Run Puppeteer tests
         run: npm test

@@ -18,6 +18,7 @@ Already using `toHaveScreenshot()`? Follow [Migrate from Playwright toHaveScreen
 
 ### Prerequisites
 
+* Node.js 22 or later
 * [Playwright](https://playwright.dev/docs/intro#installing-playwright) set up in your project
 * [Playwright running on your CI](https://playwright.dev/docs/ci-intro#on-pushpull_request)
 * [A project created in Argos](https://app.argos-ci.com/new)
@@ -82,8 +83,18 @@ export default defineConfig({
     ],
   ],
 
+  // Start your app before the tests run, locally and on CI.
+  webServer: {
+    command: "npm run start",
+    url: "http://localhost:3000",
+    reuseExistingServer: !process.env.CI,
+  },
+
   // Setup recording option to enable test debugging features.
   use: {
+    // Resolve relative URLs like page.goto("/") against your app.
+    baseURL: "http://localhost:3000",
+
     // Collect trace when retrying the failed test.
     trace: "on-first-retry",
 
@@ -98,6 +109,8 @@ export default defineConfig({
 });
 ```
 {% endcode %}
+
+`webServer` starts your app before the tests run, on your machine and on CI, so `page.goto("/")` reaches it. Replace `npm run start` with the command that serves your app, and the URL with the one it listens on.
 
 With `trace` and `screenshot` enabled, Playwright records failure screenshots and traces — the reporter uploads them to Argos automatically, so you can debug failed tests visually.
 
@@ -117,7 +130,7 @@ import { test } from "@playwright/test";
 import { argosScreenshot } from "@argos-ci/playwright";
 
 test("screenshot homepage", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("/");
   await argosScreenshot(page, "homepage");
 });
 ```
@@ -149,6 +162,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npx playwright test

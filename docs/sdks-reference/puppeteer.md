@@ -15,6 +15,11 @@ Puppeteer already offers a command to take screenshots. The official Argos Puppe
 * Obscuring text cursors or carets.
 * Providing CSS utilities to simplify content hiding.
 
+### Compatibility
+
+* **Puppeteer** 1 or later.
+* **Node.js** 22 or later.
+
 ### Installation
 
 {% stepper %}

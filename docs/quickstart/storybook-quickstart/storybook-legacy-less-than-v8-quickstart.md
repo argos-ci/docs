@@ -12,11 +12,12 @@ To add visual testing to a legacy Storybook (\<v8), capture every story with [St
 * **Review on the pull request.** Visual changes become a pull request check that your team [approves or rejects](../../learn/review-workflow/review-a-build.md).
 
 {% hint style="info" %}
-If you use Storybook v8 or later, follow the [Storybook Quickstart](README.md) instead.
+On Storybook 9 or later, follow the [Storybook quickstart](README.md) instead. On Storybook 8, follow the [Storybook Test Runner quickstart](storybook-test-runner-quickstart.md).
 {% endhint %}
 
 ### Prerequisites
 
+* Node.js 22 or later
 * [Storybook \<v8](https://storybook.js.org/docs/get-started/install) set up in your project
 * [A project created in Argos](https://app.argos-ci.com/new)
 
@@ -100,6 +101,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
 
       - name: Build Storybook

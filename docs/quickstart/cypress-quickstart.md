@@ -18,6 +18,7 @@ Coming from another tool? Follow [Migrate from Percy to Argos](../learn/how-to-g
 
 ### Prerequisites
 
+* Node.js 22 or later
 * [Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress) set up in your project
 * [Cypress running on your CI](https://learn.cypress.io/advanced-cypress-concepts/running-cypress-in-ci)
 * [A project created in Argos](https://app.argos-ci.com/new)
@@ -144,6 +145,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6

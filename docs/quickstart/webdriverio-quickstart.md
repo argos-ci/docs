@@ -14,6 +14,7 @@ To add visual testing to [WebdriverIO](https://webdriver.io/), the Node.js test 
 
 ### Prerequisites
 
+* Node.js 22 or later
 * [WebdriverIO](https://webdriver.io/) set up in your project
 * [WebdriverIO running on your CI](https://webdriver.io/docs/automationProtocols/)
 * [A project created in Argos](https://app.argos-ci.com/new)
@@ -96,6 +97,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
       - name: Run WebdriverIO tests
         run: npm test

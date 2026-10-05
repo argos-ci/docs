@@ -99,6 +99,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
       # ---
       # Here you setup your repo and run your E2E tests
@@ -120,6 +122,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
       - name: Finalize Argos build
         # ARGOS_PARALLEL_NONCE is automatically detected

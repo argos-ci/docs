@@ -11,6 +11,11 @@ description: >-
 
 Please refer to our [Quickstart guide](../quickstart/playwright-quickstart.md) to get started with Argos and Playwright.
 
+### Compatibility
+
+* **Playwright**: `@argos-ci/playwright` declares no peer dependency on Playwright; it runs with the `@playwright/test` installed in your project.
+* **Node.js** 22 or later.
+
 ### Setup Visual Testing
 
 Argos presents a significant advantage over traditional Playwright visual tests with its streamlined approach to managing and reviewing test results:

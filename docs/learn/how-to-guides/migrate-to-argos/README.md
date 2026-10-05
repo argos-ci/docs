@@ -10,8 +10,8 @@ Already running visual tests with another tool? These guides walk you through mo
 
 Argos is built around three ideas that shape every migration:
 
-* **Keep your tests.** Argos plugs into Playwright, Cypress, Storybook, WebdriverIO, and Puppeteer, or takes screenshots from any pipeline through the [CLI](../../../sdks-reference/argos-command-line-interface-cli.md). You don't rewrite tests to switch.
-* **Baselines live in Git, not in your repo.** Argos selects the [baseline build](../../platform-fundamentals/baseline-build.md) automatically from your Git history, so there are no reference images to commit, update, or resolve in merge conflicts.
+* **Keep your tests.** Argos plugs into Playwright, Vitest, Storybook, Cypress, WebdriverIO, and Puppeteer, or takes screenshots from any pipeline through the [CLI](../../../sdks-reference/argos-command-line-interface-cli.md). You don't rewrite tests to switch.
+* **Baselines come from your Git history, not from files in your repo.** Argos selects the [baseline build](../../platform-fundamentals/baseline-build.md) automatically from your Git history, so there are no reference images to commit, update, or resolve in merge conflicts.
 * **Review happens on the pull request.** Diffs are approved or rejected in the Argos app and reported back as a [commit status](../../platform-fundamentals/build-modes.md) and [PR comment](../../review-workflow/pull-request-comments.md).
 
 ### Pick your current tool

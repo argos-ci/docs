@@ -13,13 +13,14 @@ To add visual testing with [Storybook Test Runner](https://storybook.js.org/docs
 * **Review on the pull request.** Visual changes become a pull request check that your team [approves or rejects](../../learn/review-workflow/review-a-build.md).
 
 {% hint style="info" %}
-If you use Vitest instead of Test Runner, follow the [Storybook Quickstart](README.md).
+If you use the Storybook Vitest addon (Storybook 9 or later), follow the [Storybook quickstart](README.md) instead.
 
 If you use a legacy version of Storybook (\<v8), follow the [legacy Storybook Quickstart](storybook-legacy-less-than-v8-quickstart.md).
 {% endhint %}
 
 ### Prerequisites
 
+* Node.js 22 or later
 * [Storybook v8+](https://storybook.js.org/docs/get-started/install) set up in your project
 * [A project created in Argos](https://app.argos-ci.com/new)
 
@@ -121,6 +122,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
 
       - name: Install dependencies
         run: npm ci

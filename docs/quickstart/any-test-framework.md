@@ -16,6 +16,7 @@ Argos works with any tool that produces screenshots. If your framework has no de
 
 ### Prerequisites
 
+* Node.js 22 or later
 * Your tests capture screenshots into a folder (e.g. `./screenshots`)
 * Your tests run on CI
 * [A project created in Argos](https://app.argos-ci.com/new)
@@ -74,6 +75,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
       - name: Run tests and capture screenshots
         run: npm test

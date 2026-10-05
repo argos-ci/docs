@@ -22,13 +22,14 @@ By the end of this guide, every pull request will:
 Coming from Chromatic? Follow [Migrate from Chromatic to Argos](../../learn/how-to-guides/migrate-to-argos/from-chromatic.md), or read the [Argos vs Chromatic](https://argos-ci.com/compare/chromatic) comparison.
 
 {% hint style="info" %}
-If you use Test Runner instead of Vitest, follow the [Storybook Test Runner Quickstart](storybook-test-runner-quickstart.md).
+On Storybook 8, or if you use Test Runner instead of Vitest, follow the [Storybook Test Runner quickstart](storybook-test-runner-quickstart.md).
 
 If you use a legacy version of Storybook (\<v8), follow the [legacy Storybook Quickstart](storybook-legacy-less-than-v8-quickstart.md).
 {% endhint %}
 
 ### Prerequisites
 
+* Node.js 22 or later
 * [Storybook v9+](https://storybook.js.org/docs/get-started/install) set up in your project
 * [The Storybook Vitest addon](https://storybook.js.org/docs/writing-tests/integrations/vitest-addon) installed
 * [A project created in Argos](https://app.argos-ci.com/new)
@@ -205,6 +206,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
 
       # Run visual tests

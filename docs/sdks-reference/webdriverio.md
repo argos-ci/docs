@@ -13,6 +13,11 @@ description: >-
 
 Follow the [WebdriverIO Quickstart](../quickstart/webdriverio-quickstart.md) to set up Argos with WebdriverIO.
 
+### Compatibility
+
+* **WebdriverIO** 6, 7, 8, or 9.
+* **Node.js** 22 or later.
+
 ### API overview
 
 #### argosScreenshot(browser, name\[, options])

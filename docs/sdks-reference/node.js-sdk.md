@@ -14,6 +14,10 @@ description: >-
 npm install --save-dev @argos-ci/core
 ```
 
+### Compatibility
+
+* **Node.js** 22 or later.
+
 ### Usage
 
 To upload screenshots from a `./screenshots` directory, use the `upload` function:

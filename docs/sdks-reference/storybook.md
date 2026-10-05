@@ -18,7 +18,7 @@ To get started with Argos and Storybook, check out our Quickstart guides:
 ### Compatibility
 
 * **Storybook** 8 through 11, including the 11 pre-releases. The Vitest addon needs Storybook 9 or later; the Test Runner works from Storybook 8.
-* **Vitest** 4 or 5, with `@vitest/browser` and `@vitest/browser-playwright`, when using the Vitest addon.
+* **Vitest** 4 or later, with `@vitest/browser` and `@vitest/browser-playwright` 4 or later, when using the Vitest addon.
 * **Node.js** 22 or later.
 
 ### Comparing Argos and Chromatic

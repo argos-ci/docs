@@ -69,7 +69,7 @@ bun add --dev @argos-ci/storybook @argos-ci/cli
 {% endtab %}
 {% endtabs %}
 
-Argos uses the [Storybook Vitest addon](https://storybook.js.org/docs/writing-tests/integrations/vitest-addon) to run your stories. If you're on Storybook v8+ and don't have it yet, install it before continuing. (On older Storybook, use the [Test Runner quickstart](../../../quickstart/storybook-quickstart/storybook-test-runner-quickstart.md) or the [legacy quickstart](../../../quickstart/storybook-quickstart/storybook-legacy-less-than-v8-quickstart.md).)
+Argos uses the [Storybook Vitest addon](https://storybook.js.org/docs/writing-tests/integrations/vitest-addon) to run your stories. The addon requires Storybook 9 or later; if you don't have it yet, install it before continuing. On Storybook 8, use the [Test Runner quickstart](../../../quickstart/storybook-quickstart/storybook-test-runner-quickstart.md) instead, and on older versions the [legacy quickstart](../../../quickstart/storybook-quickstart/storybook-legacy-less-than-v8-quickstart.md).
 {% endstep %}
 
 {% step %}

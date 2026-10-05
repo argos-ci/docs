@@ -76,6 +76,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
       - run: npm run test:e2e
         # Note: no ARGOS_TOKEN — the SDK uses OIDC automatically
