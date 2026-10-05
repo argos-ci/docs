@@ -192,6 +192,7 @@ Fonts, text rendering, and browser versions depend on the operating system, so t
 * [Stabilize screenshots](../learn/reliability-and-flakiness/flaky-tests/README.md) – Prevent flaky diffs before they reach your pull requests
 * [Cypress SDK reference](../sdks-reference/cypress.md) – All options and helpers
 * [Cypress example](https://github.com/argos-ci/argos-javascript/tree/main/examples/cypress) – A complete working setup
+* [Cypress visual regression testing](https://argos-ci.com/blog/cypress-visual-regression-testing) – The guide on the Argos blog
 
 ***
 

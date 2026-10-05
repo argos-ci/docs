@@ -274,3 +274,4 @@ Yes. Argos has a [free plan for open-source projects](../../billing-and-subscrip
 * [Keep your screenshots stable](../../reliability-and-flakiness/flaky-tests/) — avoid false positives after you switch.
 * [Responsive viewports](../visual-coverage/responsive-viewports.md) — reproduce Percy's multi-width coverage.
 * [Playwright SDK reference](../../../sdks-reference/playwright.md)
+* [Argos vs Percy](https://argos-ci.com/compare/percy) — a side-by-side comparison.

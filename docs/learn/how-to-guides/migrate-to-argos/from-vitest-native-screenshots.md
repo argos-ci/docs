@@ -225,3 +225,4 @@ Yes. `argosSnapshot()` captures any value — an API response, generated HTML, M
 * [Vitest quickstart](../../../quickstart/vitest-quickstart.md) — the full setup, including `argosSnapshot`.
 * [Vitest SDK reference](../../../sdks-reference/vitest.md) — every option of `argosScreenshot` and the plugin.
 * [Stabilize screenshots](../../reliability-and-flakiness/flaky-tests/) — keep your screenshots free of flaky diffs.
+* [Vitest visual testing](https://argos-ci.com/blog/vitest-visual-testing) — a guide to browser mode screenshots, on the Argos blog.

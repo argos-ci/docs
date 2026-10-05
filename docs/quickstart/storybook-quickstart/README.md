@@ -262,6 +262,7 @@ Fonts, text rendering, and browser versions depend on the operating system, so t
 * [Storybook story modes](../../learn/how-to-guides/visual-coverage/storybook-story-modes.md) – Capture stories in multiple themes and viewports
 * [Storybook SDK reference](../../sdks-reference/storybook.md) – All options and helpers
 * [Storybook + Vitest example](https://github.com/argos-ci/argos-javascript/tree/main/examples/storybook-vitest) – A complete working setup
+* [Storybook visual testing without Chromatic](https://argos-ci.com/blog/storybook-visual-testing-without-chromatic) – The guide on the Argos blog
 
 ***
 

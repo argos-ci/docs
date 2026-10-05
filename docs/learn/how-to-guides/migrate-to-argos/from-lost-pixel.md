@@ -286,3 +286,4 @@ Yes, the Hobby plan is free. See [Argos pricing plans](../../billing-and-subscri
 * [Storybook quickstart](../../../quickstart/storybook-quickstart/) — replaces `storybookShots`.
 * [Capture screenshots from URLs](../visual-coverage/capture-screenshots-from-urls.md) — replaces `pageShots`.
 * [Stabilize screenshots](../../reliability-and-flakiness/flaky-tests/) — keep your new suite free of flaky diffs.
+* [Lost Pixel alternatives in 2026](https://argos-ci.com/blog/lost-pixel-alternatives) — where Lost Pixel users can migrate, on the Argos blog.

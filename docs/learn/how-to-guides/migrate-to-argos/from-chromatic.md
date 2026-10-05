@@ -255,3 +255,4 @@ Yes — see [Open source](../../billing-and-subscription/open-source.md).
 * [Storybook quickstart](../../../quickstart/storybook-quickstart/) — the full setup.
 * [Storybook story modes](../visual-coverage/storybook-story-modes.md) — replace Chromatic modes.
 * [Deployments](../../deployments/) — live Storybook URLs on every PR.
+* [Argos vs Chromatic](https://argos-ci.com/compare/chromatic) — a side-by-side comparison.

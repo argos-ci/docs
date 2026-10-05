@@ -252,6 +252,7 @@ Fonts, text rendering, and browser versions depend on the operating system, so t
 * [Stabilize screenshots](../learn/reliability-and-flakiness/flaky-tests/README.md) – Prevent flaky diffs before they reach your pull requests
 * [Vitest SDK reference](../sdks-reference/vitest.md) – All options, including `argosSnapshot`
 * [Vitest browser mode documentation](https://vitest.dev/guide/browser/) – Vitest's own browser testing guide
+* [Vitest visual testing](https://argos-ci.com/blog/vitest-visual-testing) – A guide to browser mode screenshots, on the Argos blog
 
 ***
 

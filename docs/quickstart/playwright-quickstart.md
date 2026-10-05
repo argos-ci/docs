@@ -207,6 +207,7 @@ Fonts, text rendering, and browser versions depend on the operating system, so t
 * [Stabilize screenshots](../learn/reliability-and-flakiness/flaky-tests/README.md) – Prevent flaky diffs before they reach your pull requests
 * [Playwright SDK reference](../sdks-reference/playwright.md) – All options and helpers
 * [Playwright example](https://github.com/argos-ci/argos-javascript/tree/main/examples/playwright) – A complete working setup
+* [Playwright visual regression testing in CI](https://argos-ci.com/blog/playwright-visual-regression-testing-ci) – The complete guide, on the Argos blog
 
 ***
 

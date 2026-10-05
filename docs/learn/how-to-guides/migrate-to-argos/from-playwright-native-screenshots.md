@@ -197,3 +197,4 @@ Argos applies its own [diff algorithm](../../platform-fundamentals/how-argos-det
 * [Playwright quickstart](../../../quickstart/playwright-quickstart.md)
 * [Keep your screenshots stable](../../reliability-and-flakiness/flaky-tests/)
 * [Responsive viewports](../visual-coverage/responsive-viewports.md)
+* [Argos vs Playwright screenshots](https://argos-ci.com/compare/playwright) — a side-by-side comparison with `toHaveScreenshot()`.
