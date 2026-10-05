@@ -51,6 +51,7 @@
   * [Share links, retention and limits](learn/media/share-links-retention-and-limits.md)
 * [How-to guides](learn/how-to-guides/README.md)
   * [CI pipelines](learn/how-to-guides/ci-pipelines/README.md)
+    * [Run Argos in CI (GitHub Actions, GitLab CI, CircleCI, Buildkite)](learn/how-to-guides/ci-pipelines/run-argos-in-ci.md "Run Argos in CI")
     * [Parallel testing (sharding)](learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md)
     * [Subset builds](learn/how-to-guides/ci-pipelines/subset-builds.md)
     * [Skipping a build](learn/how-to-guides/ci-pipelines/skipping-a-build.md)

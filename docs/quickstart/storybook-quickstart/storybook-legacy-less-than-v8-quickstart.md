@@ -83,7 +83,7 @@ Screenshots are written to the `./screenshots` directory. Add `./screenshots` to
 {% step %}
 ### Set up CI
 
-Add a workflow that captures the screenshots and uploads them to Argos. If you use another CI provider, adapt the steps accordingly:
+Add a workflow that captures the screenshots and uploads them to Argos. If you use another CI provider, adapt the steps with [Run Argos in CI](../../learn/how-to-guides/ci-pipelines/run-argos-in-ci.md):
 
 {% code title=".github/workflows/argos.yml" %}
 ```yaml

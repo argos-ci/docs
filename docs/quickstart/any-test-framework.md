@@ -88,7 +88,7 @@ jobs:
 ```
 {% endcode %}
 
-`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret. On other CI providers, set `ARGOS_TOKEN` as a secret environment variable.
+`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret. On other CI providers, set `ARGOS_TOKEN` as a secret environment variable. For GitLab CI, CircleCI, Buildkite, and other providers, see [Run Argos in CI](../learn/how-to-guides/ci-pipelines/run-argos-in-ci.md).
 
 The CLI detects your CI context (commit, branch, pull request) automatically. See the [CLI reference](../sdks-reference/argos-command-line-interface-cli.md) for all options.
 {% endstep %}

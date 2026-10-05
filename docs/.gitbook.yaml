@@ -56,7 +56,7 @@ redirects:
   github-tokenless: ./learn/integrations/github-actions-authentication.md
   github-oidc: ./learn/integrations/github-actions-authentication.md
   gitlab: ./learn/integrations/gitlab-integration.md
-  gitlab-ci: ./learn/integrations/gitlab-integration.md
+  gitlab-ci: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
   gitlab-self-managed: ./learn/integrations/other-git-providers.md
   azure-devops: ./learn/integrations/other-git-providers.md
   bitbucket-server: ./learn/integrations/other-git-providers.md
@@ -72,16 +72,16 @@ redirects:
   skip-build: ./learn/how-to-guides/ci-pipelines/skipping-a-build.md
   build-splitting: ./learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md
   parallel-testing: ./learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md
-  circle-ci: ./learn/how-to-guides/ci-pipelines/README.md
-  buildkite: ./learn/how-to-guides/ci-pipelines/README.md
-  codeship: ./learn/how-to-guides/ci-pipelines/README.md
-  semaphore-ci: ./learn/how-to-guides/ci-pipelines/README.md
-  semaphore: ./learn/how-to-guides/ci-pipelines/README.md
-  drone-ci: ./learn/how-to-guides/ci-pipelines/README.md
-  travis-ci: ./learn/how-to-guides/ci-pipelines/README.md
-  other-ci: ./learn/how-to-guides/ci-pipelines/README.md
-  configure-ci: ./learn/how-to-guides/ci-pipelines/README.md
-  category/ci-guides: ./learn/how-to-guides/ci-pipelines/README.md
+  circle-ci: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  buildkite: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  codeship: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  semaphore-ci: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  semaphore: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  drone-ci: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  travis-ci: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  other-ci: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  configure-ci: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  category/ci-guides: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
 
   # Visual coverage
   screenshot-pages-script: ./learn/how-to-guides/visual-coverage/capture-screenshots-from-urls.md

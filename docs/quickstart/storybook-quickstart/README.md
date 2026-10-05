@@ -226,7 +226,7 @@ jobs:
 
 `ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
 
-For other CI providers, follow [Use deployments in CI](../../learn/deployments/use-deployments-in-ci.md).
+For other CI providers, see [Run Argos in CI](../../learn/how-to-guides/ci-pipelines/run-argos-in-ci.md) for the tests and [Use deployments in CI](../../learn/deployments/use-deployments-in-ci.md) for the deployment.
 {% endstep %}
 {% endstepper %}
 
