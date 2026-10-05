@@ -243,3 +243,4 @@ They don't transfer. The first Argos build on your reference branch becomes the 
 * [How Argos detects visual differences](../../platform-fundamentals/how-argos-detects-visual-differences.md)
 * [Keep your screenshots stable](../../reliability-and-flakiness/flaky-tests/)
 * [Responsive viewports](../visual-coverage/responsive-viewports.md) — reproduce Ultrafast Grid coverage.
+* [Argos vs Applitools](https://argos-ci.com/compare/applitools) — a side-by-side comparison.

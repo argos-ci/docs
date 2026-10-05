@@ -1,8 +1,10 @@
 ---
-description: Combine Argos with Cypress to stabilize screenshots, wait for fonts and images, and surface test failures.
+description: >-
+  Reference for @argos-ci/cypress: the cy.argosScreenshot command, the upload
+  task, stabilization options, and viewports for Cypress visual tests.
 ---
 
-# Cypress
+# Cypress SDK reference (@argos-ci/cypress)
 
 Boost your visual testing capabilities by combining Argos with your [Cypress](https://www.cypress.io/) tests.
 
@@ -19,6 +21,11 @@ While Cypress inherently provides screenshot functionality, the Argos Cypress in
 ### Get started
 
 Please refer to our [Quickstart guide](../quickstart/cypress-quickstart.md) to get started with Argos and Cypress.
+
+### Compatibility
+
+* **Cypress** 12 through 15.
+* **Node.js** 22 or later.
 
 ### Set a Preview URL
 

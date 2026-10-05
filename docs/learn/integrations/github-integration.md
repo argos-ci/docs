@@ -100,6 +100,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
       - run: npm run test:e2e # Run E2E tests with Argos SDK integration
         env:

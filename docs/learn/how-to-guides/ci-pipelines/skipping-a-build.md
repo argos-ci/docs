@@ -31,6 +31,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - name: Run tests
         run: npm run visual-tests # or your test command
         env:
@@ -51,6 +53,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - name: Skip Argos build
         run: npx @argos-ci/cli skip
 ```

@@ -2,16 +2,22 @@
 description: Set up visual testing in a legacy Storybook (<v8) with Storycap and the Argos CLI.
 ---
 
-# Storybook Legacy (\<v8) Quickstart
+# Legacy Storybook (\<v8) visual testing quickstart
 
-Set up Argos with a legacy version of Storybook (\<v8) using [Storycap](https://github.com/reg-viz/storycap): Storycap crawls your Storybook and captures a screenshot of each story, then the Argos CLI uploads them.
+To add visual testing to a legacy Storybook (\<v8), capture every story with [Storycap](https://github.com/reg-viz/storycap), then upload the screenshots with `npm exec -- argos upload ./screenshots` in CI with the `ARGOS_TOKEN` environment variable set. Storycap crawls your Storybook and captures a screenshot of each story; Argos compares them with a [baseline build](../../learn/platform-fundamentals/baseline-build.md) picked from your Git history and reports the changes on your pull request.
+
+### What Argos adds
+
+* **Baselines from your Git history.** There are no reference images to commit or update.
+* **Review on the pull request.** Visual changes become a pull request check that your team [approves or rejects](../../learn/review-workflow/review-a-build.md).
 
 {% hint style="info" %}
-If you use Storybook v8 or later, follow the [Storybook Quickstart](README.md) instead.
+On Storybook 9 or later, follow the [Storybook quickstart](README.md) instead. On Storybook 8, follow the [Storybook Test Runner quickstart](storybook-test-runner-quickstart.md).
 {% endhint %}
 
 ### Prerequisites
 
+* Node.js 22 or later
 * [Storybook \<v8](https://storybook.js.org/docs/get-started/install) set up in your project
 * [A project created in Argos](https://app.argos-ci.com/new)
 
@@ -77,7 +83,7 @@ Screenshots are written to the `./screenshots` directory. Add `./screenshots` to
 {% step %}
 ### Set up CI
 
-Add a workflow that captures the screenshots and uploads them to Argos. If you use another CI provider, adapt the steps accordingly:
+Add a workflow that captures the screenshots and uploads them to Argos. If you use another CI provider, adapt the steps with [Run Argos in CI](../../learn/how-to-guides/ci-pipelines/run-argos-in-ci.md):
 
 {% code title=".github/workflows/argos.yml" %}
 ```yaml
@@ -95,6 +101,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
 
       - name: Build Storybook
@@ -121,6 +129,24 @@ Push your changes and open a pull request — the Argos check appears on it once
 {% hint style="info" %}
 Argos needs a baseline to compare against. Until a build runs on your default branch, pull request builds are marked as [orphan](../../learn/platform-fundamentals/baseline-build.md#orphan-builds). Merge this setup or run the workflow once on your default branch to establish the baseline.
 {% endhint %}
+
+### Frequently asked questions
+
+<details>
+
+<summary>How do I update the baseline after an intended change?</summary>
+
+You don't update any file. Review the build in Argos and [approve the changes](../../learn/review-workflow/review-a-build.md): an approved build is eligible as a baseline. Once you merge, the build on your default branch, which Argos approves automatically by default, becomes the baseline for the pull requests that follow. See [Baseline build](../../learn/platform-fundamentals/baseline-build.md).
+
+</details>
+
+<details>
+
+<summary>Why do screenshots differ between my machine and CI?</summary>
+
+Fonts, text rendering, and browser versions depend on the operating system, so the same page renders slightly differently on macOS and on a Linux CI runner. The workflow above uploads screenshots only from CI, so Argos only compares screenshots captured on CI. Keep your CI on the same image and browser version from one run to the next. See [Browser glitches](../../learn/reliability-and-flakiness/flaky-tests/browser-glitches.md) and [Stabilize screenshots](../../learn/reliability-and-flakiness/flaky-tests/README.md).
+
+</details>
 
 ### Next steps
 

@@ -84,6 +84,8 @@ For Playwright, simply set `ARGOS_SUBSET=true` in your CI job. The reporter will
 steps:
   - uses: actions/checkout@v6
   - uses: actions/setup-node@v6
+    with:
+      node-version: 22
   - run: npm ci
   - name: Run Playwright tests
     env:
@@ -101,6 +103,8 @@ For Cypress, set `ARGOS_SUBSET=true` in your CI job that runs Cypress and upload
 steps:
   - uses: actions/checkout@v6
   - uses: actions/setup-node@v6
+    with:
+      node-version: 22
   - run: npm ci
   - name: Run Cypress tests
     env:

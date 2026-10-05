@@ -1,10 +1,10 @@
 ---
 description: >-
-  Integrating Argos with your Puppeteer tests to enable visual testing on your
-  application.
+  Reference for @argos-ci/puppeteer: argosScreenshot options, stabilization, and
+  viewports for visual testing with Puppeteer scripts.
 ---
 
-# Puppeteer
+# Puppeteer SDK reference (@argos-ci/puppeteer)
 
 Puppeteer already offers a command to take screenshots. The official Argos Puppeteer integration uses it but also does several things:
 
@@ -14,6 +14,11 @@ Puppeteer already offers a command to take screenshots. The official Argos Puppe
 * Concealing scrollbars.
 * Obscuring text cursors or carets.
 * Providing CSS utilities to simplify content hiding.
+
+### Compatibility
+
+* **Puppeteer** 1 or later.
+* **Node.js** 22 or later.
 
 ### Installation
 

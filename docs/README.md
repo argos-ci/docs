@@ -1,5 +1,8 @@
 ---
-description: Learn how Argos works and where to start.
+description: >-
+  Argos is an open-source visual testing platform: your tests capture
+  screenshots, Argos compares them against a baseline, and you review the
+  changes on every pull request.
 icon: book-open
 ---
 

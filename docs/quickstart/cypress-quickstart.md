@@ -2,12 +2,23 @@
 description: Set up visual testing in your Cypress tests with the Argos Cypress SDK.
 ---
 
-# Cypress Quickstart
+# Cypress visual testing quickstart
 
-Set up Argos with [Cypress](https://www.cypress.io/) to run visual tests on every pull request: install the SDK, register the command and task, capture screenshots, and run it in CI.
+To add visual testing to [Cypress](https://www.cypress.io/), install `@argos-ci/cypress`, import `@argos-ci/cypress/support` in your support file, register the Argos task with `registerArgosTask()` in `cypress.config.js`, call `cy.argosScreenshot("name")` in your tests, and run Cypress in CI with the `ARGOS_TOKEN` environment variable set. Argos compares every screenshot with a [baseline build](../learn/platform-fundamentals/baseline-build.md) picked from your Git history and reports the changes as a check on your pull request.
+
+### What Argos adds to Cypress
+
+Cypress takes screenshots with `cy.screenshot()`, but it doesn't compare them with a baseline. Argos adds:
+
+* **Visual comparison with automatic baselines.** Argos picks the baseline from your Git history, so there are no images to commit.
+* **Review on the pull request.** Visual changes become a pull request check that your team [approves or rejects](../learn/review-workflow/review-a-build.md).
+* **Stable screenshots.** `cy.argosScreenshot` waits for images and fonts to load before capturing.
+
+Coming from another tool? Follow [Migrate from Percy to Argos](../learn/how-to-guides/migrate-to-argos/from-percy.md) or [Migrate from Applitools to Argos](../learn/how-to-guides/migrate-to-argos/from-applitools.md); both cover Cypress.
 
 ### Prerequisites
 
+* Node.js 22 or later
 * [Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress) set up in your project
 * [Cypress running on your CI](https://learn.cypress.io/advanced-cypress-concepts/running-cypress-in-ci)
 * [A project created in Argos](https://app.argos-ci.com/new)
@@ -134,6 +145,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
@@ -144,7 +157,7 @@ jobs:
 ```
 {% endcode %}
 
-`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret. On other CI providers, pass the token with the `ARGOS_TOKEN` environment variable or the task's `token` option.
+`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret. On other CI providers, pass the token with the `ARGOS_TOKEN` environment variable or the task's `token` option. For GitLab CI, CircleCI, Buildkite, and other providers, see [Run Argos in CI](../learn/how-to-guides/ci-pipelines/run-argos-in-ci.md).
 {% endstep %}
 {% endstepper %}
 
@@ -156,11 +169,30 @@ Push your changes and open a pull request — the Argos check appears on it once
 Argos needs a baseline to compare against. Until a build runs on your default branch, pull request builds are marked as [orphan](../learn/platform-fundamentals/baseline-build.md#orphan-builds). Merge this setup or run the workflow once on your default branch to establish the baseline.
 {% endhint %}
 
+### Frequently asked questions
+
+<details>
+
+<summary>How do I update the baseline after an intended change?</summary>
+
+You don't update any file. Review the build in Argos and [approve the changes](../learn/review-workflow/review-a-build.md): an approved build is eligible as a baseline. Once you merge, the build on your default branch, which Argos approves automatically by default, becomes the baseline for the pull requests that follow. See [Baseline build](../learn/platform-fundamentals/baseline-build.md).
+
+</details>
+
+<details>
+
+<summary>Why do screenshots differ between my machine and CI?</summary>
+
+Fonts, text rendering, and browser versions depend on the operating system, so the same page renders slightly differently on macOS and on a Linux CI runner. The Argos task uploads only from CI (`uploadToArgos: !!process.env.CI`), so Argos only compares screenshots captured on CI. Keep your CI on the same image and browser version from one run to the next. See [Browser glitches](../learn/reliability-and-flakiness/flaky-tests/browser-glitches.md) and [Stabilize screenshots](../learn/reliability-and-flakiness/flaky-tests/README.md).
+
+</details>
+
 ### Next steps
 
 * [Stabilize screenshots](../learn/reliability-and-flakiness/flaky-tests/README.md) – Prevent flaky diffs before they reach your pull requests
 * [Cypress SDK reference](../sdks-reference/cypress.md) – All options and helpers
 * [Cypress example](https://github.com/argos-ci/argos-javascript/tree/main/examples/cypress) – A complete working setup
+* [Cypress visual regression testing](https://argos-ci.com/blog/cypress-visual-regression-testing) – The guide on the Argos blog
 
 ***
 

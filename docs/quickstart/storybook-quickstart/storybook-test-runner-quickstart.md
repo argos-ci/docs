@@ -2,18 +2,25 @@
 description: Set up visual testing in Storybook with Test Runner and the Argos CLI.
 ---
 
-# Storybook Test Runner Quickstart
+# Storybook Test Runner visual testing quickstart
 
-Set up Argos with [Storybook Test Runner](https://storybook.js.org/docs/writing-tests/integrations/test-runner) to run visual tests on every pull request: capture a screenshot of each story during the test run, then upload them with the Argos CLI.
+To add visual testing with [Storybook Test Runner](https://storybook.js.org/docs/writing-tests/integrations/test-runner), install `@argos-ci/storybook` and `@argos-ci/cli`, call `argosScreenshot(page, context)` in the `postVisit` hook of `.storybook/test-runner.ts`, run `test-storybook` against your built Storybook, and upload the screenshots with `npm exec -- argos upload ./screenshots` in CI with the `ARGOS_TOKEN` environment variable set.
+
+### What Argos adds
+
+* **A screenshot of every story.** The `postVisit` hook captures each story after Test Runner has rendered it and run its `play` function.
+* **Baselines from your Git history.** Argos picks the [baseline build](../../learn/platform-fundamentals/baseline-build.md) automatically, so there are no images to commit.
+* **Review on the pull request.** Visual changes become a pull request check that your team [approves or rejects](../../learn/review-workflow/review-a-build.md).
 
 {% hint style="info" %}
-If you use Vitest instead of Test Runner, follow the [Storybook Quickstart](README.md).
+If you use the Storybook Vitest addon (Storybook 9 or later), follow the [Storybook quickstart](README.md) instead.
 
 If you use a legacy version of Storybook (\<v8), follow the [legacy Storybook Quickstart](storybook-legacy-less-than-v8-quickstart.md).
 {% endhint %}
 
 ### Prerequisites
 
+* Node.js 22 or later
 * [Storybook v8+](https://storybook.js.org/docs/get-started/install) set up in your project
 * [A project created in Argos](https://app.argos-ci.com/new)
 
@@ -96,7 +103,7 @@ Screenshots are written to the `./screenshots` directory. Add `./screenshots` to
 {% step %}
 ### Set up CI
 
-Add a workflow that builds your Storybook, runs the tests, and uploads the screenshots to Argos. If you use another CI provider, adapt the steps accordingly:
+Add a workflow that builds your Storybook, runs the tests, and uploads the screenshots to Argos. If you use another CI provider, adapt the steps with [Run Argos in CI](../../learn/how-to-guides/ci-pipelines/run-argos-in-ci.md):
 
 {% code title=".github/workflows/argos.yml" %}
 ```yaml
@@ -115,6 +122,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
 
       - name: Install dependencies
         run: npm ci
@@ -151,6 +160,24 @@ Push your changes and open a pull request — the Argos check appears on it once
 {% hint style="info" %}
 Argos needs a baseline to compare against. Until a build runs on your default branch, pull request builds are marked as [orphan](../../learn/platform-fundamentals/baseline-build.md#orphan-builds). Merge this setup or run the workflow once on your default branch to establish the baseline.
 {% endhint %}
+
+### Frequently asked questions
+
+<details>
+
+<summary>How do I update the baseline after an intended change?</summary>
+
+You don't update any file. Review the build in Argos and [approve the changes](../../learn/review-workflow/review-a-build.md): an approved build is eligible as a baseline. Once you merge, the build on your default branch, which Argos approves automatically by default, becomes the baseline for the pull requests that follow. See [Baseline build](../../learn/platform-fundamentals/baseline-build.md).
+
+</details>
+
+<details>
+
+<summary>Why do screenshots differ between my machine and CI?</summary>
+
+Fonts, text rendering, and browser versions depend on the operating system, so the same page renders slightly differently on macOS and on a Linux CI runner. The workflow above uploads screenshots only from CI, so Argos only compares screenshots captured on CI. Keep your CI on the same image and browser version from one run to the next. See [Browser glitches](../../learn/reliability-and-flakiness/flaky-tests/browser-glitches.md) and [Stabilize screenshots](../../learn/reliability-and-flakiness/flaky-tests/README.md).
+
+</details>
 
 ### Next steps
 

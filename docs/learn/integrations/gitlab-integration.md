@@ -52,6 +52,10 @@ You can also use a [Project Access Token](https://docs.gitlab.com/ee/user/projec
 {% endstep %}
 {% endstepper %}
 
+### Run Argos in GitLab CI
+
+The integration reports statuses; your pipeline uploads the screenshots. For a `.gitlab-ci.yml` example, see [Run Argos in CI](../how-to-guides/ci-pipelines/run-argos-in-ci.md#gitlab-ci).
+
 ### Connect an existing Argos project to GitLab
 
 To link a GitLab repository to a project that already exists in Argos, go to **Project Settings → Connect Git Repository** and select the repository. The [token](#connect-a-gitlab-repository) must be configured first.

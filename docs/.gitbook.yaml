@@ -27,6 +27,8 @@ redirects:
   quickstart/puppeteer: ./quickstart/puppeteer-quickstart.md
   quickstart/webdriverio: ./quickstart/webdriverio-quickstart.md
   quickstart/cypress: ./quickstart/cypress-quickstart.md
+  quickstart/vitest: ./quickstart/vitest-quickstart.md
+  quickstart/storybook-vitest: ./quickstart/storybook-quickstart/README.md
   quickstart/with-any-e2e-tool: ./quickstart/any-test-framework.md
   quickstart/react-router: ./quickstart/any-test-framework.md
   other-framework: ./quickstart/any-test-framework.md
@@ -46,6 +48,7 @@ redirects:
   screenshot-metadata: ./sdks-reference/screenshot-metadata.md
   node: ./sdks-reference/node.js-sdk.md
   node-sdk: ./sdks-reference/node.js-sdk.md
+  vitest: ./sdks-reference/vitest.md
 
   # Integrations
   github: ./learn/integrations/github-integration.md
@@ -53,7 +56,7 @@ redirects:
   github-tokenless: ./learn/integrations/github-actions-authentication.md
   github-oidc: ./learn/integrations/github-actions-authentication.md
   gitlab: ./learn/integrations/gitlab-integration.md
-  gitlab-ci: ./learn/integrations/gitlab-integration.md
+  gitlab-ci: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
   gitlab-self-managed: ./learn/integrations/other-git-providers.md
   azure-devops: ./learn/integrations/other-git-providers.md
   bitbucket-server: ./learn/integrations/other-git-providers.md
@@ -69,16 +72,16 @@ redirects:
   skip-build: ./learn/how-to-guides/ci-pipelines/skipping-a-build.md
   build-splitting: ./learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md
   parallel-testing: ./learn/how-to-guides/ci-pipelines/parallel-testing-sharding.md
-  circle-ci: ./learn/how-to-guides/ci-pipelines/README.md
-  buildkite: ./learn/how-to-guides/ci-pipelines/README.md
-  codeship: ./learn/how-to-guides/ci-pipelines/README.md
-  semaphore-ci: ./learn/how-to-guides/ci-pipelines/README.md
-  semaphore: ./learn/how-to-guides/ci-pipelines/README.md
-  drone-ci: ./learn/how-to-guides/ci-pipelines/README.md
-  travis-ci: ./learn/how-to-guides/ci-pipelines/README.md
-  other-ci: ./learn/how-to-guides/ci-pipelines/README.md
-  configure-ci: ./learn/how-to-guides/ci-pipelines/README.md
-  category/ci-guides: ./learn/how-to-guides/ci-pipelines/README.md
+  circle-ci: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  buildkite: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  codeship: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  semaphore-ci: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  semaphore: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  drone-ci: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  travis-ci: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  other-ci: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  configure-ci: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
+  category/ci-guides: ./learn/how-to-guides/ci-pipelines/run-argos-in-ci.md
 
   # Visual coverage
   screenshot-pages-script: ./learn/how-to-guides/visual-coverage/capture-screenshots-from-urls.md
@@ -99,6 +102,7 @@ redirects:
   about-flaky: ./learn/reliability-and-flakiness/flaky-tests/README.md
   screenshots-stabilization: ./learn/reliability-and-flakiness/flaky-tests/README.md
   screenshots-stabilization/about-flaky: ./learn/reliability-and-flakiness/flaky-tests/README.md
+  flaky-tests: ./learn/reliability-and-flakiness/README.md
 
   # Platform fundamentals
   monitoring-mode: ./learn/platform-fundamentals/build-modes.md
@@ -112,6 +116,10 @@ redirects:
   # Billing & subscription
   usage: ./learn/billing-and-subscription/spend-management.md
   subscription: ./learn/billing-and-subscription/README.md
+  pricing: ./learn/billing-and-subscription/pricing-plans.md
+
+  # Agents
+  mcp: ./agents/mcp-server.md
 
   # Deployments
   deployments/environments: ./learn/deployments/environments.md

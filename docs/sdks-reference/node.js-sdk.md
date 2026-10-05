@@ -4,7 +4,7 @@ description: >-
   scripts, or build your own Argos integration with @argos-ci/core.
 ---
 
-# Node.js SDK
+# Node.js SDK reference (@argos-ci/core)
 
 `@argos-ci/core` is the low-level SDK every Argos integration builds on. Use it to upload screenshots from your own Node.js scripts or to build a custom integration. It is available as an [npm package](https://www.npmjs.com/package/@argos-ci/core); the source code is on [GitHub](https://github.com/argos-ci/argos-javascript/tree/main/packages/core).
 
@@ -13,6 +13,10 @@ description: >-
 ```bash
 npm install --save-dev @argos-ci/core
 ```
+
+### Compatibility
+
+* **Node.js** 22 or later.
 
 ### Usage
 

@@ -4,7 +4,7 @@ description: >-
   review visual changes, and manage projects straight from your agent.
 ---
 
-# MCP server
+# Argos MCP server
 
 Connect your AI tools to Argos using the [Model Context Protocol (MCP)](https://modelcontextprotocol.io), an open standard that lets AI assistants interact with your Argos projects.
 

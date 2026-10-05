@@ -2,7 +2,7 @@
 description: A playbook for tackling visual flakiness, with detection, ignoring noisy changes, and stabilization strategies.
 ---
 
-# Stabilize screenshots
+# Stabilize screenshots and fix flaky visual tests
 
 The most reliable visual test suite is one where flakiness is fixed at the source. This playbook covers the strategies that make screenshots deterministic — from waiting for loading to freezing dynamic values.
 

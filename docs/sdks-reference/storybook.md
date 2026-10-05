@@ -1,11 +1,11 @@
 ---
 description: >-
-  Integrate visual testing with your Storybook using Argos. This SDK
-  allows you to capture and review visual changes in your Storybook components
-  directly within your CI.
+  Reference for @argos-ci/storybook: capture every story with the Storybook
+  Vitest addon or Test Runner, set viewports, modes, and fit-to-content, and
+  take screenshots in play functions.
 ---
 
-# Storybook
+# Storybook SDK reference (@argos-ci/storybook)
 
 ### Get started
 
@@ -18,7 +18,7 @@ To get started with Argos and Storybook, check out our Quickstart guides:
 ### Compatibility
 
 * **Storybook** 8 through 11, including the 11 pre-releases. The Vitest addon needs Storybook 9 or later; the Test Runner works from Storybook 8.
-* **Vitest** 4 or 5, with `@vitest/browser` and `@vitest/browser-playwright`, when using the Vitest addon.
+* **Vitest** 4 or later, with `@vitest/browser` and `@vitest/browser-playwright` 4 or later, when using the Vitest addon.
 * **Node.js** 22 or later.
 
 ### Comparing Argos and Chromatic

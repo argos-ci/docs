@@ -1,14 +1,20 @@
 ---
 description: >-
-  Improve test debugging and boost your visual testing capabilities by combining
-  Argos with your Playwright tests.
+  Reference for @argos-ci/playwright: the Argos reporter, argosScreenshot
+  options and stabilization, ARIA snapshots, sharding, and trace uploads for
+  Playwright visual tests.
 ---
 
-# Playwright
+# Playwright SDK reference (@argos-ci/playwright)
 
 ### Get started
 
 Please refer to our [Quickstart guide](../quickstart/playwright-quickstart.md) to get started with Argos and Playwright.
+
+### Compatibility
+
+* **Playwright**: `@argos-ci/playwright` declares no peer dependency on Playwright; it runs with the `@playwright/test` installed in your project.
+* **Node.js** 22 or later.
 
 ### Setup Visual Testing
 

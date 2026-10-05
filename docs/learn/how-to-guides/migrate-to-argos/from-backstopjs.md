@@ -230,3 +230,4 @@ Open the build in the [Argos review UI](../../review-workflow/review-a-build.md)
 * [Playwright quickstart](../../../quickstart/playwright-quickstart.md)
 * [Capture screenshots from URLs](../visual-coverage/capture-screenshots-from-urls.md) — closest to a scenario list.
 * [Keep your screenshots stable](../../reliability-and-flakiness/flaky-tests/)
+* [Argos vs BackstopJS](https://argos-ci.com/compare/backstopjs) — a side-by-side comparison.

@@ -2,12 +2,23 @@
 description: Set up visual testing in your Playwright tests with the Argos Playwright SDK.
 ---
 
-# Playwright Quickstart
+# Playwright visual testing quickstart
 
-Set up Argos with [Playwright](https://playwright.dev/) to run visual tests on every pull request: install the SDK, add the reporter, capture screenshots, and run it in CI.
+To add visual testing to [Playwright](https://playwright.dev/), install `@argos-ci/playwright`, add the Argos reporter to `playwright.config.ts`, call `argosScreenshot(page, "name")` in your tests, and run `npx playwright test` in CI with the `ARGOS_TOKEN` environment variable set. Argos compares every screenshot with a [baseline build](../learn/platform-fundamentals/baseline-build.md) picked from your Git history and reports the changes as a check on your pull request.
+
+### What Argos adds over `toHaveScreenshot()`
+
+Playwright's built-in `toHaveScreenshot()` already compares screenshots. Argos keeps your Playwright tests and changes what happens around them:
+
+* **No baselines in your repository.** `toHaveScreenshot()` stores reference PNGs in `*-snapshots/` folders that you commit, with a separate image per platform. Argos picks the baseline from your Git history, so there are no images to commit or keep in sync.
+* **Review on the pull request.** A `toHaveScreenshot()` mismatch fails the test until you re-run with `--update-snapshots` and commit new images. Argos turns visual changes into a pull request check that your team [approves or rejects](../learn/review-workflow/review-a-build.md).
+* **Fewer flaky diffs.** `argosScreenshot` waits for fonts, images, and `aria-busy` loaders before capturing, and Argos [flags unstable tests](../learn/reliability-and-flakiness/flaky-test-detection.md) with a flaky badge and a stability score.
+
+Already using `toHaveScreenshot()`? Follow [Migrate from Playwright toHaveScreenshot to Argos](../learn/how-to-guides/migrate-to-argos/from-playwright-native-screenshots.md), or read the [Argos vs Playwright screenshots](https://argos-ci.com/compare/playwright) comparison.
 
 ### Prerequisites
 
+* Node.js 22 or later
 * [Playwright](https://playwright.dev/docs/intro#installing-playwright) set up in your project
 * [Playwright running on your CI](https://playwright.dev/docs/ci-intro#on-pushpull_request)
 * [A project created in Argos](https://app.argos-ci.com/new)
@@ -72,8 +83,18 @@ export default defineConfig({
     ],
   ],
 
+  // Start your app before the tests run, locally and on CI.
+  webServer: {
+    command: "npm run start",
+    url: "http://localhost:3000",
+    reuseExistingServer: !process.env.CI,
+  },
+
   // Setup recording option to enable test debugging features.
   use: {
+    // Resolve relative URLs like page.goto("/") against your app.
+    baseURL: "http://localhost:3000",
+
     // Collect trace when retrying the failed test.
     trace: "on-first-retry",
 
@@ -88,6 +109,8 @@ export default defineConfig({
 });
 ```
 {% endcode %}
+
+`webServer` starts your app before the tests run, on your machine and on CI, so `page.goto("/")` reaches it. Replace `npm run start` with the command that serves your app, and the URL with the one it listens on.
 
 With `trace` and `screenshot` enabled, Playwright records failure screenshots and traces — the reporter uploads them to Argos automatically, so you can debug failed tests visually.
 
@@ -107,7 +130,7 @@ import { test } from "@playwright/test";
 import { argosScreenshot } from "@argos-ci/playwright";
 
 test("screenshot homepage", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("/");
   await argosScreenshot(page, "homepage");
 });
 ```
@@ -139,6 +162,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npx playwright test
@@ -147,7 +172,7 @@ jobs:
 ```
 {% endcode %}
 
-`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret. On other CI providers, pass the token with the `ARGOS_TOKEN` environment variable or the reporter's `token` option.
+`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret. On other CI providers, pass the token with the `ARGOS_TOKEN` environment variable or the reporter's `token` option. For GitLab CI, CircleCI, Buildkite, and other providers, see [Run Argos in CI](../learn/how-to-guides/ci-pipelines/run-argos-in-ci.md).
 {% endstep %}
 {% endstepper %}
 
@@ -159,11 +184,30 @@ Push your changes and open a pull request — the Argos check appears on it once
 Argos needs a baseline to compare against. Until a build runs on your default branch, pull request builds are marked as [orphan](../learn/platform-fundamentals/baseline-build.md#orphan-builds). Merge this setup or run the workflow once on your default branch to establish the baseline.
 {% endhint %}
 
+### Frequently asked questions
+
+<details>
+
+<summary>How do I update the baseline after an intended change?</summary>
+
+You don't update any file. Review the build in Argos and [approve the changes](../learn/review-workflow/review-a-build.md): an approved build is eligible as a baseline. Once you merge, the build on your default branch, which Argos approves automatically by default, becomes the baseline for the pull requests that follow. See [Baseline build](../learn/platform-fundamentals/baseline-build.md).
+
+</details>
+
+<details>
+
+<summary>Why do screenshots differ between my machine and CI?</summary>
+
+Fonts, text rendering, and browser versions depend on the operating system, so the same page renders slightly differently on macOS and on a Linux CI runner. The Argos reporter uploads to Argos only from CI (`uploadToArgos: !!process.env.CI`), so Argos only compares screenshots captured on CI, and the `launchOptions` flags make text render the same way on every machine. See [Stabilize text rendering](../learn/reliability-and-flakiness/flaky-tests/stabilize-text-rendering.md) and [Browser glitches](../learn/reliability-and-flakiness/flaky-tests/browser-glitches.md).
+
+</details>
+
 ### Next steps
 
 * [Stabilize screenshots](../learn/reliability-and-flakiness/flaky-tests/README.md) – Prevent flaky diffs before they reach your pull requests
 * [Playwright SDK reference](../sdks-reference/playwright.md) – All options and helpers
 * [Playwright example](https://github.com/argos-ci/argos-javascript/tree/main/examples/playwright) – A complete working setup
+* [Playwright visual regression testing in CI](https://argos-ci.com/blog/playwright-visual-regression-testing-ci) – The complete guide, on the Argos blog
 
 ***
 

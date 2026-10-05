@@ -4,21 +4,32 @@ description: >-
   deployment URLs on every pull request.
 ---
 
-# Storybook Quickstart
+# Storybook visual testing quickstart
 
-Set up Argos with [Storybook](https://storybook.js.org/) to get **visual testing** and **live deployment URLs** on every pull request. By the end of this guide, every pull request will:
+To add visual testing to [Storybook](https://storybook.js.org/), install `@argos-ci/storybook`, add `argosVitestPlugin()` next to `storybookTest()` in your Vitest config, and run `npx vitest run --project=storybook` in CI with the `ARGOS_TOKEN` environment variable set: Argos captures every story automatically. Add `npx argos deploy ./storybook-static` to publish your built Storybook on a unique URL for each pull request.
+
+By the end of this guide, every pull request will:
 
 * Run visual tests on your stories with Vitest.
 * Deploy your Storybook to a unique URL you can share with your team.
 
+### What Argos adds over Chromatic
+
+* **Capture in your own CI.** The Storybook Vitest addon renders each story in a real Playwright browser on your CI, and Argos diffs exactly what your tests rendered. Chromatic renders stories on its own infrastructure.
+* **Your Chromatic modes keep working.** Argos reads `parameters.chromatic.modes`, so existing [story modes](../../learn/how-to-guides/visual-coverage/storybook-story-modes.md) carry over.
+* **Open source.** The whole platform, diff engine included, is MIT-licensed on [GitHub](https://github.com/argos-ci/argos).
+
+Coming from Chromatic? Follow [Migrate from Chromatic to Argos](../../learn/how-to-guides/migrate-to-argos/from-chromatic.md), or read the [Argos vs Chromatic](https://argos-ci.com/compare/chromatic) comparison.
+
 {% hint style="info" %}
-If you use Test Runner instead of Vitest, follow the [Storybook Test Runner Quickstart](storybook-test-runner-quickstart.md).
+On Storybook 8, or if you use Test Runner instead of Vitest, follow the [Storybook Test Runner quickstart](storybook-test-runner-quickstart.md).
 
 If you use a legacy version of Storybook (\<v8), follow the [legacy Storybook Quickstart](storybook-legacy-less-than-v8-quickstart.md).
 {% endhint %}
 
 ### Prerequisites
 
+* Node.js 22 or later
 * [Storybook v9+](https://storybook.js.org/docs/get-started/install) set up in your project
 * [The Storybook Vitest addon](https://storybook.js.org/docs/writing-tests/integrations/vitest-addon) installed
 * [A project created in Argos](https://app.argos-ci.com/new)
@@ -195,6 +206,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - run: npm ci
 
       # Run visual tests
@@ -213,7 +226,7 @@ jobs:
 
 `ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
 
-For other CI providers, follow [Use deployments in CI](../../learn/deployments/use-deployments-in-ci.md).
+For other CI providers, see [Run Argos in CI](../../learn/how-to-guides/ci-pipelines/run-argos-in-ci.md) for the tests and [Use deployments in CI](../../learn/deployments/use-deployments-in-ci.md) for the deployment.
 {% endstep %}
 {% endstepper %}
 
@@ -225,12 +238,31 @@ Push your changes and open a pull request — the Argos check appears on it once
 Argos needs a baseline to compare against. Until a build runs on your default branch, pull request builds are marked as [orphan](../../learn/platform-fundamentals/baseline-build.md#orphan-builds). Merge this setup or run the workflow once on your default branch to establish the baseline.
 {% endhint %}
 
+### Frequently asked questions
+
+<details>
+
+<summary>How do I update the baseline after an intended change?</summary>
+
+You don't update any file. Review the build in Argos and [approve the changes](../../learn/review-workflow/review-a-build.md): an approved build is eligible as a baseline. Once you merge, the build on your default branch, which Argos approves automatically by default, becomes the baseline for the pull requests that follow. See [Baseline build](../../learn/platform-fundamentals/baseline-build.md).
+
+</details>
+
+<details>
+
+<summary>Why do screenshots differ between my machine and CI?</summary>
+
+Fonts, text rendering, and browser versions depend on the operating system, so the same page renders slightly differently on macOS and on a Linux CI runner. The Argos plugin uploads to Argos only from CI (`uploadToArgos: !!process.env.CI`), so Argos only compares screenshots captured on CI, and the `launchOptions` flags make text render the same way on every machine. See [Stabilize text rendering](../../learn/reliability-and-flakiness/flaky-tests/stabilize-text-rendering.md) and [Browser glitches](../../learn/reliability-and-flakiness/flaky-tests/browser-glitches.md).
+
+</details>
+
 ### Next steps
 
 * [Stabilize screenshots](../../learn/reliability-and-flakiness/flaky-tests/README.md) – Prevent flaky diffs before they reach your pull requests
 * [Storybook story modes](../../learn/how-to-guides/visual-coverage/storybook-story-modes.md) – Capture stories in multiple themes and viewports
 * [Storybook SDK reference](../../sdks-reference/storybook.md) – All options and helpers
 * [Storybook + Vitest example](https://github.com/argos-ci/argos-javascript/tree/main/examples/storybook-vitest) – A complete working setup
+* [Storybook visual testing without Chromatic](https://argos-ci.com/blog/storybook-visual-testing-without-chromatic) – The guide on the Argos blog
 
 ***
 

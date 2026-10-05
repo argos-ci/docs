@@ -4,7 +4,7 @@ description: >-
   to Argos visual testing.
 ---
 
-# Open source
+# Open-source sponsorship
 
 Argos sponsors selected open-source projects with free usage. Sponsorships are evaluated case by case.
 
