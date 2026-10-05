@@ -71,6 +71,7 @@
     * [Migrate from Applitools to Argos](learn/how-to-guides/migrate-to-argos/from-applitools.md "From Applitools")
     * [Migrate from Playwright toHaveScreenshot to Argos](learn/how-to-guides/migrate-to-argos/from-playwright-native-screenshots.md "From Playwright")
     * [Migrate from BackstopJS to Argos](learn/how-to-guides/migrate-to-argos/from-backstopjs.md "From BackstopJS")
+    * [Migrate from Lost Pixel to Argos](learn/how-to-guides/migrate-to-argos/from-lost-pixel.md "From Lost Pixel")
 * [Integrations](learn/integrations/README.md)
   * [GitHub integration](learn/integrations/github-integration.md "GitHub")
   * [GitHub Actions authentication](learn/integrations/github-actions-authentication.md "GitHub Actions auth")
