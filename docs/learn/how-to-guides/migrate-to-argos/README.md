@@ -4,7 +4,7 @@ description: >-
   native Playwright screenshots, or BackstopJS.
 ---
 
-# Migrate to Argos
+# Migrate to Argos from another visual testing tool
 
 Already running visual tests with another tool? These guides walk you through moving to Argos without rewriting your test suite. In most cases you keep your existing tests and only swap the SDK, the snapshot call, and the CI step.
 

@@ -2,7 +2,7 @@
 description: Set up visual testing in your Puppeteer scripts with the Argos Puppeteer SDK.
 ---
 
-# Puppeteer Quickstart
+# Puppeteer visual testing quickstart
 
 Set up Argos with [Puppeteer](https://pptr.dev/) to run visual tests on every pull request: capture screenshots with the SDK, then upload them with the Argos CLI.
 

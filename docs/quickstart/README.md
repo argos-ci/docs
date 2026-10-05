@@ -3,7 +3,7 @@ description: Install Argos, upload your first screenshots, and review your first
 icon: bolt
 ---
 
-# Quickstart
+# Visual testing quickstart
 
 By the end of this guide, you will have Argos connected to your CI, your first build uploaded, and a pull request check ready to review.
 

@@ -2,7 +2,7 @@
 description: Set up visual testing in Storybook with Test Runner and the Argos CLI.
 ---
 
-# Storybook Test Runner Quickstart
+# Storybook Test Runner visual testing quickstart
 
 Set up Argos with [Storybook Test Runner](https://storybook.js.org/docs/writing-tests/integrations/test-runner) to run visual tests on every pull request: capture a screenshot of each story during the test run, then upload them with the Argos CLI.
 

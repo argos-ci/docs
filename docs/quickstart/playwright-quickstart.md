@@ -2,7 +2,7 @@
 description: Set up visual testing in your Playwright tests with the Argos Playwright SDK.
 ---
 
-# Playwright Quickstart
+# Playwright visual testing quickstart
 
 Set up Argos with [Playwright](https://playwright.dev/) to run visual tests on every pull request: install the SDK, add the reporter, capture screenshots, and run it in CI.
 

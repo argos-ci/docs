@@ -2,7 +2,7 @@
 description: Set up visual testing in your Vitest browser tests with the Argos Vitest SDK.
 ---
 
-# Vitest Quickstart
+# Vitest browser mode visual testing quickstart
 
 Set up Argos with [Vitest](https://vitest.dev/) to run visual tests on every pull request. The Argos Vitest SDK adds visual testing to Vitest in two ways:
 

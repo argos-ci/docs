@@ -1,10 +1,11 @@
 ---
 description: >-
-  Improve test debugging and boost your visual testing capabilities by combining
-  Argos with your Playwright tests.
+  Reference for @argos-ci/playwright: the Argos reporter, argosScreenshot
+  options and stabilization, ARIA snapshots, sharding, and trace uploads for
+  Playwright visual tests.
 ---
 
-# Playwright
+# Playwright SDK reference (@argos-ci/playwright)
 
 ### Get started
 

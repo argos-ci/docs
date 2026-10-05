@@ -4,7 +4,7 @@ description: >-
   deployment URLs on every pull request.
 ---
 
-# Storybook Quickstart
+# Storybook visual testing quickstart
 
 Set up Argos with [Storybook](https://storybook.js.org/) to get **visual testing** and **live deployment URLs** on every pull request. By the end of this guide, every pull request will:
 

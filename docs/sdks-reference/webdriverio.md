@@ -1,10 +1,11 @@
 ---
 description: >-
-  Integrating Argos with your WebdriverIO tests to enable visual testing on
-  your application.
+  Reference for @argos-ci/webdriverio: capture screenshots in WebdriverIO tests
+  with argosScreenshot, mask dynamic areas, and upload them to Argos with the
+  CLI.
 ---
 
-# WebdriverIO
+# WebdriverIO SDK reference (@argos-ci/webdriverio)
 
 [WebdriverIO](https://webdriver.io/) is a Node.js test automation framework for web and mobile applications, built on the WebDriver and WebDriver BiDi protocols. The `@argos-ci/webdriverio` SDK captures screenshots from your WebdriverIO tests so Argos can detect visual changes on every pull request.
 

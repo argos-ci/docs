@@ -4,7 +4,7 @@ description: >-
   committing PNG baselines to Git and review visual changes on the pull request.
 ---
 
-# Migrate from Playwright native screenshots to Argos
+# Migrate from Playwright toHaveScreenshot to Argos
 
 If you use Playwright's built-in [`toHaveScreenshot()`](https://playwright.dev/docs/test-snapshots), you already have visual tests — you're just storing the baselines in your repository and diffing them on the CI machine. This guide moves those tests to Argos so baselines live in the cloud, review happens on the pull request, and you stop fighting cross-platform PNG mismatches.
 

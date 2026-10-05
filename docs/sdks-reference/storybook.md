@@ -1,11 +1,11 @@
 ---
 description: >-
-  Integrate visual testing with your Storybook using Argos. This SDK
-  allows you to capture and review visual changes in your Storybook components
-  directly within your CI.
+  Reference for @argos-ci/storybook: capture every story with the Storybook
+  Vitest addon or Test Runner, set viewports, modes, and fit-to-content, and
+  take screenshots in play functions.
 ---
 
-# Storybook
+# Storybook SDK reference (@argos-ci/storybook)
 
 ### Get started
 

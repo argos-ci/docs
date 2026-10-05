@@ -1,10 +1,11 @@
 ---
 description: >-
-  Integrate visual testing into your Vitest browser tests with Argos. Capture
-  screenshots and snapshots and review visual changes directly within your CI.
+  Reference for @argos-ci/vitest: the Vitest plugin, argosScreenshot for browser
+  mode screenshots, and argosSnapshot for diffing any value from browser or Node
+  tests.
 ---
 
-# Vitest
+# Vitest SDK reference (@argos-ci/vitest)
 
 The `@argos-ci/vitest` SDK captures Argos screenshots directly from your [Vitest browser tests](https://vitest.dev/guide/browser/), and snapshots of any serializable value from either browser or Node tests.
 

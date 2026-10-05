@@ -2,7 +2,7 @@
 description: Set up visual testing in your WebdriverIO tests with the Argos WebdriverIO SDK.
 ---
 
-# WebdriverIO Quickstart
+# WebdriverIO visual testing quickstart
 
 Set up Argos with [WebdriverIO](https://webdriver.io/), the Node.js test automation framework for web and mobile applications, to run visual tests on every pull request: capture screenshots with the SDK, then upload them with the Argos CLI.
 

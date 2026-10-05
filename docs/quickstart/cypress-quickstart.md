@@ -2,7 +2,7 @@
 description: Set up visual testing in your Cypress tests with the Argos Cypress SDK.
 ---
 
-# Cypress Quickstart
+# Cypress visual testing quickstart
 
 Set up Argos with [Cypress](https://www.cypress.io/) to run visual tests on every pull request: install the SDK, register the command and task, capture screenshots, and run it in CI.
 

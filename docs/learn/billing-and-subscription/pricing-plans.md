@@ -4,7 +4,7 @@ description: >-
   for individuals, teams, or companies.
 ---
 
-# Pricing plans
+# Argos pricing plans
 
 Argos offers plans for individuals, teams, and enterprises — from the free Hobby plan to fully custom Enterprise options. For current details, see the [pricing page](https://argos-ci.com/pricing).
 

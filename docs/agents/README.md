@@ -4,7 +4,7 @@ description: >-
   skills, and AI-ready documentation.
 ---
 
-# Agents
+# Argos for AI agents
 
 Argos is built to work with AI agents. Whether your assistant reviews visual changes in a pull request, inspects builds from your terminal, or answers questions about Argos, these are the features it can use.
 

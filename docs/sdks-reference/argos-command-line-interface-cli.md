@@ -5,7 +5,7 @@ description: >-
   AI agents.
 ---
 
-# CLI
+# Argos CLI reference (@argos-ci/cli)
 
 The Argos command-line interface (CLI) uploads screenshots, deploys static builds, and lets you inspect and review builds from a terminal, a CI pipeline, or an AI agent. It is distributed as the [`@argos-ci/cli`](https://www.npmjs.com/package/@argos-ci/cli) npm package; the source code is available on [GitHub](https://github.com/argos-ci/argos-javascript/tree/main/packages/cli).
 

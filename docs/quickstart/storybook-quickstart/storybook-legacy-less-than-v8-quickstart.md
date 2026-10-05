@@ -2,7 +2,7 @@
 description: Set up visual testing in a legacy Storybook (<v8) with Storycap and the Argos CLI.
 ---
 
-# Storybook Legacy (\<v8) Quickstart
+# Legacy Storybook (\<v8) visual testing quickstart
 
 Set up Argos with a legacy version of Storybook (\<v8) using [Storycap](https://github.com/reg-viz/storycap): Storycap crawls your Storybook and captures a screenshot of each story, then the Argos CLI uploads them.
 

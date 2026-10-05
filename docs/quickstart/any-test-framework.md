@@ -2,7 +2,7 @@
 description: Set up visual testing with any test framework by uploading screenshots with the Argos CLI.
 ---
 
-# Any test framework
+# Visual testing with any test framework
 
 Argos works with any tool that produces screenshots. If your framework has no dedicated Argos SDK, capture screenshots however you like and upload the folder with the Argos CLI.
 
