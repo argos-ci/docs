@@ -1,7 +1,7 @@
 ---
 description: >-
   Step-by-step guides for switching to Argos from Percy, Chromatic, Applitools,
-  native Playwright screenshots, BackstopJS, or Lost Pixel.
+  native Playwright or Vitest screenshots, BackstopJS, or Lost Pixel.
 ---
 
 # Migrate to Argos from another visual testing tool
@@ -16,7 +16,7 @@ Argos is built around three ideas that shape every migration:
 
 ### Pick your current tool
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Percy (BrowserStack)</strong></td><td>Replace <code>@percy/*</code> SDKs and <code>percy exec</code> with the Argos reporter.</td><td><a href="from-percy.md">from-percy.md</a></td></tr><tr><td><strong>Chromatic</strong></td><td>Move Storybook, Playwright, or Cypress visual tests off the <code>chromatic</code> CLI.</td><td><a href="from-chromatic.md">from-chromatic.md</a></td></tr><tr><td><strong>Applitools Eyes</strong></td><td>Replace <code>eyes.check()</code> and the Ultrafast Grid with Argos screenshots.</td><td><a href="from-applitools.md">from-applitools.md</a></td></tr><tr><td><strong>Playwright screenshots</strong></td><td>Move off committed <code>toHaveScreenshot()</code> snapshots to hosted review.</td><td><a href="from-playwright-native-screenshots.md">from-playwright-native-screenshots.md</a></td></tr><tr><td><strong>BackstopJS</strong></td><td>Move from self-hosted <code>backstop.json</code> scenarios to a hosted workflow.</td><td><a href="from-backstopjs.md">from-backstopjs.md</a></td></tr><tr><td><strong>Lost Pixel</strong></td><td>Map <code>lostpixel.config.ts</code> shot modes to Argos before Lost Pixel is sunset.</td><td><a href="from-lost-pixel.md">from-lost-pixel.md</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Percy (BrowserStack)</strong></td><td>Replace <code>@percy/*</code> SDKs and <code>percy exec</code> with the Argos reporter.</td><td><a href="from-percy.md">from-percy.md</a></td></tr><tr><td><strong>Chromatic</strong></td><td>Move Storybook, Playwright, or Cypress visual tests off the <code>chromatic</code> CLI.</td><td><a href="from-chromatic.md">from-chromatic.md</a></td></tr><tr><td><strong>Applitools Eyes</strong></td><td>Replace <code>eyes.check()</code> and the Ultrafast Grid with Argos screenshots.</td><td><a href="from-applitools.md">from-applitools.md</a></td></tr><tr><td><strong>Playwright screenshots</strong></td><td>Move off committed <code>toHaveScreenshot()</code> snapshots to hosted review.</td><td><a href="from-playwright-native-screenshots.md">from-playwright-native-screenshots.md</a></td></tr><tr><td><strong>Vitest screenshots</strong></td><td>Move off committed <code>toMatchScreenshot()</code> references to hosted review.</td><td><a href="from-vitest-native-screenshots.md">from-vitest-native-screenshots.md</a></td></tr><tr><td><strong>BackstopJS</strong></td><td>Move from self-hosted <code>backstop.json</code> scenarios to a hosted workflow.</td><td><a href="from-backstopjs.md">from-backstopjs.md</a></td></tr><tr><td><strong>Lost Pixel</strong></td><td>Map <code>lostpixel.config.ts</code> shot modes to Argos before Lost Pixel is sunset.</td><td><a href="from-lost-pixel.md">from-lost-pixel.md</a></td></tr></tbody></table>
 
 ### Don't see your tool?
 

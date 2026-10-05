@@ -19,6 +19,8 @@ Vitest's built-in `toMatchScreenshot()` already compares screenshots in browser 
 * **Review on the pull request.** A `toMatchScreenshot()` mismatch fails the test until you re-run with `--update`. Argos turns visual changes into a pull request check that your team [approves or rejects](../learn/review-workflow/review-a-build.md).
 * **Diff more than pixels.** `argosSnapshot()` compares any value — API responses, generated HTML, Markdown — from browser or Node tests.
 
+Already using `toMatchScreenshot()`? Follow [Migrate from Vitest toMatchScreenshot to Argos](../learn/how-to-guides/migrate-to-argos/from-vitest-native-screenshots.md).
+
 {% hint style="info" %}
 Using **Storybook**? Follow the [Storybook Quickstart](storybook-quickstart/README.md) instead — it builds on this same Vitest integration.
 {% endhint %}

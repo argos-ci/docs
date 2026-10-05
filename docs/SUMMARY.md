@@ -70,6 +70,7 @@
     * [Migrate from Chromatic to Argos](learn/how-to-guides/migrate-to-argos/from-chromatic.md "From Chromatic")
     * [Migrate from Applitools to Argos](learn/how-to-guides/migrate-to-argos/from-applitools.md "From Applitools")
     * [Migrate from Playwright toHaveScreenshot to Argos](learn/how-to-guides/migrate-to-argos/from-playwright-native-screenshots.md "From Playwright")
+    * [Migrate from Vitest toMatchScreenshot to Argos](learn/how-to-guides/migrate-to-argos/from-vitest-native-screenshots.md "From Vitest")
     * [Migrate from BackstopJS to Argos](learn/how-to-guides/migrate-to-argos/from-backstopjs.md "From BackstopJS")
     * [Migrate from Lost Pixel to Argos](learn/how-to-guides/migrate-to-argos/from-lost-pixel.md "From Lost Pixel")
 * [Integrations](learn/integrations/README.md)
