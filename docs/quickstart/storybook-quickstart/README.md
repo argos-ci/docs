@@ -38,30 +38,30 @@ If you use a legacy version of Storybook (\<v8), follow the [legacy Storybook Qu
 {% step %}
 ### Install
 
-Install the Argos Storybook SDK:
+Install the Argos Storybook SDK, plus the Argos CLI that deploys your Storybook later in this guide:
 
 {% tabs %}
 {% tab title="npm" %}
 ```
-npm i --save-dev @argos-ci/storybook
+npm i --save-dev @argos-ci/storybook @argos-ci/cli
 ```
 {% endtab %}
 
 {% tab title="yarn" %}
 ```
-yarn add --dev @argos-ci/storybook
+yarn add --dev @argos-ci/storybook @argos-ci/cli
 ```
 {% endtab %}
 
 {% tab title="pnpm" %}
 ```
-pnpm add --save-dev @argos-ci/storybook
+pnpm add --save-dev @argos-ci/storybook @argos-ci/cli
 ```
 {% endtab %}
 
 {% tab title="bun" %}
 ```
-bun add --dev @argos-ci/storybook
+bun add --dev @argos-ci/storybook @argos-ci/cli
 ```
 {% endtab %}
 {% endtabs %}
@@ -141,14 +141,15 @@ export default defineConfig({
             enabled: true,
             headless: true,
             provider: playwright({
-              // Stabilize text rendering so screenshots match across macOS and CI.
+              // Reduce text rendering differences between machines.
               launchOptions: {
                 args: ["--disable-lcd-text", "--font-render-hinting=none"],
               },
             }),
             instances: [{ browser: "chromium" }],
           },
-          setupFiles: [".storybook/vitest.setup.ts"],
+          // Storybook 9 to 10.2 only: since 10.3, the addon applies .storybook/preview itself.
+          // setupFiles: [".storybook/vitest.setup.ts"],
         },
       },
     ],
@@ -158,7 +159,7 @@ export default defineConfig({
 {% endcode %}
 
 {% hint style="success" %}
-The `launchOptions` above disable subpixel text and font hinting, so glyphs render identically on your machine and on CI. This single change prevents one of the most common causes of flaky screenshots — learn why in [Stabilize text rendering](../../learn/reliability-and-flakiness/flaky-tests/stabilize-text-rendering.md).
+The `launchOptions` above disable subpixel text and font hinting, which reduces text rendering differences between your machine and CI. This single change prevents one of the most common causes of flaky screenshots — learn why in [Stabilize text rendering](../../learn/reliability-and-flakiness/flaky-tests/stabilize-text-rendering.md).
 {% endhint %}
 {% endstep %}
 

@@ -84,7 +84,7 @@ claude
 
 ### Cursor
 
-Add the snippet below to your project-specific or global `.cursor/mcp.json` file. See the [Cursor documentation](https://docs.cursor.com/en/context/mcp) for details.
+Add the snippet below to your project-specific or global `.cursor/mcp.json` file. See the [Cursor documentation](https://cursor.com/docs/mcp) for details.
 
 ```json
 {

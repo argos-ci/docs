@@ -35,7 +35,7 @@ export default defineConfig({
   // ... other configurations
 
   use: {
-    // Stabilize text rendering so screenshots match across macOS and CI.
+    // Reduce text rendering differences between machines.
     launchOptions: {
       args: ["--disable-lcd-text", "--font-render-hinting=none"],
     },
@@ -58,7 +58,7 @@ export default defineConfig({
 {% endcode %}
 
 {% hint style="success" %}
-The `launchOptions` above disable subpixel text and font hinting, so glyphs render identically on your machine and on CI. This prevents one of the most common causes of flaky screenshots. The Argos reporter warns you at startup if these flags are missing from a Chromium project — learn why in [Stabilize text rendering](../learn/reliability-and-flakiness/flaky-tests/stabilize-text-rendering.md).
+The `launchOptions` above disable subpixel text and font hinting, which reduces text rendering differences between your machine and CI. This prevents one of the most common causes of flaky screenshots. The Argos reporter warns you at startup if these flags are missing from a Chromium project — learn why in [Stabilize text rendering](../learn/reliability-and-flakiness/flaky-tests/stabilize-text-rendering.md).
 {% endhint %}
 
 And use `argosScreenshot` helper to capture stable screenshots in your E2E tests:

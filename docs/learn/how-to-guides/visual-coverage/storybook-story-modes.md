@@ -217,7 +217,7 @@ When Argos runs, it will generate snapshots for each mode defined at the project
 
 ### Excluding or disabling modes
 
-Sometimes you want to turn off a certain higher-level mode for a specific story. You can do this by passing a disable property:
+Sometimes you want to turn off a certain higher-level mode for a specific story. You can do this by passing a `disabled` property:
 
 {% code title="ProductCard.stories.ts" %}
 ```ts
@@ -230,7 +230,7 @@ export const SpecialCard: Story = {
   parameters: {
     argos: {
       modes: {
-        "light mobile": { disable: true }, // turns off this inherited mode
+        "light mobile": { disabled: true }, // turns off this inherited mode
       },
     },
   },

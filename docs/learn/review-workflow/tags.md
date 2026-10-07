@@ -51,7 +51,7 @@ test.describe("Homepage @desktop @homepage", () => {
   test("homepage", async ({ page }) => {
     await page.goto("/");
     await argosScreenshot(page, "homepage", {
-      tags: ["@desktop", "@homepage"],
+      tag: ["@desktop", "@homepage"],
     });
   });
 });
@@ -61,20 +61,20 @@ Read the [Playwright test tags documentation](https://playwright.dev/docs/test-a
 
 #### Cypress
 
-In Cypress, you can add tags to screenshots through the `tags` option in the `cy.argosScreenshot` command.
+In Cypress, you can add tags to screenshots through the `tag` option in the `cy.argosScreenshot` command.
 
 {% code title="cypress/e2e/homepage.cy.js" %}
 ```js
 it("screenshot homepage", () => {
   cy.visit("http://localhost:3000/");
-  cy.argosScreenshot("homepage", { tags: ["@desktop", "@homepage"] });
+  cy.argosScreenshot("homepage", { tag: ["@desktop", "@homepage"] });
 });
 ```
 {% endcode %}
 
 #### Puppeteer
 
-In Puppeteer, you can add tags to screenshots through the `tags` option in the `argosScreenshot` function.
+In Puppeteer, you can add tags to screenshots through the `tag` option in the `argosScreenshot` function.
 
 {% code title="screenshot.mjs" %}
 ```js
@@ -85,7 +85,7 @@ const browser = await puppeteer.launch();
 const page = await browser.newPage();
 await page.goto("http://localhost:3000/");
 await argosScreenshot(page, "homepage", {
-  tags: ["@desktop", "@homepage"],
+  tag: ["@desktop", "@homepage"],
 });
 await browser.close();
 ```
