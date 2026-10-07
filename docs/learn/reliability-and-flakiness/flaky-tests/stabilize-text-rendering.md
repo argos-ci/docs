@@ -1,10 +1,10 @@
 ---
-description: Disable subpixel text and font hinting in Chromium so glyphs render identically across macOS, Linux, and CI.
+description: Disable subpixel text and font hinting in headless Chromium to reduce glyph rendering differences between machines.
 ---
 
 # Stabilize text rendering
 
-Force consistent glyph rendering across operating systems: disable subpixel (LCD) text and font hinting so the same text looks identical on macOS, Linux, and CI—eliminating one of the most common sources of screenshot flakiness.
+Reduce glyph rendering differences between machines: disable subpixel (LCD) text and font hinting in headless Chromium. This removes one of the most common sources of screenshot noise. It does not make macOS and Linux render text identically, so capture your screenshots in a single environment, usually CI.
 
 ### Why text causes flaky screenshots
 
@@ -17,10 +17,10 @@ The consequence: a screenshot captured locally on macOS rarely matches the exact
 
 ### The fix
 
-Launch Chromium with two flags that make text rendering deterministic:
+Launch Chromium with two flags that remove the most variable parts of text rendering:
 
 * `--disable-lcd-text` — forces **grayscale antialiasing** instead of subpixel rendering, removing the red/blue edge fringing.
-* `--font-render-hinting=none` — disables font hinting so glyph rasterization is **platform-independent**.
+* `--font-render-hinting=none` — disables font hinting, so glyphs are no longer snapped to each platform's pixel grid. Chromium only reads this flag in headless mode (the headless shell Playwright uses by default); it has no effect on a headed browser.
 
 {% tabs %}
 {% tab title="Playwright" %}
@@ -68,7 +68,7 @@ export default defineConfig({
 {% endtabs %}
 
 {% hint style="success" %}
-These flags make text rendering consistent **across** environments, so screenshots captured on your machine match those captured on CI.
+These flags reduce text rendering differences **across** environments. They don't remove them: a system font stack resolves to different fonts on each operating system, and macOS and Linux rasterize glyphs differently. Compare screenshots captured in the same environment; with Argos, baselines come from your CI builds.
 {% endhint %}
 
 {% hint style="info" %}

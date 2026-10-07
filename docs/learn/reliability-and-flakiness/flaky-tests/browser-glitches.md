@@ -9,7 +9,7 @@ description: >-
 The same page can render differently across operating systems and browser versions. Run your tests in the same environment everywhere — same OS, same browser version, locally and on CI — and smooth over the few properties that still render inconsistently.
 
 {% hint style="info" %}
-The most common cross-environment glitch is text rendering. See [Stabilize text rendering](stabilize-text-rendering.md) for the launch options that make glyphs render identically everywhere.
+The most common cross-environment glitch is text rendering. See [Stabilize text rendering](stabilize-text-rendering.md) for the launch options that reduce text rendering differences between environments.
 {% endhint %}
 
 ### Border radius

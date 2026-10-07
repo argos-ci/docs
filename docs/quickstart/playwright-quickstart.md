@@ -101,7 +101,7 @@ export default defineConfig({
     // Capture screenshot after each test failure.
     screenshot: "only-on-failure",
 
-    // Stabilize text rendering so screenshots match across macOS and CI.
+    // Reduce text rendering differences between machines.
     launchOptions: {
       args: ["--disable-lcd-text", "--font-render-hinting=none"],
     },
@@ -115,7 +115,7 @@ export default defineConfig({
 With `trace` and `screenshot` enabled, Playwright records failure screenshots and traces — the reporter uploads them to Argos automatically, so you can debug failed tests visually.
 
 {% hint style="success" %}
-The `launchOptions` above disable subpixel text and font hinting, so glyphs render identically on your machine and on CI. This single change prevents one of the most common causes of flaky screenshots — learn why in [Stabilize text rendering](../learn/reliability-and-flakiness/flaky-tests/stabilize-text-rendering.md).
+The `launchOptions` above disable subpixel text and font hinting, which reduces text rendering differences between your machine and CI. This single change prevents one of the most common causes of flaky screenshots — learn why in [Stabilize text rendering](../learn/reliability-and-flakiness/flaky-tests/stabilize-text-rendering.md).
 {% endhint %}
 {% endstep %}
 

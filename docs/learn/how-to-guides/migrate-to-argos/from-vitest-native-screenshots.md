@@ -95,7 +95,7 @@ export default defineConfig({
       enabled: true,
       headless: true,
       provider: playwright({
-        // Stabilize text rendering so screenshots match across macOS and CI.
+        // Reduce text rendering differences between machines.
         launchOptions: {
           args: ["--disable-lcd-text", "--font-render-hinting=none"],
         },

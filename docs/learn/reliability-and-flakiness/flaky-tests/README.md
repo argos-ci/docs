@@ -33,7 +33,7 @@ Most stabilization is automatic. The Argos SDK stabilizes every screenshot by de
 * **Wait for CSS background images to load.** Flag elements with `data-visual-test-wait-bg-img` so Argos waits for their backgrounds — or extend the check to the whole page. → [Wait for background images](wait-for-background-images.md)
 * **Freeze animated GIFs.** GIFs are paused on their first frame by default so they don't capture a random frame on each run. → [Pause animated GIFs](pause-gifs.md)
 * **Make dates and times deterministic.** Hide or freeze any value that changes between runs. → [Stabilize date & time](stabilize-date-and-time.md)
-* **Force consistent text rendering.** Disable subpixel text and font hinting so glyphs look identical on every machine. → [Stabilize text rendering](stabilize-text-rendering.md)
+* **Reduce text rendering differences.** Disable subpixel text and font hinting so glyphs vary less between machines. → [Stabilize text rendering](stabilize-text-rendering.md)
 * **Run the same environment everywhere, and tame rendering quirks.** Use the same OS and browser locally and on CI, and smooth over properties like `border-radius`. → [Browser glitches](browser-glitches.md)
 * **Mask or hide unavoidable dynamic content.** Use `data-visual-test` attributes for anything you can't stabilize at the source. → [Argos helpers](argos-helpers.md)
 
