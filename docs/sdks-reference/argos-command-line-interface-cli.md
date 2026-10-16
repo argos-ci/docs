@@ -117,6 +117,7 @@ Run `argos <command> --help` for a command's exact arguments, flags, and default
 | `login`, `logout`, `whoami`                | Manage the CLI's user session.                                      |
 | `create-project <name>`                    | Create a project in an account you administer.                      |
 | `analytics`                                | Fetch build and screenshot metrics for an account.                  |
+| `docs search <query>`                      | Search this documentation from the terminal.                        |
 | `help [command]`                           | Display the available commands and options.                         |
 
 ### Uploading from CI
@@ -475,6 +476,24 @@ argos analytics --account my-team --from 2026-01-01 --group-by month --json
 `--from` defaults to 30 days ago and `--to` to now, with a range capped at 365 days; `--group-by` buckets by `day`, `week`, or `month`; and `--project` filters by project name, repeated for several. Both `create-project` and `analytics` take the account from `--account <slug>` or `ARGOS_ACCOUNT`, and need a [personal access token](#project-tokens-and-personal-access-tokens) scoped to it.
 
 See [Analytics](../learn/account-and-access/analytics.md) for the dashboard view of these metrics.
+
+### Searching the documentation
+
+`docs search` searches this documentation and prints the best matching pages, each with its URL and the passage that matched. It needs no token, so it works before you have set up a project:
+
+```bash
+argos docs search "parallel builds"
+```
+
+It returns 5 results by default, and up to 10 with `--limit`. With `--json`, it prints an array of `{ "title", "url", "excerpt" }`, best match first; `excerpt` is `null` when a page has no matching passage. Append `.md` to a result's URL to read the whole page as Markdown, which is how an agent gets from a search to an answer:
+
+```bash
+url=$(argos docs search "parallel builds" --json | jq -r '.[0].url')
+curl "$url.md"
+```
+
+The search runs against the published documentation, so it needs network access. See [AI-ready docs](../agents/ai-ready-docs.md) for the other ways an agent can read these pages.
+
 ## AI agent skills
 
 The [`argos-javascript`](https://github.com/argos-ci/argos-javascript) repository includes skills that help AI agents use Argos CLI commands and review pull requests with Argos build data:
