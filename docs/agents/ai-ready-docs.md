@@ -21,6 +21,16 @@ https://argos-ci.com/docs/agents/mcp-server.md
 - [`https://argos-ci.com/docs/llms.txt`](https://argos-ci.com/docs/llms.txt) — an AI-friendly index of the whole documentation, listing every page with its Markdown URL. Give this to an agent so it can discover and fetch only the pages it needs.
 - [`https://argos-ci.com/docs/llms-full.txt`](https://argos-ci.com/docs/llms-full.txt) — a full snapshot of the published documentation in one file, for tools that ingest everything at once.
 
+## Search from the Argos CLI
+
+An agent that already runs shell commands can search these docs with the [Argos CLI](../sdks-reference/argos-command-line-interface-cli.md#searching-the-documentation), with no MCP setup and no token:
+
+```bash
+argos docs search "parallel builds" --json
+```
+
+Each result carries its page URL. Append `.md` to it to read the page.
+
 ## Docs MCP server
 
 The documentation also exposes its own read-only MCP server, so MCP-compatible tools can search and read these docs directly:
