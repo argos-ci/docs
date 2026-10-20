@@ -8,6 +8,8 @@ Argos can capture multiple versions of your stories by applying different “mod
 
 {% hint style="info" %}
 If you already have `parameters.chromatic.modes`, Argos will handle those settings by default. Prefer `parameters.argos.modes` in new work.
+
+Argos stops reading `parameters.chromatic` as soon as a story has an `argos` parameter. For example, if you add `argos: { fitToContent: false }` to `.storybook/preview.ts`, your Chromatic modes are ignored for every story. Move them to `parameters.argos.modes` at the same time.
 {% endhint %}
 
 ### What are modes?
@@ -257,6 +259,8 @@ If you have an original single baseline from before you introduced modes, and yo
 <summary>Can modes be applied if I'm still using <code>parameters.chromatic</code>?</summary>
 
 Yes. Argos reads your `chromatic.modes` settings if present. However, for new users or updated setups, prefer using `argos.modes` to avoid any confusion in the future.
+
+Argos stops reading `parameters.chromatic` as soon as a story has an `argos` parameter, even one that only sets `fitToContent`. If you add one, move your modes to `argos.modes` at the same time.
 
 </details>
 
