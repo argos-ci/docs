@@ -45,9 +45,9 @@ Argos determines the [baseline build](baseline-build.md) from your Git history a
 Once all screenshots are compared, the build concludes:
 
 * **No changes detected** — the commit status passes.
-* **Changes detected** — the commit status asks for review, and the diffs are ready in Argos.
+* **Changes detected** — the commit status asks for review: it fails with "waiting for your decision", and the diffs are ready in Argos.
 
-Argos posts the status to your Git provider, along with a [pull request comment](../review-workflow/pull-request-comments.md) on GitHub. If your branch protection requires the Argos check, the pull request is blocked until the changes are reviewed.
+Argos posts the status to your Git provider, along with a [pull request comment](../review-workflow/pull-request-comments.md) on GitHub. See every status state on [GitHub](../integrations/github-integration.md#commit-status-states) and [GitLab](../integrations/gitlab-integration.md#commit-statuses). If your branch protection requires the Argos check, the pull request is blocked until the changes are reviewed.
 {% endstep %}
 
 {% step %}

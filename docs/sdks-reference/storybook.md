@@ -1,8 +1,8 @@
 ---
 description: >-
-  Reference for @argos-ci/storybook: capture every story with the Storybook
-  Vitest addon or Test Runner, set viewports, modes, and fit-to-content, and
-  take screenshots in play functions.
+  Reference for @argos-ci/storybook: capture stories with the Storybook Vitest
+  addon or Test Runner, choose which stories are captured, set viewports,
+  modes, and fit-to-content, and take screenshots in play functions.
 ---
 
 # Storybook SDK reference (@argos-ci/storybook)
@@ -128,6 +128,169 @@ export default preview;
 * **`fitToContent.padding`**: Sets padding around the content in pixels (default: `16`).
 * **`fitToContent.zoom`**: Specifies the zoom level (default: `2`).
 
+### Choose which stories are captured
+
+With the Vitest addon, Argos takes a screenshot after each story test that `@storybook/addon-vitest` runs. A story that doesn't run as a test is not captured. Argos has no parameter of its own to skip a story: `parameters.argos` only reads `modes` and `fitToContent`, and Chromatic's `disableSnapshot` is not supported. Use Storybook's test filters instead.
+
+#### Exclude stories with tags
+
+Remove the built-in `test` tag from a story with `tags: ["!test"]`, or give it a custom tag and exclude that tag in `storybookTest()`:
+
+{% code title="Button.stories.ts" %}
+```ts
+export const Playground: Story = {
+  tags: ["no-visual"],
+};
+```
+{% endcode %}
+
+{% code title="vitest.config.ts" %}
+```ts
+storybookTest({
+  configDir: path.join(dirname, ".storybook"),
+  tags: { include: ["test"], exclude: ["no-visual"] },
+}),
+```
+{% endcode %}
+
+An excluded story is not tested at all, so it also loses its smoke test and its `play` function assertions. See [Including, excluding, or skipping tests](https://storybook.js.org/docs/writing-tests/integrations/vitest-addon#including-excluding-or-skipping-tests) in the Storybook docs.
+
+#### Skip the screenshot but keep the test
+
+To keep testing every story, run Argos in a Vitest project of its own. One project runs every story test, the other runs the stories you want captured, with the Argos plugin:
+
+{% code title="vitest.config.ts" %}
+```ts
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { defineConfig } from "vitest/config";
+import { playwright } from "@vitest/browser-playwright";
+import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
+import { argosVitestPlugin } from "@argos-ci/storybook/vitest-plugin";
+
+const dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Browser settings from the quickstart, as a fresh object for each project.
+const browser = () => ({
+  enabled: true,
+  headless: true,
+  provider: playwright({
+    launchOptions: {
+      args: ["--disable-lcd-text", "--font-render-hinting=none"],
+    },
+  }),
+  instances: [{ browser: "chromium" as const }],
+});
+
+export default defineConfig({
+  test: {
+    projects: [
+      {
+        // Every story test, no screenshots.
+        extends: true,
+        plugins: [
+          storybookTest({ configDir: path.join(dirname, ".storybook") }),
+        ],
+        test: { name: "storybook", browser: browser() },
+      },
+      {
+        // Screenshots of the stories without the `no-visual` tag.
+        extends: true,
+        plugins: [
+          storybookTest({
+            configDir: path.join(dirname, ".storybook"),
+            tags: { include: ["test"], exclude: ["no-visual"] },
+          }),
+          argosVitestPlugin({ uploadToArgos: !!process.env.CI }),
+        ],
+        test: { name: "storybook-visual", browser: browser() },
+      },
+    ],
+  },
+});
+```
+{% endcode %}
+
+Run `npx vitest run --project=storybook-visual` to capture the screenshots. When you run both projects, the captured stories render twice, once per project.
+
+If your stories use [modes](../learn/how-to-guides/visual-coverage/storybook-story-modes.md), a story whose modes are all disabled is not captured either, and its test still runs.
+
+#### Capture one folder
+
+Vitest only runs the test files whose path contains the filter you pass on the command line, and with the Vitest addon your story files are the test files:
+
+```bash
+npx vitest run --project=storybook src/components
+```
+
+To narrow a project for good, point `storybookTest({ configDir })` at a Storybook configuration whose `stories` globs only cover that folder. The addon tests the stories listed there and ignores Vitest's `test.include`.
+
+If only some runs capture part of your stories, for example on pull requests, mark those builds as [subset builds](../learn/how-to-guides/ci-pipelines/subset-builds.md) so the stories you didn't capture are not reported as removed.
+
+#### With Test Runner
+
+`argosScreenshot` only runs where you call it, so return early in `postVisit` for the stories you don't want captured. Their tests still run:
+
+{% code title=".storybook/test-runner.ts" %}
+```ts
+import { getStoryContext, type TestRunnerConfig } from "@storybook/test-runner";
+import { argosScreenshot } from "@argos-ci/storybook/test-runner";
+
+const config: TestRunnerConfig = {
+  async postVisit(page, context) {
+    const storyContext = await getStoryContext(page, context);
+    if (storyContext.tags.includes("no-visual")) {
+      return;
+    }
+    await argosScreenshot(page, context);
+  },
+};
+
+export default config;
+```
+{% endcode %}
+
+To leave stories out of the test run entirely, use the Test Runner's `tags` option or its `--includeTags`, `--excludeTags` and `--skipTags` flags. See [Filter tests](https://storybook.js.org/docs/writing-tests/integrations/test-runner#experimental-filter-tests) in the Storybook docs.
+
+### Where screenshots are saved and uploaded
+
+The Vitest plugin writes every screenshot to `./screenshots`, relative to the directory you run Vitest from. Change it with the `root` option. Screenshots are written whether or not they are uploaded, so you can open them locally.
+
+The plugin uploads them to Argos at the end of the run only when `uploadToArgos` is `true`. If you leave it out, nothing is uploaded. The quickstart sets `uploadToArgos: !!process.env.CI` to upload from CI only. A few more rules:
+
+* Nothing is uploaded in watch mode.
+* The upload includes every screenshot in the directory. The plugin doesn't empty it between runs, so files left by an earlier run are uploaded too.
+* A failed upload fails the run (exit code 1). Set `ignoreUploadFailures: true` to keep the run passing when the upload fails.
+
+With Test Runner, `argosScreenshot` also writes to `./screenshots`, and you upload the directory with `argos upload ./screenshots`. See the [Test Runner quickstart](../quickstart/storybook-quickstart/storybook-test-runner-quickstart.md).
+
+### Capture several browsers
+
+Screenshot names come from the story ID (and the mode), not from the browser. If one Vitest project lists several browser `instances`, they write the same files and overwrite each other, so capturing several browsers in one build is not supported.
+
+Run Vitest once per browser instead, and give each run its own `buildName` and `root`. Each browser then gets its own Argos build and baseline, and no run uploads another one's files:
+
+{% code title="vitest.config.ts" %}
+```ts
+// BROWSER=firefox npx vitest run --project=storybook
+const browserName = (process.env.BROWSER ?? "chromium") as
+  | "chromium"
+  | "firefox"
+  | "webkit";
+
+// In the Storybook project:
+argosVitestPlugin({
+  uploadToArgos: !!process.env.CI,
+  buildName: `storybook-${browserName}`,
+  root: `./screenshots/${browserName}`,
+}),
+// and in its browser settings:
+// instances: [{ browser: browserName }],
+```
+{% endcode %}
+
+See [Monorepos setup](../learn/how-to-guides/ci-pipelines/monorepos-setup.md) for how build names split builds.
+
 ### Troubleshooting
 
 #### My addon is not working with Vitest
@@ -158,16 +321,20 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   plugins: [
     argosVitestPlugin({
-      uploadToArgos: true, // Set to false to disable uploading
+      uploadToArgos: !!process.env.CI, // Upload from CI only
       buildName: "My Build Name", // Optional build name
     }),
   ],
 });
 ```
 
-* **`uploadToArgos`**: Set to `true` to upload screenshots to Argos.
+* **`uploadToArgos`**: Upload the screenshots to Argos at the end of the run. Nothing is uploaded unless you set it to `true`.
+* **`root`**: Directory where screenshots are written, relative to the working directory. Defaults to `./screenshots`.
+* **`buildName`**: Name of the Argos build, to [split builds](../learn/how-to-guides/ci-pipelines/monorepos-setup.md).
+* **`ignoreUploadFailures`**: Don't fail the run when the upload fails. Defaults to `false`.
+* **`stabilize`**: Same as in Playwright, except that the automatic screenshots of your stories don't wait for `aria-busy` unless you set `stabilize: { waitForAriaBusy: true }`. See [Wait for loading](../learn/reliability-and-flakiness/flaky-tests/wait-for-loading.md#storybook).
 
-Also supports all options from the [Playwright `argosScreenshot` function](playwright.md#argosscreenshothandler-name-options) and [upload parameters](https://js-sdk-reference.argos-ci.com/interfaces/UploadParameters.html).
+Also supports all options from the [Playwright `argosScreenshot` function](playwright.md#argosscreenshothandler-name-options) except `viewports` (use [viewports](#viewports) and [modes](../learn/how-to-guides/visual-coverage/storybook-story-modes.md) instead), and all [upload parameters](https://js-sdk-reference.argos-ci.com/interfaces/UploadParameters.html). See [Where screenshots are saved and uploaded](#where-screenshots-are-saved-and-uploaded).
 
 #### `@argos-ci/storybook/vitest`
 
@@ -208,7 +375,7 @@ export default config;
 
 * **`page`**: The [Playwright Page](https://playwright.dev/docs/api/class-page) instance.
 * **`context`**: The test context provided by the Storybook test runner.
-* **`options`**: Customizable options for `argosScreenshot`. Explore [available options](playwright.md#argosscreenshothandler-name-options).
+* **`options`**: Customizable options for `argosScreenshot`. Explore [available options](playwright.md#argosscreenshothandler-name-options); `viewports` is not supported. As with the Vitest plugin, waiting for `aria-busy` is off unless you set `stabilize: { waitForAriaBusy: true }`.
 
 ### Additional Resources
 

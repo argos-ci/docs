@@ -56,6 +56,23 @@ You can also use a [Project Access Token](https://docs.gitlab.com/ee/user/projec
 
 The integration reports statuses; your pipeline uploads the screenshots. For a `.gitlab-ci.yml` example, see [Run Argos in CI](../how-to-guides/ci-pipelines/run-argos-in-ci.md#gitlab-ci).
 
+### Commit statuses
+
+Argos names its commit status as on GitHub (`argos`, or `argos/<build-name>`; see [commit status names](github-integration.md#commit-status-names)). The status moves through these GitLab states as the build progresses:
+
+| Build                                                        | GitLab state |
+| ------------------------------------------------------------ | ------------ |
+| Queued                                                       | `pending`    |
+| In progress                                                  | `running`    |
+| No changes detected                                          | `success`    |
+| Changes detected                                             | `failed`     |
+| Changes approved                                             | `success`    |
+| Changes rejected                                             | `failed`     |
+| Changes detected on an auto-approved build                   | `success`    |
+| [Skipped](../how-to-guides/ci-pipelines/skipping-a-build.md) | `success`    |
+
+GitLab adds the status to the commit's pipeline as an external job. Whether a `failed` status blocks merging is your choice: turn on **Pipelines must succeed** in your GitLab project's **Settings → Merge requests → Merge checks** to prevent merging while the pipeline has failed. Argos posts the same statuses either way.
+
 ### Connect an existing Argos project to GitLab
 
 To link a GitLab repository to a project that already exists in Argos, go to **Project Settings → Connect Git Repository** and select the repository. The [token](#connect-a-gitlab-repository) must be configured first.

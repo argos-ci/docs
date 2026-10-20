@@ -12,22 +12,21 @@ Argos bills on screenshot usage, so keeping an eye on it is how you keep costs u
 
 Argos counts every screenshot registered in a build during the billing period. A few rules worth knowing:
 
+- **Usage is counted per account.** The screenshots of every project on your personal account or team add up against one allowance, whether the projects are public or private.
 - **Unchanged screenshots count.** Every screenshot in a build counts toward your quota, whether or not it differs from the baseline — comparing is the work Argos does on each one.
 - **Failed builds count.** Screenshots count once their upload completes, including builds whose test suite failed or that errored during comparison. A build that never finishes uploading contributes nothing.
+- **Omitted screenshots don't count.** In a [subset build](../how-to-guides/ci-pipelines/subset-builds.md), only the screenshots you upload are counted, not the baseline screenshots you leave out.
+
+See [What counts as a screenshot](pricing-plans.md#what-counts-as-a-screenshot) for ARIA snapshots, media uploads and the Storybook rate.
 
 ### Monitor your usage
 
-To see your team's usage details:
+To see your usage details:
 
-1. From the dashboard, select your team from the scope selector.
+1. From the dashboard, select your team or personal account from the scope selector.
 2. Select the **Settings** tab and go to the **Billing** section.
 
-![The plan card showing screenshot usage in the Billing settings](<../../.gitbook/assets/plan card 9000747fcacb6b2b42aeeb9677d81816.png>)
-
-The plan card breaks down your consumption:
-
-- **Private project**: Screenshots taken from private projects. These count toward your plan limit and are subject to charges.
-- **Public project**: Screenshots taken from open-source projects.
+The plan card shows the screenshots counted in the current period against your plan's included screenshots, for all your projects together. When the total mixes several kinds of usage, it is broken down into Storybook screenshots, classic screenshots and media uploads. Select **Show usage detail** to see the usage of each project.
 
 ### What happens at your plan's limit
 

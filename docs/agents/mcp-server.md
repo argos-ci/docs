@@ -49,7 +49,7 @@ Most MCP clients handle OAuth automatically: add the server URL, and your client
 
 ### Personal access token
 
-For clients or scripts where OAuth is impractical, authenticate with a [personal access token](https://app.argos-ci.com/settings/personal-access-tokens) sent as a bearer token:
+For clients or scripts where OAuth is impractical, authenticate with a personal access token sent as a bearer token. To create one, go to your personal account settings, open **Tokens**, then select **Generate new token**.
 
 ```
 Authorization: Bearer <personal-access-token>
@@ -58,6 +58,27 @@ Authorization: Bearer <personal-access-token>
 {% hint style="info" %}
 Project tokens (the ones used by CI to upload screenshots) are not accepted by the MCP server — they identify a project, not a user.
 {% endhint %}
+
+### Cloud and headless agents
+
+Agents that run in the cloud can use the Argos MCP server too. Hosted agents that support MCP OAuth, such as Cursor's cloud agents, go through the same sign-in: you authorize them once in your browser.
+
+When an agent can't complete the browser sign-in, for example in CI or another headless environment, pass a personal access token in the `headers` of its MCP server configuration. In Cursor's `mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "argos": {
+      "url": "https://mcp.argos-ci.com",
+      "headers": {
+        "Authorization": "Bearer ${env:ARGOS_PERSONAL_ACCESS_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+Cursor replaces `${env:ARGOS_PERSONAL_ACCESS_TOKEN}` with that environment variable, so the token stays out of the file. For Cursor's cloud agents, set the same header when you add the server from [cursor.com/agents](https://cursor.com/agents). See the [Cursor MCP documentation](https://cursor.com/docs/mcp) for details.
 
 ## Setup
 

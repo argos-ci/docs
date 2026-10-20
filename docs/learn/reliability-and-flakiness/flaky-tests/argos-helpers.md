@@ -10,7 +10,7 @@ Argos SDKs recognize `data-visual-test` attributes on your elements, giving you 
 
 ### Helpers
 
-* `data-visual-test="transparent"`: Renders the element transparent (`visibility: hidden`), keeping its layout space.
+* `data-visual-test="transparent"`: Makes the element invisible with `opacity: 0` and transparent text, and switches its font to monospace. Unlike `removed`, the element keeps a place in the layout.
 * `data-visual-test="removed"`: Removes the element from view (`display: none`).
 * `data-visual-test="blackout"`: Masks the element with a blackout effect (Storybook, Playwright, and Cypress SDKs only).
 * `data-visual-test-no-radius`: Strips the border radius from the element. See [Browser glitches](browser-glitches.md).

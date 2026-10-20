@@ -45,7 +45,7 @@ A few notes:
 
 * The workflow listens to both `pull_request` and `push` to `main`. Pull request runs produce **preview** deployments; pushes to `main` produce **production** deployments (because `main` matches the default production branch pattern—see [Environments](environments.md)).
 * `actions/checkout` gives Argos the commit SHA and branch it needs to associate the deployment with the right pull request.
-* The `ARGOS_TOKEN` is the project token from **Settings → General → Token**.
+* The `ARGOS_TOKEN` is the project token from **Settings → Authentication → Project token**.
 
 ### Force a production deployment
 

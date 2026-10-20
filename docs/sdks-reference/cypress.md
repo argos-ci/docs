@@ -91,16 +91,23 @@ module.exports = defineConfig({
 ```
 {% endcode %}
 
+### Animations
+
+`cy.argosScreenshot` keeps Cypress's own handling of animations: the `disableTimersAndAnimations` option of [`cy.screenshot`](https://docs.cypress.io/api/commands/screenshot), `true` by default, stops JavaScript timers and CSS animations while the screenshot is taken. You can pass it to `cy.argosScreenshot`.
+
+Argos stabilization also pauses, on their first frame, SVG animations that repeat forever (`stabilize.pauseSvgAnimations`) and animated GIFs (`stabilize.pauseGifs`).
+
 ### API Overview
 
-#### cy.argosScreenshot(\[name]\[, options])
+#### cy.argosScreenshot(name\[, options])
 
-* `name`: Unique name for the screenshot.
+* `name`: Unique name for the screenshot. Required.
 * `options`: Explore [cy.screenshot command options](https://docs.cypress.io/api/commands/screenshot) for details.
-* `options.element`: Use an ElementHandle or string selector to capture a specific element's screenshot.
+
+To capture a single element, chain the command from it: `cy.get(".post").argosScreenshot("post")`.
 * `options.viewports`: Define specific viewports for capturing screenshots. More on [viewports configuration](../learn/how-to-guides/visual-coverage/responsive-viewports.md).
 * `options.argosCSS`: Specific CSS applied during the screenshot process. More on [injecting CSS](../learn/how-to-guides/visual-coverage/injecting-css.md)
-* `options.threshold`: Sensitivity threshold between 0 and 1. The higher the threshold, the less sensitive the diff will be. Defaults to `0.5`.
+* `options.threshold`: Sensitivity threshold between 0 and 1. The higher the threshold, the less sensitive the diff will be. Defaults to `0.5`. More on [how the threshold works](../learn/platform-fundamentals/how-argos-detects-visual-differences.md#sensitivity-threshold).
 * `options.baseName`: Name, or list of names, to compare this screenshot against instead of its own name. Useful to compare a variant against an existing screenshot. More on [fallback baselines](../learn/how-to-guides/visual-coverage/fallback-baselines.md).
 * `options.stabilize`: Wait for the UI to stabilize before taking the screenshot. Set to `false` to disable stabilization. Pass an object to customize the stabilization. Defaults to `true`.
 * `options.stabilize.disableSpellCheck`: Disable spell check before taking the screenshot. Defaults to `true`.
@@ -109,6 +116,7 @@ module.exports = defineConfig({
 * `options.stabilize.hideScrollbars`: Hide scrollbars before taking the screenshot. Defaults to `true`.
 * `options.stabilize.loadImageSrcset`: Force the loading of images with `srcset` attributes when the viewport changes. Defaults to `true`.
 * `options.stabilize.pauseGifs`: Pause animated GIFs on their first frame so they don't capture a random frame on each run. Defaults to `true`. Flag GIFs served from extension-less URLs with `data-image-type="gif"` so they're detected too.
+* `options.stabilize.pauseSvgAnimations`: Pause SVG animations that repeat forever (`repeatCount="indefinite"` or `repeatDur="indefinite"`), such as spinners, on their first frame. Defaults to `true`.
 * `options.stabilize.roundImageSize`: Round image sizes to the nearest integer. Defaults to `true`.
 * `options.stabilize.stabilizeSticky`: Stabilize sticky and fixed elements by switching to `position: absolute`. Defaults to `true`.
 * `options.stabilize.waitForAriaBusy`: Wait for the `aria-busy` attribute to be removed from the document. Defaults to `true`.
@@ -121,7 +129,7 @@ module.exports = defineConfig({
 
 For tailored visual testing, the `data-visual-test` attributes provide control over how elements appear in Argos screenshots. This can be especially useful for obscuring or modifying elements with dynamic content, like dates.
 
-* `[data-visual-test="transparent"]`: Renders the element transparent (`visibility: hidden`).
+* `[data-visual-test="transparent"]`: Renders the element transparent (`opacity: 0`), keeping its layout space.
 * `[data-visual-test="removed"]`: Removes the element from view (`display: none`).
 * `[data-visual-test="blackout"]`: Masks the element with a blackout effect.
 * `[data-visual-test-no-radius]`: Strips the border radius from the element.

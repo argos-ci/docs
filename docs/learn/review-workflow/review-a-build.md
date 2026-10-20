@@ -34,6 +34,13 @@ The diff viewer offers several ways to compare a snapshot:
 * **Fit or expand** — fit the screenshot to the screen or inspect it at full size; zoom and pan stay in sync between the baseline and changes panes.
 * **ARIA view** — when a snapshot has an [ARIA snapshot](../how-to-guides/visual-coverage/adding-aria-snapshots-manually.md), switch between the screenshot and its accessibility tree.
 
+### Review similar changes together
+
+When the same change shows up in several screenshots of a build, Argos groups them in the screenshot list. Diffs with the same [fingerprint](../reliability-and-flakiness/flaky-test-detection.md#how-argos-recognizes-the-same-change) share one row, with an **N similar** button that counts the other screenshots in the group.
+
+* While the group is collapsed, accepting or rejecting the row applies to every screenshot in it.
+* Expand the group with the **N similar** button or `G` to see each screenshot and review them one by one.
+
 ### Follow a journey step by step
 
 A test that walks a checkout, a signup or an onboarding captures a screenshot at each screen it visits. Argos groups those screenshots back into the **journey** the test walked, so a change is reviewed next to the screens that come before and after it. There is nothing to configure: the journey is the test that took the screenshot, and each screen the test captured is a step.
@@ -73,6 +80,7 @@ Press `?` on a build page to see the full list of shortcuts. The ones you'll use
 | `D`               | Toggle the changes overlay                    |
 | `H`               | Highlight the changed regions                 |
 | `J` / `K`         | Go to the previous / next change              |
+| `G`               | Expand or collapse a group of similar changes |
 | `Space`           | Toggle fit to screen                          |
 | `Y` / `N`         | Mark a change as accepted / rejected          |
 | `I`               | Ignore a flaky change                         |
@@ -131,6 +139,15 @@ To post a single comment immediately instead of adding it to your pending review
 
 Your in-progress comments are saved locally, so you won't lose a thought if you navigate away before submitting.
 
+### When new commits are pushed
+
+Each push to your branch or pull request creates a new build. Argos carries your approvals over from earlier builds of the same branch or pull request (with the same build name), so you don't review the same change twice. A change counts as already approved when its diff has the same [fingerprint](../reliability-and-flakiness/flaky-test-detection.md#how-argos-recognizes-the-same-change) as a change you approved, or when the screenshot file is identical. Argos reads your latest review on those earlier builds, and a dismissed review never carries over.
+
+* **Every change was already approved.** When the new build finishes, Argos approves it on behalf of each previous approver whose approvals cover all of its changes. These reviews are marked as automatic: a badge on the reviewer's avatar explains that the changes were already approved on an earlier build. They count toward the [build status](#how-reviews-decide-the-build-status) like any approval, and don't email the build's subscribers.
+* **Only some changes match.** When you open the build, a **Previous approvals detected** dialog offers to **Reapply previous approvals**. It marks the matching changes as approved and takes you to the first change left to review. Submit your review once you've gone through the rest.
+
+Approvals never carry over to builds that run in a [merge queue](../integrations/github-integration.md#merge-queue-support).
+
 ### Comment on exactly what changed
 
 Comments are pinned to precisely what they're about:
@@ -177,10 +194,22 @@ Each screenshot pane has a **⋮** actions menu — on both the **baseline** and
 
 ### Who can review
 
-* Leaving reviews and comments requires a role that can review builds — team **Owners** and **Members**, or **Contributors** assigned the **Project Reviewer** or **Project Administrator** role. The build must also be in a reviewable state (changes detected, approved, or rejected).
+* Leaving reviews and comments requires a role that can review builds — team **Owners** and **Members**, or **Contributors** assigned the **Project Reviewer** or **Project Administrator** role. On a personal account, only its owner can review. The build must also be in a reviewable state (changes detected, approved, or rejected).
+* On a public project, anyone can view builds, but signed-in visitors who aren't on the team can't review them. To let an outside contributor review the build of a pull request they opened from a fork, invite them to the team with a role that can review.
 * Dismissing another person's review requires an administrator-level role.
 
 See [Team members & roles](../account-and-access/team-members-and-roles.md) for the full permission breakdown.
+
+#### Why is Submit review disabled?
+
+Hover the disabled **Submit review** button to see the reason:
+
+| Tooltip                                                | What it means                                                                                                   |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| "You must be a reviewer to approve or reject changes." | Your role on the project can't review builds. See the roles above.                                              |
+| "This build was triggered in a merge queue."           | The build ran in a [merge queue](../integrations/github-integration.md#merge-queue-support).                    |
+| "Build is auto-approved"                               | The build ran on an [auto-approved branch](../platform-fundamentals/baseline-build.md#auto-approved-branches). |
+| "No changes to review"                                 | The build has no changes.                                                                                       |
 
 ### Review from the API
 

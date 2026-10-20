@@ -10,7 +10,7 @@ SAML SSO is a paid add-on ($200 / month) available to teams on a Stripe-based su
 Only team members with the [owner role](team-members-and-roles.md#owner-role) can configure SAML SSO.
 {% endhint %}
 
-To manage your [team members](team-members-and-roles.md) through a third-party identity provider like [Okta](https://www.okta.com/) or [Auth0](https://auth0.com/), configure Security Assertion Markup Language (SAML) from **Team Settings -> Security and Privacy**.
+To manage your [team members](team-members-and-roles.md) through a third-party identity provider like [Okta](https://www.okta.com/) or [Auth0](https://auth0.com/), configure Security Assertion Markup Language (SAML) from **Team Settings -> Authentication**.
 
 Once enabled, team members can authenticate with your configured identity provider, and new users signing in with SAML will be added to your team.
 
@@ -40,7 +40,7 @@ The add-on appears as a "SAML SSO" line on your monthly invoice. You can disable
 
 1. Ensure you are an [owner](team-members-and-roles.md#owner-role) of the team.
 2. From the dashboard, select the team in the scope selector.
-3. Open the **Settings** tab, then go to **Security and Privacy**.
+3. Open the **Settings** tab, then go to **Authentication**.
 4. In **SAML Single Sign-On**, click **Configure** and follow the setup flow for your identity provider.
 5. Optionally enforce SAML SSO for all team members after confirming authentication works.
 
@@ -49,8 +49,8 @@ The add-on appears as a "SAML SSO" line on your monthly invoice. You can disable
 For additional security, you can enforce SAML so team members can only access team resources when their current session is authenticated with SAML.
 
 1. Ensure you are an [owner](team-members-and-roles.md#owner-role) and currently authenticated with SAML.
-2. Go to **Team Settings -> Security and Privacy -> SAML Single Sign-On**.
-3. Enable **Require team members to log in with SAML**.
+2. Go to **Team Settings -> Authentication -> SAML Single Sign-On**.
+3. Turn on **Require Team Members to login with SAML to access this Team**.
 
 ![SAML SSO configured and enforced.](<../../.gitbook/assets/saml enforced 0b9acb80b05d917ee70c452b00b6a254.png>)
 
@@ -81,6 +81,10 @@ Replace `team_slug` with your team identifier in Argos URLs.
 With SAML SSO, users authenticate through your identity provider, but team membership can still be managed from Argos team settings.
 
 Members are added to your team when they first sign in with SAML, but you can also pre-provision members from the **Team Settings -> Members** page.
+
+Argos doesn't support SCIM provisioning: your identity provider doesn't push users or group changes to Argos. Instead, a user is provisioned on their first SAML sign-in. Argos creates their account if they don't have one and adds them to the team with the team's default access role.
+
+To offboard someone, remove them from the team: in **Team Settings -> Members**, open the member's actions menu and select **Remove from Team**. Also remove them from the Argos app in your identity provider. Otherwise, signing in with SAML again adds them back to the team.
 
 When SAML SSO is enforced, team members must have an active SAML session to access team resources. If a member's SAML session expires, they will be prompted to re-authenticate with SAML to regain access.
 

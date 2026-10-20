@@ -240,6 +240,8 @@ export const SpecialCard: Story = {
 
 That story will now ignore light mobile mode but still apply any other inherited modes.
 
+If every mode that applies to a story is disabled, Argos captures nothing for that story, including the screenshots taken with `argosScreenshot` in its play function. The story's test still runs. To leave out stories that don't use modes, see [Choose which stories are captured](../../../sdks-reference/storybook.md#choose-which-stories-are-captured).
+
 ### Working with baselines
 
 Each mode name corresponds to a separate baseline in Argos. If you rename a mode, it’s treated as entirely new. If you alter the internals of a mode (like changing the viewport from “compact” to “ultra-compact”) without renaming it, Argos still compares the new screenshot against the old baselines for that mode name.

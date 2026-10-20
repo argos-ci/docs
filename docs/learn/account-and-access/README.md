@@ -12,3 +12,4 @@ Manage your Argos account, how you sign in, and who on your team can access what
 * [Passkeys](passkeys.md) – Sign in with your fingerprint, face, screen lock, or a hardware security key
 * [GitHub single sign-on](github-single-sign-on.md) – Sync your Argos team with a GitHub organization
 * [SAML single sign-on](saml-single-sign-on.md) – Enforce single sign-on through your SAML identity provider
+* [Security and compliance](security-and-compliance.md) – Data hosting, SOC 2, GDPR and the DPA, data retention, export and deletion

@@ -22,7 +22,7 @@ By the end of this guide, every pull request will:
 Coming from Chromatic? Follow [Migrate from Chromatic to Argos](../../learn/how-to-guides/migrate-to-argos/from-chromatic.md), or read the [Argos vs Chromatic](https://argos-ci.com/compare/chromatic) comparison.
 
 {% hint style="info" %}
-On Storybook 8, or if you use Test Runner instead of Vitest, follow the [Storybook Test Runner quickstart](storybook-test-runner-quickstart.md).
+This guide uses the Storybook Vitest addon, which only runs on a Storybook framework that uses Vite. On a Webpack-based framework such as `@storybook/angular` or `@storybook/nextjs`, on Storybook 8, or if you use Test Runner instead of Vitest, follow the [Storybook Test Runner quickstart](storybook-test-runner-quickstart.md): Test Runner works with every Storybook framework. On Angular 21 or later, Storybook's Vite-based `@storybook/angular-vite` framework (in preview) supports the Vitest addon.
 
 If you use a legacy version of Storybook (\<v8), follow the [legacy Storybook Quickstart](storybook-legacy-less-than-v8-quickstart.md).
 {% endhint %}
@@ -30,7 +30,7 @@ If you use a legacy version of Storybook (\<v8), follow the [legacy Storybook Qu
 ### Prerequisites
 
 * Node.js 22 or later
-* [Storybook v9+](https://storybook.js.org/docs/get-started/install) set up in your project
+* [Storybook v9+](https://storybook.js.org/docs/get-started/install) set up in your project, with a Vite-based framework such as `@storybook/react-vite`, `@storybook/vue3-vite`, `@storybook/nextjs-vite` or `@storybook/sveltekit`
 * [The Storybook Vitest addon](https://storybook.js.org/docs/writing-tests/integrations/vitest-addon) installed
 * [A project created in Argos](https://app.argos-ci.com/new)
 
@@ -225,7 +225,7 @@ jobs:
 ```
 {% endcode %}
 
-`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
+`ARGOS_TOKEN` is the project token from **Settings → Authentication → Project token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
 
 For other CI providers, see [Run Argos in CI](../../learn/how-to-guides/ci-pipelines/run-argos-in-ci.md) for the tests and [Use deployments in CI](../../learn/deployments/use-deployments-in-ci.md) for the deployment.
 {% endstep %}

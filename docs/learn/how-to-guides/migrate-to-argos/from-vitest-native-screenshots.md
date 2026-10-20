@@ -174,7 +174,7 @@ Run your tests in CI with `ARGOS_TOKEN` set. **Run on your default branch first*
     ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
 ```
 
-`ARGOS_TOKEN` comes from **Settings → General → Token**. On GitHub Actions you can use [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md) instead of a secret.
+`ARGOS_TOKEN` comes from **Settings → Authentication → Project token**. On GitHub Actions you can use [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md) instead of a secret.
 {% endstep %}
 {% endstepper %}
 

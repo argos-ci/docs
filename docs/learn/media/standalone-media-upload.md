@@ -25,7 +25,7 @@ Pass as many files as you like. Each one is validated up front — an unsupporte
 | `--no-compress`             | Upload images exactly as they are instead of converting them to WebP.                                                                  |
 | `--project <owner/project>` | Project to upload to. Required with a personal access token; also `ARGOS_PROJECT`.                                                     |
 
-Media belongs to a **project**, so it inherits that project's access and moves with it when the project is transferred. In CI, `media upload` authenticates like every other Argos command: `ARGOS_TOKEN`, or tokenless GitHub Actions authentication with no token at all. See [Tokens and permissions](#tokens-and-permissions) for the other commands.
+Media belongs to a **project**, so it inherits that project's access and moves with it when the project is transferred. In CI, `media upload` authenticates like every other Argos command: `ARGOS_TOKEN`, or, on GitHub Actions, OIDC or tokenless authentication once [enabled on the project](../integrations/github-actions-authentication.md#enable-oidc-or-tokenless-on-your-project). See [Tokens and permissions](#tokens-and-permissions) for the other commands.
 
 ### Getting media into a pull request
 
