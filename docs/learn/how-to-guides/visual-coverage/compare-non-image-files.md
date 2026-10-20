@@ -84,6 +84,10 @@ Argos currently supports these non-image content types:
 * `application/javascript`
 * `text/javascript`
 
+Image snapshots can be PNG, JPEG, WebP, AVIF or GIF (`image/png`, `image/jpeg`, `image/webp`, `image/avif`, `image/gif`).
+
+Video snapshots are not supported: an upload that includes a video file fails with an "Unsupported content type" error. To share a screen recording on a pull request without diffing it, use [media sharing](../../media/README.md).
+
 ### Framework support
 
-Non-image comparisons are only supported through the CLI for now. [Contact us](https://argos-ci.com/contact) if you are interested in using this feature from a test framework like Vitest.
+Besides the CLI, the [Vitest SDK](../../../sdks-reference/vitest.md#capturing-snapshots) uploads non-image snapshots with `argosSnapshot`, from browser or Node tests. [Contact us](https://argos-ci.com/contact) if you are interested in using this feature from another test framework.

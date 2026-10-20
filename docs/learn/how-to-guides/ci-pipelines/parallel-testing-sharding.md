@@ -150,3 +150,16 @@ In count mode, the build completes only after exactly `ARGOS_PARALLEL_TOTAL` upl
 The shards used different nonces. On unsupported CI providers, set `ARGOS_PARALLEL_NONCE` explicitly to a value shared by all jobs of the run (e.g. the pipeline run ID). Also make sure all shards use the same build name.
 
 </details>
+
+<details>
+
+<summary>What happens when a shard is retried or the workflow is re-run?</summary>
+
+Uploads that share a nonce and a build name go to the same build:
+
+* A second upload for a shard index (`ARGOS_PARALLEL_INDEX`) that already completed is ignored. The build keeps the screenshots from the first upload.
+* Once the build is finalized, a new upload is rejected with "Build already finalized".
+
+On GitHub Actions, the nonce includes the run attempt, so re-running a workflow starts a new build. In count mode, when you re-run only some jobs (for example with **Re-run failed jobs**), Argos fills the shards that didn't run again with the previous attempt's screenshots once the workflow run completes. This requires a project connected through the Argos GitHub App with [full access](../../integrations/github-integration.md#choose-your-access-level).
+
+</details>

@@ -9,11 +9,23 @@ description: >-
 
 To run Argos in CI, run your tests as usual with the `ARGOS_TOKEN` environment variable set. The Argos SDK or CLI reads the commit, the branch, and the pull request from your CI provider, uploads the screenshots, and Argos compares them with the [baseline build](../../platform-fundamentals/baseline-build.md). On a CI provider that Argos doesn't detect, set `ARGOS_BRANCH` (and `ARGOS_COMMIT` if needed) yourself.
 
-`ARGOS_TOKEN` is the project token from **Settings → General → Token**; store it as a secret in your CI. The examples below run Playwright tests: replace `npx playwright test` with your own test command, and follow the [quickstart](../../../quickstart/README.md) for your framework to set up the SDK.
+`ARGOS_TOKEN` is the project token from **Settings → Authentication → Project token**; store it as a secret in your CI. The examples below run Playwright tests: replace `npx playwright test` with your own test command, and follow the [quickstart](../../../quickstart/README.md) for your framework to set up the SDK.
 
 {% hint style="info" %}
 Commit statuses and pull request comments come from the Argos [GitHub](../../integrations/github-integration.md) or [GitLab](../../integrations/gitlab-integration.md) integration, whichever CI runs your tests. Without one of them, review builds in the Argos dashboard. See [Other Git providers](../../integrations/other-git-providers.md).
 {% endhint %}
+
+### Project token
+
+Argos creates the project token when you create the project. You find it in the project's **Settings → Authentication**, on the **Project token** card. A project has one token at a time.
+
+If the token leaks, a project admin can replace it:
+
+1. On the **Project token** card, select **Regenerate token**.
+2. Type the project's full name (`account/project`) to confirm, then select **Regenerate**.
+3. Update the `ARGOS_TOKEN` secret in your CI right away.
+
+The old token stops working immediately. Until you update the secret, uploads fail with "Project not found in Argos. If the issue persists, verify your token."
 
 ### CI providers detected automatically
 

@@ -89,6 +89,7 @@
   * [Passkeys](learn/account-and-access/passkeys.md)
   * [GitHub single sign-on](learn/account-and-access/github-single-sign-on.md)
   * [SAML single sign-on](learn/account-and-access/saml-single-sign-on.md)
+  * [Security and compliance](learn/account-and-access/security-and-compliance.md)
 * [Billing & subscription](learn/billing-and-subscription/README.md)
   * [Argos pricing plans](learn/billing-and-subscription/pricing-plans.md "Pricing plans")
   * [How to subscribe](learn/billing-and-subscription/how-to-subscribe.md)

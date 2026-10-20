@@ -37,7 +37,7 @@ Beyond the capture model, the reasons teams pick Argos over Percy:
 | `PERCY_TOKEN`                           | `ARGOS_TOKEN`                                                             |
 | `.percy.yml` → `snapshot.widths`        | [Responsive viewports](../visual-coverage/responsive-viewports.md)       |
 | `.percy.yml` → `percy-css` / `percyCSS` | [Injecting CSS](../visual-coverage/injecting-css.md)                     |
-| Percy project + browsers dashboard      | Argos project ([Settings → General → Token](https://app.argos-ci.com/)) |
+| Percy project + browsers dashboard      | Argos project ([Settings → Authentication → Project token](https://app.argos-ci.com/)) |
 | Percy build review                      | [Review a build](../../review-workflow/review-a-build.md) + PR comment   |
 
 ## Migrate a Playwright project
@@ -175,7 +175,7 @@ Drop `percy exec --` and run your tests directly. Rename the token secret from `
 {% endcolumn %}
 {% endcolumns %}
 
-`ARGOS_TOKEN` comes from **Settings → General → Token** in your Argos project. On GitHub Actions you can skip the secret entirely with [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md).
+`ARGOS_TOKEN` comes from **Settings → Authentication → Project token** in your Argos project. On GitHub Actions you can skip the secret entirely with [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md).
 {% endstep %}
 
 {% step %}

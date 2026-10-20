@@ -60,6 +60,27 @@ To link a repository to a project you created without Git:
 
 You can disconnect or change the repository from the same section at any time.
 
+### Delete a project
+
+Only project admins can delete a project. To keep it under another account instead, [transfer it](../billing-and-subscription/how-to-subscribe.md#transfer-your-projects).
+
+1. Open the project's **Settings**, in the **General** section.
+2. On the **Delete Project** card, select **Delete**.
+3. Type the project's full name (`account/project`), then `delete my project`, and select **Delete**.
+
+Argos warns that this can't be undone. Once the project is deleted, uploads with its project token fail and Argos stops updating its commit statuses. If the Argos check is a required status check in your Git provider, remove it there, or open pull requests keep waiting for it.
+
+### Uninstall the GitHub App
+
+You uninstall the Argos GitHub App from GitHub, not from Argos:
+
+* **Personal account:** in GitHub's **Settings → Applications → Installed GitHub Apps**, select **Configure** next to Argos, then **Uninstall**.
+* **Organization:** in the organization's **Settings → GitHub Apps** (under "Third-party Access"), select **Configure** next to Argos, then **Uninstall**.
+
+When GitHub notifies Argos, Argos disconnects each repository it can no longer access from its Argos projects. Their builds no longer get commit statuses or pull request comments, and uploads that use [OIDC or tokenless authentication](../integrations/github-actions-authentication.md) fail. Uploads with a project token are still accepted.
+
+Removing a repository from the app's **Repository access** has the same effect on that repository. To undo it, [install the app](../integrations/github-integration.md#install-the-argos-github-app) again and reconnect the repository from the project's settings.
+
 ### Teams
 
 Teams let you collaborate on projects and share resources.
@@ -110,10 +131,12 @@ To leave a team:
 
 #### Deleting a team
 
-1. Remove all team projects.
-2. Open the team's **Settings** tab.
-3. Scroll to **Delete Team** and select **Delete Team**.
-4. Confirm the action.
+Only team [owners](team-members-and-roles.md#owner-role) can delete a team. Deleting a team also deletes its projects, so you don't need to remove them first. To keep a project, [transfer it](../billing-and-subscription/how-to-subscribe.md#transfer-your-projects) to another account before you delete the team.
+
+1. If the team has an active subscription, cancel it first in **Settings → Billing → Manage subscription**. The **Delete** button stays disabled until you do.
+2. Open the team's **Settings** tab, in the **General** section.
+3. On the **Delete Team** card, select **Delete**.
+4. Type the team slug, then `delete my team`, and select **Delete**.
 
 ### Managing emails
 

@@ -22,16 +22,29 @@ For each pair, the question Argos answers is intentionally simple: did it change
 
 Argos relies on the open-source [**odiff** library](https://github.com/dmtrKovalenko/odiff) by Dmitriy Kovalenko. The full diff implementation is also open source — you can [inspect it here](https://github.com/argos-ci/argos/blob/main/apps/backend/src/screenshot-diff/diff/image/index.ts).
 
-Each comparison runs in four stages:
+Each image comparison runs in three stages:
 
-1. **Image normalization**: Resolution, color space, and alpha channels are aligned.
-2. **Multiple diff passes**: Each pass uses different thresholds to detect both strict and subtle changes.
-3. **Pixel clustering**: Random noise is separated from meaningful visual changes.
-4. **Final diff output**: A diff mask and score are produced.
+1. **Size alignment**: When the two images have different sizes, Argos places both at the top-left corner of a canvas as wide as the wider image and as tall as the taller one, and fills the empty area with transparent pixels. That area then shows up as changed. An image smaller in both dimensions is first scaled up to fit, keeping its aspect ratio.
+2. **Two diff passes**: odiff compares the images twice, with anti-aliasing detection on, so pixels that only differ by anti-aliasing are not counted.
+   * The **tolerant pass** ignores small color differences (odiff color threshold `0.15`). Its result is discarded when fewer than 20 pixels, or 0.02% of the image if that is smaller, have changed.
+   * The **color-sensitive pass** catches subtle color shifts (odiff color threshold `0.0225`), but only counts when at least 3% of the image has changed.
+3. **Final diff output**: The pass with the higher score produces the diff mask and the score. When neither pass counts, the snapshot is unchanged.
 
-Running multiple passes lets Argos stay strict while remaining resilient to minor, explainable noise.
+Running two passes lets Argos catch both a small, sharp change and a faint color shift across a large area, while ignoring isolated noise.
 
 When at least one snapshot differs from the baseline, the build concludes with **Changes detected** and the diffs await [review](../review-workflow/review-a-build.md). When every snapshot matches, the build concludes with **No changes detected** and the commit status passes.
+
+### Sensitivity threshold
+
+The `threshold` option scales the tolerances above. Set it per screenshot in the SDKs (for example `argosScreenshot(page, "chart", { threshold: 0.2 })`) or for a whole upload with the CLI's `--threshold` flag. It takes a value between 0 and 1 and defaults to `0.5`.
+
+Argos multiplies every tolerance by 2 × `threshold`:
+
+* `0.5` (default) uses the values above.
+* `0` sets every tolerance to zero: any changed pixel that isn't anti-aliasing counts.
+* `1` doubles every tolerance.
+
+Anti-aliasing detection stays on at every threshold.
 
 ### Why pixel diffing instead of AI
 

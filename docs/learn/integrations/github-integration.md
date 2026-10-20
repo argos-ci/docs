@@ -32,12 +32,34 @@ Use these exact context names when you configure [required status checks](https:
 
 On GitHub Actions `pull_request` events, `GITHUB_SHA` points to an ephemeral merge commit, not to your branch's head. Argos records that merge commit as the build commit — what you tested is the merged result — but detects the pull request from the event payload and **posts the status on the pull request's head commit**, so the check shows up on your PR as expected.
 
-Two special cases:
+Special cases:
 
 * On `pull_request_target` events, `GITHUB_SHA` points to the base branch, so Argos uses the pull request head commit as the build commit instead.
 * Outside a pull request (a push to a branch), the status is posted on the commit the screenshots were captured from.
+* In a [merge queue](#merge-queue-support), the status is posted on the merge group's commit, where the queue reads it, and Argos doesn't comment on the pull request.
 
 To override detection — for example in a custom pipeline — set the `ARGOS_COMMIT` (full 40-character SHA) and `ARGOS_BRANCH` environment variables.
+
+### Commit status states
+
+Each Argos status moves through these GitHub states as the build progresses:
+
+| Build                                                        | GitHub state | Description                                  |
+| ------------------------------------------------------------ | ------------ | -------------------------------------------- |
+| Queued                                                       | `pending`    | "Build is queued"                            |
+| In progress                                                  | `pending`    | "Build in progress..."                       |
+| No changes detected                                          | `success`    | "Everything's good!" or "… no changes found" |
+| Changes detected                                             | `failure`    | "… waiting for your decision"                |
+| Changes approved                                             | `success`    | "… approved"                                 |
+| Changes rejected                                             | `failure`    | "… rejected"                                 |
+| Changes detected on an auto-approved build                   | `success`    | "…, automatically approved"                  |
+| [Skipped](../how-to-guides/ci-pipelines/skipping-a-build.md) | `success`    | "Build skipped"                              |
+
+Once the comparison is done, the description starts with the screenshot counts, such as "2 changed, 1 added".
+
+A build on an [auto-approved branch](../platform-fundamentals/baseline-build.md#auto-approved-branches) outside a pull request is approved automatically, so its status passes even when it has changes.
+
+Whether a `failure` blocks merging is your choice in GitHub. To block, mark the Argos context as a required status check in a [branch protection rule](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches#require-status-checks-before-merging) or a [ruleset](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets#require-status-checks-to-pass-before-merging). Otherwise the status is informational. Argos posts the same states either way.
 
 ### Choose your access level
 
@@ -74,13 +96,21 @@ Argos needs the following permissions to operate:
 * **Contents** — used to find a common commit ancestor between branches
 * **Statuses** — used to add statuses to commits
 * **Pull requests** — used to add comments in pull requests
-* **Actions** — used to re-run an individual GitHub Actions workflow run when a check is retried from Argos
+* **Actions** — used to re-run an individual GitHub Actions workflow run when a check is retried from Argos, and to look up workflow runs for [tokenless authentication](github-actions-authentication.md#tokenless-authentication)
 
 We take your security and privacy seriously. If you have any concerns or questions, please [contact us](https://argos-ci.com/contact).
 
 ### Merge Queue support
 
-When Argos runs inside the merge queue, it compares the queued changes against the merge base of all pull requests in the queue, ensuring that visual tests reflect the final merged state. This is supported out of the box with [GitHub's native Merge Queue](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue), and can be configured for custom merge queue systems as well.
+Argos supports [GitHub's native Merge Queue](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue) out of the box, and can be configured for custom merge queue systems as well.
+
+#### How Argos compares a merge queue build
+
+A merge queue build takes its baseline from your base branch, then applies the changes already approved on the queued pull request (or on each pull request listed in `ARGOS_MERGE_QUEUE_PRS`). Changes you approved on the pull request don't show up again in the queue.
+
+A merge queue build can't be reviewed: Argos shows "This build was triggered in a merge queue and doesn't require a review." If it finds changes that weren't approved on the pull request, its status is `failure` ("waiting for your decision"), so the queue check fails when Argos is a [required status check](#commit-status-states).
+
+Once GitHub merges the group, your base branch points to the commit the merge queue build tested, so that build can serve as the [baseline](../platform-fundamentals/baseline-build.md) for later builds, and a separate `push` build on the base branch is optional. Like any baseline, the build must be complete, its tests must have passed, it must not be a subset, and it must not be rejected. Pull request builds also [need an approved baseline](../platform-fundamentals/baseline-build.md#when-the-baseline-must-be-approved). A merge queue build counts as approved once its pull request is merged, as long as the build is linked to that pull request (see `GITHUB_TOKEN` below).
 
 #### GitHub Actions setup for GitHub Merge Queue
 
@@ -106,12 +136,17 @@ jobs:
       - run: npm run test:e2e # Run E2E tests with Argos SDK integration
         env:
           ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }} # Argos token stored in GitHub Secrets
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Lets the SDK find the pull request of a merge group
 ```
 {% endcode %}
+
+On `merge_group` events, the SDK reads the pull request from the GitHub API with `GITHUB_TOKEN`. Without it, the build isn't linked to its pull request, and Argos can't apply the changes approved there. If your workflow restricts `GITHUB_TOKEN` permissions, grant `pull-requests: read`.
 
 #### Custom merge queue systems
 
 When you are using a merge queue system other than GitHub’s built-in Merge Queue (like [Mergify](https://mergify.com/)), you can set `ARGOS_MERGE_QUEUE_PRS` to the comma-separated pull request numbers included in the queued build. This tells Argos to treat the upload as a merge queue build and use the right baseline for visual comparisons.
+
+When the queued build contains a single pull request, Argos finds the builds approved on it by branch, so upload under that pull request's branch: set `ARGOS_BRANCH` if your merge queue runs on a branch of its own.
 
 ```yaml
 steps:
@@ -164,3 +199,5 @@ Uploads from GitHub Actions can authenticate in three ways:
 * **`ARGOS_TOKEN`** — a project token stored as a GitHub secret (used in the examples above).
 * [**GitHub OIDC**](github-actions-authentication.md#oidc) — short-lived signed tokens with no secret to manage. Preferred where available.
 * [**Tokenless authentication**](github-actions-authentication.md#tokenless-authentication) — the automatic fallback for pull requests from forked repositories.
+
+OIDC and tokenless authentication are per-project settings: a project admin [enables them](github-actions-authentication.md#enable-oidc-or-tokenless-on-your-project) in **Project Settings → Authentication**.

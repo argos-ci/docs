@@ -27,7 +27,7 @@ With native snapshots, a visual difference **fails the test**. With Argos, `argo
 | Playwright native                                  | Argos                                                                    |
 | -------------------------------------------------- | ------------------------------------------------------------------------ |
 | `expect(page).toHaveScreenshot("name.png")`        | `argosScreenshot(page, "name")`                                         |
-| `expect(locator).toHaveScreenshot()`               | `argosScreenshot(locator, "name")`                                      |
+| `expect(locator).toHaveScreenshot()`               | `argosScreenshot(page, "name", { element: locator })`                   |
 | Committed `*-snapshots/` PNG folders               | Cloud baselines from [Git history](../../platform-fundamentals/baseline-build.md) |
 | `--update-snapshots`                               | Approve in the [Argos review UI](../../review-workflow/review-a-build.md) |
 | `maxDiffPixels` / `threshold`                      | [Diff algorithm](../../platform-fundamentals/how-argos-detects-visual-differences.md) |
@@ -127,7 +127,7 @@ test("homepage", async ({ page }) => {
 {% endcolumn %}
 {% endcolumns %}
 
-To screenshot a single element, pass a locator: `await argosScreenshot(page.getByRole("dialog"), "dialog")`.
+To screenshot a single element, pass the page and a locator or selector in the `element` option: `await argosScreenshot(page, "dialog", { element: page.getByRole("dialog") })`. The first argument must be a `Page` or a `Frame`, not a locator.
 {% endstep %}
 
 {% step %}
@@ -154,7 +154,7 @@ Run your tests in CI with `ARGOS_TOKEN` set. **Run on your default branch first*
     ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
 ```
 
-`ARGOS_TOKEN` comes from **Settings → General → Token**. On GitHub Actions you can use [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md) instead.
+`ARGOS_TOKEN` comes from **Settings → Authentication → Project token**. On GitHub Actions you can use [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md) instead.
 {% endstep %}
 {% endstepper %}
 
@@ -188,7 +188,7 @@ Open the build in Argos and approve it in the [review UI](../../review-workflow/
 
 <summary>What about <code>maxDiffPixels</code> and <code>threshold</code>?</summary>
 
-Argos applies its own [diff algorithm](../../platform-fundamentals/how-argos-detects-visual-differences.md) with tolerance for anti-aliasing and sub-pixel noise, so you rarely need per-assertion tuning. If a specific screenshot needs a different sensitivity, pass the `threshold` option to `argosScreenshot` (between 0 and 1).
+Argos applies its own [diff algorithm](../../platform-fundamentals/how-argos-detects-visual-differences.md) with tolerance for anti-aliasing and sub-pixel noise, so you rarely need per-assertion tuning. If a specific screenshot needs a different sensitivity, pass the [`threshold` option](../../platform-fundamentals/how-argos-detects-visual-differences.md#sensitivity-threshold) to `argosScreenshot` (between 0 and 1).
 
 </details>
 

@@ -45,7 +45,7 @@ bun add --dev @argos-ci/cli
 
 Authentication depends on where the CLI runs:
 
-* **In CI**, set the `ARGOS_TOKEN` environment variable to your project token (from **Settings → General → Token**), usually as a CI secret. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
+* **In CI**, set the `ARGOS_TOKEN` environment variable to your project token (from **Settings → Authentication → Project token**), usually as a CI secret. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
 * **Locally**, sign in once with the browser-based login flow:
 
 ```bash
@@ -147,11 +147,15 @@ argos finalize
 
 The shards are matched by their nonce, read from `--parallel-nonce` or `ARGOS_PARALLEL_NONCE`. In most CI environments the nonce is detected automatically, so no flag is needed as long as `finalize` runs in the same pipeline as the uploads.
 
+`finalize` closes every finalize-mode build in the project that shares the nonce, whatever its build name. When several build names upload in the same pipeline, one `finalize` step closes them all.
+
 When every upload step is conditional — skipped by a task cache such as Turborepo or Nx, or by change detection — a run may produce no shard at all. Use `--skip-if-empty` to create a [skipped build](../learn/how-to-guides/ci-pipelines/skipping-a-build.md) in that case, so a required Argos status check still reports success:
 
 ```bash
 argos finalize --skip-if-empty --build-name unit
 ```
+
+Here `--build-name` only names the skipped build. It doesn't limit which builds `finalize` closes.
 
 **`skip`** creates that same [skipped build](../learn/how-to-guides/ci-pipelines/skipping-a-build.md) directly: no screenshots, no comparison, an immediately successful status. It keeps a required Argos check green on commits where you intentionally don't run visual tests. Use `--build-name` to match the check you want to satisfy.
 
@@ -175,7 +179,7 @@ argos upload ./screenshots --project my-account/my-project
 
 #### Override Git detection
 
-`argos upload` detects the commit, branch, and pull request from your CI environment — or from the local Git repository when running outside CI. To override detection, set these environment variables (there are no flag equivalents):
+`argos upload` detects the commit, branch, and pull request from your CI environment — or from the local Git repository when running outside CI. See [CI providers detected automatically](../learn/how-to-guides/ci-pipelines/run-argos-in-ci.md#ci-providers-detected-automatically) for the providers it recognizes and the variables it reads on each. To override detection, set these environment variables (there are no flag equivalents):
 
 | Environment variable   | Description                                                                         |
 | ---------------------- | ----------------------------------------------------------------------------------- |

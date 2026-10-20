@@ -131,7 +131,7 @@ Swap the Lost Pixel action for your test command, with `ARGOS_TOKEN` set:
 {% endcolumn %}
 {% endcolumns %}
 
-For Storybook, use the workflow from the [Storybook quickstart](../../../quickstart/storybook-quickstart/). For custom shots, run `npm exec -- argos upload <folder>` after your tests. `ARGOS_TOKEN` comes from **Settings → General → Token**; on GitHub Actions you can use [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md) instead of a secret.
+For Storybook, use the workflow from the [Storybook quickstart](../../../quickstart/storybook-quickstart/). For custom shots, run `npm exec -- argos upload <folder>` after your tests. `ARGOS_TOKEN` comes from **Settings → Authentication → Project token**; on GitHub Actions you can use [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md) instead of a secret.
 {% endstep %}
 
 {% step %}

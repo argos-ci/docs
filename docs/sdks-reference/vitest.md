@@ -188,6 +188,7 @@ export default defineConfig({
 ```
 
 * **`uploadToArgos`**: Upload the captured files to Argos at the end of the run (default: `false`).
+* **`ignoreUploadFailures`**: When `true`, an upload error is logged and doesn't fail the run (default: `false`, a failed upload sets the exit code to `1`).
 * **`root`**: Folder where screenshots and snapshots are written (default: `"./snapshots"`).
 
 The plugin also accepts every option supported by the [Playwright `argosScreenshot` function](playwright.md#argosscreenshothandler-name-options)—including non-serializable ones like `beforeScreenshot` and `afterScreenshot`—and all [upload parameters](https://js-sdk-reference.argos-ci.com/interfaces/UploadParameters.html). These act as defaults for every screenshot and can be overridden per call.
@@ -217,7 +218,7 @@ Available options:
 * **`viewports`**: Array of [viewports](../learn/how-to-guides/visual-coverage/responsive-viewports.md) to capture.
 * **`fullPage`**: Capture the full page instead of fitting the screenshot to the content (default: `false`).
 * **`argosCSS`**: Custom CSS evaluated during the screenshot process.
-* **`threshold`**: Sensitivity threshold between `0` and `1`. The higher the threshold, the less sensitive the diff (default: `0.5`).
+* **`threshold`**: Sensitivity threshold between `0` and `1`. The higher the threshold, the less sensitive the diff (default: `0.5`). More on [how the threshold works](../learn/platform-fundamentals/how-argos-detects-visual-differences.md#sensitivity-threshold).
 * **`baseName`**: Name, or list of names, to compare this screenshot against instead of its own name. More on [fallback baselines](../learn/how-to-guides/visual-coverage/fallback-baselines.md).
 * **`tag`**: A [tag](../learn/review-workflow/tags.md) or array of tags to attach to the screenshot.
 * **`ariaSnapshot`**: Capture an [ARIA snapshot](../learn/how-to-guides/visual-coverage/adding-aria-snapshots-manually.md) along with the screenshot (default: `false`). Each ARIA snapshot counts as an additional screenshot for billing.

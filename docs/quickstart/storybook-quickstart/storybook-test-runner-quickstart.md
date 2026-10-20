@@ -147,7 +147,7 @@ jobs:
 ```
 {% endcode %}
 
-`ARGOS_TOKEN` is the project token from **Settings → General → Token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
+`ARGOS_TOKEN` is the project token from **Settings → Authentication → Project token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
 
 To learn how to run tests on a deployed Storybook, refer to the [Storybook Test Runner documentation](https://storybook.js.org/docs/writing-tests/integrations/test-runner).
 {% endstep %}
