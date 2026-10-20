@@ -1,5 +1,7 @@
 ---
-description: Run subset builds to upload a partial test run without affecting the baseline of screenshots it didn't cover.
+description: >-
+  Run subset builds to upload a partial test run without affecting the baseline
+  of screenshots it didn't cover.
 ---
 
 # Subset builds
@@ -120,6 +122,16 @@ steps:
 <summary>Why are removed screenshots ignored?</summary>
 
 Subset builds only include a portion of your test suite, so missing screenshots may simply be from skipped tests, not actual deletions. Ignoring removals avoids false positives.
+
+</details>
+
+<details>
+
+<summary>Do omitted screenshots count toward my quota?</summary>
+
+A subset build does not copy baseline screenshots omitted from the upload into the new build. Omitted screenshots are ignored for comparison. They are neither removals nor carried-over screenshots.
+
+Only screenshots captured and uploaded in the subset build are registered. Each registered screenshot counts toward your quota, even when it is unchanged from the baseline. Baseline screenshots omitted from the upload do not consume quota merely because they exist in the baseline. See [How usage is counted](../../billing-and-subscription/spend-management.md#how-usage-is-counted).
 
 </details>
 
