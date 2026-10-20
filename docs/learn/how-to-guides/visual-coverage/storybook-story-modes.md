@@ -7,7 +7,9 @@ description: Capture separate Storybook snapshots for each mode, combining theme
 Argos can capture multiple versions of your stories by applying different “modes,” which are essentially combinations of global Storybook settings (such as theme, viewport, locale, etc.). With modes, you can automatically generate a separate snapshot for each unique configuration.
 
 {% hint style="info" %}
-If you already have `parameters.chromatic.modes`, Argos will handle those settings by default, as long as the story has no `parameters.argos`. Once an `argos` parameter is set, at the project, component or story level, Argos reads only `parameters.argos` and ignores `parameters.chromatic`. For example, adding `argos: { fitToContent: false }` to `.storybook/preview.ts` turns off your Chromatic modes for every story, so move them to `parameters.argos.modes` at the same time. Prefer `parameters.argos.modes` in new work.
+If you already have `parameters.chromatic.modes`, Argos will handle those settings by default. Prefer `parameters.argos.modes` in new work.
+
+Argos stops reading `parameters.chromatic` as soon as a story has an `argos` parameter. For example, if you add `argos: { fitToContent: false }` to `.storybook/preview.ts`, your Chromatic modes are ignored for every story. Move them to `parameters.argos.modes` at the same time.
 {% endhint %}
 
 ### What are modes?
@@ -256,7 +258,9 @@ If you have an original single baseline from before you introduced modes, and yo
 
 <summary>Can modes be applied if I'm still using <code>parameters.chromatic</code>?</summary>
 
-Yes. Argos reads your `chromatic.modes` settings if present, as long as the story has no `argos` parameter. Argos doesn’t combine the two: when `parameters.argos` is set, `parameters.chromatic` is ignored, modes included. If you add any `argos` parameter, such as `fitToContent`, move your modes to `argos.modes` at the same time. For new users or updated setups, prefer using `argos.modes` to avoid any confusion in the future.
+Yes. Argos reads your `chromatic.modes` settings if present. However, for new users or updated setups, prefer using `argos.modes` to avoid any confusion in the future.
+
+Argos stops reading `parameters.chromatic` as soon as a story has an `argos` parameter, even one that only sets `fitToContent`. If you add one, move your modes to `argos.modes` at the same time.
 
 </details>
 
