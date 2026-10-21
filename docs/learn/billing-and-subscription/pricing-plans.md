@@ -34,7 +34,7 @@ Plan details:
   - Storybook: $0.0015 per screenshot (see [Storybook screenshots](#storybook-screenshots))
 - **Optional add-ons** (Stripe subscriptions only):
   - [GitHub SSO](../account-and-access/github-single-sign-on.md): $50 / month
-  - [SAML SSO](../account-and-access/saml-single-sign-on.md): $200 / month
+  - [SAML SSO](../account-and-access/saml-single-sign-on.md), with [SCIM provisioning](../account-and-access/scim-provisioning.md): $200 / month
 - **Media sharing**: team-scoped or public share pages, 1-year retention, 500 MB per file
 
 A Pro plan belongs to a team, not to a personal account. You can subscribe with a credit card through [Stripe](how-to-subscribe.md), or through GitHub Marketplace to pay via your GitHub invoice.
@@ -81,6 +81,6 @@ Argos sponsors selected [open-source projects](open-source.md) with free usage, 
 
 ### Enterprise plan
 
-For large organizations with custom requirements: custom screenshot volumes, [SAML single sign-on](../account-and-access/saml-single-sign-on.md), and [fine-grained access control](../account-and-access/team-members-and-roles.md).
+For large organizations with custom requirements: custom screenshot volumes, [SAML single sign-on](../account-and-access/saml-single-sign-on.md) with [SCIM provisioning](../account-and-access/scim-provisioning.md), and [fine-grained access control](../account-and-access/team-members-and-roles.md).
 
 [Contact us](https://argos-ci.com/contact) to design the right plan for your business.
