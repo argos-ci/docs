@@ -191,7 +191,7 @@ export default defineConfig({
 * **`ignoreUploadFailures`**: When `true`, an upload error is logged and doesn't fail the run (default: `false`, a failed upload sets the exit code to `1`).
 * **`root`**: Folder where screenshots and snapshots are written (default: `"./snapshots"`).
 
-The plugin also accepts every option supported by the [Playwright `argosScreenshot` function](playwright.md#argosscreenshothandler-name-options)—including non-serializable ones like `beforeScreenshot` and `afterScreenshot`—and all [upload parameters](https://js-sdk-reference.argos-ci.com/interfaces/UploadParameters.html). These act as defaults for every screenshot and can be overridden per call.
+The plugin also accepts every option supported by the [Playwright `argosScreenshot` function](playwright.md#argosscreenshothandler-name-options)—including non-serializable ones like `beforeScreenshot` and `afterScreenshot`—and all [upload parameters](https://js-sdk-reference.argos-ci.com/interfaces/UploadParameters.html). These act as defaults for every screenshot and can be overridden per call. For example, `hide: ["#clock"]` on the plugin hides the clock in every screenshot, and a per-call `hide` replaces that list instead of adding to it.
 
 #### `argosScreenshot(name?, options?)`
 
@@ -218,6 +218,10 @@ Available options:
 * **`viewports`**: Array of [viewports](../learn/how-to-guides/visual-coverage/responsive-viewports.md) to capture.
 * **`fullPage`**: Capture the full page instead of fitting the screenshot to the content (default: `false`).
 * **`argosCSS`**: Custom CSS evaluated during the screenshot process.
+* **`hide`**: Array of selectors of elements to hide. Hidden elements keep their space in the layout, like with the [`data-visual-test="transparent"` helper](../learn/reliability-and-flakiness/flaky-tests/argos-helpers.md). Selectors that match nothing are ignored.
+* **`remove`**: Array of selectors of elements to remove. Removed elements no longer take space in the layout, like with `data-visual-test="removed"`. Selectors that match nothing are ignored. An element in both `hide` and `remove` is removed.
+* **`mask`**: Array of selectors of elements to cover with a box, in addition to the elements with `data-visual-test="blackout"`. Selectors that match nothing are ignored.
+* **`maskColor`**: Color of the box covering masked elements, in CSS color format (default: `"#FF00FF"`).
 * **`threshold`**: Sensitivity threshold between `0` and `1`. The higher the threshold, the less sensitive the diff (default: `0.5`). More on [how the threshold works](../learn/platform-fundamentals/how-argos-detects-visual-differences.md#sensitivity-threshold).
 * **`baseName`**: Name, or list of names, to compare this screenshot against instead of its own name. More on [fallback baselines](../learn/how-to-guides/visual-coverage/fallback-baselines.md).
 * **`tag`**: A [tag](../learn/review-workflow/tags.md) or array of tags to attach to the screenshot.
