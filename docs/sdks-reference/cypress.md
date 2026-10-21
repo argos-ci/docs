@@ -107,6 +107,9 @@ Argos stabilization also pauses, on their first frame, SVG animations that repea
 To capture a single element, chain the command from it: `cy.get(".post").argosScreenshot("post")`.
 * `options.viewports`: Define specific viewports for capturing screenshots. More on [viewports configuration](../learn/how-to-guides/visual-coverage/responsive-viewports.md).
 * `options.argosCSS`: Specific CSS applied during the screenshot process. More on [injecting CSS](../learn/how-to-guides/visual-coverage/injecting-css.md)
+* `options.hide`: Array of selectors of elements to hide. Hidden elements keep their space in the layout, like with `data-visual-test="transparent"`. Selectors that match nothing are ignored. More on [helpers](#helper-attributes-for-visual-testing).
+* `options.remove`: Array of selectors of elements to remove. Removed elements no longer take space in the layout, like with `data-visual-test="removed"`. Selectors that match nothing are ignored. An element in both `hide` and `remove` is removed.
+* `options.blackout`: Array of selectors of elements to black out, from [cy.screenshot](https://docs.cypress.io/api/commands/screenshot). They are blacked out in addition to the elements with `data-visual-test="blackout"`.
 * `options.threshold`: Sensitivity threshold between 0 and 1. The higher the threshold, the less sensitive the diff will be. Defaults to `0.5`. More on [how the threshold works](../learn/platform-fundamentals/how-argos-detects-visual-differences.md#sensitivity-threshold).
 * `options.baseName`: Name, or list of names, to compare this screenshot against instead of its own name. Useful to compare a variant against an existing screenshot. More on [fallback baselines](../learn/how-to-guides/visual-coverage/fallback-baselines.md).
 * `options.stabilize`: Wait for the UI to stabilize before taking the screenshot. Set to `false` to disable stabilization. Pass an object to customize the stabilization. Defaults to `true`.
@@ -139,6 +142,18 @@ For tailored visual testing, the `data-visual-test` attributes provide control o
 ```html
 <div id="clock" data-visual-test="transparent">...</div>
 ```
+
+**Example: Using the `hide`, `remove` and `blackout` options, without changing the markup:**
+
+```js
+cy.argosScreenshot("dashboard", {
+  hide: ["#clock", ".avatar"],
+  remove: [".cookie-banner"],
+  blackout: [".live-chart"],
+});
+```
+
+`hide` works like `transparent`, `remove` like `removed`, and `blackout` like the `blackout` helper. `hide` and `remove` ignore selectors that match nothing, and an element in both is removed. Argos restores the elements after the screenshot and applies `hide` and `remove` again for each viewport.
 
 #### registerArgosTask(on, config\[, options])
 

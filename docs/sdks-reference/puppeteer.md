@@ -67,6 +67,8 @@ Screenshots are stored in `screenshots/argos` folder, relative to current direct
 * `options.element` - Accept an ElementHandle or a string selector to screenshot an element
 * `options.viewports` - Specifies the viewports for which to capture screenshots. See [viewports configuration](../learn/how-to-guides/visual-coverage/responsive-viewports.md).
 * `options.argosCSS`: Specific CSS applied during the screenshot process. More on [injecting CSS](../learn/how-to-guides/visual-coverage/injecting-css.md)
+* `options.hide`: Array of string selectors or `ElementHandle`s of elements to hide. Hidden elements keep their space in the layout, like with `data-visual-test="transparent"`. Selectors that match nothing are ignored. More on [helpers](#helper-attributes-for-visual-testing).
+* `options.remove`: Array of string selectors or `ElementHandle`s of elements to remove. Removed elements no longer take space in the layout, like with `data-visual-test="removed"`. Selectors that match nothing are ignored. An element in both `hide` and `remove` is removed.
 * `options.disableHover`: Disable hover effects by moving the mouse to the top-left corner of the page. Defaults to `true`.
 * `options.threshold`: Sensitivity threshold between 0 and 1. The higher the threshold, the less sensitive the diff will be. Defaults to `0.5`.
 * `options.baseName`: Name, or list of names, to compare this screenshot against instead of its own name. Useful to compare a variant against an existing screenshot. More on [fallback baselines](../learn/how-to-guides/visual-coverage/fallback-baselines.md).
@@ -100,6 +102,17 @@ For tailored visual testing, the `data-visual-test` attributes provide control o
 ```html
 <div id="clock" data-visual-test="transparent">...</div>
 ```
+
+**Example: Using the `hide` and `remove` options, without changing the markup:**
+
+```js
+await argosScreenshot(page, "dashboard", {
+  hide: ["#clock", ".avatar"],
+  remove: [".cookie-banner"],
+});
+```
+
+`hide` works like `transparent` and `remove` like `removed`. Selectors that match nothing are ignored, and an element in both lists is removed. Argos restores the elements after the screenshot and applies the options again for each viewport.
 
 ### Additional Resources
 

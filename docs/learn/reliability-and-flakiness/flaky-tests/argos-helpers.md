@@ -1,7 +1,7 @@
 ---
 description: >-
-  Use data-visual-test attributes to hide, remove, or mask dynamic elements for
-  consistent, flake-free screenshots.
+  Use data-visual-test attributes or SDK options to hide, remove, or mask dynamic
+  elements for consistent, flake-free screenshots.
 ---
 
 # Argos helpers
@@ -22,3 +22,27 @@ For example, to hide a clock from the captured screenshot:
 ```html
 <div id="clock" data-visual-test="transparent">...</div>
 ```
+
+### Apply helpers from your tests
+
+When you can't or don't want to change the markup, pass the elements to `argosScreenshot` instead. They get the same treatment as with the attribute, for that screenshot only: Argos restores the page afterwards.
+
+| Helper        | `argosScreenshot` option                    |
+| ------------- | ------------------------------------------- |
+| `transparent` | `hide`                                      |
+| `removed`     | `remove`                                    |
+| `blackout`    | `mask` (Playwright), `blackout` (Cypress)   |
+
+For example, with Playwright:
+
+```ts
+await argosScreenshot(page, "dashboard", {
+  hide: ["#clock", page.getByTestId("avatar")],
+  remove: [".cookie-banner"],
+  mask: [page.getByTestId("live-chart")],
+});
+```
+
+Selectors that match nothing are ignored, and an element in both `hide` and `remove` is removed. With [viewports](../../how-to-guides/visual-coverage/responsive-viewports.md), the options apply to each viewport.
+
+`hide` and `remove` are available in the [Playwright](../../../sdks-reference/playwright.md#helper-attributes-for-visual-testing), [Puppeteer](../../../sdks-reference/puppeteer.md#helper-attributes-for-visual-testing), [Cypress](../../../sdks-reference/cypress.md#helper-attributes-for-visual-testing), [Vitest](../../../sdks-reference/vitest.md), and [Storybook](../../../sdks-reference/storybook.md) SDKs. See each SDK reference for what the options accept.

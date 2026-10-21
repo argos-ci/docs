@@ -149,6 +149,17 @@ For tailored visual testing, the `data-visual-test` attributes provide control o
 <div id="clock" data-visual-test="transparent">...</div>
 ```
 
+**Example: Using the `hide` and `remove` options, without changing the markup:**
+
+```ts
+await argosScreenshot(page, "dashboard", {
+  hide: ["#clock", page.getByTestId("avatar")],
+  remove: [".cookie-banner"],
+});
+```
+
+`hide` works like `transparent` and `remove` like `removed`. Selectors that match nothing are ignored, and an element in both lists is removed. Argos restores the elements after the screenshot and applies the options again for each viewport. To apply `blackout` from the test, use [`mask`](#mask-elements).
+
 ### Mask elements
 
 Playwright's [`mask` and `maskColor`](https://playwright.dev/docs/api/class-page#page-screenshot-option-mask) screenshot options pass through `argosScreenshot`. Each masked element is covered with a solid box:
@@ -160,10 +171,10 @@ await argosScreenshot(page, "dashboard", {
 });
 ```
 
-The `data-visual-test="blackout"` helper uses the same `mask` option, which has two consequences:
+The `data-visual-test="blackout"` helper uses the same `mask` option:
 
 * Blacked-out elements take the `maskColor`, which is Playwright's pink (`#FF00FF`) unless you set it.
-* Passing your own `mask` replaces the blackout list. To keep both, add the blackout locator to your array: `mask: [page.locator('[data-visual-test="blackout"]'), page.getByTestId("live-chart")]`.
+* The elements you pass in `mask` are masked in addition to the ones with the `blackout` helper.
 
 ### Animations
 
@@ -414,6 +425,9 @@ Each ARIA snapshot counts as an additional screenshot for billing.
 * `options.viewports`: Define specific viewports for capturing screenshots. More on [viewports configuration](../learn/how-to-guides/visual-coverage/responsive-viewports.md).
 * `options.ariaSnapshot`: Capture an ARIA snapshot along with the screenshot. More on [ARIA snapshots](playwright.md#aria-snapshots).
 * `options.argosCSS`: Specific CSS applied during the screenshot process. More on [injecting CSS](../learn/how-to-guides/visual-coverage/injecting-css.md)
+* `options.hide`: Array of [`Locator`](https://playwright.dev/docs/api/class-locator)s or string selectors of elements to hide. Hidden elements keep their space in the layout, like with `data-visual-test="transparent"`. Selectors that match nothing are ignored. More on [helpers](#helper-attributes-for-visual-testing).
+* `options.remove`: Array of `Locator`s or string selectors of elements to remove. Removed elements no longer take space in the layout, like with `data-visual-test="removed"`. Selectors that match nothing are ignored. An element in both `hide` and `remove` is removed.
+* `options.mask`: Array of `Locator`s to cover with a box, in addition to the elements with `data-visual-test="blackout"`. More on [masking elements](#mask-elements).
 * `options.disableHover`: Disable hover effects by moving the mouse to the top-left corner of the page. Defaults to `true`.
 * `options.threshold`: Sensitivity threshold between 0 and 1. The higher the threshold, the less sensitive the diff will be. Defaults to `0.5`. More on [how the threshold works](../learn/platform-fundamentals/how-argos-detects-visual-differences.md#sensitivity-threshold).
 * `options.baseName`: Name, or list of names, to compare this screenshot against instead of its own name. Useful to compare a variant against an existing screenshot. More on [fallback baselines](../learn/how-to-guides/visual-coverage/fallback-baselines.md).
