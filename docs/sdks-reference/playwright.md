@@ -520,26 +520,26 @@ await argosScreenshot(page, "card", {
 
 <summary>Can I take screenshots of an Electron app?</summary>
 
-Not with `argosScreenshot`. A window launched with Playwright's `_electron.launch()` has no default viewport and no browser instance, so `argosScreenshot` throws `Snapshots can't be taken without a viewport.` or `Can't take screenshots without a browser.`
-
-Save the screenshots with Playwright instead, then upload the folder with the [Argos CLI](argos-command-line-interface-cli.md):
+Yes. Pass the window returned by Playwright's `_electron.launch()` to `argosScreenshot`, as you would a page:
 
 ```ts
 import { test, _electron as electron } from "@playwright/test";
+import { argosScreenshot } from "@argos-ci/playwright";
 
 test("main window", async () => {
   const app = await electron.launch({ args: ["main.js"] });
   const window = await app.firstWindow();
-  await window.screenshot({ path: "screenshots/main-window.png" });
+  await argosScreenshot(window, "main-window");
   await app.close();
 });
 ```
 
-```bash
-npx argos upload ./screenshots
-```
+An Electron window has no Playwright viewport: the window itself sets the size of the page.
 
-These screenshots don't go through Argos stabilization.
+* Argos records the window's content size as the viewport. Create your `BrowserWindow` with `useContentSize: true` so its `width` and `height` set that size exactly, on every operating system.
+* The `viewports` option isn't supported and throws an error.
+
+Argos shows Electron as the browser, with the version read from the window's user agent. If your app sets its own user agent, the screenshot is recorded without a browser.
 
 </details>
 
