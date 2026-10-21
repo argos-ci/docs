@@ -5,7 +5,7 @@ description: Configure SAML single sign-on with providers like Okta or Auth0 to 
 # SAML single sign-on
 
 {% hint style="info" %}
-SAML SSO is a paid add-on ($200 / month) available to teams on a Stripe-based subscription. It is included in the [Enterprise](../billing-and-subscription/pricing-plans.md#enterprise-plan) plan.
+SAML SSO is a paid add-on ($200 / month) available to teams on a Stripe-based subscription. It is included in the [Enterprise](../billing-and-subscription/pricing-plans.md#enterprise-plan) plan, and comes with [SCIM provisioning](scim-provisioning.md).
 
 Only team members with the [owner role](team-members-and-roles.md#owner-role) can configure SAML SSO.
 {% endhint %}
@@ -82,9 +82,13 @@ With SAML SSO, users authenticate through your identity provider, but team membe
 
 Members are added to your team when they first sign in with SAML, but you can also pre-provision members from the **Team Settings -> Members** page.
 
-Argos doesn't support SCIM provisioning: your identity provider doesn't push users or group changes to Argos. Instead, a user is provisioned on their first SAML sign-in. Argos creates their account if they don't have one and adds them to the team with the team's default access role.
+{% hint style="success" %}
+**Let your identity provider manage the team.** With [SCIM provisioning](scim-provisioning.md), included with SAML SSO, your identity provider adds people to the team when they are assigned to Argos, removes them as soon as they are unassigned or deactivated, and can set their roles.
+{% endhint %}
 
-To offboard someone, remove them from the team: in **Team Settings -> Members**, open the member's actions menu and select **Remove from Team**. Also remove them from the Argos app in your identity provider. Otherwise, signing in with SAML again adds them back to the team.
+Without SCIM, a user is provisioned on their first SAML sign-in. Argos creates their account if they don't have one and adds them to the team with the team's default access role.
+
+To offboard someone without SCIM, remove them from the team: in **Team Settings -> Members**, open the member's actions menu and select **Remove from Team**. Also remove them from the Argos app in your identity provider. Otherwise, signing in with SAML again adds them back to the team.
 
 When SAML SSO is enforced, team members must have an active SAML session to access team resources. If a member's SAML session expires, they will be prompted to re-authenticate with SAML to regain access.
 

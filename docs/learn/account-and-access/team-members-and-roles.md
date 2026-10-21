@@ -27,7 +27,7 @@ Only contributors can have configurable project roles — Owners and Members alw
 
 ### Team-level roles
 
-Team-level roles apply to all projects within the team.
+Team-level roles apply to all projects within the team. With [SCIM provisioning](scim-provisioning.md#map-roles-from-your-identity-provider), your identity provider can assign them.
 
 #### Owner role
 
