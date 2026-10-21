@@ -23,7 +23,7 @@ For example, to hide a clock from the captured screenshot:
 <div id="clock" data-visual-test="transparent">...</div>
 ```
 
-The WebdriverIO SDK applies the `transparent`, `removed`, `blackout`, and `no-radius` helpers, but not the rest of Argos stabilization, so `data-visual-test-wait-bg-img` and `data-image-type="gif"` have no effect there.
+The WebdriverIO SDK applies the `transparent`, `removed`, `blackout`, and `no-radius` helpers, but not the rest of Argos stabilization, so `data-visual-test-wait-bg-img` and `data-image-type="gif"` have no effect there. In an Appium native app context, no helper applies.
 
 ### Apply helpers from your tests
 
