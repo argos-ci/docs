@@ -32,6 +32,8 @@ Follow the [WebdriverIO Quickstart](../quickstart/webdriverio-quickstart.md) to 
 
 {% hint style="info" %}
 The WebdriverIO SDK applies the `data-visual-test` helpers and `argosCSS`, but not the rest of Argos stabilization: unlike the Playwright, Cypress, and Puppeteer SDKs, it doesn't wait for loading, fonts, or images, pause GIFs, or hide scrollbars and carets. Stabilize the page in your test before calling `argosScreenshot`.
+
+In an Appium native app context, `argosScreenshot` captures the screen as is: the helpers don't apply, `mask` only accepts rectangles, and passing `hide`, `remove`, `argosCSS`, or a selector in `mask` throws an error.
 {% endhint %}
 
 ### Helper Attributes for Visual Testing
