@@ -32,21 +32,15 @@ Media sharing files have their own retention, which depends on your plan: see [S
 
 ### Export your data
 
-There is no one-click export. To get the screenshots of a build, run [`argos build snapshots`](../../sdks-reference/argos-command-line-interface-cli.md#inspecting-builds-and-tests) with `--json`. It returns one entry per snapshot of the build, and a project token is enough to run it. In each entry, `head.url` is the URL of the screenshot in this build, and `base.url` the URL of the baseline screenshot it was compared to. A screenshot removed since the baseline has no `head`.
-
-This script downloads the screenshots of build 72652 into an `export` folder, using [jq](https://jqlang.org) and curl:
+There is no one-click export, but the [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md#downloading-screenshots-and-baselines) downloads screenshots with a project token. `argos build list` lists a project's builds, `argos build download` saves the screenshots of one build, and `argos baseline download` saves the screenshots of the project's latest baseline:
 
 ```bash
-argos build snapshots 72652 --project team/project --json > snapshots.json
-
-jq -r '.[] | select(.head != null) | [.head.name, .head.url] | @tsv' snapshots.json |
-  while IFS=$'\t' read -r name url; do
-    mkdir -p "export/$(dirname "$name")"
-    curl -sSfL "$url" -o "export/$name"
-  done
+export ARGOS_TOKEN=<project-token>
+argos build download 72652   # into ./argos-build-72652
+argos baseline download      # into ./argos-baseline
 ```
 
-Download the files right after you run the command: some of the URLs are signed and expire after one hour.
+Files are saved under their snapshot names, so a directory uploaded with `argos upload` comes back with the same layout.
 
 ### Delete your data
 

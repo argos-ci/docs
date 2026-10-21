@@ -66,9 +66,11 @@ Do not use `argos login` in CI. CI uploads should use `ARGOS_TOKEN` or [GitHub O
 
 #### Project tokens and personal access tokens
 
-Uploads and read-only commands — `build get`, `build snapshots`, `test list`, `test get`, `test changes`, `change list`, `project get`, `project deployments`, `project domain get`, `media list`, `media get`, `media versions` — work with a **project token**. Anything attributed to a user requires a **personal access token**, because the action is checked against that user's permissions: submitting or dismissing a review, requesting reviewers, posting comments (on builds, tests, and media alike), ignoring a change, configuring a project, and administering a team.
+Uploads and read-only commands — `build list`, `build get`, `build snapshots`, `build download`, `test list`, `test get`, `test changes`, `change list`, `project get`, `project deployments`, `project domain get`, `media list`, `media get`, `media versions` — work with a **project token**. Anything attributed to a user requires a **personal access token**, because the action is checked against that user's permissions: submitting or dismissing a review, requesting reviewers, posting comments (on builds, tests, and media alike), ignoring a change, configuring a project, and administering a team.
 
 Two read-only commands are the exception: `project contributor list` and `review reviewer list` return users, so they need a personal access token to resolve them against — a project token carries no identity.
+
+`baseline download` is the opposite exception: it only accepts a project token, and reads that token's own project.
 
 To create a personal access token manually, go to your personal account settings, open **Tokens**, then select **Generate new token**.
 
@@ -86,9 +88,12 @@ Run `argos <command> --help` for a command's exact arguments, flags, and default
 | `finalize`                                 | Close a parallel build once every shard has uploaded.               |
 | `skip`                                     | Create a skipped build so a required check still reports success.   |
 | `deploy <directory>`                       | Deploy a static build (Storybook or any static site).               |
+| `build list`                               | List a project's builds, most recent first.                         |
 | `build get <buildReference>`               | Fetch a build's status, branch, commit, stats, and URL.             |
 | `build snapshots <buildReference>`         | Fetch a build's snapshot diffs, with flakiness data on each.        |
+| `build download <buildReference>`          | Download the screenshots a build captured.                          |
 | `build subscribe \| unsubscribe`           | Follow or stop following a build's notifications.                   |
+| `baseline download`                        | Download the screenshots of a project's latest baseline.            |
 | `test list`                                | List a project's tests, flakiest first.                             |
 | `test get <testId>`                        | Fetch a test with its flakiness metrics.                            |
 | `test changes <testId>`                    | List a test's distinct changes, most frequent first.                |
@@ -213,7 +218,17 @@ By default this creates a **preview** deployment. Add `--prod` to force a **prod
 
 ### Inspecting builds and tests
 
-These commands read data, so a project token is enough. A `<buildReference>` is a build number or a full Argos build URL; with a number, add `--project team/project`, since a URL already carries it.
+These commands read data, so a project token is enough.
+
+`build list` lists a project's builds, most recent first. It is where to start when you don't have a build number yet:
+
+```bash
+argos build list --branch main --limit 10
+```
+
+`--branch` and `--commit` keep the builds of one branch or one commit. `--commit` takes a full 40-character SHA; to match a shorter one, use `--search`, which matches the build name, part of the branch, or the start of the commit. A project token reads its own project; with a [personal access token](#project-tokens-and-personal-access-tokens), pass `--project owner/project` or set `ARGOS_PROJECT`.
+
+A `<buildReference>` is a build number or a full Argos build URL; with a number, add `--project team/project`, since a URL already carries it.
 
 ```bash
 argos build get https://app.argos-ci.com/team/project/builds/72652
@@ -266,6 +281,39 @@ argos change list --project team/project --json
 ```
 
 To let an agent do the investigation instead, see [Fix flaky tests with AI agents](../learn/reliability-and-flakiness/fix-flaky-tests-with-ai-agents.md).
+
+### Downloading screenshots and baselines
+
+`build download` saves the screenshots a build captured to a directory, and `baseline download` saves the screenshots of a project's latest baseline:
+
+```bash
+argos build download 1234 -o ./screenshots
+ARGOS_TOKEN=<project-token> argos baseline download -o ./baseline
+```
+
+**`build download`** takes a `<buildReference>` and the same authentication as [the inspection commands](#inspecting-builds-and-tests). It writes to `./argos-build-<number>` unless you pass `-o, --output`, and fails while the build is still processing. Removed snapshots have no screenshot in the build, so they are not downloaded.
+
+**`baseline download`** picks the newest build on the project's [default baseline branch](../learn/platform-fundamentals/baseline-build.md#the-baseline-branch) that is [eligible as a baseline](../learn/platform-fundamentals/baseline-build.md#check-whether-a-build-can-be-a-baseline): complete, with passing tests, not a subset, approved, and not rejected. It writes its screenshots to `./argos-baseline` unless you pass `-o, --output`. Three flags choose the baseline:
+
+- `--branch` looks on another branch.
+- `--build-name` has the same meaning as in `argos upload` and defaults to `default`. A project that uploads several builds, such as `storybook` and `e2e`, exports one build name at a time.
+- `--mode` is the [build mode](../learn/platform-fundamentals/build-modes.md), `ci` (the default) or `monitoring`.
+
+Failure screenshots are left out, because Argos never compares them. Only the latest 1,000 builds with that name on the branch are searched; when none of them is eligible, the command fails with "No baseline found".
+
+`baseline download` only accepts a project token, from `--token` or `ARGOS_TOKEN`, and downloads that token's own project, so it has no `--project` flag. It rejects personal access tokens, including the one `argos login` stores.
+
+Both commands write to a directory that is empty or doesn't exist yet. If it holds anything, they fail without writing a file. Files are laid out by snapshot name, so `chromium/home.png` keeps its folder, and screenshots uploaded from a directory with `argos upload` come back under the same paths, ready to upload again under the same names:
+
+- A name that ends with an image extension keeps it. `argos upload` stores a JPEG as PNG under its `.jpg` name, so that file comes back as `.jpg` with PNG content.
+- A name without one, such as a Storybook story name, gets the extension of its content type.
+- Names that would land on the same file get a suffix such as ` (2)`.
+
+With `--json`, both commands print `{ "build", "directory", "files" }`. `build` is the build the screenshots come from, as `build get --json` returns it, and each entry of `files` has the snapshot `name`, its `url` and `contentType`, its diff `status`, and the absolute `path` it was saved to:
+
+```bash
+ARGOS_TOKEN=<project-token> argos baseline download --build-name storybook --json
+```
 
 ### Reviewing and commenting
 
@@ -417,7 +465,7 @@ Every command in this section needs a [personal access token](#project-tokens-an
 
 ### Paginated lists
 
-`test list`, `change list`, `account member list`, `account invite list`, `project contributor list`, `project deployments`, and `automation list` follow pagination for you, up to `--limit` (100 by default). Raise it to walk a longer list:
+`build list`, `test list`, `change list`, `account member list`, `account invite list`, `project contributor list`, `project deployments`, and `automation list` follow pagination for you, up to `--limit` (100 by default). Raise it to walk a longer list:
 
 ```bash
 argos project deployments --project team/project --limit 500 --json
