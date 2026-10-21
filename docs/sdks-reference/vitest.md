@@ -220,6 +220,8 @@ Available options:
 * **`argosCSS`**: Custom CSS evaluated during the screenshot process.
 * **`hide`**: Array of selectors of elements to hide. Hidden elements keep their space in the layout, like with the [`data-visual-test="transparent"` helper](../learn/reliability-and-flakiness/flaky-tests/argos-helpers.md). Selectors that match nothing are ignored.
 * **`remove`**: Array of selectors of elements to remove. Removed elements no longer take space in the layout, like with `data-visual-test="removed"`. Selectors that match nothing are ignored. An element in both `hide` and `remove` is removed.
+* **`mask`**: Array of selectors of elements to cover with a box, in addition to the elements with `data-visual-test="blackout"`. Selectors that match nothing are ignored.
+* **`maskColor`**: Color of the box covering masked elements, in CSS color format (default: `"#FF00FF"`).
 * **`threshold`**: Sensitivity threshold between `0` and `1`. The higher the threshold, the less sensitive the diff (default: `0.5`). More on [how the threshold works](../learn/platform-fundamentals/how-argos-detects-visual-differences.md#sensitivity-threshold).
 * **`baseName`**: Name, or list of names, to compare this screenshot against instead of its own name. More on [fallback baselines](../learn/how-to-guides/visual-coverage/fallback-baselines.md).
 * **`tag`**: A [tag](../learn/review-workflow/tags.md) or array of tags to attach to the screenshot.
