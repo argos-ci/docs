@@ -59,8 +59,8 @@ The button appears only when the screenshot belongs to a journey of more than on
 
 A journey is derived from the metadata your Argos SDK already records, so nothing changes in your tests:
 
-* **The journey** is the test that took the screenshot, identified by its title path (file, `describe` blocks and test name). Storybook uploads group by component instead, with one step per story.
-* **A step** is a screen, not a file. The viewport and browser variants of one screen collapse into a single step, exactly as they do elsewhere in the review.
+* **The journey** is one run of the test that took the screenshot, identified by its title path (file, `describe` blocks and test name). A test run by several Playwright projects, such as `desktop` and `mobile`, has one journey per project. Storybook uploads group by component instead, with one step per story.
+* **A step** is a screen, not a file. The viewport variants a run captures of one screen collapse into a single step, exactly as they do elsewhere in the review.
 * **The order** is the order in which the test captured the screens.
 
 {% hint style="info" %}
