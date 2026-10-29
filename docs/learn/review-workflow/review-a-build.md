@@ -118,8 +118,8 @@ it("onboarding", () => {
 {% endtab %}
 {% endtabs %}
 
-* **One test for the whole flow.** Split across several tests, the onboarding becomes several tests of a single screen each, which Argos reviews as regular visual testing. Steps inside the test, such as `test.step` blocks, are fine.
-* **Name each screen for what it shows.** The steps follow the order of the calls, not their names, so there is nothing to number. A screen you add later takes its place in the journey, and the others keep their names and baselines.
+* **One test per path.** Each test is a journey. A signup with several options gets one test per option.
+* **Unique names.** The order comes from the calls, so there is nothing to number. A screen captured by several tests needs one name per test: put the path in it, such as `free-signup` and `team-signup`. When that screen changes, Argos groups the identical changes in one row, so you review it once.
 
 ### Keyboard shortcuts
 
