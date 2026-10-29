@@ -67,6 +67,60 @@ A journey is derived from the metadata your Argos SDK already records, so nothin
 Capture order is recorded by `@argos-ci/playwright` 7.5.1, `@argos-ci/cypress` 7.2.1 and `@argos-ci/vitest` 0.6.1 and above, as [`capture.index` in the screenshot metadata](../../sdks-reference/screenshot-metadata.md#capture). Screenshots uploaded by an earlier version, or by an SDK that does not record it, fall back to alphabetical order within the journey.
 {% endhint %}
 
+#### Capture a journey
+
+Any test that captures several screens already gives a journey. To review a flow such as an onboarding as one, walk it in a single test and capture each screen along the way:
+
+{% tabs %}
+{% tab title="Playwright" %}
+```ts
+import { test, expect } from "@playwright/test";
+import { argosScreenshot } from "@argos-ci/playwright";
+
+test("onboarding", async ({ page }) => {
+  await page.goto("/signup");
+  await argosScreenshot(page, "signup");
+
+  await page.getByLabel("Email").fill("jane@example.com");
+  await page.getByRole("button", { name: "Continue" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Create your workspace" }),
+  ).toBeVisible();
+  await argosScreenshot(page, "create-workspace");
+
+  await page.getByLabel("Workspace name").fill("Acme");
+  await page.getByRole("button", { name: "Create" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Invite your team" }),
+  ).toBeVisible();
+  await argosScreenshot(page, "invite-team");
+});
+```
+{% endtab %}
+
+{% tab title="Cypress" %}
+```ts
+it("onboarding", () => {
+  cy.visit("/signup");
+  cy.argosScreenshot("signup");
+
+  cy.get("input[name=email]").type("jane@example.com");
+  cy.contains("button", "Continue").click();
+  cy.contains("h1", "Create your workspace");
+  cy.argosScreenshot("create-workspace");
+
+  cy.get("input[name=workspace]").type("Acme");
+  cy.contains("button", "Create").click();
+  cy.contains("h1", "Invite your team");
+  cy.argosScreenshot("invite-team");
+});
+```
+{% endtab %}
+{% endtabs %}
+
+* **One test for the whole flow.** Split across several tests, the onboarding becomes several tests of a single screen each, which Argos reviews as regular visual testing. Steps inside the test, such as `test.step` blocks, are fine.
+* **Name each screen for what it shows.** The steps follow the order of the calls, not their names, so there is nothing to number. A screen you add later takes its place in the journey, and the others keep their names and baselines.
+
 ### Keyboard shortcuts
 
 Press `?` on a build page to see the full list of shortcuts. The ones you'll use most while reviewing:
