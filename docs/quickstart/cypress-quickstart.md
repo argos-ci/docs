@@ -121,7 +121,7 @@ it("screenshot homepage", () => {
 
 Screenshots are written to the `/cypress/screenshots` directory. Add `/cypress/screenshots` to your `.gitignore` file to avoid committing them.
 
-Tip: Check out our guides to [screenshot multiple pages](../learn/how-to-guides/visual-coverage/capture-screenshots-from-urls.md) or [capture multiple viewports](../learn/how-to-guides/visual-coverage/responsive-viewports.md).
+Tip: Check out our guides to [screenshot multiple pages](../learn/how-to-guides/visual-coverage/capture-screenshots-from-urls.md), [capture multiple viewports](../learn/how-to-guides/visual-coverage/responsive-viewports.md), or [capture user journeys](../learn/how-to-guides/visual-coverage/capture-user-journeys.md).
 {% endstep %}
 
 {% step %}
