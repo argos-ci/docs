@@ -69,7 +69,7 @@ Capture order is recorded by `@argos-ci/playwright` 7.5.1, `@argos-ci/cypress` 7
 
 #### Capture a journey
 
-Any test that captures several screens already gives a journey. To review a flow such as an onboarding as one, walk it in a single test and capture each screen along the way:
+To review a flow such as an onboarding as a journey, walk it in a test and capture each screen along the way:
 
 {% tabs %}
 {% tab title="Playwright" %}
@@ -118,8 +118,8 @@ it("onboarding", () => {
 {% endtab %}
 {% endtabs %}
 
-* **One test per path.** Each test is a journey. A signup with several options gets one test per option.
-* **Unique names.** The order comes from the calls, so there is nothing to number. A screen captured by several tests needs one name per test: put the path in it, such as `free-signup` and `team-signup`. When that screen changes, Argos groups the identical changes in one row, so you review it once.
+* **One test per path.** A signup with several options gets one test per option, not one test that walks them all.
+* **Unique names.** A screen captured by several tests needs one name per test: put the path in it, such as `free-signup` and `team-signup`. When that screen changes, Argos [groups the identical changes](#review-similar-changes-together) in one row, so you review it once. The order comes from the calls, so there is nothing to number.
 
 ### Keyboard shortcuts
 
