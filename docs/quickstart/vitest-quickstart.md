@@ -183,7 +183,7 @@ test("API response", async () => {
 
 Both are written to the `./snapshots` directory by default. Add `./snapshots` to your `.gitignore` file to avoid committing them.
 
-Tip: Check out our guides to [capture multiple viewports](../learn/how-to-guides/visual-coverage/responsive-viewports.md) or [add ARIA snapshots](../learn/how-to-guides/visual-coverage/adding-aria-snapshots-manually.md).
+Tip: Check out our guides to [capture multiple viewports](../learn/how-to-guides/visual-coverage/responsive-viewports.md), [add ARIA snapshots](../learn/how-to-guides/visual-coverage/adding-aria-snapshots-manually.md), or [capture user journeys](../learn/how-to-guides/visual-coverage/capture-user-journeys.md).
 {% endstep %}
 
 {% step %}

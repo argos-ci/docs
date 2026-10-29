@@ -7,6 +7,7 @@ description: Techniques to capture more of your interface, from responsive viewp
 Techniques to capture more of your interface and make every screenshot count.
 
 * [Responsive viewports](responsive-viewports.md) – Capture the same screen at multiple viewport widths
+* [Capture user journeys](capture-user-journeys.md) – Capture a flow such as a signup or an onboarding, screen by screen, as a journey
 * [Storybook story modes](storybook-story-modes.md) – Capture stories across multiple modes and themes
 * [Capture screenshots from URLs](capture-screenshots-from-urls.md) – Screenshot a list of URLs without writing tests
 * [Injecting CSS](injecting-css.md) – Apply custom CSS at capture time to hide or restyle elements

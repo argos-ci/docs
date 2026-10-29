@@ -67,6 +67,8 @@ A journey is derived from the metadata your Argos SDK already records, so nothin
 Capture order is recorded by `@argos-ci/playwright` 7.5.1, `@argos-ci/cypress` 7.2.1 and `@argos-ci/vitest` 0.6.1 and above, as [`capture.index` in the screenshot metadata](../../sdks-reference/screenshot-metadata.md#capture). Screenshots uploaded by an earlier version, or by an SDK that does not record it, fall back to alphabetical order within the journey.
 {% endhint %}
 
+To write a test that captures a journey, including a flow with several paths, see [Capture user journeys](../how-to-guides/visual-coverage/capture-user-journeys.md).
+
 ### Keyboard shortcuts
 
 Press `?` on a build page to see the full list of shortcuts. The ones you'll use most while reviewing:
