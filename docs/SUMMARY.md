@@ -60,6 +60,7 @@
     * [Run on preview deployments](learn/how-to-guides/ci-pipelines/run-on-preview-deployments.md)
   * [Visual coverage](learn/how-to-guides/visual-coverage/README.md)
     * [Responsive viewports](learn/how-to-guides/visual-coverage/responsive-viewports.md)
+    * [Capture user journeys](learn/how-to-guides/visual-coverage/capture-user-journeys.md)
     * [Storybook story modes](learn/how-to-guides/visual-coverage/storybook-story-modes.md)
     * [Capture screenshots from URLs](learn/how-to-guides/visual-coverage/capture-screenshots-from-urls.md)
     * [Injecting CSS](learn/how-to-guides/visual-coverage/injecting-css.md)
