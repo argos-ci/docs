@@ -77,6 +77,8 @@ The check then waits with "… waiting for your decision" until the review: it t
 
 A required status check blocks merging while it is pending, just as it does while it fails: the setting changes how the wait looks, not whether it blocks.
 
+[Merge queue](#merge-queue-support) builds are the exception. Nobody reviews them, so a pending status would hold the queue until it times out: their changes always report `failure`, and so does the summary check of the merge group's commit.
+
 ### Choose your access level
 
 * **Full access (recommended)** — Required for Merge Queue and baseline selection based on commit history.
@@ -124,7 +126,7 @@ Argos supports [GitHub's native Merge Queue](https://docs.github.com/en/reposito
 
 A merge queue build takes its baseline from your base branch, then applies the changes already approved on the queued pull request (or on each pull request listed in `ARGOS_MERGE_QUEUE_PRS`). Changes you approved on the pull request don't show up again in the queue.
 
-A merge queue build can't be reviewed: Argos shows "This build was triggered in a merge queue and doesn't require a review." If it finds changes that weren't approved on the pull request, its status is `failure` ("waiting for your decision"), so the queue check fails when Argos is a [required status check](#commit-status-states).
+A merge queue build can't be reviewed: Argos shows "This build was triggered in a merge queue and doesn't require a review." If it finds changes that weren't approved on the pull request, its status is `failure` ("waiting for your decision") whatever your [status while awaiting review](#status-while-awaiting-review) setting, so the queue check fails when Argos is a [required status check](#commit-status-states) instead of holding the queue until it times out.
 
 Once GitHub merges the group, your base branch points to the commit the merge queue build tested, so that build can serve as the [baseline](../platform-fundamentals/baseline-build.md) for later builds, and a separate `push` build on the base branch is optional. Like any baseline, the build must be complete, its tests must have passed, it must not be a subset, and it must not be rejected. Pull request builds also [need an approved baseline](../platform-fundamentals/baseline-build.md#when-the-baseline-must-be-approved). A merge queue build counts as approved once its pull request is merged, as long as the build is linked to that pull request (see `GITHUB_TOKEN` below).
 
