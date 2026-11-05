@@ -81,8 +81,8 @@ A required status check blocks merging while it is pending, just as it does whil
 
 ### Choose your access level
 
-* **Full access (recommended)** — Required for Merge Queue and baseline selection based on commit history.
-* **Limited access (no content)** — Works for basic checks without reading repository content; Merge Queue is not supported. See [GitHub integration without content permission](github-integration.md#github-integration-without-content-permission).
+* **Full access (recommended)**: Argos reads the commit history from GitHub to find the [baseline build](../platform-fundamentals/baseline-build.md), whatever history your CI checkout has. Required for Merge Queue.
+* **Limited access (no content)**: Argos never reads your repository content. The Argos SDK finds the baseline from the commit history of your CI checkout instead. Merge Queue is not supported. See [GitHub integration without content permission](github-integration.md#github-integration-without-content-permission).
 
 Use GitHub Connect to log in with your GitHub account, then install the Argos GitHub App to link repositories.
 
@@ -199,6 +199,14 @@ If you prefer to use Argos without granting full content access to your reposito
 ![Argos GitHub app without content access](<../../.gitbook/assets/create project 97d56ce76dfd351b29e727076e01021c.jpg>)
 
 9. Choose the repository you want to connect.
+
+#### How Argos finds the baseline without content access
+
+Argos can't read your commit history from GitHub, so the Argos SDK reads it in your CI job instead, from the repository the job runs in. It finds the merge base of your branch and its [baseline branch](../platform-fundamentals/baseline-build.md#the-baseline-branch), then sends Argos the commit SHAs of the merge base and its ancestors, never the content of your files. Argos picks the [baseline build](../platform-fundamentals/baseline-build.md#how-argos-selects-the-baseline) among these commits.
+
+On a GitHub Actions `pull_request` event, GitHub tests your branch merged into the tip of the base branch. The SDK then starts from that tip instead of the merge base, so changes already merged into the base branch don't show up as changes of your pull request.
+
+The SDK fetches the history it needs from the `origin` remote, so shallow clones work, including the default `actions/checkout` setup. Without `origin`, it falls back to the local history. When it finds no merge base, the build has no baseline and becomes an [orphan](../platform-fundamentals/baseline-build.md#orphan-builds). To pin the baseline yourself, set [`ARGOS_REFERENCE_COMMIT`](../platform-fundamentals/baseline-build.md#choose-a-custom-baseline-via-sdk).
 
 ### GitHub Enterprise
 
