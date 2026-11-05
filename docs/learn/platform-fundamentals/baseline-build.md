@@ -79,14 +79,23 @@ Builds on **auto-approved branches** are approved automatically, so they can ser
 Only builds that aren't tied to a pull request are auto-approved. A pull request build is never auto-approved, even when its branch matches the pattern.
 
 {% hint style="info" %}
-By default, Argos auto-approves your default baseline branch. You can configure auto-approved branch patterns in the Argos project settings. There is no setting to turn auto-approval off: the settings form requires a pattern, and a project without one uses the default baseline branch.
+By default, Argos auto-approves your default baseline branch. In the Argos project settings, you can auto-approve the branches matching a pattern instead, or [turn auto-approval off](#turn-off-auto-approval).
 {% endhint %}
+
+#### Turn off auto-approval
+
+To review every build, including the ones on your baseline branch, select **Don't auto-approve any branch** in the project settings. No build is auto-approved from then on, which changes two things:
+
+* **A build on the baseline branch becomes a baseline only once it's approved.** Pull request builds and pushes compare against the closest [approved build](#when-the-baseline-must-be-approved) in their history, so approve the builds on your baseline branch to move the baseline forward.
+* **Flaky test detection stops collecting data.** [Flaky test detection](../reliability-and-flakiness/flaky-test-detection.md) only learns from auto-approved builds, so test metrics and auto-ignore see no new changes.
+
+The pattern is kept while auto-approval is off, so selecting **Auto-approve branches matching a pattern** again restores it.
 
 ### Configure branches in project settings
 
-In the project settings, you can configure both the default baseline branch and the auto-approved branch patterns.
+In the project settings, under **Baseline builds**, you can configure the default baseline branch and which branches are auto-approved.
 
-![Project branches settings](<../../.gitbook/assets/project branches settings d4c960a48175260947ee018ec2ac371a.png>)
+![The Default base branch and Auto-approved branches settings](../../.gitbook/assets/project-baseline-builds-settings.png)
 
 ### Choose a custom baseline via SDK
 
