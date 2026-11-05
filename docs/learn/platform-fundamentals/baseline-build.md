@@ -34,7 +34,7 @@ The baseline must be **approved**: an auto-approved build, an [orphan](#orphan-b
 
 Among the builds that meet the criteria on the candidate build itself and share the new build's name and mode, Argos looks in this order and stops at the first match:
 
-1. **A build on the merge-base commit.**
+1. **A build on the merge-base commit**, or on the commit set with [`ARGOS_REFERENCE_COMMIT`](#choose-a-custom-baseline-via-sdk). A build on the reference commit doesn't need to be approved.
 2. **The closest build on an ancestor of the merge base.** Argos walks back through the history and skips builds that don't meet the approval rule above.
 3. **An approved build on the new build's own commit and branch**, as a last resort. This covers running Argos twice without committing, for example while setting it up.
 
@@ -58,7 +58,7 @@ When a build isn't eligible, the **Baseline eligibility** section of the Info pa
 {% hint style="info" %}
 The chip appears once a build is complete, and it reflects the build on its own. The comparison-dependent criteria — matching build name, mode, and commit ancestry — depend on the build being compared, so Argos evaluates them when a new build looks for its baseline.
 
-The chip also requires approval, which Argos [waives](#when-the-baseline-must-be-approved) when the new build's baseline branch is auto-approved. A build marked not eligible only because it isn't approved can still become a baseline that way.
+The chip also requires approval, which Argos [waives](#when-the-baseline-must-be-approved) when the new build's baseline branch is auto-approved, and for a build named with `ARGOS_REFERENCE_COMMIT`. A build marked not eligible only because it isn't approved can still become a baseline that way.
 {% endhint %}
 
 ### The baseline branch
@@ -95,7 +95,7 @@ To compare against a specific branch or commit instead of the automatically sele
 * `ARGOS_REFERENCE_BRANCH`: The branch to use as the baseline.
 * `ARGOS_REFERENCE_COMMIT`: The commit hash to select a specific baseline build.
 
-`ARGOS_REFERENCE_COMMIT` selects the build on that exact commit, even when newer builds exist. It follows the same [approval rule](#when-the-baseline-must-be-approved) as a merge-base build, with `ARGOS_REFERENCE_BRANCH` as the baseline branch: unless that variable names an auto-approved branch, the build must be approved. When the commit has no build that qualifies, Argos falls back to the closest qualifying build among its ancestors.
+`ARGOS_REFERENCE_COMMIT` selects the build on that exact commit, even when newer builds exist and even if nobody approved it: naming the commit counts as choosing that build. It must still meet the [criteria on the candidate build itself](#how-argos-selects-the-baseline): complete, tests passed, not a subset, and no active rejection. When the commit has no such build, Argos falls back to the closest build among its ancestors, and those follow the usual [approval rule](#when-the-baseline-must-be-approved).
 
 If `ARGOS_REFERENCE_COMMIT` is the build's own commit, Argos skips builds on that commit at first and searches its ancestors instead. Only when none of them qualifies does it fall back to an approved build on the same commit and branch (the last step of the [search order](#when-the-baseline-must-be-approved)).
 
