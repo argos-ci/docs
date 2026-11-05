@@ -127,7 +127,7 @@ test("homepage", async ({ page }) => {
 {% endcolumn %}
 {% endcolumns %}
 
-To screenshot a single element, pass the page and a locator or selector in the `element` option: `await argosScreenshot(page, "dialog", { element: page.getByRole("dialog") })`. The first argument must be a `Page` or a `Frame`, not a locator.
+To screenshot a single element, pass its locator instead of the page: `await argosScreenshot(page.getByRole("dialog"), "dialog")`. Add `padding` to capture the space around it, such as a shadow or focus ring: `await argosScreenshot(page.getByRole("dialog"), "dialog", { padding: 16 })`.
 {% endstep %}
 
 {% step %}

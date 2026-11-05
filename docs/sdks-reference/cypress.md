@@ -101,10 +101,11 @@ Argos stabilization also pauses, on their first frame, SVG animations that repea
 
 #### cy.argosScreenshot(name\[, options])
 
+To capture a single element, chain the command from it: `cy.get(".post").argosScreenshot("post")`.
+
 * `name`: Unique name for the screenshot. Required.
 * `options`: Explore [cy.screenshot command options](https://docs.cypress.io/api/commands/screenshot) for details.
-
-To capture a single element, chain the command from it: `cy.get(".post").argosScreenshot("post")`.
+* `options.padding`: Space to capture around the element, in CSS pixels, to include shadows, focus rings or anything else overflowing its box. A number applies to every side, and an array of 1 to 4 numbers follows the CSS `padding` shorthand, such as `[8, 16]` for 8px above and below and 16px on each side. Only applies when the command is chained off an element: `cy.get("[role=dialog]").argosScreenshot("dialog", { padding: 16 })`. The captured area is clamped to the page. Near the edge of the page, `cy.screenshot`'s own `padding` shifts the area back inside the page instead, which captures more on the opposite side.
 * `options.viewports`: Define specific viewports for capturing screenshots. More on [viewports configuration](../learn/how-to-guides/visual-coverage/responsive-viewports.md).
 * `options.argosCSS`: Specific CSS applied during the screenshot process. More on [injecting CSS](../learn/how-to-guides/visual-coverage/injecting-css.md)
 * `options.hide`: Array of selectors of elements to hide. Hidden elements keep their space in the layout, like with `data-visual-test="transparent"`. Selectors that match nothing are ignored. More on [helpers](#helper-attributes-for-visual-testing).
