@@ -26,6 +26,8 @@ Argos offers three settings for summary checks:
 
 Summary checks are an additional layer of status reporting — they never replace the individual build statuses.
 
+When the summary check reports changes awaiting review, it follows the same setting as the individual statuses: a failure by default, or pending if your project [reports the wait as pending](../integrations/github-integration.md#status-while-awaiting-review).
+
 ### Configure summary checks
 
 1. Go to your project **Settings** in Argos.

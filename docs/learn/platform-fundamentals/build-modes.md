@@ -45,7 +45,7 @@ Argos determines the [baseline build](baseline-build.md) from your Git history a
 Once all screenshots are compared, the build concludes:
 
 * **No changes detected** — the commit status passes.
-* **Changes detected** — the commit status asks for review: it fails with "waiting for your decision", and the diffs are ready in Argos.
+* **Changes detected** — the commit status asks for review: it fails with "waiting for your decision" (or stays pending, if your project [reports the wait as pending](../integrations/github-integration.md#status-while-awaiting-review)), and the diffs are ready in Argos.
 
 Argos posts the status to your Git provider, along with a [pull request comment](../review-workflow/pull-request-comments.md) on GitHub. See every status state on [GitHub](../integrations/github-integration.md#commit-status-states) and [GitLab](../integrations/gitlab-integration.md#commit-statuses). If your branch protection requires the Argos check, the pull request is blocked until the changes are reviewed.
 {% endstep %}
@@ -95,7 +95,7 @@ If differences are found, Argos notifies you — enable [Slack notifications](..
 
 #### Commit statuses in Monitoring mode
 
-Monitoring builds report to your Git provider exactly like CI builds: Argos posts a [commit status](../integrations/github-integration.md#commit-status-names) (`argos`, or `argos/<build-name>`) on the commit the screenshots were captured from — including on a pull request, if the commit belongs to one. When changes are detected, the status is **failure** with the description "waiting for your decision"; it turns to **success** once the build is approved.
+Monitoring builds report to your Git provider exactly like CI builds: Argos posts a [commit status](../integrations/github-integration.md#commit-status-names) (`argos`, or `argos/<build-name>`) on the commit the screenshots were captured from — including on a pull request, if the commit belongs to one. When changes are detected, the status is **failure** with the description "waiting for your decision" — or **pending**, if your project [reports the wait as pending](../integrations/github-integration.md#status-while-awaiting-review) — and it turns to **success** once the build is approved.
 
 The difference with CI mode is auto-approval: a CI build on an auto-approved branch (such as your default branch, outside a pull request) passes automatically, while a monitoring build is never auto-approved — a detected change always waits for a review.
 

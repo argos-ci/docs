@@ -44,22 +44,40 @@ To override detection — for example in a custom pipeline — set the `ARGOS_CO
 
 Each Argos status moves through these GitHub states as the build progresses:
 
-| Build                                                        | GitHub state | Description                                  |
-| ------------------------------------------------------------ | ------------ | -------------------------------------------- |
-| Queued                                                       | `pending`    | "Build is queued"                            |
-| In progress                                                  | `pending`    | "Build in progress..."                       |
-| No changes detected                                          | `success`    | "Everything's good!" or "… no changes found" |
-| Changes detected                                             | `failure`    | "… waiting for your decision"                |
-| Changes approved                                             | `success`    | "… approved"                                 |
-| Changes rejected                                             | `failure`    | "… rejected"                                 |
-| Changes detected on an auto-approved build                   | `success`    | "…, automatically approved"                  |
-| [Skipped](../how-to-guides/ci-pipelines/skipping-a-build.md) | `success`    | "Build skipped"                              |
+| Build                                                                  | GitHub state | Description                                  |
+| ---------------------------------------------------------------------- | ------------ | -------------------------------------------- |
+| Queued                                                                 | `pending`    | "Build is queued"                            |
+| In progress                                                            | `pending`    | "Build in progress..."                       |
+| No changes detected                                                    | `success`    | "Everything's good!" or "… no changes found" |
+| Changes detected                                                       | `failure`    | "… waiting for your decision"                |
+| Changes detected, [reported as pending](#status-while-awaiting-review) | `pending`    | "… waiting for your decision"                |
+| Changes approved                                                       | `success`    | "… approved"                                 |
+| Changes rejected                                                       | `failure`    | "… rejected"                                 |
+| Changes detected on an auto-approved build                             | `success`    | "…, automatically approved"                  |
+| [Skipped](../how-to-guides/ci-pipelines/skipping-a-build.md)           | `success`    | "Build skipped"                              |
 
 Once the comparison is done, the description starts with the screenshot counts, such as "2 changed, 1 added".
 
 A build on an [auto-approved branch](../platform-fundamentals/baseline-build.md#auto-approved-branches) outside a pull request is approved automatically, so its status passes even when it has changes.
 
 Whether a `failure` blocks merging is your choice in GitHub. To block, mark the Argos context as a required status check in a [branch protection rule](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches#require-status-checks-before-merging) or a [ruleset](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets#require-status-checks-to-pass-before-merging). Otherwise the status is informational. Argos posts the same states either way.
+
+#### Status while awaiting review
+
+By default, a build with changes to review reports `failure`: the check stays red on the pull request until someone approves or rejects the changes, so a visual change can't go unnoticed.
+
+If your team reads a red check as a broken build, report the wait as `pending` instead:
+
+1. Go to your project **Settings** in Argos.
+2. In the **Git** section, locate **Status while awaiting review**.
+3. Choose **Report a pending status**.
+4. Select **Save**.
+
+The check then waits with "… waiting for your decision" until the review: it turns to `success` when the changes are approved, and to `failure` when they are rejected. The setting covers every Argos status of the project, the [summary check](../review-workflow/summary-checks.md) included, and applies to [GitLab](gitlab-integration.md#report-changes-awaiting-review-as-running) as well. Only [project administrators](../account-and-access/team-members-and-roles.md#project-administrator) can change it, in the dashboard or through the `awaitingReviewStatus` field of the [REST API](https://argos-ci.com/docs/api-reference)'s update project endpoint.
+
+A required status check blocks merging while it is pending, just as it does while it fails: the setting changes how the wait looks, not whether it blocks.
+
+[Merge queue](#merge-queue-support) builds are the exception. Nobody reviews them, so a pending status would hold the queue until it times out: their changes always report `failure`, and so does the summary check of the merge group's commit.
 
 ### Choose your access level
 
@@ -108,7 +126,7 @@ Argos supports [GitHub's native Merge Queue](https://docs.github.com/en/reposito
 
 A merge queue build takes its baseline from your base branch, then applies the changes already approved on the queued pull request (or on each pull request listed in `ARGOS_MERGE_QUEUE_PRS`). Changes you approved on the pull request don't show up again in the queue.
 
-A merge queue build can't be reviewed: Argos shows "This build was triggered in a merge queue and doesn't require a review." If it finds changes that weren't approved on the pull request, its status is `failure` ("waiting for your decision"), so the queue check fails when Argos is a [required status check](#commit-status-states).
+A merge queue build can't be reviewed: Argos shows "This build was triggered in a merge queue and doesn't require a review." If it finds changes that weren't approved on the pull request, its status is `failure` ("waiting for your decision") whatever your [status while awaiting review](#status-while-awaiting-review) setting, so the queue check fails when Argos is a [required status check](#commit-status-states) instead of holding the queue until it times out.
 
 Once GitHub merges the group, your base branch points to the commit the merge queue build tested, so that build can serve as the [baseline](../platform-fundamentals/baseline-build.md) for later builds, and a separate `push` build on the base branch is optional. Like any baseline, the build must be complete, its tests must have passed, it must not be a subset, and it must not be rejected. Pull request builds also [need an approved baseline](../platform-fundamentals/baseline-build.md#when-the-baseline-must-be-approved). A merge queue build counts as approved once its pull request is merged, as long as the build is linked to that pull request (see `GITHUB_TOKEN` below).
 
