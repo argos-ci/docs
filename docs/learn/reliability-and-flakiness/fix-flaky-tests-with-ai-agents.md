@@ -16,7 +16,7 @@ The [test page](test-page.md) hands you a prompt that does exactly that.
 - A flaky test on the [Tests dashboard](tests-dashboard.md).
 - An AI agent with access to the repository that contains the test.
 - The [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md), the [MCP server](../../agents/mcp-server.md), or plain HTTP access to the [REST API](https://argos-ci.com/docs/api-reference) — whichever your agent already has.
-- A token the agent can read with. A **project token** is enough to read a test and its changes; ignoring a change needs a [personal access token](../../sdks-reference/argos-command-line-interface-cli.md#project-tokens-and-personal-access-tokens).
+- A token the agent can read with. A [project token](../account-and-access/project-tokens.md) with the **Read only** permissions is enough to read a test and its changes; ignoring a change needs a [personal access token](../../sdks-reference/argos-command-line-interface-cli.md#project-tokens-and-personal-access-tokens).
 
 ### Quick start
 

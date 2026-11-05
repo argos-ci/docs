@@ -45,7 +45,7 @@ bun add --dev @argos-ci/cli
 
 Authentication depends on where the CLI runs:
 
-* **In CI**, set the `ARGOS_TOKEN` environment variable to your project token (from **Settings → Authentication → Project token**), usually as a CI secret. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
+* **In CI**, set the `ARGOS_TOKEN` environment variable to a [project token](../learn/account-and-access/project-tokens.md), usually as a CI secret. Create it in your project's **Settings → Authentication**, and copy it right away: Argos only shows it once. A token linked to several projects also needs `ARGOS_PROJECT` set to `owner/project`. On GitHub Actions, you can also use [OIDC or tokenless authentication](../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
 * **Locally**, sign in once with the browser-based login flow:
 
 ```bash
@@ -66,11 +66,11 @@ Do not use `argos login` in CI. CI uploads should use `ARGOS_TOKEN` or [GitHub O
 
 #### Project tokens and personal access tokens
 
-Uploads and read-only commands — `build list`, `build get`, `build snapshots`, `build download`, `test list`, `test get`, `test changes`, `change list`, `project get`, `project deployments`, `project domain get`, `media list`, `media get`, `media versions` — work with a **project token**. Anything attributed to a user requires a **personal access token**, because the action is checked against that user's permissions: submitting or dismissing a review, requesting reviewers, posting comments (on builds, tests, and media alike), ignoring a change, configuring a project, and administering a team.
+Uploads and read-only commands — `build list`, `build get`, `build snapshots`, `build download`, `test list`, `test get`, `test changes`, `change list`, `project get`, `project deployments`, `project domain get`, `media list`, `media get`, `media versions` — work with a **project token** that has the matching [permissions](../learn/account-and-access/project-tokens.md#permissions): **Upload from CI** for uploads, **Read only** for read-only commands. Anything attributed to a user requires a **personal access token**, because the action is checked against that user's permissions: submitting or dismissing a review, requesting reviewers, posting comments (on builds, tests, and media alike), ignoring a change, configuring a project, and administering a team.
 
 Two read-only commands are the exception: `project contributor list` and `review reviewer list` return users, so they need a personal access token to resolve them against — a project token carries no identity.
 
-`baseline download` is the opposite exception: it only accepts a project token, and reads that token's own project.
+`baseline download` is the opposite exception: it only accepts a project token, and reads that token's own project. It looks the baseline up the way an upload does, so the token needs both **Read projects** and **Upload builds**: use **Full access**, or pick both under **Advanced**.
 
 To create a personal access token manually, go to your personal account settings, open **Tokens**, then select **Generate new token**.
 
@@ -226,7 +226,7 @@ These commands read data, so a project token is enough.
 argos build list --branch main --limit 10
 ```
 
-`--branch` and `--commit` keep the builds of one branch or one commit. `--commit` takes a full 40-character SHA; to match a shorter one, use `--search`, which matches the build name, part of the branch, or the start of the commit. A project token reads its own project; with a [personal access token](#project-tokens-and-personal-access-tokens), pass `--project owner/project` or set `ARGOS_PROJECT`.
+`--branch` and `--commit` keep the builds of one branch or one commit. `--commit` takes a full 40-character SHA; to match a shorter one, use `--search`, which matches the build name, part of the branch, or the start of the commit. A project token linked to a single project reads that project; with a [personal access token](#project-tokens-and-personal-access-tokens), pass `--project owner/project` or set `ARGOS_PROJECT`.
 
 A `<buildReference>` is a build number or a full Argos build URL; with a number, add `--project team/project`, since a URL already carries it.
 
@@ -259,7 +259,7 @@ argos test changes <testId> --json
 
 `test changes` lists its distinct changes, the ones that came back most often first. Each carries its `id`, whether it is `ignored`, its `occurrences`, when it was `firstSeen` and `lastSeen`, and the `diff` of its latest occurrence with the mask, baseline, and captured screenshot URLs. `--ignored true|false` narrows the list to ignored or still-reviewable changes.
 
-A `<testId>` carries the project name but not the account, so pass `--project owner/project` (or `ARGOS_PROJECT`) — unless you authenticate with a project token, which already identifies its own project.
+A `<testId>` carries the project name but not the account, so pass `--project owner/project` (or `ARGOS_PROJECT`) — unless you authenticate with a project token linked to a single project, which already identifies it.
 
 ### Silencing a flaky change
 
