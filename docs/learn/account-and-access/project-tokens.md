@@ -149,7 +149,7 @@ env:
 ```
 {% endcode %}
 
-Without it, the upload fails with "This project token is linked to several projects. Pass `project` as `owner/project` (`ARGOS_PROJECT` in the SDK) to choose one." A token linked to a single project doesn't need `ARGOS_PROJECT`.
+Without it, the upload fails with "This project token is linked to several projects. Pass `project` as `owner/project` (`ARGOS_PROJECT` in the SDK) to choose one." A token linked to a single project doesn't need `ARGOS_PROJECT`; if you set it anyway, it must name that project, or the upload fails with a `401` error.
 
 When you [transfer a project](../billing-and-subscription/how-to-subscribe.md#transfer-your-projects) to another account, the tokens linked only to that project move with it. A token linked to other projects too stays with the former account and stops working for the transferred project.
 
@@ -159,9 +159,9 @@ Tokens created before Argos supported several tokens per project are listed as *
 
 To limit what a legacy token can do, [rotate it](#rotate-a-token-without-downtime) to a token with **Upload from CI** permissions and an expiration date.
 
-### Manage tokens with the API
+### Manage tokens from the CLI or the API
 
-The [Argos REST API](https://argos-ci.com/docs/api-reference) lists, creates and revokes project tokens. These endpoints authenticate with a [personal access token](../../sdks-reference/argos-command-line-interface-cli.md#project-tokens-and-personal-access-tokens) or OAuth, not with a project token.
+The [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md#configuring-a-project) lists, creates and revokes tokens with `argos project token` and, for every token of an account, `argos account project-token`. Both call the [Argos REST API](https://argos-ci.com/docs/api-reference) endpoints below, which authenticate with a [personal access token](../../sdks-reference/argos-command-line-interface-cli.md#project-tokens-and-personal-access-tokens) or OAuth, not with a project token.
 
 | Endpoint                                                  | Does                                                    | Requires                                                                  |
 | --------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------- |
@@ -172,6 +172,6 @@ The [Argos REST API](https://argos-ci.com/docs/api-reference) lists, creates and
 | `POST /accounts/{accountSlug}/project-tokens`             | Creates a token linked to the listed `projects`.        | Administrator of the account, or of every listed project.                 |
 | `DELETE /accounts/{accountSlug}/project-tokens/{tokenId}` | Revokes a token of the account.                         | Administrator of the account, or of every project the token is linked to. |
 
-The token's value is only in the response to its creation, in the `token` field. Through the API, a token gets every permission unless you pass `permissions`, and never expires unless you pass `expireAt`: set both.
+The token's value is only in the response to its creation, in the `token` field. Through the API and the CLI, a token gets every permission unless you pass `permissions`, and never expires unless you pass `expireAt` (`--expires-in` or `--expire-at` in the CLI): set both.
 
 The [Argos MCP server](../../agents/mcp-server.md) exposes the same operations as tools, so an AI agent can create, list and revoke project tokens with the permissions you grant it.

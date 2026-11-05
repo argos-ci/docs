@@ -70,7 +70,7 @@ Uploads and read-only commands — `build list`, `build get`, `build snapshots`,
 
 Two read-only commands are the exception: `project contributor list` and `review reviewer list` return users, so they need a personal access token to resolve them against — a project token carries no identity.
 
-`baseline download` is the opposite exception: it only accepts a project token, and reads that token's own project. It looks the baseline up the way an upload does, so the token needs both **Read projects** and **Upload builds**: use **Full access**, or pick both under **Advanced**.
+`baseline download` is the opposite exception: it only accepts a project token, and reads that token's project. It looks the baseline up the way an upload does, so the token needs both **Read projects** and **Upload builds**: use **Full access**, or pick both under **Advanced**.
 
 To create a personal access token manually, go to your personal account settings, open **Tokens**, then select **Generate new token**.
 
@@ -109,11 +109,13 @@ Run `argos <command> --help` for a command's exact arguments, flags, and default
 | `project contributor list \| set \| remove` | Manage who can reach a project outside the team's own roles.        |
 | `project deployments`                      | List a project's deployments, most recent first.                    |
 | `project domain get \| set`                | Read or set the domain production deployments are served on.        |
+| `project token list \| create \| revoke`    | Manage the tokens CI authenticates with on a project.               |
 | `automation <subcommand>`                  | List, create, replace, and deactivate a project's automation rules. |
 | `account get \| update`                    | Read plan and usage, and set the role users get when they join.     |
 | `account member <subcommand>`              | List a team's members, change their role, remove them.              |
 | `account invite <subcommand>`              | Invite people, cancel invites, rotate the invite link.              |
 | `account domain <subcommand>`              | Manage the email domains a team is open to.                         |
+| `account project-token <subcommand>`       | Manage every project token of an account, multi-project ones too.   |
 | `media upload <files...>`                  | Upload standalone images or videos and print their share URLs.       |
 | `media list`                               | List a project's uploaded media, most recent first.                 |
 | `media get \| update \| delete <mediaId>`   | Fetch, edit, or delete one uploaded media.                          |
@@ -176,7 +178,7 @@ Use `-f` or `--files` to upload text-based artifacts such as JSON, YAML, XML, HT
 
 #### Specify the project
 
-Use `--project <slug>` to set the Argos project slug (`account/project-name`). This disambiguates [tokenless authentication](../learn/integrations/github-actions-authentication.md#tokenless-authentication) when multiple Argos projects are linked to the same repository:
+Use `--project <slug>`, or `ARGOS_PROJECT`, to set the Argos project slug (`account/project-name`). It picks the project when you authenticate with a [project token linked to several projects](../learn/account-and-access/project-tokens.md#use-a-token-linked-to-several-projects), and disambiguates [tokenless authentication](../learn/integrations/github-actions-authentication.md#tokenless-authentication) when multiple Argos projects are linked to the same repository. `finalize`, `skip`, `deploy` and `baseline download` take it too:
 
 ```bash
 argos upload ./screenshots --project my-account/my-project
@@ -301,7 +303,7 @@ ARGOS_TOKEN=<project-token> argos baseline download -o ./baseline
 
 Failure screenshots are left out, because Argos never compares them. Only the latest 1,000 builds with that name on the branch are searched; when none of them is eligible, the command fails with "No baseline found".
 
-`baseline download` only accepts a project token, from `--token` or `ARGOS_TOKEN`, and downloads that token's own project, so it has no `--project` flag. It rejects personal access tokens, including the one `argos login` stores.
+`baseline download` only accepts a project token, from `--token` or `ARGOS_TOKEN`, and downloads that token's project. With a token linked to several projects, name the project with `--project owner/project` or `ARGOS_PROJECT`. It rejects personal access tokens, including the one `argos login` stores.
 
 Both commands write to a directory that is empty or doesn't exist yet. If it holds anything, they fail without writing a file. Files are laid out by snapshot name, so `chromium/home.png` keeps its folder, and screenshots uploaded from a directory with `argos upload` come back under the same paths, ready to upload again under the same names:
 
@@ -393,6 +395,16 @@ argos project deployments --project team/project --environment production --json
 argos project domain set acme-web.argos-ci.live --project team/project
 ```
 
+`project token` creates, lists and revokes the [project tokens](../learn/account-and-access/project-tokens.md) CI authenticates with. To rotate one without downtime, create its replacement, update the CI secret, then revoke the old token once its last used date stops moving:
+
+```bash
+argos project token create --project team/project --name "GitHub Actions" --permissions builds:write,deployments:write --expires-in 90
+argos project token list --project team/project --json
+argos project token revoke <tokenId> --project team/project
+```
+
+`create` prints the token once; with `--json`, it is in the `token` field. Unlike the dashboard, the CLI gives a new token every permission and no expiration unless you pass `--permissions` (comma-separated, among `builds:write`, `deployments:write`, `projects:read`, `media:read` and `media:write`) and `--expires-in <days>` or `--expire-at <date>`. Listing takes the reviewer role on the project; creating and revoking take the administrator role.
+
 ### Automation rules
 
 `automation` manages the [automation rules](../learn/review-workflow/automations.md) that run when a build event matches. Rules are never deleted — deactivating one keeps its run history, which is what tells you why something fired:
@@ -460,6 +472,14 @@ argos account domain remove acme.com --account my-team
 ```
 
 Removing a domain only stops new sign-ups from joining — members who already joined through it stay. `account update --default-user-level <member|contributor>` sets the role given to everyone who joins through the invite link or a verified domain.
+
+`account project-token` manages every project token of the account, including the ones linked to several projects. `--projects` takes project names without the account, and CI using a token linked to several projects must set `ARGOS_PROJECT`:
+
+```bash
+argos account project-token create --account my-team --projects web,docs --name "Monorepo CI" --permissions builds:write,deployments:write --expires-in 90
+argos account project-token list --account my-team --json
+argos account project-token revoke <tokenId> --account my-team
+```
 
 Every command in this section needs a [personal access token](#project-tokens-and-personal-access-tokens) with administrator rights on the team, and takes the account from `--account <slug>` or `ARGOS_ACCOUNT`.
 
