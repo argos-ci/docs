@@ -44,7 +44,7 @@ Choose **Import a Git repository** and select a Git provider (GitHub or GitLab) 
 {% tab title="Create without Git" %}
 Choose **Create a project without Git**, enter a **Project name**, and select **Create project**.
 
-A project without a connected repository still receives builds through the [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md) using its project token. Features that depend on a repository — such as pull request comments — become available once you link one.
+A project without a connected repository still receives builds through the [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md) using a [project token](project-tokens.md). Features that depend on a repository — such as pull request comments — become available once you link one.
 {% endtab %}
 {% endtabs %}
 
@@ -68,7 +68,7 @@ Only project admins can delete a project. To keep it under another account inste
 2. On the **Delete Project** card, select **Delete**.
 3. Type the project's full name (`account/project`), then `delete my project`, and select **Delete**.
 
-Argos warns that this can't be undone. Once the project is deleted, uploads with its project token fail and Argos stops updating its commit statuses. If the Argos check is a required status check in your Git provider, remove it there, or open pull requests keep waiting for it.
+Argos warns that this can't be undone. Once the project is deleted, uploads with its project tokens fail and Argos stops updating its commit statuses. If the Argos check is a required status check in your Git provider, remove it there, or open pull requests keep waiting for it.
 
 ### Uninstall the GitHub App
 

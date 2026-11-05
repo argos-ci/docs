@@ -32,7 +32,7 @@ Media sharing files have their own retention, which depends on your plan: see [S
 
 ### Export your data
 
-There is no one-click export, but the [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md#downloading-screenshots-and-baselines) downloads screenshots with a project token. `argos build list` lists a project's builds, `argos build download` saves the screenshots of one build, and `argos baseline download` saves the screenshots of the project's latest baseline:
+There is no one-click export, but the [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md#downloading-screenshots-and-baselines) downloads screenshots with a [project token](project-tokens.md) that can read the project (the **Read projects** permission; `baseline download` also needs **Upload builds**). `argos build list` lists a project's builds, `argos build download` saves the screenshots of one build, and `argos baseline download` saves the screenshots of the project's latest baseline:
 
 ```bash
 export ARGOS_TOKEN=<project-token>

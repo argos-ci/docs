@@ -165,12 +165,14 @@ Resolve only what you actually fixed. A resolved thread drops out of the next `m
 
 | Command                          | Token                                                                                         |
 | -------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `media upload`, `media update`   | Project token (`ARGOS_TOKEN`, or tokenless CI for upload), or a personal access token with review access. |
-| `media get`, `list`, `versions`  | Either token type, with access to the project.                                                 |
-| `media delete`                   | Project token, or a personal access token with **administrator** rights on the project — a share URL may already be pasted somewhere, and deleting the media breaks it. |
+| `media upload`, `media update`   | Project token (`ARGOS_TOKEN`) with **Upload media**, tokenless CI for upload, or a personal access token with review access. |
+| `media get`, `list`, `versions`  | Project token with **Read media**, or a personal access token with access to the project.      |
+| `media delete`                   | Project token with **Upload media**, or a personal access token with **administrator** rights on the project — a share URL may already be pasted somewhere, and deleting the media breaks it. |
 | `media comment …`                | Personal access token, reading included.                                                       |
 
-With a personal access token, `media upload` and `media list` need the project named: `--project <owner/project>` or `ARGOS_PROJECT`. A project token already identifies its project.
+A project token's [permissions](../account-and-access/project-tokens.md#permissions) must cover the command: **Upload from CI**, the default for new tokens, doesn't include the media permissions, while **Full access** and legacy tokens do.
+
+With a personal access token, `media upload` and `media list` need the project named: `--project <owner/project>` or `ARGOS_PROJECT`. So does a project token linked to several projects; a project token linked to a single project already identifies it.
 
 ### From the Node.js SDK
 
@@ -205,7 +207,7 @@ curl -X POST https://api.argos-ci.com/v2/media \
   }'
 ```
 
-`state`, `description`, `visibility`, `branch` and `prNumber` are optional. With a personal access token, add `"project": "acme/web"`; a project token already identifies its project.
+`state`, `description`, `visibility`, `branch` and `prNumber` are optional. With a personal access token, add `"project": "acme/web"`, as you do with a project token linked to several projects; a project token linked to a single project already identifies it.
 
 `POST` the file to `upload.url` as `multipart/form-data`, appending every entry of `upload.fields` **before** the `file` part — the target stays valid for 30 minutes — then call `POST /media/{mediaId}/finalize`. Finalizing checks the file is what it claims to be, records an image's dimensions, bills the upload, and makes it reachable. When `upload` comes back `null`, Argos already holds this exact file and both steps are unnecessary.
 

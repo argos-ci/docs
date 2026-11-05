@@ -9,6 +9,7 @@ Manage your Argos account, how you sign in, and who on your team can access what
 * [Account management](account-management.md) – Sign up, create projects and teams, and manage login methods and emails
 * [Analytics](analytics.md) – Track builds, screenshots, change rate, and approval rate across your projects
 * [Team members & roles](team-members-and-roles.md) – Invite members and control their permissions with roles
+* [Project tokens](project-tokens.md) – Create the tokens CI uploads with, scope their permissions, and rotate them without downtime
 * [Passkeys](passkeys.md) – Sign in with your fingerprint, face, screen lock, or a hardware security key
 * [GitHub single sign-on](github-single-sign-on.md) – Sync your Argos team with a GitHub organization
 * [SAML single sign-on](saml-single-sign-on.md) – Enforce single sign-on through your SAML identity provider
