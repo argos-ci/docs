@@ -30,11 +30,17 @@ Argos selects the baseline by finding the closest build in your Git history that
 
 #### When the baseline must be approved
 
+The baseline must be **approved**: an auto-approved build, an [orphan](#orphan-builds), or a check build with an approved review or a merged pull request. Argos waives this when the baseline branch is an [auto-approved branch](#auto-approved-branches) and the new build isn't tied to a pull request, since merging into that branch counts as approving it.
+
 Among the builds that meet the criteria on the candidate build itself and share the new build's name and mode, Argos looks in this order and stops at the first match:
 
-1. **A build on the merge-base commit.** It must also be approved: an auto-approved build, an [orphan](#orphan-builds), or a check build with an approved review or a merged pull request. Argos skips this approval check when the baseline branch is an [auto-approved branch](#auto-approved-branches) and the new build isn't tied to a pull request.
-2. **The closest build on an ancestor of the merge base.** Argos walks back through the history, and builds found this way don't need to be approved.
+1. **A build on the merge-base commit**, or on the commit set with [`ARGOS_REFERENCE_COMMIT`](#choose-a-custom-baseline-via-sdk). A build on the reference commit doesn't need to be approved.
+2. **The closest build on an ancestor of the merge base.** Argos walks back through the history and skips builds that don't meet the approval rule above.
 3. **An approved build on the new build's own commit and branch**, as a last resort. This covers running Argos twice without committing, for example while setting it up.
+
+{% hint style="info" %}
+When you push directly to a baseline branch that isn't auto-approved, as in a trunk-based workflow where each push is reviewed in Argos, the merge base is the pushed commit itself. Argos then compares the push with the closest approved build in its history, not with the previous push. Approve a build to make it the baseline for the next pushes; until you do, they keep comparing with the last approved one.
+{% endhint %}
 
 ### Check whether a build can be a baseline
 
@@ -52,7 +58,7 @@ When a build isn't eligible, the **Baseline eligibility** section of the Info pa
 {% hint style="info" %}
 The chip appears once a build is complete, and it reflects the build on its own. The comparison-dependent criteria — matching build name, mode, and commit ancestry — depend on the build being compared, so Argos evaluates them when a new build looks for its baseline.
 
-The chip also requires approval, which the [search order](#when-the-baseline-must-be-approved) doesn't require from builds on an ancestor of the merge base. A build marked not eligible only because it isn't approved can still become a baseline that way.
+The chip also requires approval, which Argos [waives](#when-the-baseline-must-be-approved) when the new build's baseline branch is auto-approved, and for a build named with `ARGOS_REFERENCE_COMMIT`. A build marked not eligible only because it isn't approved can still become a baseline that way.
 {% endhint %}
 
 ### The baseline branch
@@ -88,6 +94,8 @@ To compare against a specific branch or commit instead of the automatically sele
 
 * `ARGOS_REFERENCE_BRANCH`: The branch to use as the baseline.
 * `ARGOS_REFERENCE_COMMIT`: The commit hash to select a specific baseline build.
+
+`ARGOS_REFERENCE_COMMIT` selects the build on that exact commit, even when newer builds exist and even if nobody approved it: naming the commit counts as choosing that build. It must still meet the [criteria on the candidate build itself](#how-argos-selects-the-baseline): complete, tests passed, not a subset, and no active rejection. When the commit has no such build, Argos falls back to the closest build among its ancestors, and those follow the usual [approval rule](#when-the-baseline-must-be-approved).
 
 If `ARGOS_REFERENCE_COMMIT` is the build's own commit, Argos skips builds on that commit at first and searches its ancestors instead. Only when none of them qualifies does it fall back to an approved build on the same commit and branch (the last step of the [search order](#when-the-baseline-must-be-approved)).
 
