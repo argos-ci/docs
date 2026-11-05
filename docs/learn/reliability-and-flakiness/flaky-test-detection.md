@@ -68,7 +68,7 @@ To configure auto-ignore:
 
 ![Auto-ignore flaky changes in project settings](<../../.gitbook/assets/auto ignore fce4000798bcef00801460c36c56dbad.png>)
 
-A change is considered flaky once it appears at least this many times in auto-approved builds within the last 7 days. The default threshold is **3** occurrences.
+A change is considered flaky once it appears at least this many times in auto-approved builds within the last 7 days. The default threshold is **3** occurrences. A project that [turns off auto-approval](../platform-fundamentals/baseline-build.md#turn-off-auto-approval) has no auto-approved builds, so auto-ignore never triggers.
 
 #### Best use cases
 

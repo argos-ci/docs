@@ -30,7 +30,7 @@ The page header shows the test name and its status:
 
 Every number and chart on the page is computed over a period you pick at the top: the last 24 hours, 3 days, 7 days, 30 days, or 90 days. It defaults to the last 7 days, and it lives in the URL — so a link you share opens on the same window you were looking at.
 
-Only **auto-approved builds** count. A change on a branch usually means someone changed the UI on purpose; a change on an auto-approved build means the test moved on its own.
+Only **auto-approved builds** count. A change on a branch usually means someone changed the UI on purpose; a change on an auto-approved build means the test moved on its own. A project that [turns off auto-approval](../platform-fundamentals/baseline-build.md#turn-off-auto-approval) has no auto-approved builds, so its metrics stop updating.
 
 ### Read the metrics
 
