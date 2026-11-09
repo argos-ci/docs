@@ -52,7 +52,7 @@ Enter a **Token name** that says where the token is used, such as "GitHub Action
 
 ### Choose its permissions and expiration
 
-The defaults, **Upload from CI** and **90 days**, are what CI needs to upload builds and deployments. See [Permissions](#permissions) and [Expiration](#expiration) to change them.
+The defaults, **Upload from CI** and **90 days**, let CI upload builds and deployments, but not media. See [Permissions](#permissions) and [Expiration](#expiration) to change them.
 {% endstep %}
 
 {% step %}
@@ -71,7 +71,7 @@ When you create a token, choose a preset, or **Advanced** to tick individual per
 
 | Preset                       | Permissions                         | Use it to                                                                                       |
 | ---------------------------- | ----------------------------------- | ----------------------------------------------------------------------------------------------- |
-| **Upload from CI** (default) | `builds:write`, `deployments:write` | Upload builds and deployments from CI.                                                          |
+| **Upload from CI** (default) | `builds:write`, `deployments:write` | Upload builds and deployments from CI, but not media.                                           |
 | **Read only**                | `projects:read`, `media:read`       | Read builds, screenshot diffs, tests, deployments and media, for example with the [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md). |
 | **Full access**              | All five permissions                | Upload builds and deployments, read projects, and upload or delete media.                       |
 | **Advanced**                 | The ones you tick                   | Combine permissions yourself.                                                                   |
@@ -149,7 +149,7 @@ env:
 ```
 {% endcode %}
 
-Without it, the upload fails with "This project token is linked to several projects. Pass `project` as `owner/project` (`ARGOS_PROJECT` in the SDK) to choose one." A token linked to a single project doesn't need `ARGOS_PROJECT`; if you set it anyway, it must name that project, or the upload fails with a `401` error.
+Without it, the upload fails with "This project token is linked to several projects. Pass `project` as `owner/project` (`ARGOS_PROJECT` in the SDK) to choose one." A token linked to a single project doesn't need `ARGOS_PROJECT`, and ignores it if it is set.
 
 When you [transfer a project](../billing-and-subscription/how-to-subscribe.md#transfer-your-projects) to another account, the tokens linked only to that project move with it. A token linked to other projects too stays with the former account and stops working for the transferred project.
 
@@ -172,6 +172,8 @@ The [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md#configu
 | `POST /accounts/{accountSlug}/project-tokens`             | Creates a token linked to the listed `projects`.        | Administrator of the account, or of every listed project.                 |
 | `DELETE /accounts/{accountSlug}/project-tokens/{tokenId}` | Revokes a token of the account.                         | Administrator of the account, or of every project the token is linked to. |
 
-The token's value is only in the response to its creation, in the `token` field. Through the API and the CLI, a token gets every permission unless you pass `permissions`, and never expires unless you pass `expireAt` (`--expires-in` or `--expire-at` in the CLI): set both.
+The create endpoints take a `name`, an optional `permissions` list, and a required `expireAt`: an ISO 8601 date, or `null` for a token that never expires. Without `permissions`, the token gets `builds:write` and `deployments:write`, like **Upload from CI**. The token's value is only in the response to its creation, in the `token` field.
+
+The CLI sends `expireAt: null` unless you pass `--expires-in <days>` or `--expire-at <date>`, so its tokens never expire by default: pass one of them.
 
 The [Argos MCP server](../../agents/mcp-server.md) exposes the same operations as tools, so an AI agent can create, list and revoke project tokens with the permissions you grant it.

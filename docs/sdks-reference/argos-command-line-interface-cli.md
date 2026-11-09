@@ -398,12 +398,12 @@ argos project domain set acme-web.argos-ci.live --project team/project
 `project token` creates, lists and revokes the [project tokens](../learn/account-and-access/project-tokens.md) CI authenticates with. To rotate one without downtime, create its replacement, update the CI secret, then revoke the old token once its last used date stops moving:
 
 ```bash
-argos project token create --project team/project --name "GitHub Actions" --permissions builds:write,deployments:write --expires-in 90
+argos project token create --project team/project --name "GitHub Actions" --expires-in 90
 argos project token list --project team/project --json
 argos project token revoke <tokenId> --project team/project
 ```
 
-`create` prints the token once; with `--json`, it is in the `token` field. Unlike the dashboard, the CLI gives a new token every permission and no expiration unless you pass `--permissions` (comma-separated, among `builds:write`, `deployments:write`, `projects:read`, `media:read` and `media:write`) and `--expires-in <days>` or `--expire-at <date>`. Listing takes the reviewer role on the project; creating and revoking take the administrator role.
+`create` prints the token once; with `--json`, it is in the `token` field. Without `--permissions`, a new token can upload builds and deployments (`builds:write` and `deployments:write`), like the dashboard's **Upload from CI**; pass a comma-separated list among `builds:write`, `deployments:write`, `projects:read`, `media:read` and `media:write` to change that. Unlike the dashboard, the CLI creates a token that never expires unless you pass `--expires-in <days>` or `--expire-at <date>`. Listing takes the reviewer role on the project; creating and revoking take the administrator role.
 
 ### Automation rules
 
@@ -476,7 +476,7 @@ Removing a domain only stops new sign-ups from joining — members who already j
 `account project-token` manages every project token of the account, including the ones linked to several projects. `--projects` takes project names without the account, and CI using a token linked to several projects must set `ARGOS_PROJECT`:
 
 ```bash
-argos account project-token create --account my-team --projects web,docs --name "Monorepo CI" --permissions builds:write,deployments:write --expires-in 90
+argos account project-token create --account my-team --projects web,docs --name "Monorepo CI" --expires-in 90
 argos account project-token list --account my-team --json
 argos account project-token revoke <tokenId> --account my-team
 ```
