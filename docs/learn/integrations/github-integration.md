@@ -179,6 +179,8 @@ steps:
 
 If you prefer to use Argos without granting full content access to your repositories, you can integrate via a more restricted setup.
 
+This setup does not support [tokenless authentication](github-actions-authentication.md#tokenless-limitations) from GitHub Actions: authenticate with [OIDC](github-actions-authentication.md#oidc) or a project token instead.
+
 #### Set up Argos with limited GitHub access
 
 1. From the dashboard, select your team from the scope selector.
