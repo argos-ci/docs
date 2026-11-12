@@ -66,7 +66,7 @@ Do not use `argos login` in CI. CI uploads should use `ARGOS_TOKEN` or [GitHub O
 
 #### Project tokens and personal access tokens
 
-Uploads and read-only commands — `build list`, `build get`, `build snapshots`, `build download`, `test list`, `test get`, `test changes`, `change list`, `project get`, `project deployments`, `project domain get`, `media list`, `media get`, `media versions` — work with a **project token** that has the matching [permissions](../learn/account-and-access/project-tokens.md#permissions): **Upload builds** for uploads (and **Upload deployments** for `deploy`), **Read projects** for read-only commands, and the media permissions for `media` commands. **Full access**, the default, has them all. Anything attributed to a user requires a **personal access token**, because the action is checked against that user's permissions: submitting or dismissing a review, requesting reviewers, posting comments (on builds, tests, and media alike), ignoring a change, configuring a project, and administering a team.
+Uploads and read-only commands (`build list`, `build get`, `build snapshots`, `build download`, `test list`, `test get`, `test changes`, `change list`, `project get`, `project deployments`, `project domain get`, `media list`, `media get`, `media versions`) work with a **project token** that has the matching [permissions](../learn/account-and-access/project-tokens.md#permissions): **Upload builds** for uploads (and **Upload deployments** for `deploy`), **Read projects** for read-only commands, and the media permissions for `media` commands. **Full access**, the default, has them all. Anything attributed to a user requires a **personal access token**, because the action is checked against that user's permissions: submitting or dismissing a review, requesting reviewers, posting comments (on builds, tests, and media alike), ignoring a change, configuring a project, and administering a team.
 
 Two read-only commands are the exception: `project contributor list` and `review reviewer list` return users, so they need a personal access token to resolve them against — a project token carries no identity.
 
@@ -261,7 +261,7 @@ argos test changes <testId> --json
 
 `test changes` lists its distinct changes, the ones that came back most often first. Each carries its `id`, whether it is `ignored`, its `occurrences`, when it was `firstSeen` and `lastSeen`, and the `diff` of its latest occurrence with the mask, baseline, and captured screenshot URLs. `--ignored true|false` narrows the list to ignored or still-reviewable changes.
 
-A `<testId>` carries the project name but not the account, so pass `--project owner/project` (or `ARGOS_PROJECT`) — unless you authenticate with a project token linked to a single project, which already identifies it.
+A `<testId>` carries the project name but not the account, so pass `--project owner/project` (or `ARGOS_PROJECT`). You don't need it with a project token linked to a single project, which already identifies the project.
 
 ### Silencing a flaky change
 

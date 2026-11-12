@@ -167,7 +167,7 @@ Resolve only what you actually fixed. A resolved thread drops out of the next `m
 | -------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `media upload`, `media update`   | Project token (`ARGOS_TOKEN`) with **Upload media**, tokenless CI for upload, or a personal access token with review access. |
 | `media get`, `list`, `versions`  | Project token with **Read media**, or a personal access token with access to the project.      |
-| `media delete`                   | Project token with **Upload media**, or a personal access token with **administrator** rights on the project — a share URL may already be pasted somewhere, and deleting the media breaks it. |
+| `media delete`                   | Project token with **Upload media**, or a personal access token with **administrator** rights on the project. A share URL may already be pasted somewhere, and deleting the media breaks it. |
 | `media comment …`                | Personal access token, reading included.                                                       |
 
 A project token's [permissions](../account-and-access/project-tokens.md#permissions) must cover the command. **Full access**, the default for new tokens, and legacy tokens have every permission; a token limited under **Advanced** needs **Upload media** or **Read media**.
