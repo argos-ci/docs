@@ -215,6 +215,7 @@ Per-call options cross the Vitest browser/Node boundary, so they must be JSON-se
 Available options:
 
 * **`element`**: String selector of the element to screenshot.
+* **`padding`**: Space to capture around the element, in CSS pixels, to include shadows, focus rings or anything else overflowing its box. A number applies to every side, and an array of 1 to 4 numbers follows the CSS `padding` shorthand, such as `[8, 16]` for 8px above and below and 16px on each side. Requires `element`. The captured area is clamped to the test's content.
 * **`viewports`**: Array of [viewports](../learn/how-to-guides/visual-coverage/responsive-viewports.md) to capture.
 * **`fullPage`**: Capture the full page instead of fitting the screenshot to the content (default: `false`).
 * **`argosCSS`**: Custom CSS evaluated during the screenshot process.

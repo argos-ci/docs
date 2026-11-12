@@ -65,6 +65,7 @@ Screenshots are stored in `screenshots/argos` folder, relative to current direct
 * `name` - The screenshot name; must be unique. If it ends with `.png`, it is treated as a path.
 * `options` - See [Page.screenshot command options](https://pptr.dev/api/puppeteer.page.screenshot)
 * `options.element` - Accept an ElementHandle or a string selector to screenshot an element
+* `options.padding`: Space to capture around the element, in CSS pixels, to include shadows, focus rings or anything else overflowing its box. A number applies to every side, and an array of 1 to 4 numbers follows the CSS `padding` shorthand, such as `[8, 16]` for 8px above and below and 16px on each side. Requires `options.element`, and can't be combined with `clip`. The captured area is clamped to the page.
 * `options.viewports` - Specifies the viewports for which to capture screenshots. See [viewports configuration](../learn/how-to-guides/visual-coverage/responsive-viewports.md).
 * `options.argosCSS`: Specific CSS applied during the screenshot process. More on [injecting CSS](../learn/how-to-guides/visual-coverage/injecting-css.md)
 * `options.hide`: Array of string selectors or `ElementHandle`s of elements to hide. Hidden elements keep their space in the layout, like with `data-visual-test="transparent"`. Selectors that match nothing are ignored. More on [helpers](#helper-attributes-for-visual-testing).

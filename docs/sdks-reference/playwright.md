@@ -217,7 +217,7 @@ With a `Frame`:
 * The screenshot captures the frame's `<body>`, or the `element` you pass.
 * The `viewports` option isn't supported and throws an error. Use one [Playwright project per viewport](../learn/how-to-guides/visual-coverage/responsive-viewports.md#troubleshooting-and-best-practices) instead.
 
-If you pass the `page` with an `element` that lives inside an iframe, such as `page.frameLocator("iframe").locator(".widget")`, Argos captures that element, but stabilization, `argosCSS` and the helpers only apply to the top-level document.
+If you pass the `page` with an `element` that lives inside an iframe, such as `page.frameLocator("iframe").locator(".widget")`, Argos captures that element, but stabilization, `argosCSS` and the helpers only apply to the top-level document. To run them inside the iframe, pass the locator itself as the handler: `argosScreenshot(page.frameLocator("iframe").locator(".widget"), "widget")`. Argos then works as if you had passed the iframe's `Frame` with that element.
 
 ### Create multiple Argos builds from a single suite of tests
 
@@ -419,10 +419,11 @@ Each ARIA snapshot counts as an additional screenshot for billing.
 
 #### argosScreenshot(handler, name\[, options])
 
-* `handler`: Instance of the [Playwright Page](https://playwright.dev/docs/api/class-page) or [Playwright Frame](https://playwright.dev/docs/api/class-frame). More on [screenshots inside iframes](#screenshots-inside-iframes).
+* `handler`: Instance of the [Playwright Page](https://playwright.dev/docs/api/class-page) or [Playwright Frame](https://playwright.dev/docs/api/class-frame), or a [`Locator`](https://playwright.dev/docs/api/class-locator) to capture its element. `argosScreenshot(page.getByRole("dialog"), "dialog")` is the same as passing the page with `element: page.getByRole("dialog")`, so a `Locator` handler can't be combined with `options.element`. More on [screenshots inside iframes](#screenshots-inside-iframes).
 * `name`: Unique name for the screenshot.
 * `options`: Explore [`Page.screenshot` command options](https://playwright.dev/docs/api/class-page#page-screenshot) for details.
 * `options.element`: Use a [`Locator`](https://playwright.dev/docs/api/class-locator) or a string selector to capture a specific element's screenshot.
+* `options.padding`: Space to capture around the element, in CSS pixels, to include shadows, focus rings or anything else overflowing its box. A number applies to every side, and an array of 1 to 4 numbers follows the CSS `padding` shorthand, such as `[8, 16]` for 8px above and below and 16px on each side. Requires `options.element` or a `Locator` handler, and can't be combined with `clip`. The captured area is clamped to the page, or to the frame when the handler is a `Frame` or a `Locator` inside an iframe.
 * `options.viewports`: Define specific viewports for capturing screenshots. More on [viewports configuration](../learn/how-to-guides/visual-coverage/responsive-viewports.md).
 * `options.ariaSnapshot`: Capture an ARIA snapshot along with the screenshot. More on [ARIA snapshots](playwright.md#aria-snapshots).
 * `options.argosCSS`: Specific CSS applied during the screenshot process. More on [injecting CSS](../learn/how-to-guides/visual-coverage/injecting-css.md)
@@ -522,13 +523,13 @@ export default defineConfig({
 
 <summary>Can I add padding around an element screenshot?</summary>
 
-No, there is no padding option. Capture a wrapper element that includes the space you want instead:
+Yes. Pass `padding` to capture the space around the element, for example to include its shadow or focus ring:
 
 ```ts
-await argosScreenshot(page, "card", {
-  element: page.getByTestId("card-wrapper"),
-});
+await argosScreenshot(page.getByRole("dialog"), "dialog", { padding: 16 });
 ```
+
+`padding` takes a number of CSS pixels for every side, or an array of 1 to 4 numbers that follows the CSS `padding` shorthand. Near the edge of the page, the captured area stops at the edge instead of extending past it. See [`options.padding`](#argosscreenshothandler-name-options).
 
 </details>
 
