@@ -66,7 +66,7 @@ Do not use `argos login` in CI. CI uploads should use `ARGOS_TOKEN` or [GitHub O
 
 #### Project tokens and personal access tokens
 
-Uploads and read-only commands — `build list`, `build get`, `build snapshots`, `build download`, `test list`, `test get`, `test changes`, `change list`, `project get`, `project deployments`, `project domain get`, `media list`, `media get`, `media versions` — work with a **project token** that has the matching [permissions](../learn/account-and-access/project-tokens.md#permissions): **Upload from CI** for uploads, **Read only** for read-only commands. Anything attributed to a user requires a **personal access token**, because the action is checked against that user's permissions: submitting or dismissing a review, requesting reviewers, posting comments (on builds, tests, and media alike), ignoring a change, configuring a project, and administering a team.
+Uploads and read-only commands — `build list`, `build get`, `build snapshots`, `build download`, `test list`, `test get`, `test changes`, `change list`, `project get`, `project deployments`, `project domain get`, `media list`, `media get`, `media versions` — work with a **project token** that has the matching [permissions](../learn/account-and-access/project-tokens.md#permissions): **Upload builds** for uploads (and **Upload deployments** for `deploy`), **Read projects** for read-only commands, and the media permissions for `media` commands. **Full access**, the default, has them all. Anything attributed to a user requires a **personal access token**, because the action is checked against that user's permissions: submitting or dismissing a review, requesting reviewers, posting comments (on builds, tests, and media alike), ignoring a change, configuring a project, and administering a team.
 
 Two read-only commands are the exception: `project contributor list` and `review reviewer list` return users, so they need a personal access token to resolve them against — a project token carries no identity.
 
@@ -403,7 +403,7 @@ argos project token list --project team/project --json
 argos project token revoke <tokenId> --project team/project
 ```
 
-`create` prints the token once; with `--json`, it is in the `token` field. Without `--permissions`, a new token can upload builds and deployments (`builds:write` and `deployments:write`), like the dashboard's **Upload from CI**; pass a comma-separated list among `builds:write`, `deployments:write`, `projects:read`, `media:read` and `media:write` to change that. Unlike the dashboard, the CLI creates a token that never expires unless you pass `--expires-in <days>` or `--expire-at <date>`. Listing takes the reviewer role on the project; creating and revoking take the administrator role.
+`create` prints the token once; with `--json`, it is in the `token` field. Without `--permissions`, a new token gets every permission, like the dashboard's **Full access**; to limit it, pass a comma-separated list among `builds:write`, `deployments:write`, `projects:read`, `media:read` and `media:write`. Unlike the dashboard, the CLI creates a token that never expires unless you pass `--expires-in <days>` or `--expire-at <date>`. Listing takes the reviewer role on the project; creating and revoking take the administrator role.
 
 ### Automation rules
 

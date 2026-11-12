@@ -52,7 +52,7 @@ Enter a **Token name** that says where the token is used, such as "GitHub Action
 
 ### Choose its permissions and expiration
 
-The defaults, **Upload from CI** and **90 days**, let CI upload builds and deployments, but not media. See [Permissions](#permissions) and [Expiration](#expiration) to change them.
+The defaults are **Full access** and **90 days**. See [Permissions](#permissions) to limit what the token can do, and [Expiration](#expiration) to change how long it works.
 {% endstep %}
 
 {% step %}
@@ -63,18 +63,18 @@ Select **Create token**. Argos shows the token once: copy it right away and stor
 {% endstep %}
 {% endstepper %}
 
-When you set up a new project, the **Getting started** page has a **Generate token** button. It creates a token named "Getting started", with the **Upload from CI** permissions, that expires in 90 days, and fills it into the commands on the page. Only project administrators see the button; other contributors are asked to get a token from an administrator.
+When you set up a new project, the **Getting started** page has a **Generate token** button. It creates a token named "Getting started", with full access, that expires in 90 days, and fills it into the commands on the page. Only project administrators see the button; other contributors are asked to get a token from an administrator.
 
 ### Permissions
 
-When you create a token, choose a preset, or **Advanced** to tick individual permissions.
+When you create a token, keep **Full access**, the default, or choose **Advanced** to pick individual permissions.
 
-| Preset                       | Permissions                         | Use it to                                                                                       |
-| ---------------------------- | ----------------------------------- | ----------------------------------------------------------------------------------------------- |
-| **Upload from CI** (default) | `builds:write`, `deployments:write` | Upload builds and deployments from CI, but not media.                                           |
-| **Read only**                | `projects:read`, `media:read`       | Read builds, screenshot diffs, tests, deployments and media, for example with the [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md). |
-| **Full access**              | All five permissions                | Upload builds and deployments, read projects, and upload or delete media.                       |
-| **Advanced**                 | The ones you tick                   | Combine permissions yourself.                                                                   |
+| Option                    | Permissions          | Use it to                                                                  |
+| ------------------------- | -------------------- | -------------------------------------------------------------------------- |
+| **Full access** (default) | All five permissions | Upload builds and deployments, read projects, and upload or delete media. |
+| **Advanced**              | The ones you tick    | Pick individual permissions.                                               |
+
+**Advanced** starts with every permission ticked: untick the ones the token doesn't need.
 
 | Permission          | Shown as           | Allows the token to                                              |
 | ------------------- | ------------------ | ---------------------------------------------------------------- |
@@ -84,12 +84,12 @@ When you create a token, choose a preset, or **Advanced** to tick individual per
 | `media:read`        | Read media         | Read the images and videos uploaded to the projects.             |
 | `media:write`       | Upload media       | Upload images and videos, and delete the ones already uploaded.  |
 
-Two uses need more than one preset covers:
+A token limited to what it is used for does less harm if it leaks. Under **Advanced**, keep:
 
-* [Uploading standalone media](../media/standalone-media-upload.md) needs **Upload media**, which **Upload from CI** doesn't include.
-* [`argos baseline download`](../../sdks-reference/argos-command-line-interface-cli.md#downloading-screenshots-and-baselines) needs both **Read projects** and **Upload builds**.
-
-Pick the permissions under **Advanced**, or use **Full access**.
+* **Upload builds** to upload builds from CI, and **Upload deployments** to [deploy](../deployments/README.md) too.
+* **Read projects** to read builds, tests and deployments, for example with the [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md#inspecting-builds-and-tests) or an AI agent.
+* **Upload media** to [upload or delete standalone media](../media/standalone-media-upload.md), and **Read media** to read it.
+* Both **Read projects** and **Upload builds** for [`argos baseline download`](../../sdks-reference/argos-command-line-interface-cli.md#downloading-screenshots-and-baselines).
 
 A request that needs a permission the token lacks fails with a `403` error: "This project token lacks a permission. This endpoint requires: …", followed by the missing permission.
 
@@ -157,7 +157,7 @@ When you [transfer a project](../billing-and-subscription/how-to-subscribe.md#tr
 
 Tokens created before Argos supported several tokens per project are listed as **Legacy token**. They keep every permission, never expire, and keep working: CI that uses one needs no change. Their **Last used** date reads **Never** until CI next uses them.
 
-To limit what a legacy token can do, [rotate it](#rotate-a-token-without-downtime) to a token with **Upload from CI** permissions and an expiration date.
+To give a legacy token an expiration date, or to limit what it can do, [rotate it](#rotate-a-token-without-downtime) to a new token.
 
 ### Manage tokens from the CLI or the API
 
@@ -172,7 +172,7 @@ The [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md#configu
 | `POST /accounts/{accountSlug}/project-tokens`             | Creates a token linked to the listed `projects`.        | Administrator of the account, or of every listed project.                 |
 | `DELETE /accounts/{accountSlug}/project-tokens/{tokenId}` | Revokes a token of the account.                         | Administrator of the account, or of every project the token is linked to. |
 
-The create endpoints take a `name`, an optional `permissions` list, and a required `expireAt`: an ISO 8601 date, or `null` for a token that never expires. Without `permissions`, the token gets `builds:write` and `deployments:write`, like **Upload from CI**. The token's value is only in the response to its creation, in the `token` field.
+The create endpoints take a `name`, an optional `permissions` list, and a required `expireAt`: an ISO 8601 date, or `null` for a token that never expires. Without `permissions`, the token gets every permission, like **Full access**. The token's value is only in the response to its creation, in the `token` field.
 
 The CLI sends `expireAt: null` unless you pass `--expires-in <days>` or `--expire-at <date>`, so its tokens never expire by default: pass one of them.
 
