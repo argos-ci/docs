@@ -147,7 +147,7 @@ On a CI provider that isn't in the table above, such as Jenkins, Azure Pipelines
 
 Options passed to the SDK or the CLI take precedence over these variables, and both take precedence over the values detected from your CI provider. These variables also override detection on the providers listed above.
 
-To find the baseline, Argos walks the commit history. When your project is connected to GitHub or GitLab, this happens server-side. Otherwise Argos reads it from the `origin` remote, or from the local history, so make sure your checkout has enough history, or pin the baseline with `ARGOS_REFERENCE_COMMIT`. See the [CLI reference](../../../sdks-reference/argos-command-line-interface-cli.md#override-git-detection).
+To find the baseline, Argos walks the commit history. When your project is connected to GitLab, or to GitHub with [full access](../../integrations/github-integration.md#choose-your-access-level), this happens server-side. Otherwise Argos reads it from the `origin` remote, or from the local history, so make sure your checkout has enough history, or pin the baseline with `ARGOS_REFERENCE_COMMIT`. See the [CLI reference](../../../sdks-reference/argos-command-line-interface-cli.md#override-git-detection).
 
 ### Troubleshooting
 
