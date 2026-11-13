@@ -170,7 +170,7 @@ Resolve only what you actually fixed. A resolved thread drops out of the next `m
 | `media delete`                   | Project token with **Upload media**, or a personal access token with **administrator** rights on the project. A share URL may already be pasted somewhere, and deleting the media breaks it. |
 | `media comment …`                | Personal access token, reading included.                                                       |
 
-A project token's [permissions](../account-and-access/project-tokens.md#permissions) must cover the command. **Full access**, the default for new tokens, and legacy tokens have every permission; a token limited under **Advanced** needs **Upload media** or **Read media**.
+A project token's [permissions](../account-and-access/project-tokens.md#permissions) must cover the command. Tokens created with **Standard**, the default, and legacy tokens have every permission. A token limited under **Advanced** needs **Upload media** or **Read media**.
 
 With a personal access token, `media upload` and `media list` need the project named: `--project <owner/project>` or `ARGOS_PROJECT`. So does a project token linked to several projects; a project token linked to a single project already identifies it.
 

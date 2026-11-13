@@ -109,7 +109,7 @@ After summarizing the visual changes, create an Argos build review with the appr
 
 #### Authentication details
 
-Reading build data requires a project token with the **Read projects** permission, which **Full access**, the default, includes. Creating a build review requires a user token because the review is attributed to an Argos user and checked against that user's project permissions.
+Reading build data requires a project token with the **Read projects** permission, which the standard permissions include. Creating a build review requires a user token because the review is attributed to an Argos user and checked against that user's project permissions.
 
 For details about token precedence, `--token`, and personal access tokens, see [Argos CLI authentication](../../sdks-reference/argos-command-line-interface-cli.md#authentication).
 

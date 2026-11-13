@@ -17,7 +17,7 @@ Commit statuses and pull request comments come from the Argos [GitHub](../../int
 
 ### Project token
 
-A project administrator creates the token in the project's **Settings → Authentication**: on the **Project tokens** card, select **Create token**. The default, **Full access**, covers uploads; under **Advanced**, you can limit the token to **Upload builds** and **Upload deployments**. Argos shows the token only once, so copy it into your CI secret right away. A token linked to several projects is created in **Team Settings → Tokens**, and CI then also needs `ARGOS_PROJECT` set to `owner/project`.
+A project administrator creates the token in the project's **Settings → Authentication**: on the **Project tokens** card, select **Create token**. The default, **Standard**, covers uploads; under **Advanced**, you can limit the token to **Upload builds** and **Upload deployments**. Argos shows the token only once, so copy it into your CI secret right away. A token linked to several projects is created in **Team Settings → Tokens**, and CI then also needs `ARGOS_PROJECT` set to `owner/project`.
 
 A project can have several tokens, so you can give each CI its own, and replace one without downtime: create the replacement, update the CI secret, then revoke the old token once its **Last used** date stops moving. See [Project tokens](../../account-and-access/project-tokens.md) for permissions, expiration, and rotation.
 
