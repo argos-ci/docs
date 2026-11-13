@@ -31,10 +31,10 @@ The Argos API authenticates requests with a **bearer token**. Add an `Authorizat
 Authorization: Bearer <your-token>
 ```
 
-In most cases this is a **project token**, which you can find in your project settings on [argos-ci.com](https://argos-ci.com). A project token grants access to a single project, so it's safe to use in your CI environment.
+In most cases this is a **project token**. Create one in your project's **Settings → Authentication** on [argos-ci.com](https://app.argos-ci.com), or in **Team Settings → Tokens** for a token linked to several projects. Argos shows it only once: copy it when you create it. A project token only reaches the projects it is linked to, and only the endpoints its permissions cover, so it's safe to use in your CI environment. See [Project tokens](https://argos-ci.com/docs/learn/account-and-access/project-tokens) for permissions, expiration, and rotation.
 
 {% hint style="warning" %}
-Your token carries the ability to create and update builds in your project. Keep it secret: store it as a CI secret or environment variable, and never commit it to version control or expose it in client-side code.
+Your token can create and update builds in your project, depending on its permissions. Keep it secret: store it as a CI secret or environment variable, and never commit it to version control or expose it in client-side code.
 {% endhint %}
 
 Some endpoints act on behalf of a user rather than a project — for example, submitting a review, posting a comment, or resolving a thread. These require a **personal access token**, which is attributed to your Argos user and checked against your project permissions. You can create one in your personal settings on [argos-ci.com](https://argos-ci.com).

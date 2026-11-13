@@ -9,7 +9,7 @@ description: >-
 
 To run Argos in CI, run your tests as usual with the `ARGOS_TOKEN` environment variable set. The Argos SDK or CLI reads the commit, the branch, and the pull request from your CI provider, uploads the screenshots, and Argos compares them with the [baseline build](../../platform-fundamentals/baseline-build.md). On a CI provider that Argos doesn't detect, set `ARGOS_BRANCH` (and `ARGOS_COMMIT` if needed) yourself.
 
-`ARGOS_TOKEN` is the project token from **Settings → Authentication → Project token**; store it as a secret in your CI. The examples below run Playwright tests: replace `npx playwright test` with your own test command, and follow the [quickstart](../../../quickstart/README.md) for your framework to set up the SDK.
+`ARGOS_TOKEN` is a [project token](../../account-and-access/project-tokens.md); store it as a secret in your CI. The examples below run Playwright tests: replace `npx playwright test` with your own test command, and follow the [quickstart](../../../quickstart/README.md) for your framework to set up the SDK.
 
 {% hint style="info" %}
 Commit statuses and pull request comments come from the Argos [GitHub](../../integrations/github-integration.md) or [GitLab](../../integrations/gitlab-integration.md) integration, whichever CI runs your tests. Without one of them, review builds in the Argos dashboard. See [Other Git providers](../../integrations/other-git-providers.md).
@@ -17,15 +17,11 @@ Commit statuses and pull request comments come from the Argos [GitHub](../../int
 
 ### Project token
 
-Argos creates the project token when you create the project. You find it in the project's **Settings → Authentication**, on the **Project token** card. A project has one token at a time.
+A project administrator creates the token in the project's **Settings → Authentication**: on the **Project tokens** card, select **Create token**. The default, **Standard**, covers uploads; under **Advanced**, you can limit the token to **Upload builds** and **Upload deployments**. Argos shows the token only once, so copy it into your CI secret right away. A token linked to several projects is created in **Team Settings → Tokens**, and CI then also needs `ARGOS_PROJECT` set to `owner/project`.
 
-If the token leaks, a project admin can replace it:
+A project can have several tokens, so you can give each CI its own, and replace one without downtime: create the replacement, update the CI secret, then revoke the old token once its **Last used** date stops moving. See [Project tokens](../../account-and-access/project-tokens.md) for permissions, expiration, and rotation.
 
-1. On the **Project token** card, select **Regenerate token**.
-2. Type the project's full name (`account/project`) to confirm, then select **Regenerate**.
-3. Update the `ARGOS_TOKEN` secret in your CI right away.
-
-The old token stops working immediately. Until you update the secret, uploads fail with "Project not found in Argos. If the issue persists, verify your token."
+Uploads with a revoked or unknown token fail with "Project not found in Argos. If the issue persists, verify your token." Uploads with an expired token fail with "This project token has expired, create a new one."
 
 ### CI providers detected automatically
 
@@ -137,6 +133,7 @@ On a CI provider that isn't in the table above, such as Jenkins, Azure Pipelines
 | Environment variable                                                  | Description                                                                                                                 |
 | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | `ARGOS_TOKEN`                                                         | Project token. Required, except with GitHub Actions OIDC or tokenless authentication.                                      |
+| `ARGOS_PROJECT`                                                       | Project to upload to, as `owner/project`. Required with a [token linked to several projects](../../account-and-access/project-tokens.md#use-a-token-linked-to-several-projects). |
 | `ARGOS_BRANCH`                                                        | Branch of the build.                                                                                                        |
 | `ARGOS_COMMIT`                                                        | Commit of the build, as a full 40-character SHA.                                                                            |
 | `ARGOS_PR_NUMBER`                                                     | Number of the pull request associated with the build.                                                                       |

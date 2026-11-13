@@ -18,7 +18,7 @@ The SDK selects an authentication method in this order:
 
 The SDK doesn't read your project settings. As soon as the job has `id-token: write`, it uses OIDC, even if OIDC is disabled on the project. In that case the upload fails; the SDK does not fall back to tokenless.
 
-* **Project token (`ARGOS_TOKEN`)**: A long-lived secret stored in your repository. Works on every CI provider, but needs to be provisioned and rotated. This is the only option outside GitHub Actions.
+* **Project token (`ARGOS_TOKEN`)**: A secret stored in your repository. Works on every CI provider, but needs to be [created and rotated](../account-and-access/project-tokens.md) before it expires. This is the only option outside GitHub Actions.
 * **OIDC**: A short-lived identity token signed by GitHub, verified by Argos on every upload. The most secure option — prefer it when your workflow can use it.
 * **Tokenless**: Argos verifies the upload by looking up the workflow run on GitHub. Nothing to add to the workflow once it is enabled on the project, and the only method that works on pull requests from forks.
 
