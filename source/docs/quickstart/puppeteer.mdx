@@ -1,0 +1,64 @@
+---
+slug: /quickstart/puppeteer
+sidebar_label: Puppeteer
+sidebar_position: 6
+---
+
+import {
+  AdditionalResources,
+  AddSecret,
+  Congratulation,
+  HelpSection,
+  InstallDevDep,
+  ScreenshotGuidesLink,
+} from "@site/src/partials";
+
+# Puppeteer Quickstart
+
+Learn how to setup visual testing using the Argos Puppeteer SDK.
+
+## Prerequisites
+
+To get the most out of this guide, you’ll need to:
+
+- [Use Puppeteer](https://pptr.dev/#getting-started)
+- Run Puppeteer on your CI/CD
+- [Create your project in Argos](https://app.argos-ci.com/new)
+
+## 1. Install
+
+<InstallDevDep dependency="@argos-ci/cli @argos-ci/puppeteer" showCliLink />
+
+## 2. Take screenshots
+
+Use <code>argosScreenshot</code> helper to capture stable screenshots in your E2E tests.
+
+```js
+import { argosScreenshot } from "@argos-ci/puppeteer";
+const puppeteer = require("puppeteer");
+
+(async () => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto("http://example.com");
+  await argosScreenshot(page, "example.png");
+  await browser.close();
+})();
+```
+
+<ScreenshotGuidesLink />
+
+## 3. Setup your CI
+
+<AddSecret folder="./screenshots" />
+
+<Congratulation />
+
+## Additional resources
+
+- [Puppeteer example](https://github.com/argos-ci/argos-javascript/tree/main/examples/puppeteer)
+- [Argos Puppeteer SDK reference](/puppeteer)
+
+---
+
+<HelpSection />

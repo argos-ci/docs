@@ -1,0 +1,1 @@
+{"version":1,"identity":{"type":"vectors","version":"2-c1","configuration":["512","openai/text-embedding-3-small#512"],"implementation":"sqlite-pages"},"checkpoint":{"profile":"repository-search-index-v7","appliedTree":"367862c9911c9223badb44643496dd65b7753c64","pendingTree":null,"versions":["openai/text-embedding-3-small#512"]}}
