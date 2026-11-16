@@ -24,7 +24,7 @@ Argos communicates with GitLab through a Personal Access Token, acting as a dedi
 ![Generate a Personal Access Token in GitLab](<../../.gitbook/assets/gitlab create token 01eecee687ee76bd683c82d45c88df99.png>)
 
 {% hint style="info" %}
-You can also use a [Project Access Token](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html) if you want to restrict access to a single project. If you choose this option, be sure to set the role of the token to **Developer**.
+You can also use a [Project Access Token](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html) if you want to restrict access to a single project. If you choose this option, give the token a role that meets the [token permissions](#token-permissions).
 {% endhint %}
 {% endstep %}
 
@@ -51,6 +51,20 @@ You can also use a [Project Access Token](https://docs.gitlab.com/ee/user/projec
 ![Configure GitLab in Argos](<../../.gitbook/assets/argos create new project ab30905e08e499062fcc221cdb79f779.png>)
 {% endstep %}
 {% endstepper %}
+
+### Token permissions
+
+Argos reports commit statuses as the GitLab user behind the token. That user needs:
+
+* the `api` scope on the token
+* at least the **Developer** role on each project linked to Argos
+* permission to push or merge to each protected branch Argos reports on
+
+{% hint style="warning" %}
+By default, GitLab fully protects a project's default branch: only Maintainers can push or merge to it, so a Developer token can't report statuses there. Use a token with the **Maintainer** role, or allow Developers to merge in your GitLab project's **Settings → Repository → Protected branches**.
+{% endhint %}
+
+When GitLab refuses a status, the Argos build is unaffected, but its status is missing from the GitLab pipeline, and Argos emails the owners of your Argos account (at most once a week while it lasts). To fix it, grant the missing permissions in GitLab, or replace the token in Argos with one from a user who has them.
 
 ### Run Argos in GitLab CI
 
