@@ -52,6 +52,8 @@ Your existing projects stay on your personal account until you move them. For ea
 ![Selecting the destination team in the Transfer Project dialog](../../.gitbook/assets/transfer-project-select-team.png)
 
 The next screen lists the builds and screenshots that will move, and confirms the plan change, before you select **Transfer**.
+
+The [project tokens](../account-and-access/project-tokens.md) linked only to the project move with it, so CI keeps uploading. A token also linked to other projects stays with your personal account and stops working for the transferred project.
 {% endstep %}
 
 {% step %}

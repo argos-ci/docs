@@ -118,7 +118,7 @@ jobs:
 ```
 {% endcode %}
 
-`ARGOS_TOKEN` is the project token from **Settings → Authentication → Project token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
+`ARGOS_TOKEN` is a [project token](../../learn/account-and-access/project-tokens.md): create one in your project's **Settings → Authentication**, and copy it right away, as Argos only shows it once. On GitHub Actions, you can also use [OIDC or tokenless authentication](../../learn/integrations/github-actions-authentication.md) to avoid managing a secret.
 {% endstep %}
 {% endstepper %}
 

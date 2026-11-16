@@ -142,7 +142,7 @@ If you used the plain (non-fixture) API — `const eyes = new Eyes(runner); awai
 {% step %}
 ### Update the CI command
 
-Rename the secret from `APPLITOOLS_API_KEY` to `ARGOS_TOKEN` and run your tests directly.
+Replace the `APPLITOOLS_API_KEY` secret with an `ARGOS_TOKEN` secret holding a [project token](../../account-and-access/project-tokens.md), and run your tests directly.
 
 ```yaml
 - run: npx playwright test

@@ -150,7 +150,7 @@ The deploy command uses the same authentication as the rest of the Argos CLI. Se
 ARGOS_TOKEN=<your-project-token>
 ```
 
-You can find the project token in **Settings → Authentication → Project token**. On GitHub Actions, you can also use [OIDC or tokenless authentication](../integrations/github-actions-authentication.md) to avoid managing a secret.
+`ARGOS_TOKEN` is a [project token](../account-and-access/project-tokens.md): create one in your project's **Settings → Authentication**, and copy it right away, as Argos only shows it once. On GitHub Actions, you can also use [OIDC or tokenless authentication](../integrations/github-actions-authentication.md) to avoid managing a secret.
 
 ### What's next
 

@@ -124,7 +124,7 @@ Swap the single `chromatic` command for two steps: run the visual tests, then de
 {% endcolumn %}
 {% endcolumns %}
 
-`ARGOS_TOKEN` comes from **Settings → Authentication → Project token**. On GitHub Actions you can use [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md) instead of a secret.
+`ARGOS_TOKEN` is a [project token](../../account-and-access/project-tokens.md), created in your project's **Settings → Authentication** and shown only once. On GitHub Actions you can use [OIDC or tokenless authentication](../../integrations/github-actions-authentication.md) instead of a secret.
 {% endstep %}
 
 {% step %}
