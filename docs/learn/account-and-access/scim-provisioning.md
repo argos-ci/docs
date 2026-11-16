@@ -16,10 +16,10 @@ SCIM (System for Cross-domain Identity Management) lets your identity provider m
 
 Without SCIM, [SAML SSO](saml-single-sign-on.md) adds people on their first sign-in and offboarding is manual. With SCIM:
 
-- **Onboarding is automatic** — people are members before they ever sign in.
-- **Offboarding is immediate** — deactivating someone in your identity provider removes them from the team.
-- **Roles come from your identity provider** — map who is an owner, a member or a contributor.
-- **Your identity provider stays the source of truth** — assignments, deactivations and role changes reach Argos on every sync.
+- **Onboarding is automatic**: people are members before they ever sign in.
+- **Offboarding is immediate**: deactivating someone in your identity provider removes them from the team.
+- **Roles come from your identity provider**: map who is an owner, a billing member, a member or a contributor.
+- **Your identity provider stays the source of truth**: assignments, deactivations and role changes reach Argos on every sync.
 
 ![The SCIM Provisioning card in Team Settings -> Authentication.](../../.gitbook/assets/scim-provisioning-card.png)
 
@@ -161,7 +161,7 @@ They are removed from the team, and Argos forgets the SCIM user. Their Argos acc
 
 ### When the last owner leaves
 
-Deprovisioning always goes through, even for the last owner of a team: blocking it would let someone who left your company keep owner access. If other members remain, the team is left without an owner, and nobody can manage its settings, billing or SCIM token.
+Deprovisioning always goes through, even for the last owner of a team: blocking it would let someone who left your company keep owner access. If other members remain, the team is left without an owner: nobody can manage its settings or SCIM token, and only its [billing members](team-members-and-roles.md#billing-role) can manage its billing.
 
 To prevent it:
 
@@ -196,12 +196,13 @@ Your identity provider can set each member's [team role](team-members-and-roles.
 | Value         | Role                                                                   |
 | ------------- | ---------------------------------------------------------------------- |
 | `owner`       | [Owner](team-members-and-roles.md#owner-role)                          |
+| `billing`     | [Billing](team-members-and-roles.md#billing-role)                      |
 | `member`      | [Member](team-members-and-roles.md#member-role)                        |
 | `contributor` | [Contributor](team-members-and-roles.md#contributor-role) (Enterprise) |
 
 {% tabs %}
 {% tab title="Microsoft Entra ID" %}
-1. In **App registrations**, open your Argos application, then **App roles**, and create one app role per value: `owner`, `member` and `contributor`. Allow **Users/Groups** as member types.
+1. In **App registrations**, open your Argos application, then **App roles**, and create one app role per value: `owner`, `billing`, `member` and `contributor`. Allow **Users/Groups** as member types.
 2. In your enterprise application, under **Users and groups**, assign each user or group one of these roles.
 3. In **Provisioning -> Mappings -> Provision Microsoft Entra ID Users**, click **Add New Mapping**:
    - **Mapping type**: **Expression**
@@ -345,7 +346,7 @@ Another SCIM user of your team has the same `userName`, or is linked to the same
 
 <summary>A role is not applied</summary>
 
-- Check the value is exactly `owner`, `member` or `contributor`: other values are ignored.
+- Check the value is exactly `owner`, `billing`, `member` or `contributor`: other values are ignored.
 - Roles apply when they change: re-sending the same role does not overwrite a change made in Argos.
 - The team's last owner is never demoted: make someone else an owner first.
 

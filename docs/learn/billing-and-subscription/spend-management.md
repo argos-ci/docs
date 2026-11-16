@@ -55,7 +55,7 @@ Setting a spend amount does not stop usage by itself. To stop builds at the amou
 
 #### Set a spend amount
 
-To configure spend management, you need the **Owner** role on your team.
+To configure spend management, you need the **Owner** or [**Billing**](../account-and-access/team-members-and-roles.md#billing-role) role on your team.
 
 {% stepper %}
 {% step %}
@@ -84,7 +84,7 @@ Enter the amount at which you want to be notified or take action. Setting the am
 
 #### Threshold notifications
 
-Once a spend amount is set, Argos emails all team owners when spending reaches **50%**, **75%**, and **100%** of the amount. The thresholds are not customizable.
+Once a spend amount is set, Argos emails all team owners and billing members when spending reaches **50%**, **75%**, and **100%** of the amount. The thresholds are not customizable.
 
 #### Pause builds at the spend amount
 

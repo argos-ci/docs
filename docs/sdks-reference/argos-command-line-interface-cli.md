@@ -372,7 +372,7 @@ Run `argos project update --help` for the full list. A few conventions are worth
 - `--private inherit` returns the project's visibility to whatever the linked repository says.
 - `--ignore-changes` and `--auto-ignore-after` drive [flaky change detection](../learn/reliability-and-flakiness/flaky-test-detection.md); `--auto-ignore-after off` turns automatic ignoring off while leaving manual ignoring on.
 
-`project contributor` grants access to users who aren't covered by their team role — team owners and members already reach every project, so this is for contributors:
+`project contributor` grants access to users who aren't covered by their team role. Team owners, billing members and members already reach every project, so this is for contributors:
 
 ```bash
 argos project contributor list --project team/project --json
@@ -450,7 +450,7 @@ argos account member set-level <userId> --level member --account my-team
 argos account member remove <userId> --account my-team
 ```
 
-Roles are `owner`, `member`, and `contributor` — owners administer the team, members see every project, contributors only the projects they are added to. A team can never be left without an administrator: the last member cannot be removed, and removing the second-to-last one promotes the survivor to owner.
+Roles are `owner`, `billing`, `member`, and `contributor`. Owners administer the team, billing members get a member's access plus the plan, spend limit and invoices, members see every project, and contributors only see the projects they are added to. A team can never be left without an administrator: the last member cannot be removed, and removing the second-to-last one promotes the survivor to owner.
 
 `account invite` covers everything that brings someone in. Re-inviting an address that already has a pending invite refreshes it, so a lost invite can always be resent:
 

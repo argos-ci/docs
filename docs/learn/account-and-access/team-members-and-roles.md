@@ -17,13 +17,14 @@ Argos distinguishes two groups of roles: **team-level roles** apply to the entir
 | Role                                              | Scope   | Availability       |
 | ------------------------------------------------- | ------- | ------------------ |
 | [Owner](#owner-role)                              | Team    | Pro and Enterprise |
+| [Billing](#billing-role)                          | Team    | Pro and Enterprise |
 | [Member](#member-role)                            | Team    | Pro and Enterprise |
 | [Contributor](#contributor-role)                  | Team    | Enterprise         |
 | [Project Administrator](#project-administrator)   | Project | Enterprise         |
 | [Project Reviewer](#project-reviewer)             | Project | Enterprise         |
 | [Project Viewer](#project-viewer)                 | Project | Enterprise         |
 
-Only contributors can have configurable project roles — Owners and Members always have access to every project in the team.
+Only contributors can have configurable project roles. Owners, billing members and members always have access to every project in the team.
 
 ### Team-level roles
 
@@ -45,6 +46,25 @@ The Owner role is the highest level of authority within a team, with full access
 Owners have unrestricted access to all team functionality, can modify all settings, and change other members' roles. They inherently act as project administrators for every project in the team.
 
 Teams can have more than one owner — for continuity, we recommend at least two. Role changes, including assigning and revoking roles, are exclusive to owners.
+
+#### Billing role
+
+The Billing role gives someone the team's billing without making them an owner, for example a finance or operations contact. Billing members have the access of a [member](#member-role), plus the team's billing.
+
+**Key responsibilities**
+
+* See and review builds.
+* Access and modify all projects, including their settings.
+* Manage the plan, the subscription and the [spend limit](../billing-and-subscription/spend-management.md).
+* Download invoices.
+
+**Access and permissions**
+
+In **Settings → Billing**, billing members choose and upgrade the plan, open the Stripe customer portal, set the spend limit, cancel or resume the subscription, and extend a trial. They also see **Settings → Invoices**.
+
+Argos sends them the billing emails owners get: spend limit and overage alerts, plan limit warnings, the end of a trial, and the monthly report.
+
+Billing members can't manage add-ons, edit other team settings (name, URL, members, authentication, tokens, integrations) or delete the team. Only owners can assign the Billing role.
 
 #### Member role
 

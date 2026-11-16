@@ -196,7 +196,7 @@ Each screenshot pane has a **⋮** actions menu — on both the **baseline** and
 
 ### Who can review
 
-* Leaving reviews and comments requires a role that can review builds — team **Owners** and **Members**, or **Contributors** assigned the **Project Reviewer** or **Project Administrator** role. On a personal account, only its owner can review. The build must also be in a reviewable state (changes detected, approved, or rejected).
+* Leaving reviews and comments requires a role that can review builds: team **Owners**, **Billing** members and **Members**, or **Contributors** assigned the **Project Reviewer** or **Project Administrator** role. On a personal account, only its owner can review. The build must also be in a reviewable state (changes detected, approved, or rejected).
 * On a public project, anyone can view builds, but signed-in visitors who aren't on the team can't review them. To let an outside contributor review the build of a pull request they opened from a fork, invite them to the team with a role that can review.
 * Dismissing another person's review requires an administrator-level role.
 
