@@ -21,7 +21,7 @@ A project administrator creates the token in the project's **Settings → Authen
 
 A project can have several tokens, so you can give each CI its own, and replace one without downtime: create the replacement, update the CI secret, then revoke the old token once its **Last used** date stops moving. See [Project tokens](../../account-and-access/project-tokens.md) for permissions, expiration, and rotation.
 
-Uploads with a revoked or unknown token fail with "Project not found in Argos. If the issue persists, verify your token." Uploads with an expired token fail with "This project token has expired, create a new one."
+Uploads with a revoked or unknown token fail with "Project not found in Argos. If the issue persists, verify your token." Uploads with an expired token fail with "This project token has expired. Create a new one."
 
 ### CI providers detected automatically
 

@@ -63,7 +63,7 @@ Select **Create token**. Argos shows the token once: copy it right away and stor
 {% endstep %}
 {% endstepper %}
 
-When you set up a new project, the **Getting started** page has a **Generate token** button. It creates a token named "Getting started", with the standard permissions, that expires in 90 days, and fills it into the commands on the page. Only project administrators see the button; other contributors are asked to get a token from an administrator.
+When you set up a new project, the **Getting started** page has a **Generate token** button. It creates a token named "Getting started", with the standard permissions, that expires in 90 days. The page shows the token once and fills it into the commands below. If the project already has tokens linked only to it, Argos first offers to delete them, since their values can't be shown again. Select **Keep and generate** if your CI already uses one of them, or **Delete and generate** to replace them. Only project administrators see the button; other contributors are asked to get a token from an administrator.
 
 ### Permissions
 
@@ -97,9 +97,9 @@ A request that needs a permission the token lacks fails with a `403` error: "Thi
 
 A new token expires in **90 days** by default. You can also pick 30, 60 or 180 days, 1 year, or **No expiration**. The dialog shows the date CI will stop uploading: [rotate the token](#rotate-a-token-without-downtime) before then.
 
-**No expiration** is discouraged. Such a token stays valid until someone revokes it, so if it leaks, in a CI log, a forked workflow or a former teammate's machine, whoever holds it can upload to your projects for as long as nobody notices. Argos asks you to confirm before creating one.
+**No expiration** is discouraged. Such a token stays valid until someone revokes it, so if it leaks, anyone who has it keeps access to your projects. Argos asks you to confirm before creating one.
 
-Once a token has expired, its date shows as **Expired** in the list, and uploads with it fail with "This project token has expired, create a new one."
+Once a token has expired, its date shows as **Expired** in the list, and uploads with it fail with "This project token has expired. Create a new one."
 
 ### Rotate a token without downtime
 
