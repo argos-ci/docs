@@ -95,6 +95,8 @@ Each deployment registers a commit status named `argos-deploy/<project>`. The st
 
 On GitHub, Argos also reports each deployment as a [GitHub deployment](../integrations/github-integration.md#github-deployments): the pull request shows a **View deployment** button, and workflows can react to it. GitLab projects are not affected.
 
+A [deployment hosted elsewhere](report-external-deployments.md) gets no `argos-deploy/<project>` commit status: its host reports its own.
+
 ### Run a workflow when a preview is live
 
 On GitHub, each status Argos reports for a deployment triggers a [`deployment_status`](https://docs.github.com/en/webhooks/webhook-events-and-payloads#deployment_status) event. Listen to it to run a job once a preview is ready, for example end-to-end tests against the deployed Storybook:
