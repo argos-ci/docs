@@ -13,6 +13,7 @@ Use deployments to:
 * Preview a Storybook for every pull request.
 * Share a live link with designers, product, or stakeholders to review work in context.
 * Browse the history of every deployed build across branches and commits.
+* Link a preview hosted on Vercel, Netlify or Cloudflare to your builds, by [reporting the deployment](report-external-deployments.md).
 
 <figure><img src="../../.gitbook/assets/deployments list bfd87fd3af8ea82b72b991367db01f21.png" alt=""><figcaption></figcaption></figure>
 
@@ -158,4 +159,5 @@ ARGOS_TOKEN=<your-project-token>
 * [**URLs and domains**](urls-and-domains.md) — The URLs Argos generates for each deployment, and how to set the production domain.
 * [**Access protection**](access-protection.md) — Restrict who can open deployment URLs.
 * [**Use in CI**](use-deployments-in-ci.md) — Deploy automatically on every pull request with GitHub Actions.
+* [**Hosted elsewhere**](report-external-deployments.md): Report a deployment from Vercel, Netlify or Cloudflare, so your builds link to it.
 * [**Lifecycle and retention**](retention.md) — How long deployments last, why they can't be overwritten, and how to pick a deploy cadence.

@@ -42,6 +42,7 @@
     * [Argos helpers](learn/reliability-and-flakiness/flaky-tests/argos-helpers.md)
 * [Deployments](learn/deployments/README.md)
   * [Use deployments in CI](learn/deployments/use-deployments-in-ci.md)
+  * [Report a deployment hosted elsewhere](learn/deployments/report-external-deployments.md "Hosted elsewhere")
   * [Environments](learn/deployments/environments.md)
   * [URLs and domains](learn/deployments/urls-and-domains.md)
   * [Access protection](learn/deployments/access-protection.md)
