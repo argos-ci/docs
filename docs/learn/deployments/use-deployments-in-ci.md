@@ -11,7 +11,7 @@ This page walks through a GitHub Actions setup for Storybook. The same pattern w
 ### Prerequisites
 
 * A static build step that produces a directory (for Storybook: `npm run build-storybook` → `storybook-static/`).
-* An `ARGOS_TOKEN` available as a CI secret. You can also use [OIDC or tokenless authentication](../integrations/github-actions-authentication.md) to avoid managing a secret.
+* An `ARGOS_TOKEN` available as a CI secret. You can also use [OIDC or tokenless authentication](../integrations/github-actions-authentication.md) to avoid managing a secret. With tokenless authentication, Argos doesn't report [GitHub deployments](../integrations/github-integration.md#github-deployments).
 
 ### GitHub Actions example
 
@@ -92,6 +92,42 @@ Argos posts a single pull request comment that lists both the deployment URLs an
 ### Status checks
 
 Each deployment registers a commit status named `argos-deploy/<project>`. The status starts as **pending** when the upload begins and becomes **success** when the deployment is ready. You can require it in your branch protection rules if a missing deployment should block a merge.
+
+On GitHub, Argos also reports each deployment as a [GitHub deployment](../integrations/github-integration.md#github-deployments): the pull request shows a **View deployment** button, and workflows can react to it. GitLab projects are not affected.
+
+### Run a workflow when a preview is live
+
+On GitHub, each status Argos reports for a deployment triggers a [`deployment_status`](https://docs.github.com/en/webhooks/webhook-events-and-payloads#deployment_status) event. Listen to it to run a job once a preview is ready, for example end-to-end tests against the deployed Storybook:
+
+{% code title=".github/workflows/test-preview.yml" %}
+```yaml
+name: Test the Argos preview
+
+on:
+  deployment_status:
+
+jobs:
+  test:
+    # Replace "docs" with your Argos project name
+    if: >-
+      github.event.deployment_status.state == 'success' &&
+      github.event.deployment.environment == 'docs/preview'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm test
+        env:
+          BASE_URL: ${{ github.event.deployment_status.environment_url }}
+```
+{% endcode %}
+
+* `github.event.deployment.environment` is `<project>/preview` for previews and `<project>/production` for production deployments. See [Environments](../integrations/github-integration.md#environments).
+* `github.event.deployment_status.environment_url` is the URL of the deployment.
+* The workflow doesn't run for [skipped deployments](../integrations/github-integration.md#skipped-deployments): deployments authenticated with tokenless authentication, and deployments from a fork's pull request.
 
 ### Other CI providers
 

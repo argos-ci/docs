@@ -68,7 +68,7 @@ Changing the production domain takes effect immediately. Any existing links that
 
 Production deployments can also be served from a domain you own, such as `storybook.acme.com`. A custom domain behaves like the production domain—it always points at the latest production deployment—but it carries your own name instead of `argos-ci.live`.
 
-Once a custom domain is live, Argos uses it in the links it publishes back to GitHub, so the commit status and the pull request comment point at your domain rather than at the generated URL.
+Once a custom domain is live, Argos uses it in the links it publishes back to GitHub, so the commit status, the pull request comment and the [GitHub deployment](../integrations/github-integration.md#github-deployments) point at your domain rather than at the generated URL.
 
 {% hint style="info" %}
 Custom domains are included in paid plans and require a team. A personal account has no plan to upgrade—create a team and transfer the project to it first.

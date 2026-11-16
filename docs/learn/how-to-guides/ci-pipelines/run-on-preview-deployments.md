@@ -64,7 +64,7 @@ jobs:
 
 ### Setup with GitHub deployment status events
 
-If your hosting provider emits GitHub Deployments events (Vercel, Netlify, Cloudflare), you can trigger tests from the [`deployment_status` event](https://docs.github.com/en/webhooks/webhook-events-and-payloads#deployment_status).
+If your hosting provider emits GitHub Deployments events (Vercel, Netlify, Cloudflare, [Argos deployments](../../deployments/README.md)), you can trigger tests from the [`deployment_status` event](https://docs.github.com/en/webhooks/webhook-events-and-payloads#deployment_status).
 
 The event carries the preview URL when a deployment becomes successful.
 
@@ -114,6 +114,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 {% endcode %}
+
+{% hint style="info" %}
+Argos deployments report to the `<project>/preview` and `<project>/production` GitHub environments. To test only previews, also check `github.event.deployment.environment`: see [Run a workflow when a preview is live](../../deployments/use-deployments-in-ci.md#run-a-workflow-when-a-preview-is-live).
+{% endhint %}
 
 ### Disable the Vercel Toolbar
 
