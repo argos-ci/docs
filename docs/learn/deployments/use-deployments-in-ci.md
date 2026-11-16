@@ -127,7 +127,7 @@ jobs:
 
 * `github.event.deployment.environment` is `<project>/preview` for previews and `<project>/production` for production deployments. See [Environments](../integrations/github-integration.md#environments).
 * `github.event.deployment_status.environment_url` is the URL of the deployment.
-* The workflow doesn't run for [skipped deployments](../integrations/github-integration.md#skipped-deployments): deployments authenticated with tokenless authentication, and deployments from a fork's pull request.
+* The workflow doesn't run for [skipped deployments](../integrations/github-integration.md#skipped-deployments): deployments authenticated with tokenless authentication, and deployments from a fork's pull request. It doesn't run either once you [turn GitHub deployments off](../integrations/github-integration.md#turn-github-deployments-off).
 
 ### Other CI providers
 

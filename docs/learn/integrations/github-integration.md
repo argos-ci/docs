@@ -82,7 +82,7 @@ A required status check blocks merging while it is pending, just as it does whil
 
 ### GitHub deployments
 
-Argos reports each [deployment](../deployments/README.md) to GitHub through the [GitHub Deployments API](https://docs.github.com/en/rest/deployments/deployments). The `argos-deploy/<project>` [commit status](../deployments/use-deployments-in-ci.md#status-checks) and the [pull request comment](../review-workflow/pull-request-comments.md) stay as they are.
+Argos reports each [deployment](../deployments/README.md) to GitHub through the [GitHub Deployments API](https://docs.github.com/en/rest/deployments/deployments). It's on by default, and you can [turn it off](#turn-github-deployments-off) per project. The `argos-deploy/<project>` [commit status](../deployments/use-deployments-in-ci.md#status-checks) and the [pull request comment](../review-workflow/pull-request-comments.md) stay as they are.
 
 * A pull request shows the deployment in its timeline and in its merge box, with a **View deployment** button.
 * The repository's **Deployments** panel lists every deployment.
@@ -133,6 +133,21 @@ Reporting deployments needs the **Deployments** (read and write) [permission](#r
 3. Select **Review request**, then **Accept new permissions**.
 
 Until you accept it, Argos skips GitHub deployments. Everything else keeps working.
+
+#### Turn GitHub deployments off
+
+GitHub deployments are on by default for every project. To turn them off:
+
+1. Go to your project **Settings** in Argos.
+2. In the **Deployments** section, locate **GitHub deployments**.
+3. Turn off **Create GitHub deployments**.
+4. Select **Save**.
+
+The **GitHub deployments** card shows once deployments are enabled on the project and the project is linked to a GitHub repository.
+
+Argos then stops creating GitHub deployments. The ones it already created keep receiving statuses, so they still turn `inactive` once a newer deployment replaces them. The commit status and the pull request comment don't change.
+
+Only [project administrators](../account-and-access/team-members-and-roles.md#project-administrator) can change it, in the dashboard or through the `githubDeploymentEnabled` field of the [REST API](https://argos-ci.com/docs/api-reference)'s update project endpoint (`PATCH /projects/{owner}/{project}`).
 
 ### Choose your access level
 
