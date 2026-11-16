@@ -40,6 +40,10 @@ Agents can list builds and inspect their screenshot diffs, approve or reject cha
 
 What an agent may actually do is decided by the scopes you grant it, not by the tool list: `projects:read` for inspecting projects, builds and tests, `reviews:write` for reviews, review requests and ignoring changes, `comments:write` for comments and notification subscriptions, `projects:write` for project configuration, automation rules and project tokens, `media:read` and `media:write` for uploading and managing shared media, and `account:admin` for team administration.
 
+## Events
+
+The server supports the draft [MCP Events extension](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/3415) (`io.modelcontextprotocol/events`). Clients that support it can poll a project's build and deployment events with `events/list` and `events/poll`. See [Receive events in an MCP client](../learn/integrations/webhooks.md#receive-events-in-an-mcp-client).
+
 ## Authentication
 
 The MCP server supports two authentication methods:
