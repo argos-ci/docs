@@ -83,7 +83,26 @@ The **Webhooks** list shows each webhook's endpoint, events and projects, and it
 
 You can't edit a webhook. To change its URL, events or projects, or to rotate its secret, add a new webhook, update your endpoint with the new secret, then delete the old one. Deleting a webhook also cancels its deliveries waiting for a retry.
 
-To test your endpoint, run a build on a project the webhook covers, then check the last delivery in the list.
+To test your endpoint, run a build on a project the webhook covers, then [open the webhook's deliveries](#inspect-deliveries) to see the request Argos sent and your endpoint's response.
+
+### Inspect deliveries
+
+Select a webhook's endpoint URL in the **Webhooks** list to open its deliveries, most recent first. Each delivery shows your endpoint's response status code, the event, and when it was sent. Filter the deliveries by status (**Failed**, **Pending** or **Delivered**), or enter an event ID to find the deliveries of that event. Select **Refresh** to load the latest ones.
+
+Select a delivery to see:
+
+* its status, its number of attempts, and the date and duration of the last attempt;
+* the event ID and when the event happened;
+* the response: its HTTP status code, the failure reason if there is one, and the first 4 KB of its body;
+* the request body Argos sent.
+
+Argos keeps deliveries for 7 days, like events.
+
+#### Resend a delivery
+
+Select **Resend** on a delivery to send its event to the webhook again, as a new delivery. Use it for an event your endpoint failed to process, once you've fixed the endpoint.
+
+A resent delivery keeps the same `webhook-id`, so an endpoint that [skips duplicates](#delivery-and-retries) skips an event it already processed. Record an event's `webhook-id` only after you've processed it: a resent event your endpoint failed on then goes through.
 
 ### Request format
 
@@ -342,7 +361,7 @@ Some failures stop the delivery at once, without retries:
 * Your endpoint answers with a redirect (`3xx`). Argos doesn't follow redirects: add a webhook with the final URL.
 * The domain name resolves to a private address. Argos checks the address on every attempt.
 
-Delivery is at least once: your endpoint can receive the same event more than once, for example when it processed a request but its answer didn't reach Argos in time. Store the `webhook-id` of the events you process and skip the ones you already did.
+Delivery is at least once: your endpoint can receive the same event more than once, for example when it processed a request but its answer didn't reach Argos in time. Once you've processed an event, store its `webhook-id`, and skip the events whose `webhook-id` you already stored.
 
 Events are delivered independently, so they can arrive out of order, especially after a retry. Use the `timestamp` of the body to order them.
 
@@ -388,7 +407,7 @@ The query takes these parameters, all optional:
 
 To follow the feed, store the `cursor` of each response and pass it to the next request. When `hasMore` is `true`, request again right away; otherwise, wait before the next poll.
 
-* Events appear in the feed about 2 seconds after they happen, oldest first.
+* Events are returned oldest first, as soon as Argos records them.
 * Argos keeps events for 7 days. `truncated` is `true` when some events after your `cursor` were deleted before you read them.
 
 See the [API reference](https://argos-ci.com/docs/api-reference/reference/events) for the full schema.
@@ -413,7 +432,7 @@ No. Argos only sends requests to public HTTPS addresses. To receive events on yo
 
 <summary>Why did my endpoint receive the same event twice?</summary>
 
-Argos retries an attempt that failed or timed out, even when your endpoint processed the request. Skip the events whose `webhook-id` you already processed.
+Argos retries an attempt that failed or timed out, even when your endpoint processed the request, and a [resent delivery](#resend-a-delivery) sends the event again. Both keep the same `webhook-id`: skip the events whose `webhook-id` you already processed.
 
 </details>
 
