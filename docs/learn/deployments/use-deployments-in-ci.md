@@ -93,6 +93,8 @@ Argos posts a single pull request comment that lists both the deployment URLs an
 
 Each deployment registers a commit status named `argos-deploy/<project>`. The status starts as **pending** when the upload begins and becomes **success** when the deployment is ready. You can require it in your branch protection rules if a missing deployment should block a merge.
 
+A [deployment hosted elsewhere](report-external-deployments.md) gets no status from Argos: its host reports its own.
+
 ### Other CI providers
 
 The `argos deploy` command has no GitHub-specific behavior. To run it on another CI provider:
