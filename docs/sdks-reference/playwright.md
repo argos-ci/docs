@@ -452,8 +452,20 @@ Each ARIA snapshot counts as an additional screenshot for billing.
 * `options.beforeScreenshot`: Run a function before taking the screenshot. When using viewports, this function will run before taking screenshots on each viewport.
 * `options.afterScreenshot`: Run a function after taking the screenshot. When using viewports, this function will run after taking screenshots on each viewport.
 * `options.tag`: Tag or array of tags to attach to the screenshot for filtering in Argos.
+* `options.description`: Text that tells reviewers what the screenshot shows or what to check. It appears in the [build sidebar](../learn/review-workflow/review-a-build.md#read-the-screenshot-description), with line breaks kept and URLs and `#123` references linked.
 
 Playwright test tags (from `test.describe` or `test` annotations) are automatically captured in the metadata.
+
+Write a longer description as a template literal. Argos drops the blank lines around it and the indentation of each line:
+
+```ts
+await argosScreenshot(page, "checkout-declined", {
+  description: `
+    The payment form after the card is declined.
+    The error must show above the Pay button. Related to #482.
+  `,
+});
+```
 
 Unlike [Playwright's `screenshot` method](https://playwright.dev/docs/api/class-page#page-screenshot), set `fullPage` option to `true` by default. Feel free to override this option if you prefer partial screenshots of your pages.
 

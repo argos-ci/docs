@@ -59,6 +59,12 @@ The diff viewer offers several ways to compare a snapshot:
 * **Fit or expand** — fit the screenshot to the screen or inspect it at full size; zoom and pan stay in sync between the baseline and changes panes.
 * **ARIA view** — when a snapshot has an [ARIA snapshot](../how-to-guides/visual-coverage/adding-aria-snapshots-manually.md), switch between the screenshot and its accessibility tree.
 
+### Read the screenshot description
+
+When a test gives a screenshot a description, it appears at the top of the **Snapshot** tab in the right sidebar, in a **Description** panel above **Metadata**. Line breaks are kept, and URLs and `#123` references to your repository are linked.
+
+To add one, pass the `description` option to the screenshot function of [Playwright](../../sdks-reference/playwright.md#api-overview), [Puppeteer](../../sdks-reference/puppeteer.md#api-overview), [Cypress](../../sdks-reference/cypress.md#api-overview) or [Vitest](../../sdks-reference/vitest.md#api-overview), or set `description` in the [screenshot metadata](../../sdks-reference/screenshot-metadata.md#description) of a CLI upload.
+
 ### Review similar changes together
 
 When the same change shows up in several screenshots of a build, Argos groups them in the screenshot list while it is [grouped by status](#choose-how-the-snapshot-list-is-shown). Diffs with the same [fingerprint](../reliability-and-flakiness/flaky-test-detection.md#how-argos-recognizes-the-same-change) share one row, with an **N similar** button that counts the other screenshots in the group.

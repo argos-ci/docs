@@ -40,6 +40,7 @@ To enable autocompletion, type checking, and schema validation in editors like V
 | `$schema`           | `string?`                                                       | Ignored. Can be set to get completions, validations, and documentation in some editors. |
 | `url`               | `string?`                                                       | The URL of the page that was screenshotted.                                             |
 | `previewUrl`        | `string?`                                                       | A URL to an accessible preview of the screenshot.                                       |
+| `description`       | `string?`                                                       | Text shown to reviewers in the build sidebar. See [Description](#description).          |
 | `viewport`          | [Viewport](screenshot-metadata.md#viewport)?                    | The viewport dimensions when the screenshot was taken.                                  |
 | `colorScheme`       | `"light" \| "dark"`                                             | The color scheme when the screenshot was taken.                                         |
 | `mediaType`         | `"screen" \| "print"`                                           | The media type when the screenshot was taken.                                           |
@@ -51,6 +52,20 @@ To enable autocompletion, type checking, and schema validation in editors like V
 | `capture`           | [Capture](screenshot-metadata.md#capture)?                      | Where the screenshot falls within its test.                                             |
 | `tags`              | `string[]?`                                                     | Custom tags to categorize the screenshot.                                               |
 | `transient`         | [Transient](screenshot-metadata.md#transient)?                  | Upload-time instructions, removed from the stored metadata.                             |
+
+### Description
+
+Text that tells reviewers what the screenshot shows or what to check. Argos shows it in the **Description** panel of the [build sidebar](../learn/review-workflow/review-a-build.md#read-the-screenshot-description).
+
+```json
+{
+  "description": "The payment form after the card is declined.\nRelated to #482."
+}
+```
+
+Line breaks are kept. Blank lines around the text and the indentation of each line are dropped. URLs and `#123` issue references become links.
+
+The SDKs set it from the `description` option of their screenshot function.
 
 ### Viewport
 
@@ -217,6 +232,7 @@ Here's a full example of `myscreenshot.png.argos.json`:
 ```json
 {
   "url": "https://example.com/home",
+  "description": "The homepage with the spring campaign banner.",
   "viewport": { "width": 1280, "height": 720 },
   "colorScheme": "light",
   "mediaType": "screen",

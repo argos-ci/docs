@@ -226,9 +226,18 @@ Available options:
 * **`threshold`**: Sensitivity threshold between `0` and `1`. The higher the threshold, the less sensitive the diff (default: `0.5`). More on [how the threshold works](../learn/platform-fundamentals/how-argos-detects-visual-differences.md#sensitivity-threshold).
 * **`baseName`**: Name, or list of names, to compare this screenshot against instead of its own name. More on [fallback baselines](../learn/how-to-guides/visual-coverage/fallback-baselines.md).
 * **`tag`**: A [tag](../learn/review-workflow/tags.md) or array of tags to attach to the screenshot.
+* **`description`**: Text that tells reviewers what the screenshot shows or what to check. It appears in the [build sidebar](../learn/review-workflow/review-a-build.md#read-the-screenshot-description), with line breaks kept and URLs and `#123` references linked.
 * **`ariaSnapshot`**: Capture an [ARIA snapshot](../learn/how-to-guides/visual-coverage/adding-aria-snapshots-manually.md) along with the screenshot (default: `false`). Each ARIA snapshot counts as an additional screenshot for billing.
 * **`disableHover`**: Disable hover effects by moving the mouse to the top-left corner (default: `true`).
 * **`stabilize`**: Wait for the UI to stabilize before taking the screenshot. Set to `false` to disable or pass an object to customize it (default: `true`).
+
+Pass `description` to tell reviewers what a screenshot shows:
+
+```ts
+await argosScreenshot("checkout-declined", {
+  description: "The payment form after the card is declined.",
+});
+```
 
 #### `argosSnapshot(content, options?)`
 
@@ -250,6 +259,7 @@ Available options:
 * **`root`**: Folder where the snapshot is written. In Node tests it defaults to `"./snapshots"`; in browser tests it defaults to the plugin `root`.
 * **`extension`**: Extension of the snapshot file. It also determines how Argos renders and diffs the snapshot, e.g. `.txt`, `.json`, `.yml`, `.html`, `.md` (default: `".txt"`).
 * **`tag`**: A [tag](../learn/review-workflow/tags.md) or array of tags to attach to the snapshot.
+* **`description`**: Text that tells reviewers what the snapshot shows or what to check. It appears in the [build sidebar](../learn/review-workflow/review-a-build.md#read-the-screenshot-description), with line breaks kept and URLs and `#123` references linked.
 * **`serialize`**: Custom serializer used when `content` is not already a string. Defaults to `@vitest/pretty-format`.
 
 ### Additional Resources
