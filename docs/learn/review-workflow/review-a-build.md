@@ -23,6 +23,30 @@ You can open a build from several places:
 
 The build page shows each screenshot with its **baseline** (the reference) next to the **changes** (the new screenshot), and highlights the visual diff between them. See [How Argos detects visual differences](../platform-fundamentals/how-argos-detects-visual-differences.md) for how the diff is computed, and use [Tags](tags.md) to filter the screenshot list down to what you care about.
 
+### Choose how the snapshot list is shown
+
+The **Display options** button, next to the filter button at the top of the build sidebar, changes how the snapshot list is laid out. Your choices are kept in your browser and apply to every build.
+
+* **Group by**: **Status**, the default, lists snapshots in one section per status, changes first. **Test** lists them in one section per test.
+* **Show**: **Screenshots** shows a thumbnail of each snapshot. **Names** shows a compact list of their names, to scan a large build at a glance.
+
+Switching either option keeps the snapshot you are reviewing open and in view.
+
+![The snapshot list grouped by test and shown as names](../../.gitbook/assets/review-snapshot-list-by-test.png)
+
+#### Group snapshots by test
+
+Grouping by test lets you review a build test by test, each change next to the other screenshots its test took.
+
+* **One section per test**, named by the test's title and followed by its file and `describe` blocks. A test run by several Playwright projects, desktop and mobile for example, is one section. Storybook snapshots are grouped by component, as [journeys](#follow-a-journey-step-by-step) are.
+* **The most pressing tests first.** Tests are ordered by their most pressing status (failures, then changes, additions and removals), then by name. A test keeps its place while you review it.
+* **Snapshots in capture order.** Within a test, snapshots follow the order the test captured them in, as the steps of a journey do.
+* **Tests with something to review start open.** The others start collapsed, like the **Unchanged** section when grouping by status. Select a test's header to open or close it.
+* **A status on every snapshot.** Each snapshot shows its status icon, accepted or rejected included, and the icon before a test's name shows its most pressing status.
+* Snapshots without test metadata are listed under **No test**.
+
+Similar changes are not stacked when grouping by test: they usually come from different tests, so each snapshot is listed and reviewed on its own.
+
 ### Compare baseline and changes
 
 The diff viewer offers several ways to compare a snapshot:
@@ -37,7 +61,7 @@ The diff viewer offers several ways to compare a snapshot:
 
 ### Review similar changes together
 
-When the same change shows up in several screenshots of a build, Argos groups them in the screenshot list. Diffs with the same [fingerprint](../reliability-and-flakiness/flaky-test-detection.md#how-argos-recognizes-the-same-change) share one row, with an **N similar** button that counts the other screenshots in the group.
+When the same change shows up in several screenshots of a build, Argos groups them in the screenshot list while it is [grouped by status](#choose-how-the-snapshot-list-is-shown). Diffs with the same [fingerprint](../reliability-and-flakiness/flaky-test-detection.md#how-argos-recognizes-the-same-change) share one row, with an **N similar** button that counts the other screenshots in the group.
 
 * While the group is collapsed, accepting or rejecting the row applies to every screenshot in it.
 * Expand the group with the **N similar** button or `G` to see each screenshot and review them one by one.
