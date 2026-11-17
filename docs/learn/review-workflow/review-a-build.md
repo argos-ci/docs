@@ -30,6 +30,7 @@ The diff viewer offers several ways to compare a snapshot:
 * **Split view** — baseline and changes side by side. This is the default.
 * **Single view** — one image at a time, switching between **Baseline** and **Changes**.
 * **Changes overlay** — changed pixels are highlighted with a red overlay. Toggle it on and off, and customize its color and opacity from the toolbar.
+* **Layout shift** — when content only moved, the overlay leaves it out and outlines each moved block with how far it went. See [Layout shifts](../platform-fundamentals/how-argos-detects-visual-differences.md#layout-shifts).
 * **Highlight and navigate changes** — flash the changed regions and jump from one to the next.
 * **Fit or expand** — fit the screenshot to the screen or inspect it at full size; zoom and pan stay in sync between the baseline and changes panes.
 * **ARIA view** — when a snapshot has an [ARIA snapshot](../how-to-guides/visual-coverage/adding-aria-snapshots-manually.md), switch between the screenshot and its accessibility tree.
@@ -80,6 +81,7 @@ Press `?` on a build page to see the full list of shortcuts. The ones you'll use
 | `⇧` `←` / `⇧` `→` | Go to the previous / next step of the journey |
 | `S`               | Toggle side-by-side view                      |
 | `D`               | Toggle the changes overlay                    |
+| `⇧` `D`           | Toggle the layout shift outlines              |
 | `H`               | Highlight the changed regions                 |
 | `J` / `K`         | Go to the previous / next change              |
 | `G`               | Expand or collapse a group of similar changes |
@@ -190,7 +192,7 @@ Each screenshot pane has a **⋮** actions menu — on both the **baseline** and
 
 * **Copy link** — copy a direct link to the screenshot.
 * **Copy embed as Markdown** — copy the screenshot as a Markdown image embed, ready to paste into a PR description or comment.
-* **Download** — download the screenshot. For a changed screenshot you can also download the **diff mask** and the **composed changes** (the diff overlaid on the screenshot).
+* **Download** — download the screenshot. For a changed screenshot you can also download the **diff mask** and the **composed changes** (the diff overlaid on the screenshot, without content that only moved).
 
 ![The screenshot actions menu with Copy link, Copy embed as Markdown, and Download options](../../.gitbook/assets/screenshot-actions-menu.png)
 
