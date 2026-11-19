@@ -169,6 +169,7 @@ OIDC has no such option: with several projects linked to the repository, the OID
 * **The Argos GitHub App must be installed on the repository.** Argos looks up the run with the app's access, for public and private repositories alike.
 * **Not available with GitHub without content access.** Tokenless authentication does not work for repositories connected through [GitHub without content access](github-integration.md#github-integration-without-content-permission). That app has no Actions permission, so Argos cannot look up the workflow run. Use [OIDC](#oidc) or `ARGOS_TOKEN` instead.
 * **The workflow run must be visible to GitHub.** If the SDK runs in a context where GitHub does not report the run (for example, a self-hosted action that runs outside the standard workflow runner), tokenless cannot verify it.
+* **No GitHub deployments.** Argos doesn't report deployments authenticated with tokenless authentication as [GitHub deployments](github-integration.md#github-deployments). Use [OIDC](#oidc) or `ARGOS_TOKEN` to get them.
 * **Weaker proof than OIDC.** Tokenless verifies that the workflow run is in progress on the reported commit and branch; OIDC verifies a signed token from GitHub. Prefer OIDC where it is available.
 
 ## Troubleshooting

@@ -34,7 +34,7 @@ Each preview deployment gets:
 
 See [URLs and domains](urls-and-domains.md) for the full list of URLs Argos generates.
 
-When a preview deployment is linked to a pull request, the deployment status appears in the [pull request comment](../review-workflow/pull-request-comments.md) and as a commit status check on the PR.
+When a preview deployment is linked to a pull request, the deployment status appears in the [pull request comment](../review-workflow/pull-request-comments.md) and as a commit status check on the PR. On GitHub, it also appears as a [GitHub deployment](../integrations/github-integration.md#github-deployments) in the `<project>/preview` environment, with a **View deployment** button.
 
 ### Production deployments
 
@@ -44,6 +44,8 @@ A production deployment is created when:
 * The branch matches the production branch pattern.
 
 When a new production deployment becomes ready, it is **promoted**: the project's production domain immediately starts serving the new build. Earlier production deployments remain available at their own URLs.
+
+On GitHub, Argos reports production deployments in the `<project>/production` [GitHub environment](../integrations/github-integration.md#environments), flagged as a production environment.
 
 The Argos dashboard shows a **Current** badge next to the deployment that is currently serving the production domain.
 
