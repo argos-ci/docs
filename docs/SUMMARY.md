@@ -22,6 +22,7 @@
   * [Builds list](learn/review-workflow/builds-list.md)
   * [Review a build](learn/review-workflow/review-a-build.md)
   * [Pull request comments](learn/review-workflow/pull-request-comments.md)
+  * [Stacked pull requests](learn/review-workflow/stacked-pull-requests.md)
   * [Summary checks](learn/review-workflow/summary-checks.md)
   * [Tags](learn/review-workflow/tags.md)
   * [Review builds with AI agents](learn/review-workflow/review-builds-with-ai-agents.md "AI agents")
