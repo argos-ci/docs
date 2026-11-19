@@ -519,11 +519,11 @@ The rest of the group: `media list` filters by `--branch`, `--pr`, `--stage stag
 
 Media belongs to a project and inherits its access, its share page included: without `--visibility`, a public project's media is `public` and a private project's is `team`. `media upload` and `media list` accept either token type; with a [personal access token](#project-tokens-and-personal-access-tokens) pass `--project <owner/project>` or set `ARGOS_PROJECT`. `media delete` needs project administrator rights, since deleting a media breaks any share link already pasted somewhere.
 
-A human can pin a comment to a point on an uploaded screenshot, which is how an agent gets told what to change about an image it cannot see:
+A human can pin a comment to a point or an area of an uploaded screenshot, which is how an agent gets told what to change about an image it cannot see:
 
 ```bash
 argos media list --branch feat/checkout   # find what was uploaded for the branch
-argos media comment list <mediaId>        # open threads, each with its pinned coordinates
+argos media comment list <mediaId>        # open threads, each with its pinned point or area
 argos media comment resolve <mediaId> <commentId>
 ```
 

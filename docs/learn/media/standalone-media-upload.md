@@ -126,7 +126,7 @@ A **team-only** link deliberately does not: unfurl metadata is read by a crawler
 
 ### Reading the feedback left on a media
 
-An uploaded media has its own comment threads, on its share page. A comment can be **pinned to a point** on the image, so a reviewer can say "this button is misaligned" about a specific pixel rather than describing where to look.
+An uploaded media has its own comment threads, on its share page. A comment can be **pinned to a point** on the image, or **cover an area** of it, so a reviewer can say "this button is misaligned" about a specific spot rather than describing where to look.
 
 That matters most for the agent that produced the screenshot. It cannot see the image, but it can read the coordinates. Find the media uploaded for the branch, then list its open threads:
 
@@ -155,7 +155,7 @@ argos media comment create 4821 --reply-to comment-xf23d --body "Fixed in abc123
 argos media comment resolve 4821 comment-xf23d
 ```
 
-`argos media comment` also covers `get`, `edit`, `delete`, `unresolve`, `react`, `unreact`, `subscribe` and `unsubscribe`, mirroring [build comments](../review-workflow/review-a-build.md#comment-on-exactly-what-changed). A new comment can carry its own pin with `--anchor-point <x,y>` (normalized 0–1); a reply inherits the spot its thread already points at. Every `media comment` command — reading included — needs a personal access token, because a comment has an author.
+`argos media comment` also covers `get`, `edit`, `delete`, `unresolve`, `react`, `unreact`, `subscribe` and `unsubscribe`, mirroring [build comments](../review-workflow/review-a-build.md#comment-on-exactly-what-changed). A new comment can carry its own pin with `--anchor-point <x,y>`, or cover a region with `--anchor-area <x,y,width,height>` (`x,y` is its top-left corner), both normalized 0–1; a reply inherits the spot its thread already points at. Every `media comment` command — reading included — needs a personal access token, because a comment has an author.
 
 {% hint style="info" %}
 Resolve only what you actually fixed. A resolved thread drops out of the next `media comment list`, so resolving something you skipped is how feedback gets silently dropped.

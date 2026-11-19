@@ -186,7 +186,7 @@ Approvals never carry over to builds that run in a [merge queue](../integrations
 
 Comments are pinned to precisely what they're about:
 
-* On a screenshot, click a point to **pin the comment to that exact spot**.
+* On a screenshot, click a point to **pin the comment to that exact spot**, or drag over an area to **comment on a whole region**, like a component or a section.
 * In a text-based snapshot, select a **line or a range of lines** to attach the comment to those lines.
 
 The snapshot you're viewing is automatically attached to your comment, and you can detach or reattach it without losing what you've written.
