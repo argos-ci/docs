@@ -12,6 +12,7 @@ Connect Argos to GitHub for automated visual testing on every pull request and m
 * Posts [pull request comments](../review-workflow/pull-request-comments.md) with the latest build results and links back to Argos.
 * Reports each [deployment](../deployments/README.md) as a [GitHub deployment](#github-deployments), so pull requests show a **View deployment** button.
 * Analyzes commit history to find the right merge base and select the correct [baseline build](../platform-fundamentals/baseline-build.md) for visual comparisons.
+* Detects [stacked pull requests](../review-workflow/stacked-pull-requests.md) and compares each one with the pull request below it.
 
 This is why Argos asks for repository access: it reads commits to find merge bases, and writes statuses, comments and deployments to report results.
 

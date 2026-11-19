@@ -30,7 +30,10 @@ Argos selects the baseline by finding the closest build in your Git history that
 
 #### When the baseline must be approved
 
-The baseline must be **approved**: an auto-approved build, an [orphan](#orphan-builds), or a check build with an approved review or a merged pull request. Argos waives this when the baseline branch is an [auto-approved branch](#auto-approved-branches) and the new build isn't tied to a pull request, since merging into that branch counts as approving it.
+The baseline must be **approved**: an auto-approved build, an [orphan](#orphan-builds), or a check build with an approved review or a merged pull request. Argos waives this in two cases:
+
+* **The baseline branch is an [auto-approved branch](#auto-approved-branches)** and the new build isn't tied to a pull request, since merging into that branch counts as approving it.
+* **The new build's pull request is [stacked](../review-workflow/stacked-pull-requests.md) on another one**: its baseline branch is the head branch of another open pull request. The build of the pull request below is used even before it's approved, since that pull request is still in review.
 
 Among the builds that meet the criteria on the candidate build itself and share the new build's name and mode, Argos looks in this order and stops at the first match:
 
@@ -58,14 +61,14 @@ When a build isn't eligible, the **Baseline eligibility** section of the Info pa
 {% hint style="info" %}
 The chip appears once a build is complete, and it reflects the build on its own. The comparison-dependent criteria — matching build name, mode, and commit ancestry — depend on the build being compared, so Argos evaluates them when a new build looks for its baseline.
 
-The chip also requires approval, which Argos [waives](#when-the-baseline-must-be-approved) when the new build's baseline branch is auto-approved, and for a build named with `ARGOS_REFERENCE_COMMIT`. A build marked not eligible only because it isn't approved can still become a baseline that way.
+The chip also requires approval, which Argos [waives](#when-the-baseline-must-be-approved) when the new build's baseline branch is auto-approved, for a [stacked pull request](../review-workflow/stacked-pull-requests.md), and for a build named with `ARGOS_REFERENCE_COMMIT`. A build marked not eligible only because it isn't approved can still become a baseline that way.
 {% endhint %}
 
 ### The baseline branch
 
 The **baseline branch** is the branch Argos uses as the reference when resolving the merge base:
 
-* For pull request builds, the base branch of the pull request is used.
+* For pull request builds, the base branch of the pull request is used. For a [stacked pull request](../review-workflow/stacked-pull-requests.md), that's the branch of the pull request below it.
 * For push events, Argos uses the default baseline branch configured in your project.
 
 {% hint style="info" %}
