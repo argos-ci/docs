@@ -104,6 +104,24 @@ Select **Resend** on a delivery to send its event to the webhook again, as a new
 
 A resent delivery keeps the same `webhook-id`, so an endpoint that [skips duplicates](#delivery-and-retries) skips an event it already processed. Record an event's `webhook-id` only after you've processed it: a resent event your endpoint failed on then goes through.
 
+### Manage webhooks from the CLI
+
+The [Argos CLI](../../sdks-reference/argos-command-line-interface-cli.md#managing-webhooks) creates, lists and deletes webhooks with `argos webhook`, and looks into their deliveries with `argos webhook delivery`. It needs a [personal access token](../../sdks-reference/argos-command-line-interface-cli.md#project-tokens-and-personal-access-tokens) or an `argos login` session with administrator access to the account, and takes the account from `--account <slug>` or `ARGOS_ACCOUNT`.
+
+Create a webhook. `--events` and `--projects` take several values. Without `--projects`, the webhook covers every project of the account. The command prints the webhook secret once:
+
+```bash
+argos webhook create --account acme --url https://example.com/webhooks/argos --events build.completed build.reviewed --projects web
+```
+
+Find the deliveries that failed, check what your endpoint answered, then [resend](#resend-a-delivery) them once it's fixed:
+
+```bash
+argos webhook delivery list <webhookId> --status failed --account acme
+argos webhook delivery get <webhookId> <deliveryId> --account acme
+argos webhook delivery resend <webhookId> <deliveryId> --account acme
+```
+
 ### Manage webhooks from the API
 
 With the [Argos REST API](https://argos-ci.com/docs/api-reference/reference/webhooks), you can create, list and delete webhooks, and look into their deliveries. These endpoints authenticate with a [personal access token](../../sdks-reference/argos-command-line-interface-cli.md#project-tokens-and-personal-access-tokens), or OAuth with the `account:admin` scope, not with a project token. They require administrator access to the account.
