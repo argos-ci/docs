@@ -1,12 +1,13 @@
 ---
 description: >-
   Connect Argos to your Git provider for pull request statuses, authenticate
-  your CI uploads, and get notified in Slack.
+  your CI uploads, get notified in Slack, and send events to your own
+  endpoints with webhooks.
 ---
 
 # Integrations
 
-Argos integrates with your Git provider to post build statuses on pull requests, and with Slack, Microsoft Teams, or Discord to notify your team. Which notifications go where is decided by [automations](../review-workflow/automations.md).
+Argos integrates with your Git provider to post build statuses on pull requests, and with Slack, Microsoft Teams, or Discord to notify your team. Which notifications go where is decided by [automations](../review-workflow/automations.md). To act on builds and deployments from your own code, use [webhooks](webhooks.md).
 
 ### Git providers
 
@@ -30,4 +31,4 @@ Looking for how to sign in to Argos itself? See [Account & access](../account-an
 
 ### Webhooks
 
-Argos does not offer user-configurable outgoing webhooks. To react to build events, use [Slack](slack-integration.md), [Microsoft Teams](microsoft-teams-integration.md), or [Discord](discord-integration.md) notifications, the commit statuses posted on your Git provider, or poll builds from the [REST API](https://argos-ci.com/docs/api-reference) or the [CLI](../../sdks-reference/argos-command-line-interface-cli.md#inspecting-builds-and-tests). If webhooks would unblock your workflow, [tell us about your use case](https://argos-ci.com/contact).
+[Webhooks](webhooks.md) send a signed `POST` request to your endpoint when a build completes or gets reviewed, and when a deployment is created or ready. The same events are available from the REST API and the [Argos MCP server](../../agents/mcp-server.md), for when you'd rather poll.

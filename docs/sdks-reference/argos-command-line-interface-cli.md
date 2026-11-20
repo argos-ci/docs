@@ -116,6 +116,8 @@ Run `argos <command> --help` for a command's exact arguments, flags, and default
 | `account invite <subcommand>`              | Invite people, cancel invites, rotate the invite link.              |
 | `account domain <subcommand>`              | Manage the email domains a team is open to.                         |
 | `account project-token <subcommand>`       | Manage every project token of an account, multi-project ones too.   |
+| `webhook list \| get \| create \| delete`  | Manage the webhooks an account's events are sent to.                |
+| `webhook delivery list \| get \| resend`   | Inspect a webhook's deliveries and resend one.                      |
 | `media upload <files...>`                  | Upload standalone images or videos and print their share URLs.       |
 | `media list`                               | List a project's uploaded media, most recent first.                 |
 | `media get \| update \| delete <mediaId>`   | Fetch, edit, or delete one uploaded media.                          |
@@ -483,9 +485,33 @@ argos account project-token revoke <tokenId> --account my-team
 
 Every command in this section needs a [personal access token](#project-tokens-and-personal-access-tokens) with administrator rights on the team, and takes the account from `--account <slug>` or `ARGOS_ACCOUNT`.
 
+### Managing webhooks
+
+`webhook` manages the [webhooks](../learn/integrations/webhooks.md) Argos sends an account's build and deployment events to. `create` prints the webhook secret once: store it right away. `--events` and `--projects` take several values after one flag, or a repeated flag. Without `--projects`, the webhook covers every project of the account, including the ones created later:
+
+```bash
+argos webhook create --account my-team --url https://example.com/webhooks/argos --events build.completed build.reviewed --projects web docs
+argos webhook list --account my-team --json
+argos webhook delete <webhookId> --account my-team
+```
+
+The events are `build.completed`, `build.reviewed`, `deployment.created` and `deployment.ready`. To change a webhook, create a new one and delete the old one.
+
+`webhook delivery` looks into what Argos sent to a webhook. To find the deliveries that failed, check what your endpoint answered, and send the event again once it's fixed:
+
+```bash
+argos webhook delivery list <webhookId> --status failed --account my-team
+argos webhook delivery get <webhookId> <deliveryId> --account my-team
+argos webhook delivery resend <webhookId> <deliveryId> --account my-team
+```
+
+`delivery get` shows the request body Argos sent and the start of the response. `delivery resend` sends the event again as a new delivery, with the same `webhook-id`. `--status` takes `pending`, `success` or `failed`, and `--event-id` lists the deliveries of one event, such as a delivery and its resends. Argos keeps deliveries 7 days.
+
+Every `webhook` command needs a [personal access token](#project-tokens-and-personal-access-tokens) or an `argos login` session with administrator access to the account (`account:admin`), and takes the account from `--account <slug>` or `ARGOS_ACCOUNT`.
+
 ### Paginated lists
 
-`build list`, `test list`, `change list`, `account member list`, `account invite list`, `project contributor list`, `project deployments`, and `automation list` follow pagination for you, up to `--limit` (100 by default). Raise it to walk a longer list:
+`build list`, `test list`, `change list`, `account member list`, `account invite list`, `project contributor list`, `project deployments`, `automation list`, and `webhook delivery list` follow pagination for you, up to `--limit` (100 by default). Raise it to walk a longer list:
 
 ```bash
 argos project deployments --project team/project --limit 500 --json

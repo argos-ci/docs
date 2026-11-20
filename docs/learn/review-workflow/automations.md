@@ -129,7 +129,7 @@ Check the conditions first: they are combined with AND, so one non-matching cond
 
 <summary>Can an automation call my own endpoint?</summary>
 
-Not today. Argos has no user-configurable outgoing webhooks — see [Integrations](../integrations/README.md#webhooks) for the alternatives, and tell us if webhooks would unblock your workflow.
+No. Automations post to Slack, Microsoft Teams or Discord. To send build events to your own endpoint, add a [webhook](../integrations/webhooks.md) in your account settings. It receives the events you select for the projects it covers, and your code decides what to do with them.
 
 </details>
 
