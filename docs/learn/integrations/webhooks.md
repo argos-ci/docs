@@ -104,6 +104,50 @@ Select **Resend** on a delivery to send its event to the webhook again, as a new
 
 A resent delivery keeps the same `webhook-id`, so an endpoint that [skips duplicates](#delivery-and-retries) skips an event it already processed. Record an event's `webhook-id` only after you've processed it: a resent event your endpoint failed on then goes through.
 
+### Manage webhooks from the API
+
+With the [Argos REST API](https://argos-ci.com/docs/api-reference/reference/webhooks), you can create, list and delete webhooks, and look into their deliveries. These endpoints authenticate with a [personal access token](../../sdks-reference/argos-command-line-interface-cli.md#project-tokens-and-personal-access-tokens), or OAuth with the `account:admin` scope, not with a project token. They require administrator access to the account.
+
+| Endpoint                                                                           | Does                                                                       |
+| ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `GET /accounts/{accountSlug}/webhooks`                                             | Lists the account's webhooks, newest first.                                |
+| `POST /accounts/{accountSlug}/webhooks`                                            | Creates a webhook and returns its secret.                                  |
+| `GET /accounts/{accountSlug}/webhooks/{webhookId}`                                 | Gets a webhook.                                                            |
+| `DELETE /accounts/{accountSlug}/webhooks/{webhookId}`                              | Deletes a webhook and cancels its pending retries.                        |
+| `GET /accounts/{accountSlug}/webhooks/{webhookId}/deliveries`                      | Lists a webhook's deliveries, most recent first.                           |
+| `GET /accounts/{accountSlug}/webhooks/{webhookId}/deliveries/{deliveryId}`         | Gets a delivery, with the request body and the start of the response body. |
+| `POST /accounts/{accountSlug}/webhooks/{webhookId}/deliveries/{deliveryId}/resend` | [Resends](#resend-a-delivery) a delivery's event, as a new delivery.       |
+
+To create a webhook, send its `url`, its `events`, and its `projects`: a list of project names, or `null` (the default) for every project of the account, including the ones created later.
+
+```bash
+curl https://api.argos-ci.com/v2/accounts/acme/webhooks \
+  -H "Authorization: Bearer $ARGOS_PERSONAL_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://example.com/webhooks/argos",
+    "events": ["build.completed", "build.reviewed"],
+    "projects": ["web"]
+  }'
+```
+
+The webhook secret is only in the response to the creation, in the `secret` field:
+
+```json
+{
+  "id": "312",
+  "url": "https://example.com/webhooks/argos",
+  "events": ["build.completed", "build.reviewed"],
+  "projects": ["web"],
+  "createdAt": "2026-11-20T10:12:44.381Z",
+  "secret": "whsec_…"
+}
+```
+
+To find the deliveries that failed, filter the list with `status` (`pending`, `success` or `failed`), or with `eventId` for the deliveries of one event. The list is [paginated](https://argos-ci.com/docs/api-reference/pagination) with `page` and `perPage`.
+
+The [Argos MCP server](../../agents/mcp-server.md) exposes the same operations as tools, so an AI agent can create a webhook or look into its failed deliveries with the permissions you grant it.
+
 ### Request format
 
 Each request is a `POST` with these headers:

@@ -36,13 +36,15 @@ The server is remote and uses the **streamable HTTP** transport — there is no 
 
 Tools are generated directly from the [Argos REST API](https://argos-ci.com/docs/api-reference): every API operation that a user can call is exposed as an MCP tool with the same name, parameters, and permissions. When the API gains an endpoint, the MCP server gains the matching tool — with no client update on your side.
 
-Agents can list builds and inspect their screenshot diffs, approve or reject changes, request reviewers, read and post comments, diagnose flaky tests and ignore their recurring changes, configure projects and their contributors, manage automation rules and project tokens, administer a team's members and invites, upload and share [standalone media](../learn/media/) and read the comments left on it, and retrieve account analytics and usage. Ask your client to list the server's tools, or see the [API reference](https://argos-ci.com/docs/api-reference) for the underlying operations.
+Agents can list builds and inspect their screenshot diffs, approve or reject changes, request reviewers, read and post comments, diagnose flaky tests and ignore their recurring changes, configure projects and their contributors, manage automation rules, project tokens and webhooks, administer a team's members and invites, upload and share [standalone media](../learn/media/) and read the comments left on it, and retrieve account analytics and usage. Ask your client to list the server's tools, or see the [API reference](https://argos-ci.com/docs/api-reference) for the underlying operations.
 
-What an agent may actually do is decided by the scopes you grant it, not by the tool list: `projects:read` for inspecting projects, builds and tests, `reviews:write` for reviews, review requests and ignoring changes, `comments:write` for comments and notification subscriptions, `projects:write` for project configuration, automation rules and project tokens, `media:read` and `media:write` for uploading and managing shared media, and `account:admin` for team administration.
+What an agent may actually do is decided by the scopes you grant it, not by the tool list: `projects:read` for inspecting projects, builds and tests, `reviews:write` for reviews, review requests and ignoring changes, `comments:write` for comments and notification subscriptions, `projects:write` for project configuration, automation rules and project tokens, `media:read` and `media:write` for uploading and managing shared media, and `account:admin` for team administration and webhooks.
 
-## Events
+## Events and webhooks
 
 The server supports the draft [MCP Events extension](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/3415) (`io.modelcontextprotocol/events`). Clients that support it can poll a project's build and deployment events with `events/list` and `events/poll`. See [Receive events in an MCP client](../learn/integrations/webhooks.md#receive-events-in-an-mcp-client).
+
+The [webhook API](../learn/integrations/webhooks.md#manage-webhooks-from-the-api) operations are tools too, such as `createAccountWebhook`, `listWebhookDeliveries` and `resendWebhookDelivery`, so an agent can create a webhook or look into its failed deliveries. They need the `account:admin` scope.
 
 ## Authentication
 
