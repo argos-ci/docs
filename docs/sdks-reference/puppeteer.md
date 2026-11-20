@@ -89,6 +89,15 @@ Screenshots are stored in `screenshots/argos` folder, relative to current direct
 * `options.stabilize.waitForImages`: Wait for images to be loaded. Defaults to `true`.
 * `options.stabilize.waitForBackgroundImages`: Wait for CSS background images (including `::before`/`::after`) to load before taking the screenshot. Enabled by default, scoped to elements flagged with the `data-visual-test-wait-bg-img` attribute (and their descendants). Pass `true` to scan the whole document, `{ selector: string }` to target a custom selector, or `false` to disable it. A failed image (e.g. a 404) is treated as loaded so it never blocks stabilization.
 * `options.tag`: Tag or array of tags to attach to the screenshot for filtering in Argos.
+* `options.description`: Text that tells reviewers what the screenshot shows or what to check. It appears in the [build sidebar](../learn/review-workflow/review-a-build.md#read-the-screenshot-description), with line breaks kept and URLs and `#123` references linked.
+
+**Example: Describing a screenshot for reviewers:**
+
+```js
+await argosScreenshot(page, "checkout-declined", {
+  description: "The payment form after the card is declined.",
+});
+```
 
 Unlike [Puppeteer's `screenshot` method](https://pptr.dev/api/puppeteer.page.screenshot), `argosScreenshot` sets the `fullPage` option to `true` by default. Override it if you prefer partial screenshots of your pages.
 

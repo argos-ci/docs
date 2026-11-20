@@ -23,6 +23,30 @@ You can open a build from several places:
 
 The build page shows each screenshot with its **baseline** (the reference) next to the **changes** (the new screenshot), and highlights the visual diff between them. See [How Argos detects visual differences](../platform-fundamentals/how-argos-detects-visual-differences.md) for how the diff is computed, and use [Tags](tags.md) to filter the screenshot list down to what you care about.
 
+### Choose how the snapshot list is shown
+
+The **Display options** button, next to the filter button at the top of the build sidebar, changes how the snapshot list is laid out. Your choices are kept in your browser and apply to every build.
+
+* **Group by**: **Status**, the default, lists snapshots in one section per status, changes first. **Test** lists them in one section per test.
+* **Show**: **Screenshots** shows a thumbnail of each snapshot. **Names** shows a compact list of their names, to scan a large build at a glance.
+
+Switching either option keeps the snapshot you are reviewing open and in view.
+
+![The snapshot list grouped by test and shown as names](../../.gitbook/assets/review-snapshot-list-by-test.png)
+
+#### Group snapshots by test
+
+Grouping by test lets you review a build test by test, each change next to the other screenshots its test took.
+
+* **One section per test**, named by the test's title and followed by its file and `describe` blocks. A test run by several Playwright projects, desktop and mobile for example, is one section. Storybook snapshots are grouped by component, as [journeys](#follow-a-journey-step-by-step) are.
+* **The most pressing tests first.** Tests are ordered by their most pressing status (failures, then changes, additions and removals), then by name. A test keeps its place while you review it.
+* **Snapshots in capture order.** Within a test, snapshots follow the order the test captured them in, as the steps of a journey do.
+* **Tests with something to review start open.** The others start collapsed, like the **Unchanged** section when grouping by status. Select a test's header to open or close it.
+* **A status on every snapshot.** Each snapshot shows its status icon, accepted or rejected included, and the icon before a test's name shows its most pressing status.
+* Snapshots without test metadata are listed under **No test**.
+
+Similar changes are not stacked when grouping by test: they usually come from different tests, so each snapshot is listed and reviewed on its own.
+
 ### Compare baseline and changes
 
 The diff viewer offers several ways to compare a snapshot:
@@ -30,13 +54,20 @@ The diff viewer offers several ways to compare a snapshot:
 * **Split view** — baseline and changes side by side. This is the default.
 * **Single view** — one image at a time, switching between **Baseline** and **Changes**.
 * **Changes overlay** — changed pixels are highlighted with a red overlay. Toggle it on and off, and customize its color and opacity from the toolbar.
+* **Layout shift** — when content only moved, the overlay leaves it out and outlines each moved block with how far it went. See [Layout shifts](../platform-fundamentals/how-argos-detects-visual-differences.md#layout-shifts).
 * **Highlight and navigate changes** — flash the changed regions and jump from one to the next.
 * **Fit or expand** — fit the screenshot to the screen or inspect it at full size; zoom and pan stay in sync between the baseline and changes panes.
 * **ARIA view** — when a snapshot has an [ARIA snapshot](../how-to-guides/visual-coverage/adding-aria-snapshots-manually.md), switch between the screenshot and its accessibility tree.
 
+### Read the screenshot description
+
+When a test gives a screenshot a description, it appears at the top of the **Snapshot** tab in the right sidebar, in a **Description** panel above **Metadata**. Line breaks are kept, and URLs and `#123` references to your repository are linked.
+
+To add one, pass the `description` option to the screenshot function of [Playwright](../../sdks-reference/playwright.md#api-overview), [Puppeteer](../../sdks-reference/puppeteer.md#api-overview), [Cypress](../../sdks-reference/cypress.md#api-overview) or [Vitest](../../sdks-reference/vitest.md#api-overview), or set `description` in the [screenshot metadata](../../sdks-reference/screenshot-metadata.md#description) of a CLI upload.
+
 ### Review similar changes together
 
-When the same change shows up in several screenshots of a build, Argos groups them in the screenshot list. Diffs with the same [fingerprint](../reliability-and-flakiness/flaky-test-detection.md#how-argos-recognizes-the-same-change) share one row, with an **N similar** button that counts the other screenshots in the group.
+When the same change shows up in several screenshots of a build, Argos groups them in the screenshot list while it is [grouped by status](#choose-how-the-snapshot-list-is-shown). Diffs with the same [fingerprint](../reliability-and-flakiness/flaky-test-detection.md#how-argos-recognizes-the-same-change) share one row, with an **N similar** button that counts the other screenshots in the group.
 
 * While the group is collapsed, accepting or rejecting the row applies to every screenshot in it.
 * Expand the group with the **N similar** button or `G` to see each screenshot and review them one by one.
@@ -80,6 +111,7 @@ Press `?` on a build page to see the full list of shortcuts. The ones you'll use
 | `⇧` `←` / `⇧` `→` | Go to the previous / next step of the journey |
 | `S`               | Toggle side-by-side view                      |
 | `D`               | Toggle the changes overlay                    |
+| `⇧` `D`           | Toggle the layout shift outlines              |
 | `H`               | Highlight the changed regions                 |
 | `J` / `K`         | Go to the previous / next change              |
 | `G`               | Expand or collapse a group of similar changes |
@@ -154,7 +186,7 @@ Approvals never carry over to builds that run in a [merge queue](../integrations
 
 Comments are pinned to precisely what they're about:
 
-* On a screenshot, click a point to **pin the comment to that exact spot**.
+* On a screenshot, click a point to **pin the comment to that exact spot**, or drag over an area to **comment on a whole region**, like a component or a section.
 * In a text-based snapshot, select a **line or a range of lines** to attach the comment to those lines.
 
 The snapshot you're viewing is automatically attached to your comment, and you can detach or reattach it without losing what you've written.
@@ -190,13 +222,13 @@ Each screenshot pane has a **⋮** actions menu — on both the **baseline** and
 
 * **Copy link** — copy a direct link to the screenshot.
 * **Copy embed as Markdown** — copy the screenshot as a Markdown image embed, ready to paste into a PR description or comment.
-* **Download** — download the screenshot. For a changed screenshot you can also download the **diff mask** and the **composed changes** (the diff overlaid on the screenshot).
+* **Download** — download the screenshot. For a changed screenshot you can also download the **diff mask** and the **composed changes** (the diff overlaid on the screenshot, without content that only moved).
 
 ![The screenshot actions menu with Copy link, Copy embed as Markdown, and Download options](../../.gitbook/assets/screenshot-actions-menu.png)
 
 ### Who can review
 
-* Leaving reviews and comments requires a role that can review builds — team **Owners** and **Members**, or **Contributors** assigned the **Project Reviewer** or **Project Administrator** role. On a personal account, only its owner can review. The build must also be in a reviewable state (changes detected, approved, or rejected).
+* Leaving reviews and comments requires a role that can review builds: team **Owners**, **Billing** members and **Members**, or **Contributors** assigned the **Project Reviewer** or **Project Administrator** role. On a personal account, only its owner can review. The build must also be in a reviewable state (changes detected, approved, or rejected).
 * On a public project, anyone can view builds, but signed-in visitors who aren't on the team can't review them. To let an outside contributor review the build of a pull request they opened from a fork, invite them to the team with a role that can review.
 * Dismissing another person's review requires an administrator-level role.
 

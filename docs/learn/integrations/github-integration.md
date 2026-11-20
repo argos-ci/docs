@@ -10,9 +10,11 @@ Connect Argos to GitHub for automated visual testing on every pull request and m
 
 * Adds commit and pull request checks, so Argos results can block merges when required in GitHub.
 * Posts [pull request comments](../review-workflow/pull-request-comments.md) with the latest build results and links back to Argos.
+* Reports each [deployment](../deployments/README.md) as a [GitHub deployment](#github-deployments), so pull requests show a **View deployment** button.
 * Analyzes commit history to find the right merge base and select the correct [baseline build](../platform-fundamentals/baseline-build.md) for visual comparisons.
+* Detects [stacked pull requests](../review-workflow/stacked-pull-requests.md) and compares each one with the pull request below it.
 
-This is why Argos asks for repository access: it reads commits to find merge bases, and writes statuses and comments to report results.
+This is why Argos asks for repository access: it reads commits to find merge bases, and writes statuses, comments and deployments to report results.
 
 ### Commit status names
 
@@ -79,6 +81,75 @@ A required status check blocks merging while it is pending, just as it does whil
 
 [Merge queue](#merge-queue-support) builds are the exception. Nobody reviews them, so a pending status would hold the queue until it times out: their changes always report `failure`, and so does the summary check of the merge group's commit.
 
+### GitHub deployments
+
+Argos reports each [deployment](../deployments/README.md) to GitHub through the [GitHub Deployments API](https://docs.github.com/en/rest/deployments/deployments). It's on by default, and you can [turn it off](#turn-github-deployments-off) per project. The `argos-deploy/<project>` [commit status](../deployments/use-deployments-in-ci.md#status-checks) and the [pull request comment](../review-workflow/pull-request-comments.md) stay as they are.
+
+* A pull request shows the deployment in its timeline and in its merge box, with a **View deployment** button.
+* The repository's **Deployments** panel lists every deployment.
+* Workflows can listen to `deployment_status` events, for example to [run tests once a preview is live](../deployments/use-deployments-in-ci.md#run-a-workflow-when-a-preview-is-live).
+
+#### Environments
+
+Argos names the GitHub environments after the Argos project:
+
+| GitHub environment     | Deployments                                                                                                            |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `<project>/preview`    | [Preview deployments](../deployments/environments.md#preview-deployments)                                              |
+| `<project>/production` | [Production deployments](../deployments/environments.md#production-deployments), flagged as a production environment |
+
+For a project named `docs`, the environments are `docs/preview` and `docs/production`. GitHub lists them in the repository's **Settings → Environments**.
+
+If you rename the Argos project, the next deployments go to environments with the new name. The previous environments stay on GitHub until you delete them.
+
+#### Deployment statuses
+
+| Argos deployment               | GitHub status |
+| ------------------------------ | ------------- |
+| Files are uploading            | `in_progress` |
+| Ready                          | `success`     |
+| Replaced by a newer deployment | `inactive`    |
+
+A `success` status links to the deployment URL. For a production deployment, it links to your [custom domain](../deployments/urls-and-domains.md#custom-domain) when one is set.
+
+A deployment becomes `inactive` once a newer one replaces it: a newer preview on the same branch, or a newer production deployment. It keeps its own deployment URL.
+
+#### Skipped deployments
+
+Argos doesn't report these deployments to GitHub:
+
+* Deployments authenticated with [tokenless authentication](github-actions-authentication.md#tokenless-authentication). Authenticate with a [project token](../account-and-access/project-tokens.md) or [GitHub Actions OIDC](github-actions-authentication.md#oidc) to get GitHub deployments.
+* Deployments from a pull request opened from a fork.
+
+GitHub runs the repository's `deployment` and `deployment_status` workflows on the deployed commit, with the repository's secrets. So Argos only reports commits your team chose.
+
+Skipped deployments keep their commit status and pull request comment.
+
+#### Accept the Deployments permission
+
+Reporting deployments needs the **Deployments** (read and write) [permission](#required-github-app-permissions) of the Argos GitHub App. If you installed the app before Argos requested it, GitHub asks an owner of your organization to accept the new permission:
+
+1. Go to the [Argos app page on GitHub](https://github.com/apps/argos-ci) and select **Configure**.
+2. Pick the organization where Argos is installed.
+3. Select **Review request**, then **Accept new permissions**.
+
+Until you accept it, Argos skips GitHub deployments. Everything else keeps working.
+
+#### Turn GitHub deployments off
+
+GitHub deployments are on by default for every project. To turn them off:
+
+1. Go to your project **Settings** in Argos.
+2. In the **Deployments** section, locate **GitHub deployments**.
+3. Turn off **Create GitHub deployments**.
+4. Select **Save**.
+
+The **GitHub deployments** card shows once deployments are enabled on the project and the project is linked to a GitHub repository.
+
+Argos then stops creating GitHub deployments. The ones it already created keep receiving statuses, so they still turn `inactive` once a newer deployment replaces them. The commit status and the pull request comment don't change.
+
+Only [project administrators](../account-and-access/team-members-and-roles.md#project-administrator) can change it, in the dashboard or through the `githubDeploymentEnabled` field of the [REST API](https://argos-ci.com/docs/api-reference)'s update project endpoint (`PATCH /projects/{owner}/{project}`).
+
 ### Choose your access level
 
 * **Full access (recommended)** — Required for Merge Queue and baseline selection based on commit history.
@@ -111,10 +182,11 @@ Argos provides a dedicated GitHub App that connects directly to your repositorie
 
 Argos needs the following permissions to operate:
 
-* **Contents** — used to find a common commit ancestor between branches
-* **Statuses** — used to add statuses to commits
-* **Pull requests** — used to add comments in pull requests
-* **Actions** — used to re-run an individual GitHub Actions workflow run when a check is retried from Argos, and to look up workflow runs for [tokenless authentication](github-actions-authentication.md#tokenless-authentication)
+* **Contents**: used to find a common commit ancestor between branches
+* **Statuses**: used to add statuses to commits
+* **Pull requests**: used to add comments in pull requests
+* **Deployments** (read and write): used to report [deployments](#github-deployments) to GitHub
+* **Actions**: used to re-run an individual GitHub Actions workflow run when a check is retried from Argos, and to look up workflow runs for [tokenless authentication](github-actions-authentication.md#tokenless-authentication)
 
 We take your security and privacy seriously. If you have any concerns or questions, please [contact us](https://argos-ci.com/contact).
 
