@@ -79,9 +79,9 @@ Expand the **Passkeys** row in **Settings -> Authentication** to see every passk
 Deleting a passkey only removes it from Argos. Your password manager or device keychain may still hold an entry for `argos-ci.com` that you will want to clean up separately.
 {% endhint %}
 
-### Passkeys and SAML SSO
+### Passkeys and a required sign-in method
 
-If one of your teams [enforces SAML SSO](saml-single-sign-on.md#enforcing-saml), a passkey signs you into Argos but does not satisfy that requirement. You keep access to your personal account and to teams without enforcement, and Argos prompts you to re-authenticate with SAML when you open a team that enforces it.
+If one of your teams [requires a sign-in method](required-sign-in-method.md), such as SAML SSO, a passkey signs you in to Argos but does not meet that requirement. You keep access to your personal account and to your other teams, and Argos asks you to sign in with the required method when you open that team.
 
 ### Troubleshooting
 

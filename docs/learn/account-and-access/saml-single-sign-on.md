@@ -42,19 +42,13 @@ The add-on appears as a "SAML SSO" line on your monthly invoice. You can disable
 2. From the dashboard, select the team in the scope selector.
 3. Open the **Settings** tab, then go to **Authentication**.
 4. In **SAML Single Sign-On**, click **Configure** and follow the setup flow for your identity provider.
-5. Optionally enforce SAML SSO for all team members after confirming authentication works.
+5. Once sign-in works, you can [require SAML SSO](#requiring-saml-sso) for every member.
 
-### Enforcing SAML
+### Requiring SAML SSO
 
-For additional security, you can enforce SAML so team members can only access team resources when their current session is authenticated with SAML.
+To make members sign in through your identity provider to reach the team, sign in with SAML SSO, then choose **SAML SSO** as the team's [required sign-in method](required-sign-in-method.md) in **Team Settings -> Authentication**.
 
-1. Ensure you are an [owner](team-members-and-roles.md#owner-role) and currently authenticated with SAML.
-2. Go to **Team Settings -> Authentication -> SAML Single Sign-On**.
-3. Turn on **Require Team Members to login with SAML to access this Team**.
-
-![SAML SSO configured and enforced.](<../../.gitbook/assets/saml enforced 0b9acb80b05d917ee70c452b00b6a254.png>)
-
-When you modify your SAML configuration, enforcement is automatically disabled. Re-authenticate with SAML and verify the new configuration before re-enabling enforcement.
+Turning SAML SSO off pauses the requirement until you turn it back on. Removing the SAML configuration, or disabling the add-on, sets the requirement back to **Any method**.
 
 ### Authenticating with SAML SSO
 
@@ -90,7 +84,7 @@ Without SCIM, a user is provisioned on their first SAML sign-in. Argos creates t
 
 To offboard someone without SCIM, remove them from the team: in **Team Settings -> Members**, open the member's actions menu and select **Remove from Team**. Also remove them from the Argos app in your identity provider. Otherwise, signing in with SAML again adds them back to the team.
 
-When SAML SSO is enforced, team members must have an active SAML session to access team resources. If a member's SAML session expires, they will be prompted to re-authenticate with SAML to regain access.
+When the team requires SAML SSO, members reach it only from a session they signed in to with SAML. When that session ends, Argos asks them to sign in with SAML again.
 
 ### SAML providers
 

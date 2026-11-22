@@ -235,7 +235,7 @@ SCIM decides who is in your team; [SAML SSO](saml-single-sign-on.md) decides how
 - People get access before their first sign-in, instead of on it.
 - SAML sign-in finds the account SCIM linked, by email. Map the same email in both, which the default Okta and Entra ID mappings do.
 - Deactivating someone in your identity provider both stops their SAML sign-in and removes them from the team.
-- [Enforcing SAML](saml-single-sign-on.md#enforcing-saml) still requires members to sign in with SAML to reach the team.
+- [Requiring SAML SSO](required-sign-in-method.md) still makes members sign in with SAML to reach the team.
 
 ## Rotate or revoke the token
 
