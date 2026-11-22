@@ -28,9 +28,13 @@ Select your team and authorize Argos on GitHub. The feature is activated immedia
 
 ![Enable GitHub SSO](<../../.gitbook/assets/enable github sso 0543329dbe51da6773d39f061606e923.png>)
 
+### Requiring GitHub sign-in
+
+To make members sign in with a GitHub account in the organization to reach the team, choose **GitHub** as the team's [required sign-in method](required-sign-in-method.md).
+
 ### Disabling the feature
 
-In team settings, select **Disable** under the **GitHub Single Sign-On** section and confirm. The owners remain as members of the team.
+In team settings, select **Disable** under the **GitHub Single Sign-On** section and confirm. The owners remain as members of the team. If the team requires GitHub sign-in, members sign in with any method until you enable GitHub SSO again.
 
 ![GitHub SSO enabled](<../../.gitbook/assets/github sso enabled 3b6b2bfec185891f6a3ca6909e1f721a.png>)
 

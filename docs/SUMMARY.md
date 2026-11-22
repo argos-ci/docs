@@ -92,6 +92,7 @@
   * [Passkeys](learn/account-and-access/passkeys.md)
   * [GitHub single sign-on](learn/account-and-access/github-single-sign-on.md)
   * [SAML single sign-on](learn/account-and-access/saml-single-sign-on.md)
+* [Required sign-in method](learn/account-and-access/required-sign-in-method.md)
   * [SCIM provisioning](learn/account-and-access/scim-provisioning.md)
   * [Security and compliance](learn/account-and-access/security-and-compliance.md)
 * [Billing & subscription](learn/billing-and-subscription/README.md)
