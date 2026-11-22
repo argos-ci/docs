@@ -65,6 +65,7 @@ redirects:
   slack-notifications: ./learn/integrations/slack-integration.md
   category/git-providers: ./learn/integrations/README.md
   category/integration-guides: ./learn/integrations/README.md
+  webhooks: ./learn/integrations/webhooks.md
 
   # CI pipelines (per-provider pages consolidated)
   run-on-preview-deployment: ./learn/how-to-guides/ci-pipelines/run-on-preview-deployments.md
