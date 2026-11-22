@@ -131,7 +131,7 @@ With the [Argos REST API](https://argos-ci.com/docs/api-reference/reference/webh
 | `GET /accounts/{accountSlug}/webhooks`                                             | Lists the account's webhooks, newest first.                                |
 | `POST /accounts/{accountSlug}/webhooks`                                            | Creates a webhook and returns its secret.                                  |
 | `GET /accounts/{accountSlug}/webhooks/{webhookId}`                                 | Gets a webhook.                                                            |
-| `DELETE /accounts/{accountSlug}/webhooks/{webhookId}`                              | Deletes a webhook and cancels its pending retries.                        |
+| `DELETE /accounts/{accountSlug}/webhooks/{webhookId}`                              | Deletes a webhook and cancels its pending retries.                         |
 | `GET /accounts/{accountSlug}/webhooks/{webhookId}/deliveries`                      | Lists a webhook's deliveries, most recent first.                           |
 | `GET /accounts/{accountSlug}/webhooks/{webhookId}/deliveries/{deliveryId}`         | Gets a delivery, with the request body and the start of the response body. |
 | `POST /accounts/{accountSlug}/webhooks/{webhookId}/deliveries/{deliveryId}/resend` | [Resends](#resend-a-delivery) a delivery's event, as a new delivery.       |
