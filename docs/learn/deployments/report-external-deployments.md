@@ -51,7 +51,7 @@ The deployment is ready at once: there are no files to upload and nothing to fin
 | ------------- | -------- | ------------------------------------------------------------------------------------------------------------ |
 | `commit`      | Yes      | The SHA of the commit your host deployed.                                                                    |
 | `branch`      | Yes      | The branch of that commit. Argos picks the [environment](#choose-the-environment) from it.                   |
-| `url`         | Yes      | The deployment URL, over `http` or `https`.                                                                  |
+| `url`         | Yes      | The deployment URL, `http` or `https` on a domain name. Argos answers `400 Bad Request` to `localhost` or an IP address, and normalizes the URL, for example by adding a trailing slash. |
 | `prNumber`    | No       | The pull request number. With it, Argos updates the pull request comment as soon as you report the deployment. |
 | `environment` | No       | `preview` or `production`. Overrides the [environment](#choose-the-environment) Argos picks from the branch. |
 
@@ -88,7 +88,7 @@ Argos links a build to the latest deployment of its commit. For a build of a pul
 
 * Argos posts no `argos-deploy/<project>` commit status and no [GitHub deployment](../integrations/github-integration.md#github-deployments) for it. Your host reports its own.
 * Argos doesn't serve the deployment, so it gets no [branch URL, production domain](urls-and-domains.md) or [access protection](access-protection.md). Argos links to the URL you report, from the project card too.
-* Turning off [hosting](README.md#turn-off-hosting) doesn't affect it. Argos takes only the deployments it hosts offline, and a deployment hosted elsewhere keeps showing on builds, project cards and the Deployments tab. The production branch still picks its environment.
+* Turning off [hosting](README.md#turn-off-hosting) doesn't affect it. Argos takes only the deployments it hosts offline, and a deployment hosted elsewhere keeps showing on builds, project cards, pull request comments and the Deployments tab. The production branch still picks its environment.
 
 ### Replace the preview base URL
 

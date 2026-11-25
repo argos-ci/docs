@@ -155,7 +155,7 @@ ARGOS_TOKEN=<your-project-token>
 
 ### Turn off hosting
 
-Argos hosts your deployments by default. To stop, turn off **Host deployments on Argos** in your project's **Settings → Deployments → Hosting**. Argos takes the URLs of the deployments it hosts offline, and they no longer show on builds, project cards or the project's Deployments tab.
+Argos hosts your deployments by default. To stop, turn off **Host deployments on Argos** in your project's **Settings → Deployments → Hosting**. Argos takes the URLs of the deployments it hosts offline, and they no longer show on builds, project cards, pull request comments or the project's Deployments tab.
 
 [Deployments hosted elsewhere](report-external-deployments.md) are not affected: they keep showing everywhere, and the Deployments tab lists only them. The **Production deployment branch** setting stays available, since it also decides their [environment](environments.md).
 
