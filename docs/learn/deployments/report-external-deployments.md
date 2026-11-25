@@ -14,7 +14,7 @@ Once you report a deployment, Argos shows it:
 * **On each screenshot.** The screenshot's URL opens on the deployment: Argos keeps the path and query of the page your test captured and replaces the origin. A screenshot of `http://localhost:3000/settings?tab=billing` links to `https://my-app-git-feature-login.vercel.app/settings?tab=billing`.
 * **In the pull request comment**, next to your builds.
 * **On the project card** of the projects list, when it's the latest production deployment.
-* **On the Deployments page** of your project.
+* **In the Deployments tab** of your project.
 
 {% hint style="info" %}
 Reporting a deployment replaces `ARGOS_PREVIEW_BASE_URL` and the SDK `previewUrl` option, which are deprecated. See [Replace the preview base URL](#replace-the-preview-base-url).
@@ -88,7 +88,7 @@ Argos links a build to the latest deployment of its commit. For a build of a pul
 
 * Argos posts no `argos-deploy/<project>` commit status and no [GitHub deployment](../integrations/github-integration.md#github-deployments) for it. Your host reports its own.
 * Argos doesn't serve the deployment, so it gets no [branch URL, production domain](urls-and-domains.md) or [access protection](access-protection.md). Argos links to the URL you report, from the project card too.
-* Turning off **Enable deployments for this project** in **Settings → Deployments** stops Argos serving the deployments it hosts. It doesn't hide deployments hosted elsewhere from builds or the projects list.
+* Turning off [hosting](README.md#turn-off-hosting) doesn't affect it. Argos takes only the deployments it hosts offline, and a deployment hosted elsewhere keeps showing on builds, project cards and the Deployments tab. The production branch still picks its environment.
 
 ### Replace the preview base URL
 

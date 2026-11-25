@@ -153,6 +153,12 @@ ARGOS_TOKEN=<your-project-token>
 
 `ARGOS_TOKEN` is a [project token](../account-and-access/project-tokens.md): create one in your project's **Settings → Authentication**, and copy it right away, as Argos only shows it once. On GitHub Actions, you can also use [OIDC or tokenless authentication](../integrations/github-actions-authentication.md) to avoid managing a secret. With tokenless authentication, Argos doesn't report [GitHub deployments](../integrations/github-integration.md#github-deployments).
 
+### Turn off hosting
+
+Argos hosts your deployments by default. To stop, turn off **Host deployments on Argos** in your project's **Settings → Deployments → Hosting**. Argos takes the URLs of the deployments it hosts offline, and they no longer show on builds, project cards or the project's Deployments tab.
+
+[Deployments hosted elsewhere](report-external-deployments.md) are not affected: they keep showing everywhere, and the Deployments tab lists only them. The **Production deployment branch** setting stays available, since it also decides their [environment](environments.md).
+
 ### What's next
 
 * [**Environments**](environments.md) — How preview and production deployments are determined, and how to customize the production branch.
