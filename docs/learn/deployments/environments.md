@@ -9,7 +9,7 @@ Every deployment is created in one of two environments:
 * **Preview** — A non-production deployment, typically created from a feature branch or pull request. Each preview gets its own URL and never replaces the production deployment.
 * **Production** — The deployment served on your project's production domain. Only deployments from a production branch are promoted here.
 
-The environment is decided when the deployment is created and cannot be changed afterwards.
+The environment is decided when the deployment is created and cannot be changed afterwards. A [deployment hosted elsewhere](report-external-deployments.md#choose-the-environment) follows the same rules.
 
 ### How the environment is determined
 
