@@ -119,6 +119,19 @@ jobs:
 Argos deployments report to the `<project>/preview` and `<project>/production` GitHub environments. To test only previews, also check `github.event.deployment.environment`: see [Run a workflow when a preview is live](../../deployments/use-deployments-in-ci.md#run-a-workflow-when-a-preview-is-live).
 {% endhint %}
 
+### Link the preview deployment
+
+Your tests run against the preview, so Argos detects the deployment and links it to the build. See [Let Argos detect the deployment](../../deployments/report-external-deployments.md#let-argos-detect-the-deployment).
+
+Argos skips builds that use [tokenless authentication](../../integrations/github-actions-authentication.md#tokenless-authentication). Without `ARGOS_TOKEN` or the `id-token: write` permission, as in the workflows above, the SDK uses tokenless authentication. Set `ARGOS_TOKEN` to a [project token](../../account-and-access/project-tokens.md) in the step that runs your tests:
+
+```yaml
+        env:
+          ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
+```
+
+In the `deployment_status` workflow, [OIDC](../../integrations/github-actions-authentication.md#oidc) works too: grant the job `id-token: write` and turn on OIDC for your project.
+
 ### Disable the Vercel Toolbar
 
 By default, Vercel may inject a toolbar overlay into preview deployments. This can interfere with automated screenshots.

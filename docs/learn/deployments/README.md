@@ -13,6 +13,7 @@ Use deployments to:
 * Preview a Storybook for every pull request.
 * Share a live link with designers, product, or stakeholders to review work in context.
 * Browse the history of every deployed build across branches and commits.
+* Link a preview hosted on Vercel, Netlify or Cloudflare to your builds: Argos [detects the deployment](report-external-deployments.md) your tests ran against, or you report it.
 
 <figure><img src="../../.gitbook/assets/deployments list bfd87fd3af8ea82b72b991367db01f21.png" alt=""><figcaption></figcaption></figure>
 
@@ -152,10 +153,17 @@ ARGOS_TOKEN=<your-project-token>
 
 `ARGOS_TOKEN` is a [project token](../account-and-access/project-tokens.md): create one in your project's **Settings → Authentication**, and copy it right away, as Argos only shows it once. On GitHub Actions, you can also use [OIDC or tokenless authentication](../integrations/github-actions-authentication.md) to avoid managing a secret. With tokenless authentication, Argos doesn't report [GitHub deployments](../integrations/github-integration.md#github-deployments).
 
+### Turn off hosting
+
+Argos hosts your deployments by default. To stop, turn off **Host deployments on Argos** in your project's **Settings → Deployments → Hosting**. Argos takes the URLs of the deployments it hosts offline, and they no longer show on builds, project cards, pull request comments or the project's Deployments tab.
+
+[Deployments hosted elsewhere](report-external-deployments.md) are not affected: they keep showing everywhere, and the Deployments tab lists only them. The **Production deployment branch** setting stays available, since it also decides their [environment](environments.md).
+
 ### What's next
 
 * [**Environments**](environments.md) — How preview and production deployments are determined, and how to customize the production branch.
 * [**URLs and domains**](urls-and-domains.md) — The URLs Argos generates for each deployment, and how to set the production domain.
 * [**Access protection**](access-protection.md) — Restrict who can open deployment URLs.
 * [**Use in CI**](use-deployments-in-ci.md) — Deploy automatically on every pull request with GitHub Actions.
+* [**Hosted elsewhere**](report-external-deployments.md): Link a deployment from Vercel, Netlify or Cloudflare to your builds.
 * [**Lifecycle and retention**](retention.md) — How long deployments last, why they can't be overwritten, and how to pick a deploy cadence.

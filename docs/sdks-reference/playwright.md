@@ -328,6 +328,10 @@ export default defineConfig({
 
 ### Set a Preview URL
 
+{% hint style="warning" %}
+`ARGOS_PREVIEW_BASE_URL` and the `previewUrl` option are deprecated. [Report your deployment](../learn/deployments/report-external-deployments.md) to Argos instead: it links each screenshot to the same page on your deployment.
+{% endhint %}
+
 Argos displays the URL of the page when a screenshot is taken, helping you understand the screenshot’s context in the Argos UI. If you run tests locally and deploy your pull requests (PRs) to a preview URL, you can link the two by setting the `ARGOS_PREVIEW_BASE_URL` environment variable or configuring the `previewUrl` option in the Argos reporter.
 
 #### Example Configuration
