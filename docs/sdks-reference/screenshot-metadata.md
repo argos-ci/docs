@@ -39,7 +39,7 @@ To enable autocompletion, type checking, and schema validation in editors like V
 | ------------------- | --------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | `$schema`           | `string?`                                                       | Ignored. Can be set to get completions, validations, and documentation in some editors. |
 | `url`               | `string?`                                                       | The URL of the page that was screenshotted.                                             |
-| `previewUrl`        | `string?`                                                       | A URL to an accessible preview of the screenshot. Takes precedence over the URL of a [reported deployment](../learn/deployments/report-external-deployments.md). |
+| `previewUrl`        | `string?`                                                       | A URL to an accessible preview of the screenshot. Takes precedence over the URL of a [deployment hosted elsewhere](../learn/deployments/report-external-deployments.md). |
 | `description`       | `string?`                                                       | Text shown to reviewers in the build sidebar. See [Description](#description).          |
 | `viewport`          | [Viewport](screenshot-metadata.md#viewport)?                    | The viewport dimensions when the screenshot was taken.                                  |
 | `colorScheme`       | `"light" \| "dark"`                                             | The color scheme when the screenshot was taken.                                         |

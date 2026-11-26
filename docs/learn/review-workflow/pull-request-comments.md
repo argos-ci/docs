@@ -20,7 +20,7 @@ Pull request comments are available on GitHub. On GitLab, Argos reports results 
 
 For each build, the comment lists its status, a link to inspect it, and a **Details** column that summarizes the changes — for example `2 added` or `4 changed, 3 ignored`. [Ignored screenshots](../reliability-and-flakiness/flaky-test-detection.md#ignore-changes) are counted here too, so you can see at a glance how much was filtered out as noise.
 
-If you [deploy with Argos](../deployments/README.md) or [report a deployment hosted elsewhere](../deployments/report-external-deployments.md), the comment also lists your deployments with their preview URLs.
+If you [deploy with Argos](../deployments/README.md) or [link a deployment hosted elsewhere](../deployments/report-external-deployments.md), the comment also lists your deployments with their preview URLs.
 
 ### Silence pull request comments
 

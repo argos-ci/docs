@@ -119,34 +119,18 @@ jobs:
 Argos deployments report to the `<project>/preview` and `<project>/production` GitHub environments. To test only previews, also check `github.event.deployment.environment`: see [Run a workflow when a preview is live](../../deployments/use-deployments-in-ci.md#run-a-workflow-when-a-preview-is-live).
 {% endhint %}
 
-### Report the deployment to Argos
+### Link the preview deployment
 
-Report the preview deployment to Argos: each screenshot then links to the same page on your preview, and the build page and pull request comment show the deployment URL. See [Report a deployment hosted elsewhere](../../deployments/report-external-deployments.md).
+Your tests run against the preview, so Argos detects the deployment and links it to the build. See [Let Argos detect the deployment](../../deployments/report-external-deployments.md#let-argos-detect-the-deployment).
 
-Add this step to the `deployment_status` workflow above, before the step that runs your tests, so the pull request comment of the build lists the deployment:
+Argos skips builds that use [tokenless authentication](../../integrations/github-actions-authentication.md#tokenless-authentication). Without `ARGOS_TOKEN` or the `id-token: write` permission, as in the workflows above, the SDK uses tokenless authentication. Set `ARGOS_TOKEN` to a [project token](../../account-and-access/project-tokens.md) in the step that runs your tests:
 
 ```yaml
-      - name: Report the deployment to Argos
         env:
           ARGOS_TOKEN: ${{ secrets.ARGOS_TOKEN }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COMMIT: ${{ github.event.deployment.sha }}
-          DEPLOYMENT_URL: ${{ github.event.deployment_status.environment_url }}
-          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-        run: |
-          # The event has no branch name: read it from the open pull request of the commit.
-          BRANCH=$(gh api "repos/$GITHUB_REPOSITORY/commits/$COMMIT/pulls" \
-            --jq 'map(select(.state == "open"))[0].head.ref // empty')
-          curl --fail-with-body https://api.argos-ci.com/v2/deployments \
-            -H "Authorization: Bearer $ARGOS_TOKEN" \
-            -H "Content-Type: application/json" \
-            -d "$(jq -n --arg commit "$COMMIT" --arg branch "${BRANCH:-$DEFAULT_BRANCH}" \
-              --arg url "$DEPLOYMENT_URL" '$ARGS.named')"
 ```
 
-* `ARGOS_TOKEN` is a [project token](../../account-and-access/project-tokens.md) with the **Upload deployments** permission.
-* A commit with no open pull request, such as a push to your default branch, is reported on the default branch, which Argos treats as [production](../../deployments/environments.md) by default.
-* Argos deployments also trigger `deployment_status`, in the `<project>/preview` and `<project>/production` environments. Skip them in the job's `if` with `github.event.deployment.environment`, so you don't report an Argos deployment back to Argos.
+In the `deployment_status` workflow, [OIDC](../../integrations/github-actions-authentication.md#oidc) works too: grant the job `id-token: write` and turn on OIDC for your project.
 
 ### Disable the Vercel Toolbar
 
