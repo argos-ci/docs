@@ -38,9 +38,9 @@ Every chart can export its underlying data as CSV. The builds export includes ch
 
 ### REST API
 
-The [`GET /accounts/{accountSlug}/analytics`](https://argos-ci.com/docs/api-reference/reference/analytics) endpoint returns the build and screenshot metrics that power the dashboard: totals and a per-period series, broken down by project. You can filter by project name, set a custom date range (up to 365 days), and group data points by day, week, or month.
+The [`GET /accounts/{accountSlug}/analytics`](https://argos-ci.com/docs/api-reference/reference/projects-and-teams/analytics) endpoint returns the build and screenshot metrics that power the dashboard: totals and a per-period series, broken down by project. You can filter by project name, set a custom date range (up to 365 days), and group data points by day, week, or month.
 
-The endpoint requires a **personal access token** scoped to the account — project tokens won't work. See the [API reference](https://argos-ci.com/docs/api-reference/reference/analytics) for details.
+The endpoint requires a **personal access token** scoped to the account — project tokens won't work. See the [API reference](https://argos-ci.com/docs/api-reference/reference/projects-and-teams/analytics) for details.
 
 ### CLI
 
