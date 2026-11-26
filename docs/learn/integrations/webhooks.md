@@ -124,7 +124,7 @@ argos webhook delivery resend <webhookId> <deliveryId> --account acme
 
 ### Manage webhooks from the API
 
-With the [Argos REST API](https://argos-ci.com/docs/api-reference/reference/webhooks), you can create, list and delete webhooks, and look into their deliveries. These endpoints authenticate with a [personal access token](../../sdks-reference/argos-command-line-interface-cli.md#project-tokens-and-personal-access-tokens), or OAuth with the `account:admin` scope, not with a project token. They require administrator access to the account.
+With the [Argos REST API](https://argos-ci.com/docs/api-reference/reference/integrations/webhooks), you can create, list and delete webhooks, and look into their deliveries. These endpoints authenticate with a [personal access token](../../sdks-reference/argos-command-line-interface-cli.md#project-tokens-and-personal-access-tokens), or OAuth with the `account:admin` scope, not with a project token. They require administrator access to the account.
 
 | Endpoint                                                                           | Does                                                                       |
 | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
@@ -472,7 +472,7 @@ To follow the feed, store the `cursor` of each response and pass it to the next 
 * Events are returned oldest first, as soon as Argos records them.
 * Argos keeps events for 7 days. `truncated` is `true` when some events after your `cursor` were deleted before you read them.
 
-See the [API reference](https://argos-ci.com/docs/api-reference/reference/events) for the full schema.
+See the [API reference](https://argos-ci.com/docs/api-reference/reference/integrations/events) for the full schema.
 
 ### Receive events in an MCP client
 
