@@ -22,7 +22,7 @@ The Hobby plan is free and belongs to your personal account. You can use it for 
 
 Designed for teams, with usage-based pricing. Pro adds two things to Hobby:
 
-- **No hard screenshot limit.** Screenshots beyond the included volume are billed at the per-screenshot rate, so uploads keep going instead of pausing. You can cap the extra cost with [spend management](spend-management.md#manage-your-spend).
+- **Extra screenshots.** Screenshots beyond the included volume are billed at the per-screenshot rate, so uploads keep going instead of pausing, up to the plan's $5,000 overage cap per billing period. You can stop builds at a lower amount with [spend management](spend-management.md#manage-your-spend).
 - **Team collaboration.** Invite members to your team, so several people review and approve builds.
 
 Plan details:

@@ -33,7 +33,7 @@ The plan card shows the screenshots counted in the current period against your p
 When you approach your plan's included screenshots, Argos alerts you. What happens when you exceed them depends on your plan:
 
 - **Hobby plan**: Uploads are paused until the next billing period. To keep uploading, upgrade to the [Pro plan](pricing-plans.md) — you can transfer your project to a newly created team.
-- **Pro plan (Stripe, usage-based)**: Extra screenshots are billed at the [per-screenshot rate](pricing-plans.md). Uploads continue uninterrupted — use [spend management](#manage-your-spend) to cap the extra cost.
+- **Pro plan (Stripe, usage-based)**: Extra screenshots are billed at the [per-screenshot rate](pricing-plans.md). Uploads continue up to the plan's $5,000 overage cap per billing period, or past it on an Enterprise plan. Use [spend management](#manage-your-spend) to stop builds at a lower amount.
 - **Pro plan (GitHub Marketplace, fixed size)**: Uploads are paused until the next billing period. To keep uploading, [upgrade your plan](https://github.com/marketplace/argos-ci) to a larger size (S, M, L, XL).
 
 ### Manage your spend
