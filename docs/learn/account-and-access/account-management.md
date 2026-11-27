@@ -100,6 +100,28 @@ Your first team automatically starts with a **14-day free trial of Argos Pro**.
 
 The trial includes unlimited users and **35,000 free screenshots**.
 
+#### Team avatar
+
+Your team's avatar appears in the scope selector and everywhere Argos shows the team. Argos uses the first of these that exists:
+
+1. A custom image: one an owner uploaded, or your company's icon, set when the team was created.
+2. The avatar of the GitHub organization, when the team is synced with one through [GitHub single sign-on](github-single-sign-on.md).
+3. The first letter of the team name, on a colored background.
+
+When you create a team that isn't synced with a GitHub organization, Argos looks up the icon of your company's website from your verified email domain, for example `acme.com`, and makes it the team's avatar. Public email providers such as Gmail are skipped. If Argos finds no icon, the team keeps its initial.
+
+To change the avatar:
+
+1. Open your team's **Settings** tab, in the **General** section.
+2. On the **Team Avatar** card, select the avatar.
+3. Choose a PNG, JPEG, WebP or GIF image, up to 10 MB and 4096 by 4096 pixels.
+
+Argos crops the image to a square and resizes it, so square images work best. An animated GIF keeps its first frame.
+
+To go back to the GitHub organization's avatar or the initial, select **Remove** on the same card.
+
+Only team [owners](team-members-and-roles.md#owner-role) can change the avatar.
+
 #### Team membership
 
 Owners can invite new members using an invitation link found in **Team Settings**.
